@@ -4,7 +4,7 @@
 
 html {
   font-size: 62.5%;
-  min-width: 320px;
+  min-width: 650px;
 }
 
 body {
@@ -12,18 +12,20 @@ body {
   font-size: 1.6rem;
   line-height: 1.5;
   background: #000002;
-  min-width: 320px;
+  min-width: 650px;
   font-family: Open Sans, sans-serif;
   color: #FFFFFF;
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 h1 {
   position: relative;
   margin: 0;
-  font-weight: 400;
-  font-size: 10.3rem;
+  padding-left: 24px;
+  font-size: 8.3rem;
   line-height: 8.7rem;
+  max-width: 1200px;
+  word-wrap: break-word;
 }
 
 h1:before {
@@ -44,6 +46,14 @@ h1:after {
   position: absolute;
   margin-top: 3.8rem;
   margin-left: 2rem;
+}
+
+h1 > span {
+  margin-left: -24px;
+}
+
+span.space {
+  margin-left: 24px;
 }
 
 p {
@@ -144,9 +154,9 @@ p span:last-of-type:after {
   }
 }
 
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
   h1 {
     font-size: 5.3rem;
     line-height: 4.5rem;
   }
-}
+} */
