@@ -26,6 +26,7 @@ h1 {
   line-height: 8.7rem;
   max-width: 1200px;
   word-wrap: break-word;
+  font-weight: 400;
 }
 
 h1:before {
