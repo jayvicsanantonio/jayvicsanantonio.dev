@@ -10,12 +10,22 @@ import {
 import styles from "~/styles/global.css";
 
 export function links() {
-  return [{ rel: "stylesheet", href: styles }];
+  return [
+    {
+      rel: "stylesheet",
+      href: styles
+    },
+    {
+      rel: 'icon',
+      href: '/favicon.ico',
+      type: 'image/x-icon',
+    },
+  ];
 }
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "New Remix App",
+  title: "Jayvic | Full Stack Web Developer",
   viewport: "width=device-width,initial-scale=1",
 });
 
