@@ -14,7 +14,7 @@ html {
   background: #000002;
   min-width: 650px;
   font-family: Open Sans, sans-serif;
-  color: #FFFFFF;
+  color: #ffffff;
   overflow: hidden;
 }
 
@@ -30,9 +30,9 @@ h1 {
 }
 
 h1:before {
-  content: '<h1>';
-  font-family: 'La Belle Aurore',cursive;
-  color: #2D638C;
+  content: "<h1>";
+  font-family: "La Belle Aurore", cursive;
+  color: #2d638c;
   font-size: 1.8rem;
   position: absolute;
   margin-top: -6rem;
@@ -40,9 +40,9 @@ h1:before {
 }
 
 h1:after {
-  content: '</h1>';
-  font-family: 'La Belle Aurore',cursive;
-  color: #2D638C;
+  content: "</h1>";
+  font-family: "La Belle Aurore", cursive;
+  color: #2d638c;
   font-size: 1.8rem;
   position: absolute;
   margin-top: 3.8rem;
@@ -59,27 +59,27 @@ span.space {
 
 p {
   margin-left: 0.5rem;
-  color: #A0F3FF;
+  color: #a0f3ff;
 }
 
 p span:after {
   margin: 1rem;
-  content: '|';
-  color: #FFFFFF;
+  content: "|";
+  color: #ffffff;
 }
 
 p span:last-of-type:after {
-  content: '';
+  content: "";
 }
 
 .tags {
-  color: #2D638C;
+  color: #2d638c;
   position: absolute;
   bottom: 0;
   left: 3rem;
   font-style: italic;
   font-size: 1.8rem;
-  font-family: 'La Belle Aurore',cursive;
+  font-family: "La Belle Aurore", cursive;
 }
 
 .top-tags {
@@ -88,9 +88,9 @@ p span:last-of-type:after {
 }
 
 .top-tags:after {
-  content: '<body>';
-  font-family: 'La Belle Aurore',cursive;
-  color: #2D638C;
+  content: "<body>";
+  font-family: "La Belle Aurore", cursive;
+  color: #2d638c;
   font-size: 1.8rem;
   position: absolute;
   margin-left: 4rem;
@@ -102,9 +102,9 @@ p span:last-of-type:after {
 }
 
 .bottom-tags:before {
-  content: '</body>';
-  font-family: 'La Belle Aurore',cursive;
-  color: #2D638C;
+  content: "</body>";
+  font-family: "La Belle Aurore", cursive;
+  color: #2d638c;
   font-size: 1.8rem;
   position: absolute;
   margin-left: 4rem;
