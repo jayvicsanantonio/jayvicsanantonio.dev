@@ -1,38 +1,130 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Astro Boilerplate with TypeScript and Tailwind CSS [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/cloudposse.svg?style=social&label=Follow%20%40Jayvic)](https://twitter.com/Jayvic)
 
-## Getting Started
+🚀 Astro Boilerplate is starter code for your blog or portfolio based on Astro
+with Tailwind CSS 3.0. ⚡️ Made with Astro, TypeScript, ESLint, Prettier,
+Tailwind CSS.
 
-First, run the development server:
+Clone this project and use it to create your own Astro blog. You can check the
+[Astro templates demo](https://creativedesignsguru.com/demo/astro-boilerplate/).
+
+## Features
+
+A complete Blog feature:
+
+- 🎈 Syntax Highlighting
+- 🤖 SEO friendly with sitemap.xml and robots.txt
+- ⚙️ RSS feed
+- 📖 Pagination
+- 🌈 Include a dark blog theme
+- ⬇️ Markdown
+- 📦 Image lazy loading
+- 💎 Responsive design
+
+Developer experience first:
+
+- 🔥 Astro
+- 🎨 Tailwind CSS with aspect ratio and typography plugin
+- 🎉 TypeScript
+- ✏️ ESLint compatible with .astro files
+- 🛠 Prettier compatible with .astro files
+- 🦊 Husky
+- 🚫 lint-staged
+- 🚨 Commitlint
+- 🔧 One-click deploy on Netlify (or, manual if you prefer)
+
+ESLint with:
+
+- Airbnb styled guide
+- TypeScript compatible
+- Astro compatible
+- Automatically remove unused imports
+- Import sorting
+- Tailwind CSS plugin
+
+### Philosophy
+
+- Minimal code
+- SEO-friendly
+- 🚀 Production-ready
+
+### Requirements
+
+- Node.js and npm
+
+#### Optional
+
+- [nvm](https://github.com/nvm-sh/nvm)
+- [volta](https://volta.sh/)
+
+While Astro-boilerplate should work with the latest Node version, it has been
+tested with the versions in .nvmrc & the bottom of package.json. At current
+writing, that's Node v16.15.1
+
+### Getting started
+
+Run the following command on your local environment:
+
+```bash
+git clone --depth=1 https://github.com/Jayvic/Astro-boilerplate
+cd my-project-name
+npm install
+```
+
+Then, you can run locally in development mode with live reload:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your favorite browser
+to see your project.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Deploy to production (manual)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+You can create an optimized production build with:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```shell
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Now, your blog is ready to be deployed. All generated files are located at
+`dist` folder, which you can deploy the folder to any hosting service you
+prefer.
 
-## Learn More
+### Deploy to Netlify
 
-To learn more about Next.js, take a look at the following resources:
+Clone this repository on own GitHub account and deploy to Netlify:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+[![Netlify Deploy button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Jayvic/Astro-boilerplate)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 🧞 Commands
 
-## Deploy on Vercel
+All commands are run from the root of the project, from a terminal:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Command           | Action                                       |
+| :---------------- | :------------------------------------------- |
+| `npm install`     | Installs dependencies                        |
+| `npm run dev`     | Starts local dev server at `localhost:3000`  |
+| `npm run build`   | Build your production site to `./dist/`      |
+| `npm run preview` | Preview your build locally, before deploying |
+| `npm run clean`   | Remove `./dist` folder                       |
+| `npm run lint`    | Run ESLint and report styling error          |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Contributions
+
+Everyone is welcome to contribute to this project.
+Feel free to open an issue if you have question or found a bug.
+
+### Additional Checks
+
+This README.md was linted with
+[markdownlint](https://github.com/igorshubovych/markdownlint-cli)
+
+### License
+
+Licensed under the MIT License, Copyright © 2022
+
+---
+
+Made with ♥ by [CreativeDesignsGuru](https://creativedesignsguru.com)
+[![Twitter](https://img.shields.io/twitter/url/https/twitter.com/cloudposse.svg?style=social&label=Follow%20%40Jayvic)](https://twitter.com/Jayvic)
