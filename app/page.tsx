@@ -8,8 +8,8 @@ import { Textarea } from "@/components/ui/textarea";
 
 export default function Component() {
   return (
-    <div className="flex flex-col min-h-screen bg-gray-950 text-gray-50">
-      <header className="flex items-center justify-between px-8 py-6 border-b border-gray-800">
+    <div className="flex flex-col">
+      <header className="flex items-center justify-between py-6 border-b border-gray-800">
         <div className="flex items-center gap-2">
           <CodeIcon className="w-6 h-6" />
         </div>
@@ -48,15 +48,20 @@ export default function Component() {
           <MenuIcon className="w-6 h-6" />
         </Button>
       </header>
-      <main className="flex-1 px-8 py-16 md:px-16 lg:px-32">
+      <main className="flex-1 py-16">
         <section className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
-            <h1 className="text-4xl font-bold tracking-tight">
-              Senior Web Developer
-            </h1>
+            <div>
+              <h1 className="text-4xl font-bold tracking-tight">
+                Jayvic San Antonio
+              </h1>
+              <h2 className="text-gray-400 text-lg font-bold tracking-widest">
+                Full-Stack Web Developer
+              </h2>
+            </div>
             <p className="text-gray-400 max-w-md">
-              Crafting exceptional digital experiences with a focus on
-              performance, accessibility, and scalability.
+              Crafting exceptional web experiences with a focus on performance,
+              accessibility, and scalability.
             </p>
             <div className="flex gap-6">
               <Link
@@ -76,13 +81,13 @@ export default function Component() {
           <img
             alt="Profile"
             className="mx-auto rounded-full border-4 border-gray-800 shadow-xl"
-            height={400}
-            src="/profile-image.jpeg"
+            height={340}
+            src="/images/home/profile-image.jpeg"
             style={{
-              aspectRatio: "400/400",
+              aspectRatio: "340/340",
               objectFit: "cover",
             }}
-            width={400}
+            width={340}
           />
         </section>
         <section className="mt-24 space-y-12">
