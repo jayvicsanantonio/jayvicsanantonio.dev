@@ -21,7 +21,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.variable}>{children}</body>
+      <body
+        className={`${inter.variable} max-w-5xl px-12 mb-40 flex flex-col md:flex-row mx-4 mt-8 lg:mx-auto min-h-screen bg-gray-950 text-gray-50`}
+      >
+        {children}
+      </body>
     </html>
   );
 }
