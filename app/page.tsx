@@ -105,28 +105,13 @@ export default function Component() {
         <section className="mt-24 space-y-12">
           <div className="space-y-4">
             <h2 className="text-2xl font-bold">My Skills</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-              <Badge aria-label="HTML" className="w-fit" variant="secondary">
-                HTML
-              </Badge>
-              <Badge aria-label="CSS" className="w-fit" variant="secondary">
-                CSS
-              </Badge>
+            <div className="grid grid-cols-3 md:grid-cols-6 gap-6">
               <Badge
                 aria-label="JavaScript"
                 className="w-fit"
                 variant="secondary"
               >
                 JavaScript
-              </Badge>
-              <Badge aria-label="React" className="w-fit" variant="secondary">
-                React
-              </Badge>
-              <Badge aria-label="Next.js" className="w-fit" variant="secondary">
-                Next.js
-              </Badge>
-              <Badge aria-label="Node.js" className="w-fit" variant="secondary">
-                Node.js
               </Badge>
               <Badge
                 aria-label="TypeScript"
@@ -135,8 +120,92 @@ export default function Component() {
               >
                 TypeScript
               </Badge>
+              <Badge aria-label="React" className="w-fit" variant="secondary">
+                React
+              </Badge>
+              <Badge aria-label="Next.js" className="w-fit" variant="secondary">
+                Next.js
+              </Badge>
+              <Badge aria-label="Remix" className="w-fit" variant="secondary">
+                Remix
+              </Badge>
+              <Badge aria-label="Node.js" className="w-fit" variant="secondary">
+                Node.js
+              </Badge>
+              <Badge
+                aria-label="Express.js"
+                className="w-fit"
+                variant="secondary"
+              >
+                Express.js
+              </Badge>
+              <Badge
+                aria-label="Tailwind CSS"
+                className="w-fit"
+                variant="secondary"
+              >
+                Tailwind CSS
+              </Badge>
+              <Badge
+                aria-label="React Native"
+                className="w-fit"
+                variant="secondary"
+              >
+                React Native
+              </Badge>
+              <Badge aria-label="Expo" className="w-fit" variant="secondary">
+                Expo
+              </Badge>
+              <Badge aria-label="Ember" className="w-fit" variant="secondary">
+                Ember.js
+              </Badge>
+              <Badge aria-label="HTML" className="w-fit" variant="secondary">
+                HTML
+              </Badge>
+              <Badge aria-label="CSS" className="w-fit" variant="secondary">
+                CSS
+              </Badge>
+              <Badge
+                aria-label="SASS / SCSS"
+                className="w-fit"
+                variant="secondary"
+              >
+                SASS / SCSS
+              </Badge>
+              <Badge
+                aria-label="Amazon Web Services (AWS)"
+                className="w-fit"
+                variant="secondary"
+              >
+                AWS
+              </Badge>
+              <Badge aria-label="MongoDB" className="w-fit" variant="secondary">
+                MongoDB
+              </Badge>
+              <Badge aria-label="Redis" className="w-fit" variant="secondary">
+                Redis
+              </Badge>
+              <Badge aria-label="MySQL" className="w-fit" variant="secondary">
+                MySQL
+              </Badge>
+              <Badge
+                aria-label="PostgreSQL"
+                className="w-fit"
+                variant="secondary"
+              >
+                PostgreSQL
+              </Badge>
+              <Badge aria-label="Java" className="w-fit" variant="secondary">
+                Java
+              </Badge>
+              <Badge aria-label="Cypress" className="w-fit" variant="secondary">
+                Cypress
+              </Badge>
               <Badge aria-label="Git" className="w-fit" variant="secondary">
                 Git
+              </Badge>
+              <Badge aria-label="Java" className="w-fit" variant="secondary">
+                Linux
               </Badge>
               <Badge aria-label="Figma" className="w-fit" variant="secondary">
                 Figma
