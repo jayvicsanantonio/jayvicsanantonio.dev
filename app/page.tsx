@@ -221,14 +221,14 @@ export default function Component() {
               web development.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="flex flex-col h-full bg-gray-800 rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-              <CardContent className="flex-1">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <Card className="flex flex-col h-full bg-gray-800 rounded-lg overflow-hidden ">
+              <CardContent className="flex-1 -p-6 ">
                 <img
-                  alt="Project 1"
+                  alt="Yahoo DSP"
                   className="w-full h-full object-cover"
                   height={225}
-                  src="/placeholder.svg"
+                  src="/images/home/yahoo-dsp.png"
                   style={{
                     aspectRatio: "400/225",
                     objectFit: "cover",
@@ -239,10 +239,18 @@ export default function Component() {
               <CardFooter className="bg-gray-900 px-8 py-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-lg font-semibold">Project 1</h3>
+                    <h3 className="text-lg text-white font-semibold">
+                      Yahoo DSP
+                    </h3>
                     <p className="text-gray-400 text-sm">
-                      A modern e-commerce platform built with Next.js and
-                      Tailwind CSS.
+                      A cutting-edge programmatic advertising platform for
+                      businesses. Built with a powerful tech stack including{" "}
+                      <em className="font-bold">Ember.js</em>,{" "}
+                      <em className="font-bold">React.js</em>, and{" "}
+                      <em className="font-bold">Node.js</em>, the platform
+                      empowers advertisers with features like real-time bidding,
+                      audience targeting, and comprehensive campaign performance
+                      measurement.
                     </p>
                   </div>
                   <Link
