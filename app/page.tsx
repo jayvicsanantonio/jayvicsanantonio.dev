@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CardContent, CardFooter, Card } from "@/components/ui/card";
@@ -27,21 +28,15 @@ export default function Component() {
           </Link>
           <Link
             className="text-sm font-medium hover:underline hover:animate-pulse"
-            href="#"
+            href="/articles"
           >
-            About
+            Articles
           </Link>
           <Link
             className="text-sm font-medium hover:underline hover:animate-pulse"
-            href="#"
+            href="/projects"
           >
             Projects
-          </Link>
-          <Link
-            className="text-sm font-medium hover:underline hover:animate-pulse"
-            href="#"
-          >
-            Contact
           </Link>
         </nav>
         <Button
@@ -83,7 +78,7 @@ export default function Component() {
               </Link>
             </div>
           </div>
-          <img
+          <Image
             alt="Profile"
             className="mx-auto rounded-full border-4 border-gray-800 shadow-xl"
             height={340}
@@ -229,7 +224,7 @@ export default function Component() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <Card className="flex flex-col h-full bg-gray-800 rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
               <CardContent className="flex-1 -p-6 max-h-64">
-                <img
+                <Image
                   alt="Yahoo DSP"
                   className="w-full h-full object-cover"
                   height={225}
@@ -269,7 +264,7 @@ export default function Component() {
             </Card>
             <Card className="flex flex-col h-full bg-gray-800 rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
               <CardContent className="flex-1 -p-6 max-h-64">
-                <img
+                <Image
                   alt="Yahoo DSP"
                   className="w-full h-full object-cover"
                   height={225}
@@ -312,23 +307,36 @@ export default function Component() {
               free to reach out to me.
             </p>
           </div>
-          <form className="grid gap-6">
+          <form
+            action="/api/send"
+            method="POST"
+            className="grid gap-6 text-black"
+          >
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-4">
                 <Label htmlFor="name">Name</Label>
-                <Input id="name" placeholder="Enter your name" />
+                <Input id="name" name="name" placeholder="Enter your name" />
               </div>
               <div className="space-y-4">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" placeholder="Enter your email" type="email" />
+                <Input
+                  id="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  type="email"
+                />
               </div>
             </div>
             <div className="space-y-4">
               <Label htmlFor="message">Message</Label>
-              <Textarea id="message" placeholder="Enter your message" />
+              <Textarea
+                id="message"
+                name="message"
+                placeholder="Enter your message"
+              />
             </div>
             <Button
-              className="justify-self-end bg-gray-600 hover:bg-gray-500 focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:bg-gray-200 dark:text-gray-900 dark:hover:bg-gray-300 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950 hover:animate-bounce"
+              className="justify-self-end bg-gray-600 hover:bg-gray-500 focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:bg-gray-200 dark:text-gray-900 dark:hover:bg-gray-300 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950 "
               type="submit"
             >
               Send Message
