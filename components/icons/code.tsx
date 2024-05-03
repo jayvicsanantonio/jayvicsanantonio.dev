@@ -1,4 +1,6 @@
-export default function CodeIcon(props) {
+import type { ComponentPropsWithoutRef } from "react";
+
+export default function CodeIcon(props: ComponentPropsWithoutRef<"svg">) {
   return (
     <svg
       {...props}

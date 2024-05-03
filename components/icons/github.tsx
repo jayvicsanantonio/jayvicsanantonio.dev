@@ -1,4 +1,6 @@
-export default function GithubIcon(props) {
+import type { ComponentPropsWithoutRef } from "react";
+
+export default function GithubIcon(props: ComponentPropsWithoutRef<"svg">) {
   return (
     <svg
       {...props}

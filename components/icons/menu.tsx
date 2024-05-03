@@ -1,4 +1,6 @@
-export default function MenuIcon(props) {
+import type { ComponentPropsWithoutRef } from "react";
+
+export default function MenuIcon(props: ComponentPropsWithoutRef<"svg">) {
   return (
     <svg
       {...props}
