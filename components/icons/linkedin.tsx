@@ -1,4 +1,6 @@
-export default function LinkedinIcon(props) {
+import type { ComponentPropsWithoutRef } from "react";
+
+export default function LinkedInIcon(props: ComponentPropsWithoutRef<"svg">) {
   return (
     <svg
       {...props}
