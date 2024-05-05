@@ -3,14 +3,12 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CardContent, CardFooter, Card } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import CodeIcon from "@/components/icons/code";
 import GithubIcon from "@/components/icons/github";
 import LinkedinIcon from "@/components/icons/linkedin";
 import MenuIcon from "@/components/icons/menu";
 import TwitterIcon from "@/components/icons/twitter";
+import ContactMeForm from "@/components/pages/home/ContactMeForm";
 
 export default function Component() {
   return (
@@ -307,41 +305,7 @@ export default function Component() {
               free to reach out to me.
             </p>
           </div>
-          <form
-            action="/api/send"
-            method="POST"
-            className="grid gap-6 text-black"
-          >
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <Label htmlFor="name">Name</Label>
-                <Input id="name" name="name" placeholder="Enter your name" />
-              </div>
-              <div className="space-y-4">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  name="email"
-                  placeholder="Enter your email"
-                  type="email"
-                />
-              </div>
-            </div>
-            <div className="space-y-4">
-              <Label htmlFor="message">Message</Label>
-              <Textarea
-                id="message"
-                name="message"
-                placeholder="Enter your message"
-              />
-            </div>
-            <Button
-              className="justify-self-end bg-gray-600 hover:bg-gray-500 focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:bg-gray-200 dark:text-gray-900 dark:hover:bg-gray-300 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950 "
-              type="submit"
-            >
-              Send Message
-            </Button>
-          </form>
+          <ContactMeForm />
         </section>
       </main>
       <footer className="bg-gray-800 px-8 py-6 text-sm text-gray-400">
