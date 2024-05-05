@@ -1,15 +1,13 @@
 import { EmailTemplate } from "@/components/templates/email";
 import { Resend } from "resend";
 import type { ReactElement } from "react";
+import { error } from "console";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
   try {
-    const formData = await request.formData();
-    const name = formData.get("name") as string;
-    const email = formData.get("email") as string;
-    const message = formData.get("message") as string;
+    const { name, email, message } = await request.json();
 
     if (!name || !email || !message) {
       return Response.json({ error: "Missing required fields" });
