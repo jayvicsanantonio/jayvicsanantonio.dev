@@ -293,6 +293,42 @@ export default function Component() {
                 </div>
               </CardFooter>
             </Card>
+            <Card className="flex flex-col h-full bg-gray-900 rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <CardContent className="flex-1 -p-6 max-h-60">
+                <Image
+                  alt="Yahoo DSP"
+                  className="w-full h-full object-cover"
+                  height={225}
+                  src="/images/home/mm-church.png"
+                  style={{
+                    aspectRatio: "400/225",
+                    objectFit: "cover",
+                  }}
+                  width={400}
+                />
+              </CardContent>
+              <CardFooter className="bg-gray-900 px-8 py-6 flex flex-col flex-1 space-between">
+                <div className="flex flex-1 flex-start justify-between gap-2">
+                  <div>
+                    <h3 className="text-lg text-white font-semibold mb-1">
+                      Malayang Mananampalataya Church
+                    </h3>
+                    <p className="text-gray-400 text-sm">
+                      Built with React.js, this Philippines church website
+                      fosters a strong connection between the church and its
+                      congregation. Easy navigation allows users to explore
+                      sermons, ministries, and events. Responsive design ensures
+                      the website looks great and is accessible across desktops,
+                      tablets, and smartphones.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-4 mt-4">
+                  <GithubButton link="https://github.com/nesceal/mmchurch" />
+                  <ViewProjectButton link="https://mmchurch.ph/" />
+                </div>
+              </CardFooter>
+            </Card>
           </div>
         </section>
         <section className="mt-24 space-y-12">
