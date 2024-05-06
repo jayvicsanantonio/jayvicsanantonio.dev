@@ -22,15 +22,15 @@ export default function Component() {
         <nav className="hidden md:flex items-center gap-8">
           <Link
             className="text-sm font-medium hover:underline hover:animate-pulse"
-            href="#"
+            href="/"
           >
             Home
           </Link>
           <Link
             className="text-sm font-medium hover:underline hover:animate-pulse"
-            href="/articles"
+            href="/blog"
           >
-            Articles
+            Blog
           </Link>
           <Link
             className="text-sm font-medium hover:underline hover:animate-pulse"
