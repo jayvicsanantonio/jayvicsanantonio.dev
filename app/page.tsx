@@ -9,6 +9,8 @@ import LinkedinIcon from "@/components/icons/linkedin";
 import MenuIcon from "@/components/icons/menu";
 import TwitterIcon from "@/components/icons/twitter";
 import ContactMeForm from "@/components/pages/home/ContactMeForm";
+import GithubButton from "@/components/pages/home/GithubButton";
+import ViewProjectButton from "@/components/pages/home/ViewProjectButton";
 
 export default function Component() {
   return (
@@ -220,8 +222,8 @@ export default function Component() {
             </p>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <Card className="flex flex-col h-full bg-gray-800 rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-              <CardContent className="flex-1 -p-6 max-h-64">
+            <Card className="flex flex-col h-full bg-gray-900 rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <CardContent className="flex-1 -p-6 max-h-60">
                 <Image
                   alt="Yahoo DSP"
                   className="w-full h-full object-cover"
@@ -234,10 +236,10 @@ export default function Component() {
                   width={400}
                 />
               </CardContent>
-              <CardFooter className="bg-gray-900 px-8 py-6">
-                <div className="flex items-center justify-between gap-2">
+              <CardFooter className="bg-gray-900 px-8 py-6 flex flex-col flex-1 space-between">
+                <div className="flex flex-1 flex-start justify-between gap-2">
                   <div>
-                    <h3 className="text-lg text-white font-semibold">
+                    <h3 className="text-lg text-white font-semibold mb-1">
                       Yahoo DSP
                     </h3>
                     <p className="text-gray-400 text-sm">
@@ -251,17 +253,15 @@ export default function Component() {
                       measurement.
                     </p>
                   </div>
-                  <Link
-                    className="inline-flex items-center justify-center rounded-md bg-gray-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:bg-gray-200 dark:text-gray-900 dark:hover:bg-gray-300 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950 hover:animate-pulse"
-                    href="#"
-                  >
-                    View Project
-                  </Link>
+                </div>
+                <div className="flex gap-4 mt-4">
+                  <GithubButton link={null} />
+                  <ViewProjectButton link="https://www.advertising.yahooinc.com/our-dsp" />
                 </div>
               </CardFooter>
             </Card>
-            <Card className="flex flex-col h-full bg-gray-800 rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-              <CardContent className="flex-1 -p-6 max-h-64">
+            <Card className="flex flex-col h-full bg-gray-900 rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <CardContent className="flex-1 -p-6 max-h-60">
                 <Image
                   alt="Yahoo DSP"
                   className="w-full h-full object-cover"
@@ -274,10 +274,10 @@ export default function Component() {
                   width={400}
                 />
               </CardContent>
-              <CardFooter className="bg-gray-900 px-8 py-6">
-                <div className="flex items-center justify-between gap-2">
+              <CardFooter className="bg-gray-900 px-8 py-6 flex flex-col flex-1 space-between">
+                <div className="flex flex-1 flex-start justify-between gap-2">
                   <div>
-                    <h3 className="text-lg text-white font-semibold">
+                    <h3 className="text-lg text-white font-semibold mb-1">
                       Barbenheimer VS Code Theme
                     </h3>
                     <p className="text-gray-400 text-sm">
@@ -286,12 +286,10 @@ export default function Component() {
                       Barbie with the dark and dramatic tones of Oppenheimer.
                     </p>
                   </div>
-                  <Link
-                    className="inline-flex items-center justify-center rounded-md bg-gray-600 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:bg-gray-200 dark:text-gray-900 dark:hover:bg-gray-300 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950 hover:animate-pulse"
-                    href="#"
-                  >
-                    View Project
-                  </Link>
+                </div>
+                <div className="flex gap-4 mt-4">
+                  <GithubButton link="https://github.com/jpsanantonio/barbenheimer-vscode-theme" />
+                  <ViewProjectButton link="https://marketplace.visualstudio.com/items?itemName=jayvicsanantonio.barbenheimer" />
                 </div>
               </CardFooter>
             </Card>
