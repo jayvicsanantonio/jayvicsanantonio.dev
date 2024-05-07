@@ -1,11 +1,4 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import CodeIcon from "@/components/icons/code";
-import GithubIcon from "@/components/icons/github";
-import LinkedinIcon from "@/components/icons/linkedin";
-import MenuIcon from "@/components/icons/menu";
-import TwitterIcon from "@/components/icons/twitter";
 import CalendarIcon from "@/components/icons/calendar";
 
 export default function Component() {
