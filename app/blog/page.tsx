@@ -37,7 +37,7 @@ export default function Component() {
               <div className="space-y-2">
                 <Link
                   className="text-gray-200 font-bold text-lg hover:underline"
-                  href="#"
+                  href="/blog/from-ember-to-next"
                 >
                   From Ember.js to Next.js: A Tale of Two Frameworks
                 </Link>
