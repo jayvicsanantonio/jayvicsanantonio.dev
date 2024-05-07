@@ -28,7 +28,7 @@ export default function Work() {
               </div>
               <span className="text-sm text-gray-400">2019 - 2023</span>
             </div>
-            <ul className="mt-4 space-y-2 text-sm/relaxed">
+            <ul className="mt-4 space-y-3 text-sm/relaxed">
               <li>
                 <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
                 Rebuilt the App Marketing business of the Yahoo Demand Side
@@ -70,7 +70,7 @@ export default function Work() {
                 CLI from older versions to newer ones
               </li>
             </ul>
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-6 flex flex-wrap gap-2">
               <Badge variant="secondary">React</Badge>
               <Badge variant="secondary">Ember</Badge>
               <Badge variant="secondary">Express</Badge>
@@ -94,7 +94,7 @@ export default function Work() {
               </div>
               <span className="text-sm text-gray-400">2016 - 2019</span>
             </div>
-            <ul className="mt-4 space-y-2 text-sm/relaxed">
+            <ul className="mt-4 space-y-3 text-sm/relaxed">
               <li>
                 <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
                 Built the Yahoo DSP Replay tool autonomously with React,
@@ -130,7 +130,7 @@ export default function Work() {
                 contributor
               </li>
             </ul>
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-6 flex flex-wrap gap-2">
               <Badge variant="secondary">React</Badge>
               <Badge variant="secondary">Ember</Badge>
               <Badge variant="secondary">Express</Badge>
@@ -155,7 +155,7 @@ export default function Work() {
               </div>
               <span className="text-sm text-gray-400">2015 - 2016</span>
             </div>
-            <ul className="mt-4 space-y-2 text-sm/relaxed">
+            <ul className="mt-4 space-y-3 text-sm/relaxed">
               <li>
                 <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
                 Represented the company and pitched at local and international
@@ -194,7 +194,7 @@ export default function Work() {
                 reduced deployment errors.
               </li>
             </ul>
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-6 flex flex-wrap gap-2">
               <Badge variant="secondary">AWS</Badge>
               <Badge variant="secondary">Express</Badge>
               <Badge variant="secondary">Node</Badge>
@@ -213,7 +213,7 @@ export default function Work() {
               </div>
               <span className="text-sm text-gray-400">2016</span>
             </div>
-            <ul className="mt-4 space-y-2 text-sm/relaxed">
+            <ul className="mt-4 space-y-3 text-sm/relaxed">
               <li>
                 <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
                 Demonstrated technical expertise and ability to thrive under
@@ -252,7 +252,7 @@ export default function Work() {
                 and technologies
               </li>
             </ul>
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-6 flex flex-wrap gap-2">
               <Badge variant="secondary">AWS</Badge>
               <Badge variant="secondary">Express</Badge>
               <Badge variant="secondary">Node</Badge>
@@ -274,7 +274,7 @@ export default function Work() {
               </div>
               <span className="text-sm text-gray-400">2013 - 2015</span>
             </div>
-            <ul className="mt-4 space-y-2 text-sm/relaxed">
+            <ul className="mt-4 space-y-3 text-sm/relaxed">
               <li>
                 <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
                 Developed the redesign of the existing stand-alone application,
@@ -291,7 +291,7 @@ export default function Work() {
                 Redis
               </li>
             </ul>
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-6 flex flex-wrap gap-2">
               <Badge variant="secondary">Express</Badge>
               <Badge variant="secondary">Node</Badge>
               <Badge variant="secondary">SailsJS</Badge>
@@ -315,7 +315,7 @@ export default function Work() {
               </div>
               <span className="text-sm text-gray-400">2012</span>
             </div>
-            <ul className="mt-4 space-y-2 text-sm/relaxed">
+            <ul className="mt-4 space-y-3 text-sm/relaxed">
               <li>
                 <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
                 Collaborated with a team of interns to design and implement a
@@ -333,7 +333,7 @@ export default function Work() {
                 efficient registration system
               </li>
             </ul>
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-6 flex flex-wrap gap-2">
               <Badge variant="secondary">PostgreSQL</Badge>
               <Badge variant="secondary">PHP</Badge>
               <Badge variant="secondary">JS</Badge>
@@ -353,7 +353,7 @@ export default function Work() {
               </div>
               <span className="text-sm text-gray-400">2012</span>
             </div>
-            <ul className="mt-4 space-y-2 text-sm/relaxed">
+            <ul className="mt-4 space-y-3 text-sm/relaxed">
               <li>
                 <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
                 Provided timely technical support to students, faculty, and
@@ -374,7 +374,7 @@ export default function Work() {
                 customer service skills
               </li>
             </ul>
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-6 flex flex-wrap gap-2">
               <Badge variant="secondary">Linux</Badge>
             </div>
           </div>

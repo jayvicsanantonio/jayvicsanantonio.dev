@@ -48,6 +48,12 @@ export default function RootLayout({
               </Link>
               <Link
                 className="text-sm font-medium hover:underline hover:animate-pulse"
+                href="/projects"
+              >
+                Projects
+              </Link>
+              <Link
+                className="text-sm font-medium hover:underline hover:animate-pulse"
                 href="/blog"
               >
                 Blog
@@ -57,12 +63,6 @@ export default function RootLayout({
                 href="/work"
               >
                 Work
-              </Link>
-              <Link
-                className="text-sm font-medium hover:underline hover:animate-pulse"
-                href="/projects"
-              >
-                Projects
               </Link>
             </nav>
             <Button
