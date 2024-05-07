@@ -40,26 +40,23 @@ export default function RootLayout({
               <CodeIcon className="w-6 h-6" />
             </div>
             <nav className="hidden md:flex items-center gap-8">
-              <Link
-                className="text-sm font-medium hover:underline hover:animate-pulse"
-                href="/"
-              >
+              <Link className="text-sm font-medium hover:underline " href="/">
                 Home
               </Link>
               <Link
-                className="text-sm font-medium hover:underline hover:animate-pulse"
+                className="text-sm font-medium hover:underline "
                 href="/projects"
               >
                 Projects
               </Link>
               <Link
-                className="text-sm font-medium hover:underline hover:animate-pulse"
+                className="text-sm font-medium hover:underline "
                 href="/blog"
               >
                 Blog
               </Link>
               <Link
-                className="text-sm font-medium hover:underline hover:animate-pulse"
+                className="text-sm font-medium hover:underline "
                 href="/work"
               >
                 Work
@@ -80,7 +77,7 @@ export default function RootLayout({
               <p>© 2024 Jayvic San Antonio. All rights reserved.</p>
               <div className="flex items-center gap-6">
                 <Link
-                  className="hover:text-gray-200 hover:animate-pulse"
+                  className="hover:text-gray-200 "
                   href="https://github.com/jpsanantonio"
                   legacyBehavior
                 >
@@ -89,7 +86,7 @@ export default function RootLayout({
                   </a>
                 </Link>
                 <Link
-                  className="hover:text-gray-200 hover:animate-pulse"
+                  className="hover:text-gray-200 "
                   href="https://twitter.com/jpsanantonio"
                   legacyBehavior
                 >
@@ -98,7 +95,7 @@ export default function RootLayout({
                   </a>
                 </Link>
                 <Link
-                  className="hover:text-gray-200 hover:animate-pulse"
+                  className="hover:text-gray-200 "
                   href="https://www.linkedin.com/in/jayvicsanantonio/"
                   legacyBehavior
                 >
