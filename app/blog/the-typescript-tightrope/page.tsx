@@ -14,25 +14,27 @@ export default function Page() {
           <span>May 4, 2024</span>
         </div>
       </div>
-      <p>
-        Let's talk about TypeScript. As a web developer, I used to scoff at the
-        idea of adding complexity with static typing to my beloved JavaScript.
-        Was it really worth the extra effort? Well, buckle up, because I'm here
-        to tell you about my journey from TypeScript skeptic to enthusiastic
-        advocate. It wasn't always smooth sailing, but let me tell you, the
-        destination is pretty darn sweet.
-      </p>
-      <Image
-        alt="Building My Developer Playground Image"
-        className="rounded-lg object-cover border border-gray-800"
-        height={640}
-        src="/images/blog/the-typescript-tightrope.png"
-        style={{
-          aspectRatio: "800/640",
-          objectFit: "cover",
-        }}
-        width={800}
-      />
+      <div className="flex flex-col md:flex-row items-center justify-center space-x-4 space-y-4">
+        <p>
+          Let's talk about TypeScript. As a web developer, I used to scoff at
+          the idea of adding complexity with static typing to my beloved
+          JavaScript. Was it really worth the extra effort? Well, buckle up,
+          because I'm here to tell you about my journey from TypeScript skeptic
+          to enthusiastic advocate. It wasn't always smooth sailing, but let me
+          tell you, the destination is pretty darn sweet.
+        </p>
+        <Image
+          alt="The Typescript Tightrope: A Love-Hate Journey Image"
+          className="rounded-lg object-cover border border-gray-800"
+          height={280}
+          src="/images/blog/the-typescript-tightrope.png"
+          style={{
+            aspectRatio: "400/280",
+            objectFit: "cover",
+          }}
+          width={400}
+        />
+      </div>
       <h3 className="text-2xl font-bold">
         The Struggles: From Confusion to Grumbling
       </h3>
