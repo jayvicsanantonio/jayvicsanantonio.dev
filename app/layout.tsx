@@ -75,7 +75,7 @@ export default function RootLayout({
             </Button>
           </header>
           <main className="flex-1 py-12">{children}</main>
-          <footer className="bg-gray-800 px-8 py-6 text-sm text-gray-400">
+          <footer className="bg-gray-950 px-8 py-6 text-sm text-gray-50 border-t border-gray-800">
             <div className="container mx-auto flex items-center justify-between">
               <p>© 2024 Jayvic San Antonio. All rights reserved.</p>
               <div className="flex items-center gap-6">
