@@ -206,10 +206,10 @@ export default function Component() {
                 width={400}
               />
             </CardContent>
-            <CardFooter className="bg-gray-950 text-gray-500 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+            <CardFooter className="bg-gray-950 text-gray-1000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
               <div className="flex flex-1 flex-start justify-between gap-2">
                 <div>
-                  <h3 className="text-lg text-white font-semibold mb-1">
+                  <h3 className="text-lg text-gray-100 font-semibold mb-1">
                     Yahoo DSP
                   </h3>
                   <p className="text-gray-400 text-sm">
@@ -244,10 +244,10 @@ export default function Component() {
                 width={400}
               />
             </CardContent>
-            <CardFooter className="bg-gray-950 text-gray-500 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+            <CardFooter className="bg-gray-950 text-gray-1000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
               <div className="flex flex-1 flex-start justify-between gap-2">
                 <div>
-                  <h3 className="text-lg text-white font-semibold mb-1">
+                  <h3 className="text-lg text-gray-100 font-semibold mb-1">
                     Barbenheimer VS Code Theme
                   </h3>
                   <p className="text-gray-400 text-sm">
