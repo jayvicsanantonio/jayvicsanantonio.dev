@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import CalendarIcon from "@/components/icons/calendar";
 
@@ -23,6 +24,17 @@ export default function Page() {
         because we're diving into the world of Next.js, React, Tailwind CSS, and
         TypeScript!
       </p>
+      <Image
+        alt="Building My Developer Playground Image"
+        className="rounded-lg object-cover border border-gray-800"
+        height={640}
+        src="/images/blog/building-my-developer-playground.png"
+        style={{
+          aspectRatio: "800/640",
+          objectFit: "cover",
+        }}
+        width={800}
+      />
       <h3 className="text-2xl font-bold">The Foundation: Next.js and React</h3>
       <p>
         The first question on any web developer's mind: "What framework should I
