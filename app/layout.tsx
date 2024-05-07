@@ -35,7 +35,7 @@ export default function RootLayout({
         className={`${inter.variable} max-w-5xl px-12 flex flex-col md:flex-row mx-4 lg:mx-auto min-h-screen bg-gray-950 text-gray-50`}
       >
         <div className="flex flex-col">
-          <header className="flex items-center justify-between py-6 border-b border-gray-800">
+          <header className="flex items-center justify-between py-6 bg-gray-950 border-b border-gray-800 sticky top-0 z-10">
             <div className="flex items-center gap-2">
               <CodeIcon className="w-6 h-6" />
             </div>
