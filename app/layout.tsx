@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} max-w-5xl px-12 flex flex-col md:flex-row mx-4 lg:mx-auto min-h-screen bg-gray-950 text-gray-50`}
+        className={`${inter.variable} max-w-5xl px-12 flex flex-col md:flex-row mx-4 lg:mx-auto min-h-screen bg-gray-950 text-gray-200`}
       >
         <div className="flex flex-col">
           <header className="flex items-center justify-between py-6 bg-gray-950 border-b border-gray-800 sticky top-0 z-10">
@@ -75,12 +75,12 @@ export default function RootLayout({
             </Button>
           </header>
           <main className="flex-1 py-12">{children}</main>
-          <footer className="bg-gray-950 px-8 py-6 text-sm text-gray-50 border-t border-gray-800">
+          <footer className="bg-gray-950 px-8 py-6 text-sm text-gray-200 border-t border-gray-800">
             <div className="container mx-auto flex items-center justify-between">
               <p>© 2024 Jayvic San Antonio. All rights reserved.</p>
               <div className="flex items-center gap-6">
                 <Link
-                  className="hover:text-gray-50 hover:animate-pulse"
+                  className="hover:text-gray-200 hover:animate-pulse"
                   href="https://github.com/jpsanantonio"
                   legacyBehavior
                 >
@@ -89,7 +89,7 @@ export default function RootLayout({
                   </a>
                 </Link>
                 <Link
-                  className="hover:text-gray-50 hover:animate-pulse"
+                  className="hover:text-gray-200 hover:animate-pulse"
                   href="https://twitter.com/jpsanantonio"
                   legacyBehavior
                 >
@@ -98,7 +98,7 @@ export default function RootLayout({
                   </a>
                 </Link>
                 <Link
-                  className="hover:text-gray-50 hover:animate-pulse"
+                  className="hover:text-gray-200 hover:animate-pulse"
                   href="https://www.linkedin.com/in/jayvicsanantonio/"
                   legacyBehavior
                 >

@@ -3,13 +3,13 @@ import { CheckIcon } from "@/components/icons/check";
 
 export default function Work() {
   return (
-    <section className="w-full  bg-gray-950 text-gray-50">
+    <section className="w-full  bg-gray-950 text-gray-200">
       <div className="grid gap-8 lg:grid-cols-3 lg:gap-12">
         <div className="col-span-2 md:col-span-1 space-y-4">
           <div className="inline-block rounded-lg bg-gray-800 px-3 py-1 text-sm">
             Work Experience
           </div>
-          <h2 className="text-2xl font-bold tracking-tighter text-gray-50 md:text-3xl/tight lg:text-4xl">
+          <h2 className="text-2xl font-bold tracking-tighter text-gray-200 md:text-3xl/tight lg:text-4xl">
             Crafting Impactful Solutions
           </h2>
           <p className="max-w-[600px] text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
@@ -21,7 +21,7 @@ export default function Work() {
           <div className="group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <h3 className="text-lg font-medium group-hover:text-gray-50">
+                <h3 className="text-lg font-medium group-hover:text-gray-200">
                   Software Dev Engineer II
                 </h3>
                 <p className="text-sm text-gray-400">Yahoo Inc.</p>
@@ -30,7 +30,7 @@ export default function Work() {
             </div>
             <ul className="mt-4 space-y-3 text-sm/relaxed">
               <li>
-                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
+                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Rebuilt the App Marketing business of the Yahoo Demand Side
                 Platform as a core developer using Ember, Java and MySQL and
                 generating over $140M in advertising spend since it launched
@@ -38,14 +38,14 @@ export default function Work() {
                 14.5 IDFA opt-out feature
               </li>
               <li>
-                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
+                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Optimized Yahoo DSP Email Audience Builder Upload feature by
                 transforming its capacity from 2M to 25M records, a 1150%
                 improvement, inspiring other UI performance initiatives, and
                 preventing potential revenue impact, executed single-handedly
               </li>
               <li>
-                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
+                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Designed and built a wide range of Yahoo DSP features, from
                 UI/UX improvements to revenue-generating initiatives,
                 demonstrating software engineering skills through consistent use
@@ -54,14 +54,14 @@ export default function Work() {
                 and complex Ember components
               </li>
               <li>
-                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
+                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Fostered a culture of collaboration and growth by mentoring
                 junior engineers and new hires, creating a positive environment
                 where they could feel comfortable discussing technical concepts,
                 and asking questions
               </li>
               <li>
-                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
+                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Contributed to an Ember open source project
                 (https://github.com/ember-learn/upgrade-guide) and was
                 recognized in Ember Times - Issue No. 166, streamlining app
@@ -87,7 +87,7 @@ export default function Work() {
           <div className="group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <h3 className="text-lg font-medium group-hover:text-gray-50">
+                <h3 className="text-lg font-medium group-hover:text-gray-200">
                   Software Dev Engineer
                 </h3>
                 <p className="text-sm text-gray-400">Yahoo Inc.</p>
@@ -96,7 +96,7 @@ export default function Work() {
             </div>
             <ul className="mt-4 space-y-3 text-sm/relaxed">
               <li>
-                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
+                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Built the Yahoo DSP Replay tool autonomously with React,
                 enabling streamlined testing and validation of legitimate bid
                 requests, significantly improving the productivity of the
@@ -105,14 +105,14 @@ export default function Work() {
                 Bidding System
               </li>
               <li>
-                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
+                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Contributed to front-end and back-end development of DMP (Data
                 Management Platform), a key component of the Yahoo DSP utilizing
                 Ember, Java, and MySQL, generating several millions of dollars
                 in revenue
               </li>
               <li>
-                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
+                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Explored the adoption of Cypress.io to address the pain points
                 of flaky end-to-end tests in Selenium, facilitated meetings to
                 share insights on how to write simple reliable tests in
@@ -121,7 +121,7 @@ export default function Work() {
                 pipeline successfully
               </li>
               <li>
-                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
+                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Contributed to upgrading Yahoo DSP’s Ember framework, enhancing
                 performance, security, and developer experience, unlocking new
                 capabilities and ecosystem of add-ons, ensuring compatibility
@@ -146,7 +146,7 @@ export default function Work() {
           <div className="group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <h3 className="text-lg font-medium group-hover:text-gray-50">
+                <h3 className="text-lg font-medium group-hover:text-gray-200">
                   Co-Founder
                 </h3>
                 <p className="text-sm text-gray-400">
@@ -157,7 +157,7 @@ export default function Work() {
             </div>
             <ul className="mt-4 space-y-3 text-sm/relaxed">
               <li>
-                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
+                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Represented the company and pitched at local and international
                 events, including the RISE Conference 2015 in Hong Kong and
                 National Science and Technology Week 2015 in the Philippines,
@@ -165,7 +165,7 @@ export default function Work() {
                 awareness.
               </li>
               <li>
-                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
+                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Achieved recognition in the Philippine tech industry, having
                 been featured in a number of top tech blogs and news websites
                 such as Deal Street Asia, Enterprise Innovation, KabayanTech,
@@ -174,21 +174,21 @@ export default function Work() {
                 coverage and brand visibility.
               </li>
               <li>
-                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
+                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Supported our CEO for the research, design and implementation of
                 Bluetooth Low Energy technology in a wearable device (Croo),
                 resulting in significant cost savings and improved product
                 reliability.
               </li>
               <li>
-                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
+                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Collaborated with our COO and CTO in architecting and
                 implementing a scalable and reliable AWS infrastructure to
                 support the Croo Android application that complements our IoT
                 Croo wearable, delivering a seamless user experience.
               </li>
               <li>
-                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
+                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Created and configured automated deployment processes using
                 Puppet, resulting in streamlined and efficient updates and
                 reduced deployment errors.
@@ -204,7 +204,7 @@ export default function Work() {
           <div className="group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <h3 className="text-lg font-medium group-hover:text-gray-50">
+                <h3 className="text-lg font-medium group-hover:text-gray-200">
                   Senior Software Engineer
                 </h3>
                 <p className="text-sm text-gray-400">
@@ -215,7 +215,7 @@ export default function Work() {
             </div>
             <ul className="mt-4 space-y-3 text-sm/relaxed">
               <li>
-                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
+                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Demonstrated technical expertise and ability to thrive under
                 pressure by leading my team to victory in several hackathons,
                 including 1st Place finishes at Hack the Climate 2015 and HERE
@@ -223,21 +223,21 @@ export default function Work() {
                 Google Cloud Developer Challenge 2013
               </li>
               <li>
-                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
+                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Authored an editorial titled "All I really need to know, I
                 learned from Pinoy Hackathons," featured on GMA News Online, a
                 highly regarded platform among the top news websites in the
                 Philippines.
               </li>
               <li>
-                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
+                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Developed and delivered the back-end of Lendr, the Philippines’
                 first fully digital, end-to-end consumer loan platform, using
                 Node and Express, collaborating with the team to ensure seamless
                 project execution and timely delivery
               </li>
               <li>
-                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
+                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Implemented a scalable back-end system for a digital-media
                 mobile application, Eat Bulaga! Mobile, leading a team of 3
                 junior engineers and utilizing Sails.js, MongoDB, and Redis to
@@ -245,7 +245,7 @@ export default function Work() {
                 active users
               </li>
               <li>
-                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
+                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Pioneered a culture of active participation in programming
                 competitions and hackathons among Voyager engineers, resulting
                 in increased creativity, knowledge and awareness of new tools
@@ -265,7 +265,7 @@ export default function Work() {
           <div className="group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <h3 className="text-lg font-medium group-hover:text-gray-50">
+                <h3 className="text-lg font-medium group-hover:text-gray-200">
                   Software Engineering Analyst
                 </h3>
                 <p className="text-sm text-gray-400">
@@ -276,7 +276,7 @@ export default function Work() {
             </div>
             <ul className="mt-4 space-y-3 text-sm/relaxed">
               <li>
-                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
+                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Developed the redesign of the existing stand-alone application,
                 SmartNet, by participating in planning and initiation stages,
                 implementing object-oriented design and JavaScript best
@@ -285,7 +285,7 @@ export default function Work() {
                 MongoDB, and Redis
               </li>
               <li>
-                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
+                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Refactored and optimized the codebase of Pinoy Hoops, a digital
                 sports platform, using Express, jQuery, CSS, Pug, MongoDB and
                 Redis
@@ -306,7 +306,7 @@ export default function Work() {
           <div className="group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <h3 className="text-lg font-medium group-hover:text-gray-50">
+                <h3 className="text-lg font-medium group-hover:text-gray-200">
                   Intern
                 </h3>
                 <p className="text-sm text-gray-400">
@@ -317,7 +317,7 @@ export default function Work() {
             </div>
             <ul className="mt-4 space-y-3 text-sm/relaxed">
               <li>
-                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
+                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Collaborated with a team of interns to design and implement a
                 new module that streamlined the registration process for
                 thousands of students, leveraging PostgreSQL, PHP, CSS,
@@ -325,7 +325,7 @@ export default function Work() {
                 improved data retrieval
               </li>
               <li>
-                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
+                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Applied theoretical knowledge to practice, demonstrating
                 problem-solving and critical thinking skills in a real-world
                 setting, and producing high-quality and maintainable code using
@@ -344,30 +344,30 @@ export default function Work() {
           <div className="group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <h3 className="text-lg font-medium group-hover:text-gray-50">
+                <h3 className="text-lg font-medium group-hover:text-gray-200">
                   Intern
                 </h3>
                 <p className="text-sm text-gray-400">
                   University of the Philippines Diliman Network
                 </p>
               </div>
-              <span className="text-sm text-gray-400">2012</span>
+              <span className="text-sm text-gray-400">2011 - 2012</span>
             </div>
             <ul className="mt-4 space-y-3 text-sm/relaxed">
               <li>
-                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
+                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Provided timely technical support to students, faculty, and
                 staff of the University of the Philippines troubleshooting and
                 resolving network-related issues to ensure uninterrupted access
                 to essential resources in the Diliman campus
               </li>
               <li>
-                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
+                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Gained valuable experience working with Linux systems and
                 developed a deep appreciation for open source projects
               </li>
               <li>
-                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-500 dark:text-gray-400" />
+                <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Collaborated effectively with a team of full-time Computer
                 Center employees to maintain a high standard of service, earning
                 recognition from supervisors and clients for exceptional
