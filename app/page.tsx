@@ -174,13 +174,24 @@ export default function Component() {
         </div>
       </section>
       <section id="projects" className="mt-24 space-y-12">
-        <div className="space-y-4">
-          <h2 className="text-2xl font-bold">Featured Projects</h2>
-          <p className="text-gray-400">
-            Check out some of my recent projects that showcase my expertise in
-            web development.
-          </p>
+        <div className="flex gap-4">
+          <div className="flex-1 space-y-4">
+            <h2 className="text-2xl font-bold">Featured Projects</h2>
+            <p className="text-gray-400">
+              Check out some of my recent projects that showcase my expertise in
+              web development.
+            </p>
+          </div>
+          <div className="self-end">
+            <Link
+              href="/projects"
+              className="inline-flex items-center justify-center rounded-md border border-gray-700 px-6 py-3 text-sm font-medium transition-colors hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950 hover:animate-pulse"
+            >
+              View All
+            </Link>
+          </div>
         </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <Card className="flex flex-col h-full bg-gray-900 rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
             <CardContent className="flex-1 -p-6 max-h-60">
@@ -250,42 +261,6 @@ export default function Component() {
               <div className="flex gap-4 mt-4">
                 <GithubButton link="https://github.com/jpsanantonio/barbenheimer-vscode-theme" />
                 <ViewProjectButton link="https://marketplace.visualstudio.com/items?itemName=jayvicsanantonio.barbenheimer" />
-              </div>
-            </CardFooter>
-          </Card>
-          <Card className="flex flex-col h-full bg-gray-900 rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-            <CardContent className="flex-1 -p-6 max-h-60">
-              <Image
-                alt="Yahoo DSP"
-                className="w-full h-full object-cover"
-                height={225}
-                src="/images/home/mm-church.png"
-                style={{
-                  aspectRatio: "400/225",
-                  objectFit: "cover",
-                }}
-                width={400}
-              />
-            </CardContent>
-            <CardFooter className="bg-gray-900 px-8 py-6 flex flex-col flex-1 space-between">
-              <div className="flex flex-1 flex-start justify-between gap-2">
-                <div>
-                  <h3 className="text-lg text-white font-semibold mb-1">
-                    Malayang Mananampalataya Church
-                  </h3>
-                  <p className="text-gray-400 text-sm">
-                    Built with React.js, this Philippines church website fosters
-                    a strong connection between the church and its congregation.
-                    Easy navigation allows users to explore sermons, ministries,
-                    and events. Responsive design ensures the website looks
-                    great and is accessible across desktops, tablets, and
-                    smartphones.
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-4 mt-4">
-                <GithubButton link="https://github.com/nesceal/mmchurch" />
-                <ViewProjectButton link="https://mmchurch.ph/" />
               </div>
             </CardFooter>
           </Card>
