@@ -72,7 +72,7 @@ export default function Component() {
               <div className="space-y-2">
                 <Link
                   className="text-gray-200 font-bold text-lg hover:underline"
-                  href="#"
+                  href="/blog/the-typescript-tightrope"
                 >
                   The Typescript Tightrope: A Love-Hate Journey
                 </Link>
