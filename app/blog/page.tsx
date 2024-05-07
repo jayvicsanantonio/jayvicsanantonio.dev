@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import CalendarIcon from "@/components/icons/calendar";
+import { Badge } from "@/components/ui/badge";
 
 export default function Component() {
   return (
@@ -40,7 +41,8 @@ export default function Component() {
                 >
                   From Ember.js to Next.js: A Tale of Two Frameworks
                 </Link>
-                <div className="text-gray-400 text-sm">
+                <div className="text-gray-400 text-sm flex items-center space-x-2">
+                  <CalendarIcon className="h-4 w-4" />
                   <span>May 7, 2024</span>
                 </div>
                 <p className="text-gray-300 line-clamp-3 text-sm">
@@ -48,25 +50,10 @@ export default function Component() {
                   Ember.js and Next.js, two powerful contenders in the web
                   development world.
                 </p>
-                <div className="flex flex-wrap gap-2 text-sm pt-2">
-                  <Link
-                    className="bg-gray-700 text-gray-400 px-3 py-1 rounded-full hover:bg-gray-600 hover:text-gray-200"
-                    href="#"
-                  >
-                    Ember.js
-                  </Link>
-                  <Link
-                    className="bg-gray-700 text-gray-400 px-3 py-1 rounded-full hover:bg-gray-600 hover:text-gray-200"
-                    href="#"
-                  >
-                    Next.js
-                  </Link>
-                  <Link
-                    className="bg-gray-700 text-gray-400 px-3 py-1 rounded-full hover:bg-gray-600 hover:text-gray-200"
-                    href="#"
-                  >
-                    JavaScript
-                  </Link>
+                <div className="mt-6 flex flex-wrap gap-2 pt-3">
+                  <Badge variant="secondary">EmberJS</Badge>
+                  <Badge variant="secondary">NextJS</Badge>
+                  <Badge variant="secondary">Lessons Learned</Badge>
                 </div>
               </div>
             </article>
@@ -89,32 +76,18 @@ export default function Component() {
                 >
                   The Typescript Tightrope: A Love-Hate Journey
                 </Link>
-                <div className="text-gray-400 text-sm">
+                <div className="text-gray-400 text-sm flex items-center space-x-2">
+                  <CalendarIcon className="h-4 w-4" />
                   <span>May 4, 2024</span>
                 </div>
                 <p className="text-gray-300 line-clamp-3 text-sm">
                   My journey from TypeScript skeptic to enthusiast - how static
                   typing transformed my code and why I believe it's the future.
                 </p>
-                <div className="flex flex-wrap gap-2 text-sm pt-2">
-                  <Link
-                    className="bg-gray-700 text-gray-400 px-3 py-1 rounded-full hover:bg-gray-600 hover:text-gray-200"
-                    href="#"
-                  >
-                    Web Development
-                  </Link>
-                  <Link
-                    className="bg-gray-700 text-gray-400 px-3 py-1 rounded-full hover:bg-gray-600 hover:text-gray-200"
-                    href="#"
-                  >
-                    TypeScript
-                  </Link>
-                  <Link
-                    className="bg-gray-700 text-gray-400 px-3 py-1 rounded-full hover:bg-gray-600 hover:text-gray-200"
-                    href="#"
-                  >
-                    Lessons Learned
-                  </Link>
+                <div className="mt-6 flex flex-wrap gap-2 pt-3">
+                  <Badge variant="secondary">Web Development</Badge>
+                  <Badge variant="secondary">TypeScript</Badge>
+                  <Badge variant="secondary">Lessons Learned</Badge>
                 </div>
               </div>
             </article>
@@ -133,54 +106,25 @@ export default function Component() {
               <div className="space-y-2">
                 <Link
                   className="text-gray-200 font-bold text-lg hover:underline"
-                  href="#"
+                  href="/blog/building-my-developer-playground"
                 >
                   Building My Developer Playground
                 </Link>
-                <div className="text-gray-400 text-sm">
+                <div className="text-gray-400 text-sm flex items-center space-x-2">
+                  <CalendarIcon className="h-4 w-4" />
                   <span>May 1, 2024</span>
                 </div>
                 <p className="text-gray-300 line-clamp-3 text-sm">
                   Dive into the code behind the scenes! Explore the decisions
                   and thought process behind building my personal website.
                 </p>
-                <div className="flex flex-wrap gap-2 text-sm pt-2">
-                  <Link
-                    className="bg-gray-700 text-gray-400 px-3 py-1 rounded-full hover:bg-gray-600 hover:text-gray-200"
-                    href="#"
-                  >
-                    Web Development
-                  </Link>
-                  <Link
-                    className="bg-gray-700 text-gray-400 px-3 py-1 rounded-full hover:bg-gray-600 hover:text-gray-200"
-                    href="#"
-                  >
-                    Next.js
-                  </Link>
-                  <Link
-                    className="bg-gray-700 text-gray-400 px-3 py-1 rounded-full hover:bg-gray-600 hover:text-gray-200"
-                    href="#"
-                  >
-                    React
-                  </Link>
-                  <Link
-                    className="bg-gray-700 text-gray-400 px-3 py-1 rounded-full hover:bg-gray-600 hover:text-gray-200"
-                    href="#"
-                  >
-                    Tailwind CSS
-                  </Link>
-                  <Link
-                    className="bg-gray-700 text-gray-400 px-3 py-1 rounded-full hover:bg-gray-600 hover:text-gray-200"
-                    href="#"
-                  >
-                    TypeScript
-                  </Link>
-                  <Link
-                    className="bg-gray-700 text-gray-400 px-3 py-1 rounded-full hover:bg-gray-600 hover:text-gray-200"
-                    href="#"
-                  >
-                    Vercel
-                  </Link>
+                <div className="mt-6 flex flex-wrap gap-2 pt-3">
+                  <Badge variant="secondary">Web Development</Badge>
+                  <Badge variant="secondary">NextJS</Badge>
+                  <Badge variant="secondary">React</Badge>
+                  <Badge variant="secondary">Tailwind CSS</Badge>
+                  <Badge variant="secondary">TypeScript</Badge>
+                  <Badge variant="secondary">Vercel</Badge>
                 </div>
               </div>
             </article>
