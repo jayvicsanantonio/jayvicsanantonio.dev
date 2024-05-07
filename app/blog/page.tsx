@@ -22,11 +22,11 @@ export default function Component() {
         <div className="flex flex-col gap-8 py-12  bg-gray-950 text-gray-200">
           <div className="space-y-8">
             <article className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg border border-gray-800 p-6 shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
-              <img
+              <Image
                 alt="Blog Post Image"
-                className="rounded-lg object-cover"
+                className="rounded-lg object-cover border border-gray-800"
                 height={150}
-                src="/images/home/placeholder-image.png"
+                src="/images/blog/from-ember-to-next.png"
                 style={{
                   aspectRatio: "200/150",
                   objectFit: "cover",
@@ -38,15 +38,63 @@ export default function Component() {
                   className="text-gray-200 font-bold text-lg hover:underline"
                   href="#"
                 >
-                  The Future of Web Development: Trends and Innovations
+                  From Ember.js to Next.js: A Tale of Two Frameworks
+                </Link>
+                <div className="text-gray-400 text-sm">
+                  <span>May 7, 2024</span>
+                </div>
+                <p className="text-gray-300 line-clamp-3 text-sm">
+                  Explore the differences and surprising similarities between
+                  Ember.js and Next.js, two powerful contenders in the web
+                  development world.
+                </p>
+                <div className="flex flex-wrap gap-2 text-sm pt-2">
+                  <Link
+                    className="bg-gray-700 text-gray-400 px-3 py-1 rounded-full hover:bg-gray-600 hover:text-gray-200"
+                    href="#"
+                  >
+                    Ember.js
+                  </Link>
+                  <Link
+                    className="bg-gray-700 text-gray-400 px-3 py-1 rounded-full hover:bg-gray-600 hover:text-gray-200"
+                    href="#"
+                  >
+                    Next.js
+                  </Link>
+                  <Link
+                    className="bg-gray-700 text-gray-400 px-3 py-1 rounded-full hover:bg-gray-600 hover:text-gray-200"
+                    href="#"
+                  >
+                    JavaScript
+                  </Link>
+                </div>
+              </div>
+            </article>
+            <article className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg border border-gray-800 p-6 shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
+              <Image
+                alt="Blog Post Image"
+                className="rounded-lg object-cover"
+                height={150}
+                src="/images/blog/the-typescript-tightrope.png"
+                style={{
+                  aspectRatio: "200/150",
+                  objectFit: "cover",
+                }}
+                width={200}
+              />
+              <div className="space-y-2">
+                <Link
+                  className="text-gray-200 font-bold text-lg hover:underline"
+                  href="#"
+                >
+                  The Typescript Tightrope: A Love-Hate Journey
                 </Link>
                 <div className="text-gray-400 text-sm">
                   <span>May 4, 2024</span>
                 </div>
                 <p className="text-gray-300 line-clamp-3 text-sm">
-                  Explore the latest trends and innovations shaping the future
-                  of web development, from AI-powered tools to serverless
-                  architectures and beyond.
+                  My journey from TypeScript skeptic to enthusiast - how static
+                  typing transformed my code and why I believe it's the future.
                 </p>
                 <div className="flex flex-wrap gap-2 text-sm pt-2">
                   <Link
@@ -59,23 +107,23 @@ export default function Component() {
                     className="bg-gray-700 text-gray-400 px-3 py-1 rounded-full hover:bg-gray-600 hover:text-gray-200"
                     href="#"
                   >
-                    Trends
+                    TypeScript
                   </Link>
                   <Link
                     className="bg-gray-700 text-gray-400 px-3 py-1 rounded-full hover:bg-gray-600 hover:text-gray-200"
                     href="#"
                   >
-                    Innovations
+                    Lessons Learned
                   </Link>
                 </div>
               </div>
             </article>
             <article className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg border border-gray-800 p-6 shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
-              <img
+              <Image
                 alt="Blog Post Image"
-                className="rounded-lg object-cover"
+                className="rounded-lg object-cover border border-gray-800"
                 height={150}
-                src="/images/home/placeholder-image.png"
+                src="/images/blog/building-my-developer-playground.png"
                 style={{
                   aspectRatio: "200/150",
                   objectFit: "cover",
@@ -87,65 +135,28 @@ export default function Component() {
                   className="text-gray-200 font-bold text-lg hover:underline"
                   href="#"
                 >
-                  Mastering Responsive Design: Techniques and Best Practices
+                  Building My Developer Playground
                 </Link>
                 <div className="text-gray-400 text-sm">
-                  <span>April 15, 2024</span>
+                  <span>May 1, 2024</span>
                 </div>
                 <p className="text-gray-300 line-clamp-3 text-sm">
-                  Learn how to create responsive, mobile-friendly websites that
-                  adapt seamlessly to different screen sizes and devices.
+                  Dive into the code behind the scenes! Explore the decisions
+                  and thought process behind building my personal website.
                 </p>
                 <div className="flex flex-wrap gap-2 text-sm pt-2">
                   <Link
                     className="bg-gray-700 text-gray-400 px-3 py-1 rounded-full hover:bg-gray-600 hover:text-gray-200"
                     href="#"
                   >
-                    Responsive Design
+                    Web Development
                   </Link>
                   <Link
                     className="bg-gray-700 text-gray-400 px-3 py-1 rounded-full hover:bg-gray-600 hover:text-gray-200"
                     href="#"
                   >
-                    Best Practices
+                    Next.js
                   </Link>
-                  <Link
-                    className="bg-gray-700 text-gray-400 px-3 py-1 rounded-full hover:bg-gray-600 hover:text-gray-200"
-                    href="#"
-                  >
-                    Techniques
-                  </Link>
-                </div>
-              </div>
-            </article>
-            <article className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg border border-gray-800 p-6 shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
-              <img
-                alt="Blog Post Image"
-                className="rounded-lg object-cover"
-                height={150}
-                src="/images/home/placeholder-image.png"
-                style={{
-                  aspectRatio: "200/150",
-                  objectFit: "cover",
-                }}
-                width={200}
-              />
-              <div className="space-y-2">
-                <Link
-                  className="text-gray-200 font-bold text-lg hover:underline"
-                  href="#"
-                >
-                  Unlocking the Power of React: A Comprehensive Guide
-                </Link>
-                <div className="text-gray-400 text-sm">
-                  <span>March 28, 2024</span>
-                </div>
-                <p className="text-gray-300 line-clamp-3 text-sm">
-                  Dive deep into the world of React, the popular JavaScript
-                  library for building user interfaces, and learn how to
-                  leverage its powerful features.
-                </p>
-                <div className="flex flex-wrap gap-2 text-sm pt-2">
                   <Link
                     className="bg-gray-700 text-gray-400 px-3 py-1 rounded-full hover:bg-gray-600 hover:text-gray-200"
                     href="#"
@@ -156,13 +167,19 @@ export default function Component() {
                     className="bg-gray-700 text-gray-400 px-3 py-1 rounded-full hover:bg-gray-600 hover:text-gray-200"
                     href="#"
                   >
-                    JavaScript
+                    Tailwind CSS
                   </Link>
                   <Link
                     className="bg-gray-700 text-gray-400 px-3 py-1 rounded-full hover:bg-gray-600 hover:text-gray-200"
                     href="#"
                   >
-                    Comprehensive Guide
+                    TypeScript
+                  </Link>
+                  <Link
+                    className="bg-gray-700 text-gray-400 px-3 py-1 rounded-full hover:bg-gray-600 hover:text-gray-200"
+                    href="#"
+                  >
+                    Vercel
                   </Link>
                 </div>
               </div>
