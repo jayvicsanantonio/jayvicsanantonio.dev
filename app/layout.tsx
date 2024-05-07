@@ -54,6 +54,12 @@ export default function RootLayout({
               </Link>
               <Link
                 className="text-sm font-medium hover:underline hover:animate-pulse"
+                href="/work"
+              >
+                Work
+              </Link>
+              <Link
+                className="text-sm font-medium hover:underline hover:animate-pulse"
                 href="/projects"
               >
                 Projects
