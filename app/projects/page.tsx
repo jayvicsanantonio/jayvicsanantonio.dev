@@ -19,7 +19,7 @@ export default function Page() {
             represents a unique challenge and learning experience.
           </p>
         </div>
-        <Card className="flex flex-col h-full bg-gray-900 rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+        <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
           <CardContent className="flex-1 -p-6 max-h-60">
             <Image
               alt="Yahoo DSP"
@@ -33,7 +33,7 @@ export default function Page() {
               width={400}
             />
           </CardContent>
-          <CardFooter className="bg-gray-900 px-8 py-6 flex flex-col flex-1 space-between">
+          <CardFooter className="bg-gray-950 text-gray-500 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
             <div className="flex flex-1 flex-start justify-between gap-2">
               <div>
                 <h3 className="text-lg text-white font-semibold mb-1">
@@ -62,7 +62,7 @@ export default function Page() {
           All Projects
         </h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <Card className="flex flex-col h-full bg-gray-900 rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
             <CardContent className="flex-1 -p-6 max-h-60">
               <Image
                 alt="Yahoo DSP"
@@ -76,7 +76,7 @@ export default function Page() {
                 width={400}
               />
             </CardContent>
-            <CardFooter className="bg-gray-900 px-8 py-6 flex flex-col flex-1 space-between">
+            <CardFooter className="bg-gray-950 text-gray-500 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
               <div className="flex flex-1 flex-start justify-between gap-2">
                 <div>
                   <h3 className="text-lg text-white font-semibold mb-1">
@@ -95,7 +95,7 @@ export default function Page() {
               </div>
             </CardFooter>
           </Card>
-          <Card className="flex flex-col h-full bg-gray-900 rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
             <CardContent className="flex-1 -p-6 max-h-60">
               <Image
                 alt="Yahoo DSP"
@@ -109,7 +109,7 @@ export default function Page() {
                 width={400}
               />
             </CardContent>
-            <CardFooter className="bg-gray-900 px-8 py-6 flex flex-col flex-1 space-between">
+            <CardFooter className="bg-gray-950 text-gray-500 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
               <div className="flex flex-1 flex-start justify-between gap-2">
                 <div>
                   <h3 className="text-lg text-white font-semibold mb-1">
