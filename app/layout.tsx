@@ -7,7 +7,7 @@ import { Toaster } from "@/components/ui/toaster";
 import GithubIcon from "@/components/icons/github";
 import LinkedinIcon from "@/components/icons/linkedin";
 import TwitterIcon from "@/components/icons/twitter";
-import Header from "@/components/pages/home/Header";
+import Header from "@/components/pages/Header";
 import "./globals.css";
 
 const inter = Inter({

@@ -18,7 +18,7 @@ export default function Header() {
       <nav
         className={
           isNavOpen
-            ? "absolute top-24 left-0 flex flex-col h-screen w-full z-10 bg-gray-950 text-gray-200 overflow-y-auto"
+            ? "absolute top-[89px] left-0 flex flex-col h-screen w-full z-9 bg-gray-950 text-gray-200 overflow-y-auto"
             : "hidden md:flex items-center gap-8"
         }
       >
