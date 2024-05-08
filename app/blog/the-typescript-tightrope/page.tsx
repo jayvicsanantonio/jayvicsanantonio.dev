@@ -14,7 +14,7 @@ export default function Page() {
           <span>May 4, 2024</span>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row items-center justify-center space-x-4 space-y-4">
+      <div className="flex flex-col md:flex-row items-center justify-center md:space-x-4 space-y-4">
         <p>
           Let's talk about TypeScript. As a web developer, I used to scoff at
           the idea of adding complexity with static typing to my beloved

@@ -14,7 +14,7 @@ export default function Page() {
           <span>May 7, 2024</span>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row items-center justify-center space-x-4 space-y-4">
+      <div className="flex flex-col md:flex-row items-center justify-center md:space-x-4 space-y-4">
         <p>
           Ah, the land of JavaScript frameworks! As a developer, navigating the
           ever-evolving landscape can be both exciting and overwhelming. Today,
