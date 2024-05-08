@@ -25,7 +25,7 @@ export default function Component() {
             <article className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg border border-gray-800 p-6 shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
               <Image
                 alt="Blog Post Image"
-                className="rounded-lg object-cover border border-gray-800"
+                className="rounded-lg object-cover border border-gray-800 w-full"
                 height={150}
                 src="/images/blog/from-ember-to-next.png"
                 style={{
@@ -60,7 +60,7 @@ export default function Component() {
             <article className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg border border-gray-800 p-6 shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
               <Image
                 alt="Blog Post Image"
-                className="rounded-lg object-cover"
+                className="rounded-lg object-cover border border-gray-800 w-full"
                 height={150}
                 src="/images/blog/the-typescript-tightrope.png"
                 style={{
@@ -94,7 +94,7 @@ export default function Component() {
             <article className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg border border-gray-800 p-6 shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
               <Image
                 alt="Blog Post Image"
-                className="rounded-lg object-cover border border-gray-800"
+                className="rounded-lg object-cover border border-gray-800 w-full"
                 height={150}
                 src="/images/blog/building-my-developer-playground.png"
                 style={{
