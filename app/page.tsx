@@ -13,15 +13,15 @@ export default function Component() {
         <div className="space-y-6">
           <div>
             <h1 className="text-4xl font-bold tracking-tight">
-              Jayvic San Antonio
+              Hey, I'm Jayvic
             </h1>
             <h2 className="text-gray-400 text-lg font-bold tracking-widest">
               Full-Stack Web Developer
             </h2>
           </div>
           <p className="text-gray-400 max-w-md">
-            Crafting exceptional web experiences with a focus on performance,
-            accessibility, and scalability.
+            I use the Force (and some serious coding skills) to build websites
+            that are lightning fast, accessible, and can scale infinitely.
           </p>
           <div className="flex gap-6">
             <Link
