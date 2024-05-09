@@ -55,10 +55,10 @@ export default function Component() {
           <h2 className="text-2xl font-bold">About Me</h2>
           <p className="text-gray-400 ">
             <strong>Hey there!</strong> I'm Jayvic San Antonio, a passionate
-            Full-Stack Web Developer hailing from the San Francisco Bay Area.
-            With over 9 years of experience, you could say JavaScript is my
-            coding soulmate - I love its versatility and how it keeps getting
-            better and better!
+            Full-Stack Web Developer originally from the Philippines, now
+            thriving in the San Francisco Bay Area. With over 9 years of
+            experience, you could say JavaScript is my coding soulmate - I love
+            its versatility and how it keeps getting better and better!
           </p>
           <p className="text-gray-400">
             From hackathons and co-founding a startup to working at a global
