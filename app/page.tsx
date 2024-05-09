@@ -13,7 +13,7 @@ export default function Component() {
         <div className="space-y-6">
           <div>
             <h1 className="text-4xl font-bold tracking-tight">
-              Hey, I'm Jayvic
+              Hey, I'm Jayvic 👋
             </h1>
             <h2 className="text-gray-400 text-lg font-bold tracking-widest">
               Full-Stack Web Developer
@@ -53,12 +53,36 @@ export default function Component() {
       <section className="mt-24 space-y-12">
         <div className="space-y-4">
           <h2 className="text-2xl font-bold">About Me</h2>
+          <p className="text-gray-400 ">
+            <strong>Hey there!</strong> I'm Jayvic San Antonio, a passionate
+            Full-Stack Web Developer hailing from the San Francisco Bay Area.
+            With over 9 years of experience, you could say JavaScript is my
+            coding soulmate - I love its versatility and how it keeps getting
+            better and better!
+          </p>
           <p className="text-gray-400">
-            As a senior web developer, I have a deep passion for creating
-            exceptional digital experiences. With over a decade of experience, I
-            have honed my skills in modern web technologies, design principles,
-            and project management, enabling me to deliver high-quality,
-            scalable, and user-centric solutions.
+            From hackathons and co-founding a startup to working at a global
+            media and tech company, I've thrived in all kinds of environments.
+            Whether I'm flying solo or part of an awesome team, I'm all about
+            tackling challenging projects and delivering top-notch code
+            (optimized, documented, and ready to roll!).
+          </p>
+          <p className="text-gray-400">
+            In this ever-evolving industry, staying sharp is key. That's why I'm
+            constantly learning and pushing my skills to the next level.
+          </p>
+          <p className="text-gray-400">
+            <strong>What gets me excited?</strong> The chance to create
+            impactful solutions, make user experiences amazing, and drive
+            innovation in a forward-thinking environment. Collaboration and
+            inclusivity are super important to me, so working with a team that
+            shares those values would be epic!
+          </p>
+          <p className="text-gray-400">
+            <strong>Ready to build something awesome together?</strong>{" "}
+            <Link href="#contact-me" className="hover:underline">
+              Let's chat!
+            </Link>
           </p>
         </div>
       </section>
