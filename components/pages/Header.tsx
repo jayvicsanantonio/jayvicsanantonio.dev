@@ -28,7 +28,7 @@ export default function Header() {
             onClick={() => setIsNavOpen(false)}
             className={`${
               isNavOpen ? "border-b-2 border-gray-800 py-8 px-4" : ""
-            } text-sm font-medium hover:underline`}
+            } font-medium hover:underline`}
           >
             Home
           </a>
@@ -39,7 +39,7 @@ export default function Header() {
             onClick={() => setIsNavOpen(false)}
             className={`${
               isNavOpen ? "border-b-2 border-gray-800 py-8 px-4" : ""
-            } text-sm font-medium hover:underline`}
+            } font-medium hover:underline`}
           >
             Projects
           </a>
@@ -50,7 +50,7 @@ export default function Header() {
             onClick={() => setIsNavOpen(false)}
             className={`${
               isNavOpen ? "border-b-2 border-gray-800 py-8 px-4" : ""
-            } text-sm font-medium hover:underline`}
+            } font-medium hover:underline`}
           >
             Blog
           </a>
@@ -61,7 +61,7 @@ export default function Header() {
             onClick={() => setIsNavOpen(false)}
             className={`${
               isNavOpen ? "border-b-2 border-gray-800 py-8 px-4" : ""
-            } text-sm font-medium hover:underline`}
+            } font-medium hover:underline`}
           >
             Work
           </a>

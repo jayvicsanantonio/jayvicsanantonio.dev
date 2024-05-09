@@ -8,10 +8,10 @@ export default function Page() {
     <section className="w-full  bg-gray-950 text-gray-200">
       <div className="flex flex-col gap-8">
         <div className="space-y-4">
-          <div className="inline-block rounded-lg bg-gray-800 px-3 py-1 text-sm">
+          <div className="font-oswald uppercase inline-block rounded-lg bg-gray-800 px-3 py-1">
             Featured Projects
           </div>
-          <h2 className="text-2xl font-bold tracking-tighter text-gray-200 md:text-3xl/tight lg:text-4xl">
+          <h2 className="font-oswald text-2xl font-bold tracking-tighter text-gray-200 md:text-3xl/tight lg:text-4xl">
             Work Showcase
           </h2>
           <p className="max-w-[600px] text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
@@ -35,11 +35,11 @@ export default function Page() {
           </CardContent>
           <CardFooter className="bg-gray-950 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
             <div className="flex flex-1 flex-start justify-between gap-2">
-              <div>
-                <h3 className="text-lg text-gray-200 font-semibold mb-1">
+              <div className="space-y-2">
+                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
                   Yahoo DSP
                 </h3>
-                <p className="text-gray-400 text-sm">
+                <p className="text-gray-400">
                   A cutting-edge programmatic advertising platform for
                   businesses. Built with a powerful tech stack including{" "}
                   <em className="font-bold">Ember.js</em>,{" "}
@@ -58,7 +58,7 @@ export default function Page() {
         </Card>
       </div>
       <div className="mt-16 space-y-8">
-        <h2 className="text-2xl font-bold tracking-tighter text-gray-200 md:text-3xl/tight lg:text-4xl">
+        <h2 className="font-oswald text-2xl font-bold tracking-tighter text-gray-200 md:text-3xl/tight lg:text-4xl">
           All Projects
         </h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -79,10 +79,10 @@ export default function Page() {
             <CardFooter className="bg-gray-950 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
               <div className="flex flex-1 flex-start justify-between gap-2">
                 <div>
-                  <h3 className="text-lg text-gray-200 font-semibold mb-1">
+                  <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
                     Barbenheimer VS Code Theme
                   </h3>
-                  <p className="text-gray-400 text-sm">
+                  <p className="text-gray-400">
                     A VS Code theme inspired by the Internet phenomenon of the
                     same name. It combines the pink and playful aesthetics of
                     Barbie with the dark and dramatic tones of Oppenheimer.
@@ -112,10 +112,10 @@ export default function Page() {
             <CardFooter className="bg-gray-950 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
               <div className="flex flex-1 flex-start justify-between gap-2">
                 <div>
-                  <h3 className="text-lg text-gray-200 font-semibold mb-1">
+                  <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
                     Malayang Mananampalataya Church
                   </h3>
-                  <p className="text-gray-400 text-sm">
+                  <p className="text-gray-400">
                     Built with React.js, this Philippines church website fosters
                     a strong connection between the church and its congregation.
                     Easy navigation allows users to explore sermons, ministries,

@@ -8,10 +8,10 @@ export default function Component() {
     <section className="w-full  bg-gray-950 text-gray-200">
       <div className="flex flex-col gap-8">
         <div className="space-y-4">
-          <div className="inline-block rounded-lg bg-gray-800 px-3 py-1 text-sm">
+          <div className="font-oswald uppercase inline-block rounded-lg bg-gray-800 px-3 py-1">
             Blog Posts
           </div>
-          <h2 className="text-2xl font-bold tracking-tighter text-gray-200 md:text-3xl/tight lg:text-4xl">
+          <h2 className="font-oswald text-2xl font-bold tracking-tighter text-gray-200 md:text-3xl/tight lg:text-4xl">
             Exploring My Thought
           </h2>
           <p className="max-w-[600px] text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
@@ -26,34 +26,40 @@ export default function Component() {
               <Image
                 alt="Blog Post Image"
                 className="rounded-lg object-cover border border-gray-800 w-full"
-                height={150}
+                height={160}
                 src="/images/blog/from-ember-to-next.png"
                 style={{
-                  aspectRatio: "200/150",
+                  aspectRatio: "200/160",
                   objectFit: "cover",
                 }}
                 width={200}
               />
               <div className="space-y-2">
                 <Link
-                  className="text-gray-200 font-bold text-lg hover:underline"
+                  className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight hover:underline"
                   href="/blog/from-ember-to-next"
                 >
                   From Ember.js to Next.js: A Tale of Two Frameworks
                 </Link>
-                <div className="text-gray-400 text-sm flex items-center space-x-2">
+                <div className="text-gray-400 flex items-center space-x-2">
                   <CalendarIcon className="h-4 w-4" />
                   <span>May 7, 2024</span>
                 </div>
-                <p className="text-gray-300 line-clamp-3 text-sm">
+                <p className="text-gray-300 line-clamp-3">
                   Explore the differences and surprising similarities between
                   Ember.js and Next.js, two powerful contenders in the web
                   development world.
                 </p>
-                <div className="mt-6 flex flex-wrap gap-2 pt-3">
-                  <Badge variant="secondary">EmberJS</Badge>
-                  <Badge variant="secondary">NextJS</Badge>
-                  <Badge variant="secondary">Lessons Learned</Badge>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  <Badge className="text-sm" variant="secondary">
+                    EmberJS
+                  </Badge>
+                  <Badge className="text-sm" variant="secondary">
+                    NextJS
+                  </Badge>
+                  <Badge className="text-sm" variant="secondary">
+                    Lessons Learned
+                  </Badge>
                 </div>
               </div>
             </article>
@@ -61,33 +67,39 @@ export default function Component() {
               <Image
                 alt="Blog Post Image"
                 className="rounded-lg object-cover border border-gray-800 w-full"
-                height={150}
+                height={160}
                 src="/images/blog/the-typescript-tightrope.png"
                 style={{
-                  aspectRatio: "200/150",
+                  aspectRatio: "200/160",
                   objectFit: "cover",
                 }}
                 width={200}
               />
               <div className="space-y-2">
                 <Link
-                  className="text-gray-200 font-bold text-lg hover:underline"
+                  className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight hover:underline"
                   href="/blog/the-typescript-tightrope"
                 >
                   The Typescript Tightrope: A Love-Hate Journey
                 </Link>
-                <div className="text-gray-400 text-sm flex items-center space-x-2">
+                <div className="text-gray-400 flex items-center space-x-2">
                   <CalendarIcon className="h-4 w-4" />
                   <span>May 4, 2024</span>
                 </div>
-                <p className="text-gray-300 line-clamp-3 text-sm">
+                <p className="text-gray-300 line-clamp-3">
                   My journey from TypeScript skeptic to enthusiast - how static
                   typing transformed my code and why I believe it's the future.
                 </p>
-                <div className="mt-6 flex flex-wrap gap-2 pt-3">
-                  <Badge variant="secondary">Web Development</Badge>
-                  <Badge variant="secondary">TypeScript</Badge>
-                  <Badge variant="secondary">Lessons Learned</Badge>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  <Badge className="text-sm" variant="secondary">
+                    Web Development
+                  </Badge>
+                  <Badge className="text-sm" variant="secondary">
+                    TypeScript
+                  </Badge>
+                  <Badge className="text-sm" variant="secondary">
+                    Lessons Learned
+                  </Badge>
                 </div>
               </div>
             </article>
@@ -95,36 +107,48 @@ export default function Component() {
               <Image
                 alt="Blog Post Image"
                 className="rounded-lg object-cover border border-gray-800 w-full"
-                height={150}
+                height={160}
                 src="/images/blog/building-my-developer-playground.png"
                 style={{
-                  aspectRatio: "200/150",
+                  aspectRatio: "200/160",
                   objectFit: "cover",
                 }}
                 width={200}
               />
               <div className="space-y-2">
                 <Link
-                  className="text-gray-200 font-bold text-lg hover:underline"
+                  className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight hover:underline"
                   href="/blog/building-my-developer-playground"
                 >
                   Building My Developer Playground
                 </Link>
-                <div className="text-gray-400 text-sm flex items-center space-x-2">
+                <div className="text-gray-400 flex items-center space-x-2">
                   <CalendarIcon className="h-4 w-4" />
                   <span>May 1, 2024</span>
                 </div>
-                <p className="text-gray-300 line-clamp-3 text-sm">
+                <p className="text-gray-300 line-clamp-3">
                   Dive into the code behind the scenes! Explore the decisions
                   and thought process behind building my personal website.
                 </p>
-                <div className="mt-6 flex flex-wrap gap-2 pt-3">
-                  <Badge variant="secondary">Web Development</Badge>
-                  <Badge variant="secondary">NextJS</Badge>
-                  <Badge variant="secondary">React</Badge>
-                  <Badge variant="secondary">Tailwind CSS</Badge>
-                  <Badge variant="secondary">TypeScript</Badge>
-                  <Badge variant="secondary">Vercel</Badge>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  <Badge className="text-sm" variant="secondary">
+                    Web Development
+                  </Badge>
+                  <Badge className="text-sm" variant="secondary">
+                    NextJS
+                  </Badge>
+                  <Badge className="text-sm" variant="secondary">
+                    React
+                  </Badge>
+                  <Badge className="text-sm" variant="secondary">
+                    Tailwind CSS
+                  </Badge>
+                  <Badge className="text-sm" variant="secondary">
+                    TypeScript
+                  </Badge>
+                  <Badge className="text-sm" variant="secondary">
+                    Vercel
+                  </Badge>
                 </div>
               </div>
             </article>

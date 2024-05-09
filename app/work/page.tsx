@@ -6,10 +6,10 @@ export default function Work() {
     <section className="w-full  bg-gray-950 text-gray-200">
       <div className="grid gap-8 lg:grid-cols-3 lg:gap-12">
         <div className="col-span-2 md:col-span-1 space-y-4">
-          <div className="inline-block rounded-lg bg-gray-800 px-3 py-1 text-sm">
+          <div className="font-oswald uppercase inline-block rounded-lg bg-gray-800 px-3 py-1">
             Work Experience
           </div>
-          <h2 className="text-2xl font-bold tracking-tighter text-gray-200 md:text-3xl/tight lg:text-4xl">
+          <h2 className="font-oswald text-2xl font-bold tracking-tighter text-gray-200 md:text-3xl/tight lg:text-4xl">
             Crafting Impactful Solutions
           </h2>
           <p className="max-w-[600px] text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
@@ -21,14 +21,14 @@ export default function Work() {
           <div className="group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <h3 className="text-lg font-medium group-hover:text-gray-200">
+                <h3 className="font-oswald text-2xl group-hover:text-gray-200">
                   Software Dev Engineer II
                 </h3>
-                <p className="text-sm text-gray-400">Yahoo Inc.</p>
+                <p className="text-gray-400">Yahoo Inc.</p>
               </div>
-              <span className="text-sm text-gray-400">2019 - 2023</span>
+              <span className="text-gray-400">2019 - 2023</span>
             </div>
-            <ul className="mt-4 space-y-3 text-sm/relaxed">
+            <ul className="mt-4 space-y-3 text-base/relaxed">
               <li>
                 <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Rebuilt the App Marketing business of the Yahoo Demand Side
@@ -71,30 +71,52 @@ export default function Work() {
               </li>
             </ul>
             <div className="mt-6 flex flex-wrap gap-2">
-              <Badge variant="secondary">React</Badge>
-              <Badge variant="secondary">Ember</Badge>
-              <Badge variant="secondary">Express</Badge>
-              <Badge variant="secondary">Node</Badge>
-              <Badge variant="secondary">JS</Badge>
-              <Badge variant="secondary">HTML</Badge>
-              <Badge variant="secondary">CSS</Badge>
-              <Badge variant="secondary">AWS</Badge>
-              <Badge variant="secondary">Java</Badge>
-              <Badge variant="secondary">MySQL</Badge>
-              <Badge variant="secondary">AdTech</Badge>
+              <Badge className="text-sm" variant="secondary">
+                React
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                Ember
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                Express
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                Node
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                JS
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                HTML
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                CSS
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                AWS
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                Java
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                MySQL
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                AdTech
+              </Badge>
             </div>
           </div>
           <div className="group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <h3 className="text-lg font-medium group-hover:text-gray-200">
+                <h3 className="font-oswald text-2xl group-hover:text-gray-200">
                   Software Dev Engineer
                 </h3>
                 <p className="text-sm text-gray-400">Yahoo Inc.</p>
               </div>
               <span className="text-sm text-gray-400">2016 - 2019</span>
             </div>
-            <ul className="mt-4 space-y-3 text-sm/relaxed">
+            <ul className="mt-4 space-y-3 text-base/relaxed">
               <li>
                 <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Built the Yahoo DSP Replay tool autonomously with React,
@@ -131,22 +153,42 @@ export default function Work() {
               </li>
             </ul>
             <div className="mt-6 flex flex-wrap gap-2">
-              <Badge variant="secondary">React</Badge>
-              <Badge variant="secondary">Ember</Badge>
-              <Badge variant="secondary">Express</Badge>
-              <Badge variant="secondary">Node</Badge>
-              <Badge variant="secondary">JS</Badge>
-              <Badge variant="secondary">HTML</Badge>
-              <Badge variant="secondary">CSS</Badge>
-              <Badge variant="secondary">Java</Badge>
-              <Badge variant="secondary">MySQL</Badge>
-              <Badge variant="secondary">AdTech</Badge>
+              <Badge className="text-sm" variant="secondary">
+                React
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                Ember
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                Express
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                Node
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                JS
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                HTML
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                CSS
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                Java
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                MySQL
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                AdTech
+              </Badge>
             </div>
           </div>
           <div className="group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <h3 className="text-lg font-medium group-hover:text-gray-200">
+                <h3 className="font-oswald text-2xl group-hover:text-gray-200">
                   Co-Founder
                 </h3>
                 <p className="text-sm text-gray-400">
@@ -155,7 +197,7 @@ export default function Work() {
               </div>
               <span className="text-sm text-gray-400">2015 - 2016</span>
             </div>
-            <ul className="mt-4 space-y-3 text-sm/relaxed">
+            <ul className="mt-4 space-y-3 text-base/relaxed">
               <li>
                 <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Represented the company and pitched at local and international
@@ -195,16 +237,24 @@ export default function Work() {
               </li>
             </ul>
             <div className="mt-6 flex flex-wrap gap-2">
-              <Badge variant="secondary">AWS</Badge>
-              <Badge variant="secondary">Express</Badge>
-              <Badge variant="secondary">Node</Badge>
-              <Badge variant="secondary">Internet of Things</Badge>
+              <Badge className="text-sm" variant="secondary">
+                AWS
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                Express
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                Node
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                Internet of Things
+              </Badge>
             </div>
           </div>
           <div className="group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <h3 className="text-lg font-medium group-hover:text-gray-200">
+                <h3 className="font-oswald text-2xl group-hover:text-gray-200">
                   Senior Software Engineer
                 </h3>
                 <p className="text-sm text-gray-400">
@@ -213,7 +263,7 @@ export default function Work() {
               </div>
               <span className="text-sm text-gray-400">2016</span>
             </div>
-            <ul className="mt-4 space-y-3 text-sm/relaxed">
+            <ul className="mt-4 space-y-3 text-base/relaxed">
               <li>
                 <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Demonstrated technical expertise and ability to thrive under
@@ -253,19 +303,33 @@ export default function Work() {
               </li>
             </ul>
             <div className="mt-6 flex flex-wrap gap-2">
-              <Badge variant="secondary">AWS</Badge>
-              <Badge variant="secondary">Express</Badge>
-              <Badge variant="secondary">Node</Badge>
-              <Badge variant="secondary">SailsJS</Badge>
-              <Badge variant="secondary">Redis</Badge>
-              <Badge variant="secondary">MongoDB</Badge>
-              <Badge variant="secondary">FinTech</Badge>
+              <Badge className="text-sm" variant="secondary">
+                AWS
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                Express
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                Node
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                SailsJS
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                Redis
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                MongoDB
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                FinTech
+              </Badge>
             </div>
           </div>
           <div className="group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <h3 className="text-lg font-medium group-hover:text-gray-200">
+                <h3 className="font-oswald text-2xl group-hover:text-gray-200">
                   Software Engineering Analyst
                 </h3>
                 <p className="text-sm text-gray-400">
@@ -274,7 +338,7 @@ export default function Work() {
               </div>
               <span className="text-sm text-gray-400">2013 - 2015</span>
             </div>
-            <ul className="mt-4 space-y-3 text-sm/relaxed">
+            <ul className="mt-4 space-y-3 text-base/relaxed">
               <li>
                 <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Developed the redesign of the existing stand-alone application,
@@ -292,21 +356,39 @@ export default function Work() {
               </li>
             </ul>
             <div className="mt-6 flex flex-wrap gap-2">
-              <Badge variant="secondary">Express</Badge>
-              <Badge variant="secondary">Node</Badge>
-              <Badge variant="secondary">SailsJS</Badge>
-              <Badge variant="secondary">Redis</Badge>
-              <Badge variant="secondary">MongoDB</Badge>
-              <Badge variant="secondary">JS</Badge>
-              <Badge variant="secondary">HTML</Badge>
-              <Badge variant="secondary">CSS</Badge>
-              <Badge variant="secondary">jQuery</Badge>
+              <Badge className="text-sm" variant="secondary">
+                Express
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                Node
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                SailsJS
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                Redis
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                MongoDB
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                JS
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                HTML
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                CSS
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                jQuery
+              </Badge>
             </div>
           </div>
           <div className="group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <h3 className="text-lg font-medium group-hover:text-gray-200">
+                <h3 className="font-oswald text-2xl group-hover:text-gray-200">
                   Intern
                 </h3>
                 <p className="text-sm text-gray-400">
@@ -315,7 +397,7 @@ export default function Work() {
               </div>
               <span className="text-sm text-gray-400">2012</span>
             </div>
-            <ul className="mt-4 space-y-3 text-sm/relaxed">
+            <ul className="mt-4 space-y-3 text-base/relaxed">
               <li>
                 <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Collaborated with a team of interns to design and implement a
@@ -334,18 +416,28 @@ export default function Work() {
               </li>
             </ul>
             <div className="mt-6 flex flex-wrap gap-2">
-              <Badge variant="secondary">PostgreSQL</Badge>
-              <Badge variant="secondary">PHP</Badge>
-              <Badge variant="secondary">JS</Badge>
-              <Badge variant="secondary">HTML</Badge>
-              <Badge variant="secondary">CSS</Badge>
+              <Badge className="text-sm" variant="secondary">
+                PostgreSQL
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                PHP
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                JS
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                HTML
+              </Badge>
+              <Badge className="text-sm" variant="secondary">
+                CSS
+              </Badge>
             </div>
           </div>
           <div className="group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <h3 className="text-lg font-medium group-hover:text-gray-200">
-                  Intern
+                <h3 className="font-oswald text-2xl group-hover:text-gray-200">
+                  Helpdesk Trainee
                 </h3>
                 <p className="text-sm text-gray-400">
                   University of the Philippines Diliman Network
@@ -353,7 +445,7 @@ export default function Work() {
               </div>
               <span className="text-sm text-gray-400">2011 - 2012</span>
             </div>
-            <ul className="mt-4 space-y-3 text-sm/relaxed">
+            <ul className="mt-4 space-y-3 text-base/relaxed">
               <li>
                 <CheckIcon className="mr-2 inline-block h-4 w-4 text-gray-2000 dark:text-gray-400" />
                 Provided timely technical support to students, faculty, and
@@ -375,7 +467,9 @@ export default function Work() {
               </li>
             </ul>
             <div className="mt-6 flex flex-wrap gap-2">
-              <Badge variant="secondary">Linux</Badge>
+              <Badge className="text-sm" variant="secondary">
+                Linux
+              </Badge>
             </div>
           </div>
         </div>

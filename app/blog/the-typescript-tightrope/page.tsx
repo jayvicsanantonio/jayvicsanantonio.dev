@@ -6,10 +6,10 @@ export default function Page() {
   return (
     <article className="prose prose-invert max-w-3xl mx-auto space-y-8">
       <div className="space-y-2 not-prose">
-        <h1 className="text-2xl font-bold tracking-tighter text-gray-200 md:text-3xl/tight lg:text-4xl">
+        <h1 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-bold tracking-tight">
           The Typescript Tightrope: A Love-Hate Journey
         </h1>
-        <div className="text-gray-400 text-sm flex items-center space-x-2">
+        <div className="text-gray-400 flex items-center space-x-2">
           <CalendarIcon className="h-4 w-4" />
           <span>May 4, 2024</span>
         </div>
@@ -26,16 +26,16 @@ export default function Page() {
         <Image
           alt="The Typescript Tightrope: A Love-Hate Journey Image"
           className="rounded-lg object-cover border border-gray-800"
-          height={280}
+          height={250}
           src="/images/blog/the-typescript-tightrope.png"
           style={{
-            aspectRatio: "400/280",
+            aspectRatio: "400/250",
             objectFit: "cover",
           }}
           width={400}
         />
       </div>
-      <h3 className="text-2xl font-bold">
+      <h3 className="font-oswald text-2xl">
         The Struggles: From Confusion to Grumbling
       </h3>
       <p>
@@ -46,7 +46,7 @@ export default function Page() {
         the JavaScript I already knew. Did I really need this extra layer of
         complexity? The answer, I soon discovered, was a resounding yes.
       </p>
-      <h3 className="text-2xl font-bold">
+      <h3 className="font-oswald text-2xl">
         The Learnings: Unveiling the Power Beneath the Complexity
       </h3>
       <p>
@@ -58,7 +58,7 @@ export default function Page() {
         became a superpower, suggesting types and guiding me towards a more
         structured codebase.
       </p>
-      <h3 className="text-2xl font-bold">
+      <h3 className="font-oswald text-2xl">
         The Love Affair Begins: Embracing the Benefits
       </h3>
       <p>
@@ -68,7 +68,7 @@ export default function Page() {
         became more manageable with TypeScript acting as a safety net. The fear
         of introducing bugs with seemingly harmless typos started to fade.
       </p>
-      <h3 className="text-2xl font-bold">
+      <h3 className="font-oswald text-2xl">
         The Present (and Future): A Continuous Learning Curve
       </h3>
       <p>
@@ -78,7 +78,7 @@ export default function Page() {
         appreciation for the structure and safety it brings to my development
         process.
       </p>
-      <h3 className="text-2xl font-bold">
+      <h3 className="font-oswald text-2xl">
         The Takeaway: Is TypeScript the Future?
       </h3>
       <p>
@@ -91,9 +91,15 @@ export default function Page() {
         just find yourself falling in love, one compile-time error at a time.
       </p>
       <div className="mt-6 flex flex-wrap gap-2">
-        <Badge variant="secondary">Web Development</Badge>
-        <Badge variant="secondary">TypeScript</Badge>
-        <Badge variant="secondary">Lessons Learned</Badge>
+        <Badge className="text-sm" variant="secondary">
+          Web Development
+        </Badge>
+        <Badge className="text-sm" variant="secondary">
+          TypeScript
+        </Badge>
+        <Badge className="text-sm" variant="secondary">
+          Lessons Learned
+        </Badge>
       </div>
     </article>
   );
