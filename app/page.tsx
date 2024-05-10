@@ -20,8 +20,16 @@ export default function Component() {
             </h2>
           </div>
           <p className="text-lg lg:text-xl text-gray-200 max-w-md">
-            I use the Force (and some serious coding skills) to build websites
-            that are lightning fast, accessible, and can scale infinitely.
+            I use the{" "}
+            <Link
+              href="https://www.starwars.com/databank/the-force"
+              target="_blank"
+              className="hover:text-violet-400"
+            >
+              Force
+            </Link>{" "}
+            (and some serious coding skills) to build websites that are
+            lightning fast, accessible, and can scale infinitely.
           </p>
           <div className="flex gap-6">
             <Link
@@ -50,9 +58,9 @@ export default function Component() {
           width={340}
         />
       </section>
-      <section className="mt-24 relative flex justify-center items-center md:px-4">
-        <div className="md:mx-4 blur absolute inset-0 rounded-lg translate-x-1 translate-y-1 bg-gradient-to-br from-pink-500 via-cyan-500 to-violet-500"></div>
-        <div className="relative top-1 left-1 lg:text-lg text-gray-200 space-y-4 bg-gray-950 rounded-xl p-4">
+      <section className="mt-24 relative flex justify-center items-center">
+        <div className="blur absolute inset-0 rounded-lg translate-x-1 translate-y-1 bg-gradient-to-br from-pink-500 via-cyan-500 to-violet-500"></div>
+        <div className="relative top-1 left-1 lg:text-lg text-gray-200 space-y-4 bg-gray-950 rounded-xl p-6">
           <p>
             <span className="font-oswald font-bold">
               I'm Jayvic San Antonio
@@ -86,7 +94,7 @@ export default function Component() {
             <span className="font-oswald font-bold">
               Ready to build something awesome together?
             </span>{" "}
-            <Link href="#contact-me" className="hover:underline">
+            <Link href="#contact-me" className="hover:text-violet-400">
               Let's chat!
             </Link>
           </p>
