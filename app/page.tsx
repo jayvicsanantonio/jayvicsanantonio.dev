@@ -12,7 +12,7 @@ export default function Component() {
       <section className="grid md:grid-cols-2 gap-12 items-center">
         <div className="space-y-6">
           <div className="font-oswald lg:space-y-2">
-            <h1 className="font-title text-4xl font-bold leading-snug lg:text-6xl hover:animate-bounce cursor-pointer">
+            <h1 className="font-title text-4xl font-bold leading-snug lg:text-6xl ">
               Hey, I'm Jayvic 👋
             </h1>
             <h2 className="text-gray-400 text-lg lg:text-3xl font-light uppercase">
@@ -25,13 +25,13 @@ export default function Component() {
           </p>
           <div className="flex gap-6">
             <Link
-              className="inline-flex items-center justify-center rounded-md border border-gray-700 px-6 py-3 text-sm font-medium hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110"
+              className="inline-flex items-center justify-center rounded-md border border-gray-700 px-6 py-3 text-sm font-medium hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950 transition ease-in-out   hover:-translate-y-1 hover:scale-110"
               href="/#projects"
             >
               View Projects
             </Link>
             <Link
-              className="inline-flex items-center justify-center rounded-md border border-gray-700 px-6 py-3 text-sm font-medium hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110"
+              className="inline-flex items-center justify-center rounded-md border border-gray-700 px-6 py-3 text-sm font-medium hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950 transition ease-in-out   hover:-translate-y-1 hover:scale-110"
               href="/#contact-me"
             >
               Contact Me
@@ -281,7 +281,7 @@ export default function Component() {
           <div className="self-end">
             <Link
               href="/projects"
-              className="inline-flex items-center justify-center rounded-md border border-gray-700 px-6 py-3 text-sm font-medium hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110"
+              className="inline-flex items-center justify-center rounded-md border border-gray-700 px-6 py-3 text-sm font-medium hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950 transition ease-in-out   hover:-translate-y-1 hover:scale-110"
             >
               View All
             </Link>
