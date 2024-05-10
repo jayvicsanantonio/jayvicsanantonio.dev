@@ -6,10 +6,10 @@ export default function Page() {
   return (
     <article className="prose prose-invert max-w-3xl mx-auto space-y-8">
       <div className="space-y-2 not-prose">
-        <h1 className="text-2xl font-bold tracking-tighter text-gray-200 md:text-3xl/tight lg:text-4xl">
+        <h1 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-bold tracking-tight">
           Building My Developer Playground
         </h1>
-        <div className="text-gray-400 text-sm flex items-center space-x-2">
+        <div className="text-gray-400 flex items-center space-x-2">
           <CalendarIcon className="h-4 w-4" />
           <span>May 1, 2024</span>
         </div>
@@ -27,15 +27,16 @@ export default function Page() {
       <Image
         alt="Building My Developer Playground Image"
         className="rounded-lg object-cover border border-gray-800"
-        height={640}
+        height={540}
         src="/images/blog/building-my-developer-playground.png"
         style={{
-          aspectRatio: "800/640",
           objectFit: "cover",
         }}
         width={800}
       />
-      <h3 className="text-2xl font-bold">The Foundation: Next.js and React</h3>
+      <h3 className="font-oswald text-2xl">
+        The Foundation: Next.js and React
+      </h3>
       <p>
         The first question on any web developer's mind: "What framework should I
         use?" Well, for this project, I opted for the dynamic duo: Next.js and
@@ -61,7 +62,7 @@ export default function Page() {
         (Vue.js-based) were tempting. But for the flexibility and developer
         experience, Next.js and React won me over.
       </p>
-      <h3 className="text-2xl font-bold">
+      <h3 className="font-oswald text-2xl">
         Styling with Styled Components... Wait, No, Tailwind!
       </h3>
       <p>
@@ -84,7 +85,9 @@ export default function Page() {
         focus on utility classes gives me more granular control and keeps my
         codebase lightweight.
       </p>
-      <h3 className="text-2xl font-bold">Adding Type Safety with TypeScript</h3>
+      <h3 className="font-oswald text-2xl">
+        Adding Type Safety with TypeScript
+      </h3>
       <p>
         One of the best decisions I made for this project? Adding TypeScript!
         Here's why:
@@ -104,7 +107,7 @@ export default function Page() {
         But for the added peace of mind and developer experience boost,
         TypeScript was a no-brainer.
       </p>
-      <h3 className="text-2xl font-bold">
+      <h3 className="font-oswald text-2xl">
         Deployment Decisions: Vercel vs AWS
       </h3>
       <p>
@@ -133,7 +136,7 @@ export default function Page() {
         more about Vercel compared to my experience with AWS, it was a fun and
         rewarding learning experience.
       </p>
-      <h3 className="text-2xl font-bold">
+      <h3 className="font-oswald text-2xl">
         Building Something Awesome (Hopefully!)
       </h3>
       <p>
@@ -150,12 +153,24 @@ export default function Page() {
       </p>
       <p>Happy coding!</p>
       <div className="mt-6 flex flex-wrap gap-2">
-        <Badge variant="secondary">Web Development</Badge>
-        <Badge variant="secondary">Next.js</Badge>
-        <Badge variant="secondary">React</Badge>
-        <Badge variant="secondary">Tailwind CSS</Badge>
-        <Badge variant="secondary">TypeScript</Badge>
-        <Badge variant="secondary">Vercel</Badge>
+        <Badge className="text-sm" variant="secondary">
+          Web Development
+        </Badge>
+        <Badge className="text-sm" variant="secondary">
+          Next.js
+        </Badge>
+        <Badge className="text-sm" variant="secondary">
+          React
+        </Badge>
+        <Badge className="text-sm" variant="secondary">
+          Tailwind CSS
+        </Badge>
+        <Badge className="text-sm" variant="secondary">
+          TypeScript
+        </Badge>
+        <Badge className="text-sm" variant="secondary">
+          Vercel
+        </Badge>
       </div>
     </article>
   );

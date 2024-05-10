@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import CodeIcon from "@/components/icons/code";
@@ -8,10 +9,11 @@ import MenuIcon from "@/components/icons/menu";
 import CloseIcon from "@/components/icons/close";
 
 export default function Header() {
+  const pathname = usePathname();
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   return (
-    <header className="flex items-center justify-between py-6 bg-gray-950 border-b border-gray-800 sticky top-0 z-10">
+    <header className="flex items-center justify-between px-4 py-6 bg-gray-950 border-b border-gray-800 sticky top-0 z-10">
       <div className="flex items-center gap-2">
         <CodeIcon className="w-6 h-6" />
       </div>
@@ -27,8 +29,14 @@ export default function Header() {
             href="/"
             onClick={() => setIsNavOpen(false)}
             className={`${
-              isNavOpen ? "border-b-2 border-gray-800 py-8 px-4" : ""
-            } text-sm font-medium hover:underline`}
+              isNavOpen
+                ? "border-b-2 border-gray-800 py-8 px-4 hover:bg-violet-400 hover:text-gray-200"
+                : "px-2 py-[1px] rotate-[3deg] hover:-rotate-[3deg] transition-all transform"
+            } ${
+              pathname === "/"
+                ? "bg-violet-600 text-white"
+                : "bg-gray-200 text-violet-600"
+            } font-oswald font-bold text-lg tracking-widest inline-block`}
           >
             Home
           </a>
@@ -38,8 +46,14 @@ export default function Header() {
             href="/projects"
             onClick={() => setIsNavOpen(false)}
             className={`${
-              isNavOpen ? "border-b-2 border-gray-800 py-8 px-4" : ""
-            } text-sm font-medium hover:underline`}
+              isNavOpen
+                ? "border-b-2 border-gray-800 py-8 px-4 hover:bg-violet-400 hover:text-gray-200"
+                : "px-2 py-[1px] -rotate-[3deg] hover:rotate-[3deg] transition-all transform"
+            } ${
+              pathname === "/projects"
+                ? "bg-violet-600 text-white"
+                : "bg-gray-200 text-violet-600"
+            } font-oswald font-bold text-lg tracking-widest inline-block`}
           >
             Projects
           </a>
@@ -49,8 +63,14 @@ export default function Header() {
             href="/blog"
             onClick={() => setIsNavOpen(false)}
             className={`${
-              isNavOpen ? "border-b-2 border-gray-800 py-8 px-4" : ""
-            } text-sm font-medium hover:underline`}
+              isNavOpen
+                ? "border-b-2 border-gray-800 py-8 px-4 hover:bg-violet-400 hover:text-gray-200"
+                : "px-2 py-[1px] rotate-[3deg] hover:-rotate-[3deg] transition-all transform"
+            } ${
+              pathname === "/blog"
+                ? "bg-violet-600 text-white"
+                : "bg-gray-200 text-violet-600"
+            } font-oswald font-bold text-lg tracking-widest inline-block`}
           >
             Blog
           </a>
@@ -60,8 +80,14 @@ export default function Header() {
             href="/work"
             onClick={() => setIsNavOpen(false)}
             className={`${
-              isNavOpen ? "border-b-2 border-gray-800 py-8 px-4" : ""
-            } text-sm font-medium hover:underline`}
+              isNavOpen
+                ? "border-b-2 border-gray-800 py-8 px-4"
+                : "px-2 py-[1px] -rotate-[3deg] hover:rotate-[3deg] transition-all transform"
+            } ${
+              pathname === "/work"
+                ? "bg-violet-600 text-white"
+                : "bg-gray-200 text-violet-600"
+            } font-oswald font-bold text-lg tracking-widest inline-block`}
           >
             Work
           </a>

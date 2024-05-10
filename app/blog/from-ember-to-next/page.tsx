@@ -6,10 +6,10 @@ export default function Page() {
   return (
     <article className="prose prose-invert max-w-3xl mx-auto space-y-8">
       <div className="space-y-2 not-prose">
-        <h1 className="text-2xl font-bold tracking-tighter text-gray-200 md:text-3xl/tight lg:text-4xl">
+        <h1 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-bold tracking-tight">
           From Ember.js to Next.js: A Tale of Two Frameworks
         </h1>
-        <div className="text-gray-400 text-sm flex items-center space-x-2">
+        <div className="text-gray-400 flex items-center space-x-2">
           <CalendarIcon className="h-4 w-4" />
           <span>May 7, 2024</span>
         </div>
@@ -26,16 +26,16 @@ export default function Page() {
         <Image
           alt="From Ember.js to Next.js Image"
           className="rounded-lg object-cover border border-gray-800"
-          height={280}
+          height={220}
           src="/images/blog/from-ember-to-next.png"
           style={{
-            aspectRatio: "400/280",
+            aspectRatio: "400/220",
             objectFit: "cover",
           }}
           width={400}
         />
       </div>
-      <h3 className="text-2xl font-bold">
+      <h3 className="font-oswald text-2xl">
         Philosophical Differences: Convention vs. Configuration
       </h3>
       <p>
@@ -55,7 +55,7 @@ export default function Page() {
         great choice for experienced developers who enjoy customization and
         control.
       </p>
-      <h3 className="text-2xl font-bold">
+      <h3 className="font-oswald text-2xl">
         Rendering Showdown: Client-Side vs. Server-Side
       </h3>
       <p>
@@ -65,7 +65,7 @@ export default function Page() {
         became more manageable with TypeScript acting as a safety net. The fear
         of introducing bugs with seemingly harmless typos started to fade.
       </p>
-      <h3 className="text-2xl font-bold">
+      <h3 className="font-oswald text-2xl">
         The Present (and Future): A Continuous Learning Curve
       </h3>
       <p>
@@ -81,7 +81,7 @@ export default function Page() {
         SEO. However, this approach can add some complexity to the development
         process.
       </p>
-      <h3 className="text-2xl font-bold">
+      <h3 className="font-oswald text-2xl">
         Routing Similarities: A Familiar Friend
       </h3>
       <p>
@@ -91,7 +91,7 @@ export default function Page() {
         navigation structure of your application, and for Ember.js developers,
         the syntax might feel strangely familiar in Next.js!
       </p>
-      <h3 className="text-2xl font-bold">
+      <h3 className="font-oswald text-2xl">
         The Verdict: Cool Kids Club, But Different Tables
       </h3>
       <p>
@@ -109,9 +109,15 @@ export default function Page() {
         spin, see which one speaks to your coding soul, and happy building!
       </p>
       <div className="mt-6 flex flex-wrap gap-2">
-        <Badge variant="secondary">EmberJS</Badge>
-        <Badge variant="secondary">NextJS</Badge>
-        <Badge variant="secondary">Lessons Learned</Badge>
+        <Badge className="text-sm" variant="secondary">
+          EmberJS
+        </Badge>
+        <Badge className="text-sm" variant="secondary">
+          NextJS
+        </Badge>
+        <Badge className="text-sm" variant="secondary">
+          Lessons Learned
+        </Badge>
       </div>
     </article>
   );
