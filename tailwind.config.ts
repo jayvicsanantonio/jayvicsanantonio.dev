@@ -19,7 +19,7 @@ const config = {
     },
     extend: {
       fontFamily: {
-        sourceSans: ["var(--font-source-sans)"],
+        "source-sans": ["var(--font-source-sans)"],
         oswald: ["var(--font-oswald)"],
       },
       colors: {
