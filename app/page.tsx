@@ -471,55 +471,6 @@ export default function Component() {
                 </div>
               </div>
             </article>
-            <article className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg border border-gray-800 p-6 shadow-sm transition-all hover:border-violet-900 hover:shadow-md">
-              <Image
-                alt="Blog Post Image"
-                className="rounded-lg object-cover border border-gray-800 w-full"
-                height={160}
-                src="/images/blog/building-my-developer-playground.png"
-                style={{
-                  aspectRatio: "200/160",
-                  objectFit: "cover",
-                }}
-                width={200}
-              />
-              <div className="space-y-2">
-                <Link
-                  className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight hover:underline hover:text-violet-500"
-                  href="/blog/building-my-developer-playground"
-                >
-                  Building My Developer Playground
-                </Link>
-                <div className="text-gray-400 flex items-center space-x-2">
-                  <CalendarIcon className="h-4 w-4" />
-                  <span>May 1, 2024</span>
-                </div>
-                <p className="text-gray-300 line-clamp-3">
-                  Dive into the code behind the scenes! Explore the decisions
-                  and thought process behind building my personal website.
-                </p>
-                <div className="mt-6 flex flex-wrap gap-2">
-                  <Badge className="text-sm" variant="secondary">
-                    Web Development
-                  </Badge>
-                  <Badge className="text-sm" variant="secondary">
-                    NextJS
-                  </Badge>
-                  <Badge className="text-sm" variant="secondary">
-                    React
-                  </Badge>
-                  <Badge className="text-sm" variant="secondary">
-                    Tailwind CSS
-                  </Badge>
-                  <Badge className="text-sm" variant="secondary">
-                    TypeScript
-                  </Badge>
-                  <Badge className="text-sm" variant="secondary">
-                    Vercel
-                  </Badge>
-                </div>
-              </div>
-            </article>
           </div>
         </div>
       </section>
