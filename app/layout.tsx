@@ -77,7 +77,7 @@ export default function RootLayout({
                   href="https://github.com/jpsanantonio"
                   legacyBehavior
                 >
-                  <a target="_blank">
+                  <a target="_blank" className="hover:text-violet-600">
                     <GithubIcon className="w-5 h-5" />
                   </a>
                 </Link>
@@ -86,7 +86,7 @@ export default function RootLayout({
                   href="https://twitter.com/jpsanantonio"
                   legacyBehavior
                 >
-                  <a target="_blank">
+                  <a target="_blank" className="hover:text-violet-600">
                     <TwitterIcon className="w-5 h-5" />
                   </a>
                 </Link>
@@ -95,7 +95,7 @@ export default function RootLayout({
                   href="https://www.linkedin.com/in/jayvicsanantonio/"
                   legacyBehavior
                 >
-                  <a target="_blank">
+                  <a target="_blank" className="hover:text-violet-600">
                     <LinkedinIcon className="w-5 h-5" />
                   </a>
                 </Link>
