@@ -65,7 +65,7 @@ export default function RootLayout({
       <body
         className={`${sourceSansPro.variable} ${oswald.variable} max-w-5xl px-4 md:px-12 mx-4 lg:mx-auto flex flex-col md:flex-row min-h-screen bg-gray-950 text-gray-200`}
       >
-        <div className="font-sourceSans flex flex-col">
+        <div className="font-source-sans flex flex-col">
           <Header />
           <main className="flex-1 py-12">{children}</main>
           <footer className="bg-gray-950 md:px-8 py-6 text-gray-200 border-t border-gray-800">
