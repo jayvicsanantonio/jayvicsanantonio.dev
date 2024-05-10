@@ -12,7 +12,7 @@ export default function Component() {
       <section className="grid md:grid-cols-2 gap-12 items-center">
         <div className="space-y-6">
           <div className="font-oswald lg:space-y-2">
-            <h1 className="font-title text-4xl font-bold leading-snug lg:text-6xl">
+            <h1 className="font-title text-4xl font-bold leading-snug lg:text-6xl hover:animate-bounce cursor-pointer">
               Hey, I'm Jayvic 👋
             </h1>
             <h2 className="text-gray-400 text-lg lg:text-3xl font-light uppercase">
@@ -25,13 +25,13 @@ export default function Component() {
           </p>
           <div className="flex gap-6">
             <Link
-              className="inline-flex items-center justify-center rounded-md border border-gray-700 px-6 py-3 text-sm font-medium transition-colors hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950 "
+              className="inline-flex items-center justify-center rounded-md border border-gray-700 px-6 py-3 text-sm font-medium hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110"
               href="/#projects"
             >
               View Projects
             </Link>
             <Link
-              className="inline-flex items-center justify-center rounded-md border border-gray-700 px-6 py-3 text-sm font-medium transition-colors hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950 "
+              className="inline-flex items-center justify-center rounded-md border border-gray-700 px-6 py-3 text-sm font-medium hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110"
               href="/#contact-me"
             >
               Contact Me
@@ -50,15 +50,19 @@ export default function Component() {
           width={340}
         />
       </section>
-      <section className="mt-24 space-y-12 group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
-        <div className="lg:text-lg text-gray-200 space-y-4">
-          {/* <h2 className="font-oswald text-2xl font-medium">About Me</h2> */}
+      <section className="mt-24 relative flex justify-center items-center md:px-4">
+        <div className="md:mx-4 blur absolute inset-0 rounded-lg translate-x-1 translate-y-1 bg-gradient-to-br from-pink-500 via-cyan-500 to-violet-500"></div>
+        <div className="relative top-1 left-1 lg:text-lg text-gray-200 space-y-4 bg-gray-950 rounded-xl p-4">
           <p>
-            I'm Jayvic San Antonio, a Full-Stack Web Developer originally from
-            the Philippines, now thriving in the San Francisco Bay Area. With
-            over 9 years of experience, you could say JavaScript is my coding
-            soulmate - I love its versatility and how it keeps getting better
-            and better!
+            <span className="font-oswald font-bold">
+              I'm Jayvic San Antonio
+            </span>
+            , a Full-Stack Web Developer originally from the Philippines, now
+            thriving in the San Francisco Bay Area. With over 9 years of
+            experience, you could say{" "}
+            <span className="font-oswald font-bold">JavaScript</span> is my
+            coding soulmate - I love its versatility and how it keeps getting
+            better and better!
           </p>
           <p>
             From hackathons and co-founding a startup to working at a global
@@ -72,14 +76,16 @@ export default function Component() {
             constantly learning and pushing my skills to the next level.
           </p>
           <p>
-            <strong>What gets me excited?</strong> The chance to create
-            impactful solutions, make user experiences amazing, and drive
-            innovation in a forward-thinking environment. Collaboration and
-            inclusivity are super important to me, so working with a team that
-            shares those values would be epic!
+            <span className="font-oswald font-bold">What gets me excited?</span>{" "}
+            The chance to create impactful solutions, make user experiences
+            amazing, and drive innovation in a forward-thinking environment.
+            Collaboration and inclusivity are super important to me, so working
+            with a team that shares those values would be epic!
           </p>
           <p>
-            <strong>Ready to build something awesome together?</strong>{" "}
+            <span className="font-oswald font-bold">
+              Ready to build something awesome together?
+            </span>{" "}
             <Link href="#contact-me" className="hover:underline">
               Let's chat!
             </Link>
@@ -275,14 +281,14 @@ export default function Component() {
           <div className="self-end">
             <Link
               href="/projects"
-              className="inline-flex items-center justify-center rounded-md border border-gray-700 px-6 py-3 text-sm font-medium transition-colors hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950 "
+              className="inline-flex items-center justify-center rounded-md border border-gray-700 px-6 py-3 text-sm font-medium hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110"
             >
               View All
             </Link>
           </div>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
+          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-violet-900 hover:shadow-md dark:border-gray-600 dark:bg-gray-800">
             <CardContent className="flex-1 -p-6 max-h-60">
               <Image
                 alt="Yahoo DSP"
@@ -302,7 +308,7 @@ export default function Component() {
                   <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
                     Yahoo DSP
                   </h3>
-                  <p className="text-gray-400 ">
+                  <p className="text-gray-200 ">
                     A cutting-edge programmatic advertising platform for
                     businesses. Built with a powerful tech stack including{" "}
                     <em className="font-bold">Ember.js</em>,{" "}
@@ -320,10 +326,10 @@ export default function Component() {
               </div>
             </CardFooter>
           </Card>
-          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
+          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-violet-900 hover:shadow-md">
             <CardContent className="flex-1 -p-6 max-h-60">
               <Image
-                alt="Yahoo DSP"
+                alt="Barbenheimer VS Code Theme"
                 className="w-full h-full object-cover"
                 height={225}
                 src="/images/home/barbenheimer.png"
@@ -340,7 +346,7 @@ export default function Component() {
                   <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
                     Barbenheimer VS Code Theme
                   </h3>
-                  <p className="text-gray-400">
+                  <p className="text-gray-200">
                     A VS Code theme inspired by the Internet phenomenon of the
                     same name. It combines the pink and playful aesthetics of
                     Barbie with the dark and dramatic tones of Oppenheimer.

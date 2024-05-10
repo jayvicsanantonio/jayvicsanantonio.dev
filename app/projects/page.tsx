@@ -19,7 +19,7 @@ export default function Page() {
             represents a unique challenge and learning experience.
           </p>
         </div>
-        <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
+        <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-violet-900 hover:shadow-md">
           <CardContent className="flex-1 -p-6 max-h-60">
             <Image
               alt="Yahoo DSP"
@@ -39,7 +39,7 @@ export default function Page() {
                 <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
                   Yahoo DSP
                 </h3>
-                <p className="text-gray-400">
+                <p className="text-gray-200">
                   A cutting-edge programmatic advertising platform for
                   businesses. Built with a powerful tech stack including{" "}
                   <em className="font-bold">Ember.js</em>,{" "}
@@ -62,10 +62,10 @@ export default function Page() {
           All Projects
         </h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
+          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-violet-900 hover:shadow-md">
             <CardContent className="flex-1 -p-6 max-h-60">
               <Image
-                alt="Yahoo DSP"
+                alt="Barbenheimer VS Code Theme"
                 className="w-full h-full object-cover"
                 height={225}
                 src="/images/home/barbenheimer.png"
@@ -78,11 +78,11 @@ export default function Page() {
             </CardContent>
             <CardFooter className="bg-gray-950 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
               <div className="flex flex-1 flex-start justify-between gap-2">
-                <div>
+                <div className="space-y-2">
                   <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
                     Barbenheimer VS Code Theme
                   </h3>
-                  <p className="text-gray-400">
+                  <p className="text-gray-200">
                     A VS Code theme inspired by the Internet phenomenon of the
                     same name. It combines the pink and playful aesthetics of
                     Barbie with the dark and dramatic tones of Oppenheimer.
@@ -95,10 +95,10 @@ export default function Page() {
               </div>
             </CardFooter>
           </Card>
-          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-gray-700 hover:shadow-md">
+          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-violet-900 hover:shadow-md">
             <CardContent className="flex-1 -p-6 max-h-60">
               <Image
-                alt="Yahoo DSP"
+                alt="Malayang Mananampalataya Church"
                 className="w-full h-full object-cover"
                 height={225}
                 src="/images/home/mm-church.png"
@@ -111,11 +111,11 @@ export default function Page() {
             </CardContent>
             <CardFooter className="bg-gray-950 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
               <div className="flex flex-1 flex-start justify-between gap-2">
-                <div>
+                <div className="space-y-2">
                   <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
                     Malayang Mananampalataya Church
                   </h3>
-                  <p className="text-gray-400">
+                  <p className="text-gray-200">
                     Built with React.js, this Philippines church website fosters
                     a strong connection between the church and its congregation.
                     Easy navigation allows users to explore sermons, ministries,

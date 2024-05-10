@@ -11,7 +11,7 @@ export default function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   return (
-    <header className="flex items-center justify-between py-6 bg-gray-950 border-b border-gray-800 sticky top-0 z-10">
+    <header className="flex items-center justify-between px-4 py-6 bg-gray-950 border-b border-gray-800 sticky top-0 z-10">
       <div className="flex items-center gap-2">
         <CodeIcon className="w-6 h-6" />
       </div>
