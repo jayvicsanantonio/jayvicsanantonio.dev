@@ -19,7 +19,7 @@ export default function Page() {
             represents a unique challenge and learning experience.
           </p>
         </div>
-        <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-violet-900 hover:shadow-md">
+        <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-violet-600 hover:shadow-md">
           <CardContent className="flex-1 -p-6 max-h-60">
             <Image
               alt="Yahoo DSP"
@@ -62,7 +62,7 @@ export default function Page() {
           All Projects
         </h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-violet-900 hover:shadow-md">
+          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-violet-600 hover:shadow-md">
             <CardContent className="flex-1 -p-6 max-h-60">
               <Image
                 alt="Barbenheimer VS Code Theme"
@@ -95,7 +95,7 @@ export default function Page() {
               </div>
             </CardFooter>
           </Card>
-          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-violet-900 hover:shadow-md">
+          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-violet-600 hover:shadow-md">
             <CardContent className="flex-1 -p-6 max-h-60">
               <Image
                 alt="Malayang Mananampalataya Church"

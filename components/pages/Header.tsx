@@ -15,7 +15,7 @@ export default function Header() {
   return (
     <header className="flex items-center justify-between px-4 py-6 bg-gray-950 border-b border-gray-800 sticky top-0 z-10 -mx-4 lg:-mx-auto">
       <Link href="/" className="flex items-center gap-2">
-        <CodeIcon className="w-6 h-6 hover:text-violet-600 hover:animate-pulse" />
+        <CodeIcon className="w-6 h-6 hover:text-violet-600 hover:scale-110 transform" />
       </Link>
       <nav
         className={
@@ -30,7 +30,7 @@ export default function Header() {
             onClick={() => setIsNavOpen(false)}
             className={`${
               isNavOpen
-                ? "border-b-2 border-gray-800 py-8 px-4 hover:bg-violet-400 hover:text-gray-200"
+                ? "border-b-2 border-gray-800 py-8 px-4 hover:bg-violet-600 hover:text-gray-200"
                 : "px-2 py-[1px] rotate-[3deg] hover:-rotate-[3deg] transition-all transform"
             } ${
               pathname === "/"
@@ -47,7 +47,7 @@ export default function Header() {
             onClick={() => setIsNavOpen(false)}
             className={`${
               isNavOpen
-                ? "border-b-2 border-gray-800 py-8 px-4 hover:bg-violet-400 hover:text-gray-200"
+                ? "border-b-2 border-gray-800 py-8 px-4 hover:bg-violet-600 hover:text-gray-200"
                 : "px-2 py-[1px] -rotate-[3deg] hover:rotate-[3deg] transition-all transform"
             } ${
               pathname === "/projects"
@@ -64,7 +64,7 @@ export default function Header() {
             onClick={() => setIsNavOpen(false)}
             className={`${
               isNavOpen
-                ? "border-b-2 border-gray-800 py-8 px-4 hover:bg-violet-400 hover:text-gray-200"
+                ? "border-b-2 border-gray-800 py-8 px-4 hover:bg-violet-600 hover:text-gray-200"
                 : "px-2 py-[1px] rotate-[3deg] hover:-rotate-[3deg] transition-all transform"
             } ${
               pathname === "/blog"
@@ -81,7 +81,7 @@ export default function Header() {
             onClick={() => setIsNavOpen(false)}
             className={`${
               isNavOpen
-                ? "border-b-2 border-gray-800 py-8 px-4 hover:bg-violet-400 hover:text-gray-200"
+                ? "border-b-2 border-gray-800 py-8 px-4 hover:bg-violet-600 hover:text-gray-200"
                 : "px-2 py-[1px] -rotate-[3deg] hover:rotate-[3deg] transition-all transform"
             } ${
               pathname === "/work"

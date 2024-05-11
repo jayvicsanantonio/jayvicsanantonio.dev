@@ -18,7 +18,7 @@ export default function Work() {
           </p>
         </div>
         <div className="col-span-2 grid gap-6">
-          <div className="group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-violet-900 hover:shadow-md">
+          <div className="group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-violet-600 hover:shadow-md">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
                 <h3 className="font-oswald text-2xl group-hover:text-gray-200">
@@ -106,7 +106,7 @@ export default function Work() {
               </Badge>
             </div>
           </div>
-          <div className="group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-violet-900 hover:shadow-md">
+          <div className="group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-violet-600 hover:shadow-md">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
                 <h3 className="font-oswald text-2xl group-hover:text-gray-200">
@@ -185,7 +185,7 @@ export default function Work() {
               </Badge>
             </div>
           </div>
-          <div className="group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-violet-900 hover:shadow-md">
+          <div className="group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-violet-600 hover:shadow-md">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
                 <h3 className="font-oswald text-2xl group-hover:text-gray-200">
@@ -251,7 +251,7 @@ export default function Work() {
               </Badge>
             </div>
           </div>
-          <div className="group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-violet-900 hover:shadow-md">
+          <div className="group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-violet-600 hover:shadow-md">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
                 <h3 className="font-oswald text-2xl group-hover:text-gray-200">
@@ -326,7 +326,7 @@ export default function Work() {
               </Badge>
             </div>
           </div>
-          <div className="group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-violet-900 hover:shadow-md">
+          <div className="group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-violet-600 hover:shadow-md">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
                 <h3 className="font-oswald text-2xl group-hover:text-gray-200">
@@ -385,7 +385,7 @@ export default function Work() {
               </Badge>
             </div>
           </div>
-          <div className="group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-violet-900 hover:shadow-md">
+          <div className="group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-violet-600 hover:shadow-md">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
                 <h3 className="font-oswald text-2xl group-hover:text-gray-200">
@@ -433,7 +433,7 @@ export default function Work() {
               </Badge>
             </div>
           </div>
-          <div className="group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-violet-900 hover:shadow-md">
+          <div className="group rounded-lg border border-gray-800 bg-gray-950 p-6 shadow-sm transition-all hover:border-violet-600 hover:shadow-md">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
                 <h3 className="font-oswald text-2xl group-hover:text-gray-200">
