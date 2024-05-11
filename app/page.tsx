@@ -25,7 +25,7 @@ export default function Component() {
             <Link
               href="https://www.starwars.com/databank/the-force"
               target="_blank"
-              className="hover:text-violet-400"
+              className="hover:text-violet-600"
             >
               Force
             </Link>{" "}
@@ -95,7 +95,7 @@ export default function Component() {
             <span className="font-oswald font-bold">
               Ready to build something awesome together?
             </span>{" "}
-            <Link href="#contact-me" className="hover:text-violet-400">
+            <Link href="#contact-me" className="hover:text-violet-600">
               Let's chat!
             </Link>
           </p>
@@ -297,7 +297,7 @@ export default function Component() {
           </div>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-violet-900 hover:shadow-md dark:border-gray-600 dark:bg-gray-800">
+          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-violet-600 hover:shadow-md dark:border-gray-600 dark:bg-gray-800">
             <CardContent className="flex-1 -p-6 max-h-60">
               <Image
                 alt="Yahoo DSP"
@@ -335,7 +335,7 @@ export default function Component() {
               </div>
             </CardFooter>
           </Card>
-          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-violet-900 hover:shadow-md">
+          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-violet-600 hover:shadow-md">
             <CardContent className="flex-1 -p-6 max-h-60">
               <Image
                 alt="Barbenheimer VS Code Theme"
@@ -390,7 +390,7 @@ export default function Component() {
         </div>
         <div className="flex flex-col gap-8 bg-gray-950 text-gray-200">
           <div className="space-y-8">
-            <article className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg border border-gray-800 p-6 shadow-sm transition-all hover:border-violet-900 hover:shadow-md">
+            <article className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg border border-gray-800 p-6 shadow-sm transition-all hover:border-violet-600 hover:shadow-md">
               <Image
                 alt="Blog Post Image"
                 className="rounded-lg object-cover border border-gray-800 w-full"
@@ -404,7 +404,7 @@ export default function Component() {
               />
               <div className="space-y-2">
                 <Link
-                  className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight hover:underline hover:text-violet-500"
+                  className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight hover:underline hover:text-violet-600"
                   href="/blog/from-ember-to-next"
                 >
                   From Ember.js to Next.js: A Tale of Two Frameworks
@@ -431,7 +431,7 @@ export default function Component() {
                 </div>
               </div>
             </article>
-            <article className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg border border-gray-800 p-6 shadow-sm transition-all hover:border-violet-900 hover:shadow-md">
+            <article className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg border border-gray-800 p-6 shadow-sm transition-all hover:border-violet-600 hover:shadow-md">
               <Image
                 alt="Blog Post Image"
                 className="rounded-lg object-cover border border-gray-800 w-full"
@@ -445,7 +445,7 @@ export default function Component() {
               />
               <div className="space-y-2">
                 <Link
-                  className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight hover:underline hover:text-violet-500"
+                  className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight hover:underline hover:text-violet-600"
                   href="/blog/the-typescript-tightrope"
                 >
                   The Typescript Tightrope: A Love-Hate Journey
