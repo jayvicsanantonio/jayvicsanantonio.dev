@@ -47,7 +47,7 @@ export default function Component() {
             </Link>
           </div>
         </div>
-        <img
+        <Image
           alt="Profile"
           className="mx-auto rounded-full border-4 border-gray-800 shadow-xl"
           height={340}
