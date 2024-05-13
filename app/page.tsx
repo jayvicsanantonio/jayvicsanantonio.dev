@@ -51,6 +51,7 @@ export default function Component() {
           alt="Profile"
           className="mx-auto rounded-full border-4 border-gray-800 shadow-xl"
           height={340}
+          loading="eager"
           src="/images/home/profile-image.jpeg"
           style={{
             aspectRatio: "340/340",
