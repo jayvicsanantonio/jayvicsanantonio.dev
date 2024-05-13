@@ -78,6 +78,7 @@ export default function RootLayout({
                   legacyBehavior
                 >
                   <a
+                    aria-label="GitHub"
                     target="_blank"
                     className="hover:text-violet-600 hover:scale-110 transform"
                   >
@@ -90,6 +91,7 @@ export default function RootLayout({
                   legacyBehavior
                 >
                   <a
+                    aria-label="Twitter"
                     target="_blank"
                     className="hover:text-violet-600 hover:scale-110 transform"
                   >
@@ -102,6 +104,7 @@ export default function RootLayout({
                   legacyBehavior
                 >
                   <a
+                    aria-label="LinkedIn"
                     target="_blank"
                     className="hover:text-violet-600 hover:scale-110 transform"
                   >

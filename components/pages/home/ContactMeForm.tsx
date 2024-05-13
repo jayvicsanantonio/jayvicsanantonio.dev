@@ -79,7 +79,9 @@ export default function ContactMeForm() {
     <form action={handleSubmit} className="grid gap-6 text-black">
       <div className="grid md:grid-cols-2 gap-6">
         <div className="space-y-4">
-          <Label htmlFor="name">Name</Label>
+          <Label htmlFor="name" className="text-gray-400">
+            Name
+          </Label>
           <Input
             id="name"
             name="name"
@@ -89,7 +91,9 @@ export default function ContactMeForm() {
           />
         </div>
         <div className="space-y-4">
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email" className="text-gray-400">
+            Email
+          </Label>
           <Input
             id="email"
             name="email"
@@ -101,7 +105,9 @@ export default function ContactMeForm() {
         </div>
       </div>
       <div className="space-y-4">
-        <Label htmlFor="message">Message</Label>
+        <Label htmlFor="message" className="text-gray-400">
+          Message
+        </Label>
         <Textarea
           id="message"
           name="message"
