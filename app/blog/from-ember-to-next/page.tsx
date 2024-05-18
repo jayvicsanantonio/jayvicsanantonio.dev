@@ -1,10 +1,12 @@
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
+import { BlogBreadcrumb } from "@/components/pages/blog/BlogBreadcrumb";
 import CalendarIcon from "@/components/icons/calendar";
 
 export default function Page() {
   return (
     <article className="prose prose-invert max-w-3xl mx-auto space-y-8">
+      <BlogBreadcrumb title="From Ember.js to Next.js" />
       <div className="space-y-2 not-prose">
         <h1 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-bold tracking-tight">
           From Ember.js to Next.js: A Tale of Two Frameworks
