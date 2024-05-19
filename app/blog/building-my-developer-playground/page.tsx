@@ -5,7 +5,7 @@ import CalendarIcon from "@/components/icons/calendar";
 
 export default function Page() {
   return (
-    <article className="prose prose-invert max-w-3xl mx-auto space-y-8">
+    <article className="prose prose-invert mx-auto space-y-8">
       <BlogBreadcrumb title="Building My Developer Playground" />
       <div className="space-y-2 not-prose">
         <h1 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-bold tracking-tight">
@@ -26,16 +26,18 @@ export default function Page() {
         because we're diving into the world of Next.js, React, Tailwind CSS, and
         TypeScript!
       </p>
-      <Image
-        alt="Building My Developer Playground Image"
-        className="rounded-lg object-cover border border-gray-800"
-        height={540}
-        src="/images/blog/building-my-developer-playground.png"
-        style={{
-          objectFit: "cover",
-        }}
-        width={800}
-      />
+      <div className="flex justify-center">
+        <Image
+          alt="Building My Developer Playground Image"
+          className="rounded-lg object-cover border border-gray-800"
+          height={540}
+          src="/images/blog/building-my-developer-playground.png"
+          style={{
+            objectFit: "cover",
+          }}
+          width={800}
+        />
+      </div>
       <h3 className="font-oswald text-2xl">
         The Foundation: Next.js and React
       </h3>

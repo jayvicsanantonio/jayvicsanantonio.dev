@@ -5,7 +5,7 @@ import CalendarIcon from "@/components/icons/calendar";
 
 export default function Page() {
   return (
-    <article className="prose prose-invert max-w-3xl mx-auto space-y-8">
+    <article className="prose prose-invert mx-auto space-y-8">
       <BlogBreadcrumb title="The Typescript Tightrope" />
       <div className="space-y-2 not-prose">
         <h1 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-bold tracking-tight">
