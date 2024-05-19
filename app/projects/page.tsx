@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import GithubButton from "@/components/pages/home/GithubButton";
-import ViewProjectButton from "@/components/pages/home/ViewProjectButton";
+import ProjectButton from "@/components/pages/ProjectButton";
+import GithubIcon from "@/components/icons/github";
 
 export default function Page() {
   return (
@@ -51,8 +51,13 @@ export default function Page() {
               </div>
             </div>
             <div className="flex gap-4 mt-4">
-              <GithubButton link={null} />
-              <ViewProjectButton link="https://www.advertising.yahooinc.com/our-dsp" />
+              <ProjectButton link={null}>
+                <GithubIcon className="w-5 h-5" />
+                Github
+              </ProjectButton>
+              <ProjectButton link="https://www.advertising.yahooinc.com/our-dsp">
+                View Project
+              </ProjectButton>
             </div>
           </CardFooter>
         </Card>
@@ -90,8 +95,13 @@ export default function Page() {
                 </div>
               </div>
               <div className="flex gap-4 mt-4">
-                <GithubButton link="https://github.com/jpsanantonio/barbenheimer-vscode-theme" />
-                <ViewProjectButton link="https://marketplace.visualstudio.com/items?itemName=jayvicsanantonio.barbenheimer" />
+                <ProjectButton link="https://github.com/jpsanantonio/barbenheimer-vscode-theme">
+                  <GithubIcon className="w-5 h-5" />
+                  Github
+                </ProjectButton>
+                <ProjectButton link="https://marketplace.visualstudio.com/items?itemName=jayvicsanantonio.barbenheimer">
+                  View Project
+                </ProjectButton>
               </div>
             </CardFooter>
           </Card>
@@ -126,8 +136,13 @@ export default function Page() {
                 </div>
               </div>
               <div className="flex gap-4 mt-4">
-                <GithubButton link="https://github.com/nesceal/mmchurch" />
-                <ViewProjectButton link="https://mmchurch.ph/" />
+                <ProjectButton link="https://github.com/nesceal/mmchurch">
+                  <GithubIcon className="w-5 h-5" />
+                  Github
+                </ProjectButton>
+                <ProjectButton link="https://mmchurch.ph/">
+                  View Project
+                </ProjectButton>
               </div>
             </CardFooter>
           </Card>
