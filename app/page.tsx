@@ -3,9 +3,9 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { CardContent, CardFooter, Card } from "@/components/ui/card";
 import ContactMeForm from "@/components/pages/home/ContactMeForm";
-import GithubButton from "@/components/pages/home/GithubButton";
-import ViewProjectButton from "@/components/pages/home/ViewProjectButton";
+import ProjectButton from "@/components/pages/ProjectButton";
 import CalendarIcon from "@/components/icons/calendar";
+import GithubIcon from "@/components/icons/github";
 
 export default function Component() {
   return (
@@ -331,8 +331,13 @@ export default function Component() {
                 </div>
               </div>
               <div className="flex gap-4 mt-4">
-                <GithubButton link={null} />
-                <ViewProjectButton link="https://www.advertising.yahooinc.com/our-dsp" />
+                <ProjectButton link={null}>
+                  <GithubIcon className="w-5 h-5" />
+                  Github
+                </ProjectButton>
+                <ProjectButton link="https://www.advertising.yahooinc.com/our-dsp">
+                  View Project
+                </ProjectButton>
               </div>
             </CardFooter>
           </Card>
@@ -364,8 +369,13 @@ export default function Component() {
                 </div>
               </div>
               <div className="flex gap-4 mt-4">
-                <GithubButton link="https://github.com/jpsanantonio/barbenheimer-vscode-theme" />
-                <ViewProjectButton link="https://marketplace.visualstudio.com/items?itemName=jayvicsanantonio.barbenheimer" />
+                <ProjectButton link="https://github.com/jpsanantonio/barbenheimer-vscode-theme">
+                  <GithubIcon className="w-5 h-5" />
+                  Github
+                </ProjectButton>
+                <ProjectButton link="https://marketplace.visualstudio.com/items?itemName=jayvicsanantonio.barbenheimer">
+                  View Project
+                </ProjectButton>
               </div>
             </CardFooter>
           </Card>
