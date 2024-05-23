@@ -75,6 +75,23 @@ export default function Header() {
             Blog
           </a>
         </Link>
+        <Link href="/lab" passHref legacyBehavior>
+          <a
+            href="/lab"
+            onClick={() => setIsNavOpen(false)}
+            className={`${
+              isNavOpen
+                ? "border-b-2 border-gray-800 py-8 px-4 hover:bg-violet-600 hover:text-gray-200"
+                : "px-2 py-[1px] rotate-[3deg] hover:-rotate-[3deg] transition-all transform"
+            } ${
+              pathname === "/lab"
+                ? "bg-violet-600 text-white"
+                : "bg-gray-200 text-violet-600"
+            } font-oswald font-bold text-lg tracking-widest inline-block`}
+          >
+            Lab
+          </a>
+        </Link>
         <Link href="/work" passHref legacyBehavior>
           <a
             href="/work"
