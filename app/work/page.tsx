@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { CheckIcon } from "@/components/icons/check";
 
-export default function Work() {
+export default function Page() {
   return (
     <section className="w-full  bg-gray-950 text-gray-200">
       <div className="grid gap-8 lg:grid-cols-3 lg:gap-12">
