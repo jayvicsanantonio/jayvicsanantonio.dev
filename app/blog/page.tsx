@@ -27,49 +27,6 @@ export default function Component() {
                 alt="Blog Post Image"
                 className="rounded-lg object-cover border border-gray-800 w-full"
                 height={160}
-                src="/images/blog/post-layoff-adventure.png"
-                style={{
-                  aspectRatio: "200/160",
-                  objectFit: "cover",
-                }}
-                width={200}
-              />
-              <div className="space-y-2">
-                <Link
-                  className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight hover:underline hover:text-violet-600"
-                  href="/blog/post-layoff-adventure"
-                >
-                  From Yahoo Y! to "Yahoo, New Opportunities!": My Post-Layoff
-                  Adventure
-                </Link>
-                <div className="text-gray-400 flex items-center space-x-2">
-                  <CalendarIcon className="h-4 w-4" />
-                  <span>May 19, 2024</span>
-                </div>
-                <p className="text-gray-300 line-clamp-3">
-                  A year after a layoff from Yahoo, I reflect on the challenges
-                  and opportunities of the job search, embracing continuous
-                  learning and professional networking while charting a new
-                  course for their future.
-                </p>
-                <div className="mt-6 flex flex-wrap gap-2">
-                  <Badge className="text-sm" variant="secondary">
-                    Career
-                  </Badge>
-                  <Badge className="text-sm" variant="secondary">
-                    Opinion
-                  </Badge>
-                  <Badge className="text-sm" variant="secondary">
-                    Lessons Learned
-                  </Badge>
-                </div>
-              </div>
-            </article>
-            <article className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg border border-gray-800 p-6 shadow-sm transition-all hover:border-violet-600 hover:shadow-md">
-              <Image
-                alt="Blog Post Image"
-                className="rounded-lg object-cover border border-gray-800 w-full"
-                height={160}
                 src="/images/blog/from-ember-to-next.png"
                 style={{
                   aspectRatio: "200/160",
