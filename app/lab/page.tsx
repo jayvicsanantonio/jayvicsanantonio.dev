@@ -22,6 +22,50 @@ export default function Page() {
           <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-violet-600 hover:shadow-md">
             <CardContent className="flex-1 -p-6">
               <iframe
+                src="https://codesandbox.io/embed/23lnhc?view=preview&module=%2Fstyles.css&hidenavigation=1"
+                style={{
+                  width: "100%",
+                  height: "500px",
+                  border: 0,
+                  borderRadius: "4px",
+                  overflow: "hidden",
+                }}
+                title="Aurora Borealis"
+                allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+                sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+              />
+            </CardContent>
+            <CardFooter className="bg-gray-950 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+              <div className="space-y-2">
+                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight">
+                  Aurora Borealis
+                </h3>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  <Badge className="text-sm" variant="secondary">
+                    HTML
+                  </Badge>
+                  <Badge className="text-sm" variant="secondary">
+                    CSS
+                  </Badge>
+                </div>
+                <p className="text-gray-200 pt-4">
+                  This HTML and CSS code snippet creates a realistic aurora
+                  borealis animation with a starry night sky. The HTML structure
+                  includes a container with layers for stars, and the aurora
+                  itself. The CSS uses background images, gradient effects, and
+                  keyframe animations to simulate twinkling stars, and the
+                  flowing, colorful lights of the aurora borealis. Inspired by
+                  the rare occurrence in May 2024, when the auroras, also known
+                  as northern lights or the aurora borealis, were visible
+                  throughout the San Francisco Bay Area and reported as far
+                  south as San Diego due to a solar storm.
+                </p>
+              </div>
+            </CardFooter>
+          </Card>
+          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-violet-600 hover:shadow-md">
+            <CardContent className="flex-1 -p-6">
+              <iframe
                 src="https://codesandbox.io/embed/qlnxgn?view=preview&module=%2Fstyles.css&hidenavigation=1"
                 style={{
                   width: "100%",
@@ -33,7 +77,7 @@ export default function Page() {
                 title="Total Solar Eclipse"
                 allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
                 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-              ></iframe>
+              />
             </CardContent>
             <CardFooter className="bg-gray-950 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
               <div className="space-y-2">
