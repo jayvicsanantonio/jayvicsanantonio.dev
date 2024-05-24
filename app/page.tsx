@@ -7,7 +7,7 @@ import ProjectButton from "@/components/pages/ProjectButton";
 import CalendarIcon from "@/components/icons/calendar";
 import GithubIcon from "@/components/icons/github";
 
-export default function Component() {
+export default function Page() {
   return (
     <>
       <section className="grid md:grid-cols-2 gap-12 items-center">

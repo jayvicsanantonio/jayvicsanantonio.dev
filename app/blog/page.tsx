@@ -3,7 +3,7 @@ import Image from "next/image";
 import CalendarIcon from "@/components/icons/calendar";
 import { Badge } from "@/components/ui/badge";
 
-export default function Component() {
+export default function Page() {
   return (
     <section className="w-full  bg-gray-950 text-gray-200">
       <div className="flex flex-col gap-8">
