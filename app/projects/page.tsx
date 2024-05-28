@@ -128,8 +128,8 @@ export default function Page() {
                   <p className="text-gray-200">
                     An extensive library of categorized links tailored for web
                     developers, featuring curated resources on learning,
-                    developer tools, frameworks & libraries, and community &
-                    blogs.
+                    developer tools, frameworks, libraries, blogs and
+                    communities.
                   </p>
                 </div>
               </div>
