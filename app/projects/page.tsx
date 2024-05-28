@@ -108,6 +108,45 @@ export default function Page() {
           <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-violet-600 hover:shadow-md">
             <CardContent className="flex-1 -p-6 max-h-60">
               <Image
+                alt="Web Development Hub"
+                className="w-full h-full object-cover"
+                height={225}
+                src="/images/home/webdevhub.png"
+                style={{
+                  aspectRatio: "400/225",
+                  objectFit: "cover",
+                }}
+                width={400}
+              />
+            </CardContent>
+            <CardFooter className="bg-gray-950 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+              <div className="flex flex-1 flex-start justify-between gap-2">
+                <div className="space-y-2">
+                  <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
+                    Web Development Hub
+                  </h3>
+                  <p className="text-gray-200">
+                    An extensive library of categorized links tailored for web
+                    developers, featuring curated resources on learning,
+                    developer tools, frameworks & libraries, and community &
+                    blogs.
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-4 mt-4">
+                <ProjectButton link="https://github.com/jpsanantonio/web-development-hub">
+                  <GithubIcon className="w-5 h-5" />
+                  Github
+                </ProjectButton>
+                <ProjectButton link="https://www.webdevhub.link/">
+                  View Project
+                </ProjectButton>
+              </div>
+            </CardFooter>
+          </Card>
+          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-violet-600 hover:shadow-md">
+            <CardContent className="flex-1 -p-6 max-h-60">
+              <Image
                 alt="Malayang Mananampalataya Church"
                 className="w-full h-full object-cover"
                 height={225}
