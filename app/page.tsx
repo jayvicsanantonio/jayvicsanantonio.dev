@@ -58,6 +58,7 @@ export default function Page() {
             objectFit: "cover",
           }}
           width={340}
+          priority={true}
         />
       </section>
       <section className="mt-24 relative flex justify-center items-center">
