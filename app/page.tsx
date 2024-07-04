@@ -10,7 +10,7 @@ import GithubIcon from "@/components/icons/github";
 export default function Page() {
   return (
     <>
-      <section className="grid md:grid-cols-2 gap-12 items-center">
+      <section className="content-visibility-auto grid md:grid-cols-2 gap-12 items-center">
         <div className="space-y-6">
           <div className="font-oswald lg:space-y-2">
             <h1 className="font-title text-4xl font-bold leading-snug lg:text-6xl ">
@@ -61,7 +61,7 @@ export default function Page() {
           priority={true}
         />
       </section>
-      <section className="mt-24 relative flex justify-center items-center">
+      <section className="content-visibility-auto mt-24 relative flex justify-center items-center">
         <div className="blur absolute inset-0 rounded-lg translate-x-1 translate-y-1 bg-gradient-to-br from-pink-500 via-cyan-500 to-violet-500"></div>
         <div className="relative top-1 left-1 lg:text-lg text-gray-200 space-y-4 bg-gray-950 rounded-xl p-6">
           <p>
@@ -103,7 +103,7 @@ export default function Page() {
           </p>
         </div>
       </section>
-      <section className="mt-24 space-y-12">
+      <section className="content-visibility-auto mt-24 space-y-12">
         <div className="space-y-4">
           <h2 className="font-oswald text-2xl font-bold">My Skills</h2>
           <div className="grid grid-cols-3 md:grid-cols-6 gap-6">
@@ -278,7 +278,10 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <section id="projects" className="mt-24 space-y-12">
+      <section
+        id="projects"
+        className="content-visibility-auto mt-24 space-y-12"
+      >
         <div className="flex gap-4">
           <div className="flex-1 space-y-4">
             <h2 className="font-oswald text-2xl font-bold">
@@ -382,7 +385,7 @@ export default function Page() {
           </Card>
         </div>
       </section>
-      <section id="blog" className="mt-24 space-y-12">
+      <section id="blog" className="content-visibility-auto mt-24 space-y-12">
         <div className="flex gap-4">
           <div className="flex-1 space-y-4">
             <h2 className="font-oswald text-2xl font-bold">Blog Posts</h2>
@@ -486,7 +489,10 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <section id="contact-me" className="mt-24 space-y-12">
+      <section
+        id="contact-me"
+        className="content-visibility-auto mt-24 space-y-12"
+      >
         <div className="space-y-4">
           <h2 className="font-oswald text-2xl font-bold">Get in Touch</h2>
           <p className="text-gray-400">
