@@ -10,7 +10,7 @@ import GithubIcon from "@/components/icons/github";
 export default function Page() {
   return (
     <>
-      <section className="content-visibility-auto grid md:grid-cols-2 gap-12 items-center">
+      <section className="grid md:grid-cols-2 gap-12 items-center">
         <div className="space-y-6">
           <div className="font-oswald lg:space-y-2">
             <h1 className="font-title text-4xl font-bold leading-snug lg:text-6xl ">
@@ -61,7 +61,7 @@ export default function Page() {
           priority={true}
         />
       </section>
-      <section className="content-visibility-auto mt-24 relative flex justify-center items-center">
+      <section className="mt-24 relative flex justify-center items-center">
         <div className="blur absolute inset-0 rounded-lg translate-x-1 translate-y-1 bg-gradient-to-br from-pink-500 via-cyan-500 to-violet-500"></div>
         <div className="relative top-1 left-1 lg:text-lg text-gray-200 space-y-4 bg-gray-950 rounded-xl p-6">
           <p>
