@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { BlogBreadcrumb } from "@/components/pages/blog/BlogBreadcrumb";
-import CalendarIcon from "@/components/icons/calendar";
+import { Calendar } from "lucide-react";
 
 export default function Page() {
   return (
@@ -12,7 +12,7 @@ export default function Page() {
           The Typescript Tightrope: A Love-Hate Journey
         </h1>
         <div className="text-gray-400 flex items-center space-x-2">
-          <CalendarIcon className="h-4 w-4" />
+          <Calendar size={20} />
           <span>May 4, 2024</span>
         </div>
       </div>

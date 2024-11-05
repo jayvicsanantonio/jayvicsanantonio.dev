@@ -4,9 +4,7 @@ import localFont from "next/font/local";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import { Toaster } from "@/components/ui/toaster";
-import GithubIcon from "@/components/icons/github";
-import LinkedinIcon from "@/components/icons/linkedin";
-import TwitterIcon from "@/components/icons/twitter";
+import { Github, Linkedin, Twitter } from "lucide-react";
 import Header from "@/components/pages/Header";
 import "./globals.css";
 
@@ -82,7 +80,7 @@ export default function RootLayout({
                     target="_blank"
                     className="hover:text-violet-600 hover:scale-110 transform"
                   >
-                    <GithubIcon className="w-5 h-5" />
+                    <Github size={20} />
                   </a>
                 </Link>
                 <Link
@@ -95,7 +93,7 @@ export default function RootLayout({
                     target="_blank"
                     className="hover:text-violet-600 hover:scale-110 transform"
                   >
-                    <TwitterIcon className="w-5 h-5" />
+                    <Twitter size={20} />
                   </a>
                 </Link>
                 <Link
@@ -108,7 +106,7 @@ export default function RootLayout({
                     target="_blank"
                     className="hover:text-violet-600 hover:scale-110 transform"
                   >
-                    <LinkedinIcon className="w-5 h-5" />
+                    <Linkedin size={20} />
                   </a>
                 </Link>
               </div>
