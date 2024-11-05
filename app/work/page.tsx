@@ -32,7 +32,7 @@ export default function Page() {
               <li>
                 <Check
                   size={20}
-                  className="mr-2 inline-block text-gray-2000 dark:text-gray-400"
+                  className="mr-2 inline-block text-gray-200 dark:text-gray-400"
                 />
                 Rebuilt the App Marketing business of the Yahoo Demand Side
                 Platform as a core developer using Ember, Java and MySQL and
@@ -43,7 +43,7 @@ export default function Page() {
               <li>
                 <Check
                   size={20}
-                  className="mr-2 inline-block text-gray-2000 dark:text-gray-400"
+                  className="mr-2 inline-block text-gray-200 dark:text-gray-400"
                 />
                 Optimized Yahoo DSP Email Audience Builder Upload feature by
                 transforming its capacity from 2M to 25M records, a 1150%
@@ -53,7 +53,7 @@ export default function Page() {
               <li>
                 <Check
                   size={20}
-                  className="mr-2 inline-block text-gray-2000 dark:text-gray-400"
+                  className="mr-2 inline-block text-gray-200 dark:text-gray-400"
                 />
                 Designed and built a wide range of Yahoo DSP features, from
                 UI/UX improvements to revenue-generating initiatives,
@@ -65,7 +65,7 @@ export default function Page() {
               <li>
                 <Check
                   size={20}
-                  className="mr-2 inline-block text-gray-2000 dark:text-gray-400"
+                  className="mr-2 inline-block text-gray-200 dark:text-gray-400"
                 />
                 Fostered a culture of collaboration and growth by mentoring
                 junior engineers and new hires, creating a positive environment
@@ -75,7 +75,7 @@ export default function Page() {
               <li>
                 <Check
                   size={20}
-                  className="mr-2 inline-block text-gray-2000 dark:text-gray-400"
+                  className="mr-2 inline-block text-gray-200 dark:text-gray-400"
                 />
                 Contributed to an Ember open source project
                 (https://github.com/ember-learn/upgrade-guide) and was
@@ -135,7 +135,7 @@ export default function Page() {
               <li>
                 <Check
                   size={20}
-                  className="mr-2 inline-block text-gray-2000 dark:text-gray-400"
+                  className="mr-2 inline-block text-gray-200 dark:text-gray-400"
                 />
                 Built the Yahoo DSP Replay tool autonomously with React,
                 enabling streamlined testing and validation of legitimate bid
@@ -147,7 +147,7 @@ export default function Page() {
               <li>
                 <Check
                   size={20}
-                  className="mr-2 inline-block text-gray-2000 dark:text-gray-400"
+                  className="mr-2 inline-block text-gray-200 dark:text-gray-400"
                 />
                 Contributed to front-end and back-end development of DMP (Data
                 Management Platform), a key component of the Yahoo DSP utilizing
@@ -157,7 +157,7 @@ export default function Page() {
               <li>
                 <Check
                   size={20}
-                  className="mr-2 inline-block text-gray-2000 dark:text-gray-400"
+                  className="mr-2 inline-block text-gray-200 dark:text-gray-400"
                 />
                 Explored the adoption of Cypress.io to address the pain points
                 of flaky end-to-end tests in Selenium, facilitated meetings to
@@ -169,7 +169,7 @@ export default function Page() {
               <li>
                 <Check
                   size={20}
-                  className="mr-2 inline-block text-gray-2000 dark:text-gray-400"
+                  className="mr-2 inline-block text-gray-200 dark:text-gray-400"
                 />
                 Contributed to upgrading Yahoo DSP’s Ember framework, enhancing
                 performance, security, and developer experience, unlocking new
@@ -228,7 +228,7 @@ export default function Page() {
               <li>
                 <Check
                   size={20}
-                  className="mr-2 inline-block text-gray-2000 dark:text-gray-400"
+                  className="mr-2 inline-block text-gray-200 dark:text-gray-400"
                 />
                 Represented the company and pitched at local and international
                 events, including the RISE Conference 2015 in Hong Kong and
@@ -239,7 +239,7 @@ export default function Page() {
               <li>
                 <Check
                   size={20}
-                  className="mr-2 inline-block text-gray-2000 dark:text-gray-400"
+                  className="mr-2 inline-block text-gray-200 dark:text-gray-400"
                 />
                 Achieved recognition in the Philippine tech industry, having
                 been featured in a number of top tech blogs and news websites
@@ -251,7 +251,7 @@ export default function Page() {
               <li>
                 <Check
                   size={20}
-                  className="mr-2 inline-block text-gray-2000 dark:text-gray-400"
+                  className="mr-2 inline-block text-gray-200 dark:text-gray-400"
                 />
                 Supported our CEO for the research, design and implementation of
                 Bluetooth Low Energy technology in a wearable device (Croo),
@@ -261,7 +261,7 @@ export default function Page() {
               <li>
                 <Check
                   size={20}
-                  className="mr-2 inline-block text-gray-2000 dark:text-gray-400"
+                  className="mr-2 inline-block text-gray-200 dark:text-gray-400"
                 />
                 Collaborated with our COO and CTO in architecting and
                 implementing a scalable and reliable AWS infrastructure to
@@ -271,7 +271,7 @@ export default function Page() {
               <li>
                 <Check
                   size={20}
-                  className="mr-2 inline-block text-gray-2000 dark:text-gray-400"
+                  className="mr-2 inline-block text-gray-200 dark:text-gray-400"
                 />
                 Created and configured automated deployment processes using
                 Puppet, resulting in streamlined and efficient updates and
@@ -309,7 +309,7 @@ export default function Page() {
               <li>
                 <Check
                   size={20}
-                  className="mr-2 inline-block text-gray-2000 dark:text-gray-400"
+                  className="mr-2 inline-block text-gray-200 dark:text-gray-400"
                 />
                 Demonstrated technical expertise and ability to thrive under
                 pressure by leading my team to victory in several hackathons,
@@ -320,7 +320,7 @@ export default function Page() {
               <li>
                 <Check
                   size={20}
-                  className="mr-2 inline-block text-gray-2000 dark:text-gray-400"
+                  className="mr-2 inline-block text-gray-200 dark:text-gray-400"
                 />
                 Authored an editorial titled "All I really need to know, I
                 learned from Pinoy Hackathons," featured on GMA News Online, a
@@ -330,7 +330,7 @@ export default function Page() {
               <li>
                 <Check
                   size={20}
-                  className="mr-2 inline-block text-gray-2000 dark:text-gray-400"
+                  className="mr-2 inline-block text-gray-200 dark:text-gray-400"
                 />
                 Developed and delivered the back-end of Lendr, the Philippines’
                 first fully digital, end-to-end consumer loan platform, using
@@ -340,7 +340,7 @@ export default function Page() {
               <li>
                 <Check
                   size={20}
-                  className="mr-2 inline-block text-gray-2000 dark:text-gray-400"
+                  className="mr-2 inline-block text-gray-200 dark:text-gray-400"
                 />
                 Implemented a scalable back-end system for a digital-media
                 mobile application, Eat Bulaga! Mobile, leading a team of 3
@@ -351,7 +351,7 @@ export default function Page() {
               <li>
                 <Check
                   size={20}
-                  className="mr-2 inline-block text-gray-2000 dark:text-gray-400"
+                  className="mr-2 inline-block text-gray-200 dark:text-gray-400"
                 />
                 Pioneered a culture of active participation in programming
                 competitions and hackathons among Voyager engineers, resulting
@@ -399,7 +399,7 @@ export default function Page() {
               <li>
                 <Check
                   size={20}
-                  className="mr-2 inline-block text-gray-2000 dark:text-gray-400"
+                  className="mr-2 inline-block text-gray-200 dark:text-gray-400"
                 />
                 Developed the redesign of the existing stand-alone application,
                 SmartNet, by participating in planning and initiation stages,
@@ -411,7 +411,7 @@ export default function Page() {
               <li>
                 <Check
                   size={20}
-                  className="mr-2 inline-block text-gray-2000 dark:text-gray-400"
+                  className="mr-2 inline-block text-gray-200 dark:text-gray-400"
                 />
                 Refactored and optimized the codebase of Pinoy Hoops, a digital
                 sports platform, using Express, jQuery, CSS, Pug, MongoDB and
@@ -464,7 +464,7 @@ export default function Page() {
               <li>
                 <Check
                   size={20}
-                  className="mr-2 inline-block text-gray-2000 dark:text-gray-400"
+                  className="mr-2 inline-block text-gray-200 dark:text-gray-400"
                 />
                 Collaborated with a team of interns to design and implement a
                 new module that streamlined the registration process for
@@ -475,7 +475,7 @@ export default function Page() {
               <li>
                 <Check
                   size={20}
-                  className="mr-2 inline-block text-gray-2000 dark:text-gray-400"
+                  className="mr-2 inline-block text-gray-200 dark:text-gray-400"
                 />
                 Applied theoretical knowledge to practice, demonstrating
                 problem-solving and critical thinking skills in a real-world
@@ -518,7 +518,7 @@ export default function Page() {
               <li>
                 <Check
                   size={20}
-                  className="mr-2 inline-block text-gray-2000 dark:text-gray-400"
+                  className="mr-2 inline-block text-gray-200 dark:text-gray-400"
                 />
                 Provided timely technical support to students, faculty, and
                 staff of the University of the Philippines troubleshooting and
@@ -528,7 +528,7 @@ export default function Page() {
               <li>
                 <Check
                   size={20}
-                  className="mr-2 inline-block text-gray-2000 dark:text-gray-400"
+                  className="mr-2 inline-block text-gray-200 dark:text-gray-400"
                 />
                 Gained valuable experience working with Linux systems and
                 developed a deep appreciation for open source projects
@@ -536,7 +536,7 @@ export default function Page() {
               <li>
                 <Check
                   size={20}
-                  className="mr-2 inline-block text-gray-2000 dark:text-gray-400"
+                  className="mr-2 inline-block text-gray-200 dark:text-gray-400"
                 />
                 Collaborated effectively with a team of full-time Computer
                 Center employees to maintain a high standard of service, earning
