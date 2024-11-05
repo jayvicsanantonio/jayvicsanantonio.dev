@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import ProjectButton from "@/components/pages/ProjectButton";
-import GithubIcon from "@/components/icons/github";
+import { Github } from "lucide-react";
 
 export default function Page() {
   return (
@@ -52,7 +52,7 @@ export default function Page() {
             </div>
             <div className="flex gap-4 mt-4">
               <ProjectButton link={null}>
-                <GithubIcon className="w-5 h-5" />
+                <Github size={20} />
                 Github
               </ProjectButton>
               <ProjectButton link="https://www.advertising.yahooinc.com/our-dsp">
@@ -96,7 +96,7 @@ export default function Page() {
               </div>
               <div className="flex gap-4 mt-4">
                 <ProjectButton link="https://github.com/jpsanantonio/barbenheimer-vscode-theme">
-                  <GithubIcon className="w-5 h-5" />
+                  <Github size={20} />
                   Github
                 </ProjectButton>
                 <ProjectButton link="https://marketplace.visualstudio.com/items?itemName=jayvicsanantonio.barbenheimer">
@@ -135,7 +135,7 @@ export default function Page() {
               </div>
               <div className="flex gap-4 mt-4">
                 <ProjectButton link="https://github.com/jpsanantonio/web-development-hub">
-                  <GithubIcon className="w-5 h-5" />
+                  <Github size={20} />
                   Github
                 </ProjectButton>
                 <ProjectButton link="https://www.webdevhub.link/">
@@ -176,7 +176,7 @@ export default function Page() {
               </div>
               <div className="flex gap-4 mt-4">
                 <ProjectButton link="https://github.com/nesceal/mmchurch">
-                  <GithubIcon className="w-5 h-5" />
+                  <Github size={20} />
                   Github
                 </ProjectButton>
                 <ProjectButton link="https://mmchurch.ph/">

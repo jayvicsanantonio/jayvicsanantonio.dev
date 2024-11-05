@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import CalendarIcon from "@/components/icons/calendar";
+import { Calendar } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 export default function Page() {
@@ -42,7 +42,7 @@ export default function Page() {
                   From Ember.js to Next.js: A Tale of Two Frameworks
                 </Link>
                 <div className="text-gray-400 flex items-center space-x-2">
-                  <CalendarIcon className="h-4 w-4" />
+                  <Calendar size={20} />
                   <span>May 7, 2024</span>
                 </div>
                 <p className="text-gray-300 line-clamp-3">
@@ -83,7 +83,7 @@ export default function Page() {
                   The Typescript Tightrope: A Love-Hate Journey
                 </Link>
                 <div className="text-gray-400 flex items-center space-x-2">
-                  <CalendarIcon className="h-4 w-4" />
+                  <Calendar size={20} />
                   <span>May 4, 2024</span>
                 </div>
                 <p className="text-gray-300 line-clamp-3">
@@ -123,7 +123,7 @@ export default function Page() {
                   Building My Developer Playground
                 </Link>
                 <div className="text-gray-400 flex items-center space-x-2">
-                  <CalendarIcon className="h-4 w-4" />
+                  <Calendar size={20} />
                   <span>May 1, 2024</span>
                 </div>
                 <p className="text-gray-300 line-clamp-3">

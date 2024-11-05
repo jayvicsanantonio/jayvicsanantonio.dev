@@ -4,8 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { CardContent, CardFooter, Card } from "@/components/ui/card";
 import ContactMeForm from "@/components/pages/home/ContactMeForm";
 import ProjectButton from "@/components/pages/ProjectButton";
-import CalendarIcon from "@/components/icons/calendar";
-import GithubIcon from "@/components/icons/github";
+import { Calendar, Github } from "lucide-react";
 
 export default function Page() {
   return (
@@ -336,7 +335,7 @@ export default function Page() {
               </div>
               <div className="flex gap-4 mt-4">
                 <ProjectButton link={null}>
-                  <GithubIcon className="w-5 h-5" />
+                  <Github size={20} />
                   Github
                 </ProjectButton>
                 <ProjectButton link="https://www.advertising.yahooinc.com/our-dsp">
@@ -374,7 +373,7 @@ export default function Page() {
               </div>
               <div className="flex gap-4 mt-4">
                 <ProjectButton link="https://github.com/jpsanantonio/barbenheimer-vscode-theme">
-                  <GithubIcon className="w-5 h-5" />
+                  <Github size={20} />
                   Github
                 </ProjectButton>
                 <ProjectButton link="https://marketplace.visualstudio.com/items?itemName=jayvicsanantonio.barbenheimer">
@@ -425,7 +424,7 @@ export default function Page() {
                   From Ember.js to Next.js: A Tale of Two Frameworks
                 </Link>
                 <div className="text-gray-400 flex items-center space-x-2">
-                  <CalendarIcon className="h-4 w-4" />
+                  <Calendar size={20} />
                   <span>May 7, 2024</span>
                 </div>
                 <p className="text-gray-300 line-clamp-3">
@@ -466,7 +465,7 @@ export default function Page() {
                   The Typescript Tightrope: A Love-Hate Journey
                 </Link>
                 <div className="text-gray-400 flex items-center space-x-2">
-                  <CalendarIcon className="h-4 w-4" />
+                  <Calendar size={20} />
                   <span>May 4, 2024</span>
                 </div>
                 <p className="text-gray-300 line-clamp-3">

@@ -4,9 +4,7 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import CodeIcon from "@/components/icons/code";
-import MenuIcon from "@/components/icons/menu";
-import CloseIcon from "@/components/icons/close";
+import { X, Code, Menu } from "lucide-react";
 
 export default function Header() {
   const pathname = usePathname();
@@ -15,7 +13,10 @@ export default function Header() {
   return (
     <header className="flex items-center justify-between px-4 py-6 bg-gray-950 border-b border-gray-800 sticky top-0 z-10 -mx-4 lg:-mx-auto">
       <Link href="/" className="flex items-center gap-2" aria-label="Logo">
-        <CodeIcon className="w-6 h-6 hover:text-violet-600 hover:scale-110 transform" />
+        <Code
+          size={24}
+          className="hover:text-violet-600 hover:scale-110 transform"
+        />
       </Link>
       <nav
         className={
@@ -117,11 +118,7 @@ export default function Header() {
         variant="ghost"
         onClick={() => setIsNavOpen((prev) => !prev)}
       >
-        {isNavOpen ? (
-          <CloseIcon className="w-6 h-6" />
-        ) : (
-          <MenuIcon className="w-6 h-6" />
-        )}
+        {isNavOpen ? <X size={24} /> : <Menu size={24} />}
       </Button>
     </header>
   );
