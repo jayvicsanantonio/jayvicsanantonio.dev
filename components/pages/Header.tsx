@@ -1,13 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { X, Code, Menu } from "lucide-react";
+import IconButton from "@/components/pages/IconButton";
+import {
+  X,
+  Code,
+  Menu,
+  House,
+  LayoutPanelLeft,
+  Newspaper,
+  FlaskConical,
+  FileUser,
+} from "lucide-react";
 
 export default function Header() {
-  const pathname = usePathname();
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   return (
@@ -21,95 +29,25 @@ export default function Header() {
       <nav
         className={
           isNavOpen
-            ? "absolute top-[89px] left-0 flex flex-col h-screen w-full z-9 bg-gray-950 text-gray-200 overflow-y-auto"
-            : "hidden md:flex items-center gap-8"
+            ? "absolute top-[89px] left-0 flex flex-col h-screen w-full z-9 bg-gray-950 text-gray-200 overflow-y-auto p-2 gap-4"
+            : "hidden md:flex items-center gap-4"
         }
       >
-        <Link href="/" passHref legacyBehavior>
-          <a
-            href="/"
-            onClick={() => setIsNavOpen(false)}
-            className={`${
-              isNavOpen
-                ? "border-b-2 border-gray-800 py-8 px-4 hover:bg-violet-600 hover:text-gray-200"
-                : "px-2 py-[1px] rotate-[3deg] hover:-rotate-[3deg] transition-all transform"
-            } ${
-              pathname === "/"
-                ? "bg-violet-600 text-white"
-                : "bg-gray-200 text-violet-600"
-            } font-oswald font-bold text-lg tracking-widest inline-block`}
-          >
-            Home
-          </a>
-        </Link>
-        <Link href="/projects" passHref legacyBehavior>
-          <a
-            href="/projects"
-            onClick={() => setIsNavOpen(false)}
-            className={`${
-              isNavOpen
-                ? "border-b-2 border-gray-800 py-8 px-4 hover:bg-violet-600 hover:text-gray-200"
-                : "px-2 py-[1px] -rotate-[3deg] hover:rotate-[3deg] transition-all transform"
-            } ${
-              pathname === "/projects"
-                ? "bg-violet-600 text-white"
-                : "bg-gray-200 text-violet-600"
-            } font-oswald font-bold text-lg tracking-widest inline-block`}
-          >
-            Projects
-          </a>
-        </Link>
-        <Link href="/blog" passHref legacyBehavior>
-          <a
-            href="/blog"
-            onClick={() => setIsNavOpen(false)}
-            className={`${
-              isNavOpen
-                ? "border-b-2 border-gray-800 py-8 px-4 hover:bg-violet-600 hover:text-gray-200"
-                : "px-2 py-[1px] rotate-[3deg] hover:-rotate-[3deg] transition-all transform"
-            } ${
-              pathname === "/blog"
-                ? "bg-violet-600 text-white"
-                : "bg-gray-200 text-violet-600"
-            } font-oswald font-bold text-lg tracking-widest inline-block`}
-          >
-            Blog
-          </a>
-        </Link>
-        <Link href="/lab" passHref legacyBehavior>
-          <a
-            href="/lab"
-            onClick={() => setIsNavOpen(false)}
-            className={`${
-              isNavOpen
-                ? "border-b-2 border-gray-800 py-8 px-4 hover:bg-violet-600 hover:text-gray-200"
-                : "px-2 py-[1px] rotate-[3deg] hover:-rotate-[3deg] transition-all transform"
-            } ${
-              pathname === "/lab"
-                ? "bg-violet-600 text-white"
-                : "bg-gray-200 text-violet-600"
-            } font-oswald font-bold text-lg tracking-widest inline-block`}
-          >
-            Lab
-          </a>
-        </Link>
-        <Link href="/work" passHref legacyBehavior>
-          <a
-            href="/work"
-            onClick={() => setIsNavOpen(false)}
-            className={`${
-              isNavOpen
-                ? "border-b-2 border-gray-800 py-8 px-4 hover:bg-violet-600 hover:text-gray-200"
-                : "px-2 py-[1px] -rotate-[3deg] hover:rotate-[3deg] transition-all transform"
-            } ${
-              pathname === "/work"
-                ? "bg-violet-600 text-white"
-                : "bg-gray-200 text-violet-600"
-            } font-oswald font-bold text-lg tracking-widest inline-block`}
-          >
-            Work
-          </a>
-        </Link>
+        <IconButton Icon={House} link="/">
+          Home
+        </IconButton>
+        <IconButton Icon={LayoutPanelLeft} link="/projects">
+          Projects
+        </IconButton>
+        <IconButton Icon={Newspaper} link="/blog">
+          Blog
+        </IconButton>
+        <IconButton Icon={FlaskConical} link="/lab">
+          Lab
+        </IconButton>
+        <IconButton Icon={FileUser} link="/work">
+          Work
+        </IconButton>
       </nav>
       <Button
         aria-label="Toggle navigation"
