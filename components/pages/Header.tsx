@@ -27,36 +27,83 @@ export default function Header() {
         />
       </Link>
       <nav
-        className={
-          isNavOpen
-            ? "absolute top-[89px] left-0 flex flex-col h-screen w-full z-9 bg-gray-950 text-gray-200 overflow-y-auto p-2 gap-4"
-            : "hidden md:flex items-center gap-4"
-        }
+        role="navigation"
+        aria-label="Main menu"
+        className={isNavOpen ? "fixed inset-0 p-4" : ""}
       >
-        <IconButton Icon={House} link="/">
-          Home
-        </IconButton>
-        <IconButton Icon={LayoutPanelLeft} link="/projects">
-          Projects
-        </IconButton>
-        <IconButton Icon={Newspaper} link="/blog">
-          Blog
-        </IconButton>
-        <IconButton Icon={FlaskConical} link="/lab">
-          Lab
-        </IconButton>
-        <IconButton Icon={FileUser} link="/work">
-          Work
-        </IconButton>
+        {isNavOpen && (
+          <div className="absolute inset-0 bg-violet-600 opacity-50 transition-opacity duration-200 ease-in-out" />
+        )}
+        <div
+          className={
+            isNavOpen
+              ? "absolute top-0 right-0 max-w-72 min-w-48 bottom-0 w-2/5 flex flex-col space-between bg-gray-950 shadow-lg p-6"
+              : ""
+          }
+        >
+          <div
+            className={
+              isNavOpen
+                ? "flex flex-col gap-6 flex-1"
+                : "hidden md:flex items-center gap-4"
+            }
+          >
+            <IconButton
+              Icon={House}
+              link="/"
+              callback={isNavOpen ? () => setIsNavOpen(false) : null}
+            >
+              Home
+            </IconButton>
+            <IconButton
+              Icon={LayoutPanelLeft}
+              link="/projects"
+              callback={isNavOpen ? () => setIsNavOpen(false) : null}
+            >
+              Projects
+            </IconButton>
+            <IconButton
+              Icon={Newspaper}
+              link="/blog"
+              callback={isNavOpen ? () => setIsNavOpen(false) : null}
+            >
+              Blog
+            </IconButton>
+            <IconButton
+              Icon={FlaskConical}
+              link="/lab"
+              callback={isNavOpen ? () => setIsNavOpen(false) : null}
+            >
+              Lab
+            </IconButton>
+            <IconButton
+              Icon={FileUser}
+              link="/work"
+              callback={isNavOpen ? () => setIsNavOpen(false) : null}
+            >
+              Work
+            </IconButton>
+          </div>
+
+          {isNavOpen && (
+            <Button
+              className="flex items-center justify-center gap-2 text-white p-2 cursor-pointer rounded text-lg"
+              onClick={() => setIsNavOpen(false)}
+            >
+              <X /> Dismiss
+            </Button>
+          )}
+        </div>
       </nav>
       <Button
-        aria-label="Toggle navigation"
+        aria-expanded={isNavOpen}
+        aria-label="Open main menu"
         className="md:hidden"
         size="icon"
         variant="ghost"
         onClick={() => setIsNavOpen((prev) => !prev)}
       >
-        {isNavOpen ? <X size={24} /> : <Menu size={24} />}
+        <Menu size={24} aria-hidden="true" focusable="false" />
       </Button>
     </header>
   );

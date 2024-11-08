@@ -4,10 +4,12 @@ import { usePathname } from "next/navigation";
 export default function IconButton({
   Icon,
   link,
+  callback,
   children,
 }: {
   Icon: React.FC<React.SVGProps<SVGSVGElement>>;
   link: string;
+  callback: (() => void) | null;
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
@@ -19,6 +21,7 @@ export default function IconButton({
         className={`flex items-center p-1 rounded-lg text-lg cursor-pointer border-none hover:text-violet-600 transition-colors duration-200 ${
           pathname === link ? "text-violet-600" : "text-white"
         }`}
+        onClick={() => callback && callback()}
       >
         <span className="flex justify-center items-center rounded ">
           <Icon strokeWidth={1.5} />
