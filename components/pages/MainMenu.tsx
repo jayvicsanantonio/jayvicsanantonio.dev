@@ -7,7 +7,11 @@ import {
   FileUser,
 } from "lucide-react";
 
-export default function MainMenu({ closeDrawer }: { closeDrawer: () => void }) {
+export default function MainMenu({
+  closeDrawer,
+}: {
+  closeDrawer?: () => void;
+}) {
   return (
     <>
       <IconButton Icon={House} link="/" callback={closeDrawer}>

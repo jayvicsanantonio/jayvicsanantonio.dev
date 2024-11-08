@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import Link from "next/link";
 import Drawer from "./Drawer";
 import MainMenu from "./MainMenu";
@@ -9,6 +9,10 @@ import { Code, Menu } from "lucide-react";
 
 export default function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false);
+
+  const closeDrawer = useCallback(() => {
+    setIsNavOpen(false);
+  }, []);
 
   return (
     <header className="flex items-center justify-between px-4 py-6 bg-gray-950 border-b border-gray-800 sticky top-0 z-10 -mx-4 lg:-mx-auto">
@@ -25,11 +29,7 @@ export default function Header() {
           isNavOpen ? "fixed inset-0 p-4" : "hidden md:flex items-center gap-4"
         }
       >
-        {isNavOpen ? (
-          <Drawer closeDrawer={() => setIsNavOpen(false)} />
-        ) : (
-          <MainMenu />
-        )}
+        {isNavOpen ? <Drawer closeDrawer={closeDrawer} /> : <MainMenu />}
       </nav>
       <Button
         aria-expanded={isNavOpen}

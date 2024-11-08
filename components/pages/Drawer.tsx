@@ -1,10 +1,13 @@
 import FocusLock from "react-focus-lock";
+import useEscapeKey from "@/hooks/use-escape-key";
 import { RemoveScroll } from "react-remove-scroll";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 import MainMenu from "./MainMenu";
 
 export default function Drawer({ closeDrawer }: { closeDrawer: () => void }) {
+  useEscapeKey(closeDrawer);
+
   return (
     <FocusLock returnFocus={true}>
       <RemoveScroll>
