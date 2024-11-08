@@ -22,6 +22,7 @@ export default function IconButton({
           pathname === link ? "text-violet-600" : "text-white"
         }`}
         onClick={() => callback()}
+        tabIndex={0}
       >
         <span className="flex justify-center items-center rounded ">
           <Icon strokeWidth={1.5} />

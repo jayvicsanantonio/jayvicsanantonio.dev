@@ -20,8 +20,9 @@ export default function Drawer({ closeDrawer }: { closeDrawer: () => void }) {
           <Button
             className="flex items-center justify-center gap-2 text-white p-2 cursor-pointer rounded text-lg bg-violet-600 hover:bg-violet-700"
             onClick={closeDrawer}
+            aria-label="Close navigation menu"
           >
-            <X /> Dismiss
+            <X aria-hidden={true} /> Dismiss
           </Button>
         </div>
       </RemoveScroll>
