@@ -372,7 +372,7 @@ export default function Page() {
                 </div>
               </div>
               <div className="flex gap-4 mt-4">
-                <ProjectButton link="https://github.com/jayvicsanantonio/barbenheimer-vscode-theme">
+                <ProjectButton link="https://github.com/jpsanantonio/barbenheimer-vscode-theme">
                   <Github size={20} />
                   Github
                 </ProjectButton>
