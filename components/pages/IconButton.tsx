@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import useBoop from "@/hooks/use-boop";
+import { animated } from "react-spring";
 
 export default function IconButton({
   Icon,
@@ -12,6 +14,7 @@ export default function IconButton({
   callback?: () => void;
   children: React.ReactNode;
 }) {
+  const [style, trigger] = useBoop({ rotation: 20, timing: 200 });
   const pathname = usePathname();
 
   return (
@@ -23,10 +26,14 @@ export default function IconButton({
         }`}
         onClick={() => callback()}
         tabIndex={0}
+        onMouseEnter={trigger}
       >
-        <span className="flex justify-center items-center rounded ">
+        <animated.span
+          style={style}
+          className="flex justify-center items-center rounded "
+        >
           <Icon strokeWidth={1.5} />
-        </span>
+        </animated.span>
         <span className="px-4 py-0">{children}</span>
       </a>
     </Link>
