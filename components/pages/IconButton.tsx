@@ -1,3 +1,4 @@
+import { MouseEventHandler } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import useBoop from "@/hooks/use-boop";
@@ -26,7 +27,7 @@ export default function IconButton({
         }`}
         onClick={() => callback()}
         tabIndex={0}
-        onMouseEnter={trigger}
+        onMouseEnter={trigger as MouseEventHandler<HTMLAnchorElement>}
       >
         <animated.span
           style={style}
