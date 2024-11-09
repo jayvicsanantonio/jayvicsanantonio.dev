@@ -72,7 +72,7 @@ export default function RootLayout({
               <div className="flex items-center gap-6">
                 <Link
                   className="hover:text-gray-200 "
-                  href="https://github.com/jpsanantonio"
+                  href="https://github.com/jayvicsanantonio"
                   legacyBehavior
                 >
                   <a
