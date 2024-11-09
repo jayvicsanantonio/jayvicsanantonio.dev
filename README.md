@@ -44,7 +44,7 @@ Make sure you have the following software installed:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/jpsanantonio/jayvicsanantonio.dev.git
+   git clone https://github.com/jayvicsanantonio/jayvicsanantonio.dev.git
    ```
 
 2. Navigate to the project directory:
