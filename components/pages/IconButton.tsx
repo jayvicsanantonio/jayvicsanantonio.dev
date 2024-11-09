@@ -1,4 +1,4 @@
-import { MouseEventHandler } from "react";
+import { MouseEventHandler, TouchEventHandler } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import useBoop from "@/hooks/use-boop";
@@ -28,6 +28,7 @@ export default function IconButton({
         onClick={() => callback()}
         tabIndex={0}
         onMouseEnter={trigger as MouseEventHandler<HTMLAnchorElement>}
+        onTouchStart={trigger as TouchEventHandler<HTMLAnchorElement>}
       >
         <animated.span
           style={style}

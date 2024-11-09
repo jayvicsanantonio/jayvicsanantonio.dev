@@ -1,6 +1,11 @@
 "use client";
 
-import { useState, useCallback, MouseEventHandler } from "react";
+import {
+  useState,
+  useCallback,
+  MouseEventHandler,
+  TouchEventHandler,
+} from "react";
 import Link from "next/link";
 import Drawer from "./Drawer";
 import MainMenu from "./MainMenu";
@@ -22,6 +27,7 @@ export default function Header() {
       <Link href="/" className="flex items-center gap-2" aria-label="Logo">
         <animated.span
           onMouseEnter={trigger as MouseEventHandler<HTMLAnchorElement>}
+          onTouchStart={trigger as TouchEventHandler<HTMLAnchorElement>}
           style={style}
         >
           <Code size={30} className="hover:text-violet-600" />
