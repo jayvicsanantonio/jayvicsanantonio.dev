@@ -22,7 +22,7 @@ export default function IconButton({
     <Link href={link} passHref legacyBehavior>
       <a
         href={link}
-        className={`flex items-center p-1 rounded-lg text-lg cursor-pointer border-none hover:text-violet-600 transition-colors duration-200 ${
+        className={`flex items-center p-1 rounded-lg text-lg cursor-pointer border-none hover:text-violet-600 transition-colors duration-200 font-oswald font-bold ${
           pathname === link ? "text-violet-600" : "text-white"
         }`}
         onClick={() => callback()}
@@ -34,7 +34,7 @@ export default function IconButton({
           style={style}
           className="flex justify-center items-center rounded "
         >
-          <Icon strokeWidth={1.5} />
+          <Icon strokeWidth={2.5} />
         </animated.span>
         <span className="px-4 py-0">{children}</span>
       </a>
