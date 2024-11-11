@@ -43,11 +43,7 @@ export default function Header() {
                 <stop offset="100%" stopColor="#a855f7" />
               </linearGradient>
             </defs>
-            <Code
-              size={30}
-              className="hover:text-violet-600"
-              stroke="url(#codeIconGradient)"
-            />
+            <Code size={30} stroke="url(#codeIconGradient)" />
           </svg>
         </animated.span>
       </Link>

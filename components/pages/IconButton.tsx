@@ -48,6 +48,7 @@ export default function IconButton({
         onMouseEnter={handleMouseEnter as MouseEventHandler<HTMLAnchorElement>}
         onMouseLeave={handleMouseLeave as MouseEventHandler<HTMLAnchorElement>}
         onTouchStart={handleMouseEnter as TouchEventHandler<HTMLAnchorElement>}
+        onTouchEnd={handleMouseLeave as TouchEventHandler<HTMLAnchorElement>}
       >
         <animated.span
           style={style}
