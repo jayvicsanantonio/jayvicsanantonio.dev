@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Code, Menu } from "lucide-react";
 
 export default function Header() {
-  const [style, trigger] = useBoop({ rotation: 20, timing: 200 });
+  const [style, trigger] = useBoop({ scale: 1.5, timing: 300 });
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   const closeDrawer = useCallback(() => {
@@ -30,7 +30,25 @@ export default function Header() {
           onTouchStart={trigger as TouchEventHandler<HTMLAnchorElement>}
           style={style}
         >
-          <Code size={30} className="hover:text-violet-600" />
+          <svg width="30" height="30" viewBox="0 0 30 30">
+            <defs>
+              <linearGradient
+                id="codeIconGradient"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="0%"
+              >
+                <stop offset="0%" stopColor="#60a5fa" />
+                <stop offset="100%" stopColor="#a855f7" />
+              </linearGradient>
+            </defs>
+            <Code
+              size={30}
+              className="hover:text-violet-600"
+              stroke="url(#codeIconGradient)"
+            />
+          </svg>
         </animated.span>
       </Link>
       <nav
