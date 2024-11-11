@@ -23,11 +23,13 @@ export default function IconButton({
   const pathname = usePathname();
 
   const handleMouseEnter = useCallback(() => {
+    // @ts-ignore
     trigger();
     setIsActive(true);
   }, []);
 
   const handleMouseLeave = useCallback(() => {
+    // @ts-ignore
     trigger();
     setIsActive(false);
   }, []);
