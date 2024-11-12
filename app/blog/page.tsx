@@ -1,9 +1,14 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Calendar } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 export default function Page() {
+  const router = useRouter();
+
   return (
     <section className="w-full  bg-gray-950 text-gray-200">
       <div className="flex flex-col gap-8">
@@ -20,9 +25,14 @@ export default function Page() {
             experiences.
           </p>
         </div>
-        <div className="flex flex-col gap-8 py-12  bg-gray-950 text-gray-200">
+        <div className="flex flex-col gap-8 bg-gradient-to-r from-blue-500/20 to-purple-500/20 p-6 rounded-xl">
           <div className="space-y-8">
-            <article className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg border border-gray-800 p-6 shadow-sm transition-all hover:border-violet-600 hover:shadow-md">
+            <button
+              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg bg-gray-950 border border-gray-800 p-6 shadow-sm hover:border-t-purple-500/80 hover:border-r-purple-500/80 hover:border-b-blue-400/80 hover:border-l-blue-400/80 hover:shadow-md transition-all"
+              onClick={() => {
+                router.push("/blog/from-ember-to-next");
+              }}
+            >
               <Image
                 alt="Blog Post Image"
                 className="rounded-lg object-cover border border-gray-800 w-full"
@@ -34,13 +44,10 @@ export default function Page() {
                 }}
                 width={200}
               />
-              <div className="space-y-2">
-                <Link
-                  className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight hover:underline hover:text-violet-600"
-                  href="/blog/from-ember-to-next"
-                >
+              <div className="space-y-2 text-left">
+                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
                   From Ember.js to Next.js: A Tale of Two Frameworks
-                </Link>
+                </h3>
                 <div className="text-gray-400 flex items-center space-x-2">
                   <Calendar size={20} />
                   <span>May 7, 2024</span>
@@ -62,8 +69,13 @@ export default function Page() {
                   </Badge>
                 </div>
               </div>
-            </article>
-            <article className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg border border-gray-800 p-6 shadow-sm transition-all hover:border-violet-600 hover:shadow-md">
+            </button>
+            <button
+              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg bg-gray-950 border border-gray-800 p-6 shadow-sm hover:border-t-purple-500/80 hover:border-r-purple-500/80 hover:border-b-blue-400/80 hover:border-l-blue-400/80 hover:shadow-md transition-all"
+              onClick={() => {
+                router.push("/blog/the-typescript-tightrope");
+              }}
+            >
               <Image
                 alt="Blog Post Image"
                 className="rounded-lg object-cover border border-gray-800 w-full"
@@ -75,13 +87,10 @@ export default function Page() {
                 }}
                 width={200}
               />
-              <div className="space-y-2">
-                <Link
-                  className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight hover:underline hover:text-violet-600"
-                  href="/blog/the-typescript-tightrope"
-                >
+              <div className="space-y-2 text-left">
+                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
                   The Typescript Tightrope: A Love-Hate Journey
-                </Link>
+                </h3>
                 <div className="text-gray-400 flex items-center space-x-2">
                   <Calendar size={20} />
                   <span>May 4, 2024</span>
@@ -102,8 +111,13 @@ export default function Page() {
                   </Badge>
                 </div>
               </div>
-            </article>
-            <article className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg border border-gray-800 p-6 shadow-sm transition-all hover:border-violet-600 hover:shadow-md">
+            </button>
+            <button
+              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg bg-gray-950 border border-gray-800 p-6 shadow-sm hover:border-t-purple-500/80 hover:border-r-purple-500/80 hover:border-b-blue-400/80 hover:border-l-blue-400/80 hover:shadow-md transition-all"
+              onClick={() => {
+                router.push("/blog/building-my-developer-playground");
+              }}
+            >
               <Image
                 alt="Blog Post Image"
                 className="rounded-lg object-cover border border-gray-800 w-full"
@@ -115,13 +129,10 @@ export default function Page() {
                 }}
                 width={200}
               />
-              <div className="space-y-2">
-                <Link
-                  className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight hover:underline hover:text-violet-600"
-                  href="/blog/building-my-developer-playground"
-                >
+              <div className="space-y-2 text-left">
+                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
                   Building My Developer Playground
-                </Link>
+                </h3>
                 <div className="text-gray-400 flex items-center space-x-2">
                   <Calendar size={20} />
                   <span>May 1, 2024</span>
@@ -151,7 +162,7 @@ export default function Page() {
                   </Badge>
                 </div>
               </div>
-            </article>
+            </button>
           </div>
         </div>
       </div>

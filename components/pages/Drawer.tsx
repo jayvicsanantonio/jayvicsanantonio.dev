@@ -18,7 +18,7 @@ export default function Drawer({ closeDrawer }: { closeDrawer: () => void }) {
           </div>
 
           <Button
-            className="flex items-center justify-center gap-2 text-white p-2 cursor-pointer rounded text-lg bg-violet-600 hover:bg-violet-700"
+            className="flex items-center justify-center gap-2 text-white p-2 cursor-pointer rounded-lg text-lg bg-gradient-to-r from-blue-400/80 to-purple-500/80"
             onClick={closeDrawer}
             aria-label="Close navigation menu"
           >

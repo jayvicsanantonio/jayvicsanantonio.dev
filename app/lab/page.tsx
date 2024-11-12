@@ -19,7 +19,7 @@ export default function Page() {
           </p>
         </div>
         <div className="flex flex-col gap-8 py-12  bg-gray-950 text-gray-200">
-          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-violet-600 hover:shadow-md">
+          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm">
             <CardContent className="flex-1 -p-6">
               <iframe
                 src="https://codesandbox.io/embed/23lnhc?view=preview&module=%2Fstyles.css&hidenavigation=1"
@@ -35,9 +35,9 @@ export default function Page() {
                 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
               />
             </CardContent>
-            <CardFooter className="bg-gray-950 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+            <CardFooter className="bg-gray-950 text-gray-2000 bg-gradient-to-r from-blue-500/20 to-purple-500/20 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
               <div className="space-y-2">
-                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight">
+                <h3 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight">
                   Aurora Borealis
                 </h3>
                 <div className="mt-6 flex flex-wrap gap-2">
@@ -63,7 +63,7 @@ export default function Page() {
               </div>
             </CardFooter>
           </Card>
-          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-violet-600 hover:shadow-md">
+          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm">
             <CardContent className="flex-1 -p-6">
               <iframe
                 src="https://codesandbox.io/embed/qlnxgn?view=preview&module=%2Fstyles.css&hidenavigation=1"
@@ -79,9 +79,9 @@ export default function Page() {
                 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
               />
             </CardContent>
-            <CardFooter className="bg-gray-950 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+            <CardFooter className="bg-gray-950 text-gray-2000 bg-gradient-to-r from-blue-500/20 to-purple-500/20 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
               <div className="space-y-2">
-                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight">
+                <h3 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight">
                   Total Solar Eclipse
                 </h3>
                 <div className="mt-6 flex flex-wrap gap-2">

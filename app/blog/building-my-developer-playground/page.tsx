@@ -8,7 +8,7 @@ export default function Page() {
     <article className="prose prose-invert mx-auto space-y-8">
       <BlogBreadcrumb title="Building My Developer Playground" />
       <div className="space-y-2 not-prose">
-        <h1 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-bold tracking-tight">
+        <h1 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-bold tracking-tight">
           Building My Developer Playground
         </h1>
         <div className="text-gray-400 flex items-center space-x-2">
