@@ -1,32 +1,19 @@
 "use client";
 
-import {
-  useEffect,
-  useState,
-  MouseEventHandler,
-  TouchEventHandler,
-} from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import useBoop from "@/hooks/use-boop";
+
 import Bluesky from "@/components/icons/Bluesky";
-import SocialMediaIconButton from "@/components/pages/SocialMediaIconButton";
-import { animated } from "react-spring";
+import ScrollDown from "@/components/pages/ScrollDown";
+import SocialMediaIconButton from "@/components/pages/home/SocialMediaIconButton";
 import { motion } from "framer-motion";
-import { ChevronDown, Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 
 export default function Hero({
   aboutRef,
 }: {
   aboutRef: React.RefObject<HTMLElement>;
 }) {
-  const [chevronDownStyle, chevronDownTrigger] = useBoop({
-    y: 10,
-    timing: 200,
-  });
-  const [socialMediaIconsStyle, socialMediaIconsTrigger] = useBoop({
-    rotation: 10,
-    timing: 200,
-  });
   const [activeIndex, setActiveIndex] = useState(0);
   const roles = [
     "Full-Stack Web Developer",
@@ -45,17 +32,8 @@ export default function Hero({
     return () => clearInterval(interval);
   }, []);
 
-  const scrollToNextSection = () => {
-    if (aboutRef.current) {
-      aboutRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-  };
-
   return (
-    <section className="relative h-screen flex flex-col-reverse md:flex-row items-center space-x-10 px-4 pb-60">
+    <section className="relative h-screen flex flex-col-reverse justify-end md:flex-row items-center px-4 pb-60">
       <div className="space-y-6">
         <div className="font-oswald lg:space-y-2 flex flex-col items-center md:items-start">
           <h1 className="font-title text-4xl font-bold leading-snug lg:text-6xl ">
@@ -116,22 +94,7 @@ export default function Hero({
         width={340}
         priority={true}
       />
-      <div className="absolute bottom-40 md:bottom-52 left-1/2 md:-translate-x-1/2 -translate-x-16">
-        <animated.button
-          className="cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 rounded-full p-2"
-          onClick={scrollToNextSection}
-          onMouseEnter={
-            chevronDownTrigger as MouseEventHandler<HTMLButtonElement>
-          }
-          onTouchStart={
-            chevronDownTrigger as TouchEventHandler<HTMLButtonElement>
-          }
-          aria-label="Scroll to About section"
-          style={chevronDownStyle}
-        >
-          <ChevronDown size={40} />
-        </animated.button>
-      </div>
+      <ScrollDown sectionRef={aboutRef} />
     </section>
   );
 }

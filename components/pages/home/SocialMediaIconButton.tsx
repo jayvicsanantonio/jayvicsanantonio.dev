@@ -2,7 +2,6 @@
 
 import { MouseEventHandler, TouchEventHandler } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import useBoop from "@/hooks/use-boop";
 import { animated } from "react-spring";
 
@@ -16,7 +15,6 @@ export default function SocialMediaIconButton({
   children: React.ReactNode;
 }) {
   const [style, trigger] = useBoop({ rotation: 10, timing: 200 });
-  const pathname = usePathname();
 
   return (
     <Link href={link} passHref legacyBehavior>
@@ -29,7 +27,7 @@ export default function SocialMediaIconButton({
         onMouseEnter={trigger as MouseEventHandler<HTMLAnchorElement>}
         onTouchStart={trigger as TouchEventHandler<HTMLAnchorElement>}
       >
-        <Icon className="w-8 h-8" />
+        <Icon className="w-6 h-6 md:w-8 md:h-8" />
       </animated.a>
     </Link>
   );
