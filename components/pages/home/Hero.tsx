@@ -7,9 +7,9 @@ import {
   TouchEventHandler,
 } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import useBoop from "@/hooks/use-boop";
 import Bluesky from "@/components/icons/Bluesky";
+import SocialMediaIconButton from "@/components/pages/SocialMediaIconButton";
 import { animated } from "react-spring";
 import { motion } from "framer-motion";
 import { ChevronDown, Github, Linkedin, Mail } from "lucide-react";
@@ -19,7 +19,14 @@ export default function Hero({
 }: {
   aboutRef: React.RefObject<HTMLElement>;
 }) {
-  const [style, trigger] = useBoop({ y: 10, timing: 200 });
+  const [chevronDownStyle, chevronDownTrigger] = useBoop({
+    y: 10,
+    timing: 200,
+  });
+  const [socialMediaIconsStyle, socialMediaIconsTrigger] = useBoop({
+    rotation: 10,
+    timing: 200,
+  });
   const [activeIndex, setActiveIndex] = useState(0);
   const roles = [
     "Full-Stack Web Developer",
@@ -70,56 +77,30 @@ export default function Hero({
           web solutions that make a difference.
         </p>
         <div className="flex space-x-6 justify-center md:justify-start">
-          <Link
-            href="https://github.com/jayvicsanantonio"
-            passHref
-            legacyBehavior
+          <SocialMediaIconButton
+            Icon={Github}
+            link="https://github.com/jayvicsanantonio"
           >
-            <a
-              href="https://github.com/jayvicsanantonio"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-blue-400 transition-colors"
-            >
-              <Github className="w-8 h-8" />
-            </a>
-          </Link>
-          <Link
-            href="https://www.linkedin.com/in/jayvicsanantonio/"
-            passHref
-            legacyBehavior
+            Github
+          </SocialMediaIconButton>
+          <SocialMediaIconButton
+            Icon={Linkedin}
+            link="https://www.linkedin.com/in/jayvicsanantonio/"
           >
-            <a
-              href="https://www.linkedin.com/in/jayvicsanantonio/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-blue-400 transition-colors"
-            >
-              <Linkedin className="w-8 h-8" />
-            </a>
-          </Link>
-          <Link
-            href="https://bsky.app/profile/jayvicsanantonio.dev"
-            passHref
-            legacyBehavior
+            LinkedIn
+          </SocialMediaIconButton>
+          <SocialMediaIconButton
+            Icon={Bluesky}
+            link="https://bsky.app/profile/jayvicsanantonio.dev"
           >
-            <a
-              href="https://bsky.app/profile/jayvicsanantonio.dev"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-blue-400 transition-colors"
-            >
-              <Bluesky className="w-8 h-8" />
-            </a>
-          </Link>
-          <Link href="mailto:hi@jayvicsanantonio.dev" passHref legacyBehavior>
-            <a
-              href="mailto:hi@jayvicsanantonio.dev"
-              className="hover:text-blue-400 transition-colors"
-            >
-              <Mail className="w-8 h-8" />
-            </a>
-          </Link>
+            Bluesky
+          </SocialMediaIconButton>
+          <SocialMediaIconButton
+            Icon={Mail}
+            link="mailto:hi@jayvicsanantonio.dev"
+          >
+            Email
+          </SocialMediaIconButton>
         </div>
       </div>
       <Image
@@ -139,10 +120,14 @@ export default function Hero({
         <animated.button
           className="cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 rounded-full p-2"
           onClick={scrollToNextSection}
-          onMouseEnter={trigger as MouseEventHandler<HTMLButtonElement>}
-          onTouchStart={trigger as TouchEventHandler<HTMLButtonElement>}
+          onMouseEnter={
+            chevronDownTrigger as MouseEventHandler<HTMLButtonElement>
+          }
+          onTouchStart={
+            chevronDownTrigger as TouchEventHandler<HTMLButtonElement>
+          }
           aria-label="Scroll to About section"
-          style={style}
+          style={chevronDownStyle}
         >
           <ChevronDown size={40} />
         </animated.button>
