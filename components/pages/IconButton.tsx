@@ -25,7 +25,7 @@ export default function IconButton({
     <Link href={link} passHref legacyBehavior>
       <a
         href={link}
-        className={`flex items-center py-1 rounded-lg text-lg cursor-pointer border-none hover:text-blue-00 transition-colors duration-200 font-oswald font-bold space-x-2 px-2 ${
+        className={`flex items-center py-1 rounded-lg text-lg cursor-pointer border-none transition-colors duration-200 font-oswald font-bold space-x-2 px-2 ${
           isActive
             ? "text-transparent bg-gradient-to-r from-blue-500 to-purple-500 text-white"
             : "text-white"
