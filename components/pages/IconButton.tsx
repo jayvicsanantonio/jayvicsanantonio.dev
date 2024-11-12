@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useCallback } from "react";
 import { MouseEventHandler, TouchEventHandler } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -18,41 +17,27 @@ export default function IconButton({
   callback?: () => void;
   children: React.ReactNode;
 }) {
-  const [isActive, setIsActive] = useState(false);
   const [style, trigger] = useBoop({ rotation: 20, timing: 200 });
   const pathname = usePathname();
-
-  const handleMouseEnter = useCallback(() => {
-    // @ts-ignore
-    trigger();
-    setIsActive(true);
-  }, []);
-
-  const handleMouseLeave = useCallback(() => {
-    // @ts-ignore
-    trigger();
-    setIsActive(false);
-  }, []);
+  const isActive = pathname === link;
 
   return (
     <Link href={link} passHref legacyBehavior>
       <a
         href={link}
-        className={`flex items-center p-1 rounded-lg text-lg cursor-pointer border-none hover:bg-clip-text hover:text-transparent hover:bg-gradient-to-r hover:from-blue-400 hover:to-purple-500 transition-colors duration-200 font-oswald font-bold ${
-          pathname === link
-            ? "bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500"
+        className={`flex items-center py-1 rounded-lg text-lg cursor-pointer border-none transition-colors duration-200 font-oswald font-bold space-x-2 px-2 ${
+          isActive
+            ? "text-transparent bg-gradient-to-r from-blue-500 to-purple-500 text-white"
             : "text-white"
         }`}
         onClick={() => callback()}
         tabIndex={0}
-        onMouseEnter={handleMouseEnter as MouseEventHandler<HTMLAnchorElement>}
-        onMouseLeave={handleMouseLeave as MouseEventHandler<HTMLAnchorElement>}
-        onTouchStart={handleMouseEnter as TouchEventHandler<HTMLAnchorElement>}
-        onTouchEnd={handleMouseLeave as TouchEventHandler<HTMLAnchorElement>}
+        onMouseEnter={trigger as MouseEventHandler<HTMLAnchorElement>}
+        onTouchStart={trigger as TouchEventHandler<HTMLAnchorElement>}
       >
         <animated.span
           style={style}
-          className="flex justify-center items-center rounded text-white"
+          className="flex justify-center items-center rounded "
         >
           <svg width="24" height="24" viewBox="0 0 24 24">
             <defs>
@@ -69,15 +54,11 @@ export default function IconButton({
             </defs>
             <Icon
               strokeWidth={2.5}
-              stroke={
-                isActive || pathname === link
-                  ? "url(#iconButtonGradient)"
-                  : "currentColor"
-              }
+              stroke={isActive ? "currentColor" : "url(#iconButtonGradient)"}
             />
           </svg>
         </animated.span>
-        <span className="px-4 py-0">{children}</span>
+        <span>{children}</span>
       </a>
     </Link>
   );
