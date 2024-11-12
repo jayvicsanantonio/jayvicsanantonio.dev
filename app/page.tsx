@@ -1,78 +1,43 @@
+"use client";
+
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { CardContent, CardFooter, Card } from "@/components/ui/card";
+import Hero from "@/components/pages/home/Hero";
 import ContactMeForm from "@/components/pages/home/ContactMeForm";
 import ProjectButton from "@/components/pages/ProjectButton";
-import { Calendar, Github } from "lucide-react";
+import { Calendar, Github, Linkedin } from "lucide-react";
 
 export default function Page() {
+  const aboutRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: aboutRef,
+    offset: ["start end", "end start"],
+  });
+
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.8]);
+
   return (
     <>
-      <section className="grid md:grid-cols-2 gap-12 items-center">
-        <div className="space-y-6">
-          <div className="font-oswald lg:space-y-2">
-            <h1 className="font-title text-4xl font-bold leading-snug lg:text-6xl ">
-              Hey, I'm Jayvic 👋
-            </h1>
-            <h2 className="text-gray-400 text-lg lg:text-3xl font-light uppercase">
-              Full-Stack Web Developer
-            </h2>
-          </div>
-          <p className="text-lg lg:text-xl text-gray-200 max-w-md">
-            I use the{" "}
-            <Link
-              href="https://www.starwars.com/databank/the-force"
-              target="_blank"
-              className="hover:text-violet-600"
-            >
-              Force
-            </Link>{" "}
-            (and some serious coding skills) to build websites that are
-            lightning fast, accessible, and can scale infinitely.
-          </p>
-          <div className="flex gap-6">
-            <Link
-              className="inline-flex items-center justify-center rounded-md border border-gray-700 px-6 py-3 text-sm font-medium hover:border-violet-600 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950 transition ease-in-out   hover:-translate-y-1 hover:scale-110"
-              href="/#projects"
-            >
-              View Projects
-            </Link>
-            <Link
-              className="inline-flex items-center justify-center rounded-md border border-gray-700 px-6 py-3 text-sm font-medium hover:border-violet-600 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950 transition ease-in-out   hover:-translate-y-1 hover:scale-110"
-              href="/#contact-me"
-            >
-              Contact Me
-            </Link>
-          </div>
-        </div>
-        <Image
-          alt="Profile"
-          className="mx-auto rounded-full border-4 border-gray-800 shadow-xl"
-          height={340}
-          loading="eager"
-          src="/images/home/profile-image.jpeg"
-          style={{
-            aspectRatio: "340/340",
-            objectFit: "cover",
-          }}
-          width={340}
-          priority={true}
-        />
-      </section>
-      <section className="mt-24 relative flex justify-center items-center">
-        <div className="blur absolute inset-0 rounded-lg translate-x-1 translate-y-1 bg-gradient-to-br from-pink-500 via-cyan-500 to-violet-500"></div>
-        <div className="relative top-1 left-1 lg:text-lg text-gray-200 space-y-4 bg-gray-950 rounded-xl p-6">
+      <Hero aboutRef={aboutRef} />
+      <motion.section
+        ref={aboutRef}
+        className="scroll-mt-52 grid lg:grid-cols-2 gap-4"
+        style={{ opacity, scale }}
+      >
+        <div className="lg:text-lg text-gray-200 space-y-4 bg-gray-950 rounded-xl p-6 border-t-purple-500 border-r-purple-500 border-b-blue-400 border-l-blue-400 border-2">
+          <h2 className="font-oswald text-2xl font-bold">About Me</h2>
           <p>
-            <span className="font-oswald font-bold">
-              I'm Jayvic San Antonio
-            </span>
-            , a Full-Stack Web Developer originally from the Philippines, now
-            thriving in the San Francisco Bay Area. With over 9 years of
-            experience, you could say{" "}
-            <span className="font-oswald font-bold">JavaScript</span> is my
-            coding soulmate - I love its versatility and how it keeps getting
-            better and better!
+            I'm Jayvic San Antonio, a Full-Stack Web Developer originally from
+            the Philippines, now thriving in the San Francisco Bay Area. With
+            over 9 years of experience, you could say JavaScript is my coding
+            soulmate - I love its versatility and how it keeps getting better
+            and better!
           </p>
           <p>
             From hackathons and co-founding a startup to working at a global
@@ -101,182 +66,219 @@ export default function Page() {
             </Link>
           </p>
         </div>
-      </section>
-      <section className="content-visibility-auto mt-24 space-y-12">
-        <div className="space-y-4">
-          <h2 className="font-oswald text-2xl font-bold">My Skills</h2>
-          <div className="grid grid-cols-3 md:grid-cols-6 gap-6">
-            <Badge
-              aria-label="JavaScript"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              JavaScript
-            </Badge>
-            <Badge
-              aria-label="TypeScript"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              TypeScript
-            </Badge>
-            <Badge
-              aria-label="React"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              React
-            </Badge>
-            <Badge
-              aria-label="Next.js"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              Next.js
-            </Badge>
-            <Badge
-              aria-label="Remix"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              Remix
-            </Badge>
-            <Badge
-              aria-label="Node.js"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              Node.js
-            </Badge>
-            <Badge
-              aria-label="Express.js"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              Express.js
-            </Badge>
-            <Badge
-              aria-label="Tailwind CSS"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              Tailwind CSS
-            </Badge>
-            <Badge
-              aria-label="React Native"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              React Native
-            </Badge>
-            <Badge
-              aria-label="Expo"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              Expo
-            </Badge>
-            <Badge
-              aria-label="Ember"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              Ember.js
-            </Badge>
-            <Badge
-              aria-label="HTML"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              HTML
-            </Badge>
-            <Badge
-              aria-label="CSS"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              CSS
-            </Badge>
-            <Badge
-              aria-label="SASS / SCSS"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              SASS / SCSS
-            </Badge>
-            <Badge
-              aria-label="Amazon Web Services (AWS)"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              AWS
-            </Badge>
-            <Badge
-              aria-label="MongoDB"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              MongoDB
-            </Badge>
-            <Badge
-              aria-label="Redis"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              Redis
-            </Badge>
-            <Badge
-              aria-label="MySQL"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              MySQL
-            </Badge>
-            <Badge
-              aria-label="PostgreSQL"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              PostgreSQL
-            </Badge>
-            <Badge
-              aria-label="Java"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              Java
-            </Badge>
-            <Badge
-              aria-label="Cypress"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              Cypress
-            </Badge>
-            <Badge
-              aria-label="Git"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              Git
-            </Badge>
-            <Badge
-              aria-label="Java"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              Linux
-            </Badge>
-            <Badge
-              aria-label="Figma"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              Figma
-            </Badge>
+        <div className="flex flex-col gap-4">
+          <div className="lg:text-lg text-gray-200 space-y-4 bg-gray-950 rounded-xl p-6 border-t-purple-500 border-r-purple-500 border-b-blue-400 border-l-blue-400 border-2 h-fit">
+            <h2 className="font-oswald text-2xl font-bold">Skills</h2>
+            <div className="grid md:grid-cols-3  gap-6">
+              <Badge
+                aria-label="JavaScript"
+                className="w-fit text-sm"
+                variant="secondary"
+              >
+                JavaScript
+              </Badge>
+              <Badge
+                aria-label="TypeScript"
+                className="w-fit text-sm"
+                variant="secondary"
+              >
+                TypeScript
+              </Badge>
+              <Badge
+                aria-label="React"
+                className="w-fit text-sm"
+                variant="secondary"
+              >
+                React
+              </Badge>
+              <Badge
+                aria-label="Next.js"
+                className="w-fit text-sm"
+                variant="secondary"
+              >
+                Next.js
+              </Badge>
+              <Badge
+                aria-label="Remix"
+                className="w-fit text-sm"
+                variant="secondary"
+              >
+                Remix
+              </Badge>
+              <Badge
+                aria-label="Node.js"
+                className="w-fit text-sm"
+                variant="secondary"
+              >
+                Node.js
+              </Badge>
+              <Badge
+                aria-label="Express.js"
+                className="w-fit text-sm"
+                variant="secondary"
+              >
+                Express.js
+              </Badge>
+              <Badge
+                aria-label="Tailwind CSS"
+                className="w-fit text-sm"
+                variant="secondary"
+              >
+                Tailwind CSS
+              </Badge>
+              <Badge
+                aria-label="React Native"
+                className="w-fit text-sm"
+                variant="secondary"
+              >
+                React Native
+              </Badge>
+              <Badge
+                aria-label="Expo"
+                className="w-fit text-sm"
+                variant="secondary"
+              >
+                Expo
+              </Badge>
+              <Badge
+                aria-label="Ember"
+                className="w-fit text-sm"
+                variant="secondary"
+              >
+                Ember.js
+              </Badge>
+              <Badge
+                aria-label="HTML"
+                className="w-fit text-sm"
+                variant="secondary"
+              >
+                HTML
+              </Badge>
+              <Badge
+                aria-label="CSS"
+                className="w-fit text-sm"
+                variant="secondary"
+              >
+                CSS
+              </Badge>
+              <Badge
+                aria-label="SASS / SCSS"
+                className="w-fit text-sm"
+                variant="secondary"
+              >
+                SASS / SCSS
+              </Badge>
+              <Badge
+                aria-label="Amazon Web Services (AWS)"
+                className="w-fit text-sm"
+                variant="secondary"
+              >
+                AWS
+              </Badge>
+              <Badge
+                aria-label="MongoDB"
+                className="w-fit text-sm"
+                variant="secondary"
+              >
+                MongoDB
+              </Badge>
+              <Badge
+                aria-label="Redis"
+                className="w-fit text-sm"
+                variant="secondary"
+              >
+                Redis
+              </Badge>
+              <Badge
+                aria-label="MySQL"
+                className="w-fit text-sm"
+                variant="secondary"
+              >
+                MySQL
+              </Badge>
+              <Badge
+                aria-label="PostgreSQL"
+                className="w-fit text-sm"
+                variant="secondary"
+              >
+                PostgreSQL
+              </Badge>
+              <Badge
+                aria-label="Java"
+                className="w-fit text-sm"
+                variant="secondary"
+              >
+                Java
+              </Badge>
+              <Badge
+                aria-label="Cypress"
+                className="w-fit text-sm"
+                variant="secondary"
+              >
+                Cypress
+              </Badge>
+              <Badge
+                aria-label="Git"
+                className="w-fit text-sm"
+                variant="secondary"
+              >
+                Git
+              </Badge>
+              <Badge
+                aria-label="Java"
+                className="w-fit text-sm"
+                variant="secondary"
+              >
+                Linux
+              </Badge>
+              <Badge
+                aria-label="Figma"
+                className="w-fit text-sm"
+                variant="secondary"
+              >
+                Figma
+              </Badge>
+            </div>
+          </div>
+          <div className="lg:text-lg text-gray-200 space-y-4 bg-gray-950 rounded-xl p-6 border-t-purple-500 border-r-purple-500 border-b-blue-400 border-l-blue-400 border-2 h-fit">
+            <h2 className="font-oswald text-2xl font-bold">Expertise</h2>
+            <ul className="space-y-2 text-gray-300">
+              <li className="flex items-center">
+                <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
+                Frontend Development
+              </li>
+              <li className="flex items-center">
+                <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
+                Web Performance Optimization
+              </li>
+              <li className="flex items-center">
+                <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
+                Agile development
+              </li>
+              <li className="flex items-center">
+                <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
+                Cross-functional collaboration
+              </li>
+              <li className="flex items-center">
+                <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
+                Problem-solving and debugging
+              </li>
+              <li className="flex items-center">
+                <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
+                Responsive Design
+              </li>
+              <li className="flex items-center">
+                <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
+                Adaptability and learning
+              </li>
+              <li className="flex items-center">
+                <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
+                Mentoring and knowledge sharing
+              </li>
+            </ul>
           </div>
         </div>
-      </section>
+      </motion.section>
       <section
         id="projects"
         className="content-visibility-auto mt-24 space-y-12"
