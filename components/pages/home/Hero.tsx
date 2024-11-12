@@ -48,7 +48,7 @@ export default function Hero({
   };
 
   return (
-    <section className="relative h-screen flex flex-col-reverse md:flex-row items-center space-x-10 px-4 pb-96 md:pb-80">
+    <section className="relative h-screen flex flex-col-reverse md:flex-row items-center space-x-10 px-4 pb-60">
       <div className="space-y-6">
         <div className="font-oswald lg:space-y-2 flex flex-col items-center md:items-start">
           <h1 className="font-title text-4xl font-bold leading-snug lg:text-6xl ">
@@ -135,7 +135,7 @@ export default function Hero({
         width={340}
         priority={true}
       />
-      <div className="absolute bottom-52 left-1/2 md:-translate-x-1/2 -translate-x-16">
+      <div className="absolute bottom-40 md:bottom-52 left-1/2 md:-translate-x-1/2 -translate-x-16">
         <animated.button
           className="cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 rounded-full p-2"
           onClick={scrollToNextSection}
