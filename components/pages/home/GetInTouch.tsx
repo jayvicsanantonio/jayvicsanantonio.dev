@@ -12,13 +12,13 @@ export default function GetInTouch({
   });
 
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.8]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1, 0.95]);
 
   return (
     <motion.section
       ref={getInTouchRef}
       id="get-in-touch"
-      className="relative scroll-mt-52 h-screen mt-24 space-y-12"
+      className="relative scroll-mt-52 min-h-screen space-y-12"
       style={{ opacity, scale }}
     >
       <div className="space-y-4">

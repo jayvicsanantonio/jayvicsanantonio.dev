@@ -20,19 +20,24 @@ export default function BlogPosts({
   });
 
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.8]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1, 0.95]);
 
   return (
     <motion.section
       ref={blogPostsRef}
       id="blog"
-      className="relative scroll-mt-52 h-screen"
+      className="relative scroll-mt-52 min-h-screen"
       style={{ opacity, scale }}
     >
-      <div className="mt-72 space-y-12 bg-gradient-to-r from-blue-500/20 to-purple-500/20 p-6 rounded-xl">
+      <div className="space-y-12 bg-gradient-to-r from-blue-500/20 to-purple-500/20 p-6 rounded-xl">
         <div className="flex gap-4">
           <div className="flex-1 space-y-4">
-            <h2 className="font-oswald text-2xl font-bold">Blog Posts</h2>
+            <h2
+              className="font-oswald text-2xl font-bold"
+              id="blog-posts-heading"
+            >
+              Blog Posts
+            </h2>
             <p className="text-gray-400">
               Check out some of my insightful articles, tips, and
               behind-the-scenes experiences.
@@ -41,6 +46,7 @@ export default function BlogPosts({
           <div className="self-end">
             <Link
               href="/blog"
+              aria-label="View all blog posts"
               className="inline-flex items-center justify-center rounded-lg border border-gray-700 px-6 py-3 text-sm font-medium hover:border-t-purple-500 hover:border-r-purple-500 hover:border-b-blue-400 hover:border-l-blue-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950"
             >
               View All

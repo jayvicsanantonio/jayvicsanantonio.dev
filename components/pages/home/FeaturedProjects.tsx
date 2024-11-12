@@ -16,13 +16,13 @@ export default function FeaturedProjects({
   });
 
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.8]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1, 0.95]);
 
   return (
     <motion.section
       ref={featuredProjectsRef}
       id="projects"
-      className="relative mt-52 h-screen"
+      className="relative scroll-mt-52 min-h-screen"
       style={{ opacity, scale }}
     >
       <div className="space-y-12 bg-gradient-to-r from-blue-500/20 to-purple-500/20 p-6 rounded-xl">
@@ -39,6 +39,7 @@ export default function FeaturedProjects({
           <div className="self-end">
             <Link
               href="/projects"
+              aria-label="View all projects"
               className="inline-flex items-center justify-center rounded-lg border border-gray-700 px-6 py-3 text-sm font-medium hover:border-t-purple-500 hover:border-r-purple-500 hover:border-b-blue-400 hover:border-l-blue-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950"
             >
               View All
@@ -53,7 +54,7 @@ export default function FeaturedProjects({
             <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all  dark:border-gray-600 dark:bg-gray-800">
               <CardContent className="flex-1 -p-6 max-h-60 rounded-t-lg overflow-hidden">
                 <Image
-                  alt="Yahoo DSP"
+                  alt="Yahoo DSP - Programmatic advertising platform interface showing campaign dashboard"
                   className="w-full h-full object-cover"
                   height={225}
                   src="/images/home/yahoo-dsp.png"

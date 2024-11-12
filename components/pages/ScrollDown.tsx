@@ -5,10 +5,10 @@ import useBoop from "@/hooks/use-boop";
 
 export default function ScrollDown({
   sectionRef,
-  bottom = "52",
+  bottom = 52,
 }: {
   sectionRef: React.RefObject<HTMLElement>;
-  bottom?: string;
+  bottom?: number;
 }) {
   const [style, trigger] = useBoop({
     y: 10,
@@ -25,7 +25,10 @@ export default function ScrollDown({
   };
 
   return (
-    <div className={`absolute bottom-${bottom} left-1/2 -translate-x-1/2 `}>
+    <div
+      className="absolute left-1/2 -translate-x-1/2 bottom-40"
+      style={{ bottom: `${bottom / 4}rem` }}
+    >
       <animated.button
         className="cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 rounded-full p-2"
         onClick={scrollToNextSection}

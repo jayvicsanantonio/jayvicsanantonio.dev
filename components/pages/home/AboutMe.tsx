@@ -13,13 +13,13 @@ export default function AboutMe({
   });
 
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.8]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1, 0.95]);
 
   return (
     <motion.section
       ref={aboutRef}
       id="about-me"
-      className="relative scroll-mt-52 h-screen grid lg:grid-cols-2 gap-4"
+      className="relative scroll-mt-52 min-h-screen grid lg:grid-cols-2 gap-4"
       style={{ opacity, scale }}
     >
       <div className="h-fit lg:text-lg text-gray-200 space-y-4 bg-gray-950 rounded-xl p-6 border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80 border-2 text-justify">
@@ -49,10 +49,12 @@ export default function AboutMe({
           with a team that shares those values would be epic!
         </p>
         <p className="hyphenate">
-          <span className="font-oswald font-bold">
-            Ready to build something awesome together?
-          </span>{" "}
-          <Link href="#contact-me" className="hover:text-violet-600">
+          Excited to bring your vision to life? Let's collaborate and build
+          something incredible together!{" "}
+          <Link
+            href="#get-in-touch"
+            className="hover:text-blue-400 underline decoration-wavy decoration-purple-500 underline-offset-4"
+          >
             Let's chat!
           </Link>
         </p>
@@ -216,7 +218,7 @@ export default function AboutMe({
               Git
             </Badge>
             <Badge
-              aria-label="Java"
+              aria-label="Linux"
               className="w-fit text-sm"
               variant="secondary"
             >
