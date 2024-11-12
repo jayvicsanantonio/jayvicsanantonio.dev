@@ -281,7 +281,7 @@ export default function Page() {
       </motion.section>
       <section
         id="projects"
-        className="content-visibility-auto mt-24 space-y-12"
+        className="content-visibility-auto mt-24 space-y-12 bg-gradient-to-r from-blue-500/20 to-purple-500/20 p-6 rounded-xl"
       >
         <div className="flex gap-4">
           <div className="flex-1 space-y-4">
@@ -296,97 +296,110 @@ export default function Page() {
           <div className="self-end">
             <Link
               href="/projects"
-              className="inline-flex items-center justify-center rounded-md border border-gray-700 px-6 py-3 text-sm font-medium hover:border-violet-600 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950 transition ease-in-out   hover:-translate-y-1 hover:scale-110"
+              className="inline-flex items-center justify-center rounded-md border border-gray-700 px-6 py-3 text-sm font-medium hover:border-t-purple-500 hover:border-r-purple-500 hover:border-b-blue-400 hover:border-l-blue-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950 transition ease-in-out   hover:-translate-y-1 hover:scale-110"
             >
               View All
             </Link>
           </div>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-violet-600 hover:shadow-md dark:border-gray-600 dark:bg-gray-800">
-            <CardContent className="flex-1 -p-6 max-h-60">
-              <Image
-                alt="Yahoo DSP"
-                className="w-full h-full object-cover"
-                height={225}
-                src="/images/home/yahoo-dsp.png"
-                style={{
-                  aspectRatio: "400/225",
-                  objectFit: "cover",
-                }}
-                width={400}
-              />
-            </CardContent>
-            <CardFooter className="bg-gray-950 text-gray-1000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
-              <div className="flex flex-1 flex-start justify-between gap-2">
-                <div className="space-y-2">
-                  <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
-                    Yahoo DSP
-                  </h3>
-                  <p className="text-gray-200 ">
-                    A cutting-edge programmatic advertising platform for
-                    businesses. Built with a powerful tech stack including{" "}
-                    <em className="font-bold">Ember.js</em>,{" "}
-                    <em className="font-bold">React.js</em>, and{" "}
-                    <em className="font-bold">Node.js</em>, the platform
-                    empowers advertisers with features like real-time bidding,
-                    audience targeting, and comprehensive campaign performance
-                    measurement.
-                  </p>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3 }}
+          >
+            <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all  dark:border-gray-600 dark:bg-gray-800">
+              <CardContent className="flex-1 -p-6 max-h-60">
+                <Image
+                  alt="Yahoo DSP"
+                  className="w-full h-full object-cover"
+                  height={225}
+                  src="/images/home/yahoo-dsp.png"
+                  style={{
+                    aspectRatio: "400/225",
+                    objectFit: "cover",
+                  }}
+                  width={400}
+                />
+              </CardContent>
+              <CardFooter className="bg-gray-950 text-gray-1000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+                <div className="flex flex-1 flex-start justify-between gap-2">
+                  <div className="space-y-2">
+                    <h3 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
+                      Yahoo DSP
+                    </h3>
+                    <p className="text-gray-200 ">
+                      A cutting-edge programmatic advertising platform for
+                      businesses. Built with a powerful tech stack including{" "}
+                      <em className="font-bold">Ember.js</em>,{" "}
+                      <em className="font-bold">React.js</em>, and{" "}
+                      <em className="font-bold">Node.js</em>, the platform
+                      empowers advertisers with features like real-time bidding,
+                      audience targeting, and comprehensive campaign performance
+                      measurement.
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex gap-4 mt-4">
-                <ProjectButton link={null}>
-                  <Github size={20} />
-                  Github
-                </ProjectButton>
-                <ProjectButton link="https://www.advertising.yahooinc.com/our-dsp">
-                  View Project
-                </ProjectButton>
-              </div>
-            </CardFooter>
-          </Card>
-          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all hover:border-violet-600 hover:shadow-md">
-            <CardContent className="flex-1 -p-6 max-h-60">
-              <Image
-                alt="Barbenheimer VS Code Theme"
-                className="w-full h-full object-cover"
-                height={225}
-                src="/images/home/barbenheimer.png"
-                style={{
-                  aspectRatio: "400/225",
-                  objectFit: "cover",
-                }}
-                width={400}
-              />
-            </CardContent>
-            <CardFooter className="bg-gray-950 text-gray-1000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
-              <div className="flex flex-1 flex-start justify-between gap-2">
-                <div className="space-y-2">
-                  <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
-                    Barbenheimer VS Code Theme
-                  </h3>
-                  <p className="text-gray-200">
-                    A VS Code theme inspired by the Internet phenomenon of the
-                    same name. It combines the pink and playful aesthetics of
-                    Barbie with the dark and dramatic tones of Oppenheimer.
-                  </p>
+                <div className="flex gap-4 mt-4">
+                  <ProjectButton link={null}>
+                    <Github size={20} />
+                    Github
+                  </ProjectButton>
+                  <ProjectButton link="https://www.advertising.yahooinc.com/our-dsp">
+                    View Project
+                  </ProjectButton>
                 </div>
-              </div>
-              <div className="flex gap-4 mt-4">
-                <ProjectButton link="https://github.com/jpsanantonio/barbenheimer-vscode-theme">
-                  <Github size={20} />
-                  Github
-                </ProjectButton>
-                <ProjectButton link="https://marketplace.visualstudio.com/items?itemName=jayvicsanantonio.barbenheimer">
-                  View Project
-                </ProjectButton>
-              </div>
-            </CardFooter>
-          </Card>
+              </CardFooter>
+            </Card>
+          </motion.div>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3 }}
+          >
+            <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all ">
+              <CardContent className="flex-1 -p-6 max-h-60">
+                <Image
+                  alt="Barbenheimer VS Code Theme"
+                  className="w-full h-full object-cover"
+                  height={225}
+                  src="/images/home/barbenheimer.png"
+                  style={{
+                    aspectRatio: "400/225",
+                    objectFit: "cover",
+                  }}
+                  width={400}
+                />
+              </CardContent>
+              <CardFooter className="bg-gray-950 text-gray-1000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+                <div className="flex flex-1 flex-start justify-between gap-2">
+                  <div className="space-y-2">
+                    <h3 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
+                      Barbenheimer VS Code Theme
+                    </h3>
+                    <p className="text-gray-200">
+                      A VS Code theme inspired by the Internet phenomenon of the
+                      same name. It combines the pink and playful aesthetics of
+                      Barbie with the dark and dramatic tones of Oppenheimer.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex gap-4 mt-4">
+                  <ProjectButton link="https://github.com/jpsanantonio/barbenheimer-vscode-theme">
+                    <Github size={20} />
+                    Github
+                  </ProjectButton>
+                  <ProjectButton link="https://marketplace.visualstudio.com/items?itemName=jayvicsanantonio.barbenheimer">
+                    View Project
+                  </ProjectButton>
+                </div>
+              </CardFooter>
+            </Card>
+          </motion.div>
         </div>
       </section>
-      <section id="blog" className="content-visibility-auto mt-24 space-y-12">
+      <section
+        id="blog"
+        className="content-visibility-auto mt-24 space-y-12 bg-gradient-to-r from-blue-500/20 to-purple-500/20 p-6 rounded-xl"
+      >
         <div className="flex gap-4">
           <div className="flex-1 space-y-4">
             <h2 className="font-oswald text-2xl font-bold">Blog Posts</h2>
@@ -398,95 +411,106 @@ export default function Page() {
           <div className="self-end">
             <Link
               href="/blog"
-              className="inline-flex items-center justify-center rounded-md border border-gray-700 px-6 py-3 text-sm font-medium hover:border-violet-600 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950 transition ease-in-out   hover:-translate-y-1 hover:scale-110"
+              className="inline-flex items-center justify-center rounded-md border border-gray-700 px-6 py-3 text-sm font-medium hover:border-t-purple-500 hover:border-r-purple-500 hover:border-b-blue-400 hover:border-l-blue-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950 transition ease-in-out   hover:-translate-y-1 hover:scale-110"
             >
               View All
             </Link>
           </div>
         </div>
-        <div className="flex flex-col gap-8 bg-gray-950 text-gray-200">
+        <div className="flex flex-col gap-8">
           <div className="space-y-8">
-            <article className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg border border-gray-800 p-6 shadow-sm transition-all hover:border-violet-600 hover:shadow-md">
-              <Image
-                alt="Blog Post Image"
-                className="rounded-lg object-cover border border-gray-800 w-full"
-                height={160}
-                src="/images/blog/from-ember-to-next.png"
-                style={{
-                  aspectRatio: "200/160",
-                  objectFit: "cover",
-                }}
-                width={200}
-              />
-              <div className="space-y-2">
-                <Link
-                  className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight hover:underline hover:text-violet-600"
-                  href="/blog/from-ember-to-next"
-                >
-                  From Ember.js to Next.js: A Tale of Two Frameworks
-                </Link>
-                <div className="text-gray-400 flex items-center space-x-2">
-                  <Calendar size={20} />
-                  <span>May 7, 2024</span>
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+            >
+              <article className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg bg-gray-950 border border-gray-800 p-6 shadow-sm transition-all">
+                <Image
+                  alt="Blog Post Image"
+                  className="rounded-lg object-cover border border-gray-800 w-full"
+                  height={160}
+                  src="/images/blog/from-ember-to-next.png"
+                  style={{
+                    aspectRatio: "200/160",
+                    objectFit: "cover",
+                  }}
+                  width={200}
+                />
+                <div className="space-y-2">
+                  <Link
+                    className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500"
+                    href="/blog/from-ember-to-next"
+                  >
+                    From Ember.js to Next.js: A Tale of Two Frameworks
+                  </Link>
+                  <div className="text-gray-400 flex items-center space-x-2">
+                    <Calendar size={20} />
+                    <span>May 7, 2024</span>
+                  </div>
+                  <p className="text-gray-300 line-clamp-3">
+                    Explore the differences and surprising similarities between
+                    Ember.js and Next.js, two powerful contenders in the web
+                    development world.
+                  </p>
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    <Badge className="text-sm" variant="secondary">
+                      EmberJS
+                    </Badge>
+                    <Badge className="text-sm" variant="secondary">
+                      NextJS
+                    </Badge>
+                    <Badge className="text-sm" variant="secondary">
+                      Lessons Learned
+                    </Badge>
+                  </div>
                 </div>
-                <p className="text-gray-300 line-clamp-3">
-                  Explore the differences and surprising similarities between
-                  Ember.js and Next.js, two powerful contenders in the web
-                  development world.
-                </p>
-                <div className="mt-6 flex flex-wrap gap-2">
-                  <Badge className="text-sm" variant="secondary">
-                    EmberJS
-                  </Badge>
-                  <Badge className="text-sm" variant="secondary">
-                    NextJS
-                  </Badge>
-                  <Badge className="text-sm" variant="secondary">
-                    Lessons Learned
-                  </Badge>
+              </article>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+            >
+              <article className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg bg-gray-950 border border-gray-800 p-6 shadow-sm transition-all">
+                <Image
+                  alt="Blog Post Image"
+                  className="rounded-lg object-cover border border-gray-800 w-full"
+                  height={160}
+                  src="/images/blog/the-typescript-tightrope.png"
+                  style={{
+                    aspectRatio: "200/160",
+                    objectFit: "cover",
+                  }}
+                  width={200}
+                />
+                <div className="space-y-2">
+                  <Link
+                    className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight hover:underline bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500"
+                    href="/blog/the-typescript-tightrope"
+                  >
+                    The Typescript Tightrope: A Love-Hate Journey
+                  </Link>
+                  <div className="text-gray-400 flex items-center space-x-2">
+                    <Calendar size={20} />
+                    <span>May 4, 2024</span>
+                  </div>
+                  <p className="text-gray-300 line-clamp-3">
+                    My journey from TypeScript skeptic to enthusiast - how
+                    static typing transformed my code and why I believe it's the
+                    future.
+                  </p>
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    <Badge className="text-sm" variant="secondary">
+                      Web Development
+                    </Badge>
+                    <Badge className="text-sm" variant="secondary">
+                      TypeScript
+                    </Badge>
+                    <Badge className="text-sm" variant="secondary">
+                      Lessons Learned
+                    </Badge>
+                  </div>
                 </div>
-              </div>
-            </article>
-            <article className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg border border-gray-800 p-6 shadow-sm transition-all hover:border-violet-600 hover:shadow-md">
-              <Image
-                alt="Blog Post Image"
-                className="rounded-lg object-cover border border-gray-800 w-full"
-                height={160}
-                src="/images/blog/the-typescript-tightrope.png"
-                style={{
-                  aspectRatio: "200/160",
-                  objectFit: "cover",
-                }}
-                width={200}
-              />
-              <div className="space-y-2">
-                <Link
-                  className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight hover:underline hover:text-violet-600"
-                  href="/blog/the-typescript-tightrope"
-                >
-                  The Typescript Tightrope: A Love-Hate Journey
-                </Link>
-                <div className="text-gray-400 flex items-center space-x-2">
-                  <Calendar size={20} />
-                  <span>May 4, 2024</span>
-                </div>
-                <p className="text-gray-300 line-clamp-3">
-                  My journey from TypeScript skeptic to enthusiast - how static
-                  typing transformed my code and why I believe it's the future.
-                </p>
-                <div className="mt-6 flex flex-wrap gap-2">
-                  <Badge className="text-sm" variant="secondary">
-                    Web Development
-                  </Badge>
-                  <Badge className="text-sm" variant="secondary">
-                    TypeScript
-                  </Badge>
-                  <Badge className="text-sm" variant="secondary">
-                    Lessons Learned
-                  </Badge>
-                </div>
-              </div>
-            </article>
+              </article>
+            </motion.div>
           </div>
         </div>
       </section>
