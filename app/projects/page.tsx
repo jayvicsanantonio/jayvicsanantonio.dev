@@ -19,7 +19,7 @@ export default function Page() {
             represents a unique challenge and learning experience.
           </p>
         </div>
-        <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm">
+        <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none">
           <CardContent className="flex-1 -p-6 max-h-60">
             <Image
               alt="Yahoo DSP"
@@ -33,7 +33,7 @@ export default function Page() {
               width={400}
             />
           </CardContent>
-          <CardFooter className="bg-gray-950 bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+          <CardFooter className="bg-gray-950 bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
             <div className="flex flex-1 flex-start justify-between gap-2">
               <div className="space-y-2">
                 <h3 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
@@ -62,12 +62,12 @@ export default function Page() {
           </CardFooter>
         </Card>
       </div>
-      <div className="mt-16 space-y-8 bg-gradient-to-r from-blue-500/20 to-purple-500/20 p-6 rounded-xl">
+      <div className="mt-16 space-y-8">
         <h2 className="font-oswald text-2xl font-bold tracking-tighter text-gray-200 md:text-3xl/tight lg:text-4xl">
           All Projects
         </h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden">
+          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none">
             <CardContent className="flex-1 -p-6 max-h-60">
               <Image
                 alt="Barbenheimer VS Code Theme"
@@ -81,7 +81,7 @@ export default function Page() {
                 width={400}
               />
             </CardContent>
-            <CardFooter className="bg-gray-950 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+            <CardFooter className="bg-gray-950 bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
               <div className="flex flex-1 flex-start justify-between gap-2">
                 <div className="space-y-2">
                   <h3 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
@@ -105,7 +105,7 @@ export default function Page() {
               </div>
             </CardFooter>
           </Card>
-          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden">
+          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none">
             <CardContent className="flex-1 -p-6 max-h-60">
               <Image
                 alt="Web Development Hub"
@@ -119,7 +119,7 @@ export default function Page() {
                 width={400}
               />
             </CardContent>
-            <CardFooter className="bg-gray-950 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+            <CardFooter className="bg-gray-950 bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
               <div className="flex flex-1 flex-start justify-between gap-2">
                 <div className="space-y-2">
                   <h3 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
@@ -144,7 +144,7 @@ export default function Page() {
               </div>
             </CardFooter>
           </Card>
-          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden">
+          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none">
             <CardContent className="flex-1 -p-6 max-h-60">
               <Image
                 alt="Malayang Mananampalataya Church"
@@ -158,7 +158,7 @@ export default function Page() {
                 width={400}
               />
             </CardContent>
-            <CardFooter className="bg-gray-950 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+            <CardFooter className="bg-gray-950 bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
               <div className="flex flex-1 flex-start justify-between gap-2">
                 <div className="space-y-2">
                   <h3 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
