@@ -33,7 +33,7 @@ export default function Page() {
               width={400}
             />
           </CardContent>
-          <CardFooter className="bg-gray-950 bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+          <CardFooter className="bg-gray-950 bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
             <div className="flex flex-1 flex-start justify-between gap-2">
               <div className="space-y-2">
                 <h3 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
@@ -81,7 +81,7 @@ export default function Page() {
                 width={400}
               />
             </CardContent>
-            <CardFooter className="bg-gray-950 bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+            <CardFooter className="bg-gray-950 bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
               <div className="flex flex-1 flex-start justify-between gap-2">
                 <div className="space-y-2">
                   <h3 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
@@ -119,7 +119,7 @@ export default function Page() {
                 width={400}
               />
             </CardContent>
-            <CardFooter className="bg-gray-950 bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+            <CardFooter className="bg-gray-950 bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
               <div className="flex flex-1 flex-start justify-between gap-2">
                 <div className="space-y-2">
                   <h3 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
@@ -158,7 +158,7 @@ export default function Page() {
                 width={400}
               />
             </CardContent>
-            <CardFooter className="bg-gray-950 bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+            <CardFooter className="bg-gray-950 bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
               <div className="flex flex-1 flex-start justify-between gap-2">
                 <div className="space-y-2">
                   <h3 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
