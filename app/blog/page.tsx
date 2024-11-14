@@ -25,17 +25,17 @@ export default function Page() {
             experiences.
           </p>
         </div>
-        <div className="flex flex-col gap-8 bg-gradient-to-r from-blue-500/20 to-purple-500/20 p-6 rounded-xl">
+        <div className="flex flex-col gap-8">
           <div className="space-y-8">
             <button
-              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg bg-gray-950 border border-gray-800 p-6 shadow-sm hover:border-t-purple-500/80 hover:border-r-purple-500/80 hover:border-b-blue-400/80 hover:border-l-blue-400/80 hover:shadow-md transition-all"
+              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg bg-gray-950 border border-gray-800 p-6 shadow-sm    hover:shadow-md transition bg-gradient-to-r from-blue-500/20 to-purple-500/20 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
               onClick={() => {
                 router.push("/blog/from-ember-to-next");
               }}
             >
               <Image
                 alt="Blog Post Image"
-                className="rounded-lg object-cover border border-gray-800 w-full"
+                className="rounded-lg object-cover border border-gray-800 w-full bg-gray-950"
                 height={160}
                 src="/images/blog/from-ember-to-next.png"
                 style={{
@@ -71,7 +71,7 @@ export default function Page() {
               </div>
             </button>
             <button
-              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg bg-gray-950 border border-gray-800 p-6 shadow-sm hover:border-t-purple-500/80 hover:border-r-purple-500/80 hover:border-b-blue-400/80 hover:border-l-blue-400/80 hover:shadow-md transition-all"
+              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg bg-gray-950 border border-gray-800 p-6 shadow-sm    hover:shadow-md transition bg-gradient-to-r from-blue-500/20 to-purple-500/20 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
               onClick={() => {
                 router.push("/blog/the-typescript-tightrope");
               }}
@@ -113,7 +113,7 @@ export default function Page() {
               </div>
             </button>
             <button
-              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg bg-gray-950 border border-gray-800 p-6 shadow-sm hover:border-t-purple-500/80 hover:border-r-purple-500/80 hover:border-b-blue-400/80 hover:border-l-blue-400/80 hover:shadow-md transition-all"
+              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg bg-gray-950 border border-gray-800 p-6 shadow-sm    hover:shadow-md transition bg-gradient-to-r from-blue-500/20 to-purple-500/20 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
               onClick={() => {
                 router.push("/blog/building-my-developer-playground");
               }}

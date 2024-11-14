@@ -18,7 +18,7 @@ export default function GetInTouch({
     <motion.section
       ref={getInTouchRef}
       id="get-in-touch"
-      className="relative scroll-mt-52 min-h-screen space-y-12"
+      className="relative scroll-mt-52 space-y-12"
       style={{ opacity, scale }}
     >
       <div className="space-y-4">
