@@ -60,7 +60,7 @@ export default function BlogPosts({
               transition={{ duration: 0.3 }}
             >
               <button
-                className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg bg-gray-950 border border-gray-800 p-6 shadow-sm transition-all"
+                className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg bg-gray-950 border border-transparent shadow-2xl p-6 transition-all"
                 onClick={() => {
                   router.push("/blog/from-ember-to-next");
                 }}
@@ -108,7 +108,7 @@ export default function BlogPosts({
               transition={{ duration: 0.3 }}
             >
               <button
-                className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg bg-gray-950 border border-gray-800 p-6 shadow-sm transition-all"
+                className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg bg-gray-950 border border-transparent shadow-2xl p-6 transition-all"
                 onClick={() => {
                   router.push("/blog/the-typescript-tightrope");
                 }}

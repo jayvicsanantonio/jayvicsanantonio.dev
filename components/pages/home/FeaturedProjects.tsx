@@ -51,7 +51,7 @@ export default function FeaturedProjects({
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.3 }}
           >
-            <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all  dark:border-gray-600 dark:bg-gray-800">
+            <Card className="flex flex-col h-full border-transparent shadow-2xl bg-gray-950 rounded-lg overflow-hidden transition-all  dark:border-gray-600 dark:bg-gray-800">
               <CardContent className="flex-1 -p-6 max-h-60 rounded-t-lg overflow-hidden">
                 <Image
                   alt="Yahoo DSP - Programmatic advertising platform interface showing campaign dashboard"
@@ -99,7 +99,7 @@ export default function FeaturedProjects({
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.3 }}
           >
-            <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm transition-all  dark:border-gray-600 dark:bg-gray-800">
+            <Card className="flex flex-col h-full border-transparent shadow-2xl bg-gray-950 rounded-lg overflow-hidden transition-all  dark:border-gray-600 dark:bg-gray-800">
               <CardContent className="flex-1 -p-6 max-h-60 rounded-t-lg overflow-hidden">
                 <Image
                   alt="Barbenheimer VS Code Theme"
