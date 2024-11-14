@@ -1,5 +1,3 @@
-"use client";
-
 import { MouseEventHandler, TouchEventHandler } from "react";
 import { animated } from "react-spring";
 import { ChevronDown } from "lucide-react";
