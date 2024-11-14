@@ -19,7 +19,7 @@ export default function Page() {
           </p>
         </div>
         <div className="flex flex-col gap-8 py-12  bg-gray-950 text-gray-200">
-          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm">
+          <Card className="flex flex-col h-full border-transparent bg-gray-950 rounded-lg overflow-hidden shadow-2xl hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none">
             <CardContent className="flex-1 -p-6">
               <iframe
                 src="https://codesandbox.io/embed/23lnhc?view=preview&module=%2Fstyles.css&hidenavigation=1"
@@ -63,7 +63,7 @@ export default function Page() {
               </div>
             </CardFooter>
           </Card>
-          <Card className="flex flex-col h-full border-gray-800 bg-gray-950 rounded-lg overflow-hidden shadow-sm">
+          <Card className="flex flex-col h-full border-transparent bg-gray-950 rounded-lg overflow-hidden shadow-2xl hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none">
             <CardContent className="flex-1 -p-6">
               <iframe
                 src="https://codesandbox.io/embed/qlnxgn?view=preview&module=%2Fstyles.css&hidenavigation=1"
