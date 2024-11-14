@@ -1,7 +1,10 @@
+"use client";
+
 import { MouseEventHandler, TouchEventHandler } from "react";
 import { animated } from "react-spring";
 import { ChevronDown } from "lucide-react";
 import useBoop from "@/hooks/use-boop";
+import useScreenSize from "@/hooks/use-screen-size";
 
 export default function ScrollDown({
   sectionRef,
@@ -10,6 +13,7 @@ export default function ScrollDown({
   sectionRef: React.RefObject<HTMLElement>;
   bottom?: number;
 }) {
+  const { width } = useScreenSize();
   const [style, trigger] = useBoop({
     y: 10,
     timing: 200,
@@ -23,6 +27,10 @@ export default function ScrollDown({
       });
     }
   };
+
+  if (width < 768) {
+    return null;
+  }
 
   return (
     <div

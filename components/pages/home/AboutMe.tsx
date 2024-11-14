@@ -19,7 +19,7 @@ export default function AboutMe({
     <motion.section
       ref={aboutRef}
       id="about-me"
-      className="relative scroll-mt-52 min-h-screen grid lg:grid-cols-2 gap-4"
+      className="relative scroll-mt-32 min-h-screen grid lg:grid-cols-2 gap-4"
       style={{ opacity, scale }}
     >
       <div className="h-fit lg:text-lg text-gray-200 space-y-4 bg-gray-950 rounded-xl p-6 border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80 border-2 text-justify">
