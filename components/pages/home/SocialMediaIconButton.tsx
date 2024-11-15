@@ -8,12 +8,12 @@ import { animated } from "react-spring";
 export default function SocialMediaIconButton({
   Icon,
   link,
-  size = 6,
+  className,
   children,
 }: {
   Icon: React.FC<React.SVGProps<SVGSVGElement>>;
   link: string;
-  size?: number;
+  className?: string;
   children: React.ReactNode;
 }) {
   const [style, trigger] = useBoop({ rotation: 10, timing: 200 });
@@ -30,7 +30,7 @@ export default function SocialMediaIconButton({
         onTouchStart={trigger as TouchEventHandler<HTMLAnchorElement>}
       >
         <Icon
-          className={`h-${size} w-${size}  md:w-${size + 2} md:h-${size + 2}`}
+          className={`${className ? className : "w-6 h-6 md:w-8 md:h-8"}`}
         />
       </animated.a>
     </Link>

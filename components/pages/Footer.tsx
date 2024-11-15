@@ -13,28 +13,28 @@ export default function Footer() {
           <SocialMediaIconButton
             Icon={Github}
             link="https://github.com/jayvicsanantonio"
-            size={4}
+            className="w-5 h-5"
           >
             Github
           </SocialMediaIconButton>
           <SocialMediaIconButton
             Icon={Linkedin}
             link="https://www.linkedin.com/in/jayvicsanantonio/"
-            size={4}
+            className="w-5 h-5"
           >
             LinkedIn
           </SocialMediaIconButton>
           <SocialMediaIconButton
             Icon={Bluesky}
             link="https://bsky.app/profile/jayvicsanantonio.dev"
-            size={4}
+            className="w-5 h-5"
           >
             Bluesky
           </SocialMediaIconButton>
           <SocialMediaIconButton
             Icon={Mail}
             link="mailto:hi@jayvicsanantonio.dev"
-            size={4}
+            className="w-5 h-5"
           >
             Email
           </SocialMediaIconButton>
