@@ -23,7 +23,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="flex items-center justify-between px-4 py-6 bg-gray-950 border-b border-gray-800 sticky top-0 z-10 -mx-4 lg:-mx-auto">
+    <header className="flex items-center justify-between px-4 py-6 bg-white dark:bg-gray-950 border-b dark:border-gray-800 sticky top-0 z-10 -mx-4 lg:-mx-auto">
       <Link href="/" className="flex items-center gap-2" aria-label="Logo">
         <animated.span
           onMouseEnter={trigger as MouseEventHandler<HTMLAnchorElement>}

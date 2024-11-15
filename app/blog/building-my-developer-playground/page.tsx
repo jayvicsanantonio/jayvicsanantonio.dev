@@ -5,7 +5,7 @@ import { Calendar } from "lucide-react";
 
 export default function Page() {
   return (
-    <article className="prose prose-invert mx-auto space-y-8">
+    <article className="prose prose-invert mx-auto space-y-8 text-gray-950 dark:text-gray-200">
       <BlogBreadcrumb title="Building My Developer Playground" />
       <div className="space-y-2 not-prose">
         <h1 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-bold tracking-tight">
@@ -157,22 +157,40 @@ export default function Page() {
       </p>
       <p>Happy coding!</p>
       <div className="mt-6 flex flex-wrap gap-2">
-        <Badge className="text-sm" variant="secondary">
+        <Badge
+          className="text-sm bg-gray-200 dark:bg-gray-800"
+          variant="secondary"
+        >
           Web Development
         </Badge>
-        <Badge className="text-sm" variant="secondary">
+        <Badge
+          className="text-sm bg-gray-200 dark:bg-gray-800"
+          variant="secondary"
+        >
           Next.js
         </Badge>
-        <Badge className="text-sm" variant="secondary">
+        <Badge
+          className="text-sm bg-gray-200 dark:bg-gray-800"
+          variant="secondary"
+        >
           React
         </Badge>
-        <Badge className="text-sm" variant="secondary">
+        <Badge
+          className="text-sm bg-gray-200 dark:bg-gray-800"
+          variant="secondary"
+        >
           Tailwind CSS
         </Badge>
-        <Badge className="text-sm" variant="secondary">
+        <Badge
+          className="text-sm bg-gray-200 dark:bg-gray-800"
+          variant="secondary"
+        >
           TypeScript
         </Badge>
-        <Badge className="text-sm" variant="secondary">
+        <Badge
+          className="text-sm bg-gray-200 dark:bg-gray-800"
+          variant="secondary"
+        >
           Vercel
         </Badge>
       </div>

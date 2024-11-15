@@ -12,13 +12,13 @@ export function BlogBreadcrumb({ title }: { title: string }) {
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href="/" className="hover:text-gray-400">
+          <BreadcrumbLink href="/" className="dark:hover:text-gray-200">
             Home
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href="/blog" className="hover:text-gray-400">
+          <BreadcrumbLink href="/blog" className="dark:hover:text-gray-200">
             Blog Posts
           </BreadcrumbLink>
         </BreadcrumbItem>

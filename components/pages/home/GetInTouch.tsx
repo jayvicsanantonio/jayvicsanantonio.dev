@@ -18,12 +18,12 @@ export default function GetInTouch({
     <motion.section
       ref={getInTouchRef}
       id="get-in-touch"
-      className="relative scroll-mt-52 space-y-12"
+      className="relative scroll-mt-52 space-y-12 text-gray-950 dark:text-gray-200"
       style={{ opacity, scale }}
     >
       <div className="space-y-4">
         <h2 className="font-oswald text-2xl font-bold">Get in Touch</h2>
-        <p className="text-gray-400">
+        <p className="dark:text-gray-400">
           I'm always excited to discuss new projects and opportunities. Feel
           free to reach out to me.
         </p>

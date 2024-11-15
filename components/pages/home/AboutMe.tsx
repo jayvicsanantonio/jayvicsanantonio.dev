@@ -22,7 +22,7 @@ export default function AboutMe({
       className="relative scroll-mt-32 min-h-screen grid lg:grid-cols-2 gap-4"
       style={{ opacity, scale }}
     >
-      <div className="h-fit lg:text-lg text-gray-200 space-y-4 bg-gray-950 rounded-xl p-6 border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80 border-2 text-justify">
+      <div className="h-fit lg:text-lg space-y-4 text-gray-950 dark:text-gray-200 dark:bg-gray-950 rounded-xl p-6 border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80 border-2 text-justify">
         <h2 className="font-oswald text-2xl font-bold">About Me</h2>
         <p className="hyphenate">
           I'm Jayvic San Antonio, a Full-Stack Web Developer originally from the
@@ -60,182 +60,182 @@ export default function AboutMe({
         </p>
       </div>
       <div className="flex flex-col gap-4">
-        <div className="lg:text-lg text-gray-200 space-y-4 bg-gray-950 rounded-xl p-6 border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80 border-2 h-fit">
+        <div className="lg:text-lg space-y-4 text-gray-950 dark:text-gray-200 dark:bg-gray-950 rounded-xl p-6 border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80 border-2 h-fit">
           <h2 className="font-oswald text-2xl font-bold">Skills</h2>
           <div className="flex flex-wrap gap-3">
             <Badge
               aria-label="JavaScript"
-              className="w-fit text-sm"
+              className="w-fit text-sm bg-gray-200 dark:bg-gray-800"
               variant="secondary"
             >
               JavaScript
             </Badge>
             <Badge
               aria-label="TypeScript"
-              className="w-fit text-sm"
+              className="w-fit text-sm bg-gray-200 dark:bg-gray-800"
               variant="secondary"
             >
               TypeScript
             </Badge>
             <Badge
               aria-label="React"
-              className="w-fit text-sm"
+              className="w-fit text-sm bg-gray-200 dark:bg-gray-800"
               variant="secondary"
             >
               React
             </Badge>
             <Badge
               aria-label="Next.js"
-              className="w-fit text-sm"
+              className="w-fit text-sm bg-gray-200 dark:bg-gray-800"
               variant="secondary"
             >
               Next.js
             </Badge>
             <Badge
               aria-label="Remix"
-              className="w-fit text-sm"
+              className="w-fit text-sm bg-gray-200 dark:bg-gray-800"
               variant="secondary"
             >
               Remix
             </Badge>
             <Badge
               aria-label="Node.js"
-              className="w-fit text-sm"
+              className="w-fit text-sm bg-gray-200 dark:bg-gray-800"
               variant="secondary"
             >
               Node.js
             </Badge>
             <Badge
               aria-label="Express.js"
-              className="w-fit text-sm"
+              className="w-fit text-sm bg-gray-200 dark:bg-gray-800"
               variant="secondary"
             >
               Express.js
             </Badge>
             <Badge
               aria-label="Tailwind CSS"
-              className="w-fit text-sm"
+              className="w-fit text-sm bg-gray-200 dark:bg-gray-800"
               variant="secondary"
             >
               Tailwind CSS
             </Badge>
             <Badge
               aria-label="React Native"
-              className="w-fit text-sm"
+              className="w-fit text-sm bg-gray-200 dark:bg-gray-800"
               variant="secondary"
             >
               React Native
             </Badge>
             <Badge
               aria-label="Expo"
-              className="w-fit text-sm"
+              className="w-fit text-sm bg-gray-200 dark:bg-gray-800"
               variant="secondary"
             >
               Expo
             </Badge>
             <Badge
               aria-label="Ember"
-              className="w-fit text-sm"
+              className="w-fit text-sm bg-gray-200 dark:bg-gray-800"
               variant="secondary"
             >
               Ember.js
             </Badge>
             <Badge
               aria-label="HTML"
-              className="w-fit text-sm"
+              className="w-fit text-sm bg-gray-200 dark:bg-gray-800"
               variant="secondary"
             >
               HTML
             </Badge>
             <Badge
               aria-label="CSS"
-              className="w-fit text-sm"
+              className="w-fit text-sm bg-gray-200 dark:bg-gray-800"
               variant="secondary"
             >
               CSS
             </Badge>
             <Badge
               aria-label="SASS / SCSS"
-              className="w-fit text-sm"
+              className="w-fit text-sm bg-gray-200 dark:bg-gray-800"
               variant="secondary"
             >
               SASS / SCSS
             </Badge>
             <Badge
               aria-label="Amazon Web Services (AWS)"
-              className="w-fit text-sm"
+              className="w-fit text-sm bg-gray-200 dark:bg-gray-800"
               variant="secondary"
             >
               AWS
             </Badge>
             <Badge
               aria-label="MongoDB"
-              className="w-fit text-sm"
+              className="w-fit text-sm bg-gray-200 dark:bg-gray-800"
               variant="secondary"
             >
               MongoDB
             </Badge>
             <Badge
               aria-label="Redis"
-              className="w-fit text-sm"
+              className="w-fit text-sm bg-gray-200 dark:bg-gray-800"
               variant="secondary"
             >
               Redis
             </Badge>
             <Badge
               aria-label="MySQL"
-              className="w-fit text-sm"
+              className="w-fit text-sm bg-gray-200 dark:bg-gray-800"
               variant="secondary"
             >
               MySQL
             </Badge>
             <Badge
               aria-label="PostgreSQL"
-              className="w-fit text-sm"
+              className="w-fit text-sm bg-gray-200 dark:bg-gray-800"
               variant="secondary"
             >
               PostgreSQL
             </Badge>
             <Badge
               aria-label="Java"
-              className="w-fit text-sm"
+              className="w-fit text-sm bg-gray-200 dark:bg-gray-800"
               variant="secondary"
             >
               Java
             </Badge>
             <Badge
               aria-label="Cypress"
-              className="w-fit text-sm"
+              className="w-fit text-sm bg-gray-200 dark:bg-gray-800"
               variant="secondary"
             >
               Cypress
             </Badge>
             <Badge
               aria-label="Git"
-              className="w-fit text-sm"
+              className="w-fit text-sm bg-gray-200 dark:bg-gray-800"
               variant="secondary"
             >
               Git
             </Badge>
             <Badge
               aria-label="Linux"
-              className="w-fit text-sm"
+              className="w-fit text-sm bg-gray-200 dark:bg-gray-800"
               variant="secondary"
             >
               Linux
             </Badge>
             <Badge
               aria-label="Figma"
-              className="w-fit text-sm"
+              className="w-fit text-sm bg-gray-200 dark:bg-gray-800"
               variant="secondary"
             >
               Figma
             </Badge>
           </div>
         </div>
-        <div className="lg:text-lg text-gray-200 space-y-4 bg-gray-950 rounded-xl p-6 border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80 border-2 h-fit">
+        <div className="lg:text-lg space-y-4 text-gray-950 dark:text-gray-200 dark:bg-gray-950 rounded-xl p-6 border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80 border-2 h-fit">
           <h2 className="font-oswald text-2xl font-bold">Expertise</h2>
-          <ul className="space-y-1 text-gray-300">
+          <ul className="space-y-1">
             <li className="flex items-center">
               <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
               Frontend Development

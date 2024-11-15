@@ -5,21 +5,21 @@ import { Github } from "lucide-react";
 
 export default function Page() {
   return (
-    <section className="w-full  bg-gray-950 text-gray-200">
+    <section className="w-full  dark:bg-gray-950 dark:text-gray-200">
       <div className="flex flex-col gap-8">
         <div className="space-y-4">
           <div className="font-oswald uppercase inline-block rounded-lg bg-gray-800 px-3 py-1">
             Featured Projects
           </div>
-          <h2 className="font-oswald text-2xl font-bold tracking-tighter text-gray-200 md:text-3xl/tight lg:text-4xl">
+          <h2 className="font-oswald text-2xl font-bold tracking-tighter text-gray-950 dark:text-gray-200 md:text-3xl/tight lg:text-4xl">
             Work Showcase
           </h2>
-          <p className="max-w-[600px] text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+          <p className="max-w-[600px] text-gray-950/70 dark:text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
             Here's a showcase of some of the projects I've worked on. Each one
             represents a unique challenge and learning experience.
           </p>
         </div>
-        <Card className="flex flex-col h-full border-transparent bg-gray-950 rounded-lg overflow-hidden shadow-2xl hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none">
+        <Card className="flex flex-col h-full border-transparent rounded-lg overflow-hidden shadow-2xl hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none">
           <CardContent className="flex-1 -p-6 max-h-60">
             <Image
               alt="Yahoo DSP"
@@ -33,13 +33,13 @@ export default function Page() {
               width={400}
             />
           </CardContent>
-          <CardFooter className="bg-gray-950 bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+          <CardFooter className="bg-white dark:bg-gray-950 bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-gray-2000 text-950 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
             <div className="flex flex-1 flex-start justify-between gap-2">
               <div className="space-y-2">
                 <h3 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
                   Yahoo DSP
                 </h3>
-                <p className="text-gray-200">
+                <p className="dark:text-gray-200">
                   A cutting-edge programmatic advertising platform for
                   businesses. Built with a powerful tech stack including{" "}
                   <em className="font-bold">Ember.js</em>,{" "}
@@ -63,11 +63,11 @@ export default function Page() {
         </Card>
       </div>
       <div className="mt-16 space-y-8">
-        <h2 className="font-oswald text-2xl font-bold tracking-tighter text-gray-200 md:text-3xl/tight lg:text-4xl">
+        <h2 className="font-oswald text-2xl font-bold tracking-tighter text-gray-950 dark:text-gray-200 md:text-3xl/tight lg:text-4xl">
           All Projects
         </h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <Card className="flex flex-col h-full border-transparent bg-gray-950 rounded-lg overflow-hidden shadow-2xl hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none">
+          <Card className="flex flex-col h-full border-transparent rounded-lg overflow-hidden shadow-2xl hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none">
             <CardContent className="flex-1 -p-6 max-h-60">
               <Image
                 alt="Barbenheimer VS Code Theme"
@@ -81,13 +81,13 @@ export default function Page() {
                 width={400}
               />
             </CardContent>
-            <CardFooter className="bg-gray-950 bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+            <CardFooter className="dark:bg-gray-950 bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-gray-950 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
               <div className="flex flex-1 flex-start justify-between gap-2">
                 <div className="space-y-2">
                   <h3 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
                     Barbenheimer VS Code Theme
                   </h3>
-                  <p className="text-gray-200">
+                  <p className="dark:text-gray-200">
                     A VS Code theme inspired by the Internet phenomenon of the
                     same name. It combines the pink and playful aesthetics of
                     Barbie with the dark and dramatic tones of Oppenheimer.
@@ -105,7 +105,7 @@ export default function Page() {
               </div>
             </CardFooter>
           </Card>
-          <Card className="flex flex-col h-full border-transparent bg-gray-950 rounded-lg overflow-hidden shadow-2xl hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none">
+          <Card className="flex flex-col h-full border-transparent rounded-lg overflow-hidden shadow-2xl hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none">
             <CardContent className="flex-1 -p-6 max-h-60">
               <Image
                 alt="Web Development Hub"
@@ -119,13 +119,13 @@ export default function Page() {
                 width={400}
               />
             </CardContent>
-            <CardFooter className="bg-gray-950 bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+            <CardFooter className="dark:bg-gray-950 bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-gray-950 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
               <div className="flex flex-1 flex-start justify-between gap-2">
                 <div className="space-y-2">
                   <h3 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
                     Web Development Hub
                   </h3>
-                  <p className="text-gray-200">
+                  <p className="dark:text-gray-200">
                     An extensive library of categorized links tailored for web
                     developers, featuring curated resources on learning,
                     developer tools, frameworks, libraries, blogs and
@@ -144,7 +144,7 @@ export default function Page() {
               </div>
             </CardFooter>
           </Card>
-          <Card className="flex flex-col h-full border-transparent bg-gray-950 rounded-lg overflow-hidden shadow-2xl hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none">
+          <Card className="flex flex-col h-full border-transparent rounded-lg overflow-hidden shadow-2xl hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none">
             <CardContent className="flex-1 -p-6 max-h-60">
               <Image
                 alt="Malayang Mananampalataya Church"
@@ -158,13 +158,13 @@ export default function Page() {
                 width={400}
               />
             </CardContent>
-            <CardFooter className="bg-gray-950 bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-gray-2000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+            <CardFooter className="dark:bg-gray-950 bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-gray-950 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
               <div className="flex flex-1 flex-start justify-between gap-2">
                 <div className="space-y-2">
                   <h3 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
                     Malayang Mananampalataya Church
                   </h3>
-                  <p className="text-gray-200">
+                  <p className="dark:text-gray-200">
                     Built with React.js, this Philippines church website fosters
                     a strong connection between the church and its congregation.
                     Easy navigation allows users to explore sermons, ministries,
