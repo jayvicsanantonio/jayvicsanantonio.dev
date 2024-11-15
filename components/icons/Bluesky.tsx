@@ -7,6 +7,8 @@ export default function Bluesky({ className }: { className?: string }) {
       role="img"
       aria-labelledby="ab43nghsxdwxmqcx3674aw8bigz117ox"
       className={className}
+      width="16"
+      height="16"
     >
       <title id="ab43nghsxdwxmqcx3674aw8bigz117ox">Bluesky</title>
       <path
