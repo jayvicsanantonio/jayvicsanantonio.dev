@@ -5,7 +5,7 @@ import { Calendar } from "lucide-react";
 
 export default function Page() {
   return (
-    <article className="prose prose-invert mx-auto space-y-8">
+    <article className="prose prose-invert mx-auto space-y-8 text-gray-950 dark:text-gray-200">
       <BlogBreadcrumb title="From Ember.js to Next.js" />
       <div className="space-y-2 not-prose">
         <h1 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-bold tracking-tight">
@@ -27,7 +27,7 @@ export default function Page() {
         </p>
         <Image
           alt="From Ember.js to Next.js Image"
-          className="rounded-lg object-cover border border-gray-800"
+          className="rounded-lg object-cover border border-gray-800 bg-gray-950"
           height={220}
           src="/images/blog/from-ember-to-next.png"
           style={{
@@ -111,13 +111,22 @@ export default function Page() {
         spin, see which one speaks to your coding soul, and happy building!
       </p>
       <div className="mt-6 flex flex-wrap gap-2">
-        <Badge className="text-sm" variant="secondary">
+        <Badge
+          className="text-sm bg-gray-200 dark:bg-gray-800"
+          variant="secondary"
+        >
           EmberJS
         </Badge>
-        <Badge className="text-sm" variant="secondary">
+        <Badge
+          className="text-sm bg-gray-200 dark:bg-gray-800"
+          variant="secondary"
+        >
           NextJS
         </Badge>
-        <Badge className="text-sm" variant="secondary">
+        <Badge
+          className="text-sm bg-gray-200 dark:bg-gray-800"
+          variant="secondary"
+        >
           Lessons Learned
         </Badge>
       </div>

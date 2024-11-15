@@ -29,7 +29,7 @@ export default function BlogPosts({
       className="relative scroll-mt-52 min-h-screen"
       style={{ opacity, scale }}
     >
-      <div className="space-y-12 bg-gradient-to-r from-blue-500/20 to-purple-500/20 p-6 rounded-xl">
+      <div className="space-y-12 bg-gradient-to-r from-blue-500/20 to-purple-500/20 p-6 rounded-xl text-gray-950 dark:text-gray-200">
         <div className="flex gap-4">
           <div className="flex-1 space-y-4">
             <h2
@@ -38,7 +38,7 @@ export default function BlogPosts({
             >
               Blog Posts
             </h2>
-            <p className="text-gray-400">
+            <p className="dark:text-gray-400">
               Check out some of my insightful articles, tips, and
               behind-the-scenes experiences.
             </p>
@@ -60,14 +60,14 @@ export default function BlogPosts({
               transition={{ duration: 0.3 }}
             >
               <button
-                className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg bg-gray-950 border border-transparent shadow-2xl p-6 transition-all"
+                className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 bg-white border border-transparent shadow-2xl p-6 transition-all"
                 onClick={() => {
                   router.push("/blog/from-ember-to-next");
                 }}
               >
                 <Image
                   alt="Blog Post Image"
-                  className="rounded-lg object-cover border border-gray-800 w-full"
+                  className="rounded-lg object-cover w-full bg-gray-950"
                   height={160}
                   src="/images/blog/from-ember-to-next.png"
                   style={{
@@ -77,26 +77,35 @@ export default function BlogPosts({
                   width={200}
                 />
                 <div className="space-y-2 text-left">
-                  <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                  <h3 className="font-oswald dark:text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
                     From Ember.js to Next.js: A Tale of Two Frameworks
                   </h3>
-                  <div className="text-gray-400 flex items-center space-x-2">
+                  <div className="dark:text-gray-400 flex items-center space-x-2">
                     <Calendar size={20} />
                     <span>May 7, 2024</span>
                   </div>
-                  <p className="text-gray-300 line-clamp-3">
+                  <p className="dark:text-gray-300 line-clamp-3">
                     Explore the differences and surprising similarities between
                     Ember.js and Next.js, two powerful contenders in the web
                     development world.
                   </p>
                   <div className="mt-6 flex flex-wrap gap-2">
-                    <Badge className="text-sm" variant="secondary">
+                    <Badge
+                      className="text-sm bg-gray-200 dark:bg-gray-800"
+                      variant="secondary"
+                    >
                       EmberJS
                     </Badge>
-                    <Badge className="text-sm" variant="secondary">
+                    <Badge
+                      className="text-sm bg-gray-200 dark:bg-gray-800"
+                      variant="secondary"
+                    >
                       NextJS
                     </Badge>
-                    <Badge className="text-sm" variant="secondary">
+                    <Badge
+                      className="text-sm bg-gray-200 dark:bg-gray-800"
+                      variant="secondary"
+                    >
                       Lessons Learned
                     </Badge>
                   </div>
@@ -108,14 +117,14 @@ export default function BlogPosts({
               transition={{ duration: 0.3 }}
             >
               <button
-                className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg bg-gray-950 border border-transparent shadow-2xl p-6 transition-all"
+                className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 bg-white border border-transparent shadow-2xl p-6 transition-all"
                 onClick={() => {
                   router.push("/blog/the-typescript-tightrope");
                 }}
               >
                 <Image
                   alt="Blog Post Image"
-                  className="rounded-lg object-cover border border-gray-800 w-full"
+                  className="rounded-lg object-cover w-full"
                   height={160}
                   src="/images/blog/the-typescript-tightrope.png"
                   style={{
@@ -125,26 +134,35 @@ export default function BlogPosts({
                   width={200}
                 />
                 <div className="space-y-2 text-left">
-                  <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight hover:underline bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                  <h3 className="font-oswald dark:text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
                     The Typescript Tightrope: A Love-Hate Journey
                   </h3>
-                  <div className="text-gray-400 flex items-center space-x-2">
+                  <div className="dark:text-gray-400 flex items-center space-x-2">
                     <Calendar size={20} />
                     <span>May 4, 2024</span>
                   </div>
-                  <p className="text-gray-300 line-clamp-3">
+                  <p className="dark:text-gray-300 line-clamp-3">
                     My journey from TypeScript skeptic to enthusiast - how
                     static typing transformed my code and why I believe it's the
                     future.
                   </p>
                   <div className="mt-6 flex flex-wrap gap-2">
-                    <Badge className="text-sm" variant="secondary">
+                    <Badge
+                      className="text-sm bg-gray-200 dark:bg-gray-800"
+                      variant="secondary"
+                    >
                       Web Development
                     </Badge>
-                    <Badge className="text-sm" variant="secondary">
+                    <Badge
+                      className="text-sm bg-gray-200 dark:bg-gray-800"
+                      variant="secondary"
+                    >
                       TypeScript
                     </Badge>
-                    <Badge className="text-sm" variant="secondary">
+                    <Badge
+                      className="text-sm bg-gray-200 dark:bg-gray-800"
+                      variant="secondary"
+                    >
                       Lessons Learned
                     </Badge>
                   </div>

@@ -3,23 +3,23 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
 export default function Page() {
   return (
-    <section className="mx-auto w-full  bg-gray-950 text-gray-200">
+    <section className="mx-auto w-full  dark:bg-gray-950 dark:text-gray-200">
       <div className="flex flex-col gap-8">
         <div className="space-y-4">
           <div className="font-oswald uppercase inline-block rounded-lg bg-gray-800 px-3 py-1">
             Laboratory
           </div>
-          <h2 className="font-oswald text-2xl font-bold tracking-tighter text-gray-200 md:text-3xl/tight lg:text-4xl">
+          <h2 className="font-oswald text-2xl font-bold tracking-tighter text-gray-950 dark:text-gray-200 md:text-3xl/tight lg:text-4xl">
             Experimenting with Code
           </h2>
-          <p className="max-w-[600px] text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+          <p className="max-w-[600px] text-gray-950/70 dark:text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
             Welcome to the Lab! This is where I share my coding experiments.
             Dive into a collection of code snippets from my CodeSandbox and
             CodePen accounts.
           </p>
         </div>
-        <div className="flex flex-col gap-8 py-12  bg-gray-950 text-gray-200">
-          <Card className="flex flex-col h-full border-transparent bg-gray-950 rounded-lg overflow-hidden shadow-2xl hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none">
+        <div className="flex flex-col gap-8 py-12  dark:bg-gray-950 text-gray-200">
+          <Card className="flex flex-col h-full border-transparent dark:bg-gray-950 rounded-lg overflow-hidden shadow-2xl hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none">
             <CardContent className="flex-1 -p-6">
               <iframe
                 src="https://codesandbox.io/embed/23lnhc?view=preview&module=%2Fstyles.css&hidenavigation=1"
@@ -35,20 +35,26 @@ export default function Page() {
                 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
               />
             </CardContent>
-            <CardFooter className="bg-gray-950 text-gray-2000 bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+            <CardFooter className="dark:bg-gray-950 text-gray-2000 bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
               <div className="space-y-2">
                 <h3 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight">
                   Aurora Borealis
                 </h3>
                 <div className="mt-6 flex flex-wrap gap-2">
-                  <Badge className="text-sm" variant="secondary">
+                  <Badge
+                    className="text-sm bg-gray-200 dark:bg-gray-800"
+                    variant="secondary"
+                  >
                     HTML
                   </Badge>
-                  <Badge className="text-sm" variant="secondary">
+                  <Badge
+                    className="text-sm bg-gray-200 dark:bg-gray-800"
+                    variant="secondary"
+                  >
                     CSS
                   </Badge>
                 </div>
-                <p className="text-gray-200 pt-4">
+                <p className="dark:text-gray-200 pt-4">
                   This HTML and CSS code snippet creates a realistic aurora
                   borealis animation with a starry night sky. The HTML structure
                   includes a container with layers for stars, and the aurora
@@ -63,7 +69,7 @@ export default function Page() {
               </div>
             </CardFooter>
           </Card>
-          <Card className="flex flex-col h-full border-transparent bg-gray-950 rounded-lg overflow-hidden shadow-2xl hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none">
+          <Card className="flex flex-col h-full border-transparent dark:bg-gray-950 rounded-lg overflow-hidden shadow-2xl hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none">
             <CardContent className="flex-1 -p-6">
               <iframe
                 src="https://codesandbox.io/embed/qlnxgn?view=preview&module=%2Fstyles.css&hidenavigation=1"
@@ -79,20 +85,26 @@ export default function Page() {
                 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
               />
             </CardContent>
-            <CardFooter className="bg-gray-950 text-gray-2000 bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+            <CardFooter className="dark:bg-gray-950 text-gray-2000 bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
               <div className="space-y-2">
                 <h3 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight">
                   Total Solar Eclipse
                 </h3>
                 <div className="mt-6 flex flex-wrap gap-2">
-                  <Badge className="text-sm" variant="secondary">
+                  <Badge
+                    className="text-sm bg-gray-200 dark:bg-gray-800"
+                    variant="secondary"
+                  >
                     HTML
                   </Badge>
-                  <Badge className="text-sm" variant="secondary">
+                  <Badge
+                    className="text-sm bg-gray-200 dark:bg-gray-800"
+                    variant="secondary"
+                  >
                     CSS
                   </Badge>
                 </div>
-                <p className="text-gray-200 pt-4">
+                <p className="dark:text-gray-200 pt-4">
                   This HTML and CSS code snippet creates a total solar eclipse
                   animation. The HTML defines a div structure for the sun and
                   moon within a centered container. The CSS uses radial

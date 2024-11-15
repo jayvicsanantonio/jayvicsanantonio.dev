@@ -79,7 +79,7 @@ export default function ContactMeForm() {
     <form action={handleSubmit} className="grid gap-6 text-black">
       <div className="grid md:grid-cols-2 gap-6">
         <div className="space-y-4">
-          <Label htmlFor="name" className="text-gray-400">
+          <Label htmlFor="name" className="dark:text-gray-400">
             Name
           </Label>
           <Input
@@ -91,7 +91,7 @@ export default function ContactMeForm() {
           />
         </div>
         <div className="space-y-4">
-          <Label htmlFor="email" className="text-gray-400">
+          <Label htmlFor="email" className="dark:text-gray-400">
             Email
           </Label>
           <Input
@@ -105,7 +105,7 @@ export default function ContactMeForm() {
         </div>
       </div>
       <div className="space-y-4">
-        <Label htmlFor="message" className="text-gray-400">
+        <Label htmlFor="message" className="dark:text-gray-400">
           Message
         </Label>
         <Textarea
@@ -117,7 +117,7 @@ export default function ContactMeForm() {
         />
       </div>
       <Button
-        className="justify-self-end rounded-md border border-gray-700 m-1 px-6 py-3 text-sm font-medium hover:border-t-purple-500 hover:border-r-purple-500 hover:border-b-blue-400 hover:border-l-blue-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950"
+        className="justify-self-end text-gray-950 bg-white dark:text-white dark:bg-gray-950 rounded-md border border-gray-700 m-1 px-6 py-3 text-sm font-medium hover:border-t-purple-500 hover:border-r-purple-500 hover:border-b-blue-400 hover:border-l-blue-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:hover:bg-gray-950 hover:bg-white"
         type="submit"
       >
         Send Message

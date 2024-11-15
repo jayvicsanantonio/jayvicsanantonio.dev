@@ -25,13 +25,13 @@ export default function FeaturedProjects({
       className="relative scroll-mt-52 min-h-screen"
       style={{ opacity, scale }}
     >
-      <div className="space-y-12 bg-gradient-to-r from-blue-500/20 to-purple-500/20 p-6 rounded-xl">
+      <div className="space-y-12 bg-gradient-to-r from-blue-500/20 to-purple-500/20 p-6 rounded-xl text-gray-950 dark:text-gray-200">
         <div className="flex gap-4">
           <div className="flex-1 space-y-4">
             <h2 className="font-oswald text-2xl font-bold">
               Featured Projects
             </h2>
-            <p className="text-gray-400">
+            <p className="dark:text-gray-400">
               Check out some of my recent projects that showcase my expertise in
               web development.
             </p>
@@ -51,7 +51,7 @@ export default function FeaturedProjects({
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.3 }}
           >
-            <Card className="flex flex-col h-full border-transparent shadow-2xl bg-gray-950 rounded-lg overflow-hidden transition-all  dark:border-gray-600 dark:bg-gray-800">
+            <Card className="flex flex-col h-full shadow-2xl  rounded-lg overflow-hidden transition-all">
               <CardContent className="flex-1 -p-6 max-h-60 rounded-t-lg overflow-hidden">
                 <Image
                   alt="Yahoo DSP - Programmatic advertising platform interface showing campaign dashboard"
@@ -65,13 +65,13 @@ export default function FeaturedProjects({
                   width={400}
                 />
               </CardContent>
-              <CardFooter className="bg-gray-950 text-gray-1000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+              <CardFooter className="dark:bg-gray-950 text-gray-950 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
                 <div className="flex flex-1 flex-start justify-between gap-2">
                   <div className="space-y-2">
                     <h3 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
                       Yahoo DSP
                     </h3>
-                    <p className="text-gray-200 ">
+                    <p className="dark:text-gray-200 ">
                       A cutting-edge programmatic advertising platform for
                       businesses. Built with a powerful tech stack including{" "}
                       <em className="font-bold">Ember.js</em>,{" "}
@@ -99,7 +99,7 @@ export default function FeaturedProjects({
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.3 }}
           >
-            <Card className="flex flex-col h-full border-transparent shadow-2xl bg-gray-950 rounded-lg overflow-hidden transition-all  dark:border-gray-600 dark:bg-gray-800">
+            <Card className="flex flex-col h-full shadow-2xl  rounded-lg overflow-hidden transition-all">
               <CardContent className="flex-1 -p-6 max-h-60 rounded-t-lg overflow-hidden">
                 <Image
                   alt="Barbenheimer VS Code Theme"
@@ -113,13 +113,13 @@ export default function FeaturedProjects({
                   width={400}
                 />
               </CardContent>
-              <CardFooter className="bg-gray-950 text-gray-1000 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+              <CardFooter className="dark:bg-gray-950 text-gray-950 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
                 <div className="flex flex-1 flex-start justify-between gap-2">
                   <div className="space-y-2">
                     <h3 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
                       Barbenheimer VS Code Theme
                     </h3>
-                    <p className="text-gray-200">
+                    <p className="dark:text-gray-200">
                       A VS Code theme inspired by the Internet phenomenon of the
                       same name. It combines the pink and playful aesthetics of
                       Barbie with the dark and dramatic tones of Oppenheimer.

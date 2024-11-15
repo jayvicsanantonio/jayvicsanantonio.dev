@@ -33,7 +33,7 @@ export default function Hero({
   }, []);
 
   return (
-    <section className="relative h-screen flex flex-col-reverse justify-end md:flex-row items-center px-4 pb-60">
+    <section className="relative h-screen flex flex-col-reverse justify-end md:flex-row items-center px-4 pb-60 text-gray-950 dark:text-gray-200">
       <div className="space-y-6">
         <div className="font-oswald lg:space-y-2 flex flex-col items-center md:items-start">
           <h1 className="font-title text-4xl font-bold leading-snug lg:text-6xl ">
@@ -45,12 +45,12 @@ export default function Hero({
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -10, opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-lg lg:text-3xl font-light uppercase bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-purple-300"
+            className="text-lg lg:text-3xl font-light uppercase bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500"
           >
             {roles[activeIndex]}
           </motion.h2>
         </div>
-        <p className="text-lg lg:text-xl text-gray-200 text-center md:text-left">
+        <p className="text-lg lg:text-xl text-center md:text-left">
           Turning caffeine into code and transforming challenges into innovative
           web solutions that make a difference.
         </p>
@@ -83,7 +83,7 @@ export default function Hero({
       </div>
       <Image
         alt="Profile"
-        className="rounded-full border-4 border-gray-800 shadow-xl md:mb-0 mb-8"
+        className="rounded-full md:mb-0 mb-8"
         height={340}
         loading="eager"
         src="/images/home/profile-image.jpeg"
