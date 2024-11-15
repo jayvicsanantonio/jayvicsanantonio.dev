@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import localFont from "next/font/local";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
 import { Toaster } from "@/components/ui/toaster";
-import { Github, Linkedin, Twitter } from "lucide-react";
 import Header from "@/components/pages/Header";
+import Footer from "@/components/pages/Footer";
 import "./globals.css";
 
 const sourceSansPro = localFont({
@@ -66,52 +65,7 @@ export default function RootLayout({
         <div className="font-source-sans flex flex-col">
           <Header />
           <main className="flex-1 py-12">{children}</main>
-          <footer className="bg-gray-950 md:px-8 py-6 text-gray-200 border-t border-gray-800">
-            <div className="mx-auto flex flex-col md:flex-row items-center justify-between gap-2">
-              <p>© 2024 Jayvic San Antonio. All rights reserved.</p>
-              <div className="flex items-center gap-6">
-                <Link
-                  className="hover:text-gray-200 "
-                  href="https://github.com/jayvicsanantonio"
-                  legacyBehavior
-                >
-                  <a
-                    aria-label="GitHub"
-                    target="_blank"
-                    className="hover:text-violet-600 hover:scale-110 transform"
-                  >
-                    <Github size={20} />
-                  </a>
-                </Link>
-                <Link
-                  className="hover:text-gray-200 "
-                  href="https://twitter.com/jpsanantonio"
-                  legacyBehavior
-                >
-                  <a
-                    aria-label="Twitter"
-                    target="_blank"
-                    className="hover:text-violet-600 hover:scale-110 transform"
-                  >
-                    <Twitter size={20} />
-                  </a>
-                </Link>
-                <Link
-                  className="hover:text-gray-200 "
-                  href="https://www.linkedin.com/in/jayvicsanantonio/"
-                  legacyBehavior
-                >
-                  <a
-                    aria-label="LinkedIn"
-                    target="_blank"
-                    className="hover:text-violet-600 hover:scale-110 transform"
-                  >
-                    <Linkedin size={20} />
-                  </a>
-                </Link>
-              </div>
-            </div>
-          </footer>
+          <Footer />
         </div>
         <Toaster />
         <SpeedInsights />
