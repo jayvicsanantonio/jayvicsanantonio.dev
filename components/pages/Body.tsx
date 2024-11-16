@@ -49,7 +49,7 @@ const oswald = localFont({
 });
 
 export default function Body({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
 
   return (
     <body
