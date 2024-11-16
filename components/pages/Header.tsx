@@ -7,8 +7,8 @@ import {
   TouchEventHandler,
 } from "react";
 import Link from "next/link";
-import Drawer from "./Drawer";
-import MainMenu from "./MainMenu";
+import Drawer from "@/components/pages/Drawer";
+import MainMenu from "@/components/pages/MainMenu";
 import useBoop from "@/hooks/use-boop";
 import { animated } from "react-spring";
 import { Button } from "@/components/ui/button";
@@ -71,25 +71,26 @@ export default function Header({
         >
           {isNavOpen ? <Drawer closeDrawer={closeDrawer} /> : <MainMenu />}
         </nav>
-        <div className="md:border-l md:border-gray-200 dark:md:border-gray-800 md:pl-4">
+        <div className="flex md:border-l md:border-gray-200 dark:md:border-gray-800 md:pl-4">
           <Button
             role="switch"
             aria-label="Toggle theme"
-            className="bg-transparent hover:bg-transparent  focus:outline-blue-700"
+            className="hover:bg-transparent"
             size="icon"
+            variant="ghost"
             onClick={() => {
               // @ts-ignore
               themeTrigger();
               setTheme(theme === "light" ? "dark" : "light");
             }}
+            onMouseEnter={themeTrigger as MouseEventHandler<HTMLButtonElement>}
+            onTouchStart={themeTrigger as TouchEventHandler<HTMLButtonElement>}
           >
             <animated.svg
               width="24"
               height="24"
               viewBox="0 0 24 24"
               style={themeStyle}
-              onMouseEnter={themeTrigger as MouseEventHandler<SVGSVGElement>}
-              onTouchStart={themeTrigger as TouchEventHandler<SVGSVGElement>}
             >
               <defs>
                 <linearGradient
@@ -121,6 +122,8 @@ export default function Header({
               menuTrigger();
               setIsNavOpen((prev) => !prev);
             }}
+            onMouseEnter={menuTrigger as MouseEventHandler<HTMLButtonElement>}
+            onTouchStart={menuTrigger as TouchEventHandler<HTMLButtonElement>}
           >
             <svg
               width="24"
@@ -128,8 +131,6 @@ export default function Header({
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              onMouseEnter={menuTrigger as MouseEventHandler<SVGSVGElement>}
-              onTouchStart={menuTrigger as TouchEventHandler<SVGSVGElement>}
             >
               <defs>
                 <linearGradient
@@ -144,14 +145,14 @@ export default function Header({
                 </linearGradient>
               </defs>
               <rect
-                x="4"
+                x="2"
                 y="4"
                 width="20"
                 height="2"
                 fill="url(#menuIconGradient)"
               />
               <animated.rect
-                x="4"
+                x="2"
                 y="11"
                 width="20"
                 height="2"
@@ -159,7 +160,7 @@ export default function Header({
                 style={menuStyle}
               />
               <rect
-                x="4"
+                x="2"
                 y="18"
                 width="20"
                 height="2"
