@@ -7,26 +7,31 @@ import { useSpring, animated } from "react-spring";
 import MainMenu from "@/components/pages/MainMenu";
 
 export default function Drawer({ closeDrawer }: { closeDrawer: () => void }) {
-  useEscapeKey(closeDrawer);
   const [isClosing, setIsClosing] = useState(false);
+
+  const handleClose = () => {
+    setIsClosing(true);
+  };
+
+  useEscapeKey(handleClose);
 
   const slideAnimation = useSpring({
     from: { x: isClosing ? 0 : 290 },
     to: { x: isClosing ? 290 : 0 },
     config: { mass: 1, tension: 180, friction: 20 },
+    onRest: () => {
+      if (isClosing) {
+        closeDrawer();
+      }
+    },
   });
-
-  const handleClose = () => {
-    setIsClosing(true);
-
-    setTimeout(() => {
-      closeDrawer();
-    }, 300);
-  };
 
   return (
     <FocusLock returnFocus={true}>
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-purple-500/20  backdrop-blur-sm" />
+      <div
+        className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-purple-500/20  backdrop-blur-sm"
+        onClick={handleClose}
+      />
       <animated.div
         className="absolute top-0 right-0 max-w-72 min-w-48 bottom-0 w-3/5 flex flex-col space-between bg-white dark:bg-gray-950 shadow-lg p-6 z-1000"
         style={slideAnimation}
