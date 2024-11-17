@@ -5,13 +5,16 @@ export default function useLocalStorage<T>(
   initialValue: T
 ): [T, Dispatch<SetStateAction<T>>] {
   const [state, setState] = useState<T>(() => {
-    const valueInLocalStorage = window?.localStorage?.getItem(key);
+    if (typeof window === "undefined")
+      return typeof initialValue === "function" ? initialValue() : initialValue;
+
+    const valueInLocalStorage = window.localStorage.getItem(key);
 
     if (valueInLocalStorage) {
       try {
         return JSON.parse(valueInLocalStorage);
       } catch (error) {
-        return window?.localStorage.removeItem(key);
+        return window.localStorage.removeItem(key);
       }
     }
 
@@ -26,7 +29,7 @@ export default function useLocalStorage<T>(
       window.localStorage.removeItem(prevKey);
     }
     prevKeyRef.current = key;
-    window?.localStorage?.setItem(key, JSON.stringify(state));
+    window.localStorage.setItem(key, JSON.stringify(state));
   }, [key, state]);
 
   return [state, setState];
