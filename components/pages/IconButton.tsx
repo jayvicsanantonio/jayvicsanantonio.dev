@@ -3,16 +3,17 @@
 import { MouseEventHandler, TouchEventHandler } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import useBoop from "@/hooks/use-boop";
 import { animated } from "react-spring";
+import useBoop from "@/hooks/use-boop";
+import Icon from "@/components/pages/Icon";
 
 export default function IconButton({
-  Icon,
+  IconName,
   link,
   callback = () => {},
   children,
 }: {
-  Icon: React.FC<React.SVGProps<SVGSVGElement>>;
+  IconName: React.FC<React.SVGProps<SVGSVGElement>>;
   link: string;
   callback?: () => void;
   children: React.ReactNode;
@@ -53,6 +54,7 @@ export default function IconButton({
               </linearGradient>
             </defs>
             <Icon
+              name={IconName}
               strokeWidth={2.5}
               stroke={isActive ? "currentColor" : "url(#iconButtonGradient)"}
             />
