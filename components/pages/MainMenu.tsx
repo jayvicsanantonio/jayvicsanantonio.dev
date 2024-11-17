@@ -14,23 +14,23 @@ export default function MainMenu({
 }) {
   return (
     <>
-      <IconButton Icon={House} link="/" callback={closeDrawer}>
+      <IconButton IconName={House} link="/" callback={closeDrawer}>
         Home
       </IconButton>
       <IconButton
-        Icon={LayoutPanelLeft}
+        IconName={LayoutPanelLeft}
         link="/projects"
         callback={closeDrawer}
       >
         Projects
       </IconButton>
-      <IconButton Icon={Newspaper} link="/blog" callback={closeDrawer}>
+      <IconButton IconName={Newspaper} link="/blog" callback={closeDrawer}>
         Blog
       </IconButton>
-      <IconButton Icon={FlaskConical} link="/lab" callback={closeDrawer}>
+      <IconButton IconName={FlaskConical} link="/lab" callback={closeDrawer}>
         Lab
       </IconButton>
-      <IconButton Icon={FileUser} link="/work" callback={closeDrawer}>
+      <IconButton IconName={FileUser} link="/work" callback={closeDrawer}>
         Work
       </IconButton>
     </>
