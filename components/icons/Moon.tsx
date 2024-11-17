@@ -1,3 +1,5 @@
+"use client";
+
 import { MouseEventHandler, TouchEventHandler } from "react";
 import { animated } from "react-spring";
 import useBoop from "@/hooks/use-boop";

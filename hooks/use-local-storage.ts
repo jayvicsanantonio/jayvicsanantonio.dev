@@ -24,12 +24,45 @@ export default function useLocalStorage<T>(
   const prevKeyRef = useRef(key);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
     const prevKey = prevKeyRef.current;
+
     if (prevKey !== key) {
-      window.localStorage.removeItem(prevKey);
+      try {
+        window.localStorage.removeItem(prevKey);
+      } catch (error) {
+        console.warn(`Failed to remove old key "${prevKey}"`, error);
+      }
     }
+
     prevKeyRef.current = key;
-    window.localStorage.setItem(key, JSON.stringify(state));
+
+    try {
+      window.localStorage.setItem(key, JSON.stringify(state));
+    } catch (error) {
+      console.error(`Failed to save state for key "${key}"`, error);
+    }
+
+    // Handle storage events from other tabs
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === key && e.newValue !== null) {
+        try {
+          setState(JSON.parse(e.newValue));
+        } catch (error) {
+          console.warn(
+            `Failed to parse storage event value for key "${key}"`,
+            error
+          );
+        }
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
   }, [key, state]);
 
   return [state, setState];
