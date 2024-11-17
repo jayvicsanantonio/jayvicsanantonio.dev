@@ -83,7 +83,7 @@ export default function Hero({
       </div>
       <Image
         alt="Profile"
-        className="rounded-full md:mb-0 mb-8"
+        className="rounded-full md:mb-0 mb-8 p-1.5"
         height={340}
         loading="eager"
         src="/images/home/profile-image.jpeg"
