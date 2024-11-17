@@ -1,5 +1,5 @@
-import { strokeLineCap } from "@/types/stroke-line-cap";
-import { strokeLineJoin } from "@/types/stroke-line-join";
+import { StrokeLineCap } from "@/types/stroke-line-cap";
+import { StrokeLineJoin } from "@/types/stroke-line-join";
 
 export default function Sun({
   className,
@@ -13,8 +13,8 @@ export default function Sun({
   fill?: string;
   stroke?: string;
   strokeWidth?: string;
-  strokeLinecap?: strokeLineCap;
-  strokeLinejoin?: strokeLineJoin;
+  strokeLinecap?: StrokeLineCap;
+  strokeLinejoin?: StrokeLineJoin;
 }) {
   return (
     <svg

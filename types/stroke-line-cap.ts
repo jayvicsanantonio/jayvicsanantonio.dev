@@ -1,1 +1,1 @@
-export type strokeLineCap = "round" | "square" | "inherit";
+export type StrokeLineCap = "round" | "square" | "inherit";

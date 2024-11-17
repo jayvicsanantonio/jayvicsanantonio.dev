@@ -1,8 +1,8 @@
 import { MouseEventHandler, TouchEventHandler } from "react";
 import { animated } from "react-spring";
 import useBoop from "@/hooks/use-boop";
-import { strokeLineCap } from "@/types/stroke-line-cap";
-import { strokeLineJoin } from "@/types/stroke-line-join";
+import { StrokeLineCap } from "@/types/stroke-line-cap";
+import { StrokeLineJoin } from "@/types/stroke-line-join";
 
 export default function Moon({
   className,
@@ -16,8 +16,8 @@ export default function Moon({
   fill?: string;
   stroke?: string;
   strokeWidth?: string;
-  strokeLinecap?: strokeLineCap;
-  strokeLinejoin?: strokeLineJoin;
+  strokeLinecap?: StrokeLineCap;
+  strokeLinejoin?: StrokeLineJoin;
 }) {
   const [style, trigger] = useBoop({
     rotation: 90,
