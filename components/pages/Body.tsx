@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import localFont from "next/font/local";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
@@ -8,6 +7,7 @@ import { Toaster } from "@/components/ui/toaster";
 import Header from "@/components/pages/Header";
 import Footer from "@/components/pages/Footer";
 import useLocalStorage from "@/hooks/use-local-storage";
+import Theme from "@/context/theme";
 
 const sourceSansPro = localFont({
   src: [
@@ -49,7 +49,7 @@ const oswald = localFont({
 });
 
 export default function Body({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useLocalStorage<"light" | "dark">("theme", "light");
+  const [theme, setTheme] = useLocalStorage<Theme>("theme", "light");
 
   return (
     <body
