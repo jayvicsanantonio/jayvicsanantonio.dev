@@ -23,7 +23,7 @@ export default function Header({
   setTheme,
 }: {
   theme: Theme;
-  setTheme: React.Dispatch<React.SetStateAction<"light" | "dark">>;
+  setTheme: React.Dispatch<React.SetStateAction<Theme>>;
 }) {
   const [menuStyle, menuTrigger] = useBoop({ x: 15, timing: 300 });
 
