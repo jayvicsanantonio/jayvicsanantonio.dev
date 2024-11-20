@@ -7,7 +7,7 @@ import { Toaster } from "@/components/ui/toaster";
 import Header from "@/components/pages/Header";
 import Footer from "@/components/pages/Footer";
 import useLocalStorage from "@/hooks/use-local-storage";
-import Theme from "@/context/theme";
+import Theme from "@/types/theme";
 
 const sourceSansPro = localFont({
   src: [

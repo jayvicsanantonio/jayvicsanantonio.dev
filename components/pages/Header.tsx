@@ -16,12 +16,13 @@ import { Code } from "lucide-react";
 import Icon from "@/components/pages/Icon";
 import Sun from "@/components/icons/Sun";
 import Moon from "@/components/icons/Moon";
+import Theme from "@/types/theme";
 
 export default function Header({
   theme,
   setTheme,
 }: {
-  theme: "light" | "dark";
+  theme: Theme;
   setTheme: React.Dispatch<React.SetStateAction<"light" | "dark">>;
 }) {
   const [menuStyle, menuTrigger] = useBoop({ x: 15, timing: 300 });
