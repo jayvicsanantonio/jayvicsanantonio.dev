@@ -7,7 +7,7 @@ import { Calendar } from "lucide-react";
 export default function Page() {
   return (
     <article className="prose prose-invert mx-auto space-y-8 text-gray-950 dark:text-gray-200">
-      <BlogBreadcrumb title="The Typescript Tightrope" />
+      <BlogBreadcrumb title="Goodbye Twitter, Hello Bluesky!" />
       <div className="space-y-2 not-prose">
         <h1 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-bold tracking-tight">
           Goodbye Twitter, Hello Bluesky!
@@ -118,6 +118,8 @@ export default function Page() {
         <Link
           href="https://bsky.app/profile/jayvicsanantonio.dev"
           className="hover:text-blue-400 underline decoration-wavy decoration-purple-500 underline-offset-4"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           @jayvicsanantonio.dev
         </Link>
