@@ -84,23 +84,23 @@ export default function Page() {
         and clickbait.
       </p>
       <p>Here's what I'm loving about Bluesky so far:</p>
-      <ul>
+      <ul className="list-disc list-inside ml-4">
         <li>
-          <strong>It's more like the "old" Twitter:</strong> The interface is
+          <strong>It's more like the "old" Twitter</strong>. The interface is
           clean and familiar, and the focus is on sharing thoughts and engaging
           with others.
         </li>
         <li>
-          <strong>The community is amazing:</strong> People are genuinely
+          <strong>The community is amazing</strong>. People are genuinely
           friendly and supportive, and there's a real sense of community.
         </li>
         <li>
-          <strong>It's built to last:</strong> Bluesky is built on a
+          <strong>It's built to last</strong>. Bluesky is built on a
           decentralized protocol, which means it's not controlled by a single
           company or individual.
         </li>
         <li>
-          <strong>It's constantly evolving:</strong> The developers are actively
+          <strong>It's constantly evolving</strong>. The developers are actively
           working to improve the platform and add new features.
         </li>
       </ul>
