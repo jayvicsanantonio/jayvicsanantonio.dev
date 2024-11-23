@@ -30,6 +30,46 @@ export default function Page() {
             <button
               className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition bg-gradient-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
               onClick={() => {
+                router.push("/blog/goodbye-twitter-x-hello-bluesky");
+              }}
+            >
+              <Image
+                alt="Blog Post Image"
+                className="rounded-lg object-cover border border-transparent w-full bg-gray-950"
+                height={160}
+                src="/images/blog/goodbye-twitter-x-hello-bluesky.png"
+                style={{
+                  aspectRatio: "200/160",
+                  objectFit: "cover",
+                }}
+                width={200}
+              />
+              <div className="space-y-2 text-left">
+                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                  Goodbye Twitter, Hello Bluesky!
+                </h3>
+                <div className="dark:text-gray-400 flex items-center space-x-2">
+                  <Calendar size={20} />
+                  <span>November 22, 2024</span>
+                </div>
+                <p className="dark:text-gray-300 line-clamp-3">
+                  I finally said "goodbye" to Twitter/X and found my happy place
+                  on Bluesky! This post explores why I made the switch and what
+                  I'm loving about my new online home.
+                </p>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  <Badge
+                    className="text-sm bg-gray-200 dark:bg-gray-800"
+                    variant="secondary"
+                  >
+                    Others
+                  </Badge>
+                </div>
+              </div>
+            </button>
+            <button
+              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition bg-gradient-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
+              onClick={() => {
                 router.push("/blog/from-ember-to-next");
               }}
             >
