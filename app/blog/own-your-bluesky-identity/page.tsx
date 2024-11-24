@@ -7,9 +7,7 @@ import { Calendar } from "lucide-react";
 export default function Page() {
   return (
     <article className="prose prose-invert mx-auto space-y-8 text-gray-950 dark:text-gray-200">
-      <BlogBreadcrumb
-        title={`Get Your "Blue Check" on Bluesky: A Simple Guide to Verification`}
-      />
+      <BlogBreadcrumb title={`Own Your Bluesky Identity`} />
       <div className="space-y-2 not-prose">
         <h1 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-bold tracking-tight">
           Own Your Bluesky Identity
