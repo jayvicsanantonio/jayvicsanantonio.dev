@@ -85,9 +85,9 @@ export default function BlogPosts({
                     <span>November 23, 2024</span>
                   </div>
                   <p className="dark:text-gray-300 line-clamp-3">
-                    I finally said "goodbye" to Twitter/X and found my happy
-                    place on Bluesky! This post explores why I made the switch
-                    and what I'm loving about my new online home.
+                    Ditch the default ".bsky.social" and claim your own domain
+                    as your Bluesky username! This easy guide shows you how to
+                    get verified and own your online identity.
                   </p>
                   <div className="mt-6 flex flex-wrap gap-2">
                     <Badge
