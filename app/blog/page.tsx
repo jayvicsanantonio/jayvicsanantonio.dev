@@ -37,7 +37,7 @@ export default function Page() {
                 alt="Blog Post Image"
                 className="rounded-lg object-cover border border-transparent w-full bg-gray-950"
                 height={160}
-                src="/images/blog/bsky-change-handle.png"
+                src="/images/blog/account-change-handle-bluesky.png"
                 style={{
                   aspectRatio: "200/160",
                   objectFit: "cover",

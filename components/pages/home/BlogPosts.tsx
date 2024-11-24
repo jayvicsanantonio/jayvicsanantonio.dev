@@ -62,6 +62,51 @@ export default function BlogPosts({
               <button
                 className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 bg-white border border-transparent shadow-2xl p-6 transition-all"
                 onClick={() => {
+                  router.push("/blog/own-your-bluesky-identity");
+                }}
+              >
+                <Image
+                  alt="Blog Post Image"
+                  className="rounded-lg object-cover w-full bg-gray-950"
+                  height={160}
+                  src="/images/blog/account-change-handle-bluesky.png"
+                  style={{
+                    aspectRatio: "200/160",
+                    objectFit: "cover",
+                  }}
+                  width={200}
+                />
+                <div className="space-y-2 text-left">
+                  <h3 className="font-oswald dark:text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                    Own Your Bluesky Identity
+                  </h3>
+                  <div className="dark:text-gray-400 flex items-center space-x-2">
+                    <Calendar size={20} />
+                    <span>November 23, 2024</span>
+                  </div>
+                  <p className="dark:text-gray-300 line-clamp-3">
+                    I finally said "goodbye" to Twitter/X and found my happy
+                    place on Bluesky! This post explores why I made the switch
+                    and what I'm loving about my new online home.
+                  </p>
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    <Badge
+                      className="text-sm bg-gray-200 dark:bg-gray-800"
+                      variant="secondary"
+                    >
+                      Others
+                    </Badge>
+                  </div>
+                </div>
+              </button>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+            >
+              <button
+                className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 bg-white border border-transparent shadow-2xl p-6 transition-all"
+                onClick={() => {
                   router.push("/blog/goodbye-twitter-x-hello-bluesky");
                 }}
               >
