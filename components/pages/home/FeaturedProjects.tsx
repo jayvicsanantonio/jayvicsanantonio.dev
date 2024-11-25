@@ -40,7 +40,7 @@ export default function FeaturedProjects({
             <Link
               href="/projects"
               aria-label="View all projects"
-              className="inline-flex items-center justify-center rounded-lg border border-gray-700 px-6 py-3 text-sm font-medium hover:border-t-purple-500 hover:border-r-purple-500 hover:border-b-blue-400 hover:border-l-blue-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950"
+              className="inline-flex items-center justify-center rounded-lg border border-gray-700 px-6 py-3 text-sm font-medium hover:border-t-purple-500 hover:border-r-purple-500 hover:border-b-blue-400 hover:border-l-blue-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950"
             >
               View All
             </Link>
@@ -48,10 +48,11 @@ export default function FeaturedProjects({
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <motion.div
+            className="will-change-transform"
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.3 }}
           >
-            <Card className="flex flex-col h-full shadow-2xl  rounded-lg overflow-hidden transition-all">
+            <Card className="flex flex-col h-full shadow-2xl  rounded-lg overflow-hidden">
               <CardContent className="flex-1 -p-6 max-h-60 rounded-t-lg overflow-hidden">
                 <Image
                   alt="Yahoo DSP - Programmatic advertising platform interface showing campaign dashboard"
@@ -96,10 +97,11 @@ export default function FeaturedProjects({
             </Card>
           </motion.div>
           <motion.div
+            className="will-change-transform"
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.3 }}
           >
-            <Card className="flex flex-col h-full shadow-2xl  rounded-lg overflow-hidden transition-all">
+            <Card className="flex flex-col h-full shadow-2xl  rounded-lg overflow-hidden">
               <CardContent className="flex-1 -p-6 max-h-60 rounded-t-lg overflow-hidden">
                 <Image
                   alt="Barbenheimer VS Code Theme"

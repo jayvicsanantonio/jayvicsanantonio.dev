@@ -41,7 +41,7 @@ export default function Drawer({ closeDrawer }: { closeDrawer: () => void }) {
         </div>
 
         <Button
-          className="group inline-flex items-center justify-center rounded-lg border px-6 py-3 text-sm font-medium bg-white text-gray-950 hover:bg-white dark:bg-gray-950 dark:hover:bg-gray-950 dark:text-white border-t-purple-500 border-r-purple-500 border-b-blue-400 border-l-blue-400  focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 space-x-2 hover:scale-110 transition ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
+          className="group inline-flex items-center justify-center rounded-lg border px-6 py-3 text-sm font-medium bg-white text-gray-950 hover:bg-white dark:bg-gray-950 dark:hover:bg-gray-950 dark:text-white border-t-purple-500 border-r-purple-500 border-b-blue-400 border-l-blue-400  focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 space-x-2 hover:scale-110 transition ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none will-change-transform"
           onClick={handleClose}
           aria-label="Close navigation menu"
         >
