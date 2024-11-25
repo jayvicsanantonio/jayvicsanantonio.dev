@@ -45,7 +45,7 @@ export default function Hero({
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -10, opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-lg lg:text-3xl font-light uppercase bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500"
+            className="text-lg lg:text-3xl font-light uppercase bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 will-change-transform"
           >
             {roles[activeIndex]}
           </motion.h2>

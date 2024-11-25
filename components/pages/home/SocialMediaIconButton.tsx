@@ -25,7 +25,7 @@ export default function SocialMediaIconButton({
         style={style}
         target="_blank"
         rel="noopener noreferrer"
-        className="hover:text-blue-400 transition-colors"
+        className="hover:text-blue-400 transition-colors will-change-transform"
         onMouseEnter={trigger as MouseEventHandler<HTMLAnchorElement>}
         onTouchStart={trigger as TouchEventHandler<HTMLAnchorElement>}
       >

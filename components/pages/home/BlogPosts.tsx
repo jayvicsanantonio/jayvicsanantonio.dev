@@ -47,7 +47,7 @@ export default function BlogPosts({
             <Link
               href="/blog"
               aria-label="View all blog posts"
-              className="inline-flex items-center justify-center rounded-lg border border-gray-700 px-6 py-3 text-sm font-medium hover:border-t-purple-500 hover:border-r-purple-500 hover:border-b-blue-400 hover:border-l-blue-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950"
+              className="inline-flex items-center justify-center rounded-lg border border-gray-700 px-6 py-3 text-sm font-medium hover:border-t-purple-500 hover:border-r-purple-500 hover:border-b-blue-400 hover:border-l-blue-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600  dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950 "
             >
               View All
             </Link>
@@ -56,11 +56,12 @@ export default function BlogPosts({
         <div className="flex flex-col gap-8">
           <div className="space-y-8">
             <motion.div
+              className="will-change-transform"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
               <button
-                className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 bg-white border border-transparent shadow-2xl p-6 transition-all"
+                className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 bg-white border border-transparent shadow-2xl p-6"
                 onClick={() => {
                   router.push("/blog/own-your-bluesky-identity");
                 }}
@@ -101,11 +102,12 @@ export default function BlogPosts({
               </button>
             </motion.div>
             <motion.div
+              className="will-change-transform"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
               <button
-                className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 bg-white border border-transparent shadow-2xl p-6 transition-all"
+                className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 bg-white border border-transparent shadow-2xl p-6"
                 onClick={() => {
                   router.push("/blog/goodbye-twitter-x-hello-bluesky");
                 }}
@@ -146,11 +148,12 @@ export default function BlogPosts({
               </button>
             </motion.div>
             <motion.div
+              className="will-change-transform"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
               <button
-                className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 bg-white border border-transparent shadow-2xl p-6 transition-all"
+                className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 bg-white border border-transparent shadow-2xl p-6"
                 onClick={() => {
                   router.push("/blog/from-ember-to-next");
                 }}
