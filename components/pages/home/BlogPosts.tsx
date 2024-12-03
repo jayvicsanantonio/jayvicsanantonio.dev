@@ -63,6 +63,53 @@ export default function BlogPosts({
               <button
                 className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 bg-white border border-transparent shadow-2xl p-6"
                 onClick={() => {
+                  router.push(
+                    "/blog/my-coding-christmas-four-advent-calendars"
+                  );
+                }}
+              >
+                <Image
+                  alt="Blog Post Image"
+                  className="rounded-lg object-cover w-full bg-gray-950"
+                  height={160}
+                  src="/images/blog/advent-calendars.webp"
+                  style={{
+                    aspectRatio: "200/160",
+                    objectFit: "cover",
+                  }}
+                  width={200}
+                />
+                <div className="space-y-2 text-left">
+                  <h3 className="font-oswald dark:text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                    My Coding Christmas: Four Advent Calendars!
+                  </h3>
+                  <div className="dark:text-gray-400 flex items-center space-x-2">
+                    <Calendar size={20} />
+                    <span>December 2, 2024</span>
+                  </div>
+                  <p className="dark:text-gray-300 line-clamp-3">
+                    This December, I'm diving into four coding Advent calendars
+                    to learn more about HTML, CSS, Svelte, and TypeScript.
+                  </p>
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    <Badge
+                      className="text-sm bg-gray-200 dark:bg-gray-800"
+                      variant="secondary"
+                    >
+                      Others
+                    </Badge>
+                  </div>
+                </div>
+              </button>
+            </motion.div>
+            <motion.div
+              className="will-change-transform"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+            >
+              <button
+                className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 bg-white border border-transparent shadow-2xl p-6"
+                onClick={() => {
                   router.push("/blog/own-your-bluesky-identity");
                 }}
               >
@@ -142,64 +189,6 @@ export default function BlogPosts({
                       variant="secondary"
                     >
                       Others
-                    </Badge>
-                  </div>
-                </div>
-              </button>
-            </motion.div>
-            <motion.div
-              className="will-change-transform"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-            >
-              <button
-                className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 bg-white border border-transparent shadow-2xl p-6"
-                onClick={() => {
-                  router.push("/blog/from-ember-to-next");
-                }}
-              >
-                <Image
-                  alt="Blog Post Image"
-                  className="rounded-lg object-cover w-full bg-gray-950"
-                  height={160}
-                  src="/images/blog/from-ember-to-next.png"
-                  style={{
-                    aspectRatio: "200/160",
-                    objectFit: "cover",
-                  }}
-                  width={200}
-                />
-                <div className="space-y-2 text-left">
-                  <h3 className="font-oswald dark:text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
-                    From Ember.js to Next.js: A Tale of Two Frameworks
-                  </h3>
-                  <div className="dark:text-gray-400 flex items-center space-x-2">
-                    <Calendar size={20} />
-                    <span>May 7, 2024</span>
-                  </div>
-                  <p className="dark:text-gray-300 line-clamp-3">
-                    Explore the differences and surprising similarities between
-                    Ember.js and Next.js, two powerful contenders in the web
-                    development world.
-                  </p>
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    <Badge
-                      className="text-sm bg-gray-200 dark:bg-gray-800"
-                      variant="secondary"
-                    >
-                      EmberJS
-                    </Badge>
-                    <Badge
-                      className="text-sm bg-gray-200 dark:bg-gray-800"
-                      variant="secondary"
-                    >
-                      NextJS
-                    </Badge>
-                    <Badge
-                      className="text-sm bg-gray-200 dark:bg-gray-800"
-                      variant="secondary"
-                    >
-                      Lessons Learned
                     </Badge>
                   </div>
                 </div>
