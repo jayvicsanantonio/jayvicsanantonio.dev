@@ -30,6 +30,58 @@ export default function Page() {
             <button
               className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-gradient-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
               onClick={() => {
+                router.push("/blog/css-has-explained");
+              }}
+            >
+              <Image
+                alt="Blog Post Image"
+                className="rounded-lg object-cover border border-transparent w-full bg-gray-950"
+                height={160}
+                src="/images/blog/has-pseudo-class.webp"
+                style={{
+                  aspectRatio: "200/160",
+                  objectFit: "cover",
+                }}
+                width={200}
+              />
+              <div className="space-y-2 text-left">
+                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                  CSS{" "}
+                  <span className="px-3 bg-gray-200 dark:bg-gray-800 rounded-2xl text-gray-950 dark:text-gray-200 mx-2">
+                    :has()
+                  </span>{" "}
+                  Explained
+                </h3>
+                <div className="dark:text-gray-400 flex items-center space-x-2">
+                  <Calendar size={20} />
+                  <span>December 2, 2024</span>
+                </div>
+                <p className="dark:text-gray-300 line-clamp-3">
+                  The CSS :has() pseudo-class lets you style elements based on
+                  their children, ancestors, or siblings. This means you can now
+                  select an element if it contains (or doesn't contain) a
+                  specific element, giving you unprecedented control over your
+                  stylesheets.
+                </p>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  <Badge
+                    className="text-sm bg-gray-200 dark:bg-gray-800"
+                    variant="secondary"
+                  >
+                    CSS
+                  </Badge>
+                  <Badge
+                    className="text-sm bg-gray-200 dark:bg-gray-800"
+                    variant="secondary"
+                  >
+                    Web Development
+                  </Badge>
+                </div>
+              </div>
+            </button>
+            <button
+              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-gradient-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
+              onClick={() => {
                 router.push("/blog/my-coding-christmas-four-advent-calendars");
               }}
             >
@@ -61,7 +113,7 @@ export default function Page() {
                     className="text-sm bg-gray-200 dark:bg-gray-800"
                     variant="secondary"
                   >
-                    Others
+                    Web Development
                   </Badge>
                 </div>
               </div>
