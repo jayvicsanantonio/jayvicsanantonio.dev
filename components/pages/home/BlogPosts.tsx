@@ -101,6 +101,12 @@ export default function BlogPosts({
                       className="text-sm bg-gray-200 dark:bg-gray-800"
                       variant="secondary"
                     >
+                      Advent Calendar
+                    </Badge>
+                    <Badge
+                      className="text-sm bg-gray-200 dark:bg-gray-800"
+                      variant="secondary"
+                    >
                       CSS
                     </Badge>
                     <Badge
@@ -150,6 +156,12 @@ export default function BlogPosts({
                     to learn more about HTML, CSS, Svelte, and TypeScript.
                   </p>
                   <div className="mt-6 flex flex-wrap gap-2">
+                    <Badge
+                      className="text-sm bg-gray-200 dark:bg-gray-800"
+                      variant="secondary"
+                    >
+                      Advent Calendar
+                    </Badge>
                     <Badge
                       className="text-sm bg-gray-200 dark:bg-gray-800"
                       variant="secondary"

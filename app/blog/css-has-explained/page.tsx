@@ -294,6 +294,12 @@ export default function Page() {
           className="text-sm bg-gray-200 dark:bg-gray-800"
           variant="secondary"
         >
+          Advent Calendar
+        </Badge>
+        <Badge
+          className="text-sm bg-gray-200 dark:bg-gray-800"
+          variant="secondary"
+        >
           CSS
         </Badge>
         <Badge
