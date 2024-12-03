@@ -18,7 +18,7 @@ export default function Page() {
       </div>
       <div className="flex justify-center">
         <Image
-          alt="Goodbye Twitter, Hello Bluesky!"
+          alt="Four Advent Calendars"
           className="rounded-lg object-cover border border-transparent bg-gray-950"
           height={540}
           src="/images/blog/advent-calendars.webp"
