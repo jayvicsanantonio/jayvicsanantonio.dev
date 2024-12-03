@@ -1,8 +1,15 @@
+/**
+ * A custom React hook for managing state that persists in localStorage.
+ * - Syncs state across multiple tabs/windows
+ * - Handles serialization/deserialization automatically
+ * - Cleans up old keys when the key changes
+ * - Provides type safety through generics
+ */
 import { useEffect, useRef, useState, Dispatch, SetStateAction } from "react";
 
 export default function useLocalStorage<T>(
   key: string,
-  initialValue: T
+  initialValue: T,
 ): [T, Dispatch<SetStateAction<T>>] {
   const [state, setState] = useState<T>(() => {
     if (typeof window === "undefined")
@@ -52,7 +59,7 @@ export default function useLocalStorage<T>(
         } catch (error) {
           console.warn(
             `Failed to parse storage event value for key "${key}"`,
-            error
+            error,
           );
         }
       }
