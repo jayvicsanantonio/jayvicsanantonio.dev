@@ -21,26 +21,6 @@ export default function ChristmasLights() {
           <use xlinkHref="#holiday-lights" />
         </svg>
       </div>
-      <div className="lights bottom">
-        <svg viewBox="0 0 161 54">
-          <use xlinkHref="#holiday-lights" />
-        </svg>
-        <svg viewBox="0 0 161 54">
-          <use xlinkHref="#holiday-lights" />
-        </svg>
-        <svg viewBox="0 0 161 54">
-          <use xlinkHref="#holiday-lights" />
-        </svg>
-        <svg viewBox="0 0 161 54">
-          <use xlinkHref="#holiday-lights" />
-        </svg>
-        <svg viewBox="0 0 161 54">
-          <use xlinkHref="#holiday-lights" />
-        </svg>
-        <svg viewBox="0 0 161 54">
-          <use xlinkHref="#holiday-lights" />
-        </svg>
-      </div>
       <svg
         id="lights-def"
         xmlns="http://www.w3.org/2000/svg"
@@ -89,7 +69,7 @@ export default function ChristmasLights() {
             fill="#fff"
             d="m13.12 18.14 1.49-2.1a4 4 0 0 1 2.58-1.64l1.67-.29a4 4 0 0 1 2.98.68l2.11 1.48a10 10 0 0 1 4.08 9.94l-2.1 11.7a4 4 0 0 1-7.42 1.29l-5.9-10.33a10 10 0 0 1 .5-10.73Z"
           />
-          <g id="holiday-lights" clip-path="url(#a)">
+          <g id="holiday-lights" clipPath="url(#a)">
             <path
               id="cord"
               fill="color(display-p3 .0471 .1961 .1137)"
@@ -118,7 +98,7 @@ export default function ChristmasLights() {
               <path
                 fill="color(display-p3 .9216 .3412 .3412)"
                 stroke="color(display-p3 .8784 .8784 .8784)"
-                stroke-width=".25"
+                strokeWidth=".25"
                 d="m137.32 16.43 2.03-1.58a4 4 0 0 1 2.95-.82l1.68.2a4 4 0 0 1 2.66 1.51l1.59 2.04a10 10 0 0 1 1.03 10.7l-5.4 10.59a4 4 0 0 1-7.47-.92l-2.66-11.6a10 10 0 0 1 3.59-10.12Z"
               />
               <g filter="url(#e)" style={{ mixBlendMode: "overlay" }}>
@@ -161,7 +141,7 @@ export default function ChristmasLights() {
               <path
                 fill="color(display-p3 .1765 .6118 .8588)"
                 stroke="color(display-p3 .8784 .8784 .8784)"
-                stroke-width=".25"
+                strokeWidth=".25"
                 d="m93.23 18.08 1.5-2.1a4 4 0 0 1 2.6-1.61l1.67-.28a4 4 0 0 1 2.98.7l2.1 1.5a10 10 0 0 1 3.99 9.98l-2.2 11.69a4 4 0 0 1-7.42 1.22L92.63 28.8a10 10 0 0 1 .6-10.72Z"
               />
               <g filter="url(#j)" style={{ mixBlendMode: "overlay" }}>
@@ -204,7 +184,7 @@ export default function ChristmasLights() {
               <path
                 fill="color(display-p3 .949 .7882 .298)"
                 stroke="color(display-p3 .8784 .8784 .8784)"
-                stroke-width=".25"
+                strokeWidth=".25"
                 d="m56.6 16.63 1.96-1.69a4 4 0 0 1 2.91-.95l1.68.12a4 4 0 0 1 2.74 1.38l1.68 1.96a10 10 0 0 1 1.53 10.63l-4.89 10.84a4 4 0 0 1-7.5-.56L53.5 26.91a10 10 0 0 1 3.1-10.28Z"
               />
               <g filter="url(#o)" style={{ mixBlendMode: "overlay" }}>
@@ -247,7 +227,7 @@ export default function ChristmasLights() {
               <path
                 fill="color(display-p3 .1529 .6824 .3765)"
                 stroke="color(display-p3 .8784 .8784 .8784)"
-                stroke-width=".25"
+                strokeWidth=".25"
                 d="m13.12 18.14 1.49-2.1a4 4 0 0 1 2.58-1.64l1.67-.29a4 4 0 0 1 2.98.68l2.11 1.48a10 10 0 0 1 4.08 9.94l-2.1 11.7a4 4 0 0 1-7.42 1.29l-5.9-10.33a10 10 0 0 1 .5-10.73Z"
               />
               <g filter="url(#t)" style={{ mixBlendMode: "overlay" }}>
@@ -318,10 +298,10 @@ export default function ChristmasLights() {
             height="51.25"
             x="121.47"
             y="2"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"
@@ -338,10 +318,10 @@ export default function ChristmasLights() {
             height="5.16"
             x="138.85"
             y="10.07"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"
@@ -358,10 +338,10 @@ export default function ChristmasLights() {
             height="14.82"
             x="133.48"
             y="15.05"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"
@@ -378,10 +358,10 @@ export default function ChristmasLights() {
             height="27.11"
             x="136.59"
             y="13.91"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"
@@ -398,10 +378,10 @@ export default function ChristmasLights() {
             height="51.18"
             x="79.35"
             y="2.04"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"
@@ -418,10 +398,10 @@ export default function ChristmasLights() {
             height="5.85"
             x="94.01"
             y="10.4"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"
@@ -438,10 +418,10 @@ export default function ChristmasLights() {
             height="15.53"
             x="91"
             y="15.85"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"
@@ -458,10 +438,10 @@ export default function ChristmasLights() {
             height="27"
             x="95.24"
             y="13.85"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"
@@ -478,10 +458,10 @@ export default function ChristmasLights() {
             height="51.3"
             x="41.13"
             y="1.97"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"
@@ -498,10 +478,10 @@ export default function ChristmasLights() {
             height="5.2"
             x="58.03"
             y="10.1"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"
@@ -518,10 +498,10 @@ export default function ChristmasLights() {
             height="15.01"
             x="53.06"
             y="15.1"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"
@@ -538,10 +518,10 @@ export default function ChristmasLights() {
             height="27.2"
             x="56.36"
             y="13.83"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"
@@ -558,10 +538,10 @@ export default function ChristmasLights() {
             height="51.16"
             x="-.71"
             y="2.05"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"
@@ -578,10 +558,10 @@ export default function ChristmasLights() {
             height="5.88"
             x="13.85"
             y="10.42"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"
@@ -598,10 +578,10 @@ export default function ChristmasLights() {
             height="15.54"
             x="10.93"
             y="15.89"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"
@@ -618,10 +598,10 @@ export default function ChristmasLights() {
             height="26.97"
             x="15.15"
             y="13.87"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"
@@ -638,10 +618,10 @@ export default function ChristmasLights() {
             height="51.25"
             x="121.47"
             y="2"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"
@@ -658,10 +638,10 @@ export default function ChristmasLights() {
             height="41.25"
             x="126.47"
             y="7"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"
@@ -678,10 +658,10 @@ export default function ChristmasLights() {
             height="31.25"
             x="131.47"
             y="12"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"
@@ -698,10 +678,10 @@ export default function ChristmasLights() {
             height="51.18"
             x="79.35"
             y="2.04"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"
@@ -718,10 +698,10 @@ export default function ChristmasLights() {
             height="41.18"
             x="84.35"
             y="7.04"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"
@@ -738,10 +718,10 @@ export default function ChristmasLights() {
             height="31.18"
             x="89.35"
             y="12.04"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"
@@ -758,10 +738,10 @@ export default function ChristmasLights() {
             height="51.3"
             x="41.13"
             y="1.97"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"
@@ -778,10 +758,10 @@ export default function ChristmasLights() {
             height="41.3"
             x="46.13"
             y="6.97"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"
@@ -798,10 +778,10 @@ export default function ChristmasLights() {
             height="31.3"
             x="51.13"
             y="11.97"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"
@@ -818,10 +798,10 @@ export default function ChristmasLights() {
             height="51.16"
             x="-.71"
             y="2.05"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"
@@ -838,10 +818,10 @@ export default function ChristmasLights() {
             height="41.16"
             x="4.29"
             y="7.05"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"
@@ -858,10 +838,10 @@ export default function ChristmasLights() {
             height="31.16"
             x="9.29"
             y="12.05"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
             filterUnits="userSpaceOnUse"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feBlend
               in="SourceGraphic"
               in2="BackgroundImageFix"

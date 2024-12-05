@@ -14,6 +14,7 @@ import { animated } from "react-spring";
 import { Button } from "@/components/ui/button";
 import { Code } from "lucide-react";
 import Icon from "@/components/pages/Icon";
+import HolidayLights from "@/components/pages/HolidayLights";
 import Sun from "@/components/icons/Sun";
 import Moon from "@/components/icons/Moon";
 import Theme from "@/types/theme";
@@ -46,6 +47,7 @@ export default function Header({
           }}
         />
       </Link>
+      <HolidayLights />
       <div className="flex space-x-7">
         <nav
           role="navigation"
