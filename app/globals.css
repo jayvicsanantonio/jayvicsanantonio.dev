@@ -78,6 +78,98 @@
     /* Prefix for Safari */
     -webkit-hyphens: auto;
   }
+
+  /* For Holiday Season Only */
+  @keyframes lights {
+    0% {
+      opacity: 0;
+    }
+
+    30% {
+      opacity: 0;
+    }
+
+    40% {
+      opacity: 1;
+    }
+
+    90% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .lit {
+    animation: 2s linear infinite lights;
+
+    &.yellow {
+      animation-delay: 0.5s;
+    }
+
+    &.blue {
+      animation-delay: 1s;
+    }
+
+    &.red {
+      animation-delay: 1.5s;
+    }
+  }
+
+  .lights {
+    align-items: top;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    position: absolute;
+    inset-inline: 0;
+
+    &.top {
+      top: 0;
+    }
+
+    &.bottom {
+      bottom: 0;
+      rotate: 180deg;
+    }
+
+    & svg {
+      display: block;
+      width: 100%;
+    }
+
+    & svg:nth-child(2)~svg {
+      display: none;
+
+      @media (min-width: 400px) {
+        display: block;
+      }
+    }
+
+    & svg:nth-child(3)~svg {
+      display: none;
+
+      @media (min-width: 500px) {
+        display: block;
+      }
+    }
+
+    & svg:nth-child(4)~svg {
+      display: none;
+
+      @media (min-width: 600px) {
+        display: block;
+      }
+    }
+  }
+
+  #lights-def {
+    display: block;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
 }
 
 @layer base {

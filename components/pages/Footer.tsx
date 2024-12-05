@@ -6,7 +6,7 @@ import SocialMediaIconButton from "@/components/pages/home/SocialMediaIconButton
 
 export default function Footer() {
   return (
-    <footer className="bg-white dark:bg-gray-950 md:px-8 py-6 text-gray-950 dark:text-gray-200 border-t dark:border-gray-800">
+    <footer className="bg-white dark:bg-gray-950 -mx-4 lg:-mx-auto md:px-8 py-6 text-gray-950 dark:text-gray-200 border-t dark:border-gray-800">
       <div className="mx-auto flex flex-col md:flex-row items-center justify-between gap-2">
         <p>© 2024 Jayvic San Antonio. All rights reserved.</p>
         <div className="flex items-center gap-6">
