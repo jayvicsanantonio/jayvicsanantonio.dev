@@ -36,7 +36,7 @@ export default function Header({
 
   return (
     <>
-      <header className="flex items-center justify-between px-4 py-2 mt-4 bg-white dark:bg-gray-950/50 bg-white/50 backdrop-blur-md border rounded-3xl dark:border-gray-800 sticky top-4 z-20 -mx-4 lg:-mx-auto">
+      <header className="flex items-center justify-between px-4 py-2 mt-4 bg-white dark:bg-gray-950/80 bg-white/80 backdrop-blur-lg border rounded-3xl dark:border-gray-800 sticky top-4 z-20 -mx-4 lg:-mx-auto">
         <Link href="/" className="flex items-center gap-2" aria-label="Logo">
           <Icon
             name={Code}
@@ -48,7 +48,7 @@ export default function Header({
             }}
           />
         </Link>
-        <HolidayLights />
+        {/* <HolidayLights /> */}
         <div className="flex space-x-7">
           <nav
             role="navigation"
@@ -140,7 +140,7 @@ export default function Header({
         </div>
       </header>
       {isNavOpen && <Drawer closeDrawer={closeDrawer} />}
-      <div className="sticky inset-0 h-16 backdrop-blur-lg dark:bg-gray-950/90 bg-white/90 z-10 -mx-20"></div>
+      <div className="sticky inset-0 h-5 backdrop-blur-lg dark:bg-gray-950/90 bg-white/90 z-10 -mx-20"></div>
     </>
   );
 }
