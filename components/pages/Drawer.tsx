@@ -16,9 +16,8 @@ export default function Drawer({ closeDrawer }: { closeDrawer: () => void }) {
   useEscapeKey(handleClose);
 
   const slideAnimation = useSpring({
-    from: { x: isClosing ? 0 : 290 },
+    from: { x: 200 },
     to: { x: isClosing ? 290 : 0 },
-    config: { mass: 1, tension: 180, friction: 20 },
     onRest: () => {
       if (isClosing) {
         closeDrawer();
@@ -29,11 +28,11 @@ export default function Drawer({ closeDrawer }: { closeDrawer: () => void }) {
   return (
     <FocusLock returnFocus={true}>
       <div
-        className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-purple-500/20  backdrop-blur-sm"
+        className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-purple-500/20  backdrop-blur-sm z-20"
         onClick={handleClose}
       />
       <animated.div
-        className="absolute top-0 right-0 max-w-72 min-w-48 bottom-0 w-3/5 flex flex-col space-between bg-white dark:bg-gray-950 shadow-lg p-6 z-1000"
+        className="absolute top-0 right-0 max-w-72 min-w-48 bottom-0 w-3/5 flex flex-col space-between bg-white dark:bg-gray-950 shadow-lg p-6 z-20"
         style={slideAnimation}
       >
         <div className="flex flex-col gap-6 flex-1">
