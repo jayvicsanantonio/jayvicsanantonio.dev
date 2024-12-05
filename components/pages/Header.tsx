@@ -48,7 +48,7 @@ export default function Header({
             }}
           />
         </Link>
-        {/* <HolidayLights /> */}
+        <HolidayLights />
         <div className="flex space-x-7">
           <nav
             role="navigation"
