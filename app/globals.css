@@ -126,12 +126,7 @@
     inset-inline: 0;
 
     &.top {
-      top: 0;
-    }
-
-    &.bottom {
-      bottom: 0;
-      rotate: 180deg;
+      top: 52px;
     }
 
     & svg {
@@ -139,7 +134,7 @@
       width: 100%;
     }
 
-    & svg:nth-child(2)~svg {
+    & svg:nth-child(2) ~ svg {
       display: none;
 
       @media (min-width: 400px) {
@@ -147,7 +142,7 @@
       }
     }
 
-    & svg:nth-child(3)~svg {
+    & svg:nth-child(3) ~ svg {
       display: none;
 
       @media (min-width: 500px) {
@@ -155,7 +150,7 @@
       }
     }
 
-    & svg:nth-child(4)~svg {
+    & svg:nth-child(4) ~ svg {
       display: none;
 
       @media (min-width: 600px) {
