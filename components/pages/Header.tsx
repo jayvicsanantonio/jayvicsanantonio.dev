@@ -59,7 +59,6 @@ export default function Header({
                 : "hidden md:flex items-center gap-4"
             }
           >
-            {/* {isNavOpen ? <Drawer closeDrawer={closeDrawer} /> : <MainMenu />} */}
             {!isNavOpen && <MainMenu />}
           </nav>
           <div className="flex md:border-l md:border-gray-200 dark:md:border-gray-800 md:pl-4">
@@ -140,7 +139,7 @@ export default function Header({
         </div>
       </header>
       {isNavOpen && <Drawer closeDrawer={closeDrawer} />}
-      <div className="sticky inset-0 h-5 backdrop-blur-lg dark:bg-gray-950/90 bg-white/90 z-10 -mx-20"></div>
+      <div className="sticky inset-0 h-5 backdrop-blur-lg dark:bg-gray-950/90 bg-white/90 z-10 -mx-1"></div>
     </>
   );
 }
