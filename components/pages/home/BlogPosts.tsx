@@ -63,6 +63,73 @@ export default function BlogPosts({
               <button
                 className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 bg-white border border-transparent shadow-2xl p-6"
                 onClick={() => {
+                  router.push("/blog/css-user-valid-user-invalid-explained");
+                }}
+              >
+                <Image
+                  alt="Blog Post Image"
+                  className="rounded-lg object-cover w-full bg-gray-950"
+                  height={160}
+                  src="/images/blog/css-user-valid-user-invalid-explained.webp"
+                  style={{
+                    aspectRatio: "200/160",
+                    objectFit: "cover",
+                  }}
+                  width={200}
+                />
+                <div className="space-y-2 text-left">
+                  <h3 className="font-oswald dark:text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                    CSS{" "}
+                    <span className="px-3 bg-gray-200 dark:bg-gray-800 rounded-2xl text-gray-950 dark:text-gray-200 mx-2">
+                      :user-valid
+                    </span>{" "}
+                    and{" "}
+                    <span className="px-3 bg-gray-200 dark:bg-gray-800 rounded-2xl text-gray-950 dark:text-gray-200 mx-2">
+                      :user-invalid
+                    </span>
+                    Explained
+                  </h3>
+                  <div className="dark:text-gray-400 flex items-center space-x-2">
+                    <Calendar size={20} />
+                    <span>December 5, 2024</span>
+                  </div>
+                  <p className="dark:text-gray-300 line-clamp-3">
+                    The :user-valid and :user-invalid CSS pseudo-classes give
+                    instant visual feedback on form input, improving usability
+                    and accessibility by highlighting correct and incorrect
+                    entries.
+                  </p>
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    <Badge
+                      className="text-sm bg-gray-200 dark:bg-gray-800"
+                      variant="secondary"
+                    >
+                      Advent Calendar
+                    </Badge>
+                    <Badge
+                      className="text-sm bg-gray-200 dark:bg-gray-800"
+                      variant="secondary"
+                    >
+                      CSS
+                    </Badge>
+                    <Badge
+                      className="text-sm bg-gray-200 dark:bg-gray-800"
+                      variant="secondary"
+                    >
+                      Web Development
+                    </Badge>
+                  </div>
+                </div>
+              </button>
+            </motion.div>
+            <motion.div
+              className="will-change-transform"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+            >
+              <button
+                className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 bg-white border border-transparent shadow-2xl p-6"
+                onClick={() => {
                   router.push("/blog/html-autofocus-explained");
                 }}
               >
@@ -171,59 +238,6 @@ export default function BlogPosts({
                       variant="secondary"
                     >
                       CSS
-                    </Badge>
-                    <Badge
-                      className="text-sm bg-gray-200 dark:bg-gray-800"
-                      variant="secondary"
-                    >
-                      Web Development
-                    </Badge>
-                  </div>
-                </div>
-              </button>
-            </motion.div>
-            <motion.div
-              className="will-change-transform"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-            >
-              <button
-                className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 bg-white border border-transparent shadow-2xl p-6"
-                onClick={() => {
-                  router.push(
-                    "/blog/my-coding-christmas-four-advent-calendars"
-                  );
-                }}
-              >
-                <Image
-                  alt="Blog Post Image"
-                  className="rounded-lg object-cover w-full bg-gray-950"
-                  height={160}
-                  src="/images/blog/advent-calendars.webp"
-                  style={{
-                    aspectRatio: "200/160",
-                    objectFit: "cover",
-                  }}
-                  width={200}
-                />
-                <div className="space-y-2 text-left">
-                  <h3 className="font-oswald dark:text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
-                    My Coding Christmas: Four Advent Calendars!
-                  </h3>
-                  <div className="dark:text-gray-400 flex items-center space-x-2">
-                    <Calendar size={20} />
-                    <span>December 2, 2024</span>
-                  </div>
-                  <p className="dark:text-gray-300 line-clamp-3">
-                    This December, I'm diving into four coding Advent calendars
-                    to learn more about HTML, CSS, Svelte, and TypeScript.
-                  </p>
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    <Badge
-                      className="text-sm bg-gray-200 dark:bg-gray-800"
-                      variant="secondary"
-                    >
-                      Advent Calendar
                     </Badge>
                     <Badge
                       className="text-sm bg-gray-200 dark:bg-gray-800"
