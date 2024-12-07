@@ -63,6 +63,77 @@ export default function BlogPosts({
               <button
                 className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 bg-white border border-transparent shadow-2xl p-6"
                 onClick={() => {
+                  router.push("/blog/popover-api-explained");
+                }}
+              >
+                <Image
+                  alt="Blog Post Image"
+                  className="rounded-lg object-cover w-full bg-gray-950"
+                  height={160}
+                  src="/images/blog/popover-api-explained.webp"
+                  style={{
+                    aspectRatio: "200/160",
+                    objectFit: "cover",
+                  }}
+                  width={200}
+                />
+                <div className="space-y-2 text-left">
+                  <h3 className="font-oswald dark:text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                    Popover API Explained
+                  </h3>
+                  <div className="dark:text-gray-400 flex items-center space-x-2">
+                    <Calendar size={20} />
+                    <span>December 6, 2024</span>
+                  </div>
+                  <p className="dark:text-gray-300 line-clamp-3">
+                    The Popover API lets you easily create and control those
+                    handy content bubbles that pop up on webpages, offering
+                    improved accessibility and standardization for a smoother
+                    user experience.
+                  </p>
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    <Badge
+                      className="text-sm bg-gray-200 dark:bg-gray-800"
+                      variant="secondary"
+                    >
+                      Advent Calendar
+                    </Badge>
+                    <Badge
+                      className="text-sm bg-gray-200 dark:bg-gray-800"
+                      variant="secondary"
+                    >
+                      HTML
+                    </Badge>
+                    <Badge
+                      className="text-sm bg-gray-200 dark:bg-gray-800"
+                      variant="secondary"
+                    >
+                      JS
+                    </Badge>
+                    <Badge
+                      className="text-sm bg-gray-200 dark:bg-gray-800"
+                      variant="secondary"
+                    >
+                      CSS
+                    </Badge>
+                    <Badge
+                      className="text-sm bg-gray-200 dark:bg-gray-800"
+                      variant="secondary"
+                    >
+                      Web Development
+                    </Badge>
+                  </div>
+                </div>
+              </button>
+            </motion.div>
+            <motion.div
+              className="will-change-transform"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+            >
+              <button
+                className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 bg-white border border-transparent shadow-2xl p-6"
+                onClick={() => {
                   router.push("/blog/css-user-valid-user-invalid-explained");
                 }}
               >
@@ -80,11 +151,11 @@ export default function BlogPosts({
                 <div className="space-y-2 text-left">
                   <h3 className="font-oswald dark:text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
                     CSS{" "}
-                    <span className="px-3 bg-gray-200 dark:bg-gray-800 rounded-2xl text-gray-950 dark:text-gray-200 mx-2">
+                    <span className="px-3 text-2xl bg-gray-200 dark:bg-gray-800 rounded-2xl text-gray-950 dark:text-gray-200 mx-2">
                       :user-valid
                     </span>{" "}
                     and{" "}
-                    <span className="px-3 bg-gray-200 dark:bg-gray-800 rounded-2xl text-gray-950 dark:text-gray-200 mx-2">
+                    <span className="px-3 text-2xl bg-gray-200 dark:bg-gray-800 rounded-2xl text-gray-950 dark:text-gray-200 mx-2">
                       :user-invalid
                     </span>
                     Explained
@@ -147,7 +218,7 @@ export default function BlogPosts({
                 <div className="space-y-2 text-left">
                   <h3 className="font-oswald dark:text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
                     HTML{" "}
-                    <span className="px-3 bg-gray-200 dark:bg-gray-800 rounded-2xl text-gray-950 dark:text-gray-200 mx-2">
+                    <span className="px-3 text-2xl bg-gray-200 dark:bg-gray-800 rounded-2xl text-gray-950 dark:text-gray-200 mx-2">
                       autofocus
                     </span>{" "}
                     Explained
@@ -174,70 +245,6 @@ export default function BlogPosts({
                       variant="secondary"
                     >
                       HTML
-                    </Badge>
-                    <Badge
-                      className="text-sm bg-gray-200 dark:bg-gray-800"
-                      variant="secondary"
-                    >
-                      Web Development
-                    </Badge>
-                  </div>
-                </div>
-              </button>
-            </motion.div>
-            <motion.div
-              className="will-change-transform"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-            >
-              <button
-                className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 bg-white border border-transparent shadow-2xl p-6"
-                onClick={() => {
-                  router.push("/blog/css-has-explained");
-                }}
-              >
-                <Image
-                  alt="Blog Post Image"
-                  className="rounded-lg object-cover w-full bg-gray-950"
-                  height={160}
-                  src="/images/blog/has-pseudo-class.webp"
-                  style={{
-                    aspectRatio: "200/160",
-                    objectFit: "cover",
-                  }}
-                  width={200}
-                />
-                <div className="space-y-2 text-left">
-                  <h3 className="font-oswald dark:text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
-                    CSS{" "}
-                    <span className="px-3 bg-gray-200 dark:bg-gray-800 rounded-2xl text-gray-950 dark:text-gray-200 mx-2">
-                      :has()
-                    </span>{" "}
-                    Explained
-                  </h3>
-                  <div className="dark:text-gray-400 flex items-center space-x-2">
-                    <Calendar size={20} />
-                    <span>December 2, 2024</span>
-                  </div>
-                  <p className="dark:text-gray-300 line-clamp-3">
-                    The CSS :has() pseudo-class lets you style elements based on
-                    their children, ancestors, or siblings. This means you can
-                    now select an element if it contains (or doesn't contain) a
-                    specific element, giving you unprecedented control over your
-                    stylesheets.
-                  </p>
-                  <div className="mt-6 flex flex-wrap gap-2">
-                    <Badge
-                      className="text-sm bg-gray-200 dark:bg-gray-800"
-                      variant="secondary"
-                    >
-                      Advent Calendar
-                    </Badge>
-                    <Badge
-                      className="text-sm bg-gray-200 dark:bg-gray-800"
-                      variant="secondary"
-                    >
-                      CSS
                     </Badge>
                     <Badge
                       className="text-sm bg-gray-200 dark:bg-gray-800"
