@@ -1,8 +1,5 @@
 "use client";
 
-import { MouseEventHandler, TouchEventHandler } from "react";
-import { animated } from "react-spring";
-import useBoop from "@/hooks/use-boop";
 import { StrokeLineCap } from "@/types/stroke-line-cap";
 import { StrokeLineJoin } from "@/types/stroke-line-join";
 
@@ -21,13 +18,8 @@ export default function Moon({
   strokeLinecap?: StrokeLineCap;
   strokeLinejoin?: StrokeLineJoin;
 }) {
-  const [style, trigger] = useBoop({
-    rotation: 90,
-    timing: 300,
-  });
-
   return (
-    <animated.svg
+    <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
@@ -38,11 +30,8 @@ export default function Moon({
       strokeLinecap={strokeLinecap}
       strokeLinejoin={strokeLinejoin}
       className={className}
-      style={style}
-      onMouseEnter={trigger as MouseEventHandler<SVGSVGElement>}
-      onTouchStart={trigger as TouchEventHandler<SVGSVGElement>}
     >
       <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-    </animated.svg>
+    </svg>
   );
 }

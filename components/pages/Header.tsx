@@ -73,9 +73,23 @@ export default function Header({
               }}
             >
               {theme === "light" ? (
-                <Icon name={Sun} aria-hidden={true} />
+                <Icon
+                  name={Sun}
+                  aria-hidden={true}
+                  boopConfig={{
+                    rotation: 20,
+                    timing: 200,
+                  }}
+                />
               ) : (
-                <Icon name={Moon} aria-hidden={true} />
+                <Icon
+                  name={Moon}
+                  aria-hidden={true}
+                  boopConfig={{
+                    rotation: 20,
+                    timing: 200,
+                  }}
+                />
               )}
             </Button>
             <Button
