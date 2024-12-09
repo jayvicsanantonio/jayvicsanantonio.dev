@@ -185,6 +185,47 @@ export default function Page() {
               </div>
             </CardFooter>
           </Card>
+          <Card className="flex flex-col h-full border-transparent rounded-lg overflow-hidden shadow-md hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none will-change-transform">
+            <CardContent className="flex-1 -p-6 max-h-60">
+              <Image
+                alt="Barbenheimer VS Code Theme"
+                className="w-full h-full object-cover"
+                height={225}
+                src="/images/projects/barbenheimer-zed-theme.png"
+                style={{
+                  aspectRatio: "400/225",
+                  objectFit: "cover",
+                }}
+                width={400}
+              />
+            </CardContent>
+            <CardFooter className="dark:bg-gray-950 bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-gray-950 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+              <div className="flex flex-1 flex-start justify-between gap-2">
+                <div className="space-y-2">
+                  <h3 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
+                    Barbenheimer Zed Theme
+                  </h3>
+                  <p className="dark:text-gray-200">
+                    A zed theme inspired by the "Barbenheimer" cultural
+                    phenomenon, offering distinct styles that capture the
+                    essence of both Barbie and Oppenheimer. While each theme
+                    leans towards a different aesthetic, they share a cohesive
+                    color palette with subtle nods to both films, creating a
+                    balanced and unified experience.
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-4 mt-4">
+                <ProjectButton link="https://github.com/jayvicsanantonio/barbenheimer-zed-theme">
+                  <Github size={20} />
+                  Github
+                </ProjectButton>
+                <ProjectButton link="https://zed.dev/extensions?query=Barbenheimer">
+                  View Project
+                </ProjectButton>
+              </div>
+            </CardFooter>
+          </Card>
         </div>
       </div>
     </section>
