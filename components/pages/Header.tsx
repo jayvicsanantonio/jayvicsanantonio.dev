@@ -153,7 +153,7 @@ export default function Header({
         </div>
       </header>
       {isNavOpen && <Drawer closeDrawer={closeDrawer} />}
-      <div className="sticky inset-0 h-5 backdrop-blur-lg dark:bg-gray-950/90 bg-white/90 z-10 -mx-1"></div>
+      <div className="sticky inset-0 h-[4.6rem] backdrop-blur-lg dark:bg-gray-950/90 bg-white/90 z-10 -mx-14"></div>
     </>
   );
 }
