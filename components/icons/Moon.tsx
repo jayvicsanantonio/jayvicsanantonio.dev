@@ -1,5 +1,3 @@
-"use client";
-
 import { StrokeLineCap } from "@/types/stroke-line-cap";
 import { StrokeLineJoin } from "@/types/stroke-line-join";
 
