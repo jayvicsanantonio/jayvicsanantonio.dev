@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -18,7 +18,7 @@
     "clsx": "^2.1.0",
     "framer-motion": "^11.11.11",
     "lucide-react": "^0.454.0",
-    "next": "^14.2.18",
+    "next": "15.0",
     "react": "^18",
     "react-dom": "^18",
     "react-focus-lock": "^2.13.2",
