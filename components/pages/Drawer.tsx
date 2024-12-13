@@ -1,5 +1,4 @@
 import { useState } from "react";
-import FocusLock from "react-focus-lock";
 import useEscapeKey from "@/hooks/use-escape-key";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
@@ -26,7 +25,7 @@ export default function Drawer({ closeDrawer }: { closeDrawer: () => void }) {
   });
 
   return (
-    <FocusLock returnFocus={true}>
+    <>
       <div
         className="absolute inset-0 bg-gradient-to-r from-blue-400/20 to-purple-500/20  backdrop-blur-sm z-20"
         onClick={handleClose}
@@ -48,6 +47,6 @@ export default function Drawer({ closeDrawer }: { closeDrawer: () => void }) {
           <span>Dismiss</span>
         </Button>
       </animated.div>
-    </FocusLock>
+    </>
   );
 }
