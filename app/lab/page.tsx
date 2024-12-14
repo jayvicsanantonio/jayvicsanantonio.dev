@@ -19,7 +19,64 @@ export default function Page() {
           </p>
         </div>
         <div className="flex flex-col gap-8 py-12  dark:bg-gray-950 text-gray-200">
-          <Card className="flex flex-col h-full border-transparent dark:bg-gray-950 rounded-lg overflow-hidden shadow-md hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none will-change-transform">
+          <Card className="flex flex-col h-full border-transparent dark:bg-gray-950 rounded-lg overflow-hidden shadow-md will-change-transform">
+            <CardContent className="flex-1 -p-6">
+              <iframe
+                src="https://codesandbox.io/embed/c894q8?view=preview&hidenavigation=1"
+                style={{
+                  width: "100%",
+                  height: "500px",
+                  border: 0,
+                  borderRadius: "4px",
+                  overflow: "hidden",
+                }}
+                title="Christmas Countdown using Popover and Anchor Positioning APIs"
+                allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+                sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+              ></iframe>
+            </CardContent>
+            <CardFooter className="dark:bg-gray-950 text-gray-2000 bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+              <div className="space-y-2">
+                <h3 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight">
+                  Christmas Countdown
+                </h3>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  <Badge
+                    className="text-sm bg-gray-200 dark:bg-gray-800"
+                    variant="secondary"
+                  >
+                    HTML
+                  </Badge>
+                  <Badge
+                    className="text-sm bg-gray-200 dark:bg-gray-800"
+                    variant="secondary"
+                  >
+                    JS
+                  </Badge>
+                  <Badge
+                    className="text-sm bg-gray-200 dark:bg-gray-800"
+                    variant="secondary"
+                  >
+                    CSS
+                  </Badge>
+                </div>
+                <p className="dark:text-gray-200 pt-4">
+                  This snippet playfully blends holiday spirit with modern web
+                  APIs, featuring a dynamic countdown timer and an interactive
+                  "Santa's Mail" popover built using the widely supported
+                  Popover API. Distinct from the popover, a div element
+                  positioned next to the mailbox(anchor) demonstrates the
+                  precise element placement achieved through the CSS Anchor
+                  Positioning API (currently supported in Chrome and Edge, with
+                  Firefox and Safari support forthcoming), offering a glimpse
+                  into the future of web layout. This festive experiment
+                  provides a fun way to track the time until Christmas while
+                  exploring the capabilities of these cutting-edge web APIs.
+                </p>
+              </div>
+            </CardFooter>
+          </Card>
+          <Card className="flex flex-col h-full border-transparent dark:bg-gray-950 rounded-lg overflow-hidden shadow-md will-change-transform">
             <CardContent className="flex-1 -p-6">
               <iframe
                 src="https://codesandbox.io/embed/23lnhc?view=preview&module=%2Fstyles.css&hidenavigation=1"
@@ -69,7 +126,7 @@ export default function Page() {
               </div>
             </CardFooter>
           </Card>
-          <Card className="flex flex-col h-full border-transparent dark:bg-gray-950 rounded-lg overflow-hidden shadow-md hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none will-change-transform">
+          <Card className="flex flex-col h-full border-transparent dark:bg-gray-950 rounded-lg overflow-hidden shadow-md will-change-transform">
             <CardContent className="flex-1 -p-6">
               <iframe
                 src="https://codesandbox.io/embed/qlnxgn?view=preview&module=%2Fstyles.css&hidenavigation=1"
