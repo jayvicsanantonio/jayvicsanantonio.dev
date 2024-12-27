@@ -25,7 +25,7 @@ export default function Page() {
               alt="Yahoo DSP"
               className="w-full h-full object-cover"
               height={125}
-              src="/images/home/yahoo-dsp.png"
+              src="/images/home/yahoo-dsp.webp"
               style={{
                 aspectRatio: "400/125",
                 objectFit: "cover",
@@ -73,7 +73,7 @@ export default function Page() {
                 alt="Barbenheimer VS Code Theme"
                 className="w-full h-full object-cover"
                 height={225}
-                src="/images/home/barbenheimer.png"
+                src="/images/home/barbenheimer.webp"
                 style={{
                   aspectRatio: "400/225",
                   objectFit: "cover",
@@ -111,7 +111,7 @@ export default function Page() {
                 alt="Web Development Hub"
                 className="w-full h-full object-cover"
                 height={225}
-                src="/images/home/webdevhub.png"
+                src="/images/home/webdevhub.webp"
                 style={{
                   aspectRatio: "400/225",
                   objectFit: "cover",
@@ -150,7 +150,7 @@ export default function Page() {
                 alt="Malayang Mananampalataya Church"
                 className="w-full h-full object-cover"
                 height={225}
-                src="/images/home/mm-church.png"
+                src="/images/home/mm-church.webp"
                 style={{
                   aspectRatio: "400/225",
                   objectFit: "cover",
