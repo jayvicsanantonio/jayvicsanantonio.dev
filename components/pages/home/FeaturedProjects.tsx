@@ -58,7 +58,7 @@ export default function FeaturedProjects({
                   alt="Yahoo DSP - Programmatic advertising platform interface showing campaign dashboard"
                   className="w-full h-full object-cover"
                   height={225}
-                  src="/images/home/yahoo-dsp.png"
+                  src="/images/home/yahoo-dsp.webp"
                   style={{
                     aspectRatio: "400/225",
                     objectFit: "cover",
@@ -107,7 +107,7 @@ export default function FeaturedProjects({
                   alt="Barbenheimer VS Code Theme"
                   className="w-full h-full object-cover"
                   height={225}
-                  src="/images/home/barbenheimer.png"
+                  src="/images/home/barbenheimer.webp"
                   style={{
                     aspectRatio: "400/225",
                     objectFit: "cover",
