@@ -191,7 +191,7 @@ export default function Page() {
                 alt="Barbenheimer VS Code Theme"
                 className="w-full h-full object-cover"
                 height={225}
-                src="/images/projects/barbenheimer-zed-theme.png"
+                src="/images/projects/barbenheimer-zed-theme.webp"
                 style={{
                   aspectRatio: "400/225",
                   objectFit: "cover",
