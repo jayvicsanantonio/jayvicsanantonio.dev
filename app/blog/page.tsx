@@ -321,7 +321,7 @@ export default function Page() {
                 alt="Blog Post Image"
                 className="rounded-lg object-cover border border-transparent w-full bg-gray-950"
                 height={160}
-                src="/images/blog/account-change-handle-bluesky.png"
+                src="/images/blog/account-change-handle-bluesky.webp"
                 style={{
                   aspectRatio: "200/160",
                   objectFit: "cover",
@@ -361,7 +361,7 @@ export default function Page() {
                 alt="Blog Post Image"
                 className="rounded-lg object-cover border border-transparent w-full bg-gray-950"
                 height={160}
-                src="/images/blog/goodbye-twitter-x-hello-bluesky.png"
+                src="/images/blog/goodbye-twitter-x-hello-bluesky.webp"
                 style={{
                   aspectRatio: "200/160",
                   objectFit: "cover",
@@ -401,7 +401,7 @@ export default function Page() {
                 alt="Blog Post Image"
                 className="rounded-lg object-cover border border-transparent w-full bg-gray-950"
                 height={160}
-                src="/images/blog/from-ember-to-next.png"
+                src="/images/blog/from-ember-to-next.webp"
                 style={{
                   aspectRatio: "200/160",
                   objectFit: "cover",
@@ -453,7 +453,7 @@ export default function Page() {
                 alt="Blog Post Image"
                 className="rounded-lg object-cover border border-transparent w-full"
                 height={160}
-                src="/images/blog/the-typescript-tightrope.png"
+                src="/images/blog/the-typescript-tightrope.webp"
                 style={{
                   aspectRatio: "200/160",
                   objectFit: "cover",
@@ -504,7 +504,7 @@ export default function Page() {
                 alt="Blog Post Image"
                 className="rounded-lg object-cover border border-transparent w-full"
                 height={160}
-                src="/images/blog/building-my-developer-playground.png"
+                src="/images/blog/building-my-developer-playground.webp"
                 style={{
                   aspectRatio: "200/160",
                   objectFit: "cover",

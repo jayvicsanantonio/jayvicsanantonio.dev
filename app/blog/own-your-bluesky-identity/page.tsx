@@ -44,7 +44,7 @@ export default function Page() {
           alt="Sign up for Bluesky"
           className="rounded-lg object-cover ml-4 my-4 border border-transparent bg-gray-950"
           height={240}
-          src="/images/blog/signup-for-bluesky.png"
+          src="/images/blog/signup-for-bluesky.webp"
           style={{
             objectFit: "cover",
           }}
@@ -55,7 +55,7 @@ export default function Page() {
           alt="Click on Settings"
           className="rounded-lg object-cover ml-4 my-4 border border-transparent bg-gray-950"
           height={240}
-          src="/images/blog/click-settings-bluesky.png"
+          src="/images/blog/click-settings-bluesky.webp"
           style={{
             objectFit: "cover",
           }}
@@ -66,7 +66,7 @@ export default function Page() {
           alt="Click on Handle"
           className="rounded-lg object-cover ml-4 my-4 border border-transparent bg-gray-950"
           height={240}
-          src="/images/blog/account-handle-bluesky.png"
+          src="/images/blog/account-handle-bluesky.webp"
           style={{
             objectFit: "cover",
           }}
@@ -77,7 +77,7 @@ export default function Page() {
           alt="Click on I have my own domain"
           className="rounded-lg object-cover ml-4 my-4 border border-transparent bg-gray-950"
           height={240}
-          src="/images/blog/account-change-handle-bluesky.png"
+          src="/images/blog/account-change-handle-bluesky.webp"
           style={{
             objectFit: "cover",
           }}
@@ -95,7 +95,7 @@ export default function Page() {
           alt="Grab the DNS record info"
           className="rounded-lg object-cover ml-4 my-4 border border-transparent bg-gray-950"
           height={240}
-          src="/images/blog/add-dns-record-to-domain.png"
+          src="/images/blog/add-dns-record-to-domain.webp"
           style={{
             objectFit: "cover",
           }}
@@ -108,7 +108,7 @@ export default function Page() {
           alt="Enter your domain"
           className="rounded-lg object-cover ml-4 my-4 border border-transparent bg-gray-950"
           height={240}
-          src="/images/blog/verify-dns-record-bluesky.png"
+          src="/images/blog/verify-dns-record-bluesky.webp"
           style={{
             objectFit: "cover",
           }}
