@@ -22,7 +22,7 @@ export default function Page() {
           alt="Goodbye Twitter, Hello Bluesky!"
           className="rounded-lg object-cover border border-transparent bg-gray-950"
           height={540}
-          src="/images/blog/goodbye-twitter-x-hello-bluesky.png"
+          src="/images/blog/goodbye-twitter-x-hello-bluesky.webp"
           style={{
             objectFit: "cover",
           }}
@@ -65,7 +65,7 @@ export default function Page() {
           alt="My First Bluesky Post"
           className="rounded-lg object-cover border border-transparent bg-gray-950"
           height={540}
-          src="/images/blog/first-bluesky-post.png"
+          src="/images/blog/first-bluesky-post.webp"
           style={{
             objectFit: "cover",
           }}

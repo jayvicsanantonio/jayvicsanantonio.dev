@@ -29,7 +29,7 @@ export default function Page() {
           alt="From Ember.js to Next.js Image"
           className="rounded-lg object-cover border border-gray-800 bg-gray-950"
           height={220}
-          src="/images/blog/from-ember-to-next.png"
+          src="/images/blog/from-ember-to-next.webp"
           style={{
             aspectRatio: "400/220",
             objectFit: "cover",

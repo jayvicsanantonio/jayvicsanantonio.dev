@@ -31,7 +31,7 @@ export default function Page() {
           alt="Building My Developer Playground Image"
           className="rounded-lg object-cover border border-gray-800"
           height={540}
-          src="/images/blog/building-my-developer-playground.png"
+          src="/images/blog/building-my-developer-playground.webp"
           style={{
             objectFit: "cover",
           }}

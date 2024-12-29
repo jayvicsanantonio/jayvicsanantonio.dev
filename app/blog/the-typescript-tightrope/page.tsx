@@ -29,7 +29,7 @@ export default function Page() {
           alt="The Typescript Tightrope: A Love-Hate Journey Image"
           className="rounded-lg object-cover"
           height={250}
-          src="/images/blog/the-typescript-tightrope.png"
+          src="/images/blog/the-typescript-tightrope.webp"
           style={{
             aspectRatio: "400/250",
             objectFit: "cover",
