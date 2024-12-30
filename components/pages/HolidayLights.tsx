@@ -1,4 +1,12 @@
 export default function ChristmasLights() {
+  const today = new Date();
+  const currentMonth = today.getMonth(); // getMonth() returns 0 for January, 1 for February, and so on.
+
+  // 11 represents December
+  if (currentMonth !== 11) {
+    return null;
+  }
+
   return (
     <>
       <div className="lights top">
