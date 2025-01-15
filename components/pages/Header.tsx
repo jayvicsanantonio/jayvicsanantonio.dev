@@ -36,7 +36,7 @@ export default function Header({
 
   return (
     <>
-      <header className="flex items-center justify-between px-4 py-2 mt-4 bg-white dark:bg-gray-950/45 bg-white/45 backdrop-blur-lg border rounded-3xl dark:border-gray-800 sticky top-4 z-20 -mx-4 lg:-mx-auto">
+      <header className="flex items-center justify-between px-4 py-2 mt-4 bg-white dark:bg-gray-950/80 bg-white/80 backdrop-blur-lg border rounded-3xl dark:border-gray-800 sticky top-1 z-20 -mx-4 lg:-mx-auto">
         <Link href="/" className="flex items-center gap-2" aria-label="Logo">
           <Icon
             name={Code}
@@ -153,7 +153,6 @@ export default function Header({
         </div>
       </header>
       {isNavOpen && <Drawer closeDrawer={closeDrawer} />}
-      <div className="sticky inset-0 h-[4.6rem] backdrop-blur-lg dark:bg-gray-950/80 bg-white/80 z-10 -mx-14"></div>
     </>
   );
 }
