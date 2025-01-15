@@ -11,7 +11,6 @@ export default function GetInTouch({
     offset: ["start end", "end start"],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1, 0.95]);
 
   return (
@@ -19,7 +18,7 @@ export default function GetInTouch({
       ref={getInTouchRef}
       id="get-in-touch"
       className="relative scroll-mt-52 space-y-12 text-gray-950 dark:text-gray-200"
-      style={{ opacity, scale }}
+      style={{ scale }}
     >
       <div className="space-y-4">
         <h2 className="font-oswald text-2xl font-bold">Get in Touch</h2>

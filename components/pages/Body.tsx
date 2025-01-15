@@ -57,10 +57,10 @@ export default function Body({ children }: { children: React.ReactNode }) {
         sourceSansPro.variable
       } ${
         oswald.variable
-      } max-w-5xl px-4 md:px-12 mx-4 lg:mx-auto flex flex-col md:flex-row min-h-screen dark:bg-gray-950 text-gray-200`}
+      }  flex flex-col md:flex-row min-h-screen dark:bg-gray-950 text-gray-200`}
     >
       <div
-        className={`font-source-sans flex flex-col ${
+        className={`font-source-sans flex flex-col max-w-5xl px-4 md:px-12 mx-4 lg:mx-auto ${
           theme === "light" ? "" : "dark"
         }`}
       >

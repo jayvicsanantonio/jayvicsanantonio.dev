@@ -19,7 +19,6 @@ export default function BlogPosts({
     offset: ["start end", "end start"],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1, 0.95]);
 
   return (
@@ -27,7 +26,7 @@ export default function BlogPosts({
       ref={blogPostsRef}
       id="blog"
       className="relative scroll-mt-52 min-h-screen"
-      style={{ opacity, scale }}
+      style={{ scale }}
     >
       <div className="space-y-12 bg-gradient-to-r from-blue-500/20 to-purple-500/20 p-6 rounded-xl text-gray-950 dark:text-gray-200">
         <div className="flex gap-4">
