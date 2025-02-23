@@ -117,7 +117,7 @@ export default function ContactMeForm() {
         />
       </div>
       <Button
-        className="justify-self-end text-gray-950 bg-white dark:text-white dark:bg-gray-950 rounded-md border border-gray-700 m-1 px-6 py-3 text-sm font-medium hover:border-t-purple-500 hover:border-r-purple-500 hover:border-b-blue-400 hover:border-l-blue-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:hover:bg-gray-950 hover:bg-white"
+        className="justify-self-end text-gray-950 bg-white dark:text-white dark:bg-gray-950 rounded-md border border-gray-700 m-1 px-6 py-3 text-sm font-medium hover:border-t-purple-500 hover:border-r-purple-500 hover:border-b-blue-400 hover:border-l-blue-400 focus:outline-hidden focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:hover:bg-gray-950 hover:bg-white"
         type="submit"
       >
         Send Message

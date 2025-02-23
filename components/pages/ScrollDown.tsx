@@ -36,7 +36,7 @@ export default function ScrollDown({
       style={{ bottom: `${bottom / 4}rem` }}
     >
       <animated.button
-        className="cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 rounded-full p-2"
+        className="cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 rounded-full p-2"
         onClick={scrollToNextSection}
         onMouseEnter={trigger as MouseEventHandler<HTMLButtonElement>}
         onTouchStart={trigger as TouchEventHandler<HTMLButtonElement>}
