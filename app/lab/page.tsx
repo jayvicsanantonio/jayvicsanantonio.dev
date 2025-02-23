@@ -35,9 +35,9 @@ export default function Page() {
                 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
               ></iframe>
             </CardContent>
-            <CardFooter className="dark:bg-gray-950 text-gray-2000 bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+            <CardFooter className="dark:bg-gray-950 text-gray-2000 bg-linear-to-r from-blue-500/10 to-purple-500/10 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
               <div className="space-y-2">
-                <h3 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight">
+                <h3 className="font-oswald bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight">
                   Christmas Countdown
                 </h3>
                 <div className="mt-6 flex flex-wrap gap-2">
@@ -92,9 +92,9 @@ export default function Page() {
                 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
               />
             </CardContent>
-            <CardFooter className="dark:bg-gray-950 text-gray-2000 bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+            <CardFooter className="dark:bg-gray-950 text-gray-2000 bg-linear-to-r from-blue-500/10 to-purple-500/10 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
               <div className="space-y-2">
-                <h3 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight">
+                <h3 className="font-oswald bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight">
                   Aurora Borealis
                 </h3>
                 <div className="mt-6 flex flex-wrap gap-2">
@@ -142,9 +142,9 @@ export default function Page() {
                 sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
               />
             </CardContent>
-            <CardFooter className="dark:bg-gray-950 text-gray-2000 bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
+            <CardFooter className="dark:bg-gray-950 text-gray-2000 bg-linear-to-r from-blue-500/10 to-purple-500/10 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
               <div className="space-y-2">
-                <h3 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight">
+                <h3 className="font-oswald bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight">
                   Total Solar Eclipse
                 </h3>
                 <div className="mt-6 flex flex-wrap gap-2">

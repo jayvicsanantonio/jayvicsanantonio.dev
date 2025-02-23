@@ -18,10 +18,10 @@ export default function Page() {
           </p>
         </div>
         <div className="col-span-2 grid gap-6">
-          <div className="group rounded-lg border border-gray-800 dark:bg-gray-950 text-gray-950 dark:text-gray-200  p-6 shadow-sm border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80">
+          <div className="group rounded-lg border border-gray-800 dark:bg-gray-950 text-gray-950 dark:text-gray-200  p-6 shadow-xs border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <h3 className="font-oswald text-2xl bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                <h3 className="font-oswald text-2xl bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500">
                   Software Dev Engineer II
                 </h3>
                 <p className="text-gray-400">Yahoo Inc.</p>
@@ -154,10 +154,10 @@ export default function Page() {
               </Badge>
             </div>
           </div>
-          <div className="group rounded-lg border border-gray-800 dark:bg-gray-950 text-gray-950 dark:text-gray-200  p-6 shadow-sm border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80">
+          <div className="group rounded-lg border border-gray-800 dark:bg-gray-950 text-gray-950 dark:text-gray-200  p-6 shadow-xs border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <h3 className="font-oswald text-2xl bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                <h3 className="font-oswald text-2xl bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500">
                   Software Dev Engineer
                 </h3>
                 <p className="text-sm text-gray-400">Yahoo Inc.</p>
@@ -275,10 +275,10 @@ export default function Page() {
               </Badge>
             </div>
           </div>
-          <div className="group rounded-lg border border-gray-800 dark:bg-gray-950 text-gray-950 dark:text-gray-200  p-6 shadow-sm border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80">
+          <div className="group rounded-lg border border-gray-800 dark:bg-gray-950 text-gray-950 dark:text-gray-200  p-6 shadow-xs border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <h3 className="font-oswald text-2xl bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                <h3 className="font-oswald text-2xl bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500">
                   Co-Founder
                 </h3>
                 <p className="text-sm text-gray-400">
@@ -368,10 +368,10 @@ export default function Page() {
               </Badge>
             </div>
           </div>
-          <div className="group rounded-lg border border-gray-800 dark:bg-gray-950 text-gray-950 dark:text-gray-200  p-6 shadow-sm border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80">
+          <div className="group rounded-lg border border-gray-800 dark:bg-gray-950 text-gray-950 dark:text-gray-200  p-6 shadow-xs border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <h3 className="font-oswald text-2xl bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                <h3 className="font-oswald text-2xl bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500">
                   Senior Software Engineer
                 </h3>
                 <p className="text-sm text-gray-400">
@@ -479,10 +479,10 @@ export default function Page() {
               </Badge>
             </div>
           </div>
-          <div className="group rounded-lg border border-gray-800 dark:bg-gray-950 text-gray-950 dark:text-gray-200  p-6 shadow-sm border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80">
+          <div className="group rounded-lg border border-gray-800 dark:bg-gray-950 text-gray-950 dark:text-gray-200  p-6 shadow-xs border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <h3 className="font-oswald text-2xl bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                <h3 className="font-oswald text-2xl bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500">
                   Software Engineering Analyst
                 </h3>
                 <p className="text-sm text-gray-400">
@@ -571,10 +571,10 @@ export default function Page() {
               </Badge>
             </div>
           </div>
-          <div className="group rounded-lg border border-gray-800 dark:bg-gray-950 text-gray-950 dark:text-gray-200  p-6 shadow-sm border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80">
+          <div className="group rounded-lg border border-gray-800 dark:bg-gray-950 text-gray-950 dark:text-gray-200  p-6 shadow-xs border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <h3 className="font-oswald text-2xl bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                <h3 className="font-oswald text-2xl bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500">
                   Intern
                 </h3>
                 <p className="text-sm text-gray-400">
@@ -640,10 +640,10 @@ export default function Page() {
               </Badge>
             </div>
           </div>
-          <div className="group rounded-lg border border-gray-800 dark:bg-gray-950 text-gray-950 dark:text-gray-200  p-6 shadow-sm border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80">
+          <div className="group rounded-lg border border-gray-800 dark:bg-gray-950 text-gray-950 dark:text-gray-200  p-6 shadow-xs border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
-                <h3 className="font-oswald text-2xl bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                <h3 className="font-oswald text-2xl bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500">
                   Helpdesk Trainee
                 </h3>
                 <p className="text-sm text-gray-400">

@@ -24,7 +24,7 @@ export default function FeaturedProjects({
       className="relative scroll-mt-52 min-h-screen"
       style={{ scale }}
     >
-      <div className="space-y-12 bg-gradient-to-r from-blue-500/20 to-purple-500/20 p-6 rounded-xl text-gray-950 dark:text-gray-200">
+      <div className="space-y-12 bg-linear-to-r from-blue-500/20 to-purple-500/20 p-6 rounded-xl text-gray-950 dark:text-gray-200">
         <div className="flex gap-4">
           <div className="flex-1 space-y-4">
             <h2 className="font-oswald text-2xl font-bold">
@@ -39,7 +39,7 @@ export default function FeaturedProjects({
             <Link
               href="/projects"
               aria-label="View all projects"
-              className="inline-flex items-center justify-center rounded-lg border border-gray-700 px-6 py-3 text-sm font-medium hover:border-t-purple-500 hover:border-r-purple-500 hover:border-b-blue-400 hover:border-l-blue-400 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950"
+              className="inline-flex items-center justify-center rounded-lg border border-gray-700 px-6 py-3 text-sm font-medium hover:border-t-purple-500 hover:border-r-purple-500 hover:border-b-blue-400 hover:border-l-blue-400 focus:outline-hidden focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:border-gray-600 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950"
             >
               View All
             </Link>
@@ -68,7 +68,7 @@ export default function FeaturedProjects({
               <CardFooter className="dark:bg-gray-950 text-gray-950 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
                 <div className="flex flex-1 flex-start justify-between gap-2">
                   <div className="space-y-2">
-                    <h3 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
+                    <h3 className="font-oswald bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
                       Yahoo DSP
                     </h3>
                     <p className="dark:text-gray-200 ">
@@ -117,7 +117,7 @@ export default function FeaturedProjects({
               <CardFooter className="dark:bg-gray-950 text-gray-950 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
                 <div className="flex flex-1 flex-start justify-between gap-2">
                   <div className="space-y-2">
-                    <h3 className="font-oswald bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
+                    <h3 className="font-oswald bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
                       Barbenheimer VS Code Theme
                     </h3>
                     <p className="dark:text-gray-200">

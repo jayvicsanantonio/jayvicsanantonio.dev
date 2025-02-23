@@ -28,7 +28,7 @@ export default function Page() {
         <div className="flex flex-col gap-8">
           <div className="space-y-8">
             <button
-              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-gradient-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
+              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-linear-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
               onClick={() => {
                 router.push("/blog/popover-api-explained");
               }}
@@ -45,7 +45,7 @@ export default function Page() {
                 width={200}
               />
               <div className="space-y-2 text-left">
-                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500">
                   Popover API Explained
                 </h3>
                 <div className="dark:text-gray-400 flex items-center space-x-2">
@@ -93,7 +93,7 @@ export default function Page() {
               </div>
             </button>
             <button
-              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-gradient-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
+              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-linear-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
               onClick={() => {
                 router.push("/blog/css-user-valid-user-invalid-explained");
               }}
@@ -110,7 +110,7 @@ export default function Page() {
                 width={200}
               />
               <div className="space-y-2 text-left">
-                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500">
                   CSS{" "}
                   <span className="px-3 text-2xl bg-gray-200 dark:bg-gray-800 rounded-2xl text-gray-950 dark:text-gray-200 mx-2">
                     :user-valid
@@ -153,7 +153,7 @@ export default function Page() {
               </div>
             </button>
             <button
-              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-gradient-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
+              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-linear-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
               onClick={() => {
                 router.push("/blog/html-autofocus-explained");
               }}
@@ -170,7 +170,7 @@ export default function Page() {
                 width={200}
               />
               <div className="space-y-2 text-left">
-                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500">
                   HTML{" "}
                   <span className="px-3 text-2xl bg-gray-200 dark:bg-gray-800 rounded-2xl text-gray-950 dark:text-gray-200 mx-2">
                     autofocus
@@ -210,7 +210,7 @@ export default function Page() {
               </div>
             </button>
             <button
-              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-gradient-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
+              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-linear-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
               onClick={() => {
                 router.push("/blog/css-has-explained");
               }}
@@ -227,7 +227,7 @@ export default function Page() {
                 width={200}
               />
               <div className="space-y-2 text-left">
-                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500">
                   CSS{" "}
                   <span className="px-3 text-2xl bg-gray-200 dark:bg-gray-800 rounded-2xl text-gray-950 dark:text-gray-200 mx-2">
                     :has()
@@ -267,7 +267,7 @@ export default function Page() {
               </div>
             </button>
             <button
-              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-gradient-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
+              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-linear-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
               onClick={() => {
                 router.push("/blog/my-coding-christmas-four-advent-calendars");
               }}
@@ -284,7 +284,7 @@ export default function Page() {
                 width={200}
               />
               <div className="space-y-2 text-left">
-                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500">
                   My Coding Christmas: Four Advent Calendars!
                 </h3>
                 <div className="dark:text-gray-400 flex items-center space-x-2">
@@ -312,7 +312,7 @@ export default function Page() {
               </div>
             </button>
             <button
-              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-gradient-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
+              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-linear-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
               onClick={() => {
                 router.push("/blog/own-your-bluesky-identity");
               }}
@@ -329,7 +329,7 @@ export default function Page() {
                 width={200}
               />
               <div className="space-y-2 text-left">
-                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500">
                   Own Your Bluesky Identity
                 </h3>
                 <div className="dark:text-gray-400 flex items-center space-x-2">
@@ -352,7 +352,7 @@ export default function Page() {
               </div>
             </button>
             <button
-              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-gradient-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
+              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-linear-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
               onClick={() => {
                 router.push("/blog/goodbye-twitter-x-hello-bluesky");
               }}
@@ -369,7 +369,7 @@ export default function Page() {
                 width={200}
               />
               <div className="space-y-2 text-left">
-                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500">
                   Goodbye Twitter, Hello Bluesky!
                 </h3>
                 <div className="dark:text-gray-400 flex items-center space-x-2">
@@ -392,7 +392,7 @@ export default function Page() {
               </div>
             </button>
             <button
-              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-gradient-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
+              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-linear-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
               onClick={() => {
                 router.push("/blog/from-ember-to-next");
               }}
@@ -409,7 +409,7 @@ export default function Page() {
                 width={200}
               />
               <div className="space-y-2 text-left">
-                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500">
                   From Ember.js to Next.js: A Tale of Two Frameworks
                 </h3>
                 <div className="dark:text-gray-400 flex items-center space-x-2">
@@ -444,7 +444,7 @@ export default function Page() {
               </div>
             </button>
             <button
-              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-gradient-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
+              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-linear-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
               onClick={() => {
                 router.push("/blog/the-typescript-tightrope");
               }}
@@ -461,7 +461,7 @@ export default function Page() {
                 width={200}
               />
               <div className="space-y-2 text-left">
-                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500">
                   The Typescript Tightrope: A Love-Hate Journey
                 </h3>
                 <div className="dark:text-gray-400 flex items-center space-x-2">
@@ -495,7 +495,7 @@ export default function Page() {
               </div>
             </button>
             <button
-              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-gradient-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
+              className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-linear-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
               onClick={() => {
                 router.push("/blog/building-my-developer-playground");
               }}
@@ -512,7 +512,7 @@ export default function Page() {
                 width={200}
               />
               <div className="space-y-2 text-left">
-                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                <h3 className="font-oswald text-gray-200 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500">
                   Building My Developer Playground
                 </h3>
                 <div className="dark:text-gray-400 flex items-center space-x-2">
