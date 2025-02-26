@@ -29,9 +29,7 @@ export default function ContactMeForm() {
       }
 
       if (misssingFields.length > 0) {
-        toast({
-          variant: "destructive",
-          title: "Action Required",
+        toast("Action Required", {
           description: `Please fill in the following fields: ${misssingFields.join(
             ", "
           )}`,
