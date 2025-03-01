@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Github } from "lucide-react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { CardContent, CardFooter, Card } from "@/components/ui/card";
 import ProjectButton from "@/components/pages/ProjectButton";
 
