@@ -6,7 +6,7 @@ import Image from "next/image";
 import Bluesky from "@/components/icons/Bluesky";
 import ScrollDown from "@/components/pages/ScrollDown";
 import SocialMediaIconButton from "@/components/pages/home/SocialMediaIconButton";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { Github, Linkedin, Mail } from "lucide-react";
 
 export default function Hero({
