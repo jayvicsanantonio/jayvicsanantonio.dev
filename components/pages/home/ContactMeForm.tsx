@@ -1,16 +1,18 @@
 "use client";
 
 import { useCallback, useState } from "react";
+import { ToastAction } from "@/components/ui/toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { toast } from "sonner";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function ContactMeForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const { toast } = useToast();
 
   const handleSubmit = useCallback(
     async (formData: FormData) => {
@@ -29,7 +31,9 @@ export default function ContactMeForm() {
       }
 
       if (misssingFields.length > 0) {
-        toast("Action Required", {
+        toast({
+          variant: "destructive",
+          title: "Action Required",
           description: `Please fill in the following fields: ${misssingFields.join(
             ", "
           )}`,
@@ -50,8 +54,11 @@ export default function ContactMeForm() {
       const data = await result.json();
 
       if (data.error) {
-        toast("Uh oh! Something went wrong.", {
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
           description: "There was a problem with your request.",
+          action: <ToastAction altText="Try again">Try again</ToastAction>,
         });
       } else {
         // Clear form fields after submitting successfully
@@ -59,7 +66,8 @@ export default function ContactMeForm() {
         setEmail("");
         setMessage("");
 
-        toast("Message Sent", {
+        toast({
+          title: "Message Sent",
           description: "Thank you for your message!",
         });
       }
