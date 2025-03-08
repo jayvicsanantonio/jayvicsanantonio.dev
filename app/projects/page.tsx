@@ -20,7 +20,7 @@ export default function Page() {
           </p>
         </div>
         <Card className="flex flex-col h-full border-transparent rounded-lg overflow-hidden shadow-md hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none will-change-transform">
-          <CardContent className="flex-1 -p-6 max-h-60">
+          <CardContent className="flex-1 -p-6">
             <Image
               alt="Yahoo DSP"
               className="w-full h-full object-cover"
@@ -51,10 +51,6 @@ export default function Page() {
               </div>
             </div>
             <div className="flex gap-4 mt-4">
-              <ProjectButton link={null}>
-                <Github size={20} />
-                Github
-              </ProjectButton>
               <ProjectButton link="https://www.advertising.yahooinc.com/our-dsp">
                 View Project
               </ProjectButton>

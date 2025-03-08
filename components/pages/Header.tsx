@@ -65,7 +65,7 @@ export default function Header({
             <Button
               role="switch"
               aria-label="Toggle theme"
-              className="hover:bg-transparent"
+              className="hover:bg-transparent cursor-pointer"
               size="icon"
               variant="ghost"
               onClick={() => {
