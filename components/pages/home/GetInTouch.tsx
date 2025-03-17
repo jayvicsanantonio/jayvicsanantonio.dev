@@ -1,5 +1,5 @@
 import ContactMeForm from "@/components/pages/home/ContactMeForm";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "motion/react";
 
 export default function GetInTouch({
   getInTouchRef,
