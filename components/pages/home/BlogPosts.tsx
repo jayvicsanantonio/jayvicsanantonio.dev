@@ -91,34 +91,19 @@ export default function BlogPosts({
                     user experience.
                   </p>
                   <div className="mt-6 flex flex-wrap gap-2">
-                    <Badge
-                      className="text-sm bg-gray-200 dark:bg-gray-800"
-                      variant="secondary"
-                    >
+                    <Badge className="text-sm" variant="secondary">
                       Advent Calendar
                     </Badge>
-                    <Badge
-                      className="text-sm bg-gray-200 dark:bg-gray-800"
-                      variant="secondary"
-                    >
+                    <Badge className="text-sm" variant="secondary">
                       HTML
                     </Badge>
-                    <Badge
-                      className="text-sm bg-gray-200 dark:bg-gray-800"
-                      variant="secondary"
-                    >
+                    <Badge className="text-sm" variant="secondary">
                       JS
                     </Badge>
-                    <Badge
-                      className="text-sm bg-gray-200 dark:bg-gray-800"
-                      variant="secondary"
-                    >
+                    <Badge className="text-sm" variant="secondary">
                       CSS
                     </Badge>
-                    <Badge
-                      className="text-sm bg-gray-200 dark:bg-gray-800"
-                      variant="secondary"
-                    >
+                    <Badge className="text-sm" variant="secondary">
                       Web Development
                     </Badge>
                   </div>
@@ -170,22 +155,13 @@ export default function BlogPosts({
                     entries.
                   </p>
                   <div className="mt-6 flex flex-wrap gap-2">
-                    <Badge
-                      className="text-sm bg-gray-200 dark:bg-gray-800"
-                      variant="secondary"
-                    >
+                    <Badge className="text-sm" variant="secondary">
                       Advent Calendar
                     </Badge>
-                    <Badge
-                      className="text-sm bg-gray-200 dark:bg-gray-800"
-                      variant="secondary"
-                    >
+                    <Badge className="text-sm" variant="secondary">
                       CSS
                     </Badge>
-                    <Badge
-                      className="text-sm bg-gray-200 dark:bg-gray-800"
-                      variant="secondary"
-                    >
+                    <Badge className="text-sm" variant="secondary">
                       Web Development
                     </Badge>
                   </div>
@@ -233,22 +209,13 @@ export default function BlogPosts({
                     accessibility issues.
                   </p>
                   <div className="mt-6 flex flex-wrap gap-2">
-                    <Badge
-                      className="text-sm bg-gray-200 dark:bg-gray-800"
-                      variant="secondary"
-                    >
+                    <Badge className="text-sm" variant="secondary">
                       Advent Calendar
                     </Badge>
-                    <Badge
-                      className="text-sm bg-gray-200 dark:bg-gray-800"
-                      variant="secondary"
-                    >
+                    <Badge className="text-sm" variant="secondary">
                       HTML
                     </Badge>
-                    <Badge
-                      className="text-sm bg-gray-200 dark:bg-gray-800"
-                      variant="secondary"
-                    >
+                    <Badge className="text-sm" variant="secondary">
                       Web Development
                     </Badge>
                   </div>

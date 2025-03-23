@@ -111,22 +111,13 @@ export default function Page() {
         spin, see which one speaks to your coding soul, and happy building!
       </p>
       <div className="mt-6 flex flex-wrap gap-2">
-        <Badge
-          className="text-sm bg-gray-200 dark:bg-gray-800"
-          variant="secondary"
-        >
+        <Badge className="text-sm" variant="secondary">
           EmberJS
         </Badge>
-        <Badge
-          className="text-sm bg-gray-200 dark:bg-gray-800"
-          variant="secondary"
-        >
+        <Badge className="text-sm" variant="secondary">
           NextJS
         </Badge>
-        <Badge
-          className="text-sm bg-gray-200 dark:bg-gray-800"
-          variant="secondary"
-        >
+        <Badge className="text-sm" variant="secondary">
           Lessons Learned
         </Badge>
       </div>

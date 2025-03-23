@@ -156,10 +156,7 @@ export default function Page() {
         So, there you have it! A simple guide to getting verified on Bluesky.
       </p>
       <div className="mt-6 flex flex-wrap gap-2">
-        <Badge
-          className="text-sm bg-gray-200 dark:bg-gray-800"
-          variant="secondary"
-        >
+        <Badge className="text-sm" variant="secondary">
           Others
         </Badge>
       </div>

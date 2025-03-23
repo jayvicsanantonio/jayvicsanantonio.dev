@@ -86,70 +86,37 @@ export default function Page() {
               </li>
             </ul>
             <div className="mt-6 flex flex-wrap gap-2">
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 React
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 Ember
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 Express
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 Node
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 JS
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 HTML
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 CSS
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 AWS
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 Java
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 MySQL
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 AdTech
               </Badge>
             </div>
@@ -213,64 +180,34 @@ export default function Page() {
               </li>
             </ul>
             <div className="mt-6 flex flex-wrap gap-2">
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 React
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 Ember
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 Express
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 Node
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 JS
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 HTML
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 CSS
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 Java
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 MySQL
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 AdTech
               </Badge>
             </div>
@@ -342,28 +279,16 @@ export default function Page() {
               </li>
             </ul>
             <div className="mt-6 flex flex-wrap gap-2">
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 AWS
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 Express
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 Node
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 Internet of Things
               </Badge>
             </div>
@@ -435,46 +360,25 @@ export default function Page() {
               </li>
             </ul>
             <div className="mt-6 flex flex-wrap gap-2">
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 AWS
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 Express
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 Node
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 SailsJS
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 Redis
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 MongoDB
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 FinTech
               </Badge>
             </div>
@@ -515,58 +419,31 @@ export default function Page() {
               </li>
             </ul>
             <div className="mt-6 flex flex-wrap gap-2">
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 Express
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 Node
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 SailsJS
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 Redis
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 MongoDB
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 JS
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 HTML
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 CSS
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 jQuery
               </Badge>
             </div>
@@ -608,34 +485,19 @@ export default function Page() {
               </li>
             </ul>
             <div className="mt-6 flex flex-wrap gap-2">
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 PostgreSQL
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 PHP
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 JS
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 HTML
               </Badge>
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 CSS
               </Badge>
             </div>
@@ -683,10 +545,7 @@ export default function Page() {
               </li>
             </ul>
             <div className="mt-6 flex flex-wrap gap-2">
-              <Badge
-                className="text-sm bg-gray-200 dark:bg-gray-800"
-                variant="secondary"
-              >
+              <Badge className="text-sm" variant="secondary">
                 Linux
               </Badge>
             </div>

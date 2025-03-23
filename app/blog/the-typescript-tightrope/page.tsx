@@ -93,22 +93,13 @@ export default function Page() {
         just find yourself falling in love, one compile-time error at a time.
       </p>
       <div className="mt-6 flex flex-wrap gap-2">
-        <Badge
-          className="text-sm bg-gray-200 dark:bg-gray-800"
-          variant="secondary"
-        >
+        <Badge className="text-sm" variant="secondary">
           Web Development
         </Badge>
-        <Badge
-          className="text-sm bg-gray-200 dark:bg-gray-800"
-          variant="secondary"
-        >
+        <Badge className="text-sm" variant="secondary">
           TypeScript
         </Badge>
-        <Badge
-          className="text-sm bg-gray-200 dark:bg-gray-800"
-          variant="secondary"
-        >
+        <Badge className="text-sm" variant="secondary">
           Lessons Learned
         </Badge>
       </div>
