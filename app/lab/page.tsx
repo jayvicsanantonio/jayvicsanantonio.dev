@@ -41,22 +41,13 @@ export default function Page() {
                   Christmas Countdown
                 </h3>
                 <div className="mt-6 flex flex-wrap gap-2">
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     HTML
                   </Badge>
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     JS
                   </Badge>
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     CSS
                   </Badge>
                 </div>
@@ -98,16 +89,10 @@ export default function Page() {
                   Aurora Borealis
                 </h3>
                 <div className="mt-6 flex flex-wrap gap-2">
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     HTML
                   </Badge>
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     CSS
                   </Badge>
                 </div>
@@ -148,16 +133,10 @@ export default function Page() {
                   Total Solar Eclipse
                 </h3>
                 <div className="mt-6 flex flex-wrap gap-2">
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     HTML
                   </Badge>
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     CSS
                   </Badge>
                 </div>

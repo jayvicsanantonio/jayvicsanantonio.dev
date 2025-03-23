@@ -59,34 +59,19 @@ export default function Page() {
                   experience.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2">
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     Advent Calendar
                   </Badge>
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     HTML
                   </Badge>
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     JS
                   </Badge>
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     CSS
                   </Badge>
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     Web Development
                   </Badge>
                 </div>
@@ -131,22 +116,13 @@ export default function Page() {
                   accessibility by highlighting correct and incorrect entries.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2">
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     Advent Calendar
                   </Badge>
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     CSS
                   </Badge>
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     Web Development
                   </Badge>
                 </div>
@@ -188,22 +164,13 @@ export default function Page() {
                   accessibility issues.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2">
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     Advent Calendar
                   </Badge>
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     HTML
                   </Badge>
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     Web Development
                   </Badge>
                 </div>
@@ -245,22 +212,13 @@ export default function Page() {
                   they contain.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2">
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     Advent Calendar
                   </Badge>
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     CSS
                   </Badge>
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     Web Development
                   </Badge>
                 </div>
@@ -296,16 +254,10 @@ export default function Page() {
                   learn more about HTML, CSS, Svelte, and TypeScript.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2">
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     Advent Calendar
                   </Badge>
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     Web Development
                   </Badge>
                 </div>
@@ -342,10 +294,7 @@ export default function Page() {
                   verified and own your online identity.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2">
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     Others
                   </Badge>
                 </div>
@@ -382,10 +331,7 @@ export default function Page() {
                   I'm loving about my new online home.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2">
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     Others
                   </Badge>
                 </div>
@@ -422,22 +368,13 @@ export default function Page() {
                   development world.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2">
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     EmberJS
                   </Badge>
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     NextJS
                   </Badge>
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     Lessons Learned
                   </Badge>
                 </div>
@@ -473,22 +410,13 @@ export default function Page() {
                   typing transformed my code and why I believe it's the future.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2">
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     Web Development
                   </Badge>
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     TypeScript
                   </Badge>
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     Lessons Learned
                   </Badge>
                 </div>
@@ -524,40 +452,22 @@ export default function Page() {
                   and thought process behind building my personal website.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2">
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     Web Development
                   </Badge>
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     NextJS
                   </Badge>
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     React
                   </Badge>
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     Tailwind CSS
                   </Badge>
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     TypeScript
                   </Badge>
-                  <Badge
-                    className="text-sm bg-gray-200 dark:bg-gray-800"
-                    variant="secondary"
-                  >
+                  <Badge className="text-sm" variant="secondary">
                     Vercel
                   </Badge>
                 </div>

@@ -120,16 +120,10 @@ export default function Page() {
         developer. Wish me luck!
       </p>
       <div className="mt-6 flex flex-wrap gap-2">
-        <Badge
-          className="text-sm bg-gray-200 dark:bg-gray-800"
-          variant="secondary"
-        >
+        <Badge className="text-sm" variant="secondary">
           Advent Calendar
         </Badge>
-        <Badge
-          className="text-sm bg-gray-200 dark:bg-gray-800"
-          variant="secondary"
-        >
+        <Badge className="text-sm" variant="secondary">
           Web Development
         </Badge>
       </div>

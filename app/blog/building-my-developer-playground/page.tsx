@@ -157,40 +157,22 @@ export default function Page() {
       </p>
       <p>Happy coding!</p>
       <div className="mt-6 flex flex-wrap gap-2">
-        <Badge
-          className="text-sm bg-gray-200 dark:bg-gray-800"
-          variant="secondary"
-        >
+        <Badge className="text-sm" variant="secondary">
           Web Development
         </Badge>
-        <Badge
-          className="text-sm bg-gray-200 dark:bg-gray-800"
-          variant="secondary"
-        >
+        <Badge className="text-sm" variant="secondary">
           Next.js
         </Badge>
-        <Badge
-          className="text-sm bg-gray-200 dark:bg-gray-800"
-          variant="secondary"
-        >
+        <Badge className="text-sm" variant="secondary">
           React
         </Badge>
-        <Badge
-          className="text-sm bg-gray-200 dark:bg-gray-800"
-          variant="secondary"
-        >
+        <Badge className="text-sm" variant="secondary">
           Tailwind CSS
         </Badge>
-        <Badge
-          className="text-sm bg-gray-200 dark:bg-gray-800"
-          variant="secondary"
-        >
+        <Badge className="text-sm" variant="secondary">
           TypeScript
         </Badge>
-        <Badge
-          className="text-sm bg-gray-200 dark:bg-gray-800"
-          variant="secondary"
-        >
+        <Badge className="text-sm" variant="secondary">
           Vercel
         </Badge>
       </div>
