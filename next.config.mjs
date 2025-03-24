@@ -1,4 +1,12 @@
 import nextPWA from "next-pwa";
+import { withSentryConfig } from "@sentry/nextjs";
+
+const nextConfig = {
+  reactStrictMode: true,
+  images: {
+    domains: ["avatars.githubusercontent.com"],
+  },
+};
 
 /** @type {import('next').NextConfig} */
 const withPWA = nextPWA({
@@ -8,15 +16,7 @@ const withPWA = nextPWA({
   disable: process.env.NODE_ENV === "development", // Disable PWA in development mode
 });
 
-const nextConfig = {
-  reactStrictMode: true,
-
-  images: {
-    domains: ["avatars.githubusercontent.com"],
-  },
-};
-
-export default withPWA(nextConfig, {
+export default withSentryConfig(withPWA(nextConfig), {
   // For all available options, see:
   // https://github.com/getsentry/sentry-webpack-plugin#options
 
