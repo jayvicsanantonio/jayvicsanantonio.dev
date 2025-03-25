@@ -7,6 +7,15 @@ export const metadata: Metadata = {
   title: "Jayvic San Antonio | Software Engineer",
   description:
     "Highly skilled senior web developer with a proven track record of delivering successful web projects. Experienced in JavaScript and passionate about building innovative solutions. Contact me to learn more about my expertise.",
+  manifest: "/manifest.json",
+  icons: {
+    icon: [
+      { url: "/icons/favicon.ico", sizes: "48x48", type: "image/x-icon" },
+      { url: "/icons/favicon.svg", sizes: "48x48", type: "image/svg+xml" },
+    ],
+    apple: "/icons/apple-touch-icon.png",
+  },
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({
