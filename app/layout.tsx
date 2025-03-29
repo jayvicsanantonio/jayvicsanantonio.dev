@@ -13,9 +13,9 @@ export const metadata: Metadata = {
       { url: "/icons/favicon.ico", sizes: "48x48", type: "image/x-icon" },
       { url: "/icons/favicon.svg", sizes: "48x48", type: "image/svg+xml" },
     ],
-    apple: "/icons/apple-icon.png",
+    apple: "/icons/apple-touch-icon.png",
   },
-  themeColor: "#030712",
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({
