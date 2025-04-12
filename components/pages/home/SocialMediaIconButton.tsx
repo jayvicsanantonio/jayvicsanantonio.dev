@@ -31,7 +31,9 @@ export default function SocialMediaIconButton({
         className={`${
           className ? className : 'w-6 h-6 md:w-8 md:h-8'
         }`}
+        aria-hidden="true"
       />
+      <span className="sr-only">{children}</span>
     </motion.a>
   );
 }
