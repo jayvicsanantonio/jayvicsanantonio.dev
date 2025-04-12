@@ -1,5 +1,5 @@
 import { MouseEventHandler, TouchEventHandler } from 'react';
-import { motion } from 'framer-motion'; // Import motion
+import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import useBoop from '@/hooks/use-boop';
 import useWindowSize from '@/hooks/use-window-size';
@@ -13,7 +13,6 @@ export default function ScrollDown({
 }) {
   const { width } = useWindowSize();
   const [controls, trigger] = useBoop({
-    // Get controls from useBoop
     y: 10,
     timing: 200,
   });
@@ -36,14 +35,13 @@ export default function ScrollDown({
       className="absolute left-1/2 -translate-x-1/2 bottom-40"
       style={{ bottom: `${bottom / 4}rem` }}
     >
-      <motion.button // Use motion.button
+      <motion.button
         className="cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 rounded-full p-2"
         onClick={scrollToNextSection}
         onMouseEnter={trigger as MouseEventHandler<HTMLButtonElement>}
         onTouchStart={trigger as TouchEventHandler<HTMLButtonElement>}
         aria-label="Scroll to About section"
-        animate={controls} // Pass controls to animate prop
-        // Remove style={style}
+        animate={controls}
       >
         <ChevronDown size={40} />
       </motion.button>

@@ -7,10 +7,8 @@ export default function AboutMe({
 }: {
   aboutRef: React.RefObject<HTMLElement>;
 }) {
-  // Reverted: Removed useState, useEffect for scrollContainer
   const { scrollYProgress } = useScroll({
     target: aboutRef,
-    // Reverted: Removed container option
     offset: ['start end', 'end start'],
   });
 
@@ -30,7 +28,7 @@ export default function AboutMe({
       ref={aboutRef}
       id="about-me"
       className="relative scroll-mt-32 min-h-screen grid lg:grid-cols-2 gap-4"
-      style={{ opacity, scale }} // Removed position: 'relative'
+      style={{ opacity, scale }}
     >
       <div className="h-fit lg:text-lg space-y-4 text-gray-950 dark:text-gray-200 dark:bg-gray-950 rounded-xl p-6 border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80 border-2 text-justify">
         <h2 className="font-oswald text-2xl font-bold">About Me</h2>

@@ -36,10 +36,9 @@ export default function Icon({
       height={size}
       viewBox={`0 0 ${size} ${size}`}
       className={className}
-      animate={controls} // Use animate prop with controls
+      animate={controls}
       onMouseEnter={trigger as MouseEventHandler<SVGSVGElement>}
       onTouchStart={trigger as TouchEventHandler<SVGSVGElement>}
-      // Initial state can be set here if needed, e.g., initial={{ transform: 'translate(0px, 0px) rotate(0deg) scale(1)' }}
     >
       <defs>
         <linearGradient

@@ -10,7 +10,7 @@ import Link from 'next/link';
 import Drawer from '@/components/pages/Drawer';
 import MainMenu from '@/components/pages/MainMenu';
 import useBoop from '@/hooks/use-boop';
-import { motion } from 'framer-motion'; // Import motion
+import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Code } from 'lucide-react';
 import Icon from '@/components/pages/Icon';
@@ -26,7 +26,7 @@ export default function Header({
   theme: Theme;
   setTheme: React.Dispatch<React.SetStateAction<Theme>>;
 }) {
-  const [menuControls, menuTrigger] = useBoop({ x: 15, timing: 300 }); // Get controls
+  const [boopControls, menuTrigger] = useBoop({ x: 15, timing: 300 });
 
   const [isNavOpen, setIsNavOpen] = useState(false);
 
@@ -140,14 +140,13 @@ export default function Header({
                   height="2"
                   fill="url(#menuIconGradient)"
                 />
-                <motion.rect // Use motion.rect
+                <motion.rect
                   x="2"
                   y="11"
                   width="20"
                   height="2"
                   fill="url(#menuIconGradient)"
-                  animate={menuControls} // Pass controls to animate prop
-                  // Remove style={menuStyle}
+                  animate={boopControls}
                 />
                 <rect
                   x="2"

@@ -2,7 +2,7 @@
 
 import { MouseEventHandler, TouchEventHandler } from 'react';
 import useBoop from '@/hooks/use-boop';
-import { motion } from 'framer-motion'; // Import motion
+import { motion } from 'framer-motion';
 
 export default function SocialMediaIconButton({
   Icon,
@@ -15,18 +15,17 @@ export default function SocialMediaIconButton({
   className?: string;
   children: React.ReactNode;
 }) {
-  const [controls, trigger] = useBoop({ rotation: 10, timing: 200 }); // Get controls
+  const [controls, trigger] = useBoop({ rotation: 10, timing: 200 });
 
   return (
-    <motion.a // Use motion.a
+    <motion.a
       href={link}
-      animate={controls} // Pass controls to animate prop
+      animate={controls}
       target="_blank"
       rel="noopener noreferrer"
       className="hover:text-blue-400 transition-colors will-change-transform"
       onMouseEnter={trigger as MouseEventHandler<HTMLAnchorElement>}
       onTouchStart={trigger as TouchEventHandler<HTMLAnchorElement>}
-      // Remove style={style}
     >
       <Icon
         className={`${
