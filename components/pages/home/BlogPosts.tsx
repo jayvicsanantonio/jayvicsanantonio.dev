@@ -63,14 +63,12 @@ export default function BlogPosts({
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
-              <button
-                className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 bg-white border border-transparent shadow-2xl p-6"
-                onClick={() => {
-                  router.push('/blog/popover-api-explained');
-                }}
+              <Link
+                href="/blog/popover-api-explained"
+                className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 bg-white border border-transparent shadow-2xl p-6 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950"
               >
                 <Image
-                  alt="Blog Post Image"
+                  alt="Popover API Explained"
                   className="rounded-lg object-cover w-full bg-gray-950"
                   height={160}
                   src="/images/blog/popover-api-explained.webp"
@@ -112,23 +110,19 @@ export default function BlogPosts({
                     </Badge>
                   </div>
                 </div>
-              </button>
+              </Link>
             </motion.div>
             <motion.div
               className="will-change-transform"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
-              <button
-                className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 bg-white border border-transparent shadow-2xl p-6"
-                onClick={() => {
-                  router.push(
-                    '/blog/css-user-valid-user-invalid-explained'
-                  );
-                }}
+              <Link
+                href="/blog/css-user-valid-user-invalid-explained"
+                className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 bg-white border border-transparent shadow-2xl p-6 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950"
               >
                 <Image
-                  alt="Blog Post Image"
+                  alt="CSS :user-valid and :user-invalid Explained"
                   className="rounded-lg object-cover w-full bg-gray-950"
                   height={160}
                   src="/images/blog/css-user-valid-user-invalid-explained.webp"
@@ -172,21 +166,19 @@ export default function BlogPosts({
                     </Badge>
                   </div>
                 </div>
-              </button>
+              </Link>
             </motion.div>
             <motion.div
               className="will-change-transform"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
-              <button
-                className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 bg-white border border-transparent shadow-2xl p-6"
-                onClick={() => {
-                  router.push('/blog/html-autofocus-explained');
-                }}
+              <Link
+                href="/blog/html-autofocus-explained"
+                className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 bg-white border border-transparent shadow-2xl p-6 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-950"
               >
                 <Image
-                  alt="Blog Post Image"
+                  alt="HTML autofocus Explained"
                   className="rounded-lg object-cover w-full bg-gray-950"
                   height={160}
                   src="/images/blog/html-autofocus-explained.webp"
@@ -226,7 +218,7 @@ export default function BlogPosts({
                     </Badge>
                   </div>
                 </div>
-              </button>
+              </Link>
             </motion.div>
           </div>
         </div>
