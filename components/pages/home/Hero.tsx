@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
+import usePrefersReducedMotion from '@/hooks/use-prefers-reduced-motion';
 import Bluesky from '@/components/icons/Bluesky';
 import ScrollDown from '@/components/pages/ScrollDown';
 import SocialMediaIconButton from '@/components/pages/home/SocialMediaIconButton';
@@ -14,6 +15,7 @@ export default function Hero({
 }: {
   aboutRef: React.RefObject<HTMLElement>;
 }) {
+  const prefersReducedMotion = usePrefersReducedMotion();
   const [activeIndex, setActiveIndex] = useState(0);
   const roles = [
     'Full-Stack Web Developer',
@@ -30,7 +32,7 @@ export default function Hero({
       setActiveIndex((current) => (current + 1) % roles.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [roles.length]);
 
   return (
     <section className="relative h-screen flex flex-col-reverse justify-end md:flex-row items-center px-4 pb-60 text-gray-950 dark:text-gray-200">
@@ -44,7 +46,11 @@ export default function Hero({
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -10, opacity: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={
+              prefersReducedMotion
+                ? { duration: 0 }
+                : { duration: 0.5 }
+            }
             className="text-lg lg:text-3xl font-light uppercase bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500 will-change-transform"
           >
             {roles[activeIndex]}
