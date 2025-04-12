@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { animated } from "react-spring";
-import { MouseEventHandler, TouchEventHandler } from "react";
-import useBoop from "@/hooks/use-boop";
+import { motion } from 'framer-motion';
+import { MouseEventHandler, TouchEventHandler } from 'react';
+import useBoop from '@/hooks/use-boop';
 
 export default function Icon({
   name: Component,
   className,
   size = 24,
   strokeWidth = 2,
-  stroke = "url(#iconGradient)",
+  stroke = 'url(#iconGradient)',
   boopConfig = {
     rotation: 90,
     timing: 300,
@@ -28,17 +28,18 @@ export default function Icon({
   };
   props?: Array<any>;
 }) {
-  const [style, trigger] = useBoop(boopConfig);
+  const [controls, trigger] = useBoop(boopConfig);
 
   return (
-    <animated.svg
+    <motion.svg
       width={size}
       height={size}
       viewBox={`0 0 ${size} ${size}`}
       className={className}
-      style={style}
+      animate={controls} // Use animate prop with controls
       onMouseEnter={trigger as MouseEventHandler<SVGSVGElement>}
       onTouchStart={trigger as TouchEventHandler<SVGSVGElement>}
+      // Initial state can be set here if needed, e.g., initial={{ transform: 'translate(0px, 0px) rotate(0deg) scale(1)' }}
     >
       <defs>
         <linearGradient
@@ -59,6 +60,6 @@ export default function Icon({
         strokeWidth={strokeWidth}
         {...props}
       />
-    </animated.svg>
+    </motion.svg>
   );
 }

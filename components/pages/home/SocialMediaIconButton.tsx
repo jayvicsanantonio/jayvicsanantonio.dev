@@ -1,9 +1,8 @@
-"use client";
+'use client';
 
-import { MouseEventHandler, TouchEventHandler } from "react";
-import Link from "next/link";
-import useBoop from "@/hooks/use-boop";
-import { animated } from "react-spring";
+import { MouseEventHandler, TouchEventHandler } from 'react';
+import useBoop from '@/hooks/use-boop';
+import { motion } from 'framer-motion'; // Import motion
 
 export default function SocialMediaIconButton({
   Icon,
@@ -16,23 +15,24 @@ export default function SocialMediaIconButton({
   className?: string;
   children: React.ReactNode;
 }) {
-  const [style, trigger] = useBoop({ rotation: 10, timing: 200 });
+  const [controls, trigger] = useBoop({ rotation: 10, timing: 200 }); // Get controls
 
   return (
-    <Link href={link} passHref legacyBehavior>
-      <animated.a
-        href={link}
-        style={style}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="hover:text-blue-400 transition-colors will-change-transform"
-        onMouseEnter={trigger as MouseEventHandler<HTMLAnchorElement>}
-        onTouchStart={trigger as TouchEventHandler<HTMLAnchorElement>}
-      >
-        <Icon
-          className={`${className ? className : "w-6 h-6 md:w-8 md:h-8"}`}
-        />
-      </animated.a>
-    </Link>
+    <motion.a // Use motion.a
+      href={link}
+      animate={controls} // Pass controls to animate prop
+      target="_blank"
+      rel="noopener noreferrer"
+      className="hover:text-blue-400 transition-colors will-change-transform"
+      onMouseEnter={trigger as MouseEventHandler<HTMLAnchorElement>}
+      onTouchStart={trigger as TouchEventHandler<HTMLAnchorElement>}
+      // Remove style={style}
+    >
+      <Icon
+        className={`${
+          className ? className : 'w-6 h-6 md:w-8 md:h-8'
+        }`}
+      />
+    </motion.a>
   );
 }

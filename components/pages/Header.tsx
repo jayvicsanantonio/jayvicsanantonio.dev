@@ -1,23 +1,23 @@
-"use client";
+'use client';
 
 import {
   useState,
   useCallback,
   MouseEventHandler,
   TouchEventHandler,
-} from "react";
-import Link from "next/link";
-import Drawer from "@/components/pages/Drawer";
-import MainMenu from "@/components/pages/MainMenu";
-import useBoop from "@/hooks/use-boop";
-import { animated } from "react-spring";
-import { Button } from "@/components/ui/button";
-import { Code } from "lucide-react";
-import Icon from "@/components/pages/Icon";
-import HolidayLights from "@/components/pages/HolidayLights";
-import Sun from "@/components/icons/Sun";
-import Moon from "@/components/icons/Moon";
-import Theme from "@/types/theme";
+} from 'react';
+import Link from 'next/link';
+import Drawer from '@/components/pages/Drawer';
+import MainMenu from '@/components/pages/MainMenu';
+import useBoop from '@/hooks/use-boop';
+import { motion } from 'framer-motion'; // Import motion
+import { Button } from '@/components/ui/button';
+import { Code } from 'lucide-react';
+import Icon from '@/components/pages/Icon';
+import HolidayLights from '@/components/pages/HolidayLights';
+import Sun from '@/components/icons/Sun';
+import Moon from '@/components/icons/Moon';
+import Theme from '@/types/theme';
 
 export default function Header({
   theme,
@@ -26,7 +26,7 @@ export default function Header({
   theme: Theme;
   setTheme: React.Dispatch<React.SetStateAction<Theme>>;
 }) {
-  const [menuStyle, menuTrigger] = useBoop({ x: 15, timing: 300 });
+  const [menuControls, menuTrigger] = useBoop({ x: 15, timing: 300 }); // Get controls
 
   const [isNavOpen, setIsNavOpen] = useState(false);
 
@@ -37,7 +37,11 @@ export default function Header({
   return (
     <>
       <header className="flex items-center justify-between px-4 py-2 mt-4 bg-white dark:bg-gray-950/80 bg-white/80 backdrop-blur-lg border rounded-3xl dark:border-gray-800 sticky top-1 z-20 -mx-4 lg:-mx-auto">
-        <Link href="/" className="flex items-center gap-2" aria-label="Logo">
+        <Link
+          href="/"
+          className="flex items-center gap-2"
+          aria-label="Logo"
+        >
           <Icon
             name={Code}
             size={30}
@@ -55,8 +59,8 @@ export default function Header({
             aria-label="Main menu"
             className={
               isNavOpen
-                ? "fixed inset-0 p-4 z-10"
-                : "hidden md:flex items-center gap-4"
+                ? 'fixed inset-0 p-4 z-10'
+                : 'hidden md:flex items-center gap-4'
             }
           >
             {!isNavOpen && <MainMenu />}
@@ -69,10 +73,10 @@ export default function Header({
               size="icon"
               variant="ghost"
               onClick={() => {
-                setTheme(theme === "light" ? "dark" : "light");
+                setTheme(theme === 'light' ? 'dark' : 'light');
               }}
             >
-              {theme === "light" ? (
+              {theme === 'light' ? (
                 <Icon
                   name={Sun}
                   aria-hidden={true}
@@ -103,8 +107,12 @@ export default function Header({
                 menuTrigger();
                 setIsNavOpen((prev) => !prev);
               }}
-              onMouseEnter={menuTrigger as MouseEventHandler<HTMLButtonElement>}
-              onTouchStart={menuTrigger as TouchEventHandler<HTMLButtonElement>}
+              onMouseEnter={
+                menuTrigger as MouseEventHandler<HTMLButtonElement>
+              }
+              onTouchStart={
+                menuTrigger as TouchEventHandler<HTMLButtonElement>
+              }
             >
               <svg
                 width="24"
@@ -132,13 +140,14 @@ export default function Header({
                   height="2"
                   fill="url(#menuIconGradient)"
                 />
-                <animated.rect
+                <motion.rect // Use motion.rect
                   x="2"
                   y="11"
                   width="20"
                   height="2"
                   fill="url(#menuIconGradient)"
-                  style={menuStyle}
+                  animate={menuControls} // Pass controls to animate prop
+                  // Remove style={menuStyle}
                 />
                 <rect
                   x="2"

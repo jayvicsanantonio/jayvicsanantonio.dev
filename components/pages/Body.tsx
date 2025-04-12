@@ -1,59 +1,63 @@
-"use client";
+'use client';
 
-import localFont from "next/font/local";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/react";
-import { Toaster } from "@/components/ui/sonner";
-import Header from "@/components/pages/Header";
-import Footer from "@/components/pages/Footer";
-import useLocalStorage from "@/hooks/use-local-storage";
-import Theme from "@/types/theme";
+import localFont from 'next/font/local';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/react';
+import { Toaster } from '@/components/ui/sonner';
+import Header from '@/components/pages/Header';
+import Footer from '@/components/pages/Footer';
+import useLocalStorage from '@/hooks/use-local-storage';
+import Theme from '@/types/theme';
 
 const sourceSansPro = localFont({
   src: [
     {
-      path: "../../public/fonts/SourceSansPro-Regular.woff2",
-      weight: "400",
-      style: "normal",
+      path: '../../public/fonts/SourceSansPro-Regular.woff2',
+      weight: '400',
+      style: 'normal',
     },
     {
-      path: "../../public/fonts/SourceSansPro-Light.woff2",
-      weight: "300",
-      style: "normal",
+      path: '../../public/fonts/SourceSansPro-Light.woff2',
+      weight: '300',
+      style: 'normal',
     },
     {
-      path: "../../public/fonts/SourceSansPro-Bold.woff2",
-      weight: "700",
-      style: "normal",
+      path: '../../public/fonts/SourceSansPro-Bold.woff2',
+      weight: '700',
+      style: 'normal',
     },
   ],
-  display: "swap",
-  variable: "--font-source-sans",
+  display: 'swap',
+  variable: '--font-source-sans',
 });
 
 const oswald = localFont({
   src: [
     {
-      path: "../../public/fonts/oswald.woff2",
-      weight: "300",
-      style: "normal",
+      path: '../../public/fonts/oswald.woff2',
+      weight: '300',
+      style: 'normal',
     },
     {
-      path: "../../public/fonts/oswald.woff2",
-      weight: "700",
-      style: "normal",
+      path: '../../public/fonts/oswald.woff2',
+      weight: '700',
+      style: 'normal',
     },
   ],
-  display: "swap",
-  variable: "--font-oswald",
+  display: 'swap',
+  variable: '--font-oswald',
 });
 
-export default function Body({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useLocalStorage<Theme>("theme", "dark");
+export default function Body({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const [theme, setTheme] = useLocalStorage<Theme>('theme', 'dark');
 
   return (
     <body
-      className={`${theme === "light" ? "" : "dark"} ${
+      className={`${theme === 'light' ? '' : 'dark'} ${
         sourceSansPro.variable
       } ${
         oswald.variable
@@ -61,7 +65,7 @@ export default function Body({ children }: { children: React.ReactNode }) {
     >
       <div
         className={`font-source-sans flex flex-col max-w-5xl px-4 md:px-12 mx-4 lg:mx-auto ${
-          theme === "light" ? "" : "dark"
+          theme === 'light' ? '' : 'dark'
         }`}
       >
         <Header theme={theme} setTheme={setTheme} />

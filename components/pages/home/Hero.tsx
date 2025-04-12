@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
-import Bluesky from "@/components/icons/Bluesky";
-import ScrollDown from "@/components/pages/ScrollDown";
-import SocialMediaIconButton from "@/components/pages/home/SocialMediaIconButton";
-import { motion } from "motion/react";
-import { Github, Linkedin, Mail } from "lucide-react";
+import Bluesky from '@/components/icons/Bluesky';
+import ScrollDown from '@/components/pages/ScrollDown';
+import SocialMediaIconButton from '@/components/pages/home/SocialMediaIconButton';
+import { motion } from 'framer-motion';
+import { Github, Linkedin, Mail } from 'lucide-react';
 
 export default function Hero({
   aboutRef,
@@ -16,13 +16,13 @@ export default function Hero({
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const roles = [
-    "Full-Stack Web Developer",
-    "JavaScript Specialist",
-    "React Expert",
-    "Node.JS Developer",
-    "UI/UX Enthusiast",
-    "Performance Optimization Advocate",
-    "Creative Thinker",
+    'Full-Stack Web Developer',
+    'JavaScript Specialist',
+    'React Expert',
+    'Node.JS Developer',
+    'UI/UX Enthusiast',
+    'Performance Optimization Advocate',
+    'Creative Thinker',
   ];
 
   useEffect(() => {
@@ -51,8 +51,8 @@ export default function Hero({
           </motion.h2>
         </div>
         <p className="text-lg lg:text-xl text-center md:text-left">
-          Turning caffeine into code and transforming challenges into innovative
-          web solutions that make a difference.
+          Turning caffeine into code and transforming challenges into
+          innovative web solutions that make a difference.
         </p>
         <div className="flex space-x-6 justify-center md:justify-start">
           <SocialMediaIconButton
@@ -88,8 +88,8 @@ export default function Hero({
         loading="eager"
         src="/images/home/profile-image.jpg"
         style={{
-          aspectRatio: "340/340",
-          objectFit: "cover",
+          aspectRatio: '340/340',
+          objectFit: 'cover',
         }}
         width={340}
         priority={true}

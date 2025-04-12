@@ -1,56 +1,72 @@
-import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
-import { motion, useScroll, useTransform } from "motion/react";
+import Link from 'next/link';
+import { Badge } from '@/components/ui/badge';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function AboutMe({
   aboutRef,
 }: {
   aboutRef: React.RefObject<HTMLElement>;
 }) {
+  // Reverted: Removed useState, useEffect for scrollContainer
   const { scrollYProgress } = useScroll({
     target: aboutRef,
-    offset: ["start end", "end start"],
+    // Reverted: Removed container option
+    offset: ['start end', 'end start'],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1, 0.95]);
+  const opacity = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [0, 1, 0]
+  );
+  const scale = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [0.95, 1, 0.95]
+  );
 
   return (
     <motion.section
       ref={aboutRef}
       id="about-me"
       className="relative scroll-mt-32 min-h-screen grid lg:grid-cols-2 gap-4"
-      style={{ opacity, scale }}
+      style={{ opacity, scale }} // Removed position: 'relative'
     >
       <div className="h-fit lg:text-lg space-y-4 text-gray-950 dark:text-gray-200 dark:bg-gray-950 rounded-xl p-6 border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80 border-2 text-justify">
         <h2 className="font-oswald text-2xl font-bold">About Me</h2>
         <p className="hyphenate">
-          I'm Jayvic San Antonio, a Full-Stack Web Developer originally from the
-          Philippines, now thriving in the San Francisco Bay Area. With over 9
-          years of experience, you could say JavaScript is my coding soulmate -
-          I love its versatility and how it keeps getting better and better!
+          I'm Jayvic San Antonio, a Full-Stack Web Developer
+          originally from the Philippines, now thriving in the San
+          Francisco Bay Area. With over 9 years of experience, you
+          could say JavaScript is my coding soulmate - I love its
+          versatility and how it keeps getting better and better!
         </p>
         <p className="hyphenate">
-          From hackathons and co-founding a startup to working at a global media
-          and tech company, I've thrived in all kinds of environments. Whether
-          I'm flying solo or part of an awesome team, I'm all about tackling
-          challenging projects and delivering top-notch code (optimized,
-          documented, and ready to roll!).
+          From hackathons and co-founding a startup to working at a
+          global media and tech company, I've thrived in all kinds of
+          environments. Whether I'm flying solo or part of an awesome
+          team, I'm all about tackling challenging projects and
+          delivering top-notch code (optimized, documented, and ready
+          to roll!).
         </p>
         <p className="hyphenate">
-          In this ever-evolving industry, staying sharp is key. That's why I'm
-          constantly learning and pushing my skills to the next level.
+          In this ever-evolving industry, staying sharp is key. That's
+          why I'm constantly learning and pushing my skills to the
+          next level.
         </p>
         <p className="hyphenate">
-          <span className="font-oswald font-bold">What gets me excited?</span>{" "}
-          The chance to create impactful solutions, make user experiences
-          amazing, and drive innovation in a forward-thinking environment.
-          Collaboration and inclusivity are super important to me, so working
-          with a team that shares those values would be epic!
+          <span className="font-oswald font-bold">
+            What gets me excited?
+          </span>{' '}
+          The chance to create impactful solutions, make user
+          experiences amazing, and drive innovation in a
+          forward-thinking environment. Collaboration and inclusivity
+          are super important to me, so working with a team that
+          shares those values would be epic!
         </p>
         <p className="hyphenate">
-          Excited to bring your vision to life? Let's collaborate and build
-          something incredible together!{" "}
+          Excited to bring your vision to life? Let's collaborate and
+          build something incredible together!{' '}
           <Link
             href="#get-in-touch"
             className="hover:text-blue-400 underline decoration-wavy decoration-purple-500 underline-offset-4"
@@ -234,7 +250,9 @@ export default function AboutMe({
           </div>
         </div>
         <div className="lg:text-lg space-y-4 text-gray-950 dark:text-gray-200 dark:bg-gray-950 rounded-xl p-6 border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80 border-2 h-fit">
-          <h2 className="font-oswald text-2xl font-bold">Expertise</h2>
+          <h2 className="font-oswald text-2xl font-bold">
+            Expertise
+          </h2>
           <ul className="space-y-1">
             <li className="flex items-center">
               <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>

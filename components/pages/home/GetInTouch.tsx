@@ -1,5 +1,5 @@
-import ContactMeForm from "@/components/pages/home/ContactMeForm";
-import { motion, useScroll, useTransform } from "motion/react";
+import ContactMeForm from '@/components/pages/home/ContactMeForm';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function GetInTouch({
   getInTouchRef,
@@ -8,10 +8,14 @@ export default function GetInTouch({
 }) {
   const { scrollYProgress } = useScroll({
     target: getInTouchRef,
-    offset: ["start end", "end start"],
+    offset: ['start end', 'end start'],
   });
 
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1, 0.95]);
+  const scale = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [0.95, 1, 0.95]
+  );
 
   return (
     <motion.section
@@ -21,10 +25,12 @@ export default function GetInTouch({
       style={{ scale }}
     >
       <div className="space-y-4">
-        <h2 className="font-oswald text-2xl font-bold">Get in Touch</h2>
+        <h2 className="font-oswald text-2xl font-bold">
+          Get in Touch
+        </h2>
         <p className="dark:text-gray-400">
-          I'm always excited to discuss new projects and opportunities. Feel
-          free to reach out to me.
+          I'm always excited to discuss new projects and
+          opportunities. Feel free to reach out to me.
         </p>
       </div>
       <ContactMeForm />
