@@ -8,7 +8,7 @@ import ProjectButton from '@/components/pages/ProjectButton';
 export default function FeaturedProjects({
   featuredProjectsRef,
 }: {
-  featuredProjectsRef: React.RefObject<HTMLElement>;
+  featuredProjectsRef: React.RefObject<HTMLElement | null>;
 }) {
   const { scrollYProgress } = useScroll({
     target: featuredProjectsRef,
@@ -23,7 +23,7 @@ export default function FeaturedProjects({
 
   return (
     <motion.section
-      ref={featuredProjectsRef}
+      ref={featuredProjectsRef as React.RefObject<HTMLElement>}
       id="projects"
       className="relative scroll-mt-52 min-h-screen"
       style={{ scale }}
