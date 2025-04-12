@@ -1,55 +1,74 @@
-import { useCallback, useEffect, useState } from "react";
-import { useSpring } from "react-spring";
+import { useCallback } from 'react';
+import {
+  useAnimationControls,
+  AnimationControls,
+} from 'framer-motion';
+import usePrefersReducedMotion from './use-prefers-reduced-motion';
 
-import usePrefersReducedMotion from "./use-prefers-reduced-motion";
+interface BoopConfig {
+  x?: number;
+  y?: number;
+  rotation?: number;
+  scale?: number;
+  timing?: number;
+  springConfig?: {
+    stiffness?: number;
+    damping?: number;
+    mass?: number;
+  };
+}
 
 function useBoop({
   x = 0,
   y = 0,
   rotation = 0,
-  scale = 1,
+  scale = 1.1, // Default scale slightly larger for a noticeable boop
   timing = 150,
   springConfig = {
-    tension: 300,
-    friction: 10,
+    stiffness: 300,
+    damping: 10,
+    mass: 1,
   },
-}) {
+}: BoopConfig): [AnimationControls, () => void] {
   const prefersReducedMotion = usePrefersReducedMotion();
-
-  const [isBooped, setIsBooped] = useState(false);
-
-  const style = useSpring({
-    transform: isBooped
-      ? `translate(${x}px, ${y}px)
-         rotate(${rotation}deg)
-         scale(${scale})`
-      : `translate(0px, 0px)
-         rotate(0deg)
-         scale(1)`,
-    config: springConfig,
-  });
-
-  useEffect(() => {
-    if (!isBooped) {
-      return;
-    }
-
-    const timeoutId = window.setTimeout(() => {
-      setIsBooped(false);
-    }, timing);
-
-    return () => {
-      window.clearTimeout(timeoutId);
-    };
-  }, [isBooped, timing]);
+  const controls = useAnimationControls();
 
   const trigger = useCallback(() => {
-    setIsBooped(true);
-  }, []);
+    if (prefersReducedMotion) {
+      return;
+    }
+    controls.start({
+      transform: `translate(${x}px, ${y}px) rotate(${rotation}deg) scale(${scale})`,
+      transition: {
+        type: 'spring',
+        ...springConfig,
+        duration: timing / 1000, // Framer Motion uses seconds
+      },
+    });
+    // Reset after the animation duration
+    setTimeout(() => {
+      controls.start({
+        transform: 'translate(0px, 0px) rotate(0deg) scale(1)',
+        transition: {
+          type: 'spring',
+          ...springConfig,
+          duration: timing / 1000,
+        },
+      });
+    }, timing);
+  }, [
+    controls,
+    x,
+    y,
+    rotation,
+    scale,
+    timing,
+    springConfig,
+    prefersReducedMotion,
+  ]);
 
-  let appliedStyle = prefersReducedMotion ? {} : style;
-
-  return [appliedStyle, trigger];
+  // Return controls instead of style. Initial state is handled by motion component.
+  return [controls, trigger];
 }
 
 export default useBoop;

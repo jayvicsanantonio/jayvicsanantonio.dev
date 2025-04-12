@@ -1,27 +1,34 @@
-import nextPWA from "next-pwa";
-import { withSentryConfig } from "@sentry/nextjs";
+import nextPWA from 'next-pwa';
+import { withSentryConfig } from '@sentry/nextjs';
 
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["avatars.githubusercontent.com"],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
 };
 
 /** @type {import('next').NextConfig} */
 const withPWA = nextPWA({
-  dest: "public",
+  dest: 'public',
   register: true, // Register the service worker
   skipWaiting: true, // Skip waiting for service worker activation
-  disable: process.env.NODE_ENV === "development", // Disable PWA in development mode
+  disable: process.env.NODE_ENV === 'development', // Disable PWA in development mode
 });
 
 export default withSentryConfig(withPWA(nextConfig), {
   // For all available options, see:
   // https://github.com/getsentry/sentry-webpack-plugin#options
 
-  org: "jayvic-san-antonio",
-  project: "javascript-nextjs",
+  org: 'jayvic-san-antonio',
+  project: 'javascript-nextjs',
 
   // Only print logs for uploading source maps in CI
   silent: !process.env.CI,
@@ -41,7 +48,7 @@ export default withSentryConfig(withPWA(nextConfig), {
   // This can increase your server load as well as your hosting bill.
   // Note: Check that the configured route will not match with your Next.js middleware, otherwise reporting of client-
   // side errors will fail.
-  tunnelRoute: "/monitoring",
+  tunnelRoute: '/monitoring',
 
   // Hides source maps from generated client bundles
   hideSourceMaps: true,

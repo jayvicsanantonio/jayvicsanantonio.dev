@@ -1,8 +1,8 @@
-import { MouseEventHandler, TouchEventHandler } from "react";
-import { animated } from "react-spring";
-import { ChevronDown } from "lucide-react";
-import useBoop from "@/hooks/use-boop";
-import useWindowSize from "@/hooks/use-window-size";
+import { MouseEventHandler, TouchEventHandler } from 'react';
+import { motion } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
+import useBoop from '@/hooks/use-boop';
+import useWindowSize from '@/hooks/use-window-size';
 
 export default function ScrollDown({
   sectionRef,
@@ -12,7 +12,7 @@ export default function ScrollDown({
   bottom?: number;
 }) {
   const { width } = useWindowSize();
-  const [style, trigger] = useBoop({
+  const [controls, trigger] = useBoop({
     y: 10,
     timing: 200,
   });
@@ -20,8 +20,8 @@ export default function ScrollDown({
   const scrollToNextSection = () => {
     if (sectionRef.current) {
       sectionRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
+        behavior: 'smooth',
+        block: 'start',
       });
     }
   };
@@ -35,16 +35,16 @@ export default function ScrollDown({
       className="absolute left-1/2 -translate-x-1/2 bottom-40"
       style={{ bottom: `${bottom / 4}rem` }}
     >
-      <animated.button
+      <motion.button
         className="cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 rounded-full p-2"
         onClick={scrollToNextSection}
         onMouseEnter={trigger as MouseEventHandler<HTMLButtonElement>}
         onTouchStart={trigger as TouchEventHandler<HTMLButtonElement>}
         aria-label="Scroll to About section"
-        style={style}
+        animate={controls}
       >
         <ChevronDown size={40} />
-      </animated.button>
+      </motion.button>
     </div>
   );
 }

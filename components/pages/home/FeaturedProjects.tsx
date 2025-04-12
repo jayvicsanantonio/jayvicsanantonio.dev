@@ -1,9 +1,9 @@
-import Link from "next/link";
-import Image from "next/image";
-import { Github } from "lucide-react";
-import { motion, useScroll, useTransform } from "motion/react";
-import { CardContent, CardFooter, Card } from "@/components/ui/card";
-import ProjectButton from "@/components/pages/ProjectButton";
+import Link from 'next/link';
+import Image from 'next/image';
+import { Github } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { CardContent, CardFooter, Card } from '@/components/ui/card';
+import ProjectButton from '@/components/pages/ProjectButton';
 
 export default function FeaturedProjects({
   featuredProjectsRef,
@@ -12,10 +12,14 @@ export default function FeaturedProjects({
 }) {
   const { scrollYProgress } = useScroll({
     target: featuredProjectsRef,
-    offset: ["start end", "end start"],
+    offset: ['start end', 'end start'],
   });
 
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1, 0.95]);
+  const scale = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [0.95, 1, 0.95]
+  );
 
   return (
     <motion.section
@@ -31,8 +35,8 @@ export default function FeaturedProjects({
               Featured Projects
             </h2>
             <p className="dark:text-gray-400">
-              Check out some of my recent projects that showcase my expertise in
-              web development.
+              Check out some of my recent projects that showcase my
+              expertise in web development.
             </p>
           </div>
           <div className="self-end">
@@ -59,8 +63,8 @@ export default function FeaturedProjects({
                   height={225}
                   src="/images/home/yahoo-dsp.webp"
                   style={{
-                    aspectRatio: "400/225",
-                    objectFit: "cover",
+                    aspectRatio: '400/225',
+                    objectFit: 'cover',
                   }}
                   width={400}
                 />
@@ -72,14 +76,15 @@ export default function FeaturedProjects({
                       Yahoo DSP
                     </h3>
                     <p className="dark:text-gray-200 ">
-                      A cutting-edge programmatic advertising platform for
-                      businesses. Built with a powerful tech stack including{" "}
-                      <em className="font-bold">Ember.js</em>,{" "}
-                      <em className="font-bold">React.js</em>, and{" "}
-                      <em className="font-bold">Node.js</em>, the platform
-                      empowers advertisers with features like real-time bidding,
-                      audience targeting, and comprehensive campaign performance
-                      measurement.
+                      A cutting-edge programmatic advertising platform
+                      for businesses. Built with a powerful tech stack
+                      including{' '}
+                      <em className="font-bold">Ember.js</em>,{' '}
+                      <em className="font-bold">React.js</em>, and{' '}
+                      <em className="font-bold">Node.js</em>, the
+                      platform empowers advertisers with features like
+                      real-time bidding, audience targeting, and
+                      comprehensive campaign performance measurement.
                     </p>
                   </div>
                 </div>
@@ -108,8 +113,8 @@ export default function FeaturedProjects({
                   height={225}
                   src="/images/home/barbenheimer.webp"
                   style={{
-                    aspectRatio: "400/225",
-                    objectFit: "cover",
+                    aspectRatio: '400/225',
+                    objectFit: 'cover',
                   }}
                   width={400}
                 />
@@ -121,9 +126,10 @@ export default function FeaturedProjects({
                       Barbenheimer VS Code Theme
                     </h3>
                     <p className="dark:text-gray-200">
-                      A VS Code theme inspired by the Internet phenomenon of the
-                      same name. It combines the pink and playful aesthetics of
-                      Barbie with the dark and dramatic tones of Oppenheimer.
+                      A VS Code theme inspired by the Internet
+                      phenomenon of the same name. It combines the
+                      pink and playful aesthetics of Barbie with the
+                      dark and dramatic tones of Oppenheimer.
                     </p>
                   </div>
                 </div>
