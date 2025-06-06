@@ -2,12 +2,19 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation"; // Removed
 import { Calendar } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Blog | Jayvic San Antonio - Web Development Insights",
+  description: "Explore insightful articles, tips, and behind-the-scenes experiences in web development from Jayvic San Antonio's blog.",
+  keywords: ["blog", "web development", "javascript", "typescript", "nextjs", "react", "css", "html"],
+};
 
 export default function Page() {
-  const router = useRouter();
+  // const router = useRouter(); // Removed
 
   return (
     <section className="w-full  dark:bg-gray-950 text-gray-200">
@@ -27,11 +34,9 @@ export default function Page() {
         </div>
         <div className="flex flex-col gap-8">
           <div className="space-y-8">
-            <button
+            <Link
+              href="/blog/popover-api-explained"
               className="cursor-pointer grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-linear-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
-              onClick={() => {
-                router.push("/blog/popover-api-explained");
-              }}
             >
               <Image
                 alt="Blog Post Image"
@@ -76,12 +81,10 @@ export default function Page() {
                   </Badge>
                 </div>
               </div>
-            </button>
-            <button
+            </Link>
+            <Link
+              href="/blog/css-user-valid-user-invalid-explained"
               className="cursor-pointer grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-linear-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
-              onClick={() => {
-                router.push("/blog/css-user-valid-user-invalid-explained");
-              }}
             >
               <Image
                 alt="Blog Post Image"
@@ -127,12 +130,10 @@ export default function Page() {
                   </Badge>
                 </div>
               </div>
-            </button>
-            <button
+            </Link>
+            <Link
+              href="/blog/html-autofocus-explained"
               className="cursor-pointer grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-linear-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
-              onClick={() => {
-                router.push("/blog/html-autofocus-explained");
-              }}
             >
               <Image
                 alt="Blog Post Image"
@@ -175,12 +176,10 @@ export default function Page() {
                   </Badge>
                 </div>
               </div>
-            </button>
-            <button
+            </Link>
+            <Link
+              href="/blog/css-has-explained"
               className="cursor-pointer grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-linear-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
-              onClick={() => {
-                router.push("/blog/css-has-explained");
-              }}
             >
               <Image
                 alt="Blog Post Image"
@@ -223,12 +222,10 @@ export default function Page() {
                   </Badge>
                 </div>
               </div>
-            </button>
-            <button
+            </Link>
+            <Link
+              href="/blog/my-coding-christmas-four-advent-calendars"
               className="cursor-pointer grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-linear-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
-              onClick={() => {
-                router.push("/blog/my-coding-christmas-four-advent-calendars");
-              }}
             >
               <Image
                 alt="Blog Post Image"
@@ -262,12 +259,10 @@ export default function Page() {
                   </Badge>
                 </div>
               </div>
-            </button>
-            <button
+            </Link>
+            <Link
+              href="/blog/own-your-bluesky-identity"
               className="cursor-pointer grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-linear-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
-              onClick={() => {
-                router.push("/blog/own-your-bluesky-identity");
-              }}
             >
               <Image
                 alt="Blog Post Image"
@@ -299,12 +294,10 @@ export default function Page() {
                   </Badge>
                 </div>
               </div>
-            </button>
-            <button
+            </Link>
+            <Link
+              href="/blog/goodbye-twitter-x-hello-bluesky"
               className="cursor-pointer grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-linear-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
-              onClick={() => {
-                router.push("/blog/goodbye-twitter-x-hello-bluesky");
-              }}
             >
               <Image
                 alt="Blog Post Image"
@@ -336,12 +329,10 @@ export default function Page() {
                   </Badge>
                 </div>
               </div>
-            </button>
-            <button
+            </Link>
+            <Link
+              href="/blog/from-ember-to-next"
               className="cursor-pointer grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-linear-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
-              onClick={() => {
-                router.push("/blog/from-ember-to-next");
-              }}
             >
               <Image
                 alt="Blog Post Image"
@@ -379,12 +370,10 @@ export default function Page() {
                   </Badge>
                 </div>
               </div>
-            </button>
-            <button
+            </Link>
+            <Link
+              href="/blog/the-typescript-tightrope"
               className="cursor-pointer grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-linear-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
-              onClick={() => {
-                router.push("/blog/the-typescript-tightrope");
-              }}
             >
               <Image
                 alt="Blog Post Image"
@@ -421,12 +410,10 @@ export default function Page() {
                   </Badge>
                 </div>
               </div>
-            </button>
-            <button
+            </Link>
+            <Link
+              href="/blog/building-my-developer-playground"
               className="cursor-pointer grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 rounded-lg dark:bg-gray-950 text-gray-950 dark:text-gray-400 border border-transparent p-6 shadow-md transition will-change-transform bg-linear-to-r from-blue-500/10 to-purple-500/10 hover:scale-110 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none"
-              onClick={() => {
-                router.push("/blog/building-my-developer-playground");
-              }}
             >
               <Image
                 alt="Blog Post Image"
@@ -472,7 +459,7 @@ export default function Page() {
                   </Badge>
                 </div>
               </div>
-            </button>
+            </Link>
           </div>
         </div>
       </div>

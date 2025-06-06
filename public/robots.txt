@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.jayvicsanantonio.me/sitemap.xml
+Sitemap: https://jayvicsanantonio.dev/sitemap.xml

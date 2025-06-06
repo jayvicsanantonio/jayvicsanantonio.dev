@@ -1,8 +1,58 @@
+import type { Metadata } from 'next';
+import { blogPostsData } from '@/lib/blog-data';
 import Link from "next/link";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { BlogBreadcrumb } from "@/components/pages/blog/BlogBreadcrumb";
 import { Calendar } from "lucide-react";
+
+const SLUG = 'own-your-bluesky-identity';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const post = blogPostsData.get(SLUG);
+
+  if (!post) {
+    return {
+      title: 'Blog Post Not Found',
+      description: 'This blog post could not be found.',
+    };
+  }
+
+  // const siteUrl = 'https://www.jayvicsanantonio.me'; // Removed, metadataBase in layout.tsx will be used
+  const fullImageUrl = post.image; // Path should be relative to metadataBase
+  const postUrl = `/blog/${SLUG}`; // Path should be relative to metadataBase
+
+  return {
+    title: `${post.title} | Jayvic San Antonio`,
+    description: post.description,
+    keywords: post.keywords,
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      url: postUrl,
+      images: [
+        {
+          url: fullImageUrl,
+          width: 800,
+          height: 540,
+          alt: post.title,
+        },
+      ],
+      type: 'article',
+      publishedTime: post.date,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.description,
+      images: [fullImageUrl],
+      creator: '@jayvicsanantonio',
+    },
+    alternates: {
+      canonical: postUrl,
+    },
+  };
+}
 
 export default function Page() {
   return (
