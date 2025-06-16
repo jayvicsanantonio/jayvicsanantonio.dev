@@ -1,5 +1,32 @@
+import type { Metadata } from 'next';
 import { Badge } from "@/components/ui/badge";
 import { Check } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Work Experience | Professional Journey | Jayvic San Antonio",
+  description: "Discover the professional journey and work experience of Jayvic San Antonio, highlighting roles, responsibilities, and achievements in the tech industry.",
+  keywords: ["work experience", "career", "professional journey", "tech industry", "software engineering roles"],
+  openGraph: {
+    title: "Work Experience | Professional Journey | Jayvic San Antonio",
+    description: "Discover the professional journey and work experience of Jayvic San Antonio, highlighting roles, responsibilities, and achievements in the tech industry.",
+    url: 'https://jayvicsanantonio.dev/work',
+    images: [
+      {
+        url: 'https://jayvicsanantonio.dev/icons/web-app-manifest-512x512.png', // Using default from layout
+        width: 512,
+        height: 512,
+        alt: 'Jayvic San Antonio Work Experience',
+      },
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Work Experience | Professional Journey | Jayvic San Antonio",
+    description: "Discover the professional journey and work experience of Jayvic San Antonio, highlighting roles, responsibilities, and achievements in the tech industry.",
+    images: ['https://jayvicsanantonio.dev/icons/web-app-manifest-512x512.png'], // Using default from layout
+  },
+};
 
 export default function Page() {
   return (

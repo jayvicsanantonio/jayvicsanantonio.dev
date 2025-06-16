@@ -108,7 +108,7 @@ export default function FeaturedProjects({
             <Card className="flex flex-col h-full shadow-2xl  rounded-lg overflow-hidden">
               <CardContent className="flex-1 -p-6 max-h-60 rounded-t-lg overflow-hidden">
                 <Image
-                  alt="Barbenheimer VS Code Theme"
+                  alt="Barbenheimer VS Code Theme - A dark and light theme for the VS Code editor."
                   className="w-full h-full object-cover"
                   height={225}
                   src="/images/home/barbenheimer.webp"

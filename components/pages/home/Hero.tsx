@@ -88,7 +88,7 @@ export default function Hero({
         </div>
       </div>
       <Image
-        alt="Profile"
+        alt="Jayvic San Antonio - Software Engineer profile picture"
         className="rounded-full md:mb-0 mb-8 p-1.5"
         height={340}
         loading="eager"

@@ -1,7 +1,34 @@
+import type { Metadata } from 'next';
 import Image from "next/image";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import ProjectButton from "@/components/pages/ProjectButton";
 import { Github } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Projects | Software Development Portfolio | Jayvic San Antonio",
+  description: "Browse a selection of software development projects by Jayvic San Antonio, showcasing expertise in web technologies and problem-solving.",
+  keywords: ["projects", "portfolio", "software development", "web applications", "case studies"],
+  openGraph: {
+    title: "Projects | Software Development Portfolio | Jayvic San Antonio",
+    description: "Browse a selection of software development projects by Jayvic San Antonio, showcasing expertise in web technologies and problem-solving.",
+    url: 'https://jayvicsanantonio.dev/projects',
+    images: [
+      {
+        url: 'https://jayvicsanantonio.dev/icons/web-app-manifest-512x512.png', // Using default from layout
+        width: 512,
+        height: 512,
+        alt: 'Jayvic San Antonio Projects',
+      },
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Projects | Software Development Portfolio | Jayvic San Antonio",
+    description: "Browse a selection of software development projects by Jayvic San Antonio, showcasing expertise in web technologies and problem-solving.",
+    images: ['https://jayvicsanantonio.dev/icons/web-app-manifest-512x512.png'], // Using default from layout
+  },
+};
 
 export default function Page() {
   return (

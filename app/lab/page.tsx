@@ -1,5 +1,32 @@
+import type { Metadata } from 'next';
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+
+export const metadata: Metadata = {
+  title: "Lab | Experiments & Creative Coding | Jayvic San Antonio",
+  description: "Explore coding experiments, innovative prototypes, and creative projects by Jayvic San Antonio. A playground for new ideas and technologies.",
+  keywords: ["lab", "experiments", "creative coding", "prototypes", "side projects"],
+  openGraph: {
+    title: "Lab | Experiments & Creative Coding | Jayvic San Antonio",
+    description: "Explore coding experiments, innovative prototypes, and creative projects by Jayvic San Antonio. A playground for new ideas and technologies.",
+    url: 'https://jayvicsanantonio.dev/lab',
+    images: [
+      {
+        url: 'https://jayvicsanantonio.dev/icons/web-app-manifest-512x512.png', // Using default from layout
+        width: 512,
+        height: 512,
+        alt: 'Jayvic San Antonio Lab',
+      },
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Lab | Experiments & Creative Coding | Jayvic San Antonio",
+    description: "Explore coding experiments, innovative prototypes, and creative projects by Jayvic San Antonio. A playground for new ideas and technologies.",
+    images: ['https://jayvicsanantonio.dev/icons/web-app-manifest-512x512.png'], // Using default from layout
+  },
+};
 
 export default function Page() {
   return (
