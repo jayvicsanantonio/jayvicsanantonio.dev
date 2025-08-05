@@ -1,7 +1,7 @@
-import Image from "next/image";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import ProjectButton from "@/components/pages/ProjectButton";
-import { Github } from "lucide-react";
+import Image from 'next/image';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import ProjectButton from '@/components/pages/ProjectButton';
+import { Github } from 'lucide-react';
 
 export default function Page() {
   return (
@@ -15,8 +15,9 @@ export default function Page() {
             Work Showcase
           </h2>
           <p className="max-w-[600px] text-gray-950/70 dark:text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-            Here's a showcase of some of the projects I've worked on. Each one
-            represents a unique challenge and learning experience.
+            Here's a showcase of some of the projects I've worked on.
+            Each one represents a unique challenge and learning
+            experience.
           </p>
         </div>
         <Card className="flex flex-col h-full border-transparent rounded-lg overflow-hidden shadow-md hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none will-change-transform">
@@ -27,8 +28,8 @@ export default function Page() {
               height={125}
               src="/images/home/yahoo-dsp.webp"
               style={{
-                aspectRatio: "400/125",
-                objectFit: "cover",
+                aspectRatio: '400/125',
+                objectFit: 'cover',
               }}
               width={400}
             />
@@ -41,12 +42,13 @@ export default function Page() {
                 </h3>
                 <p className="dark:text-gray-200">
                   A cutting-edge programmatic advertising platform for
-                  businesses. Built with a powerful tech stack including{" "}
-                  <em className="font-bold">Ember.js</em>,{" "}
-                  <em className="font-bold">React.js</em>, and{" "}
-                  <em className="font-bold">Node.js</em>, the platform empowers
-                  advertisers with features like real-time bidding, audience
-                  targeting, and comprehensive campaign performance measurement.
+                  businesses. Built with a powerful tech stack
+                  including <em className="font-bold">Ember.js</em>,{' '}
+                  <em className="font-bold">React.js</em>, and{' '}
+                  <em className="font-bold">Node.js</em>, the platform
+                  empowers advertisers with features like real-time
+                  bidding, audience targeting, and comprehensive
+                  campaign performance measurement.
                 </p>
               </div>
             </div>
@@ -71,8 +73,8 @@ export default function Page() {
                 height={225}
                 src="/images/home/barbenheimer.webp"
                 style={{
-                  aspectRatio: "400/225",
-                  objectFit: "cover",
+                  aspectRatio: '400/225',
+                  objectFit: 'cover',
                 }}
                 width={400}
               />
@@ -84,9 +86,10 @@ export default function Page() {
                     Barbenheimer VS Code Theme
                   </h3>
                   <p className="dark:text-gray-200">
-                    A VS Code theme inspired by the Internet phenomenon of the
-                    same name. It combines the pink and playful aesthetics of
-                    Barbie with the dark and dramatic tones of Oppenheimer.
+                    A VS Code theme inspired by the Internet
+                    phenomenon of the same name. It combines the pink
+                    and playful aesthetics of Barbie with the dark and
+                    dramatic tones of Oppenheimer.
                   </p>
                 </div>
               </div>
@@ -107,10 +110,10 @@ export default function Page() {
                 alt="Web Development Hub"
                 className="w-full h-full object-cover"
                 height={225}
-                src="/images/home/webdevhub.webp"
+                src="/images/home/webdevhub.png"
                 style={{
-                  aspectRatio: "400/225",
-                  objectFit: "cover",
+                  aspectRatio: '400/225',
+                  objectFit: 'cover',
                 }}
                 width={400}
               />
@@ -122,10 +125,10 @@ export default function Page() {
                     Web Development Hub
                   </h3>
                   <p className="dark:text-gray-200">
-                    An extensive library of categorized links tailored for web
-                    developers, featuring curated resources on learning,
-                    developer tools, frameworks, libraries, blogs and
-                    communities.
+                    An extensive library of categorized links tailored
+                    for web developers, featuring curated resources on
+                    learning, developer tools, frameworks, libraries,
+                    blogs and communities.
                   </p>
                 </div>
               </div>
@@ -134,7 +137,7 @@ export default function Page() {
                   <Github size={20} />
                   Github
                 </ProjectButton>
-                <ProjectButton link="https://www.webdevhub.link/">
+                <ProjectButton link="https://webdevhub.link/">
                   View Project
                 </ProjectButton>
               </div>
@@ -148,8 +151,8 @@ export default function Page() {
                 height={225}
                 src="/images/home/mm-church.webp"
                 style={{
-                  aspectRatio: "400/225",
-                  objectFit: "cover",
+                  aspectRatio: '400/225',
+                  objectFit: 'cover',
                 }}
                 width={400}
               />
@@ -161,12 +164,13 @@ export default function Page() {
                     Malayang Mananampalataya Church
                   </h3>
                   <p className="dark:text-gray-200">
-                    Built with React.js, this Philippines church website fosters
-                    a strong connection between the church and its congregation.
-                    Easy navigation allows users to explore sermons, ministries,
-                    and events. Responsive design ensures the website looks
-                    great and is accessible across desktops, tablets, and
-                    smartphones.
+                    Built with React.js, this Philippines church
+                    website fosters a strong connection between the
+                    church and its congregation. Easy navigation
+                    allows users to explore sermons, ministries, and
+                    events. Responsive design ensures the website
+                    looks great and is accessible across desktops,
+                    tablets, and smartphones.
                   </p>
                 </div>
               </div>
@@ -189,8 +193,8 @@ export default function Page() {
                 height={225}
                 src="/images/projects/barbenheimer-zed-theme.webp"
                 style={{
-                  aspectRatio: "400/225",
-                  objectFit: "cover",
+                  aspectRatio: '400/225',
+                  objectFit: 'cover',
                 }}
                 width={400}
               />
@@ -202,11 +206,12 @@ export default function Page() {
                     Barbenheimer Zed Theme
                   </h3>
                   <p className="dark:text-gray-200">
-                    A zed theme inspired by the "Barbenheimer" cultural
-                    phenomenon, offering distinct styles that capture the
-                    essence of both Barbie and Oppenheimer. While each theme
-                    leans towards a different aesthetic, they share a cohesive
-                    color palette with subtle nods to both films, creating a
+                    A zed theme inspired by the "Barbenheimer"
+                    cultural phenomenon, offering distinct styles that
+                    capture the essence of both Barbie and
+                    Oppenheimer. While each theme leans towards a
+                    different aesthetic, they share a cohesive color
+                    palette with subtle nods to both films, creating a
                     balanced and unified experience.
                   </p>
                 </div>
