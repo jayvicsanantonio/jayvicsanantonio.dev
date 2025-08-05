@@ -110,7 +110,7 @@ export default function Page() {
                 alt="Web Development Hub"
                 className="w-full h-full object-cover"
                 height={225}
-                src="/images/home/webdevhub.webp"
+                src="/images/home/webdevhub.png"
                 style={{
                   aspectRatio: '400/225',
                   objectFit: 'cover',
@@ -137,7 +137,7 @@ export default function Page() {
                   <Github size={20} />
                   Github
                 </ProjectButton>
-                <ProjectButton link="https://www.webdevhub.link/">
+                <ProjectButton link="https://webdevhub.link/">
                   View Project
                 </ProjectButton>
               </div>
