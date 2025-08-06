@@ -216,7 +216,7 @@ export default function Page() {
                 </div>
               </div>
               <div className="flex gap-4 mt-4">
-                <ProjectButton link="https://github.com/jayvicsanantonio/syncflow">
+                <ProjectButton link="https://github.com/jayvicsanantonio/sync-flow">
                   <Github size={20} />
                   Github
                 </ProjectButton>
