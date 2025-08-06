@@ -146,7 +146,7 @@ export default function Page() {
           <Card className="flex flex-col h-full border-purple-400 dark:border-purple-900 border-2 rounded-lg overflow-hidden shadow-md hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none will-change-transform">
             <CardContent className="flex-1 -p-6 max-h-60">
               <Image
-                alt="Barbenheimer VS Code Theme"
+                alt="Barbenheimer Zed Theme"
                 className="w-full h-full object-cover"
                 height={225}
                 src="/images/projects/barbenheimer-zed-theme.webp"
