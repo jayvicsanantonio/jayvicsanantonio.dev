@@ -1,131 +1,28 @@
 @import 'tailwindcss';
 
-@custom-variant dark (&:where(.dark, .dark *));
-
-@theme {
-  --font-source-sans: var(--font-source-sans);
-  --font-oswald: var(--font-oswald);
-
-  --color-border: hsl(var(--border));
-  --color-input: hsl(var(--input));
-  --color-ring: hsl(var(--ring));
-  --color-background: hsl(var(--background));
-  --color-foreground: hsl(var(--foreground));
-
-  --color-primary: hsl(var(--primary));
-  --color-primary-foreground: hsl(var(--primary-foreground));
-
-  --color-secondary: hsl(var(--secondary));
-  --color-secondary-foreground: hsl(var(--secondary-foreground));
-
-  --color-destructive: hsl(var(--destructive));
-  --color-destructive-foreground: hsl(var(--destructive-foreground));
-
-  --color-muted: hsl(var(--muted));
-  --color-muted-foreground: hsl(var(--muted-foreground));
-
-  --color-accent: hsl(var(--accent));
-  --color-accent-foreground: hsl(var(--accent-foreground));
-
-  --color-popover: hsl(var(--popover));
-  --color-popover-foreground: hsl(var(--popover-foreground));
-
-  --color-card: hsl(var(--card));
-  --color-card-foreground: hsl(var(--card-foreground));
-
-  --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-sm: calc(var(--radius) - 4px);
-
-  --animate-accordion-down: accordion-down 0.2s ease-out;
-  --animate-accordion-up: accordion-up 0.2s ease-out;
-
-  @keyframes accordion-down {
-    from {
-      height: 0;
-    }
-    to {
-      height: var(--radix-accordion-content-height);
-    }
-  }
-  @keyframes accordion-up {
-    from {
-      height: var(--radix-accordion-content-height);
-    }
-    to {
-      height: 0;
-    }
-  }
-}
-
-@utility container {
-  margin-inline: auto;
-  padding-inline: 2rem;
-  @media (width >= --theme(--breakpoint-sm)) {
-    max-width: none;
-  }
-  @media (width >= 1400px) {
-    max-width: 1400px;
-  }
-}
-
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
 @layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
-  }
-}
-
-@layer base {
-  :root {
-    scroll-behavior: smooth;
-
-    --background: 0 0% 100%;
-    --foreground: 224 71.4% 4.1%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 224 71.4% 4.1%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 224 71.4% 4.1%;
-
-    --primary: 220.9 39.3% 11%;
-    --primary-foreground: 210 20% 98%;
-
-    --secondary: 220 14.3% 95.9%;
-    --secondary-foreground: 220.9 39.3% 11%;
-
-    --muted: 220 14.3% 95.9%;
-    --muted-foreground: 220 8.9% 46.1%;
-
-    --accent: 220 14.3% 95.9%;
-    --accent-foreground: 220.9 39.3% 11%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 20% 98%;
-
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 224 71.4% 4.1%;
-
-    --radius: 0.5rem;
+  * {
+    @apply border-border;
   }
 
+  body {
+    @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Define the new color palette using HSL values for easy manipulation. */
+  :root,
   .dark {
-    --background: 224 71.4% 4.1%;
-    --foreground: 210 20% 98%;
+    /* Core Palette */
+    --background: 224 71.4% 4.1%; /* Near-black with a hint of blue */
+    --foreground: 210 20% 98%;   /* Soft, off-white */
 
+    /* Accent Color */
+    --accent: 310 100% 60%;      /* Vibrant, futuristic magenta */
+    --accent-foreground: 210 20% 98%; /* Text on top of the accent color */
+
+    /* UI Elements */
     --card: 224 71.4% 4.1%;
     --card-foreground: 210 20% 98%;
 
@@ -141,136 +38,31 @@
     --muted: 215 27.9% 16.9%;
     --muted-foreground: 217.9 10.6% 64.9%;
 
-    --accent: 215 27.9% 16.9%;
-    --accent-foreground: 210 20% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 20% 98%;
-
     --border: 215 27.9% 16.9%;
     --input: 215 27.9% 16.9%;
-    --ring: 216 12.2% 83.9%;
+    --ring: 310 100% 60%; /* Ring should use the accent color */
+
+    --radius: 0.5rem;
   }
 
-  .content-visibility-auto {
-    content-visibility: auto;
-  }
-
-  p.hyphenate {
-    overflow-wrap: break-word;
-    hyphens: auto;
-
-    /* Prefix for Safari */
-    -webkit-hyphens: auto;
-  }
-
-  /* For Holiday Season Only */
-  @keyframes lights {
-    0% {
-      opacity: 0;
-    }
-
-    30% {
-      opacity: 0;
-    }
-
-    40% {
-      opacity: 1;
-    }
-
-    90% {
-      opacity: 1;
-    }
-
-    100% {
-      opacity: 0;
-    }
-  }
-
-  .lit {
-    animation: 2s linear infinite lights;
-
-    &.yellow {
-      animation-delay: 0.5s;
-    }
-
-    &.blue {
-      animation-delay: 1s;
-    }
-
-    &.red {
-      animation-delay: 1.5s;
-    }
-  }
-
-  .lights {
-    align-items: top;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
-    position: absolute;
-    inset-inline: 0;
-
-    &.top {
-      top: 52px;
-    }
-
-    & svg {
-      display: block;
-      width: 100%;
-    }
-
-    & svg:nth-child(2) ~ svg {
-      display: none;
-
-      @media (min-width: 400px) {
-        display: block;
-      }
-    }
-
-    & svg:nth-child(3) ~ svg {
-      display: none;
-
-      @media (min-width: 500px) {
-        display: block;
-      }
-    }
-
-    & svg:nth-child(4) ~ svg {
-      display: none;
-
-      @media (min-width: 600px) {
-        display: block;
-      }
-    }
-  }
-
-  #lights-def {
-    display: block;
-    width: 0;
-    height: 0;
-    overflow: hidden;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
-/*
-  ---break---
-*/
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
+  /* Apply the HSL variables to Tailwind's color utilities */
+  @theme {
+    --color-background: hsl(var(--background));
+    --color-foreground: hsl(var(--foreground));
+    --color-accent: hsl(var(--accent));
+    --color-accent-foreground: hsl(var(--accent-foreground));
+    --color-card: hsl(var(--card));
+    --color-card-foreground: hsl(var(--card-foreground));
+    --color-popover: hsl(var(--popover));
+    --color-popover-foreground: hsl(var(--popover-foreground));
+    --color-primary: hsl(var(--primary));
+    --color-primary-foreground: hsl(var(--primary-foreground));
+    --color-secondary: hsl(var(--secondary));
+    --color-secondary-foreground: hsl(var(--secondary-foreground));
+    --color-muted: hsl(var(--muted));
+    --color-muted-foreground: hsl(var(--muted-foreground));
+    --color-border: hsl(var(--border));
+    --color-input: hsl(var(--input));
+    --color-ring: hsl(var(--ring));
   }
 }

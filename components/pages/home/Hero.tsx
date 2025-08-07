@@ -1,106 +1,106 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
-
-import usePrefersReducedMotion from '@/hooks/use-prefers-reduced-motion';
-import Bluesky from '@/components/icons/Bluesky';
-import ScrollDown from '@/components/pages/ScrollDown';
-import SocialMediaIconButton from '@/components/pages/home/SocialMediaIconButton';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
+import usePrefersReducedMotion from '@/hooks/use-prefers-reduced-motion';
 
-export default function Hero({
-  aboutRef,
-}: {
-  aboutRef: React.RefObject<HTMLElement>;
-}) {
+// The opening scene of our narrative. It's designed to be immersive and set the tone.
+export default function Hero() {
   const prefersReducedMotion = usePrefersReducedMotion();
-  const [activeIndex, setActiveIndex] = useState(0);
-  const roles = [
-    'Full-Stack Web Developer',
-    'JavaScript Specialist',
-    'React Expert',
-    'Node.JS Developer',
-    'UI/UX Enthusiast',
-    'Performance Optimization Advocate',
-    'Creative Thinker',
-  ];
+  const headline = "Weaving Digital Narratives";
+  const words = headline.split(" ");
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((current) => (current + 1) % roles.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [roles.length]);
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: prefersReducedMotion ? 0 : 0.2,
+      },
+    },
+  };
+
+  const wordVariants = {
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: 'spring',
+        damping: 12,
+        stiffness: 100,
+      },
+    },
+  };
+
+  // Simple particle effect using divs and framer-motion
+  const particles = Array.from({ length: 20 });
 
   return (
-    <section className="relative h-screen flex flex-col-reverse justify-end md:flex-row items-center px-4 pb-60 text-gray-950 dark:text-gray-200">
-      <div className="space-y-6">
-        <div className="font-oswald lg:space-y-2 flex flex-col items-center md:items-start">
-          <h1 className="font-title text-4xl font-bold leading-snug lg:text-6xl ">
-            Hey, I'm Jayvic 👋
-          </h1>
-          <motion.h2
-            key={activeIndex}
-            initial={{ y: 10, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -10, opacity: 0 }}
-            transition={
-              prefersReducedMotion
-                ? { duration: 0 }
-                : { duration: 0.5 }
-            }
-            className="text-lg lg:text-3xl font-light uppercase bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500 will-change-transform"
-          >
-            {roles[activeIndex]}
-          </motion.h2>
+    <div className="relative h-screen flex flex-col items-center justify-center overflow-hidden px-4">
+      {/* Particle Background */}
+      {!prefersReducedMotion && (
+        <div className="absolute inset-0 z-0">
+          {particles.map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute bg-accent rounded-full"
+              initial={{
+                x: Math.random() * 100 + 'vw',
+                y: Math.random() * 100 + 'vh',
+                scale: Math.random() * 0.5 + 0.1,
+                opacity: 0,
+              }}
+              animate={{
+                opacity: [0, 0.2, 0],
+                x: `calc(${Math.random() * 100}vw - 50%)`,
+                y: `calc(${Math.random() * 100}vh - 50%)`,
+              }}
+              transition={{
+                duration: Math.random() * 10 + 20,
+                repeat: Infinity,
+                repeatType: 'loop',
+                delay: Math.random() * 5,
+              }}
+              style={{
+                width: Math.random() * 4 + 1,
+                height: Math.random() * 4 + 1,
+              }}
+            />
+          ))}
         </div>
-        <p className="text-lg lg:text-xl text-center md:text-left">
-          Turning caffeine into code and transforming challenges into
-          innovative web solutions that make a difference.
-        </p>
-        <div className="flex space-x-6 justify-center md:justify-start">
-          <SocialMediaIconButton
-            Icon={Github}
-            link="https://github.com/jayvicsanantonio"
+      )}
+
+      {/* Animated Headline */}
+      <motion.h1
+        className="text-4xl sm:text-5xl md:text-7xl font-bold text-center z-10 pointer-events-none"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        {words.map((word, i) => (
+          <motion.span
+            key={i}
+            className="inline-block mr-2 md:mr-4"
+            variants={wordVariants}
           >
-            Github
-          </SocialMediaIconButton>
-          <SocialMediaIconButton
-            Icon={Linkedin}
-            link="https://www.linkedin.com/in/jayvicsanantonio/"
-          >
-            LinkedIn
-          </SocialMediaIconButton>
-          <SocialMediaIconButton
-            Icon={Bluesky}
-            link="https://bsky.app/profile/jayvicsanantonio.dev"
-          >
-            Bluesky
-          </SocialMediaIconButton>
-          <SocialMediaIconButton
-            Icon={Mail}
-            link="mailto:hi@jayvicsanantonio.dev"
-          >
-            Email
-          </SocialMediaIconButton>
-        </div>
-      </div>
-      <Image
-        alt="Profile"
-        className="rounded-full md:mb-0 mb-8 p-1.5"
-        height={340}
-        loading="eager"
-        src="/images/home/profile-image.jpg"
-        style={{
-          aspectRatio: '340/340',
-          objectFit: 'cover',
+            {word}
+          </motion.span>
+        ))}
+      </motion.h1>
+
+      {/* Animated Scroll Down Indicator */}
+      <motion.div
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10"
+        animate={!prefersReducedMotion ? { y: ["0%", "20%", "0%"] } : {}}
+        transition={{
+          duration: 1.5,
+          repeat: Infinity,
+          repeatType: "loop",
+          ease: "easeInOut",
         }}
-        width={340}
-        priority={true}
-      />
-      <ScrollDown sectionRef={aboutRef} />
-    </section>
+      >
+        <ChevronDown className="w-8 h-8 text-muted-foreground" />
+      </motion.div>
+    </div>
   );
 }
