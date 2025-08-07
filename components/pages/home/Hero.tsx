@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
 import usePrefersReducedMotion from '@/hooks/use-prefers-reduced-motion';
 import Bluesky from '@/components/icons/Bluesky';
 import ScrollDown from '@/components/pages/ScrollDown';
 import SocialMediaIconButton from '@/components/pages/home/SocialMediaIconButton';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Github, Linkedin, Mail } from 'lucide-react';
 
 export default function Hero({
@@ -17,6 +17,26 @@ export default function Hero({
 }) {
   const prefersReducedMotion = usePrefersReducedMotion();
   const [activeIndex, setActiveIndex] = useState(0);
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
+  });
+  const titleY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, prefersReducedMotion ? 0 : -30]
+  );
+  const titleOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.6, 1],
+    [1, 0.92, 0.85]
+  );
+  const imageY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, prefersReducedMotion ? 0 : -60]
+  );
   const roles = [
     'Full-Stack Web Developer',
     'JavaScript Specialist',
@@ -35,12 +55,22 @@ export default function Hero({
   }, [roles.length]);
 
   return (
-    <section className="relative h-screen flex flex-col-reverse justify-end md:flex-row items-center px-4 pb-60 text-gray-950 dark:text-gray-200">
+    <section
+      ref={heroRef}
+      className="relative h-screen flex flex-col-reverse justify-end md:flex-row items-center px-4 pb-60 text-gray-950 dark:text-gray-200"
+    >
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute -top-24 left-1/2 -translate-x-1/2 h-[44rem] w-[44rem] rounded-full opacity-20 blur-3xl bg-[radial-gradient(closest-side,rgba(59,130,246,0.25),transparent)]" />
+        <div className="absolute bottom-0 right-0 h-[26rem] w-[26rem] rounded-full opacity-15 blur-3xl bg-[radial-gradient(closest-side,rgba(168,85,247,0.25),transparent)]" />
+      </div>
       <div className="space-y-6">
         <div className="font-oswald lg:space-y-2 flex flex-col items-center md:items-start">
-          <h1 className="font-title text-4xl font-bold leading-snug lg:text-6xl ">
+          <motion.h1
+            style={{ y: titleY, opacity: titleOpacity }}
+            className="font-title text-4xl font-bold leading-snug lg:text-6xl "
+          >
             Hey, I'm Jayvic 👋
-          </h1>
+          </motion.h1>
           <motion.h2
             key={activeIndex}
             initial={{ y: 10, opacity: 0 }}
@@ -87,19 +117,24 @@ export default function Hero({
           </SocialMediaIconButton>
         </div>
       </div>
-      <Image
-        alt="Profile"
-        className="rounded-full md:mb-0 mb-8 p-1.5 shadow-[0_0_0_2px_rgba(59,130,246,0.6),0_0_0_4px_rgba(168,85,247,0.4)]"
-        height={340}
-        loading="eager"
-        src="/images/home/profile-image.jpg"
-        style={{
-          aspectRatio: '340/340',
-          objectFit: 'cover',
-        }}
-        width={340}
-        priority={true}
-      />
+      <motion.div
+        style={{ y: imageY }}
+        className="will-change-transform"
+      >
+        <Image
+          alt="Profile"
+          className="rounded-full md:mb-0 mb-8 p-1.5 shadow-[0_0_0_2px_rgba(59,130,246,0.6),0_0_0_4px_rgba(168,85,247,0.4)]"
+          height={340}
+          loading="eager"
+          src="/images/home/profile-image.jpg"
+          style={{
+            aspectRatio: '340/340',
+            objectFit: 'cover',
+          }}
+          width={340}
+          priority={true}
+        />
+      </motion.div>
       <ScrollDown sectionRef={aboutRef} />
     </section>
   );
