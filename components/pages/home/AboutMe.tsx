@@ -1,308 +1,235 @@
+'use client';
+
 import Link from 'next/link';
-import { Badge } from '@/components/ui/badge';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { useRef } from 'react';
+import { ArrowUpRight, Code2, Lightbulb, Users, Coffee } from 'lucide-react';
+
+const skills = [
+  {
+    category: 'Frontend',
+    technologies: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Framer Motion'],
+    icon: Code2,
+  },
+  {
+    category: 'Backend', 
+    technologies: ['Node.js', 'Python', 'PostgreSQL', 'MongoDB', 'GraphQL'],
+    icon: Lightbulb,
+  },
+  {
+    category: 'Tools & Others',
+    technologies: ['Git', 'Docker', 'AWS', 'Figma', 'Vercel'],
+    icon: Users,
+  },
+];
+
+const achievements = [
+  {
+    number: '9+',
+    label: 'Years of Experience',
+    description: 'Crafting digital experiences'
+  },
+  {
+    number: '50+',
+    label: 'Projects Delivered',
+    description: 'From concept to production'
+  },
+  {
+    number: '100%',
+    label: 'Client Satisfaction',
+    description: 'Building lasting relationships'
+  },
+];
 
 export default function AboutMe({
   aboutRef,
 }: {
   aboutRef: React.RefObject<HTMLElement>;
 }) {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
   const { scrollYProgress } = useScroll({
     target: aboutRef,
     offset: ['start end', 'end start'],
   });
 
-  const opacity = useTransform(
-    scrollYProgress,
-    [0, 0.5, 1],
-    [0, 1, 0]
-  );
-  const scale = useTransform(
-    scrollYProgress,
-    [0, 0.5, 1],
-    [0.95, 1, 0.95]
-  );
+  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0.2,
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 30, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: [0.215, 0.61, 0.355, 1]
+      }
+    }
+  };
 
   return (
-    <motion.section
-      ref={aboutRef}
-      id="about-me"
-      className="relative scroll-mt-32 min-h-screen grid lg:grid-cols-2 gap-4"
-      style={{ opacity, scale }}
+    <section
+      ref={sectionRef}
+      id="about"
+      className="section-padding relative overflow-hidden"
     >
-      <div className="h-fit lg:text-lg space-y-4 text-gray-950 dark:text-gray-200 dark:bg-gray-950 rounded-xl p-6 border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80 border-2 text-justify">
-        <h2 className="font-oswald text-2xl font-bold">About Me</h2>
-        <p className="hyphenate">
-          I'm Jayvic San Antonio, a Full-Stack Web Developer
-          originally from the Philippines, now thriving in the San
-          Francisco Bay Area. With over 9 years of experience, you
-          could say JavaScript is my coding soulmate - I love its
-          versatility and how it keeps getting better and better!
-        </p>
-        <p className="hyphenate">
-          From hackathons and co-founding a startup to working at a
-          global media and tech company, I've thrived in all kinds of
-          environments. Whether I'm flying solo or part of an awesome
-          team, I'm all about tackling challenging projects and
-          delivering top-notch code (optimized, documented, and ready
-          to roll!).
-        </p>
-        <p className="hyphenate">
-          In this ever-evolving industry, staying sharp is key. That's
-          why I'm constantly learning and pushing my skills to the
-          next level.
-        </p>
-        <p className="hyphenate">
-          <span className="font-oswald font-bold">
-            What gets me excited?
-          </span>{' '}
-          The chance to create impactful solutions, make user
-          experiences amazing, and drive innovation in a
-          forward-thinking environment. Collaboration and inclusivity
-          are super important to me, so working with a team that
-          shares those values would be epic!
-        </p>
-        <p className="hyphenate">
-          Excited to bring your vision to life? Let's collaborate and
-          build something incredible together!{' '}
-          <Link
-            href="#get-in-touch"
-            className="hover:text-blue-400 underline decoration-wavy decoration-purple-500 underline-offset-4"
-          >
-            Let's chat!
-          </Link>
-        </p>
-      </div>
-      <div className="flex flex-col gap-4">
-        <div className="lg:text-lg space-y-4 text-gray-950 dark:text-gray-200 dark:bg-gray-950 rounded-xl p-6 border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80 border-2 h-fit">
-          <h2 className="font-oswald text-2xl font-bold">Skills</h2>
-          <div className="flex flex-wrap gap-3">
-            <Badge
-              aria-label="JavaScript"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              JavaScript
-            </Badge>
-            <Badge
-              aria-label="TypeScript"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              TypeScript
-            </Badge>
-            <Badge
-              aria-label="React"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              React
-            </Badge>
-            <Badge
-              aria-label="Next.js"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              Next.js
-            </Badge>
-            <Badge
-              aria-label="Remix"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              Remix
-            </Badge>
-            <Badge
-              aria-label="Node.js"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              Node.js
-            </Badge>
-            <Badge
-              aria-label="Express.js"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              Express.js
-            </Badge>
-            <Badge
-              aria-label="Tailwind CSS"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              Tailwind CSS
-            </Badge>
-            <Badge
-              aria-label="React Native"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              React Native
-            </Badge>
-            <Badge
-              aria-label="Expo"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              Expo
-            </Badge>
-            <Badge
-              aria-label="Ember"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              Ember.js
-            </Badge>
-            <Badge
-              aria-label="HTML"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              HTML
-            </Badge>
-            <Badge
-              aria-label="CSS"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              CSS
-            </Badge>
-            <Badge
-              aria-label="SASS / SCSS"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              SASS / SCSS
-            </Badge>
-            <Badge
-              aria-label="Amazon Web Services (AWS)"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              AWS
-            </Badge>
-            <Badge
-              aria-label="MongoDB"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              MongoDB
-            </Badge>
-            <Badge
-              aria-label="Redis"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              Redis
-            </Badge>
-            <Badge
-              aria-label="MySQL"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              MySQL
-            </Badge>
-            <Badge
-              aria-label="PostgreSQL"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              PostgreSQL
-            </Badge>
-            <Badge
-              aria-label="Java"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              Java
-            </Badge>
-            <Badge
-              aria-label="Cypress"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              Cypress
-            </Badge>
-            <Badge
-              aria-label="Git"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              Git
-            </Badge>
-            <Badge
-              aria-label="Linux"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              Linux
-            </Badge>
-            <Badge
-              aria-label="Figma"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              Figma
-            </Badge>
+      {/* Background Elements */}
+      <div className="absolute inset-0 grid-pattern opacity-30" />
+      
+      <motion.div
+        style={{ y }}
+        variants={containerVariants}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        className="container-narrow relative z-10"
+      >
+        {/* Section Header */}
+        <motion.div variants={itemVariants} className="text-center mb-20">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber/10 border border-amber/20 rounded-full text-amber text-sm font-medium mb-6">
+            <Coffee className="w-4 h-4" />
+            About Me
           </div>
-        </div>
-        <div className="lg:text-lg space-y-4 text-gray-950 dark:text-gray-200 dark:bg-gray-950 rounded-xl p-6 border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80 border-2 h-fit">
-          <h2 className="font-oswald text-2xl font-bold">
-            Expertise
+          <h2 className="font-editorial text-4xl md:text-6xl lg:text-7xl font-light text-pearl mb-6">
+            Crafting Digital
+            <span className="block text-gradient">Experiences</span>
           </h2>
-          <ul className="space-y-1">
-            <li className="flex items-center">
-              <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-              Frontend Development
-            </li>
-            <li className="flex items-center">
-              <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-              Web Performance Optimization
-            </li>
-            <li className="flex items-center">
-              <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-              Agile and Scrum Methodologies
-            </li>
-            <li className="flex items-center">
-              <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-              Cross-functional Collaboration
-            </li>
-            <li className="flex items-center">
-              <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-              Problem-solving and Debugging
-            </li>
-            <li className="flex items-center">
-              <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-              Responsive Design
-            </li>
-            <li className="flex items-center">
-              <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-              Adaptability and Learning
-            </li>
-            <li className="flex items-center">
-              <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-              Mentoring and Knowledge Sharing
-            </li>
-            <li className="flex items-center">
-              <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-              Documentation Proficiency
-            </li>
-            <li className="flex items-center">
-              <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-              Technical Leadership
-            </li>
-            <li className="flex items-center">
-              <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-              Software Engineering Best Practices
-            </li>
-            <li className="flex items-center">
-              <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-              Startup Development
-            </li>
-          </ul>
+          <p className="text-xl text-silver/80 max-w-3xl mx-auto leading-relaxed">
+            I'm Jayvic San Antonio, a Full-Stack Developer who believes that great technology 
+            should feel effortless and inspire genuine delight.
+          </p>
+        </motion.div>
+
+        {/* Story Grid */}
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 mb-20">
+          {/* Personal Story */}
+          <motion.div variants={itemVariants} className="space-y-8">
+            <div className="relative">
+              <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-amber to-rose rounded-full" />
+              <div className="space-y-6 text-lg leading-relaxed text-silver/90">
+                <p>
+                  Originally from the Philippines, now creating in the San Francisco Bay Area. 
+                  With over{' '}
+                  <span className="text-amber font-medium">9 years of experience</span>, 
+                  I've discovered that the most beautiful code is the kind that solves real problems 
+                  with elegance and intention.
+                </p>
+                <p>
+                  From late-night hackathons to co-founding a startup, from intimate team collaborations 
+                  to scaling solutions at global companies — each experience has taught me that 
+                  technology's true power lies in its ability to{' '}
+                  <span className="text-rose font-medium">connect and elevate</span> human experiences.
+                </p>
+                <p>
+                  I approach every project with curiosity, craftsmanship, and a deep respect for 
+                  the end user. Whether architecting scalable backends or crafting pixel-perfect 
+                  interfaces, I believe in building things that{' '}
+                  <span className="text-pearl font-medium">last and inspire</span>.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Skills & Expertise */}
+          <motion.div variants={itemVariants} className="space-y-8">
+            <h3 className="font-editorial text-2xl font-medium text-pearl mb-8">
+              Technical Expertise
+            </h3>
+            <div className="space-y-6">
+              {skills.map((skill, index) => (
+                <motion.div
+                  key={skill.category}
+                  variants={itemVariants}
+                  className="card-minimal group"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="p-2 bg-amber/10 rounded-lg flex-shrink-0">
+                      <skill.icon className="w-5 h-5 text-amber" />
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-medium text-pearl mb-2">
+                        {skill.category}
+                      </h4>
+                      <div className="flex flex-wrap gap-2">
+                        {skill.technologies.map((tech) => (
+                          <span
+                            key={tech}
+                            className="px-3 py-1 text-sm bg-pewter/20 text-silver rounded-full border border-pewter/30 group-hover:border-amber/30 transition-colors duration-300"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         </div>
-      </div>
-    </motion.section>
+
+        {/* Achievements */}
+        <motion.div variants={itemVariants} className="mb-16">
+          <div className="grid md:grid-cols-3 gap-8">
+            {achievements.map((achievement, index) => (
+              <motion.div
+                key={achievement.label}
+                variants={itemVariants}
+                className="text-center group"
+              >
+                <div className="relative">
+                  <div className="text-4xl md:text-5xl font-editorial font-light text-gradient mb-2">
+                    {achievement.number}
+                  </div>
+                  <h4 className="font-medium text-pearl text-lg mb-1">
+                    {achievement.label}
+                  </h4>
+                  <p className="text-silver/70 text-sm">
+                    {achievement.description}
+                  </p>
+                  
+                  {/* Decorative line */}
+                  <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-8 h-px bg-gradient-to-r from-transparent via-amber to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Call to Action */}
+        <motion.div variants={itemVariants} className="text-center">
+          <p className="text-lg text-silver/80 mb-8">
+            Ready to bring your vision to life with thoughtful, impactful technology?
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link 
+              href="/work"
+              className="btn-primary group inline-flex items-center gap-2"
+            >
+              View My Work
+              <ArrowUpRight className="w-5 h-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+            </Link>
+            <Link 
+              href="/projects"
+              className="btn-secondary group inline-flex items-center gap-2"
+            >
+              Explore Projects
+              <ArrowUpRight className="w-5 h-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+            </Link>
+          </div>
+        </motion.div>
+      </motion.div>
+    </section>
   );
 }
