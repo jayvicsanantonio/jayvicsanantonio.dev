@@ -3,8 +3,8 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-source-sans: var(--font-source-sans);
-  --font-oswald: var(--font-oswald);
+  --font-serif: var(--font-eb-garamond);
+  --font-sans: var(--font-inter);
 
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
@@ -91,65 +91,65 @@
   :root {
     scroll-behavior: smooth;
 
-    --background: 0 0% 100%;
-    --foreground: 224 71.4% 4.1%;
+    --background: 0 0% 10%; /* #1a1a1a */
+    --foreground: 0 0% 94%; /* #f0f0f0 */
 
-    --card: 0 0% 100%;
-    --card-foreground: 224 71.4% 4.1%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 94%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 224 71.4% 4.1%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 94%;
 
-    --primary: 220.9 39.3% 11%;
-    --primary-foreground: 210 20% 98%;
+    --primary: 30 33% 63%; /* #c0a080 */
+    --primary-foreground: 0 0% 10%;
 
-    --secondary: 220 14.3% 95.9%;
-    --secondary-foreground: 220.9 39.3% 11%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 94%;
 
-    --muted: 220 14.3% 95.9%;
-    --muted-foreground: 220 8.9% 46.1%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
 
-    --accent: 220 14.3% 95.9%;
-    --accent-foreground: 220.9 39.3% 11%;
+    --accent: 30 33% 63%;
+    --accent-foreground: 0 0% 10%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 20% 98%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 94%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 224 71.4% 4.1%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 30 33% 63%;
 
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: 224 71.4% 4.1%;
-    --foreground: 210 20% 98%;
+    --background: 0 0% 10%; /* #1a1a1a */
+    --foreground: 0 0% 94%; /* #f0f0f0 */
 
-    --card: 224 71.4% 4.1%;
-    --card-foreground: 210 20% 98%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 94%;
 
-    --popover: 224 71.4% 4.1%;
-    --popover-foreground: 210 20% 98%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 94%;
 
-    --primary: 210 20% 98%;
-    --primary-foreground: 220.9 39.3% 11%;
+    --primary: 30 33% 63%; /* #c0a080 */
+    --primary-foreground: 0 0% 10%;
 
-    --secondary: 215 27.9% 16.9%;
-    --secondary-foreground: 210 20% 98%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 94%;
 
-    --muted: 215 27.9% 16.9%;
-    --muted-foreground: 217.9 10.6% 64.9%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
 
-    --accent: 215 27.9% 16.9%;
-    --accent-foreground: 210 20% 98%;
+    --accent: 30 33% 63%;
+    --accent-foreground: 0 0% 10%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 20% 98%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 94%;
 
-    --border: 215 27.9% 16.9%;
-    --input: 215 27.9% 16.9%;
-    --ring: 216 12.2% 83.9%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 30 33% 63%;
   }
 
   .content-visibility-auto {
@@ -163,93 +163,6 @@
     /* Prefix for Safari */
     -webkit-hyphens: auto;
   }
-
-  /* For Holiday Season Only */
-  @keyframes lights {
-    0% {
-      opacity: 0;
-    }
-
-    30% {
-      opacity: 0;
-    }
-
-    40% {
-      opacity: 1;
-    }
-
-    90% {
-      opacity: 1;
-    }
-
-    100% {
-      opacity: 0;
-    }
-  }
-
-  .lit {
-    animation: 2s linear infinite lights;
-
-    &.yellow {
-      animation-delay: 0.5s;
-    }
-
-    &.blue {
-      animation-delay: 1s;
-    }
-
-    &.red {
-      animation-delay: 1.5s;
-    }
-  }
-
-  .lights {
-    align-items: top;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
-    position: absolute;
-    inset-inline: 0;
-
-    &.top {
-      top: 52px;
-    }
-
-    & svg {
-      display: block;
-      width: 100%;
-    }
-
-    & svg:nth-child(2) ~ svg {
-      display: none;
-
-      @media (min-width: 400px) {
-        display: block;
-      }
-    }
-
-    & svg:nth-child(3) ~ svg {
-      display: none;
-
-      @media (min-width: 500px) {
-        display: block;
-      }
-    }
-
-    & svg:nth-child(4) ~ svg {
-      display: none;
-
-      @media (min-width: 600px) {
-        display: block;
-      }
-    }
-  }
-
-  #lights-def {
-    display: block;
-    width: 0;
-    height: 0;
-    overflow: hidden;
-  }
 }
 
 @layer base {
@@ -259,6 +172,21 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .fade-in-section {
+    animation: fadeIn 0.8s ease-out forwards;
   }
 }
 
