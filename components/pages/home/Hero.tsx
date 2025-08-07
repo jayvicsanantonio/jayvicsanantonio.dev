@@ -9,6 +9,7 @@ import ScrollDown from '@/components/pages/ScrollDown';
 import SocialMediaIconButton from '@/components/pages/home/SocialMediaIconButton';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Github, Linkedin, Mail } from 'lucide-react';
+import HeroAmbient from '@/components/pages/home/HeroAmbient';
 
 export default function Hero({
   aboutRef,
@@ -59,6 +60,7 @@ export default function Hero({
       ref={heroRef}
       className="relative h-screen flex flex-col-reverse justify-end md:flex-row items-center px-4 pb-60 text-gray-950 dark:text-gray-200"
     >
+      <HeroAmbient />
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute -top-24 left-1/2 -translate-x-1/2 h-[44rem] w-[44rem] rounded-full opacity-20 blur-3xl bg-[radial-gradient(closest-side,rgba(59,130,246,0.25),transparent)]" />
         <div className="absolute bottom-0 right-0 h-[26rem] w-[26rem] rounded-full opacity-15 blur-3xl bg-[radial-gradient(closest-side,rgba(168,85,247,0.25),transparent)]" />
