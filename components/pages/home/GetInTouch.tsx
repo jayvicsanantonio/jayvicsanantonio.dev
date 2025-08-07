@@ -1,39 +1,44 @@
 import ContactMeForm from '@/components/pages/home/ContactMeForm';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import Link from 'next/link';
+
+const socialLinks = [
+  { name: 'Email', href: 'mailto:hi@jayvicsanantonio.dev' },
+  { name: 'Github', href: 'https://github.com/jayvicsanantonio' },
+  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/jayvicsanantonio/' },
+  { name: 'Bluesky', href: 'https://bsky.app/profile/jayvicsanantonio.dev' },
+];
 
 export default function GetInTouch({
   getInTouchRef,
 }: {
   getInTouchRef: React.RefObject<HTMLElement>;
 }) {
-  const { scrollYProgress } = useScroll({
-    target: getInTouchRef,
-    offset: ['start end', 'end start'],
-  });
-
-  const scale = useTransform(
-    scrollYProgress,
-    [0, 0.5, 1],
-    [0.95, 1, 0.95]
-  );
-
   return (
-    <motion.section
+    <section
       ref={getInTouchRef}
       id="get-in-touch"
-      className="relative scroll-mt-52 space-y-12 text-gray-950 dark:text-gray-200"
-      style={{ scale }}
+      className="max-w-3xl mx-auto py-24 px-8 text-center fade-in-section"
     >
-      <div className="space-y-4">
-        <h2 className="font-oswald text-2xl font-bold">
-          Get in Touch
-        </h2>
-        <p className="dark:text-gray-400">
-          I'm always excited to discuss new projects and
-          opportunities. Feel free to reach out to me.
-        </p>
-      </div>
+      <h2 className="font-serif text-5xl md:text-6xl font-bold mb-4">
+        Let's Connect
+      </h2>
+      <p className="font-sans text-lg md:text-xl mb-12 max-w-2xl mx-auto">
+        I am currently available for new opportunities. If you have a project
+        in mind or would like to discuss a collaboration, please feel free to
+        get in touch.
+      </p>
       <ContactMeForm />
-    </motion.section>
+      <div className="mt-16">
+        <ul className="flex justify-center space-x-8 font-sans text-lg">
+          {socialLinks.map((link) => (
+            <li key={link.name}>
+              <Link href={link.href} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors duration-300">
+                {link.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
   );
 }
