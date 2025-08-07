@@ -51,12 +51,12 @@ export default function Hero({
                 ? { duration: 0 }
                 : { duration: 0.5 }
             }
-            className="text-lg lg:text-3xl font-light uppercase bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500 will-change-transform"
+            className="text-lg lg:text-3xl font-light uppercase tracking-tight bg-clip-text text-transparent bg-linear-to-r from-blue-400 via-cyan-300 to-purple-500 will-change-transform"
           >
             {roles[activeIndex]}
           </motion.h2>
         </div>
-        <p className="text-lg lg:text-xl text-center md:text-left">
+        <p className="text-lg lg:text-xl text-center md:text-left text-white/80">
           Turning caffeine into code and transforming challenges into
           innovative web solutions that make a difference.
         </p>
@@ -89,7 +89,7 @@ export default function Hero({
       </div>
       <Image
         alt="Profile"
-        className="rounded-full md:mb-0 mb-8 p-1.5"
+        className="rounded-full md:mb-0 mb-8 p-1.5 shadow-[0_0_0_2px_rgba(59,130,246,0.6),0_0_0_4px_rgba(168,85,247,0.4)]"
         height={340}
         loading="eager"
         src="/images/home/profile-image.jpg"

@@ -30,8 +30,10 @@ export default function AboutMe({
       className="relative scroll-mt-32 min-h-screen grid lg:grid-cols-2 gap-4"
       style={{ opacity, scale }}
     >
-      <div className="h-fit lg:text-lg space-y-4 text-gray-950 dark:text-gray-200 dark:bg-gray-950 rounded-xl p-6 border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80 border-2 text-justify">
-        <h2 className="font-oswald text-2xl font-bold">About Me</h2>
+      <div className="h-fit lg:text-lg space-y-4 text-gray-950 dark:text-gray-200 dark:bg-gray-950 rounded-xl p-6 border-2 border-transparent [border-image:linear-gradient(90deg,rgba(59,130,246,0.6),rgba(34,211,238,0.5),rgba(168,85,247,0.6))_1] text-justify">
+        <h2 className="font-oswald text-2xl font-bold tracking-tight">
+          About Me
+        </h2>
         <p className="hyphenate">
           I'm Jayvic San Antonio, a Full-Stack Web Developer
           originally from the Philippines, now thriving in the San
@@ -74,8 +76,10 @@ export default function AboutMe({
         </p>
       </div>
       <div className="flex flex-col gap-4">
-        <div className="lg:text-lg space-y-4 text-gray-950 dark:text-gray-200 dark:bg-gray-950 rounded-xl p-6 border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80 border-2 h-fit">
-          <h2 className="font-oswald text-2xl font-bold">Skills</h2>
+        <div className="lg:text-lg space-y-4 text-gray-950 dark:text-gray-200 dark:bg-gray-950 rounded-xl p-6 border-2 border-transparent [border-image:linear-gradient(90deg,rgba(59,130,246,0.6),rgba(34,211,238,0.5),rgba(168,85,247,0.6))_1] h-fit">
+          <h2 className="font-oswald text-2xl font-bold tracking-tight">
+            Skills
+          </h2>
           <div className="flex flex-wrap gap-3">
             <Badge
               aria-label="JavaScript"
@@ -247,8 +251,8 @@ export default function AboutMe({
             </Badge>
           </div>
         </div>
-        <div className="lg:text-lg space-y-4 text-gray-950 dark:text-gray-200 dark:bg-gray-950 rounded-xl p-6 border-t-purple-500/80 border-r-purple-500/80 border-b-blue-400/80 border-l-blue-400/80 border-2 h-fit">
-          <h2 className="font-oswald text-2xl font-bold">
+        <div className="lg:text-lg space-y-4 text-gray-950 dark:text-gray-200 dark:bg-gray-950 rounded-xl p-6 border-2 border-transparent [border-image:linear-gradient(90deg,rgba(59,130,246,0.6),rgba(34,211,238,0.5),rgba(168,85,247,0.6))_1] h-fit">
+          <h2 className="font-oswald text-2xl font-bold tracking-tight">
             Expertise
           </h2>
           <ul className="space-y-1">

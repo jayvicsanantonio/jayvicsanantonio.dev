@@ -24,7 +24,7 @@ export default function IconButton({
     <Link
       href={link}
       passHref
-      className={`flex items-center py-1 rounded-lg text-lg cursor-pointer border-none transition-colors will-change-transform duration-200 font-oswald font-bold space-x-2 px-2 hover:underline hover:underline-offset-2 ${
+      className={`flex items-center py-1 rounded-lg text-lg cursor-pointer border-none transition-colors will-change-transform duration-200 font-oswald font-semibold tracking-wide space-x-2 px-2 hover:underline hover:underline-offset-2 ${
         isActive
           ? 'text-white bg-linear-to-r from-blue-500/80 to-purple-500/80 hover:no-underline'
           : 'dark:text-white text-gray-950'
