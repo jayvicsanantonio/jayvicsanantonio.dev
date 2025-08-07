@@ -51,7 +51,7 @@ export default function Hero({
                 ? { duration: 0 }
                 : { duration: 0.5 }
             }
-            className="text-lg lg:text-3xl font-light uppercase tracking-tight bg-clip-text text-transparent bg-linear-to-r from-blue-400 via-cyan-300 to-purple-500 will-change-transform"
+            className="text-lg lg:text-3xl font-light uppercase tracking-[0.22em] md:tracking-[0.28em] lg:tracking-[0.34em] bg-clip-text text-transparent bg-linear-to-r from-blue-400 via-cyan-300 to-purple-500 will-change-transform"
           >
             {roles[activeIndex]}
           </motion.h2>
