@@ -1,11 +1,13 @@
-import IconButton from "@/components/pages/IconButton";
+'use client';
+
+import IconButton from '@/components/pages/IconButton';
 import {
   House,
   LayoutPanelLeft,
-  Newspaper,
   FlaskConical,
   FileUser,
-} from "lucide-react";
+} from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function MainMenu({
   closeDrawer,
@@ -14,22 +16,58 @@ export default function MainMenu({
 }) {
   return (
     <>
-      <IconButton IconName={House} link="/" callback={closeDrawer}>
-        Home
-      </IconButton>
-      <IconButton
-        IconName={LayoutPanelLeft}
-        link="/projects"
-        callback={closeDrawer}
+      <motion.div
+        variants={{
+          hidden: { opacity: 0, y: 8 },
+          show: { opacity: 1, y: 0 },
+        }}
       >
-        Projects
-      </IconButton>
-      <IconButton IconName={FlaskConical} link="/lab" callback={closeDrawer}>
-        Lab
-      </IconButton>
-      <IconButton IconName={FileUser} link="/work" callback={closeDrawer}>
-        Work
-      </IconButton>
+        <IconButton IconName={House} link="/" callback={closeDrawer}>
+          Home
+        </IconButton>
+      </motion.div>
+      <motion.div
+        variants={{
+          hidden: { opacity: 0, y: 8 },
+          show: { opacity: 1, y: 0 },
+        }}
+      >
+        <IconButton
+          IconName={LayoutPanelLeft}
+          link="/projects"
+          callback={closeDrawer}
+        >
+          Projects
+        </IconButton>
+      </motion.div>
+      <motion.div
+        variants={{
+          hidden: { opacity: 0, y: 8 },
+          show: { opacity: 1, y: 0 },
+        }}
+      >
+        <IconButton
+          IconName={FlaskConical}
+          link="/lab"
+          callback={closeDrawer}
+        >
+          Lab
+        </IconButton>
+      </motion.div>
+      <motion.div
+        variants={{
+          hidden: { opacity: 0, y: 8 },
+          show: { opacity: 1, y: 0 },
+        }}
+      >
+        <IconButton
+          IconName={FileUser}
+          link="/work"
+          callback={closeDrawer}
+        >
+          Work
+        </IconButton>
+      </motion.div>
     </>
   );
 }

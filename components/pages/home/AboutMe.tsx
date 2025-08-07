@@ -57,9 +57,6 @@ export default function AboutMe({
       style={{ opacity, scale }}
     >
       <div className="h-fit lg:text-lg space-y-4 text-gray-950 dark:text-gray-200 dark:bg-gray-950 rounded-xl p-6 border-2 border-transparent [border-image:linear-gradient(90deg,rgba(59,130,246,0.6),rgba(34,211,238,0.5),rgba(168,85,247,0.6))_1] text-justify content-visibility-auto">
-        <div className="font-oswald uppercase inline-block rounded-lg bg-gray-800 px-3 py-1 text-xs tracking-widest">
-          Chapter I — Origin
-        </div>
         <h2 className="font-oswald text-2xl font-bold tracking-tight">
           About Me
         </h2>
