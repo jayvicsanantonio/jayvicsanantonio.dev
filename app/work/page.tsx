@@ -221,52 +221,61 @@ export default function WorkPage() {
                     {/* Card */}
                     <motion.article
                       {...(reveal as any)}
-                      className={`group w-full rounded-xl border border-gray-800/60 bg-gray-950/70 p-6 shadow-[0_8px_28px_rgba(0,0,0,0.35)] ring-1 ring-white/5 transition-transform duration-300 hover:-translate-y-0.5 md:w-[min(436px,42vw)] ${
+                      className={`group relative w-full rounded-2xl p-[1px] md:w-[min(436px,42vw)] shadow-[0_8px_28px_rgba(0,0,0,0.35)] ring-1 ring-white/5 transition-transform duration-300 hover:-translate-y-0.5 bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(168,85,247,0.22),rgba(34,211,238,0.2))] ${
                         isRight ? 'md:ml-0' : 'md:mr-[6%]'
                       }`}
                     >
                       {/* Subtle halo */}
                       <div
                         aria-hidden
-                        className="pointer-events-none absolute -inset-4 -z-10 rounded-2xl opacity-20 blur-xl bg-[radial-gradient(80%_60%_at_50%_40%,rgba(59,130,246,0.22),transparent_70%),radial-gradient(70%_60%_at_60%_60%,rgba(168,85,247,0.18),transparent_70%)]"
+                        className="pointer-events-none absolute -inset-4 -z-10 rounded-3xl opacity-20 blur-xl bg-[radial-gradient(80%_60%_at_50%_40%,rgba(59,130,246,0.22),transparent_70%),radial-gradient(70%_60%_at_60%_60%,rgba(168,85,247,0.18),transparent_70%)]"
                       />
 
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="space-y-1 text-left">
+                      {/* Inner frosted panel */}
+                      <div className="relative rounded-2xl border border-white/5 bg-gray-950/70 backdrop-blur-md p-6">
+                        <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-blue-400/40 via-cyan-300/30 to-purple-500/40" />
+
+                        <div className="text-left">
                           <h3 className="font-oswald text-2xl bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500">
                             {item.title}
                           </h3>
-                          <p className="text-gray-400">
-                            {item.company}
-                          </p>
+                          <div className="mt-1 flex items-baseline justify-between gap-3">
+                            <p className="text-sm md:text-base uppercase tracking-[0.14em] text-gray-300/90">
+                              {item.company}
+                            </p>
+                            <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] md:text-[11px] uppercase tracking-[0.12em] font-medium text-gray-300 whitespace-nowrap">
+                              {item.period}
+                            </span>
+                          </div>
+                          <div className="mt-3 h-px bg-linear-to-r from-transparent via-white/5 to-transparent" />
                         </div>
-                        <span className="text-gray-400 whitespace-nowrap">
-                          {item.period}
-                        </span>
-                      </div>
 
-                      <ul className="mt-4 space-y-3 text-[0.98rem]/relaxed">
-                        {item.bullets.map((b, i) => (
-                          <li key={i} className="text-gray-300/90">
-                            <Check
-                              size={18}
-                              className="mr-2 inline-block text-gray-400 align-top"
-                            />
-                            {b}
-                          </li>
-                        ))}
-                      </ul>
+                        <ul className="mt-4 space-y-3 text-[0.98rem]/relaxed">
+                          {item.bullets.map((b, i) => (
+                            <li
+                              key={i}
+                              className="flex gap-2 text-gray-300/90"
+                            >
+                              <Check
+                                size={18}
+                                className="mt-0.5 text-cyan-300/80 shrink-0"
+                              />
+                              <span>{b}</span>
+                            </li>
+                          ))}
+                        </ul>
 
-                      <div className="mt-6 flex flex-wrap gap-2">
-                        {item.tags.map((t) => (
-                          <Badge
-                            key={t}
-                            className="text-xs"
-                            variant="secondary"
-                          >
-                            {t}
-                          </Badge>
-                        ))}
+                        <div className="mt-6 flex flex-wrap gap-2">
+                          {item.tags.map((t) => (
+                            <Badge
+                              key={t}
+                              className="text-xs"
+                              variant="secondary"
+                            >
+                              {t}
+                            </Badge>
+                          ))}
+                        </div>
                       </div>
                     </motion.article>
                   </div>
