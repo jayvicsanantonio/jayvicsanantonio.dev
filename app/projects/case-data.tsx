@@ -87,6 +87,96 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
   },
   {
+    slug: 'christmas-countdown',
+    title: 'Christmas Countdown',
+    period: '2024',
+    blurb:
+      'A playful countdown and popover demo using the Popover API and CSS Anchor Positioning.',
+    image: {
+      src: '/images/home/placeholder-image.webp',
+      alt: 'Christmas Countdown experiment preview',
+      width: 1200,
+      height: 675,
+      ratio: '1200/675',
+    },
+    skills: ['Sandboxes'],
+    metrics: ['Popover API', 'Anchor Positioning API'],
+    links: [
+      { label: 'View', href: 'https://codesandbox.io/s/c894q8' },
+    ],
+    sections: [
+      {
+        label: 'Context',
+        content: (
+          <>
+            Interactive holiday-themed UI exploring modern web
+            platform features.
+          </>
+        ),
+      },
+    ],
+  },
+  {
+    slug: 'aurora-borealis',
+    title: 'Aurora Borealis',
+    period: '2024',
+    blurb:
+      'Pure HTML/CSS animation of a starry sky and aurora lights.',
+    image: {
+      src: '/images/home/placeholder-image.webp',
+      alt: 'Aurora Borealis CSS animation',
+      width: 1200,
+      height: 675,
+      ratio: '1200/675',
+    },
+    skills: ['Sandboxes'],
+    metrics: ['CSS Animation', 'Layered gradients'],
+    links: [
+      { label: 'View', href: 'https://codesandbox.io/s/23lnhc' },
+    ],
+    sections: [
+      {
+        label: 'Context',
+        content: (
+          <>
+            A visual experiment recreating northern lights with
+            gradients and keyframes.
+          </>
+        ),
+      },
+    ],
+  },
+  {
+    slug: 'total-solar-eclipse',
+    title: 'Total Solar Eclipse',
+    period: '2024',
+    blurb:
+      'CSS-driven eclipse animation using radial gradients and keyframes.',
+    image: {
+      src: '/images/home/placeholder-image.webp',
+      alt: 'Total Solar Eclipse CSS animation',
+      width: 1200,
+      height: 675,
+      ratio: '1200/675',
+    },
+    skills: ['Sandboxes'],
+    metrics: ['Radial gradients', 'Pure CSS'],
+    links: [
+      { label: 'View', href: 'https://codesandbox.io/s/qlnxgn' },
+    ],
+    sections: [
+      {
+        label: 'Context',
+        content: (
+          <>
+            Animating celestial motion with CSS only; inspired by
+            April 2024 eclipse.
+          </>
+        ),
+      },
+    ],
+  },
+  {
     slug: 'barbenheimer-vscode-theme',
     title: 'Barbenheimer VS Code Theme',
     period: '2023',

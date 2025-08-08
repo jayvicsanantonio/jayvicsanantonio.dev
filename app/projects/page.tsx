@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import AmbientBackground from '@/components/pages/AmbientBackground';
@@ -81,7 +82,10 @@ function SkillsAndCases({
 }: {
   prefersReducedMotion: boolean;
 }) {
-  const [active, setActive] = React.useState<string>('All');
+  const searchParams = useSearchParams();
+  const initialFromQuery =
+    (searchParams?.get('skill') || searchParams?.get('filter')) ??
+    undefined;
   const skills = React.useMemo(
     () => [
       'All',
@@ -92,8 +96,15 @@ function SkillsAndCases({
       'Accessibility',
       'Edge',
       'AdTech',
+      'Sandboxes',
     ],
     []
+  );
+
+  const [active, setActive] = React.useState<string>(() =>
+    initialFromQuery && skills.includes(initialFromQuery)
+      ? initialFromQuery
+      : 'All'
   );
 
   const reveal = prefersReducedMotion

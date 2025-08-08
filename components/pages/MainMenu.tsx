@@ -81,9 +81,9 @@ export default function MainMenu({
       >
         <IconButton
           IconName={FlaskConical}
-          link="/lab"
+          link="/projects?skill=Sandboxes"
           callback={closeDrawer}
-          subtitle="Experiments & prototypes"
+          subtitle="Sandboxes & prototypes"
         >
           Lab
         </IconButton>

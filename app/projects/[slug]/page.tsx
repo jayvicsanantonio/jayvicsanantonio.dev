@@ -5,7 +5,7 @@ import AmbientBackground from '@/components/pages/AmbientBackground';
 import {
   CASE_STUDIES,
   findCaseStudy,
-} from '@/app/projects/case-data.tsx';
+} from '@/app/projects/case-data';
 
 export function generateStaticParams() {
   return CASE_STUDIES.map((c) => ({ slug: c.slug }));
