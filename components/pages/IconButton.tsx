@@ -13,11 +13,13 @@ export default function IconButton({
   link,
   callback = () => {},
   children,
+  subtitle,
 }: {
   IconName: React.FC<React.SVGProps<SVGSVGElement>>;
   link: string;
   callback?: () => void;
   children: React.ReactNode;
+  subtitle?: string;
 }) {
   const pathname = usePathname();
   const isActive = pathname === link;
@@ -56,25 +58,40 @@ export default function IconButton({
     <Link href={link} onClick={() => callback()} className="block">
       <motion.div
         ref={ref}
-        className={`flex items-center py-2 rounded-xl text-lg cursor-pointer border border-white/0 transition-colors will-change-transform duration-200 font-oswald font-semibold tracking-wide space-x-2 px-3 hover:underline hover:underline-offset-2 ${
+        className={`flex items-center py-3 rounded-xl cursor-pointer border border-white/0 transition-colors will-change-transform duration-200 font-oswald px-4 ${
           isActive
-            ? 'text-white bg-linear-to-r from-blue-500/20 to-purple-500/20 hover:no-underline border-white/10'
-            : 'dark:text-white text-gray-950 hover:bg-white/5 hover:border-white/10'
+            ? 'text-white bg-[#151626] hover:no-underline border-white/10'
+            : 'dark:text-white text-gray-950 hover:bg-[#141524] hover:border-white/10'
         }`}
         tabIndex={0}
-        style={{ x: springX, y: springY }}
-        onMouseMove={onMouseMove}
-        onMouseLeave={onMouseLeave}
+        style={isActive ? undefined : { x: springX, y: springY }}
+        onMouseMove={isActive ? undefined : onMouseMove}
+        onMouseLeave={isActive ? undefined : onMouseLeave}
       >
-        <Icon
-          name={IconName}
-          size={24}
-          strokeWidth={2.5}
-          stroke={isActive ? 'currentColor' : 'url(#iconGradient)'}
-          aria-hidden={true}
-          boopConfig={{ rotation: 20, timing: 300 }}
-        />
-        <span>{children}</span>
+        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#0f1020] text-white/90">
+          <Icon
+            name={IconName}
+            size={22}
+            strokeWidth={2}
+            stroke={isActive ? 'currentColor' : 'url(#iconGradient)'}
+            aria-hidden={true}
+            boopConfig={
+              isActive
+                ? { rotation: 0, timing: 0 }
+                : { rotation: 20, timing: 300 }
+            }
+          />
+        </div>
+        <div className="ml-3 flex flex-col items-start">
+          <span className="text-[1.05rem] leading-tight font-semibold tracking-wide">
+            {children}
+          </span>
+          {subtitle ? (
+            <span className="text-sm leading-tight text-white/60 -mt-0.5">
+              {subtitle}
+            </span>
+          ) : null}
+        </div>
       </motion.div>
     </Link>
   );

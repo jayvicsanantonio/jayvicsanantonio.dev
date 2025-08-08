@@ -24,13 +24,15 @@ export default function Drawer({
   return (
     <FocusLock className="z-40" returnFocus={true}>
       <RemoveScroll>
-        {/* Fullscreen glassy gradient veil */}
+        {/* Fullscreen matte backdrop (no blur, opaque) */}
         <motion.div
-          className="fixed inset-0 bg-[radial-gradient(80%_100%_at_50%_0%,rgba(59,130,246,0.25),transparent_70%),radial-gradient(80%_100%_at_50%_100%,rgba(168,85,247,0.25),transparent_70%)] backdrop-blur-xl"
+          className="fixed inset-0 bg-[#0b0c12]"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          animate={{ opacity: 0.92 }}
           exit={{ opacity: 0 }}
         />
+
+        {/* Close control positioned just outside the card corner */}
 
         {/* Content layer */}
         <motion.div
@@ -40,23 +42,26 @@ export default function Drawer({
           exit={{ scale: 0.98, opacity: 0 }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
         >
-          <div className="relative w-full max-w-3xl rounded-2xl border border-white/10 bg-white/5 dark:bg-white/5 backdrop-blur-xl shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_24px_80px_rgba(99,102,241,0.35)] p-8">
-            {/* Close */}
-            <div className="absolute top-3 right-3">
-              <Button
-                className="rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/10"
-                size="icon"
-                variant="ghost"
+          <div className="relative w-full max-w-3xl rounded-2xl border border-white/5 bg-[#101118] p-8 shadow-[0_0_0_1px_rgba(255,255,255,0.03),0_24px_80px_rgba(99,102,241,0.25)]">
+            {/* Outside-close control anchored to the card corner */}
+            <div className="absolute -top-9 -right-9">
+              <button
+                type="button"
                 onClick={closeDrawer}
                 aria-label="Close navigation menu"
+                className="group h-10 w-10 inline-flex items-center justify-center rounded-full border border-white/25 bg-[#0b0c12] text-white/80 hover:text-white hover:border-white/40 transition-colors shadow-none hover:shadow-[0_0_0_1px_rgba(168,85,247,0.35),0_0_24px_rgba(99,102,241,0.35)]"
               >
-                <X aria-hidden={true} size={16} />
-              </Button>
+                <X
+                  aria-hidden={true}
+                  size={18}
+                  className="transition-transform duration-300 group-hover:rotate-90"
+                />
+                <span className="sr-only">Close</span>
+              </button>
             </div>
-
-            {/* Staggered menu */}
+            {/* Vertical, perfectly aligned stack */}
             <motion.div
-              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+              className="flex flex-col gap-3"
               initial="hidden"
               animate="show"
               variants={{
