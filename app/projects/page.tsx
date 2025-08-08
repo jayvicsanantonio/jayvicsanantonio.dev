@@ -87,17 +87,7 @@ function SkillsAndCases({
     (searchParams?.get('skill') || searchParams?.get('filter')) ??
     undefined;
   const skills = React.useMemo(
-    () => [
-      'All',
-      'Architecture',
-      'Performance',
-      'DX',
-      'Testing',
-      'Accessibility',
-      'Edge',
-      'AdTech',
-      'Sandboxes',
-    ],
+    () => ['All', 'Open Source', 'Sandboxes'],
     []
   );
 

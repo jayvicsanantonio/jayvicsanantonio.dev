@@ -434,7 +434,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       height: 675,
       ratio: '1200/675',
     },
-    skills: ['Open Source', 'DX', 'Accessibility', 'React'],
+    skills: ['DX', 'Accessibility', 'React'],
     metrics: [
       'Hundreds of links curated',
       'Structured taxonomy',
