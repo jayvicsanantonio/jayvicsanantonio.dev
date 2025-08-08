@@ -171,29 +171,29 @@ export default function WorkPage() {
           <div className="font-oswald uppercase inline-block rounded-lg bg-white/5 px-3 py-1 tracking-wide text-white/90">
             Work
           </div>
-          <h1 className="font-oswald text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight bg-clip-text text-transparent bg-linear-to-r from-blue-400 via-cyan-300 to-purple-500">
+          <h1 className="font-oswald text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight bg-clip-text text-transparent bg-linear-to-r from-blue-400 via-cyan-300 to-purple-500">
             A Timeline of Crafting Impact
           </h1>
           <p className="text-gray-300/85 text-base sm:text-lg">
-            A narrative journey through products, platforms, and
-            teams— guided by intention, refined by iteration,
-            delivered with care.
+            A decade of building adtech platforms, real‑time systems,
+            and scalable web experiences—shipping performance wins,
+            leading teams, and crafting thoughtful interfaces.
           </p>
         </div>
 
         {/* Timeline */}
         <div
           ref={containerRef}
-          className="relative mt-10 sm:mt-12 md:mt-16"
+          className="relative mt-10 sm:mt-12 lg:mt-16"
         >
           {/* Spine that fills with scroll */}
           <motion.div
             aria-hidden
             style={{ scaleY: prefersReducedMotion ? 1 : spineScale }}
-            className="hidden md:block origin-top pointer-events-none absolute md:left-1/2 md:-translate-x-1/2 top-0 h-full w-[2px] bg-[linear-gradient(to_bottom,rgba(59,130,246,0.75),rgba(168,85,247,0.55),rgba(34,211,238,0.35),transparent)] shadow-[0_0_14px_rgba(59,130,246,0.25)] [transform:translateZ(0)]"
+            className="hidden lg:block origin-top pointer-events-none absolute lg:left-1/2 lg:-translate-x-1/2 top-0 h-full w-[2px] bg-[linear-gradient(to_bottom,rgba(59,130,246,0.75),rgba(168,85,247,0.55),rgba(34,211,238,0.35),transparent)] shadow-[0_0_14px_rgba(59,130,246,0.25)] [transform:translateZ(0)]"
           />
 
-          <ul className="relative mx-auto max-w-[1100px] space-y-10 sm:space-y-14 md:space-y-24 pl-0 md:pl-0">
+          <ul className="relative mx-auto max-w-[1100px] space-y-10 sm:space-y-14 lg:space-y-24 pl-0 lg:pl-0">
             {EXPERIENCES.map((item, index) => {
               const isRight = index % 2 === 1;
               return (
@@ -202,20 +202,20 @@ export default function WorkPage() {
                   className="relative"
                 >
                   {/* Node on spine */}
-                  <div className="hidden md:block absolute md:left-1/2 md:-translate-x-1/2 top-6">
+                  <div className="hidden lg:block absolute lg:left-1/2 lg:-translate-x-1/2 top-6">
                     <span className="relative z-10 block h-2.5 w-2.5 rounded-full bg-cyan-300 ring-1 ring-cyan-400/60 shadow-[0_0_10px_3px_rgba(34,211,238,0.35)]" />
                   </div>
 
                   <div
                     className={`relative ${
                       // Pancake (stacked) layout on small screens; alternating on md+
-                      isRight ? 'md:ml-[56%]' : 'md:mr-[56%]'
-                    } md:pl-0`}
+                      isRight ? 'lg:ml-[56%]' : 'lg:mr-[56%]'
+                    } lg:pl-0`}
                   >
                     {/* Connector from spine to card (desktop) */}
                     <span
                       aria-hidden
-                      className={`absolute top-6 sm:top-7 hidden h-[2px] w-10 sm:w-14 md:block ${
+                      className={`absolute top-6 sm:top-7 hidden h-[2px] w-10 sm:w-14 lg:block ${
                         isRight
                           ? 'left-[-56px] bg-[linear-gradient(to_right,rgba(34,211,238,0)_0%,rgba(34,211,238,0.7)_40%,rgba(168,85,247,0.7)_100%)]'
                           : 'right-[-56px] bg-[linear-gradient(to_left,rgba(34,211,238,0)_0%,rgba(34,211,238,0.7)_40%,rgba(168,85,247,0.7)_100%)]'
@@ -225,9 +225,9 @@ export default function WorkPage() {
                     {/* Card */}
                     <motion.article
                       {...(reveal as any)}
-                      className={`group relative w-full rounded-2xl p-[1px] sm:p-[1.2px] md:w-[min(436px,42vw)] shadow-[0_8px_28px_rgba(0,0,0,0.35)] ring-1 ring-white/5 transition-transform duration-300 hover:-translate-y-0.5 bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(168,85,247,0.22),rgba(34,211,238,0.2))] ${
-                        isRight ? 'md:ml-0' : 'md:mr-[6%]'
-                      } md:mx-0 mx-auto`}
+                      className={`group relative w-full rounded-2xl p-[1px] sm:p-[1.2px] lg:w-[min(436px,42vw)] shadow-[0_8px_28px_rgba(0,0,0,0.35)] ring-1 ring-white/5 transition-transform duration-300 hover:-translate-y-0.5 bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(168,85,247,0.22),rgba(34,211,238,0.2))] ${
+                        isRight ? 'lg:ml-0' : 'lg:mr-[6%]'
+                      } lg:mx-0 mx-auto`}
                     >
                       {/* Subtle halo */}
                       <div
@@ -244,10 +244,10 @@ export default function WorkPage() {
                             {item.title}
                           </h3>
                           <div className="mt-1 flex items-baseline justify-between gap-3">
-                            <p className="text-sm md:text-base uppercase tracking-[0.14em] text-gray-300/90">
+                            <p className="text-sm lg:text-base uppercase tracking-[0.14em] text-gray-300/90">
                               {item.company}
                             </p>
-                            <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] md:text-[11px] uppercase tracking-[0.12em] font-medium text-gray-300 whitespace-nowrap">
+                            <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] lg:text-[11px] uppercase tracking-[0.12em] font-medium text-gray-300 whitespace-nowrap">
                               {item.period}
                             </span>
                           </div>
