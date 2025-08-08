@@ -8,11 +8,10 @@ import {
   MouseEventHandler,
   TouchEventHandler,
 } from 'react';
-import Drawer from '@/components/pages/Drawer';
 import useBoop from '@/hooks/use-boop';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import Icon from '@/components/pages/Icon';
+import MainMenu from '@/components/pages/MainMenu';
 
 export default function Header() {
   const [, menuTrigger] = useBoop({ x: 8, timing: 250 });
@@ -22,6 +21,7 @@ export default function Header() {
   const lastScrollYRef = useRef(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
+  const menuContainerRef = useRef<HTMLDivElement | null>(null);
 
   const closeDrawer = useCallback(() => {
     setIsNavOpen(false);
@@ -51,13 +51,31 @@ export default function Header() {
 
   // Removed anchor tracking for menu button (no longer needed)
 
+  // Close when clicking outside the menu
+  useEffect(() => {
+    if (!isNavOpen) return;
+    const onDocClick = (e: MouseEvent) => {
+      const target = e.target as Node | null;
+      if (
+        menuContainerRef.current &&
+        target &&
+        !menuContainerRef.current.contains(target)
+      ) {
+        setIsNavOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', onDocClick);
+    return () =>
+      document.removeEventListener('mousedown', onDocClick);
+  }, [isNavOpen]);
+
   return (
     <>
       {/* Floating chrome: auto-hiding corner controls with scroll progress ring */}
       <AnimatePresence>
         {isVisible && (
           <motion.header
-            className="fixed top-4 right-4"
+            className="fixed top-4 right-4 z-[90]"
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -100, opacity: 0 }}
@@ -70,14 +88,15 @@ export default function Header() {
             <div className="flex items-center gap-2 rounded-full px-1 py-1 border transition-all duration-300 bg-transparent border-transparent">
               {/* Theme toggle removed */}
               <div
-                className={`relative ${isNavOpen ? 'z-[60]' : ''}`}
+                ref={menuContainerRef}
+                className={`relative ${isNavOpen ? 'z-[90]' : ''}`}
               >
                 <Button
                   aria-expanded={isNavOpen}
                   aria-label="Open main menu"
-                  className={`cursor-pointer rounded-full text-white transition-colors ${
+                  className={`relative z-[95] cursor-pointer rounded-full text-white transition-colors ${
                     isNavOpen
-                      ? 'bg-white/20 border border-white/30 ring-2 ring-white/30'
+                      ? 'border border-white/30 ring-1 ring-white/10 hover:bg-transparent'
                       : 'bg-transparent border border-transparent hover:bg-white/1'
                   }`}
                   size="icon"
@@ -155,14 +174,51 @@ export default function Header() {
                     />
                   </motion.svg>
                 </Button>
+
+                {/* Click-outside backdrop */}
+                <AnimatePresence>
+                  {isNavOpen && (
+                    <motion.button
+                      aria-hidden={true}
+                      className="fixed inset-0 z-[85] cursor-default bg-black/50 backdrop-blur-sm"
+                      style={{ WebkitBackdropFilter: 'blur(4px)' }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.15 }}
+                      onClick={() => setIsNavOpen(false)}
+                    />
+                  )}
+                </AnimatePresence>
+
+                {/* Anchored popover under the hamburger */}
+                <AnimatePresence>
+                  {isNavOpen && (
+                    <motion.div
+                      className="absolute right-0 top-full mt-2 z-[90] w-72 rounded-xl border border-white/10 bg-[#101118] p-2 shadow-[0_0_0_1px_rgba(255,255,255,0.03),0_16px_48px_rgba(99,102,241,0.25)]"
+                      initial={{ opacity: 0, y: -6, scale: 0.98 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -6, scale: 0.98 }}
+                      transition={{
+                        type: 'spring',
+                        stiffness: 360,
+                        damping: 28,
+                      }}
+                      role="menu"
+                      aria-label="Main navigation"
+                    >
+                      <MainMenu
+                        closeDrawer={() => setIsNavOpen(false)}
+                      />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             </div>
           </motion.header>
         )}
       </AnimatePresence>
-      <AnimatePresence>
-        {isNavOpen && <Drawer closeDrawer={closeDrawer} />}
-      </AnimatePresence>
+      {/* Drawer removed in favor of anchored popover */}
     </>
   );
 }
