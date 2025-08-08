@@ -532,6 +532,73 @@ export const CASE_STUDIES: CaseStudy[] = [
       },
     ],
   },
+  {
+    slug: 'croo',
+    title: 'Croo',
+    period: '2015–2016',
+    blurb:
+      'Wearable safety device with Android companion app using Bluetooth Low Energy, backed by AWS services with a Node.js + Express.js backend.',
+    image: {
+      src: '/images/projects/croo.png',
+      alt: 'Croo wearable and app',
+      width: 1200,
+      height: 675,
+      ratio: '1200/675',
+    },
+    skills: [
+      'Architecture',
+      'DX',
+      'Internet of Things',
+      'AWS',
+      'Node',
+      'Express',
+      'Android',
+      'BLE',
+    ],
+    metrics: [
+      'Bluetooth Low Energy wearable',
+      'Android companion app',
+      'AWS-hosted backend (Node + Express)',
+    ],
+    links: [
+      {
+        label: 'Watch',
+        href: 'https://www.youtube.com/watch?v=0wYUNuDsrRo',
+      },
+    ],
+    sections: [
+      {
+        label: 'Context',
+        content: (
+          <>
+            Designed and supported the infrastructure for an IoT
+            wearable focused on personal safety, with a companion
+            Android application.
+          </>
+        ),
+      },
+      {
+        label: 'Decisions',
+        content: (
+          <>
+            Chose BLE for low-power connectivity; implemented a
+            Node.js + Express backend on AWS to provide reliable APIs
+            and telemetry processing.
+          </>
+        ),
+      },
+      {
+        label: 'Results',
+        content: (
+          <>
+            Delivered a responsive device–app experience with a
+            scalable cloud backend and streamlined developer
+            workflows.
+          </>
+        ),
+      },
+    ],
+  },
 ];
 
 export function findCaseStudy(slug: string): CaseStudy | undefined {
