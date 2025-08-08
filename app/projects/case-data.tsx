@@ -599,6 +599,64 @@ export const CASE_STUDIES: CaseStudy[] = [
       },
     ],
   },
+  {
+    slug: 'ember-upgrade-guide',
+    title: 'Ember Upgrade Guide',
+    period: '2020',
+    blurb:
+      'Community tool helping developers upgrade Ember apps across versions with clear guidance on new features, deprecations, and breaking changes.',
+    image: {
+      src: '/images/projects/ember-upgrade-guide.png',
+      alt: 'Ember Upgrade Guide',
+      width: 1200,
+      height: 675,
+      ratio: '1200/675',
+    },
+    skills: ['Open Source', 'DX', 'Ember', 'React'],
+    metrics: [
+      'Used by the Ember community',
+      'Guided upgrades across framework releases',
+    ],
+    links: [
+      {
+        label: 'Github',
+        href: 'https://github.com/ember-learn/upgrade-guide',
+        icon: <Github size={18} />,
+      },
+      { label: 'View', href: 'https://upgrade.emberjs.com/' },
+    ],
+    sections: [
+      {
+        label: 'Context',
+        content: (
+          <>
+            Contributed to a community resource that streamlines
+            upgrading Ember apps by surfacing changes between versions
+            and recommended migration steps.
+          </>
+        ),
+      },
+      {
+        label: 'Decisions',
+        content: (
+          <>
+            Focused on clarity and accuracy of guidance; emphasized a
+            developer‑friendly UX to minimize friction during
+            upgrades.
+          </>
+        ),
+      },
+      {
+        label: 'Results',
+        content: (
+          <>
+            Increased confidence and speed of framework upgrades
+            across teams adopting modern Ember patterns.
+          </>
+        ),
+      },
+    ],
+  },
 ];
 
 export function findCaseStudy(slug: string): CaseStudy | undefined {
