@@ -478,6 +478,60 @@ export const CASE_STUDIES: CaseStudy[] = [
       },
     ],
   },
+  {
+    slug: 'fintq-lendr',
+    title: 'FINTQ — Lendr',
+    period: '2016',
+    blurb:
+      'Mobile-first digital lending marketplace connecting banks with borrowers across the Philippines. Built with Node.js and Express.js.',
+    image: {
+      src: '/images/projects/fintq-lendr.png',
+      alt: 'FINTQ Lendr',
+      width: 1200,
+      height: 675,
+      ratio: '1200/675',
+    },
+    skills: ['Architecture', 'Performance', 'DX'],
+    metrics: [
+      'Digital lending marketplace',
+      'Mobile-first onboarding',
+    ],
+    links: [
+      {
+        label: 'View',
+        href: 'https://www.voyagerinnovation.com/fintq',
+      },
+    ],
+    sections: [
+      {
+        label: 'Context',
+        content: (
+          <>
+            Built to extend access to credit by bringing bank lending
+            flows to mobile.
+          </>
+        ),
+      },
+      {
+        label: 'Decisions',
+        content: (
+          <>
+            Focused on secure, streamlined journeys and an API-first
+            integration surface for participating banks.
+          </>
+        ),
+      },
+      {
+        label: 'Results',
+        content: (
+          <>
+            Enabled scalable distribution of loan products across
+            geographies via a single mobile experience.
+          </>
+        ),
+      },
+    ],
+  },
 ];
 
 export function findCaseStudy(slug: string): CaseStudy | undefined {
