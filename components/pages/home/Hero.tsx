@@ -39,12 +39,13 @@ export default function Hero({
     [0, prefersReducedMotion ? 0 : -60]
   );
   const roles = [
+    'Senior Software Engineer',
     'Full-Stack Web Developer',
     'JavaScript Specialist',
     'React Expert',
     'Node.JS Developer',
     'UI/UX Enthusiast',
-    'Performance Optimization Advocate',
+    'Performance Optimizer',
     'Creative Thinker',
   ];
 

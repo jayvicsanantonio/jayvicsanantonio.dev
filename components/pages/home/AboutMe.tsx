@@ -264,20 +264,6 @@ export default function AboutMe({
             >
               Git
             </Badge>
-            <Badge
-              aria-label="Linux"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              Linux
-            </Badge>
-            <Badge
-              aria-label="Figma"
-              className="w-fit text-sm"
-              variant="secondary"
-            >
-              Figma
-            </Badge>
           </motion.div>
         </div>
         <div className="lg:text-lg space-y-4 text-gray-950 dark:text-gray-200 dark:bg-gray-950 rounded-xl p-6 border-2 border-transparent [border-image:linear-gradient(90deg,rgba(59,130,246,0.6),rgba(34,211,238,0.5),rgba(168,85,247,0.6))_1] h-fit">

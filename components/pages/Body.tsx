@@ -59,7 +59,7 @@ export default function Body({
       <AmbientBackground />
       <CursorGlow />
       <div
-        className={`font-source-sans flex flex-col max-w-5xl px-4 md:px-12 mx-4 lg:mx-auto ${
+        className={`font-source-sans flex flex-col w-3xl lg:w-6xl md:px-12 mx-4 lg:mx-auto ${
           theme === 'light' ? '' : 'dark'
         }`}
       >

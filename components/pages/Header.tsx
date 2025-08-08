@@ -24,7 +24,7 @@ export default function Header({
   theme: Theme;
   setTheme: React.Dispatch<React.SetStateAction<Theme>>;
 }) {
-  const [boopControls, menuTrigger] = useBoop({ x: 15, timing: 300 });
+  const [, menuTrigger] = useBoop({ x: 8, timing: 250 });
 
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
@@ -58,12 +58,6 @@ export default function Header({
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const size = 44;
-  const stroke = 3;
-  const r = (size - stroke) / 2;
-  const c = 2 * Math.PI * r;
-  const dash = c * scrollProgress;
-
   return (
     <>
       {/* Floating chrome: auto-hiding corner controls with scroll progress ring */}
@@ -90,7 +84,7 @@ export default function Header({
               <Button
                 role="switch"
                 aria-label="Toggle theme"
-                className="cursor-pointer rounded-full text-white transition-colors bg-transparent border border-transparent hover:bg-white/10"
+                className="cursor-pointer rounded-full text-white transition-colors bg-transparent border border-transparent hover:bg-white/1"
                 size="icon"
                 variant="ghost"
                 onClick={() => {
@@ -116,7 +110,7 @@ export default function Header({
                 <Button
                   aria-expanded={isNavOpen}
                   aria-label="Open main menu"
-                  className="cursor-pointer rounded-full text-white transition-colors bg-transparent border border-transparent hover:bg-white/10"
+                  className="cursor-pointer rounded-full text-white transition-colors bg-transparent border border-transparent hover:bg-white/1"
                   size="icon"
                   variant="ghost"
                   onClick={() => {
@@ -132,13 +126,22 @@ export default function Header({
                   }
                   title="Menu"
                 >
-                  <svg
+                  <motion.svg
                     width="22"
                     height="22"
                     viewBox="0 0 24 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                     aria-hidden="true"
+                    initial="rest"
+                    whileHover="hover"
+                    onHoverStart={() => menuTrigger()}
+                    onMouseEnter={
+                      menuTrigger as MouseEventHandler<SVGSVGElement>
+                    }
+                    onTouchStart={
+                      menuTrigger as TouchEventHandler<SVGSVGElement>
+                    }
                   >
                     <defs>
                       <linearGradient
@@ -159,14 +162,21 @@ export default function Header({
                       height="2"
                       fill="url(#menuIconGradient)"
                     />
-                    <motion.rect
-                      x="2"
-                      y="11"
-                      width="20"
-                      height="2"
-                      fill="url(#menuIconGradient)"
-                      animate={boopControls}
-                    />
+                    <motion.g
+                      style={{
+                        transformBox: 'fill-box',
+                        transformOrigin: 'center',
+                      }}
+                      variants={{ rest: { x: 0 }, hover: { x: 6 } }}
+                    >
+                      <rect
+                        x="2"
+                        y="11"
+                        width="20"
+                        height="2"
+                        fill="url(#menuIconGradient)"
+                      />
+                    </motion.g>
                     <rect
                       x="2"
                       y="18"
@@ -174,7 +184,7 @@ export default function Header({
                       height="2"
                       fill="url(#menuIconGradient)"
                     />
-                  </svg>
+                  </motion.svg>
                 </Button>
               </div>
             </div>
