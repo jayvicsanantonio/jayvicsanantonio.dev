@@ -171,10 +171,10 @@ export default function WorkPage() {
           <div className="font-oswald uppercase inline-block rounded-lg bg-white/5 px-3 py-1 tracking-wide text-white/90">
             Work
           </div>
-          <h1 className="font-oswald text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight bg-clip-text text-transparent bg-linear-to-r from-blue-400 via-cyan-300 to-purple-500">
+          <h1 className="font-oswald text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight bg-clip-text text-transparent bg-linear-to-r from-blue-400 via-cyan-300 to-purple-500">
             A Timeline of Crafting Impact
           </h1>
-          <p className="text-gray-300/85 md:text-lg">
+          <p className="text-gray-300/85 text-base sm:text-lg">
             A narrative journey through products, platforms, and
             teams— guided by intention, refined by iteration,
             delivered with care.
@@ -182,15 +182,18 @@ export default function WorkPage() {
         </div>
 
         {/* Timeline */}
-        <div ref={containerRef} className="relative mt-16">
+        <div
+          ref={containerRef}
+          className="relative mt-10 sm:mt-12 md:mt-16"
+        >
           {/* Spine that fills with scroll */}
           <motion.div
             aria-hidden
             style={{ scaleY: prefersReducedMotion ? 1 : spineScale }}
-            className="origin-top pointer-events-none absolute left-6 top-0 h-full w-[2px] bg-[linear-gradient(to_bottom,rgba(59,130,246,0.75),rgba(168,85,247,0.55),rgba(34,211,238,0.35),transparent)] shadow-[0_0_14px_rgba(59,130,246,0.25)] md:left-1/2 md:-translate-x-1/2"
+            className="hidden md:block origin-top pointer-events-none absolute md:left-1/2 md:-translate-x-1/2 top-0 h-full w-[2px] bg-[linear-gradient(to_bottom,rgba(59,130,246,0.75),rgba(168,85,247,0.55),rgba(34,211,238,0.35),transparent)] shadow-[0_0_14px_rgba(59,130,246,0.25)] [transform:translateZ(0)]"
           />
 
-          <ul className="relative mx-auto max-w-[1100px] space-y-16 md:space-y-24 pl-12 md:pl-0">
+          <ul className="relative mx-auto max-w-[1100px] space-y-10 sm:space-y-14 md:space-y-24 pl-0 md:pl-0">
             {EXPERIENCES.map((item, index) => {
               const isRight = index % 2 === 1;
               return (
@@ -199,19 +202,20 @@ export default function WorkPage() {
                   className="relative"
                 >
                   {/* Node on spine */}
-                  <div className="absolute left-6 md:left-1/2 md:-translate-x-1/2 top-6">
-                    <span className="block h-2.5 w-2.5 rounded-full bg-cyan-300 ring-1 ring-cyan-400/60 shadow-[0_0_10px_3px_rgba(34,211,238,0.35)]" />
+                  <div className="hidden md:block absolute md:left-1/2 md:-translate-x-1/2 top-6">
+                    <span className="relative z-10 block h-2.5 w-2.5 rounded-full bg-cyan-300 ring-1 ring-cyan-400/60 shadow-[0_0_10px_3px_rgba(34,211,238,0.35)]" />
                   </div>
 
                   <div
                     className={`relative ${
+                      // Pancake (stacked) layout on small screens; alternating on md+
                       isRight ? 'md:ml-[56%]' : 'md:mr-[56%]'
                     } md:pl-0`}
                   >
                     {/* Connector from spine to card (desktop) */}
                     <span
                       aria-hidden
-                      className={`absolute top-7 hidden h-[2px] w-14 md:block ${
+                      className={`absolute top-6 sm:top-7 hidden h-[2px] w-10 sm:w-14 md:block ${
                         isRight
                           ? 'left-[-56px] bg-[linear-gradient(to_right,rgba(34,211,238,0)_0%,rgba(34,211,238,0.7)_40%,rgba(168,85,247,0.7)_100%)]'
                           : 'right-[-56px] bg-[linear-gradient(to_left,rgba(34,211,238,0)_0%,rgba(34,211,238,0.7)_40%,rgba(168,85,247,0.7)_100%)]'
@@ -221,9 +225,9 @@ export default function WorkPage() {
                     {/* Card */}
                     <motion.article
                       {...(reveal as any)}
-                      className={`group relative w-full rounded-2xl p-[1px] md:w-[min(436px,42vw)] shadow-[0_8px_28px_rgba(0,0,0,0.35)] ring-1 ring-white/5 transition-transform duration-300 hover:-translate-y-0.5 bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(168,85,247,0.22),rgba(34,211,238,0.2))] ${
+                      className={`group relative w-full rounded-2xl p-[1px] sm:p-[1.2px] md:w-[min(436px,42vw)] shadow-[0_8px_28px_rgba(0,0,0,0.35)] ring-1 ring-white/5 transition-transform duration-300 hover:-translate-y-0.5 bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(168,85,247,0.22),rgba(34,211,238,0.2))] ${
                         isRight ? 'md:ml-0' : 'md:mr-[6%]'
-                      }`}
+                      } md:mx-0 mx-auto`}
                     >
                       {/* Subtle halo */}
                       <div
@@ -232,7 +236,7 @@ export default function WorkPage() {
                       />
 
                       {/* Inner frosted panel */}
-                      <div className="relative rounded-2xl border border-white/5 bg-gray-950/70 backdrop-blur-md p-6">
+                      <div className="relative rounded-2xl border border-white/5 bg-gray-950/70 backdrop-blur-md p-5 sm:p-6">
                         <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-blue-400/40 via-cyan-300/30 to-purple-500/40" />
 
                         <div className="text-left">
@@ -250,11 +254,11 @@ export default function WorkPage() {
                           <div className="mt-3 h-px bg-linear-to-r from-transparent via-white/5 to-transparent" />
                         </div>
 
-                        <ul className="mt-4 space-y-3 text-[0.98rem]/relaxed">
+                        <ul className="mt-4 space-y-3 text-[0.95rem]/relaxed sm:text-[0.98rem]/relaxed">
                           {item.bullets.map((b, i) => (
                             <li
                               key={i}
-                              className="flex gap-2 text-gray-300/90"
+                              className="flex gap-2 text-gray-300/90 break-words"
                             >
                               <Check
                                 size={18}
