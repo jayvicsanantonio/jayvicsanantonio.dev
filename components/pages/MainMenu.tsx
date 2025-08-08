@@ -80,30 +80,6 @@ export default function MainMenu({
         }}
       >
         <IconButton
-          IconName={FlaskConical}
-          link="/projects?skill=Sandboxes"
-          callback={closeDrawer}
-          subtitle="Sandboxes & prototypes"
-        >
-          Lab
-        </IconButton>
-      </motion.div>
-      <motion.div
-        variants={{
-          hidden: { opacity: 0, x: -12, filter: 'blur(4px)' },
-          show: {
-            opacity: 1,
-            x: 0,
-            filter: 'blur(0px)',
-            transition: {
-              type: 'spring',
-              stiffness: 420,
-              damping: 28,
-            },
-          },
-        }}
-      >
-        <IconButton
           IconName={FileUser}
           link="/work"
           callback={closeDrawer}
