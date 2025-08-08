@@ -207,9 +207,11 @@ export default function Header() {
                       role="menu"
                       aria-label="Main navigation"
                     >
-                      <MainMenu
-                        closeDrawer={() => setIsNavOpen(false)}
-                      />
+                      <div className="flex flex-col gap-3">
+                        <MainMenu
+                          closeDrawer={() => setIsNavOpen(false)}
+                        />
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
