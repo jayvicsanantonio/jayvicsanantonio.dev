@@ -13,17 +13,8 @@ import useBoop from '@/hooks/use-boop';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/pages/Icon';
-import Sun from '@/components/icons/Sun';
-import Moon from '@/components/icons/Moon';
-import Theme from '@/types/theme';
 
-export default function Header({
-  theme,
-  setTheme,
-}: {
-  theme: Theme;
-  setTheme: React.Dispatch<React.SetStateAction<Theme>>;
-}) {
+export default function Header() {
   const [, menuTrigger] = useBoop({ x: 8, timing: 250 });
 
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -58,13 +49,15 @@ export default function Header({
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Removed anchor tracking for menu button (no longer needed)
+
   return (
     <>
       {/* Floating chrome: auto-hiding corner controls with scroll progress ring */}
       <AnimatePresence>
         {isVisible && (
           <motion.header
-            className="fixed top-4 right-4 z-30"
+            className="fixed top-4 right-4"
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -100, opacity: 0 }}
@@ -74,43 +67,19 @@ export default function Header({
               delay: 0.1,
             }}
           >
-            <div
-              className={`flex items-center gap-2 rounded-full px-1 py-1 border transition-all duration-300 ${
-                isScrolled
-                  ? 'bg-white/5 dark:bg-white/5 backdrop-blur-md border-white/10 shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_8px_24px_rgba(99,102,241,0.25)]'
-                  : 'bg-transparent border-transparent'
-              }`}
-            >
-              <Button
-                role="switch"
-                aria-label="Toggle theme"
-                className="cursor-pointer rounded-full text-white transition-colors bg-transparent border border-transparent hover:bg-white/1"
-                size="icon"
-                variant="ghost"
-                onClick={() => {
-                  setTheme(theme === 'light' ? 'dark' : 'light');
-                }}
-                title="Toggle theme"
+            <div className="flex items-center gap-2 rounded-full px-1 py-1 border transition-all duration-300 bg-transparent border-transparent">
+              {/* Theme toggle removed */}
+              <div
+                className={`relative ${isNavOpen ? 'z-[60]' : ''}`}
               >
-                {theme === 'light' ? (
-                  <Icon
-                    name={Sun}
-                    aria-hidden={true}
-                    boopConfig={{ rotation: 20, timing: 200 }}
-                  />
-                ) : (
-                  <Icon
-                    name={Moon}
-                    aria-hidden={true}
-                    boopConfig={{ rotation: 20, timing: 200 }}
-                  />
-                )}
-              </Button>
-              <div className="relative">
                 <Button
                   aria-expanded={isNavOpen}
                   aria-label="Open main menu"
-                  className="cursor-pointer rounded-full text-white transition-colors bg-transparent border border-transparent hover:bg-white/1"
+                  className={`cursor-pointer rounded-full text-white transition-colors ${
+                    isNavOpen
+                      ? 'bg-white/20 border border-white/30 ring-2 ring-white/30'
+                      : 'bg-transparent border border-transparent hover:bg-white/1'
+                  }`}
                   size="icon"
                   variant="ghost"
                   onClick={() => {
