@@ -153,7 +153,7 @@ export default function WorkPage() {
   const reveal = prefersReducedMotion
     ? { initial: {}, whileInView: {}, viewport: {}, transition: {} }
     : {
-        initial: { opacity: 0, y: 22 },
+        initial: { opacity: 0 },
         whileInView: { opacity: 1, y: 0 },
         viewport: { once: true, amount: 0.3 },
         transition: {
@@ -190,7 +190,7 @@ export default function WorkPage() {
           <motion.div
             aria-hidden
             style={{ scaleY: prefersReducedMotion ? 1 : spineScale }}
-            className="hidden lg:block origin-top pointer-events-none absolute lg:left-1/2 lg:-translate-x-1/2 top-0 h-full w-[2px] bg-[linear-gradient(to_bottom,rgba(59,130,246,0.75),rgba(168,85,247,0.55),rgba(34,211,238,0.35),transparent)] shadow-[0_0_14px_rgba(59,130,246,0.25)] [transform:translateZ(0)]"
+            className="hidden lg:block origin-top pointer-events-none absolute lg:left-1/2 lg:-translate-x-1/2 top-0 h-full w-1 bg-[linear-gradient(to_bottom,rgba(59,130,246,0.75),rgba(168,85,247,0.55),rgba(34,211,238,0.35),transparent)] shadow-[0_0_14px_rgba(59,130,246,0.25)] [transform:translateZ(0)]"
           />
 
           <ul className="relative mx-auto max-w-[1100px] space-y-10 sm:space-y-14 lg:space-y-24 pl-0 lg:pl-0">
@@ -212,16 +212,6 @@ export default function WorkPage() {
                       isRight ? 'lg:ml-[56%]' : 'lg:mr-[56%]'
                     } lg:pl-0`}
                   >
-                    {/* Connector from spine to card (desktop) */}
-                    <span
-                      aria-hidden
-                      className={`absolute top-6 sm:top-7 hidden h-[2px] w-10 sm:w-14 lg:block ${
-                        isRight
-                          ? 'left-[-56px] bg-[linear-gradient(to_right,rgba(34,211,238,0)_0%,rgba(34,211,238,0.7)_40%,rgba(168,85,247,0.7)_100%)]'
-                          : 'right-[-56px] bg-[linear-gradient(to_left,rgba(34,211,238,0)_0%,rgba(34,211,238,0.7)_40%,rgba(168,85,247,0.7)_100%)]'
-                      } shadow-[0_0_10px_rgba(34,211,238,0.25)]`}
-                    />
-
                     {/* Card */}
                     <motion.article
                       {...(reveal as any)}
@@ -237,8 +227,6 @@ export default function WorkPage() {
 
                       {/* Inner frosted panel */}
                       <div className="relative rounded-2xl border border-white/5 bg-gray-950/70 backdrop-blur-md p-5 sm:p-6">
-                        <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-blue-400/40 via-cyan-300/30 to-purple-500/40" />
-
                         <div className="text-left">
                           <h3 className="font-oswald text-2xl bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500">
                             {item.title}
