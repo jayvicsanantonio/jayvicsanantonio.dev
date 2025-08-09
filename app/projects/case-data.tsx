@@ -41,6 +41,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       'DX',
       'Ember',
       'React',
+      'Enterprise',
     ],
     metrics: [
       '+1150% throughput (uploads)',
@@ -491,7 +492,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       height: 675,
       ratio: '1200/675',
     },
-    skills: ['Architecture', 'Performance', 'DX'],
+    skills: ['Architecture', 'Performance', 'DX', 'Enterprise'],
     metrics: [
       'Digital lending marketplace',
       'Mobile-first onboarding',
@@ -554,6 +555,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       'Express',
       'Android',
       'BLE',
+      'Startup',
     ],
     metrics: [
       'Bluetooth Low Energy wearable',
