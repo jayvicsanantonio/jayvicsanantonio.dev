@@ -94,7 +94,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     blurb:
       'A playful countdown and popover demo using the Popover API and CSS Anchor Positioning.',
     image: {
-      src: '/images/home/placeholder-image.webp',
+      src: '/images/projects/christmas-countdown.png',
       alt: 'Christmas Countdown experiment preview',
       width: 1200,
       height: 675,
@@ -103,7 +103,10 @@ export const CASE_STUDIES: CaseStudy[] = [
     skills: ['Sandboxes'],
     metrics: ['Popover API', 'Anchor Positioning API'],
     links: [
-      { label: 'View', href: 'https://codesandbox.io/s/c894q8' },
+      {
+        label: 'View Sandbox',
+        href: 'https://codesandbox.io/p/sandbox/christmas-countdown-using-popover-and-anchor-positioning-apis-c894q8?file=%2Findex.html&from-embed',
+      },
     ],
     sections: [
       {
@@ -124,7 +127,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     blurb:
       'Pure HTML/CSS animation of a starry sky and aurora lights.',
     image: {
-      src: '/images/home/placeholder-image.webp',
+      src: '/images/projects/aurora-borealis.png',
       alt: 'Aurora Borealis CSS animation',
       width: 1200,
       height: 675,
@@ -133,7 +136,10 @@ export const CASE_STUDIES: CaseStudy[] = [
     skills: ['Sandboxes'],
     metrics: ['CSS Animation', 'Layered gradients'],
     links: [
-      { label: 'View', href: 'https://codesandbox.io/s/23lnhc' },
+      {
+        label: 'View Sandbox',
+        href: 'https://codesandbox.io/p/sandbox/23lnhc?file=%2Fstyles.css',
+      },
     ],
     sections: [
       {
@@ -154,7 +160,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     blurb:
       'CSS-driven eclipse animation using radial gradients and keyframes.',
     image: {
-      src: '/images/home/placeholder-image.webp',
+      src: '/images/projects/solar-eclipse.png',
       alt: 'Total Solar Eclipse CSS animation',
       width: 1200,
       height: 675,
@@ -163,7 +169,10 @@ export const CASE_STUDIES: CaseStudy[] = [
     skills: ['Sandboxes'],
     metrics: ['Radial gradients', 'Pure CSS'],
     links: [
-      { label: 'View', href: 'https://codesandbox.io/s/qlnxgn' },
+      {
+        label: 'View Sandbox',
+        href: 'https://codesandbox.io/p/sandbox/qlnxgn?file=%2Fstyles.css',
+      },
     ],
     sections: [
       {
@@ -203,7 +212,7 @@ export const CASE_STUDIES: CaseStudy[] = [
         icon: <Github size={18} />,
       },
       {
-        label: 'Marketplace',
+        label: 'View Marketplace',
         href: 'https://marketplace.visualstudio.com/items?itemName=jayvicsanantonio.barbenheimer',
       },
     ],
@@ -265,8 +274,8 @@ export const CASE_STUDIES: CaseStudy[] = [
         icon: <Github size={18} />,
       },
       {
-        label: 'Zed Extensions',
-        href: 'https://zed.dev/extensions?query=Barbenheimer',
+        label: 'View Marketplace',
+        href: 'https://zed.dev/extensions/barbenheimer',
       },
     ],
     sections: [
@@ -564,7 +573,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     links: [
       {
-        label: 'Watch',
+        label: 'Watch Video',
         href: 'https://www.youtube.com/watch?v=0wYUNuDsrRo',
       },
     ],
@@ -683,7 +692,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     metrics: ['500K–1M downloads', '4.5★ (22,339 ratings)'],
     links: [
       {
-        label: 'Case Study',
+        label: 'Read Case Study',
         href: 'https://www.ajmatillano.com/eb-mobile',
       },
     ],
