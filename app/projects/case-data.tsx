@@ -384,6 +384,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       'Performance',
       'TypeScript',
       'Hono',
+      'Hobby',
     ],
     metrics: [
       '<100ms edge latency targets',
@@ -444,7 +445,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       height: 675,
       ratio: '1200/675',
     },
-    skills: ['DX', 'Accessibility', 'React'],
+    skills: ['DX', 'Accessibility', 'React', 'Hobby'],
     metrics: [
       'Hundreds of links curated',
       'Structured taxonomy',

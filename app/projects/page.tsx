@@ -91,6 +91,7 @@ function SkillsAndCases({
       'All',
       'Open Source',
       'Sandboxes',
+      'Hobby',
       'Startup',
       'Enterprise',
     ],
@@ -112,9 +113,33 @@ function SkillsAndCases({
         transition: { duration: 0.45 },
       };
 
-  const visible = CASE_STUDIES.filter(
-    (c) => active === 'All' || c.skills.includes(active)
+  const priorityOrder = React.useMemo(
+    () => [
+      'yahoo-dsp',
+      'webdevhub',
+      'sync-flow',
+      'barbenheimer-vscode-theme',
+      'barbenheimer-zed-theme',
+      'ember-upgrade-guide',
+    ],
+    []
   );
+
+  const visible = React.useMemo(() => {
+    const filtered = CASE_STUDIES.filter(
+      (c) => active === 'All' || c.skills.includes(active)
+    );
+    return filtered.slice().sort((a, b) => {
+      const ai = priorityOrder.indexOf(a.slug);
+      const bi = priorityOrder.indexOf(b.slug);
+      if (ai !== -1 || bi !== -1) {
+        if (ai === -1) return 1;
+        if (bi === -1) return -1;
+        return ai - bi;
+      }
+      return 0;
+    });
+  }, [active, priorityOrder]);
 
   return (
     <div className="mt-12">
