@@ -719,6 +719,69 @@ export const CASE_STUDIES: CaseStudy[] = [
       },
     ],
   },
+  {
+    slug: 'pinoy-hoops',
+    title: 'Pinoy Hoops',
+    period: '2013–2015',
+    blurb:
+      'Digital basketball platform for Filipino fans with scores, news, and community features; engineered for reliability and scale.',
+    image: {
+      src: '/images/projects/pinoy-hoops.webp',
+      alt: 'Pinoy Hoops',
+      width: 1200,
+      height: 675,
+      ratio: '1200/675',
+    },
+    skills: [
+      'Enterprise',
+      'Express',
+      'Node',
+      'MongoDB',
+      'Redis',
+      'jQuery',
+    ],
+    metrics: [
+      'Highly trafficked sports content',
+      'Optimized build and deploy',
+    ],
+    links: [
+      {
+        label: 'Read Article',
+        href: 'https://www.techinasia.com/pinoyhoops-app-assist-basketball-fans',
+      },
+    ],
+    sections: [
+      {
+        label: 'Context',
+        content: (
+          <>
+            Helped evolve an enterprise-grade content platform serving
+            Philippine basketball fans with fresh updates and
+            features.
+          </>
+        ),
+      },
+      {
+        label: 'Decisions',
+        content: (
+          <>
+            Used Express and Node with MongoDB and Redis for fast page
+            delivery and caching; streamlined templating and UI with
+            jQuery and CSS.
+          </>
+        ),
+      },
+      {
+        label: 'Results',
+        content: (
+          <>
+            Delivered a responsive, reliable experience that handled
+            bursts of traffic around major games and events.
+          </>
+        ),
+      },
+    ],
+  },
 ];
 
 export function findCaseStudy(slug: string): CaseStudy | undefined {
