@@ -195,7 +195,7 @@ export default function WorkPage() {
 
           <ul className="relative mx-auto max-w-[1100px] space-y-10 sm:space-y-14 lg:space-y-24 pl-0 lg:pl-0">
             {EXPERIENCES.map((item, index) => {
-              const isRight = index % 2 === 1;
+              const isRight = index % 2 === 0;
               return (
                 <li
                   key={`${item.title}-${item.period}`}
