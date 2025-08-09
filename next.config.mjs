@@ -23,8 +23,8 @@ const withPWA = nextPWA({
 });
 
 export default withSentryConfig(withPWA(nextConfig), {
-  org: 'jayvic-san-antonio',
-  project: 'javascript-nextjs',
+  org: 'jayvic-san-antonio-hl',
+  project: 'jayvicsanantonio-dev',
 
   silent: !process.env.CI,
 
