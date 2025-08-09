@@ -321,7 +321,12 @@ export const CASE_STUDIES: CaseStudy[] = [
       height: 675,
       ratio: '1200/675',
     },
-    skills: ['React', 'Accessibility', 'Content Architecture'],
+    skills: [
+      'React',
+      'Accessibility',
+      'Content Architecture',
+      'Client',
+    ],
     metrics: [
       'Mobile‑first UX',
       'Fast loading',

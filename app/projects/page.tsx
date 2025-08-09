@@ -89,11 +89,12 @@ function SkillsAndCases({
   const skills = React.useMemo(
     () => [
       'All',
+      'Enterprise',
+      'Startup',
+      'Hobby',
+      'Client',
       'Open Source',
       'Sandboxes',
-      'Hobby',
-      'Startup',
-      'Enterprise',
     ],
     []
   );
