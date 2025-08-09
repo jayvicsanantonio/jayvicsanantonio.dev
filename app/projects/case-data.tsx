@@ -659,6 +659,66 @@ export const CASE_STUDIES: CaseStudy[] = [
       },
     ],
   },
+  {
+    slug: 'eat-bulaga-mobile',
+    title: 'Eat Bulaga! Mobile',
+    period: '2014–2015',
+    blurb:
+      'Official fan app and Pinoy Henyo game for the Philippines’ top noon-time show. Built with scalable Node.js services and real-time features to support hundreds of thousands of users.',
+    image: {
+      src: '/images/projects/eat-bulaga-mobile.png',
+      alt: 'Eat Bulaga Mobile app',
+      width: 1200,
+      height: 675,
+      ratio: '1200/675',
+    },
+    skills: [
+      'Enterprise',
+      'Node',
+      'SailsJS',
+      'Redis',
+      'MongoDB',
+      'Android',
+    ],
+    metrics: ['500K–1M downloads', '4.5★ (22,339 ratings)'],
+    links: [
+      {
+        label: 'Case Study',
+        href: 'https://www.ajmatillano.com/eb-mobile',
+      },
+    ],
+    sections: [
+      {
+        label: 'Context',
+        content: (
+          <>
+            Collaborated on a large-scale consumer app for T.A.P.E.,
+            integrating social feeds and delivering the Pinoy Henyo
+            multiplayer experience to mobile.
+          </>
+        ),
+      },
+      {
+        label: 'Decisions',
+        content: (
+          <>
+            Used Node and SailsJS with Redis and MongoDB to handle
+            spikes in concurrent requests; optimized for reliability
+            and low-latency interactions.
+          </>
+        ),
+      },
+      {
+        label: 'Results',
+        content: (
+          <>
+            Successfully launched for the show’s 35th anniversary with
+            strong adoption and engagement.
+          </>
+        ),
+      },
+    ],
+  },
 ];
 
 export function findCaseStudy(slug: string): CaseStudy | undefined {
