@@ -15,11 +15,15 @@ const nextConfig = {
   },
 };
 
-/**
- * Temporarily disable Sentry and PWA wrappers while investigating build error.
- * We'll export plain nextConfig to isolate the issue source.
- */
-export default nextConfig;
+/** Enable PWA wrapper; keep Sentry disabled for now. */
+const withPWA = nextPWA({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+  disable: process.env.NODE_ENV === 'development',
+});
+
+export default withPWA(nextConfig);
 
 /*
 export default withSentryConfig(withPWA(nextConfig), {
