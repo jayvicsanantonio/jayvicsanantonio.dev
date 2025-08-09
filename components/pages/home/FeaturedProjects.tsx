@@ -28,10 +28,10 @@ export default function FeaturedProjects({
       className="relative scroll-mt-52 min-h-screen"
       style={{ scale }}
     >
-      <div className="space-y-12 bg-linear-to-r from-blue-500/20 to-purple-500/20 p-6 rounded-xl text-gray-950 dark:text-gray-200">
+      <div className="space-y-12 bg-linear-to-r from-blue-500/15 via-cyan-300/10 to-purple-500/15 p-6 rounded-xl text-gray-950 dark:text-gray-200">
         <div className="flex gap-4">
           <div className="flex-1 space-y-4">
-            <h2 className="font-oswald text-2xl font-bold">
+            <h2 className="font-oswald text-2xl font-bold tracking-tight">
               Featured Projects
             </h2>
             <p className="dark:text-gray-400">

@@ -25,7 +25,7 @@ export default function GetInTouch({
       style={{ scale }}
     >
       <div className="space-y-4">
-        <h2 className="font-oswald text-2xl font-bold">
+        <h2 className="font-oswald text-2xl font-bold tracking-tight">
           Get in Touch
         </h2>
         <p className="dark:text-gray-400">

@@ -5,6 +5,8 @@
 @theme {
   --font-source-sans: var(--font-source-sans);
   --font-oswald: var(--font-oswald);
+  /* optional, kept for clarity if needed elsewhere */
+  --font-inter-tight: var(--font-inter-tight);
 
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
@@ -258,7 +260,7 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
   }
 }
 
@@ -271,6 +273,13 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+/* Cursor focus ring on interactive elements */
+@layer utilities {
+  .focus-ring {
+    @apply focus:outline-hidden focus:ring-2 focus:ring-blue-400/60 focus:ring-offset-2 focus:ring-offset-background;
   }
 }
