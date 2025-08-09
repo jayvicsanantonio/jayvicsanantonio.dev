@@ -15,14 +15,13 @@ const nextConfig = {
   },
 };
 
-/** @type {import('next').NextConfig} */
-const withPWA = nextPWA({
-  dest: 'public',
-  register: true, // Register the service worker
-  skipWaiting: true, // Skip waiting for service worker activation
-  disable: process.env.NODE_ENV === 'development', // Disable PWA in development mode
-});
+/**
+ * Temporarily disable Sentry and PWA wrappers while investigating build error.
+ * We'll export plain nextConfig to isolate the issue source.
+ */
+export default nextConfig;
 
+/*
 export default withSentryConfig(withPWA(nextConfig), {
   // For all available options, see:
   // https://github.com/getsentry/sentry-webpack-plugin#options
@@ -62,3 +61,4 @@ export default withSentryConfig(withPWA(nextConfig), {
   // https://vercel.com/docs/cron-jobs
   automaticVercelMonitors: true,
 });
+*/

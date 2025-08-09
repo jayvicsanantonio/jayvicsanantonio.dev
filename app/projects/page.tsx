@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
@@ -71,7 +71,11 @@ export default function ProjectsPage() {
         </div>
 
         {/* Case studies only */}
-        <SkillsAndCases prefersReducedMotion={prefersReducedMotion} />
+        <Suspense fallback={null}>
+          <SkillsAndCases
+            prefersReducedMotion={prefersReducedMotion}
+          />
+        </Suspense>
       </div>
     </section>
   );
