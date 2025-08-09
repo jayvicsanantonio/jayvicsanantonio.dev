@@ -110,7 +110,7 @@ function SkillsAndCases({
     : {
         initial: { opacity: 0, y: 16 },
         whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true, amount: 0.3 },
+
         transition: { duration: 0.45 },
       };
 
@@ -170,7 +170,7 @@ function SkillsAndCases({
             {...(reveal as any)}
             transition={{
               ...(reveal.transition as any),
-              delay: prefersReducedMotion ? 0 : 0.05 * i,
+              delay: prefersReducedMotion ? 0 : 0.01 * i,
             }}
             className="group relative rounded-2xl p-[1px] min-h-[430px] bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(168,85,247,0.22),rgba(34,211,238,0.2))] shadow-[0_8px_28px_rgba(0,0,0,0.35)] ring-1 ring-white/5"
           >
