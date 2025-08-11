@@ -123,6 +123,7 @@ function SkillsAndCases({
       'yahoo-dsp',
       'webdevhub',
       'sync-flow',
+      'tracknstick',
       'barbenheimer-vscode-theme',
       'barbenheimer-zed-theme',
       'ember-upgrade-guide',

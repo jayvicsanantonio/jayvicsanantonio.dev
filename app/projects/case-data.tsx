@@ -438,6 +438,63 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
   },
   {
+    slug: 'tracknstick',
+    title: "Track N' Stick",
+    period: '2024',
+    blurb:
+      'Habit tracking app with streak visualization and goal management. Built with modern web technologies for a smooth user experience.',
+    image: {
+      src: '/images/projects/tracknstick.png',
+      alt: "Track N' Stick",
+      width: 1200,
+      height: 675,
+      ratio: '1200/675',
+    },
+    skills: ['Hobby', 'React', 'TypeScript', 'Full Stack'],
+    metrics: [
+      'Habit tracking',
+      'Streak visualization',
+      'Goal management',
+    ],
+    links: [
+      {
+        label: 'Github',
+        href: 'https://github.com/jayvicsanantonio/tracknstick.com',
+        icon: <Github size={18} />,
+      },
+      { label: 'View', href: 'https://tracknstick.com/' },
+    ],
+    sections: [
+      {
+        label: 'Context',
+        content: (
+          <>
+            Personal project focused on building sustainable habits
+            through visual progress tracking and goal setting.
+          </>
+        ),
+      },
+      {
+        label: 'Decisions',
+        content: (
+          <>
+            Built with a clean, intuitive interface prioritizing ease
+            of use and consistent engagement patterns.
+          </>
+        ),
+      },
+      {
+        label: 'Results',
+        content: (
+          <>
+            Delivered a functional habit tracker with streak
+            visualization and goal management capabilities.
+          </>
+        ),
+      },
+    ],
+  },
+  {
     slug: 'webdevhub',
     title: 'Web Development Hub',
     period: '2023',
