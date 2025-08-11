@@ -24,6 +24,20 @@ export default function IconButton({
   const isActive = pathname === link;
   const ref = useRef<HTMLDivElement | null>(null);
 
+  // Map routes to animation types
+  const getAnimationType = (route: string) => {
+    switch (route) {
+      case '/':
+        return 'home';
+      case '/projects':
+        return 'projects';
+      case '/work':
+        return 'work';
+      default:
+        return 'default';
+    }
+  };
+
   return (
     <Link href={link} onClick={() => callback()} className="block">
       <motion.div
@@ -33,6 +47,19 @@ export default function IconButton({
             ? 'text-white bg-[#151626] hover:no-underline border-white/10'
             : 'dark:text-white text-gray-950 hover:bg-[#141524] hover:border-white/10'
         }`}
+        whileHover={
+          isActive
+            ? {}
+            : {
+                scale: 1.02,
+                transition: {
+                  type: 'spring',
+                  stiffness: 400,
+                  damping: 17,
+                },
+              }
+        }
+        whileTap={isActive ? {} : { scale: 0.98 }}
         tabIndex={0}
       >
         <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-[#0f1020] text-white/90">
@@ -41,6 +68,8 @@ export default function IconButton({
             size={22}
             strokeWidth={2}
             stroke={isActive ? 'currentColor' : 'url(#iconGradient)'}
+            animationType={getAnimationType(link)}
+            isActive={isActive}
             aria-hidden={true}
           />
         </div>
