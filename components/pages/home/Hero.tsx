@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 
 import usePrefersReducedMotion from '@/hooks/use-prefers-reduced-motion';
@@ -38,23 +38,6 @@ export default function Hero({
     [0, 1],
     [0, prefersReducedMotion ? 0 : -60]
   );
-  const roles = [
-    'Senior Software Engineer',
-    'Full-Stack Web Developer',
-    'JavaScript Specialist',
-    'React Expert',
-    'Node.JS Developer',
-    'UI/UX Enthusiast',
-    'Performance Optimizer',
-    'Creative Thinker',
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((current) => (current + 1) % roles.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [roles.length]);
 
   return (
     <section
@@ -84,9 +67,9 @@ export default function Hero({
                 ? { duration: 0 }
                 : { duration: 0.5 }
             }
-            className="text-lg lg:text-3xl font-light uppercase tracking-[0.22em] md:tracking-[0.28em] lg:tracking-[0.34em] bg-clip-text text-transparent bg-linear-to-r from-blue-400 via-cyan-300 to-purple-500 will-change-transform"
+            className="text-lg lg:text-3xl font-light uppercase tracking-[0.22em] md:tracking-[0.28em] lg:tracking-[0.34em] text-cyan-300/90 will-change-transform"
           >
-            {roles[activeIndex]}
+            Full-Stack Developer
           </motion.h2>
         </div>
         <p className="text-lg lg:text-xl text-center md:text-left text-white/80">

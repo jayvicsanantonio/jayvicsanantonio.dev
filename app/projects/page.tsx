@@ -60,7 +60,7 @@ export default function ProjectsPage() {
           <div className="font-oswald uppercase inline-block rounded-lg bg-white/5 px-3 py-1 tracking-wide text-white/90">
             Projects
           </div>
-          <h1 className="font-oswald text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight bg-clip-text text-transparent bg-linear-to-r from-blue-400 via-cyan-300 to-purple-500">
+          <h1 className="font-oswald text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight text-cyan-300/90">
             Crafted Artifacts
           </h1>
           <p className="text-gray-300/85 text-base sm:text-lg max-w-[720px]">
@@ -157,8 +157,8 @@ function SkillsAndCases({
             onClick={() => setActive(s)}
             className={`rounded-full px-3 py-1.5 text-xs sm:text-sm border focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:ring-blue-400/60 ${
               active === s
-                ? 'bg-linear-to-r from-blue-500/80 to-purple-500/80 text-white'
-                : 'bg-white/5 text-white/90'
+                ? 'bg-purple-600/70 text-white border-purple-500/70'
+                : 'bg-white/5 text-white/90 border-white/10'
             }`}
             aria-pressed={active === s}
           >
@@ -193,7 +193,7 @@ function SkillsAndCases({
               />
               <div className="p-5 flex-1 flex flex-col gap-3">
                 <div className="flex items-center justify-between gap-4">
-                  <h3 className="font-oswald text-xl bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500">
+                  <h3 className="font-oswald text-xl text-white">
                     {c.title}
                   </h3>
                   <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] uppercase tracking-[0.12em] font-medium text-gray-300 whitespace-nowrap">

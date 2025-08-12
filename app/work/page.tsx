@@ -171,7 +171,7 @@ export default function WorkPage() {
           <div className="font-oswald uppercase inline-block rounded-lg bg-white/5 px-3 py-1 tracking-wide text-white/90">
             Work
           </div>
-          <h1 className="font-oswald text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight bg-clip-text text-transparent bg-linear-to-r from-blue-400 via-cyan-300 to-purple-500">
+          <h1 className="font-oswald text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight text-cyan-300/90">
             A Timeline of Crafting Impact
           </h1>
           <p className="text-gray-300/85 text-base sm:text-lg">
@@ -267,7 +267,7 @@ export default function WorkPage() {
                       {/* Inner frosted panel */}
                       <div className="relative rounded-2xl border border-white/5 bg-gray-950/70 backdrop-blur-md p-5 sm:p-6">
                         <div className="text-left">
-                          <h3 className="font-oswald text-2xl bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500">
+                          <h3 className="font-oswald text-2xl text-white">
                             {item.title}
                           </h3>
                           <div className="mt-1 flex items-baseline justify-between gap-3">
