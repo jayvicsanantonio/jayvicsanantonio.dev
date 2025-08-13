@@ -24,6 +24,9 @@ export default function MainMenu({
       >
         Projects
       </IconButton>
+      <IconButton IconName={Newspaper} link="/blog" callback={closeDrawer}>
+        Blog
+      </IconButton>
       <IconButton IconName={FlaskConical} link="/lab" callback={closeDrawer}>
         Lab
       </IconButton>
