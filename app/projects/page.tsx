@@ -1,275 +1,235 @@
-import Image from 'next/image';
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
-import ProjectButton from '@/components/pages/ProjectButton';
-import { Github } from 'lucide-react';
+'use client';
 
-export default function Page() {
+import React, { Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import AmbientBackground from '@/components/pages/AmbientBackground';
+import usePrefersReducedMotion from '@/hooks/use-prefers-reduced-motion';
+import { CASE_STUDIES } from '@/app/projects/case-data';
+
+// CASE_STUDIES now sourced from case-data.ts
+
+function LinkButton({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
   return (
-    <section className="w-full  dark:bg-gray-950 dark:text-gray-200">
-      <div className="flex flex-col gap-8">
-        <div className="space-y-4">
-          <div className="font-oswald uppercase inline-block rounded-lg bg-gray-800 px-3 py-1">
-            Featured Projects
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-gray-200 hover:bg-white/10 transition-colors focus:outline-hidden focus:ring-2 focus:ring-blue-400/60 focus:ring-offset-2 focus:ring-offset-background"
+    >
+      {children}
+    </a>
+  );
+}
+
+export default function ProjectsPage() {
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  const reveal = prefersReducedMotion
+    ? { initial: {}, whileInView: {}, viewport: {}, transition: {} }
+    : {
+        initial: { opacity: 0, y: 16 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, amount: 0.3 },
+        transition: {
+          duration: 0.55,
+          ease: [0.22, 1, 0.36, 1] as any,
+        },
+      };
+
+  return (
+    <section className="relative w-full">
+      <AmbientBackground />
+
+      {/* Ambient orbs */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute -top-24 left-1/2 -translate-x-1/2 h-[40rem] w-[40rem] rounded-full opacity-20 blur-3xl bg-[radial-gradient(closest-side,rgba(59,130,246,0.25),transparent)]" />
+        <div className="absolute bottom-0 right-0 h-[26rem] w-[26rem] rounded-full opacity-15 blur-3xl bg-[radial-gradient(closest-side,rgba(168,85,247,0.25),transparent)]" />
+      </div>
+
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        {/* Header */}
+        <div className="space-y-5 max-w-3xl">
+          <div className="font-oswald uppercase inline-block rounded-lg bg-white/5 px-3 py-1 tracking-wide text-white/90">
+            Projects
           </div>
-          <h2 className="font-oswald text-2xl font-bold tracking-tighter text-gray-950 dark:text-gray-200 md:text-3xl/tight lg:text-4xl">
-            Work Showcase
-          </h2>
-          <p className="max-w-[600px] text-gray-950/70 dark:text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-            Here's a showcase of some of the projects I've worked on.
-            Each one represents a unique challenge and learning
-            experience.
+          <h1 className="font-oswald text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight text-cyan-300/90">
+            Crafted Artifacts
+          </h1>
+          <p className="text-gray-300/85 text-base sm:text-lg max-w-[720px]">
+            A curated collection of platforms, tools, and
+            experiments—built with care, tuned for performance, and
+            shaped by design.
           </p>
         </div>
-        <Card className="flex flex-col h-full border-purple-400 dark:border-purple-900 border-2 rounded-lg overflow-hidden shadow-md hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none will-change-transform">
-          <CardContent className="flex-1 -p-6">
-            <Image
-              alt="Yahoo DSP"
-              className="w-full h-full object-cover"
-              height={125}
-              src="/images/home/yahoo-dsp.webp"
-              style={{
-                aspectRatio: '400/125',
-                objectFit: 'cover',
-              }}
-              width={400}
-            />
-          </CardContent>
-          <CardFooter className="bg-white dark:bg-gray-950 bg-linear-to-r from-blue-500/10 to-purple-500/10 text-gray-2000 text-950 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
-            <div className="flex flex-1 flex-start justify-between gap-2">
-              <div className="space-y-2">
-                <h3 className="font-oswald bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
-                  Yahoo DSP
-                </h3>
-                <p className="dark:text-gray-200">
-                  A cutting-edge programmatic advertising platform for
-                  businesses. Built with a powerful tech stack
-                  including <em className="font-bold">Ember.js</em>,{' '}
-                  <em className="font-bold">React.js</em>, and{' '}
-                  <em className="font-bold">Node.js</em>, the platform
-                  empowers advertisers with features like real-time
-                  bidding, audience targeting, and comprehensive
-                  campaign performance measurement.
-                </p>
-              </div>
-            </div>
-            <div className="flex gap-4 mt-4">
-              <ProjectButton link="https://www.advertising.yahooinc.com/our-dsp">
-                View Project
-              </ProjectButton>
-            </div>
-          </CardFooter>
-        </Card>
-      </div>
-      <div className="mt-16 space-y-8">
-        <h2 className="font-oswald text-2xl font-bold tracking-tighter text-gray-950 dark:text-gray-200 md:text-3xl/tight lg:text-4xl">
-          All Projects
-        </h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <Card className="flex flex-col h-full border-purple-400 dark:border-purple-900 border-2 rounded-lg overflow-hidden shadow-md hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none will-change-transform">
-            <CardContent className="flex-1 -p-6 max-h-60">
-              <Image
-                alt="Barbenheimer VS Code Theme"
-                className="w-full h-full object-cover"
-                height={225}
-                src="/images/home/barbenheimer.webp"
-                style={{
-                  aspectRatio: '400/225',
-                  objectFit: 'cover',
-                }}
-                width={400}
-              />
-            </CardContent>
-            <CardFooter className="dark:bg-gray-950 bg-linear-to-r from-blue-500/10 to-purple-500/10 text-gray-950 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
-              <div className="flex flex-1 flex-start justify-between gap-2">
-                <div className="space-y-2">
-                  <h3 className="font-oswald bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
-                    Barbenheimer VS Code Theme
-                  </h3>
-                  <p className="dark:text-gray-200">
-                    A VS Code theme inspired by the Internet
-                    phenomenon of the same name. It combines the pink
-                    and playful aesthetics of Barbie with the dark and
-                    dramatic tones of Oppenheimer.
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-4 mt-4">
-                <ProjectButton link="https://github.com/jayvicsanantonio/barbenheimer-vscode-theme">
-                  <Github size={20} />
-                  Github
-                </ProjectButton>
-                <ProjectButton link="https://marketplace.visualstudio.com/items?itemName=jayvicsanantonio.barbenheimer">
-                  View Project
-                </ProjectButton>
-              </div>
-            </CardFooter>
-          </Card>
-          <Card className="flex flex-col h-full border-purple-400 dark:border-purple-900 border-2 rounded-lg overflow-hidden shadow-md hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none will-change-transform">
-            <CardContent className="flex-1 -p-6 max-h-60">
-              <Image
-                alt="Web Development Hub"
-                className="w-full h-full object-cover"
-                height={225}
-                src="/images/home/webdevhub.png"
-                style={{
-                  aspectRatio: '400/225',
-                  objectFit: 'cover',
-                }}
-                width={400}
-              />
-            </CardContent>
-            <CardFooter className="dark:bg-gray-950 bg-linear-to-r from-blue-500/10 to-purple-500/10 text-gray-950 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
-              <div className="flex flex-1 flex-start justify-between gap-2">
-                <div className="space-y-2">
-                  <h3 className="font-oswald bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
-                    Web Development Hub
-                  </h3>
-                  <p className="dark:text-gray-200">
-                    An extensive library of categorized links tailored
-                    for web developers, featuring curated resources on
-                    learning, developer tools, frameworks, libraries,
-                    blogs and communities.
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-4 mt-4">
-                <ProjectButton link="https://github.com/jayvicsanantonio/web-development-hub">
-                  <Github size={20} />
-                  Github
-                </ProjectButton>
-                <ProjectButton link="https://webdevhub.link/">
-                  View Project
-                </ProjectButton>
-              </div>
-            </CardFooter>
-          </Card>
-          <Card className="flex flex-col h-full border-purple-400 dark:border-purple-900 border-2 rounded-lg overflow-hidden shadow-md hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none will-change-transform">
-            <CardContent className="flex-1 -p-6 max-h-60">
-              <Image
-                alt="Barbenheimer Zed Theme"
-                className="w-full h-full object-cover"
-                height={225}
-                src="/images/projects/barbenheimer-zed-theme.webp"
-                style={{
-                  aspectRatio: '400/225',
-                  objectFit: 'cover',
-                }}
-                width={400}
-              />
-            </CardContent>
-            <CardFooter className="dark:bg-gray-950 bg-linear-to-r from-blue-500/10 to-purple-500/10 text-gray-950 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
-              <div className="flex flex-1 flex-start justify-between gap-2">
-                <div className="space-y-2">
-                  <h3 className="font-oswald bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
-                    Barbenheimer Zed Theme
-                  </h3>
-                  <p className="dark:text-gray-200">
-                    A zed theme inspired by the "Barbenheimer"
-                    cultural phenomenon, offering distinct styles that
-                    capture the essence of both Barbie and
-                    Oppenheimer. While each theme leans towards a
-                    different aesthetic, they share a cohesive color
-                    palette with subtle nods to both films, creating a
-                    balanced and unified experience.
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-4 mt-4">
-                <ProjectButton link="https://github.com/jayvicsanantonio/barbenheimer-zed-theme">
-                  <Github size={20} />
-                  Github
-                </ProjectButton>
-                <ProjectButton link="https://zed.dev/extensions?query=Barbenheimer">
-                  View Project
-                </ProjectButton>
-              </div>
-            </CardFooter>
-          </Card>
-          <Card className="flex flex-col h-full border-purple-400 dark:border-purple-900 border-2 rounded-lg overflow-hidden shadow-md hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none will-change-transform">
-            <CardContent className="flex-1 -p-6 max-h-60">
-              <Image
-                alt="SyncFlow"
-                className="w-full h-full object-cover"
-                height={225}
-                src="/images/projects/sync-flow.png"
-                style={{
-                  aspectRatio: '400/225',
-                  objectFit: 'cover',
-                }}
-                width={400}
-              />
-            </CardContent>
-            <CardFooter className="dark:bg-gray-950 bg-linear-to-r from-blue-500/10 to-purple-500/10 text-gray-950 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
-              <div className="flex flex-1 flex-start justify-between gap-2">
-                <div className="space-y-2">
-                  <h3 className="font-oswald bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
-                    SyncFlow
-                  </h3>
-                  <p className="dark:text-gray-200">
-                    A real-time task synchronization service that
-                    bridges Apple Reminders and Google Tasks, built
-                    with TypeScript, Hono framework, and deployed on
-                    Vercel's edge network with OAuth 2.0
-                    authentication, webhook-based updates, and
-                    Redis-backed state management.
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-4 mt-4">
-                <ProjectButton link="https://github.com/jayvicsanantonio/sync-flow">
-                  <Github size={20} />
-                  Github
-                </ProjectButton>
-                <ProjectButton link="https://sync-flow-nine.vercel.app/">
-                  View Project
-                </ProjectButton>
-              </div>
-            </CardFooter>
-          </Card>
-          <Card className="flex flex-col h-full border-purple-400 dark:border-purple-900 border-2 rounded-lg overflow-hidden shadow-md hover:scale-105 ease-in duration-300 motion-reduce:transition-none motion-reduce:hover:transform-none will-change-transform">
-            <CardContent className="flex-1 -p-6 max-h-60">
-              <Image
-                alt="Malayang Mananampalataya Church"
-                className="w-full h-full object-cover"
-                height={225}
-                src="/images/home/mm-church.webp"
-                style={{
-                  aspectRatio: '400/225',
-                  objectFit: 'cover',
-                }}
-                width={400}
-              />
-            </CardContent>
-            <CardFooter className="dark:bg-gray-950 bg-linear-to-r from-blue-500/10 to-purple-500/10 text-gray-950 dark:text-gray-400 px-8 py-6 flex flex-col flex-1 space-between">
-              <div className="flex flex-1 flex-start justify-between gap-2">
-                <div className="space-y-2">
-                  <h3 className="font-oswald bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-500 leading-tight text-3xl md:text-4xl font-title font-normal tracking-tight mb-1">
-                    Malayang Mananampalataya Church
-                  </h3>
-                  <p className="dark:text-gray-200">
-                    Built with React.js, this Philippines church
-                    website fosters a strong connection between the
-                    church and its congregation. Easy navigation
-                    allows users to explore sermons, ministries, and
-                    events. Responsive design ensures the website
-                    looks great and is accessible across desktops,
-                    tablets, and smartphones.
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-4 mt-4">
-                <ProjectButton link="https://github.com/nesceal/mmchurch">
-                  <Github size={20} />
-                  Github
-                </ProjectButton>
-                <ProjectButton link="https://mmchurch.ph/">
-                  View Project
-                </ProjectButton>
-              </div>
-            </CardFooter>
-          </Card>
-        </div>
+
+        {/* Case studies only */}
+        <Suspense fallback={null}>
+          <SkillsAndCases
+            prefersReducedMotion={prefersReducedMotion}
+          />
+        </Suspense>
       </div>
     </section>
+  );
+}
+
+function SkillsAndCases({
+  prefersReducedMotion,
+}: {
+  prefersReducedMotion: boolean;
+}) {
+  const searchParams = useSearchParams();
+  const initialFromQuery =
+    (searchParams?.get('skill') || searchParams?.get('filter')) ??
+    undefined;
+  const skills = React.useMemo(
+    () => [
+      'All',
+      'Enterprise',
+      'Startup',
+      'Hobby',
+      'Client',
+      'Open Source',
+      'Sandboxes',
+    ],
+    []
+  );
+
+  const [active, setActive] = React.useState<string>(() =>
+    initialFromQuery && skills.includes(initialFromQuery)
+      ? initialFromQuery
+      : 'All'
+  );
+
+  const reveal = prefersReducedMotion
+    ? { initial: {}, whileInView: {}, viewport: {}, transition: {} }
+    : {
+        initial: { opacity: 0, y: 16 },
+        whileInView: { opacity: 1, y: 0 },
+
+        transition: { duration: 0.45 },
+      };
+
+  const priorityOrder = React.useMemo(
+    () => [
+      'yahoo-dsp',
+      'webdevhub',
+      'sync-flow',
+      'tracknstick',
+      'barbenheimer-vscode-theme',
+      'barbenheimer-zed-theme',
+      'ember-upgrade-guide',
+    ],
+    []
+  );
+
+  const visible = React.useMemo(() => {
+    const filtered = CASE_STUDIES.filter(
+      (c) => active === 'All' || c.skills.includes(active)
+    );
+    return filtered.slice().sort((a, b) => {
+      const ai = priorityOrder.indexOf(a.slug);
+      const bi = priorityOrder.indexOf(b.slug);
+      if (ai !== -1 || bi !== -1) {
+        if (ai === -1) return 1;
+        if (bi === -1) return -1;
+        return ai - bi;
+      }
+      return 0;
+    });
+  }, [active, priorityOrder]);
+
+  return (
+    <div className="mt-12">
+      {/* Matrix */}
+      <div className="flex flex-wrap gap-2">
+        {skills.map((s) => (
+          <button
+            key={s}
+            onClick={() => setActive(s)}
+            className={`rounded-full px-3 py-1.5 text-xs sm:text-sm border focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:ring-blue-400/60 ${
+              active === s
+                ? 'bg-purple-600/70 text-white border-purple-500/70'
+                : 'bg-white/5 text-white/90 border-white/10'
+            }`}
+            aria-pressed={active === s}
+          >
+            {s}
+          </button>
+        ))}
+      </div>
+
+      {/* Case studies rail */}
+      <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {visible.map((c, i) => (
+          <motion.article
+            key={c.slug}
+            {...(reveal as any)}
+            transition={{
+              ...(reveal.transition as any),
+              delay: prefersReducedMotion ? 0 : 0.01 * i,
+            }}
+            className="group relative rounded-2xl p-[1px] min-h-[430px] bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(168,85,247,0.22),rgba(34,211,238,0.2))] shadow-[0_8px_28px_rgba(0,0,0,0.35)] ring-1 ring-white/5"
+          >
+            <div className="flex h-full flex-col rounded-2xl border border-white/5 bg-gray-950/70 backdrop-blur-md overflow-hidden">
+              <Image
+                src={c.image.src}
+                alt={c.image.alt}
+                width={c.image.width}
+                height={c.image.height}
+                style={{
+                  aspectRatio: c.image.ratio,
+                  objectFit: 'cover',
+                }}
+                className="w-full h-40 md:h-44 object-cover"
+              />
+              <div className="p-5 flex-1 flex flex-col gap-3">
+                <div className="flex items-center justify-between gap-4">
+                  <h3 className="font-oswald text-xl text-white">
+                    {c.title}
+                  </h3>
+                  <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] uppercase tracking-[0.12em] font-medium text-gray-300 whitespace-nowrap">
+                    {c.period}
+                  </span>
+                </div>
+                <p className="text-gray-300/90 text-[0.98rem]/relaxed flex-1 overflow-hidden">
+                  {c.blurb}
+                </p>
+                <ul className="flex flex-wrap gap-2">
+                  {c.metrics.map((m) => (
+                    <li
+                      key={m}
+                      className="rounded-full bg-white/8 px-2 py-0.5 text-[10px] text-white/90"
+                    >
+                      {m}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-auto flex flex-wrap gap-2">
+                  {c.links.map((l) => (
+                    <LinkButton
+                      key={`${c.slug}-${l.label}`}
+                      href={l.href}
+                    >
+                      {l.icon}
+                      {l.icon ? <>&nbsp;</> : null}
+                      {l.label}
+                    </LinkButton>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.article>
+        ))}
+      </div>
+    </div>
   );
 }
