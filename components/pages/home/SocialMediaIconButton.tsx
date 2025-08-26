@@ -1,8 +1,8 @@
 'use client';
 
-import { MouseEventHandler, TouchEventHandler } from 'react';
-import useBoop from '@/hooks/use-boop';
+import React, { MouseEventHandler, TouchEventHandler } from 'react';
 import { motion } from 'framer-motion';
+import useBoop from '@/hooks/use-boop';
 
 export default function SocialMediaIconButton({
   Icon,
@@ -15,15 +15,17 @@ export default function SocialMediaIconButton({
   className?: string;
   children: React.ReactNode;
 }) {
-  const [controls, trigger] = useBoop({ rotation: 10, timing: 200 });
+  const [controls, trigger] = useBoop({ scale: 1.06, timing: 180 });
 
   return (
     <motion.a
       href={link}
       animate={controls}
+      whileHover={{ scale: 1.06 }}
+      whileTap={{ scale: 0.98 }}
       target="_blank"
       rel="noopener noreferrer"
-      className="hover:text-blue-400 transition-colors will-change-transform"
+      className="hover:text-cyan-300 transition will-change-transform"
       onMouseEnter={trigger as MouseEventHandler<HTMLAnchorElement>}
       onTouchStart={trigger as TouchEventHandler<HTMLAnchorElement>}
     >

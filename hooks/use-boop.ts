@@ -22,7 +22,7 @@ function useBoop({
   x = 0,
   y = 0,
   rotation = 0,
-  scale = 1.1, // Default scale slightly larger for a noticeable boop
+  scale = 1,
   timing = 150,
   springConfig = {
     stiffness: 300,
@@ -38,7 +38,10 @@ function useBoop({
       return;
     }
     controls.start({
-      transform: `translate(${x}px, ${y}px) rotate(${rotation}deg) scale(${scale})`,
+      x,
+      y,
+      rotate: rotation,
+      scale,
       transition: {
         type: 'spring',
         ...springConfig,
@@ -48,7 +51,10 @@ function useBoop({
     // Reset after the animation duration
     setTimeout(() => {
       controls.start({
-        transform: 'translate(0px, 0px) rotate(0deg) scale(1)',
+        x: 0,
+        y: 0,
+        rotate: 0,
+        scale: 1,
         transition: {
           type: 'spring',
           ...springConfig,

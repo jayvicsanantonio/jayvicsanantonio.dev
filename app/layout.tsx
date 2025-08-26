@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 
 import Body from '@/components/pages/Body';
 import './globals.css';
+import localFont from 'next/font/local';
+import { Inter_Tight } from 'next/font/google';
 
 export const metadata: Metadata = {
   title: 'Jayvic San Antonio | Software Engineer',
@@ -29,6 +31,35 @@ export const viewport = {
   themeColor: '#030712',
 };
 
+const sourceSansPro = localFont({
+  src: [
+    {
+      path: '../public/fonts/SourceSansPro-Regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/SourceSansPro-Light.woff2',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/SourceSansPro-Bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  display: 'swap',
+  variable: '--font-source-sans',
+});
+
+// Map Inter Tight onto the legacy --font-oswald variable so existing classes continue to work
+const interTight = Inter_Tight({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-oswald',
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -36,7 +67,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Body>{children}</Body>
+      <Body
+        fontVars={`${sourceSansPro.variable} ${interTight.variable}`}
+      >
+        {children}
+      </Body>
     </html>
   );
 }
