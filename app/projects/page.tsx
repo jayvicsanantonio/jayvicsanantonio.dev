@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import React, { Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
-import AmbientBackground from '@/components/pages/AmbientBackground';
-import usePrefersReducedMotion from '@/hooks/use-prefers-reduced-motion';
-import { CASE_STUDIES } from '@/app/projects/case-data';
+import { PROJECTS } from "@/app/projects/project-data";
+import AmbientBackground from "@/components/pages/AmbientBackground";
+import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { useSearchParams } from "next/navigation";
+import React, { Suspense } from "react";
 
-// CASE_STUDIES now sourced from case-data.ts
+// PROJECTS now sourced from project-data.ts
 
 function LinkButton({
   href,
@@ -64,17 +64,14 @@ export default function ProjectsPage() {
             Crafted Artifacts
           </h1>
           <p className="text-gray-300/85 text-base sm:text-lg max-w-[720px]">
-            A curated collection of platforms, tools, and
-            experiments—built with care, tuned for performance, and
-            shaped by design.
+            A curated collection of platforms, tools, and experiments—built with
+            care, tuned for performance, and shaped by design.
           </p>
         </div>
 
-        {/* Case studies only */}
+        {/* Projects only */}
         <Suspense fallback={null}>
-          <SkillsAndCases
-            prefersReducedMotion={prefersReducedMotion}
-          />
+          <SkillsAndCases prefersReducedMotion={prefersReducedMotion} />
         </Suspense>
       </div>
     </section>
@@ -88,25 +85,24 @@ function SkillsAndCases({
 }) {
   const searchParams = useSearchParams();
   const initialFromQuery =
-    (searchParams?.get('skill') || searchParams?.get('filter')) ??
-    undefined;
+    (searchParams?.get("skill") || searchParams?.get("filter")) ?? undefined;
   const skills = React.useMemo(
     () => [
-      'All',
-      'Enterprise',
-      'Startup',
-      'Hobby',
-      'Client',
-      'Open Source',
-      'Sandboxes',
+      "All",
+      "Enterprise",
+      "Startup",
+      "Hobby",
+      "Client",
+      "Open Source",
+      "Sandboxes",
     ],
-    []
+    [],
   );
 
   const [active, setActive] = React.useState<string>(() =>
     initialFromQuery && skills.includes(initialFromQuery)
       ? initialFromQuery
-      : 'All'
+      : "All",
   );
 
   const reveal = prefersReducedMotion
@@ -120,20 +116,20 @@ function SkillsAndCases({
 
   const priorityOrder = React.useMemo(
     () => [
-      'yahoo-dsp',
-      'webdevhub',
-      'sync-flow',
-      'tracknstick',
-      'barbenheimer-vscode-theme',
-      'barbenheimer-zed-theme',
-      'ember-upgrade-guide',
+      "yahoo-dsp",
+      "webdevhub",
+      "sync-flow",
+      "tracknstick",
+      "barbenheimer-vscode-theme",
+      "barbenheimer-zed-theme",
+      "ember-upgrade-guide",
     ],
-    []
+    [],
   );
 
   const visible = React.useMemo(() => {
-    const filtered = CASE_STUDIES.filter(
-      (c) => active === 'All' || c.skills.includes(active)
+    const filtered = PROJECTS.filter(
+      (c) => active === "All" || c.skills.includes(active),
     );
     return filtered.slice().sort((a, b) => {
       const ai = priorityOrder.indexOf(a.slug);
@@ -157,8 +153,8 @@ function SkillsAndCases({
             onClick={() => setActive(s)}
             className={`rounded-full px-3 py-1.5 text-xs sm:text-sm border focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:ring-blue-400/60 ${
               active === s
-                ? 'bg-purple-600/70 text-white border-purple-500/70'
-                : 'bg-white/5 text-white/90 border-white/10'
+                ? "bg-purple-600/70 text-white border-purple-500/70"
+                : "bg-white/5 text-white/90 border-white/10"
             }`}
             aria-pressed={active === s}
           >
@@ -167,7 +163,7 @@ function SkillsAndCases({
         ))}
       </div>
 
-      {/* Case studies rail */}
+      {/* Projects rail */}
       <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
         {visible.map((c, i) => (
           <motion.article
@@ -187,15 +183,13 @@ function SkillsAndCases({
                 height={c.image.height}
                 style={{
                   aspectRatio: c.image.ratio,
-                  objectFit: 'cover',
+                  objectFit: "cover",
                 }}
                 className="w-full h-40 md:h-44 object-cover"
               />
               <div className="p-5 flex-1 flex flex-col gap-3">
                 <div className="flex items-center justify-between gap-4">
-                  <h3 className="font-oswald text-xl text-white">
-                    {c.title}
-                  </h3>
+                  <h3 className="font-oswald text-xl text-white">{c.title}</h3>
                   <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] uppercase tracking-[0.12em] font-medium text-gray-300 whitespace-nowrap">
                     {c.period}
                   </span>
@@ -215,10 +209,7 @@ function SkillsAndCases({
                 </ul>
                 <div className="mt-auto flex flex-wrap gap-2">
                   {c.links.map((l) => (
-                    <LinkButton
-                      key={`${c.slug}-${l.label}`}
-                      href={l.href}
-                    >
+                    <LinkButton key={`${c.slug}-${l.label}`} href={l.href}>
                       {l.icon}
                       {l.icon ? <>&nbsp;</> : null}
                       {l.label}
