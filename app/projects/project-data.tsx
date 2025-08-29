@@ -21,6 +21,65 @@ export type Project = {
 
 export const PROJECTS: Project[] = [
   {
+    slug: "ai-pacman",
+    title: "AI Pac-Man",
+    period: "2025",
+    blurb:
+      "Modern Pac-Man built with React 19, TypeScript, Vite, and Tailwind. Playable demo showcasing hooks, context state, collisions, power mode, and ghost AI.",
+    image: {
+      src: "/images/projects/ai-pacman.png",
+      alt: "AI Pac-Man",
+      width: 1200,
+      height: 675,
+      ratio: "1200/675",
+    },
+    skills: ["React", "TypeScript", "Vite", "Tailwind", "Hobby"],
+    metrics: ["React 19", "Ghost AI", "Collision Detection"],
+    links: [
+      {
+        label: "Github",
+        href: "https://github.com/jayvicsanantonio/ai-pacman",
+        icon: <Github size={18} />,
+      },
+      {
+        label: "View",
+        href: "https://jayvicsanantonio.github.io/ai-pacman/",
+      },
+    ],
+    sections: [
+      {
+        label: "Context",
+        content: (
+          <>
+            A modern implementation of the classic Pac-Man game, built to
+            explore React 19 features, state management with hooks and context,
+            and simple game AI.
+          </>
+        ),
+      },
+      {
+        label: "Decisions",
+        content: (
+          <>
+            Utilized React 19 for modern features, TypeScript for type safety,
+            Vite for a fast development environment, and Tailwind CSS for
+            styling. Implemented game logic including collision detection,
+            power-up modes, and basic ghost AI.
+          </>
+        ),
+      },
+      {
+        label: "Results",
+        content: (
+          <>
+            A playable demo showcasing a complete game loop, responsive
+            controls, and functional AI-driven opponents.
+          </>
+        ),
+      },
+    ],
+  },
+  {
     slug: "yahoo-dsp",
     title: "Yahoo DSP",
     period: "2016–2023",
@@ -304,6 +363,7 @@ export const PROJECTS: Project[] = [
       },
     ],
   },
+
   {
     slug: "mm-church",
     title: "Malayang Mananampalataya Church",
