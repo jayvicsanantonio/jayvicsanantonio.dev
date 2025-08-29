@@ -1,13 +1,8 @@
-'use client';
+"use client";
 
-import IconButton from '@/components/pages/IconButton';
-import {
-  House,
-  LayoutPanelLeft,
-  FlaskConical,
-  FileUser,
-} from 'lucide-react';
-import { motion } from 'framer-motion';
+import IconButton from "@/components/pages/IconButton";
+import { motion } from "framer-motion";
+import { FileUser, House, LayoutPanelLeft } from "lucide-react";
 
 export default function MainMenu({
   closeDrawer,
@@ -18,13 +13,13 @@ export default function MainMenu({
     <>
       <motion.div
         variants={{
-          hidden: { opacity: 0, x: -12, filter: 'blur(4px)' },
+          hidden: { opacity: 0, x: -12, filter: "blur(4px)" },
           show: {
             opacity: 1,
             x: 0,
-            filter: 'blur(0px)',
+            filter: "blur(0px)",
             transition: {
-              type: 'spring',
+              type: "spring",
               stiffness: 420,
               damping: 28,
             },
@@ -42,13 +37,13 @@ export default function MainMenu({
       </motion.div>
       <motion.div
         variants={{
-          hidden: { opacity: 0, x: -12, filter: 'blur(4px)' },
+          hidden: { opacity: 0, x: -12, filter: "blur(4px)" },
           show: {
             opacity: 1,
             x: 0,
-            filter: 'blur(0px)',
+            filter: "blur(0px)",
             transition: {
-              type: 'spring',
+              type: "spring",
               stiffness: 420,
               damping: 28,
             },
@@ -59,20 +54,20 @@ export default function MainMenu({
           IconName={LayoutPanelLeft}
           link="/projects"
           callback={closeDrawer}
-          subtitle="Selected builds & case studies"
+          subtitle="Selected builds & projects"
         >
           Projects
         </IconButton>
       </motion.div>
       <motion.div
         variants={{
-          hidden: { opacity: 0, x: -12, filter: 'blur(4px)' },
+          hidden: { opacity: 0, x: -12, filter: "blur(4px)" },
           show: {
             opacity: 1,
             x: 0,
-            filter: 'blur(0px)',
+            filter: "blur(0px)",
             transition: {
-              type: 'spring',
+              type: "spring",
               stiffness: 420,
               damping: 28,
             },
