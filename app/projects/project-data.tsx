@@ -22,10 +22,10 @@ export type Project = {
 export const PROJECTS: Project[] = [
   {
     slug: "ai-pacman",
-    title: "AI Pac-Man",
+    title: "Pac-Man",
     period: "2025",
     blurb:
-      "Modern Pac-Man built with React 19, TypeScript, Vite, and Tailwind. Playable demo showcasing hooks, context state, collisions, power mode, and ghost AI.",
+      "Engineered a high-performance Pac-Man implementation using React 19 and TypeScript, featuring advanced collision detection and stateful ghost AI. This project demonstrates expertise in modern frontend architecture and complex state management.",
     image: {
       src: "/images/projects/ai-pacman.png",
       alt: "AI Pac-Man",
@@ -80,11 +80,68 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
+    slug: "ai-timeline",
+    title: "The AI Timeline",
+    period: "2025",
+    blurb:
+      "Developed a visually engaging and performant AI timeline using Next.js 15 and Framer Motion, ensuring full accessibility compliance. This project showcases skills in building interactive data visualizations and optimizing web performance.",
+    image: {
+      src: "/images/projects/ai-timeline.png",
+      alt: "AI Timeline",
+      width: 1200,
+      height: 675,
+      ratio: "1200/675",
+    },
+    skills: ["Next.js", "TypeScript", "Framer Motion", "Hobby"],
+    metrics: ["Next.js 15", "Framer Motion", "Accessibility"],
+    links: [
+      {
+        label: "Github",
+        href: "https://github.com/jayvicsanantonio/ai-timeline",
+        icon: <Github size={18} />,
+      },
+      {
+        label: "View",
+        href: "https://ai-timeline-six.vercel.app/",
+      },
+    ],
+    sections: [
+      {
+        label: "Context",
+        content: (
+          <>
+            An interactive timeline of AI history, designed to be performant and
+            accessible, built with the latest web technologies.
+          </>
+        ),
+      },
+      {
+        label: "Decisions",
+        content: (
+          <>
+            Utilized Next.js 15 for its performance features, TypeScript for
+            type safety, and Framer Motion for smooth animations. Ensured WCAG
+            compliance for accessibility.
+          </>
+        ),
+      },
+      {
+        label: "Results",
+        content: (
+          <>
+            A fast, engaging, and accessible timeline that visually represents
+            key moments in AI history.
+          </>
+        ),
+      },
+    ],
+  },
+  {
     slug: "yahoo-dsp",
     title: "Yahoo DSP",
     period: "2016–2023",
     blurb:
-      "Programmatic advertising platform: RTB systems, audience tooling, and performance at scale.",
+      "Led frontend architecture for a high-stakes programmatic advertising platform, enhancing audience tooling and real-time bidding systems. Achieved a 1150% increase in data processing throughput and influenced over $140M in ad spend.",
     image: {
       src: "/images/home/yahoo-dsp.webp",
       alt: "Yahoo DSP",
@@ -151,7 +208,7 @@ export const PROJECTS: Project[] = [
     title: "Christmas Countdown",
     period: "2024",
     blurb:
-      "A playful countdown and popover demo using the Popover API and CSS Anchor Positioning.",
+      "Demonstrated expertise in modern CSS capabilities by creating a festive countdown timer that leverages the Popover and Anchor Positioning APIs for a unique and interactive user experience.",
     image: {
       src: "/images/projects/christmas-countdown.png",
       alt: "Christmas Countdown experiment preview",
@@ -183,7 +240,8 @@ export const PROJECTS: Project[] = [
     slug: "aurora-borealis",
     title: "Aurora Borealis",
     period: "2024",
-    blurb: "Pure HTML/CSS animation of a starry sky and aurora lights.",
+    blurb:
+      "Crafted a visually stunning aurora borealis effect using only HTML and CSS, showcasing advanced animation techniques and a deep understanding of layered gradients to create a dynamic and engaging background.",
     image: {
       src: "/images/projects/aurora-borealis.png",
       alt: "Aurora Borealis CSS animation",
@@ -215,7 +273,8 @@ export const PROJECTS: Project[] = [
     slug: "total-solar-eclipse",
     title: "Total Solar Eclipse",
     period: "2024",
-    blurb: "CSS-driven eclipse animation using radial gradients and keyframes.",
+    blurb:
+      "Engineered a precise and captivating solar eclipse animation using pure CSS, leveraging radial gradients and keyframes to simulate a complex astronomical event. This project highlights a mastery of CSS for creating sophisticated visual effects.",
     image: {
       src: "/images/projects/solar-eclipse.png",
       alt: "Total Solar Eclipse CSS animation",
@@ -248,7 +307,7 @@ export const PROJECTS: Project[] = [
     title: "Barbenheimer VS Code Theme",
     period: "2023",
     blurb:
-      "A playful yet dramatic editor theme blending Barbie and Oppenheimer aesthetics with thoughtful contrast and legibility.",
+      "Designed and launched a popular VS Code theme with dual-light and dark modes, focusing on optimal contrast and legibility for improved developer experience. Published to the Visual Studio Marketplace, it has been widely adopted by the community.",
     image: {
       src: "/images/home/barbenheimer.webp",
       alt: "Barbenheimer VS Code Theme",
@@ -308,7 +367,7 @@ export const PROJECTS: Project[] = [
     title: "Barbenheimer Zed Theme",
     period: "2024",
     blurb:
-      "A cohesive pair of Zed editor themes capturing both playful and dramatic tones with shared palette logic.",
+      "Developed and published a Zed editor theme with a cohesive and polished design system, offering both light and dark variants. This project demonstrates a keen eye for UI/UX and a commitment to enhancing developer tools.",
     image: {
       src: "/images/projects/barbenheimer-zed-theme.webp",
       alt: "Barbenheimer Zed Theme",
@@ -369,7 +428,7 @@ export const PROJECTS: Project[] = [
     title: "Malayang Mananampalataya Church",
     period: "2022",
     blurb:
-      "Responsive church website built to strengthen community connection with clear navigation and accessible content.",
+      "Engineered a responsive and accessible church website using React, focusing on clear navigation and a streamlined content architecture. The mobile-first design ensures a seamless user experience for a broad audience.",
     image: {
       src: "/images/home/mm-church.webp",
       alt: "Malayang Mananampalataya Church",
@@ -422,7 +481,7 @@ export const PROJECTS: Project[] = [
     title: "SyncFlow",
     period: "2024",
     blurb:
-      "Edge‑deployed task sync bridging Apple Reminders and Google Tasks with OAuth, webhooks, and Redis.",
+      "Architected a low-latency, edge-deployed synchronization service to bridge Apple Reminders and Google Tasks. This project utilizes OAuth, webhooks, and Redis for an event-driven, zero-cold-start user experience.",
     image: {
       src: "/images/projects/sync-flow.png",
       alt: "SyncFlow",
@@ -486,7 +545,7 @@ export const PROJECTS: Project[] = [
     title: "Track N' Stick",
     period: "2024",
     blurb:
-      "Habit tracking app with streak visualization and goal management. Built with modern web technologies for a smooth user experience.",
+      "Developed a full-stack habit tracking application with streak visualization and goal management features. This project showcases expertise in building robust, user-centric applications with modern web technologies.",
     image: {
       src: "/images/projects/tracknstick.png",
       alt: "Track N' Stick",
@@ -539,7 +598,7 @@ export const PROJECTS: Project[] = [
     title: "Web Development Hub",
     period: "2023",
     blurb:
-      "A curated library of developer resources—learning, tools, frameworks, blogs, and communities.",
+      "Curated and built a comprehensive resource library for developers, featuring a structured taxonomy and a fast, intuitive search experience. This project highlights a commitment to improving developer workflow and knowledge sharing.",
     image: {
       src: "/images/home/webdevhub.png",
       alt: "Web Development Hub",
@@ -596,7 +655,7 @@ export const PROJECTS: Project[] = [
     title: "FINTQ — Lendr",
     period: "2016",
     blurb:
-      "Mobile-first digital lending marketplace connecting banks with borrowers across the Philippines. Built with Node.js and Express.js.",
+      "Architected and delivered a mobile-first digital lending marketplace in the Philippines using Node.js and Express.js, connecting banks with borrowers through a secure and streamlined onboarding process.",
     image: {
       src: "/images/projects/fintq-lendr.png",
       alt: "FINTQ Lendr",
@@ -647,7 +706,7 @@ export const PROJECTS: Project[] = [
     title: "Croo",
     period: "2015–2016",
     blurb:
-      "Wearable safety device with Android companion app using Bluetooth Low Energy, backed by AWS services with a Node.js + Express.js backend.",
+      "Led the development of an IoT wearable safety device with a companion Android app, featuring Bluetooth Low Energy connectivity and a scalable AWS backend. This project demonstrates expertise in building end-to-end IoT solutions.",
     image: {
       src: "/images/projects/croo.png",
       alt: "Croo wearable and app",
@@ -713,7 +772,7 @@ export const PROJECTS: Project[] = [
     title: "Ember Upgrade Guide",
     period: "2020",
     blurb:
-      "Community tool helping developers upgrade Ember apps across versions with clear guidance on new features, deprecations, and breaking changes.",
+      "Contributed to a critical open-source tool for the Ember community, providing clear and concise guidance for upgrading applications across framework versions. This project showcases a commitment to developer education and open-source contribution.",
     image: {
       src: "/images/projects/ember-upgrade-guide.png",
       alt: "Ember Upgrade Guide",
@@ -770,7 +829,7 @@ export const PROJECTS: Project[] = [
     title: "Eat Bulaga! Mobile",
     period: "2014–2015",
     blurb:
-      "Official fan app and Pinoy Henyo game for the Philippines’ top noon-time show. Built with scalable Node.js services and real-time features to support hundreds of thousands of users.",
+      "Co-engineered the official fan application for a major television show, supporting hundreds of thousands of concurrent users with scalable Node.js services and real-time features. The app achieved over 500,000 downloads and a 4.5-star rating.",
     image: {
       src: "/images/projects/eat-bulaga-mobile.png",
       alt: "Eat Bulaga Mobile app",
@@ -823,7 +882,7 @@ export const PROJECTS: Project[] = [
     title: "Pinoy Hoops",
     period: "2013–2015",
     blurb:
-      "Digital basketball platform for Filipino fans with scores, news, and community features; engineered for reliability and scale.",
+      "Developed a high-traffic digital platform for basketball fans, delivering real-time scores, news, and community features. Engineered for reliability and scale, this project demonstrates expertise in building and maintaining high-availability web applications.",
     image: {
       src: "/images/projects/pinoy-hoops.webp",
       alt: "Pinoy Hoops",

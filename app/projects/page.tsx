@@ -197,16 +197,7 @@ function SkillsAndCases({
                 <p className="text-gray-300/90 text-[0.98rem]/relaxed flex-1 overflow-hidden">
                   {c.blurb}
                 </p>
-                <ul className="flex flex-wrap gap-2">
-                  {c.metrics.map((m) => (
-                    <li
-                      key={m}
-                      className="rounded-full bg-white/8 px-2 py-0.5 text-[10px] text-white/90"
-                    >
-                      {m}
-                    </li>
-                  ))}
-                </ul>
+
                 <div className="mt-auto flex flex-wrap gap-2">
                   {c.links.map((l) => (
                     <LinkButton key={`${c.slug}-${l.label}`} href={l.href}>
