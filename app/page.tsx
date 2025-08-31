@@ -74,9 +74,9 @@ export default function Page() {
 
   // Profile image positioning and sizing (like the silhouette)
   const profileScale = Math.max(1 - scrollProgress * 0.4, 0.6); // Shrinks to 60%
-  const profileOpacity = Math.max(1 - scrollProgress * 0.3, 0.7);
   // Keep the image always touching the bottom by adjusting the container height
-  const profileHeight = Math.max(40 - scrollProgress * 8, 20); // rem units
+  // Ensure enough height so head doesn't get cut off
+  const profileHeight = Math.max(50 - scrollProgress * 10, 35); // rem units - taller to prevent cutoff
 
   // Text animations
   const titleOpacity = Math.max(1 - scrollY / 300, 0);
@@ -180,19 +180,19 @@ export default function Page() {
         className="fixed bottom-0 left-1/2 z-40"
         style={{
           transform: `translateX(-50%) scale(${profileScale})`,
-          opacity: profileOpacity,
+          opacity: 1,
           transition: 'none',
         }}
       >
         <div
-          className="relative w-96 md:w-[32rem]"
+          className="relative w-[32rem] md:w-[60rem]"
           style={{ height: `${profileHeight}rem` }}
         >
           <Image
-            src="/images/me2.png"
+            src="/images/me.png"
             alt="Jayvic San Antonio - Creative Developer"
             fill
-            className="object-cover object-bottom"
+            className="object-contain object-bottom"
             style={{
               filter: `
                 brightness(0.8) 
