@@ -75,7 +75,7 @@ export default function Page() {
   const profileScale = Math.max(1 - scrollProgress * 0.4, 0.6); // Shrinks to 60%
   const profileOpacity = Math.max(1 - scrollProgress * 0.3, 0.7);
   // Keep the image always touching the bottom by adjusting the container height
-  const profileHeight = Math.max(28 - scrollProgress * 8, 20); // rem units
+  const profileHeight = Math.max(40 - scrollProgress * 8, 20); // rem units
 
   // Text animations
   const titleOpacity = Math.max(1 - scrollY / 300, 0);
@@ -161,50 +161,22 @@ export default function Page() {
         }}
       >
         <div
-          className="relative w-80 md:w-96"
+          className="relative w-98 md:w-132"
           style={{ height: `${profileHeight}rem` }}
         >
           <Image
-            src="/images/me.png"
+            src="/images/me2.png"
             alt="Jayvic San Antonio - Creative Developer"
             fill
-            className="object-cover object-bottom"
+            className="object-cover object-bottom shadow-lg shadow-white/10"
+            style={{
+              filter:
+                'drop-shadow(0 0 15px rgba(255, 255, 255, 0.15)) drop-shadow(0 0 30px rgba(255, 255, 255, 0.1))',
+            }}
             priority
           />
         </div>
       </div>
-
-      {/* Top Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 p-6">
-        <div className="flex justify-between items-center">
-          <div className="text-white font-bold text-xl mix-blend-difference">
-            Jayvic
-          </div>
-          <div className="hidden md:flex space-x-8 text-white/90 mix-blend-difference">
-            <a
-              href="#work"
-              className="hover:text-white transition-colors"
-            >
-              Work
-            </a>
-            <a
-              href="#about"
-              className="hover:text-white transition-colors"
-            >
-              About
-            </a>
-            <a
-              href="#contact"
-              className="hover:text-white transition-colors"
-            >
-              Contact
-            </a>
-          </div>
-          <button className="text-white mix-blend-difference">
-            <span className="text-sm font-medium">Try Now</span>
-          </button>
-        </div>
-      </nav>
 
       {/* Hero Content */}
       <section className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4">
@@ -247,7 +219,7 @@ export default function Page() {
       </section>
 
       {/* Content sections with gray background */}
-      <div className="relative z-10 bg-gray-100">
+      <div className="relative z-10 bg-gray-100 min-w-screen">
         {/* Spacer section for scroll transition */}
         <section className="h-screen"></section>
 
@@ -378,49 +350,6 @@ export default function Page() {
             </div>
           </div>
         </section>
-
-        {/* Contact Section */}
-        <section
-          ref={(el) => observeElement(el, 'contact')}
-          className="min-h-screen flex flex-col items-center justify-center px-4 py-20"
-        >
-          <div
-            className={`max-w-4xl text-center transition-all duration-1000 ${
-              isVisible.contact
-                ? 'opacity-100 transform translate-y-0'
-                : 'opacity-0 transform translate-y-20'
-            }`}
-          >
-            <h2 className="text-4xl md:text-6xl font-light text-gray-900 mb-8 tracking-wider">
-              <span className="inline-block mr-4">A</span>
-              <span className="inline-block mr-4">v</span>
-              <span className="inline-block mr-4">a</span>
-              <span className="inline-block mr-4">i</span>
-              <span className="inline-block mr-4">l</span>
-              <span className="inline-block mr-4">a</span>
-              <span className="inline-block mr-4">b</span>
-              <span className="inline-block mr-4">l</span>
-              <span className="inline-block mr-4">e</span>
-              <span className="inline-block mr-8">n</span>
-              <span className="inline-block mr-4">o</span>
-              <span className="inline-block mr-4">w</span>
-            </h2>
-
-            <button className="px-12 py-4 bg-gray-900 text-white font-medium rounded-full hover:bg-gray-800 transition-all duration-300 hover:scale-105 text-lg">
-              Get In Touch
-            </button>
-          </div>
-        </section>
-
-        {/* Footer */}
-        <footer className="py-12 px-4 border-t border-gray-200">
-          <div className="max-w-6xl mx-auto text-center">
-            <p className="text-gray-500">
-              © 2024 Jayvic San Antonio. Crafted with passion and
-              code.
-            </p>
-          </div>
-        </footer>
       </div>
     </div>
   );
