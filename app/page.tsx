@@ -64,7 +64,7 @@ export default function Page() {
 
   // Video morphing transformations - transforms INTO navigation bar
   const videoScale = Math.max(1 - scrollProgress * 0.85, 0.15); // Shrinks significantly
-  const videoBorderRadius = Math.min(scrollProgress * 50, 50); // Becomes very rounded
+  const videoBorderRadius = Math.min(scrollProgress * 200, 100); // Becomes very rounded
   const videoWidth = Math.max(100 - scrollProgress * 85, 15); // Width shrinks from 100vw to 15vw
   const videoHeight = Math.max(100 - scrollProgress * 92, 8); // Height shrinks from 100vh to 8vh
 
@@ -88,11 +88,9 @@ export default function Page() {
       <div
         className="fixed z-30 overflow-hidden flex items-center justify-center"
         style={{
-          top: scrollProgress > 0.5 ? '5rem' : '50%',
+          top: '50%',
           left: '50%',
-          transform: `translate(-50%, ${
-            scrollProgress > 0.5 ? '0' : '-50%'
-          })`,
+          transform: `translate(-50%, -50%)`,
           width: `${videoWidth}vw`,
           height: `${videoHeight}vh`,
           borderRadius: `${videoBorderRadius}px`,
@@ -177,7 +175,7 @@ export default function Page() {
 
       {/* Profile Image - Positioned like silhouette */}
       <div
-        className="fixed bottom-0 left-1/2 z-40"
+        className="fixed isolate bottom-0 left-1/2 z-40"
         style={{
           transform: `translateX(-50%) scale(${profileScale})`,
           opacity: 1,
