@@ -23,13 +23,7 @@ export default function Body({
     >
       <AmbientBackground />
       <CursorGlow />
-      <div
-        className={`font-source-sans flex flex-col w-3xl lg:w-6xl md:px-12 mx-4 lg:mx-auto`}
-      >
-        <Header />
-        <main className="flex-1 py-12">{children}</main>
-        <Footer />
-      </div>
+      {children}
       <Toaster />
       <SpeedInsights />
       <Analytics />

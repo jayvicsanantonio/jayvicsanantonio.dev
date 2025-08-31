@@ -5,7 +5,7 @@ export default function AmbientBackground() {
       <div className="absolute inset-0 bg-[radial-gradient(80%_60%_at_50%_0%,rgba(59,130,246,0.15),transparent_60%),radial-gradient(60%_50%_at_50%_100%,rgba(168,85,247,0.12),transparent_60%)]" />
 
       {/* Soft horizon glow */}
-      <div className="absolute inset-x-0 bottom-[-20%] h-[50%] bg-[radial-gradient(50%_100%_at_50%_0%,rgba(34,211,238,0.12),transparent_70%)]" />
+      {/* <div className="absolute inset-x-0 bottom-[-20%] h-[50%] bg-[radial-gradient(50%_100%_at_50%_0%,rgba(34,211,238,0.12),transparent_70%)]" /> */}
 
       {/* Subtle grid */}
       <div className="absolute inset-0 opacity-[0.04] [background-image:linear-gradient(to_right,white_1px,transparent_1px),linear-gradient(to_bottom,white_1px,transparent_1px)] [background-size:64px_64px] mix-blend-overlay" />
