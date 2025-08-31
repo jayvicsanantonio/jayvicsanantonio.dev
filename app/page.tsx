@@ -127,7 +127,8 @@ export default function Page() {
           >
             <source src="/matrix.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/70" />
+          <div className="absolute inset-0 bg-black/25" />
         </div>
 
         {/* Navigation elements that appear as video transforms */}
