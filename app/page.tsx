@@ -62,14 +62,15 @@ export default function Page() {
   const maxScroll = 800; // Distance for complete transformation
   const scrollProgress = Math.min(scrollY / maxScroll, 1);
 
-  // Video background transformations
-  const videoScale = Math.max(1 - scrollProgress * 0.7, 0.3); // Shrinks to 30%
-  const videoOpacity = Math.max(1 - scrollProgress * 1.2, 0);
-  const videoBorderRadius = scrollProgress * 40; // Becomes rounded
+  // Video morphing transformations - transforms INTO navigation bar
+  const videoScale = Math.max(1 - scrollProgress * 0.85, 0.15); // Shrinks significantly
+  const videoBorderRadius = Math.min(scrollProgress * 50, 50); // Becomes very rounded
+  const videoWidth = Math.max(100 - scrollProgress * 85, 15); // Width shrinks from 100vw to 15vw
+  const videoHeight = Math.max(100 - scrollProgress * 92, 8); // Height shrinks from 100vh to 8vh
 
-  // Navigation bar emergence
-  const navOpacity = Math.max((scrollProgress - 0.4) * 2.5, 0); // Appears after 40% scroll
-  const navScale = Math.min(0.8 + (scrollProgress - 0.4) * 0.5, 1);
+  // Navigation elements emergence (icons appear around the morphing video)
+  const navIconsOpacity = Math.max((scrollProgress - 0.6) * 2.5, 0); // Icons appear later
+  const navTextOpacity = Math.max((scrollProgress - 0.7) * 3, 0); // Text appears last
 
   // Profile image positioning and sizing (like the silhouette)
   const profileScale = Math.max(1 - scrollProgress * 0.4, 0.6); // Shrinks to 60%
@@ -83,77 +84,99 @@ export default function Page() {
 
   return (
     <div ref={containerRef} className="relative bg-gray-100">
-      {/* Shrinking Video Background */}
+      {/* Morphing Video - transforms INTO navigation bar */}
       <div
-        className="fixed top-1/2 left-1/2 z-10 overflow-hidden"
+        className="fixed z-30 overflow-hidden flex items-center justify-center"
         style={{
-          transform: `translate(-50%, -50%) scale(${videoScale})`,
-          opacity: videoOpacity,
+          top: scrollProgress > 0.5 ? '5rem' : '50%',
+          left: '50%',
+          transform: `translate(-50%, ${
+            scrollProgress > 0.5 ? '0' : '-50%'
+          })`,
+          width: `${videoWidth}vw`,
+          height: `${videoHeight}vh`,
           borderRadius: `${videoBorderRadius}px`,
-          width: '100vw',
-          height: '100vh',
-          transition: 'none',
+          transition: 'top 0.3s ease-out',
+          backgroundColor:
+            scrollProgress > 0.8
+              ? 'rgba(255, 255, 255, 0.95)'
+              : 'transparent',
+          backdropFilter:
+            scrollProgress > 0.8 ? 'blur(20px)' : 'none',
+          boxShadow:
+            scrollProgress > 0.8
+              ? '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
+              : 'none',
         }}
       >
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-full object-cover"
+        {/* The actual video that morphs */}
+        <div
+          className="relative w-full h-full overflow-hidden"
+          style={{
+            borderRadius: `${videoBorderRadius}px`,
+            opacity: scrollProgress < 0.8 ? 1 : 0.3,
+          }}
         >
-          <source src="/matrix.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
-      </div>
-
-      {/* Navigation Bar (appears as video shrinks) */}
-      <div
-        className="fixed top-20 left-1/2 z-30 flex items-center gap-4 px-8 py-4 bg-white/90 backdrop-blur-md rounded-full shadow-2xl"
-        style={{
-          transform: `translate(-50%, 0) scale(${navScale})`,
-          opacity: navOpacity,
-          transition: 'none',
-        }}
-      >
-        {/* Navigation Icons - similar to the app icons in the images */}
-        <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-full flex items-center justify-center">
-          <span className="text-white text-sm font-bold">💡</span>
-        </div>
-        <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center">
-          <span className="text-white text-sm font-bold">🎨</span>
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source src="/matrix.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
         </div>
 
-        {/* Video becomes the expanded navigation item */}
-        <div className="relative flex items-center bg-white rounded-full px-6 py-2 shadow-lg">
-          <div className="w-8 h-8 rounded-lg overflow-hidden mr-3 flex-shrink-0">
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="w-full h-full object-cover"
-            >
-              <source src="/matrix.mp4" type="video/mp4" />
-            </video>
+        {/* Navigation elements that appear as video transforms */}
+        <div
+          className="absolute inset-0 flex items-center justify-center gap-4 px-8"
+          style={{ opacity: navIconsOpacity }}
+        >
+          {/* Left icons */}
+          <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-full flex items-center justify-center">
+            <span className="text-white text-sm font-bold">💡</span>
           </div>
-          <span className="text-gray-900 font-medium text-sm whitespace-nowrap">
-            Creative visuals for development
-          </span>
-        </div>
+          <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center">
+            <span className="text-white text-sm font-bold">🎨</span>
+          </div>
 
-        <div className="w-10 h-10 bg-gradient-to-br from-gray-300 to-gray-500 rounded-full flex items-center justify-center">
-          <span className="text-white text-sm font-bold">☁️</span>
-        </div>
-        <div className="w-10 h-10 bg-gradient-to-br from-gray-600 to-gray-800 rounded-full flex items-center justify-center">
-          <span className="text-white text-sm font-bold">🚀</span>
+          {/* Center - Video with text overlay */}
+          <div className="relative flex items-center bg-white/90 rounded-full px-6 py-2 shadow-lg backdrop-blur-sm">
+            <div className="w-8 h-8 rounded-lg overflow-hidden mr-3 flex-shrink-0">
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+              >
+                <source src="/matrix.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <span
+              className="text-gray-900 font-medium text-sm whitespace-nowrap"
+              style={{ opacity: navTextOpacity }}
+            >
+              Creative visuals for development
+            </span>
+          </div>
+
+          {/* Right icons */}
+          <div className="w-10 h-10 bg-gradient-to-br from-gray-300 to-gray-500 rounded-full flex items-center justify-center">
+            <span className="text-white text-sm font-bold">☁️</span>
+          </div>
+          <div className="w-10 h-10 bg-gradient-to-br from-gray-600 to-gray-800 rounded-full flex items-center justify-center">
+            <span className="text-white text-sm font-bold">🚀</span>
+          </div>
         </div>
       </div>
 
       {/* Profile Image - Positioned like silhouette */}
       <div
-        className="fixed bottom-0 left-1/2 z-20"
+        className="fixed bottom-0 left-1/2 z-40"
         style={{
           transform: `translateX(-50%) scale(${profileScale})`,
           opacity: profileOpacity,
@@ -161,17 +184,23 @@ export default function Page() {
         }}
       >
         <div
-          className="relative w-98 md:w-132"
+          className="relative w-96 md:w-[32rem]"
           style={{ height: `${profileHeight}rem` }}
         >
           <Image
             src="/images/me2.png"
             alt="Jayvic San Antonio - Creative Developer"
             fill
-            className="object-cover object-bottom shadow-lg shadow-white/10"
+            className="object-cover object-bottom"
             style={{
-              filter:
-                'drop-shadow(0 0 15px rgba(255, 255, 255, 0.15)) drop-shadow(0 0 30px rgba(255, 255, 255, 0.1))',
+              filter: `
+                brightness(0.8) 
+                saturate(1.4) 
+                hue-rotate(15deg)
+                drop-shadow(0 0 20px rgba(0, 139, 139, 0.25)) 
+                drop-shadow(0 0 40px rgba(0, 139, 139, 0.15))
+                drop-shadow(0 0 60px rgba(0, 139, 139, 0.08))
+              `,
             }}
             priority
           />
