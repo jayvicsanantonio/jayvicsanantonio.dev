@@ -67,7 +67,10 @@ export default function Page() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const startedRef = useRef(false);
-  const prevOverflowRef = useRef<{ html: string; body: string } | null>(null);
+  const prevOverflowRef = useRef<{
+    html: string;
+    body: string;
+  } | null>(null);
   const [scrollY, setScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState<{
     [key: string]: boolean;
@@ -78,10 +81,18 @@ export default function Page() {
   const [showSubtitle, setShowSubtitle] = useState(false);
   const [showDesc, setShowDesc] = useState(false);
   const [showName, setShowName] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
+  const [shouldPlayVideo, setShouldPlayVideo] = useState(false);
 
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.playbackRate = 0.75;
+      // Ensure autoplay policies are satisfied and video begins loading
+      videoRef.current.muted = true;
+      // @ts-expect-error - playsInline is supported in browsers
+      videoRef.current.playsInline = true;
+      // Kick off loading early so onLoadedData can fire without autoplay
+      try { videoRef.current.load(); } catch {}
     }
 
     let ticking = false;
@@ -112,7 +123,9 @@ export default function Page() {
     timers.push(window.setTimeout(() => setInitialPill(false), 600));
     // Reveal other elements after expansion starts
     timers.push(window.setTimeout(() => setShowName(true), 750));
-    timers.push(window.setTimeout(() => setShowTitleGroup(true), 900));
+    timers.push(
+      window.setTimeout(() => setShowTitleGroup(true), 900)
+    );
     timers.push(window.setTimeout(() => setShowDesc(true), 1100));
     return () => timers.forEach((t) => window.clearTimeout(t));
   }, []);
@@ -133,7 +146,8 @@ export default function Page() {
     } else {
       // restore
       if (prevOverflowRef.current) {
-        document.documentElement.style.overflow = prevOverflowRef.current.html;
+        document.documentElement.style.overflow =
+          prevOverflowRef.current.html;
         document.body.style.overflow = prevOverflowRef.current.body;
         prevOverflowRef.current = null;
       } else {
@@ -142,6 +156,22 @@ export default function Page() {
       }
     }
   }, [initialPill]);
+
+  // After the pill finishes expanding, allow the video to play
+  useEffect(() => {
+    if (!initialPill) {
+      const expansionGraceMs = 650; // wait for container transition to fully finish
+      const t = window.setTimeout(() => setShouldPlayVideo(true), expansionGraceMs);
+      return () => window.clearTimeout(t);
+    }
+  }, [initialPill]);
+
+  // When ready and allowed, start the video programmatically
+  useEffect(() => {
+    if (shouldPlayVideo && videoReady && videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    }
+  }, [shouldPlayVideo, videoReady]);
 
   // Intersection Observer for section animations
   const observeElement = useCallback(
@@ -213,7 +243,9 @@ export default function Page() {
               ? 'rgba(255, 255, 255, 0.95)'
               : 'transparent',
           backdropFilter:
-            initialPill || scrollProgress > 0.7 ? 'blur(20px)' : 'none',
+            initialPill || scrollProgress > 0.7
+              ? 'blur(20px)'
+              : 'none',
           boxShadow:
             initialPill || scrollProgress > 0.7
               ? '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
@@ -282,15 +314,22 @@ export default function Page() {
           style={{
             borderRadius: `${videoBorderRadius}px`,
             // During the initial pill, dim the video so the frosted white background shows through
-            opacity: initialPill ? 0.2 : scrollProgress < 0.8 ? 1 : 0.3,
+            opacity: initialPill
+              ? 0.2
+              : scrollProgress < 0.8
+              ? 1
+              : 0.3,
           }}
         >
           <video
             ref={videoRef}
-            autoPlay
             muted
             loop
             playsInline
+            preload="auto"
+            onLoadedData={() => setVideoReady(true)}
+            onCanPlay={() => setVideoReady(true)}
+            onCanPlayThrough={() => setVideoReady(true)}
             className="w-full h-full object-cover"
             style={{
               filter: `
@@ -305,7 +344,10 @@ export default function Page() {
           >
             <source src="/matrix-horizontal.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30" style={{ opacity: initialPill ? 0 : 1 }} />
+          <div
+            className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30"
+            style={{ opacity: initialPill ? 0 : 1 }}
+          />
 
           {/* Watermark cover - covers bottom right corner */}
           <div className="absolute bottom-0 right-0 w-20 h-12 bg-gradient-to-tl from-black via-black/80 to-transparent"></div>
@@ -313,7 +355,13 @@ export default function Page() {
       </div>
 
       {/* Profile Image - Positioned like silhouette */}
-      <div className="fixed isolate bottom-0 left-1/2 -translate-x-1/2 z-40" style={{ opacity: initialPill ? 0 : 1, transition: 'opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1)' }}>
+      <div
+        className="fixed isolate bottom-0 left-1/2 -translate-x-1/2 z-40"
+        style={{
+          opacity: initialPill ? 0 : 1,
+          transition: 'opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
+        }}
+      >
         <div
           className="relative w-[32rem] md:w-[60rem]"
           style={{
