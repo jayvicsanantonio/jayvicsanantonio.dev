@@ -60,14 +60,14 @@ export default function Page() {
   );
 
   // Calculate scroll-based transformations
-  const maxScroll = 700; // Distance for complete transformation
+  const maxScroll = 1800; // Distance for complete transformation
   const scrollProgress = Math.min(scrollY / maxScroll, 1);
 
   // Video morphing transformations - starts as rounded rectangle, transforms INTO navigation bar
   const videoScale = Math.max(1 - scrollProgress * 0.15, 0.85); // Very subtle shrinking
   const videoBorderRadius = Math.min(20 + scrollProgress * 80, 100); // Starts with 8px radius, becomes much more rounded
-  const videoWidth = Math.max(96 - scrollProgress * 80, 15); // Starts at 95vw, almost touching sides
-  const videoHeight = Math.max(86 - scrollProgress * 62, 8); // Starts at 70vh, much taller
+  const videoWidth = Math.max(96 - scrollProgress * 100, 15); // Starts at 95vw, almost touching sides
+  const videoHeight = Math.max(86 - scrollProgress * 100, 8); // Starts at 70vh, much taller
 
   // Navigation elements emergence (icons appear around the morphing video)
   const navIconsOpacity = Math.max((scrollProgress - 0.6) * 2.5, 0); // Icons appear later
@@ -253,7 +253,7 @@ export default function Page() {
       {/* Content sections with smooth transition from black to gray */}
       <div className="relative z-10 min-w-screen">
         {/* Smooth transition from black to gray */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-800 to-gray-200 h-[200vh]"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-800 to-gray-200 h-[154rem]"></div>
 
         {/* Expanding person highlight effect */}
         <div
@@ -273,9 +273,9 @@ export default function Page() {
           }}
         />
         {/* Spacer section for scroll transition */}
-        <section className="h-screen"></section>
+        {/* <section className="h-screen"></section> */}
         {/* About Section */}
-        <section className="min-h-screen flex flex-col items-center justify-center px-4 py-20"></section>
+        <section className="min-h-[154rem] flex flex-col items-center justify-center px-4 py-20"></section>
       </div>
     </div>
   );
