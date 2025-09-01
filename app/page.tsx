@@ -130,24 +130,34 @@ export default function Page() {
     if (root) {
       let raf = 0;
       const MAX = 1800;
+      const update = () => {
+        const y = window.scrollY;
+        const vh = window.innerHeight || 1;
+        const p = Math.min(y / MAX, 1);
+        const pf = Math.min(p * 1.8, 1); // accelerated progress for faster shrink
+        const ps = Math.min(y / (vh * 0.10), 1); // progress to 10% viewport height
+        root.style.setProperty('--scroll-y', String(y));
+        root.style.setProperty('--p', String(p));
+        root.style.setProperty('--pf', String(pf));
+        root.style.setProperty('--ps', String(ps));
+        root.style.setProperty('--vh', String(vh));
+      };
       const onScroll = () => {
         if (raf) return;
         raf = requestAnimationFrame(() => {
-          const y = window.scrollY;
-          const p = Math.min(y / MAX, 1);
-          const pf = Math.min(p * 1.8, 1); // accelerated progress for faster shrink
-          root.style.setProperty('--scroll-y', String(y));
-          root.style.setProperty('--p', String(p));
-          root.style.setProperty('--pf', String(pf));
+          update();
           raf = 0;
         });
       };
+      const onResize = () => update();
       window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
+      window.addEventListener('resize', onResize);
+      update();
       timers.push(0); // sentinel
       const cleanup = () => {
         if (raf) cancelAnimationFrame(raf);
         window.removeEventListener('scroll', onScroll);
+        window.removeEventListener('resize', onResize);
       };
       // store cleanup using a symbol id in timers (not used), return below
       return () => {
@@ -429,11 +439,11 @@ export default function Page() {
         <div
           className="absolute bottom-4 left-16 transition-opacity duration-700"
           style={{
-            opacity: showName
-              ? 'clamp(0, calc(1 - var(--scroll-y, 0) / 160), 1)'
+opacity: showName
+              ? 'clamp(0, calc(1 - var(--ps, 0)), 1)'
               : 0,
-            transform:
-              'translateY(calc(-1.3 * var(--scroll-y, 0) * 1px))',
+transform:
+              'translateY(calc(-1.6 * var(--scroll-y, 0) * 1px))',
             willChange: 'opacity, transform',
           }}
         >
@@ -452,10 +462,10 @@ export default function Page() {
           className="absolute bottom-8 right-16 pointer-events-auto transition-opacity duration-700"
           style={{
             opacity: showName
-              ? 'clamp(0, calc(1 - var(--scroll-y, 0) / 160), 1)'
+              ? 'clamp(0, calc(1 - var(--ps, 0)), 1)'
               : 0,
             transform:
-              'translateY(calc(-1.3 * var(--scroll-y, 0) * 1px))',
+              'translateY(calc(-1.2 * var(--scroll-y, 0) * 1px))',
             willChange: 'opacity, transform',
           }}
         >
