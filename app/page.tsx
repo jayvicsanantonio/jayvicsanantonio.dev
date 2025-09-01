@@ -66,8 +66,8 @@ export default function Page() {
   // Video morphing transformations - starts as rounded rectangle, transforms INTO navigation bar
   const videoScale = Math.max(1 - scrollProgress * 0.15, 0.85); // Very subtle shrinking
   const videoBorderRadius = Math.max(24 - scrollProgress * 4, 32); // Starts with 24px radius, less rounded
-  const videoWidth = Math.max(95 - scrollProgress * 80, 15); // Starts at 95vw, almost touching sides
-  const videoHeight = Math.max(80 - scrollProgress * 62, 8); // Starts at 70vh, much taller
+  const videoWidth = Math.max(96 - scrollProgress * 80, 15); // Starts at 95vw, almost touching sides
+  const videoHeight = Math.max(86 - scrollProgress * 62, 8); // Starts at 70vh, much taller
 
   // Navigation elements emergence (icons appear around the morphing video)
   const navIconsOpacity = Math.max((scrollProgress - 0.6) * 2.5, 0); // Icons appear later
@@ -94,7 +94,7 @@ export default function Page() {
         style={{
           top: '50%',
           left: '50%',
-          transform: `translate(-50%, -50%)`,
+          transform: `translate(-50%, -54%)`,
           width: `${videoWidth}vw`,
           height: `${videoHeight}vh`,
           borderRadius: `${videoBorderRadius}px`,
@@ -111,6 +111,36 @@ export default function Page() {
               : '0 8px 20px -2px rgba(0, 0, 0, 0.08)',
         }}
       >
+        <div
+          className="absolute sm:bottom-40 right-8 md:bottom-22 md:right-10 z-50"
+          style={{ opacity: titleOpacity }}
+        >
+          <h3 className="text-lg md:text-3xl lg:text-4xl 2xl:text-6xl font-medium text-white tracking-widest">
+            Full-Stack
+          </h3>
+        </div>
+
+        {/* "imagination" text - right side, positioned vertically */}
+        <div
+          className="absolute bottom-32 right-8 md:bottom-10 md:right-10 z-50"
+          style={{ opacity: titleOpacity }}
+        >
+          <h4 className="text-lg md:text-3xl lg:text-4xl 2xl:text-5xl font-light text-white/90 tracking-wider italic">
+            Software Engineer
+          </h4>
+        </div>
+
+        {/* Description text - bottom left */}
+        <div
+          className="absolute bottom-32 left-8 md:bottom-10 md:left-10 max-w-80 z-50"
+          style={{ opacity: subtitleOpacity }}
+        >
+          <p className="text-sm md:text-base text-white/80 leading-relaxed mb-2">
+            I experiment with AI daily—and build web platforms that
+            put it to work.
+          </p>
+        </div>
+
         {/* The actual video that morphs */}
         <div
           className="relative w-full h-full overflow-hidden"
@@ -143,52 +173,6 @@ export default function Page() {
 
           {/* Watermark cover - covers bottom right corner */}
           <div className="absolute bottom-0 right-0 w-20 h-12 bg-gradient-to-tl from-black via-black/80 to-transparent"></div>
-        </div>
-
-        {/* Navigation elements that appear as video transforms */}
-        <div
-          className="absolute inset-0 flex items-center justify-center gap-4 px-8"
-          style={{ opacity: navIconsOpacity }}
-        >
-          {/* Left icons */}
-          <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-full flex items-center justify-center">
-            <span className="text-white text-sm font-bold">💡</span>
-          </div>
-          <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center">
-            <span className="text-white text-sm font-bold">🎨</span>
-          </div>
-
-          {/* Center - Video with text overlay */}
-          <div className="relative flex items-center bg-white/90 rounded-full px-6 py-2 shadow-lg backdrop-blur-sm">
-            <div className="w-8 h-8 rounded-lg overflow-hidden mr-3 flex-shrink-0">
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="w-full h-full object-cover"
-              >
-                <source
-                  src="/matrix-horizontal.mp4"
-                  type="video/mp4"
-                />
-              </video>
-            </div>
-            <span
-              className="text-gray-900 font-medium text-sm whitespace-nowrap"
-              style={{ opacity: navTextOpacity }}
-            >
-              Creative visuals for development
-            </span>
-          </div>
-
-          {/* Right icons */}
-          <div className="w-10 h-10 bg-gradient-to-br from-gray-300 to-gray-500 rounded-full flex items-center justify-center">
-            <span className="text-white text-sm font-bold">☁️</span>
-          </div>
-          <div className="w-10 h-10 bg-gradient-to-br from-gray-600 to-gray-800 rounded-full flex items-center justify-center">
-            <span className="text-white text-sm font-bold">🚀</span>
-          </div>
         </div>
       </div>
 
@@ -240,63 +224,9 @@ export default function Page() {
 
       {/* Text Overlays - positioned around the video and person */}
       <div className="fixed inset-0 z-50 pointer-events-none">
-        {/* "Jayvic" text - top left */}
-        {/* <div
-          className="absolute top-16 left-8 md:top-20 md:left-16"
-          style={{ opacity: titleOpacity }}
-        >
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-medium text-white tracking-wider">
-            Jayvic
-          </h2>
-        </div> */}
-
-        {/* "San Antonio" text - top left */}
-        {/* <div
-          className="absolute top-24 left-8 md:top-28 md:left-16"
-          style={{ opacity: titleOpacity }}
-        >
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-light text-white tracking-wider">
-            SAN ANTONIO
-          </h1>
-        </div> */}
-
-        {/* "of" text - top right */}
-        <div
-          className="absolute sm:bottom-40 right-8 md:bottom-52 md:right-16"
-          style={{ opacity: titleOpacity }}
-        >
-          <h3 className="text-lg md:text-3xl lg:text-4xl 2xl:text-6xl font-medium text-white tracking-widest">
-            Full-Stack
-          </h3>
-        </div>
-
-        {/* "imagination" text - right side, positioned vertically */}
-        <div
-          className="absolute bottom-32 right-8 md:bottom-40 md:right-16"
-          style={{ opacity: titleOpacity }}
-        >
-          <h4 className="text-lg md:text-3xl lg:text-4xl 2xl:text-5xl font-light text-white/90 tracking-wider italic">
-            Software Engineer
-          </h4>
-        </div>
-
-        {/* Description text - bottom left */}
-        <div
-          className="absolute bottom-32 left-8 md:bottom-40 md:left-16 max-w-96"
-          style={{ opacity: subtitleOpacity }}
-        >
-          <p className="text-sm md:text-base text-white/80 leading-relaxed mb-2">
-            I experiment with AI daily—and build web platforms that
-            put it to work.
-          </p>
-          {/* <p className="text-xs md:text-sm text-white/60">
-            Social Media Buttons
-          </p> */}
-        </div>
-
         {/* Brand text - bottom left corner */}
         <div
-          className="absolute bottom-4 left-12"
+          className="absolute bottom-4 left-16"
           style={{ opacity: titleOpacity }}
         >
           <div className="text-white">
@@ -311,7 +241,7 @@ export default function Page() {
 
         {/* Work Experience button - bottom right */}
         <div
-          className="absolute bottom-8 right-8 pointer-events-auto"
+          className="absolute bottom-8 right-16 pointer-events-auto"
           style={{ opacity: titleOpacity }}
         >
           <Link
@@ -401,75 +331,6 @@ export default function Page() {
                   designs, brand guidelines, and user requirements.
                   Make it exactly how you see it.
                 </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Work Section */}
-        <section
-          ref={(el) => observeElement(el, 'work')}
-          className="min-h-screen flex flex-col items-center justify-center px-4 py-20 bg-gray-50"
-        >
-          <div
-            className={`max-w-6xl w-full transition-all duration-1000 ${
-              isVisible.work
-                ? 'opacity-100 transform translate-y-0'
-                : 'opacity-0 transform translate-y-20'
-            }`}
-          >
-            <h2 className="text-4xl md:text-6xl font-light text-gray-900 mb-12 text-center tracking-wider">
-              <span className="inline-block mr-4">D</span>
-              <span className="inline-block mr-4">o</span>
-              <span className="inline-block mr-8">i</span>
-              <span className="inline-block mr-4">t</span>
-              <span className="inline-block mr-8">a</span>
-              <span className="inline-block mr-4">l</span>
-              <span className="inline-block mr-4">l</span>
-            </h2>
-
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
-                <h3 className="text-2xl font-semibold text-gray-900 mb-4">
-                  Build Applications
-                </h3>
-                <p className="text-gray-600 mb-6">
-                  Create full-stack web applications with modern
-                  frameworks. From concept to deployment with seamless
-                  user experiences.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
-                    React
-                  </span>
-                  <span className="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">
-                    Next.js
-                  </span>
-                  <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">
-                    TypeScript
-                  </span>
-                </div>
-              </div>
-
-              <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
-                <h3 className="text-2xl font-semibold text-gray-900 mb-4">
-                  Design Systems
-                </h3>
-                <p className="text-gray-600 mb-6">
-                  Craft cohesive design languages and component
-                  libraries that scale across teams and products.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm">
-                    Figma
-                  </span>
-                  <span className="px-3 py-1 bg-pink-100 text-pink-800 rounded-full text-sm">
-                    Tailwind
-                  </span>
-                  <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm">
-                    Storybook
-                  </span>
-                </div>
               </div>
             </div>
           </div>
