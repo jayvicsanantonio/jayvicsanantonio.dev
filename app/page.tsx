@@ -121,9 +121,9 @@ export default function Page() {
     // Reveal other elements while expansion progresses
     timers.push(window.setTimeout(() => setShowName(true), 1000));
     timers.push(
-      window.setTimeout(() => setShowTitleGroup(true), 1500)
+      window.setTimeout(() => setShowTitleGroup(true), 3600)
     );
-    timers.push(window.setTimeout(() => setShowDesc(true), 1800));
+    timers.push(window.setTimeout(() => setShowDesc(true), 3200));
 
     // Set up CSS variable based scroll loop (no React renders on scroll)
     const root = containerRef.current;
@@ -156,33 +156,6 @@ export default function Page() {
 
     return () => timers.forEach((t) => window.clearTimeout(t));
   }, []);
-
-  // Temporarily disable scroll during initial pill
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    if (initialPill) {
-      // store previous overflow to restore later
-      if (!prevOverflowRef.current) {
-        prevOverflowRef.current = {
-          html: document.documentElement.style.overflow,
-          body: document.body.style.overflow,
-        };
-      }
-      document.documentElement.style.overflow = 'hidden';
-      document.body.style.overflow = 'hidden';
-    } else {
-      // restore
-      if (prevOverflowRef.current) {
-        document.documentElement.style.overflow =
-          prevOverflowRef.current.html;
-        document.body.style.overflow = prevOverflowRef.current.body;
-        prevOverflowRef.current = null;
-      } else {
-        document.documentElement.style.overflow = '';
-        document.body.style.overflow = '';
-      }
-    }
-  }, [initialPill]);
 
   // After the pill finishes expanding, allow the video to play
   useEffect(() => {
@@ -227,11 +200,14 @@ export default function Page() {
           '--sy':
             'clamp(0.09302, calc((86 - 100 * var(--p, 0)) / 86), 1)',
           '--intro-scale': String(introScale),
+          '--i-sx': initialPill ? '1' : '1',
+          '--i-sy': initialPill ? '1' : '1',
           transform:
-            'translate(-50%, -50%) scale(var(--sx), var(--sy)) scale(var(--intro-scale))',
+            'translate(-50%, -50%) scale(var(--sx), var(--sy)) scale(var(--i-sx), var(--i-sy)) scale(var(--intro-scale))',
           width: '96vw',
           height: '86vh',
           borderRadius: containerRadius,
+          border: 'none',
           willChange: 'transform, opacity, filter',
           transformOrigin: '50% 50%',
           transition: isExpanding
@@ -243,12 +219,18 @@ export default function Page() {
           '--shadow-a': isIntro
             ? '0.25'
             : 'calc(max(0, (var(--p, 0) - 0.7) * 3) * 0.25)',
-          backgroundColor: 'rgba(255, 255, 255, var(--bg-a))',
-          backdropFilter: isIntro
-            ? 'blur(20px)'
-            : 'blur(calc(max(0, (var(--p, 0) - 0.7) * 3) * 20px))',
-          boxShadow:
-            '0 25px 50px -12px rgba(0, 0, 0, var(--shadow-a))',
+          backgroundColor: initialPill
+            ? 'transparent'
+            : 'rgba(255, 255, 255, var(--bg-a))',
+          backdropFilter:
+            isIntro && !initialPill
+              ? 'blur(20px)'
+              : isIntro
+              ? 'blur(0px)'
+              : 'blur(calc(max(0, (var(--p, 0) - 0.7) * 3) * 20px))',
+          boxShadow: initialPill
+            ? 'none'
+            : '0 25px 50px -12px rgba(0, 0, 0, var(--shadow-a))',
         }}
       >
         <div
@@ -307,21 +289,29 @@ export default function Page() {
         <div
           className="absolute inset-0 z-50 flex items-center justify-center pointer-events-none"
           style={{
-            transform: 'scale(calc(0.9 / var(--intro-scale)))',
+            transform: 'none',
             transformOrigin: '50% 50%',
             opacity: initialPill
-              ? 1
+              ? 0
               : 'max(0, calc((var(--p, 0) - 0.7) * 3))',
           }}
         >
-          <div className="px-4 py-1.5">
-            {/* Short label on very small widths, full name from sm and up */}
-            <span className="inline sm:hidden text-[12px] font-semibold text-black tracking-wide">
-              Jayvic
-            </span>
-            <span className="hidden sm:inline text-sm md:text-base lg:text-lg font-semibold text-black tracking-wide">
-              Jayvic San Antonio
-            </span>
+          <div className="px-3">
+            <div className="flex items-center gap-3">
+              <Image
+                src="/icon.svg"
+                alt="Site icon"
+                width={16}
+                height={16}
+              />
+              {/* Short label on very small widths, full name from sm and up */}
+              <span className="inline sm:hidden text-[10px] font-semibold text-black tracking-wide">
+                Jayvic
+              </span>
+              <span className="hidden sm:inline text-xs md:text-sm lg:text-base font-semibold text-black tracking-wide">
+                Jayvic San Antonio
+              </span>
+            </div>
           </div>
         </div>
 
@@ -363,6 +353,35 @@ export default function Page() {
           <div className="absolute bottom-0 right-0 w-20 h-12 bg-gradient-to-tl from-black via-black/80 to-transparent"></div>
         </div>
       </div>
+
+      {/* Initial pill overlay (decoupled from container transforms) */}
+      {initialPill && (
+        <div className="fixed z-[60] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+          <div
+            className="flex items-center gap-3 px-6 py-3"
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.98)',
+              borderRadius: '9999px',
+              overflow: 'hidden',
+              boxShadow:
+                'inset 0 0 0 2px rgba(0,0,0,0.10), 0 8px 24px rgba(0,0,0,0.14)',
+            }}
+          >
+            <Image
+              src="/icon.svg"
+              alt="Site icon"
+              width={28}
+              height={28}
+            />
+            <span className="hidden sm:inline text-sm md:text-base lg:text-lg font-semibold text-black tracking-wide">
+              Jayvic San Antonio
+            </span>
+            <span className="inline sm:hidden text-[12px] font-semibold text-black tracking-wide">
+              Jayvic
+            </span>
+          </div>
+        </div>
+      )}
 
       {/* Profile Image - Positioned like silhouette */}
       <div
