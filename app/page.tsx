@@ -66,24 +66,18 @@ function AnimatedText({
 export default function Page() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const startedRef = useRef(false);
+  const prevOverflowRef = useRef<{ html: string; body: string } | null>(null);
   const [scrollY, setScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState<{
     [key: string]: boolean;
   }>({});
+  // Intro sequencing
+  const [initialPill, setInitialPill] = useState(true);
   const [showTitleGroup, setShowTitleGroup] = useState(false);
-  const [showDetails, setShowDetails] = useState(false);
+  const [showSubtitle, setShowSubtitle] = useState(false);
+  const [showDesc, setShowDesc] = useState(false);
   const [showName, setShowName] = useState(false);
-
-  useEffect(() => {
-    const t1 = setTimeout(() => setShowTitleGroup(true), 900);
-    const t2 = setTimeout(() => setShowDetails(true), 600);
-    const t3 = setTimeout(() => setShowName(true), 100);
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      clearTimeout(t3);
-    };
-  }, []);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -107,6 +101,47 @@ export default function Page() {
     });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Intro sequencing independent of video readiness
+  useEffect(() => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    setInitialPill(true);
+    const timers: number[] = [];
+    // Wait 600ms before expanding the pill
+    timers.push(window.setTimeout(() => setInitialPill(false), 600));
+    // Reveal other elements after expansion starts
+    timers.push(window.setTimeout(() => setShowName(true), 750));
+    timers.push(window.setTimeout(() => setShowTitleGroup(true), 900));
+    timers.push(window.setTimeout(() => setShowDesc(true), 1100));
+    return () => timers.forEach((t) => window.clearTimeout(t));
+  }, []);
+
+  // Temporarily disable scroll during initial pill
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (initialPill) {
+      // store previous overflow to restore later
+      if (!prevOverflowRef.current) {
+        prevOverflowRef.current = {
+          html: document.documentElement.style.overflow,
+          body: document.body.style.overflow,
+        };
+      }
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+    } else {
+      // restore
+      if (prevOverflowRef.current) {
+        document.documentElement.style.overflow = prevOverflowRef.current.html;
+        document.body.style.overflow = prevOverflowRef.current.body;
+        prevOverflowRef.current = null;
+      } else {
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+      }
+    }
+  }, [initialPill]);
 
   // Intersection Observer for section animations
   const observeElement = useCallback(
@@ -168,18 +203,19 @@ export default function Page() {
           top: '50%',
           left: '50%',
           transform: `translate(-50%, -55%)`,
-          width: `${videoWidth}vw`,
-          height: `${videoHeight}vh`,
-          borderRadius: `${videoBorderRadius}px`,
-          transition: 'top 0.4s ease-out, transform 0.4s ease-out',
+          width: initialPill ? '15vw' : `${videoWidth}vw`,
+          height: initialPill ? '8vh' : `${videoHeight}vh`,
+          borderRadius: `${initialPill ? 100 : videoBorderRadius}px`,
+          transition:
+            'top 0.4s ease-out, transform 0.4s ease-out, width 0.6s cubic-bezier(0.22, 1, 0.36, 1), height 0.6s cubic-bezier(0.22, 1, 0.36, 1), border-radius 0.6s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.4s ease-out, backdrop-filter 0.4s ease-out, box-shadow 0.4s ease-out',
           backgroundColor:
-            scrollProgress > 0.7
+            initialPill || scrollProgress > 0.7
               ? 'rgba(255, 255, 255, 0.95)'
               : 'transparent',
           backdropFilter:
-            scrollProgress > 0.7 ? 'blur(20px)' : 'none',
+            initialPill || scrollProgress > 0.7 ? 'blur(20px)' : 'none',
           boxShadow:
-            scrollProgress > 0.7
+            initialPill || scrollProgress > 0.7
               ? '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
               : '0 8px 20px -2px rgba(0, 0, 0, 0.08)',
         }}
@@ -193,6 +229,7 @@ export default function Page() {
               text="Full-Stack"
               start={showTitleGroup}
               perCharDelay={45}
+              onComplete={() => setShowSubtitle(true)}
             />
           </h3>
         </div>
@@ -200,14 +237,14 @@ export default function Page() {
         {/* "imagination" text - right side, positioned vertically */}
         <div
           className="absolute bottom-32 right-8 md:bottom-10 md:right-10 z-50 transition-opacity duration-700"
-          style={{ opacity: showTitleGroup ? titleOpacity : 0 }}
+          style={{ opacity: showSubtitle ? titleOpacity : 0 }}
         >
           <h4 className="text-lg md:text-3xl lg:text-4xl 2xl:text-5xl font-light text-white/90 tracking-wider italic">
             <AnimatedText
               text="Software Engineer"
-              start={showTitleGroup}
-              perCharDelay={60}
-              baseDelay={300}
+              start={showSubtitle}
+              perCharDelay={30}
+              baseDelay={60}
             />
           </h4>
         </div>
@@ -215,7 +252,7 @@ export default function Page() {
         {/* Description text - bottom left */}
         <div
           className="absolute bottom-32 left-8 md:bottom-10 md:left-10 max-w-80 z-50 transition-opacity duration-700"
-          style={{ opacity: showDetails ? subtitleOpacity : 0 }}
+          style={{ opacity: showDesc ? subtitleOpacity : 0 }}
         >
           <p className="text-sm md:text-base text-white/80 leading-relaxed mb-2">
             I experiment with AI daily—and build web platforms that
@@ -226,7 +263,7 @@ export default function Page() {
         {/* Name inside the pill when nav state */}
         <div
           className="absolute inset-0 z-50 flex items-center justify-center pointer-events-none"
-          style={{ opacity: navTextOpacity }}
+          style={{ opacity: initialPill ? 1 : navTextOpacity }}
         >
           <div className="px-3">
             {/* Short label on very small widths, full name from sm and up */}
@@ -244,7 +281,8 @@ export default function Page() {
           className="relative w-full h-full overflow-hidden"
           style={{
             borderRadius: `${videoBorderRadius}px`,
-            opacity: scrollProgress < 0.8 ? 1 : 0.3,
+            // During the initial pill, dim the video so the frosted white background shows through
+            opacity: initialPill ? 0.2 : scrollProgress < 0.8 ? 1 : 0.3,
           }}
         >
           <video
@@ -267,7 +305,7 @@ export default function Page() {
           >
             <source src="/matrix-horizontal.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30" style={{ opacity: initialPill ? 0 : 1 }} />
 
           {/* Watermark cover - covers bottom right corner */}
           <div className="absolute bottom-0 right-0 w-20 h-12 bg-gradient-to-tl from-black via-black/80 to-transparent"></div>
@@ -275,7 +313,7 @@ export default function Page() {
       </div>
 
       {/* Profile Image - Positioned like silhouette */}
-      <div className="fixed isolate bottom-0 left-1/2 -translate-x-1/2 z-40">
+      <div className="fixed isolate bottom-0 left-1/2 -translate-x-1/2 z-40" style={{ opacity: initialPill ? 0 : 1, transition: 'opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1)' }}>
         <div
           className="relative w-[32rem] md:w-[60rem]"
           style={{
