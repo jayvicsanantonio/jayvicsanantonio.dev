@@ -135,8 +135,10 @@ export default function Page() {
         raf = requestAnimationFrame(() => {
           const y = window.scrollY;
           const p = Math.min(y / MAX, 1);
+          const pf = Math.min(p * 1.8, 1); // accelerated progress for faster shrink
           root.style.setProperty('--scroll-y', String(y));
           root.style.setProperty('--p', String(p));
+          root.style.setProperty('--pf', String(pf));
           raf = 0;
         });
       };
@@ -182,7 +184,7 @@ export default function Page() {
   const introScale = initialPill ? 0.14 : 1; // transform-based intro sizing (no width/height animation)
   const containerRadius = initialPill
     ? '9999px'
-    : 'calc(20px + 80px * var(--p, 0))'; // starts fully pill, relaxes as it grows
+    : 'calc(24px + 240px * var(--pf, var(--p, 0)))'; // round faster with scroll
 
   return (
     <div
@@ -196,9 +198,9 @@ export default function Page() {
           top: '46%',
           left: '50%',
           '--sx':
-            'clamp(0.15625, calc((96 - 100 * var(--p, 0)) / 96), 1)',
+            'clamp(0.15625, calc((96 - 360 * var(--pf, var(--p, 0))) / 96), 1)',
           '--sy':
-            'clamp(0.09302, calc((86 - 100 * var(--p, 0)) / 86), 1)',
+            'clamp(0.09302, calc((86 - 460 * var(--pf, var(--p, 0))) / 86), 1)',
           '--intro-scale': String(introScale),
           '--i-sx': initialPill ? '1' : '1',
           '--i-sy': initialPill ? '1' : '1',
@@ -255,7 +257,7 @@ export default function Page() {
         <div
           className="absolute bottom-32 right-8 md:bottom-10 md:right-10 z-50 transition-opacity duration-700"
           style={{
-            opacity: showSubtitle
+            opacity: showTitleGroup
               ? 'clamp(0, calc(1 - var(--scroll-y) / 300), 1)'
               : 0,
           }}
@@ -263,9 +265,9 @@ export default function Page() {
           <h4 className="text-lg md:text-3xl lg:text-4xl 2xl:text-5xl font-light text-white/90 tracking-wider italic">
             <AnimatedText
               text="Software Engineer"
-              start={showSubtitle}
-              perCharDelay={30}
-              baseDelay={60}
+              start={showTitleGroup}
+              perCharDelay={60}
+              baseDelay={240}
             />
           </h4>
         </div>
@@ -319,7 +321,8 @@ export default function Page() {
         <div
           className="relative w-full h-full overflow-hidden"
           style={{
-            borderRadius: 'calc(20px + 80px * var(--p, 0))',
+            borderRadius:
+              'calc(24px + 240px * var(--pf, var(--p, 0)))',
             // Keep video hidden until intro completes, then fade it in; dim slightly when nav-like
             opacity: isIntro
               ? 0
@@ -429,6 +432,9 @@ export default function Page() {
             opacity: showName
               ? 'clamp(0, calc(1 - var(--scroll-y, 0) / 300), 1)'
               : 0,
+            transform:
+              'translateY(calc(-1 * clamp(0px, calc(var(--scroll-y, 0) * 1px), 72px)))',
+            willChange: 'opacity, transform',
           }}
         >
           <div className="text-white">
@@ -448,6 +454,9 @@ export default function Page() {
             opacity: showName
               ? 'clamp(0, calc(1 - var(--scroll-y, 0) / 300), 1)'
               : 0,
+            transform:
+              'translateY(calc(-1 * clamp(0px, calc(var(--scroll-y, 0) * 1px), 72px)))',
+            willChange: 'opacity, transform',
           }}
         >
           <Link
