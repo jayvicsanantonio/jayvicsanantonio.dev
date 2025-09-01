@@ -60,7 +60,7 @@ export default function Page() {
   );
 
   // Calculate scroll-based transformations
-  const maxScroll = 800; // Distance for complete transformation
+  const maxScroll = 700; // Distance for complete transformation
   const scrollProgress = Math.min(scrollY / maxScroll, 1);
 
   // Video morphing transformations - starts as rounded rectangle, transforms INTO navigation bar
@@ -94,7 +94,7 @@ export default function Page() {
         style={{
           top: '50%',
           left: '50%',
-          transform: `translate(-50%, -54%)`,
+          transform: `translate(-50%, -55%)`,
           width: `${videoWidth}vw`,
           height: `${videoHeight}vh`,
           borderRadius: `${videoBorderRadius}px`,
@@ -177,17 +177,14 @@ export default function Page() {
       </div>
 
       {/* Profile Image - Positioned like silhouette */}
-      <div
-        className="fixed isolate bottom-0 left-1/2 z-40"
-        style={{
-          transform: `translateX(-50%) scale(${profileScale})`,
-          opacity: 1,
-          transition: 'none',
-        }}
-      >
+      <div className="fixed isolate bottom-0 left-1/2 -translate-x-1/2 z-40">
         <div
           className="relative w-[32rem] md:w-[60rem]"
-          style={{ height: `${profileHeight}rem` }}
+          style={{
+            height: `${profileHeight}rem`,
+            transform: `scale(${profileScale})`,
+            transformOrigin: '50% 100%',
+          }}
         >
           <Image
             src="/images/me.png"
@@ -278,63 +275,7 @@ export default function Page() {
         {/* Spacer section for scroll transition */}
         <section className="h-screen"></section>
         {/* About Section */}
-        <section className="min-h-screen flex flex-col items-center justify-center px-4 py-20">
-          <div className="max-w-4xl text-center">
-            <h2 className="text-4xl md:text-6xl font-light text-gray-900 mb-8 tracking-wider">
-              <span className="inline-block mr-4">M</span>
-              <span className="inline-block mr-4">a</span>
-              <span className="inline-block mr-4">k</span>
-              <span className="inline-block mr-4">e</span>
-              <span className="inline-block mr-8">i</span>
-              <span className="inline-block mr-4">t</span>
-              <span className="inline-block mr-8">r</span>
-              <span className="inline-block mr-4">e</span>
-              <span className="inline-block mr-4">a</span>
-              <span className="inline-block mr-4">l</span>
-            </h2>
-
-            <p className="text-xl md:text-2xl text-gray-700 mb-12 leading-relaxed">
-              A new fluid approach to creating stunning digital
-              experiences that feel out of this world. All you need to
-              do is envision it.
-            </p>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="text-center p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                  Create beautiful interfaces, fast
-                </h3>
-                <p className="text-gray-600">
-                  Ideate and iterate as fast as you think. Explore
-                  endless possibilities with React, Next.js, and
-                  modern design systems.
-                </p>
-              </div>
-
-              <div className="text-center p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                  No complex setup needed, just build
-                </h3>
-                <p className="text-gray-600">
-                  Be as simple or as specific as you want. Work in
-                  your own way to develop, deploy, and scale your
-                  applications fluently.
-                </p>
-              </div>
-
-              <div className="text-center p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                  Reference and remix anything
-                </h3>
-                <p className="text-gray-600">
-                  Explore creative alternatives. Bring in your own
-                  designs, brand guidelines, and user requirements.
-                  Make it exactly how you see it.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+        <section className="min-h-screen flex flex-col items-center justify-center px-4 py-20"></section>
       </div>
     </div>
   );
