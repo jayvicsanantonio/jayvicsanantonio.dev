@@ -4,6 +4,65 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+interface AnimatedTextProps {
+  text: string;
+  start: boolean;
+  perCharDelay?: number; // ms delay between letters
+  baseDelay?: number; // ms delay before first letter
+  className?: string;
+  onComplete?: () => void;
+}
+
+function AnimatedText({
+  text,
+  start,
+  perCharDelay = 40,
+  baseDelay = 0,
+  className,
+  onComplete,
+}: AnimatedTextProps) {
+  const letters = Array.from(text);
+
+  // Fire onComplete after the last letter finishes its transition
+  useEffect(() => {
+    if (!start) return;
+    const total =
+      baseDelay + (letters.length - 1) * perCharDelay + 500; // 500ms ~ transition duration
+    const t = window.setTimeout(() => onComplete?.(), total);
+    return () => window.clearTimeout(t);
+  }, [start, baseDelay, perCharDelay, letters.length, onComplete]);
+
+  return (
+    <span
+      aria-label={text}
+      className={className}
+      style={{ display: 'inline-block', whiteSpace: 'pre' }}
+    >
+      {letters.map((ch, i) => (
+        <span
+          key={`${ch}-${i}`}
+          style={{
+            display: 'inline-block',
+            willChange: 'transform, opacity, filter',
+            transitionProperty: 'opacity, transform, filter',
+            transitionDuration: '500ms, 500ms, 700ms',
+            transitionTimingFunction:
+              'cubic-bezier(0.22, 1, 0.36, 1)',
+            transitionDelay: `${baseDelay + i * perCharDelay}ms`,
+            opacity: start ? 1 : 0,
+            transform: start
+              ? 'translateY(0) scale(1)'
+              : 'translateY(12px) scale(1.02)',
+            filter: start ? 'blur(0px)' : 'blur(2px)',
+          }}
+        >
+          {ch === ' ' ? '\u00A0' : ch}
+        </span>
+      ))}
+    </span>
+  );
+}
+
 export default function Page() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -11,6 +70,20 @@ export default function Page() {
   const [isVisible, setIsVisible] = useState<{
     [key: string]: boolean;
   }>({});
+  const [showTitleGroup, setShowTitleGroup] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
+  const [showName, setShowName] = useState(false);
+
+  useEffect(() => {
+    const t1 = setTimeout(() => setShowTitleGroup(true), 900);
+    const t2 = setTimeout(() => setShowDetails(true), 600);
+    const t3 = setTimeout(() => setShowName(true), 300);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+    };
+  }, []);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -112,28 +185,37 @@ export default function Page() {
         }}
       >
         <div
-          className="absolute sm:bottom-40 right-8 md:bottom-22 md:right-10 z-50"
-          style={{ opacity: titleOpacity }}
+          className="absolute sm:bottom-40 right-8 md:bottom-22 md:right-10 z-50 transition-opacity duration-700"
+          style={{ opacity: showTitleGroup ? titleOpacity : 0 }}
         >
           <h3 className="text-lg md:text-3xl lg:text-4xl 2xl:text-6xl font-medium text-white tracking-widest">
-            Full-Stack
+            <AnimatedText
+              text="Full-Stack"
+              start={showTitleGroup}
+              perCharDelay={45}
+            />
           </h3>
         </div>
 
         {/* "imagination" text - right side, positioned vertically */}
         <div
-          className="absolute bottom-32 right-8 md:bottom-10 md:right-10 z-50"
-          style={{ opacity: titleOpacity }}
+          className="absolute bottom-32 right-8 md:bottom-10 md:right-10 z-50 transition-opacity duration-700"
+          style={{ opacity: showTitleGroup ? titleOpacity : 0 }}
         >
           <h4 className="text-lg md:text-3xl lg:text-4xl 2xl:text-5xl font-light text-white/90 tracking-wider italic">
-            Software Engineer
+            <AnimatedText
+              text="Software Engineer"
+              start={showTitleGroup}
+              perCharDelay={60}
+              baseDelay={300}
+            />
           </h4>
         </div>
 
         {/* Description text - bottom left */}
         <div
-          className="absolute bottom-32 left-8 md:bottom-10 md:left-10 max-w-80 z-50"
-          style={{ opacity: subtitleOpacity }}
+          className="absolute bottom-32 left-8 md:bottom-10 md:left-10 max-w-80 z-50 transition-opacity duration-700"
+          style={{ opacity: showDetails ? subtitleOpacity : 0 }}
         >
           <p className="text-sm md:text-base text-white/80 leading-relaxed mb-2">
             I experiment with AI daily—and build web platforms that
@@ -223,8 +305,8 @@ export default function Page() {
       <div className="fixed inset-0 z-50 pointer-events-none">
         {/* Brand text - bottom left corner */}
         <div
-          className="absolute bottom-4 left-16"
-          style={{ opacity: titleOpacity }}
+          className="absolute bottom-4 left-16 transition-opacity duration-700"
+          style={{ opacity: showName ? titleOpacity : 0 }}
         >
           <div className="text-white">
             <div className="text-lg md:text-3xl font-light tracking-wider">
@@ -238,8 +320,8 @@ export default function Page() {
 
         {/* Work Experience button - bottom right */}
         <div
-          className="absolute bottom-8 right-16 pointer-events-auto"
-          style={{ opacity: titleOpacity }}
+          className="absolute bottom-8 right-16 pointer-events-auto transition-opacity duration-700"
+          style={{ opacity: showName ? titleOpacity : 0 }}
         >
           <Link
             href="/work"
