@@ -65,7 +65,7 @@ export default function Page() {
 
   // Video morphing transformations - starts as rounded rectangle, transforms INTO navigation bar
   const videoScale = Math.max(1 - scrollProgress * 0.15, 0.85); // Very subtle shrinking
-  const videoBorderRadius = Math.max(24 - scrollProgress * 4, 32); // Starts with 24px radius, less rounded
+  const videoBorderRadius = Math.min(20 + scrollProgress * 80, 100); // Starts with 8px radius, becomes much more rounded
   const videoWidth = Math.max(96 - scrollProgress * 80, 15); // Starts at 95vw, almost touching sides
   const videoHeight = Math.max(86 - scrollProgress * 62, 8); // Starts at 70vh, much taller
 
