@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -71,10 +71,8 @@ export default function Page() {
     html: string;
     body: string;
   } | null>(null);
+  // CSS-variable scroll state (no React renders on scroll)
   const [scrollY, setScrollY] = useState(0);
-  const [isVisible, setIsVisible] = useState<{
-    [key: string]: boolean;
-  }>({});
   // Intro sequencing
   const [initialPill, setInitialPill] = useState(true);
   const [showTitleGroup, setShowTitleGroup] = useState(false);
@@ -93,25 +91,13 @@ export default function Page() {
       // @ts-expect-error - playsInline is supported in browsers
       videoRef.current.playsInline = true;
       // Kick off loading early so onLoadedData can fire without autoplay
-      try { videoRef.current.load(); } catch {}
+      try {
+        videoRef.current.load();
+      } catch {}
     }
 
-    let ticking = false;
-
-    const handleScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          setScrollY(window.scrollY);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, {
-      passive: true,
-    });
-    return () => window.removeEventListener('scroll', handleScroll);
+    // Scroll handling moved to CSS variable loop below to avoid React renders.
+    return;
   }, []);
 
   // Intro sequencing independent of video readiness
@@ -126,14 +112,47 @@ export default function Page() {
       window.setTimeout(() => {
         setInitialPill(false); // triggers CSS transition to final size
         setIsExpanding(true);
-        timers.push(window.setTimeout(() => setIsExpanding(false), 2000)); // match slower transition duration
+        timers.push(
+          window.setTimeout(() => setIsExpanding(false), 2000)
+        ); // match slower transition duration
       }, 800)
     );
 
     // Reveal other elements while expansion progresses
     timers.push(window.setTimeout(() => setShowName(true), 1000));
-    timers.push(window.setTimeout(() => setShowTitleGroup(true), 1500));
+    timers.push(
+      window.setTimeout(() => setShowTitleGroup(true), 1500)
+    );
     timers.push(window.setTimeout(() => setShowDesc(true), 1800));
+
+    // Set up CSS variable based scroll loop (no React renders on scroll)
+    const root = containerRef.current;
+    if (root) {
+      let raf = 0;
+      const MAX = 1800;
+      const onScroll = () => {
+        if (raf) return;
+        raf = requestAnimationFrame(() => {
+          const y = window.scrollY;
+          const p = Math.min(y / MAX, 1);
+          root.style.setProperty('--scroll-y', String(y));
+          root.style.setProperty('--p', String(p));
+          raf = 0;
+        });
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+      timers.push(0); // sentinel
+      const cleanup = () => {
+        if (raf) cancelAnimationFrame(raf);
+        window.removeEventListener('scroll', onScroll);
+      };
+      // store cleanup using a symbol id in timers (not used), return below
+      return () => {
+        cleanup();
+        timers.forEach((t) => t && window.clearTimeout(t));
+      };
+    }
 
     return () => timers.forEach((t) => window.clearTimeout(t));
   }, []);
@@ -168,7 +187,10 @@ export default function Page() {
   // After the pill finishes expanding, allow the video to play
   useEffect(() => {
     if (!initialPill && !isExpanding) {
-      const t = window.setTimeout(() => setShouldPlayVideo(true), 200); // tiny grace after final step
+      const t = window.setTimeout(
+        () => setShouldPlayVideo(true),
+        200
+      ); // tiny grace after final step
       return () => window.clearTimeout(t);
     }
   }, [initialPill, isExpanding]);
@@ -180,59 +202,14 @@ export default function Page() {
     }
   }, [shouldPlayVideo, videoReady]);
 
-  // Intersection Observer for section animations
-  const observeElement = useCallback(
-    (element: HTMLElement | null, id: string) => {
-      if (!element) return;
-
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          setIsVisible((prev) => ({
-            ...prev,
-            [id]: entry.isIntersecting,
-          }));
-        },
-        {
-          threshold: 0.3,
-          rootMargin: '-10% 0px -10% 0px',
-        }
-      );
-
-      observer.observe(element);
-      return () => observer.disconnect();
-    },
-    []
-  );
-
-  // Calculate scroll-based transformations
-  const maxScroll = 1800; // Distance for complete transformation
-  const scrollProgress = Math.min(scrollY / maxScroll, 1);
-
-  // Video morphing transformations - starts as rounded rectangle, transforms INTO navigation bar
-  const videoScale = Math.max(1 - scrollProgress * 0.15, 0.85); // Very subtle shrinking
-  const videoBorderRadius = Math.min(20 + scrollProgress * 80, 100); // Starts with 8px radius, becomes much more rounded
-  const videoWidth = Math.max(96 - scrollProgress * 100, 15); // Starts at 95vw, almost touching sides
-  const videoHeight = Math.max(86 - scrollProgress * 100, 8); // Starts at 70vh, much taller
-
-  // Navigation elements emergence (icons appear around the morphing video)
-  const navIconsOpacity = Math.max((scrollProgress - 0.6) * 2.5, 0); // Icons appear later
-  const navTextOpacity = Math.max((scrollProgress - 0.7) * 3, 0); // Text appears last
-
-  // Profile image positioning and sizing (like the silhouette)
-  const profileScale = Math.max(1 - scrollProgress * 0.4, 0.6); // Shrinks to 60%
-  // Keep the image always touching the bottom by adjusting the container height
-  // Ensure enough height so head doesn't get cut off
-  const profileHeight = Math.max(50 - scrollProgress * 10, 35); // rem units - taller to prevent cutoff
-
-  // Text animations
-  const titleOpacity = Math.max(1 - scrollY / 300, 0);
-  const subtitleOpacity = Math.max(1 - (scrollY - 100) / 300, 0);
+  // IntersectionObserver logic removed (unused)
 
   // Intro continuous animation: start small and smoothly transition to final hero
   const isIntro = initialPill || isExpanding;
-  const pillWidth = initialPill ? '15vw' : `${videoWidth}vw`;
-  const pillHeight = initialPill ? '8vh' : `${videoHeight}vh`;
-  const pillRadius = initialPill ? 100 : videoBorderRadius; // becomes less rounded as it grows
+  const introScale = initialPill ? 0.14 : 1; // transform-based intro sizing (no width/height animation)
+  const containerRadius = initialPill
+    ? '9999px'
+    : 'calc(20px + 80px * var(--p, 0))'; // starts fully pill, relaxes as it grows
 
   return (
     <div
@@ -243,31 +220,44 @@ export default function Page() {
       <div
         className="fixed z-30 overflow-hidden flex items-center justify-center"
         style={{
-          top: '50%',
+          top: '46%',
           left: '50%',
-          transform: `translate(-50%, -55%)`,
-          width: pillWidth,
-          height: pillHeight,
-          borderRadius: `${pillRadius}px`,
-          transition:
-            'top 0.4s ease-out, transform 0.4s ease-out, width 2s cubic-bezier(0.22, 1, 0.36, 1), height 2s cubic-bezier(0.22, 1, 0.36, 1), border-radius 2s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out',
-          backgroundColor:
-            isIntro || scrollProgress > 0.7
-              ? 'rgba(255, 255, 255, 0.95)'
-              : 'transparent',
-          backdropFilter:
-            isIntro || scrollProgress > 0.7
-              ? 'blur(20px)'
-              : 'none',
+          '--sx':
+            'clamp(0.15625, calc((96 - 100 * var(--p, 0)) / 96), 1)',
+          '--sy':
+            'clamp(0.09302, calc((86 - 100 * var(--p, 0)) / 86), 1)',
+          '--intro-scale': String(introScale),
+          transform:
+            'translate(-50%, -50%) scale(var(--sx), var(--sy)) scale(var(--intro-scale))',
+          width: '96vw',
+          height: '86vh',
+          borderRadius: containerRadius,
+          willChange: 'transform, opacity, filter',
+          transformOrigin: '50% 50%',
+          transition: isExpanding
+            ? 'top 0.4s ease-out, transform 2s cubic-bezier(0.22, 1, 0.36, 1), border-radius 2s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out'
+            : 'top 0.4s ease-out, border-radius 0s, background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out',
+          '--bg-a': isIntro
+            ? '0.95'
+            : 'calc(max(0, (var(--p, 0) - 0.7) * 3) * 0.95)',
+          '--shadow-a': isIntro
+            ? '0.25'
+            : 'calc(max(0, (var(--p, 0) - 0.7) * 3) * 0.25)',
+          backgroundColor: 'rgba(255, 255, 255, var(--bg-a))',
+          backdropFilter: isIntro
+            ? 'blur(20px)'
+            : 'blur(calc(max(0, (var(--p, 0) - 0.7) * 3) * 20px))',
           boxShadow:
-            isIntro || scrollProgress > 0.7
-              ? '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
-              : '0 8px 20px -2px rgba(0, 0, 0, 0.08)',
+            '0 25px 50px -12px rgba(0, 0, 0, var(--shadow-a))',
         }}
       >
         <div
           className="absolute sm:bottom-40 right-8 md:bottom-22 md:right-10 z-50 transition-opacity duration-700"
-          style={{ opacity: showTitleGroup ? titleOpacity : 0 }}
+          style={{
+            opacity: showTitleGroup
+              ? 'clamp(0, calc(1 - var(--scroll-y) / 300), 1)'
+              : 0,
+          }}
         >
           <h3 className="text-lg md:text-3xl lg:text-4xl 2xl:text-6xl font-medium text-white tracking-widest">
             <AnimatedText
@@ -282,7 +272,11 @@ export default function Page() {
         {/* "imagination" text - right side, positioned vertically */}
         <div
           className="absolute bottom-32 right-8 md:bottom-10 md:right-10 z-50 transition-opacity duration-700"
-          style={{ opacity: showSubtitle ? titleOpacity : 0 }}
+          style={{
+            opacity: showSubtitle
+              ? 'clamp(0, calc(1 - var(--scroll-y) / 300), 1)'
+              : 0,
+          }}
         >
           <h4 className="text-lg md:text-3xl lg:text-4xl 2xl:text-5xl font-light text-white/90 tracking-wider italic">
             <AnimatedText
@@ -297,7 +291,11 @@ export default function Page() {
         {/* Description text - bottom left */}
         <div
           className="absolute bottom-32 left-8 md:bottom-10 md:left-10 max-w-80 z-50 transition-opacity duration-700"
-          style={{ opacity: showDesc ? subtitleOpacity : 0 }}
+          style={{
+            opacity: showDesc
+              ? 'clamp(0, calc(1 - (var(--scroll-y) - 100) / 300), 1)'
+              : 0,
+          }}
         >
           <p className="text-sm md:text-base text-white/80 leading-relaxed mb-2">
             I experiment with AI daily—and build web platforms that
@@ -308,14 +306,20 @@ export default function Page() {
         {/* Name inside the pill when nav state */}
         <div
           className="absolute inset-0 z-50 flex items-center justify-center pointer-events-none"
-          style={{ opacity: initialPill ? 1 : navTextOpacity }}
+          style={{
+            transform: 'scale(calc(0.9 / var(--intro-scale)))',
+            transformOrigin: '50% 50%',
+            opacity: initialPill
+              ? 1
+              : 'max(0, calc((var(--p, 0) - 0.7) * 3))',
+          }}
         >
-          <div className="px-3">
+          <div className="px-4 py-1.5">
             {/* Short label on very small widths, full name from sm and up */}
-            <span className="inline sm:hidden text-[10px] font-semibold text-black tracking-wide">
+            <span className="inline sm:hidden text-[12px] font-semibold text-black tracking-wide">
               Jayvic
             </span>
-            <span className="hidden sm:inline text-xs md:text-sm lg:text-base font-semibold text-black tracking-wide">
+            <span className="hidden sm:inline text-sm md:text-base lg:text-lg font-semibold text-black tracking-wide">
               Jayvic San Antonio
             </span>
           </div>
@@ -325,9 +329,11 @@ export default function Page() {
         <div
           className="relative w-full h-full overflow-hidden"
           style={{
-            borderRadius: `${videoBorderRadius}px`,
-            // Keep video hidden until intro completes, then fade it in
-            opacity: isIntro ? 0 : scrollProgress < 0.8 ? 1 : 0.3,
+            borderRadius: 'calc(20px + 80px * var(--p, 0))',
+            // Keep video hidden until intro completes, then fade it in; dim slightly when nav-like
+            opacity: isIntro
+              ? 0
+              : 'calc(1 - clamp(0, (var(--p, 0) - 0.8) * 3.5, 0.7))',
             transition: 'opacity 0.8s ease-out',
           }}
         >
@@ -342,13 +348,7 @@ export default function Page() {
             onCanPlayThrough={() => setVideoReady(true)}
             className="w-full h-full object-cover"
             style={{
-              filter: `
-                brightness(1.8) 
-                contrast(1.4) 
-                saturate(1.8) 
-                hue-rotate(5deg)
-                gamma(1.2)
-              `,
+              willChange: 'opacity, transform',
               transform: 'scale(1.05)', // Slight zoom to crop out watermark
             }}
           >
@@ -375,8 +375,9 @@ export default function Page() {
         <div
           className="relative w-[32rem] md:w-[60rem]"
           style={{
-            height: `${profileHeight}rem`,
-            transform: `scale(${profileScale})`,
+            height: 'calc(50rem - 10rem * var(--p))',
+            transform:
+              'scale(clamp(0.6, calc(1 - 0.4 * var(--p)), 1))',
             transformOrigin: '50% 100%',
           }}
         >
@@ -386,26 +387,13 @@ export default function Page() {
             fill
             className="object-contain object-bottom"
             style={{
+              willChange: 'filter',
               filter: `
-                brightness(${0.8 + scrollProgress * 0.4}) 
-                saturate(1.4) 
-                hue-rotate(15deg)
-                drop-shadow(0 0 ${
-                  20 + scrollProgress * 40
-                }px rgba(0, 139, 139, ${
-                0.25 + scrollProgress * 0.3
-              })) 
-                drop-shadow(0 0 ${
-                  40 + scrollProgress * 80
-                }px rgba(0, 139, 139, ${
-                0.15 + scrollProgress * 0.25
-              }))
-                drop-shadow(0 0 ${
-                  60 + scrollProgress * 120
-                }px rgba(0, 139, 139, ${0.08 + scrollProgress * 0.2}))
-                drop-shadow(0 0 ${
-                  100 + scrollProgress * 200
-                }px rgba(0, 139, 139, ${scrollProgress * 0.15}))
+                brightness(calc(0.9 + 0.3 * var(--p)))
+                saturate(1.3)
+                hue-rotate(12deg)
+                drop-shadow(0 0 calc(20px + 40px * var(--p)) rgba(0, 139, 139, 0.35))
+                drop-shadow(0 0 calc(60px + 120px * var(--p)) rgba(0, 139, 139, 0.18))
               `,
             }}
             priority
@@ -418,7 +406,11 @@ export default function Page() {
         {/* Brand text - bottom left corner */}
         <div
           className="absolute bottom-4 left-16 transition-opacity duration-700"
-          style={{ opacity: showName ? titleOpacity : 0 }}
+          style={{
+            opacity: showName
+              ? 'clamp(0, calc(1 - var(--scroll-y, 0) / 300), 1)'
+              : 0,
+          }}
         >
           <div className="text-white">
             <div className="text-lg md:text-3xl font-light tracking-wider">
@@ -433,7 +425,11 @@ export default function Page() {
         {/* Work Experience button - bottom right */}
         <div
           className="absolute bottom-8 right-16 pointer-events-auto transition-opacity duration-700"
-          style={{ opacity: showName ? titleOpacity : 0 }}
+          style={{
+            opacity: showName
+              ? 'clamp(0, calc(1 - var(--scroll-y, 0) / 300), 1)'
+              : 0,
+          }}
         >
           <Link
             href="/work"
@@ -453,17 +449,9 @@ export default function Page() {
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: `radial-gradient(ellipse 80vw 60vh at 50% 100%, 
-                rgba(0, 139, 139, ${Math.min(
-                  scrollProgress * 0.4,
-                  0.2
-                )}) 0%, 
-                rgba(0, 139, 139, ${Math.min(
-                  scrollProgress * 0.2,
-                  0.1
-                )}) 40%, 
-                transparent 70%)`,
-            opacity: Math.min(scrollProgress * 2, 1),
+            background:
+              'radial-gradient(ellipse 80vw 60vh at 50% 100%, rgba(0,139,139,0.2) 0%, rgba(0,139,139,0.1) 40%, transparent 70%)',
+            opacity: 'min(calc(var(--p, 0) * 2), 1)',
           }}
         />
         {/* Spacer section for scroll transition */}
