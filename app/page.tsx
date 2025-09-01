@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 import Image from 'next/image';
+import AmbientBackground from '@/components/pages/AmbientBackground';
 
 export default function Page() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -62,11 +63,11 @@ export default function Page() {
   const maxScroll = 800; // Distance for complete transformation
   const scrollProgress = Math.min(scrollY / maxScroll, 1);
 
-  // Video morphing transformations - transforms INTO navigation bar
-  const videoScale = Math.max(1 - scrollProgress * 0.85, 0.15); // Shrinks significantly
-  const videoBorderRadius = Math.min(scrollProgress * 200, 100); // Becomes very rounded
-  const videoWidth = Math.max(100 - scrollProgress * 85, 15); // Width shrinks from 100vw to 15vw
-  const videoHeight = Math.max(100 - scrollProgress * 92, 8); // Height shrinks from 100vh to 8vh
+  // Video morphing transformations - starts as rounded rectangle, transforms INTO navigation bar
+  const videoScale = Math.max(1 - scrollProgress * 0.15, 0.85); // Very subtle shrinking
+  const videoBorderRadius = Math.max(24 - scrollProgress * 4, 20); // Starts with 24px radius, less rounded
+  const videoWidth = Math.max(95 - scrollProgress * 80, 15); // Starts at 95vw, almost touching sides
+  const videoHeight = Math.max(80 - scrollProgress * 62, 8); // Starts at 70vh, much taller
 
   // Navigation elements emergence (icons appear around the morphing video)
   const navIconsOpacity = Math.max((scrollProgress - 0.6) * 2.5, 0); // Icons appear later
@@ -83,28 +84,30 @@ export default function Page() {
   const subtitleOpacity = Math.max(1 - (scrollY - 100) / 300, 0);
 
   return (
-    <div ref={containerRef} className="relative bg-gray-100">
+    <div ref={containerRef} className="relative overflow-x-hidden">
       {/* Morphing Video - transforms INTO navigation bar */}
       <div
         className="fixed z-30 overflow-hidden flex items-center justify-center"
         style={{
-          top: '50%',
+          top: scrollProgress > 0.6 ? '5rem' : '45%',
           left: '50%',
-          transform: `translate(-50%, -50%)`,
+          transform: `translate(-50%, ${
+            scrollProgress > 0.6 ? '0' : '-50%'
+          })`,
           width: `${videoWidth}vw`,
           height: `${videoHeight}vh`,
           borderRadius: `${videoBorderRadius}px`,
-          transition: 'top 0.3s ease-out',
+          transition: 'top 0.4s ease-out, transform 0.4s ease-out',
           backgroundColor:
-            scrollProgress > 0.8
+            scrollProgress > 0.7
               ? 'rgba(255, 255, 255, 0.95)'
               : 'transparent',
           backdropFilter:
-            scrollProgress > 0.8 ? 'blur(20px)' : 'none',
+            scrollProgress > 0.7 ? 'blur(20px)' : 'none',
           boxShadow:
-            scrollProgress > 0.8
-              ? '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
-              : 'none',
+            scrollProgress > 0.7
+              ? '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
+              : '0 8px 20px -2px rgba(0, 0, 0, 0.08)',
         }}
       >
         {/* The actual video that morphs */}
@@ -123,10 +126,12 @@ export default function Page() {
             playsInline
             className="w-full h-full object-cover"
           >
-            <source src="/matrix.mp4" type="video/mp4" />
+            <source src="/matrix-vertical.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/70" />
-          <div className="absolute inset-0 bg-black/25" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/40" />
+
+          {/* Watermark cover - covers bottom right corner */}
+          <div className="absolute bottom-0 right-0 w-20 h-12 bg-gradient-to-tl from-black via-black/80 to-transparent"></div>
         </div>
 
         {/* Navigation elements that appear as video transforms */}
@@ -152,7 +157,7 @@ export default function Page() {
                 playsInline
                 className="w-full h-full object-cover"
               >
-                <source src="/matrix.mp4" type="video/mp4" />
+                <source src="/matrix-vertical.mp4" type="video/mp4" />
               </video>
             </div>
             <span
@@ -206,51 +211,74 @@ export default function Page() {
         </div>
       </div>
 
-      {/* Hero Content */}
-      <section className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4">
+      {/* Text Overlays - positioned around the video and person */}
+      <div className="fixed inset-0 z-50 pointer-events-none">
+        {/* "of" text - top right */}
         <div
-          className="text-center mb-8 max-w-4xl"
+          className="absolute bottom-16 right-8 md:bottom-60 md:right-16"
           style={{ opacity: titleOpacity }}
         >
-          {/* Main Title - "New freedoms" style */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-light text-white mb-4 tracking-[0.2em]">
-            <span className="inline-block mr-4">N</span>
-            <span className="inline-block mr-4">e</span>
-            <span className="inline-block mr-4">w</span>
-          </h1>
-
-          <h2 className="text-6xl md:text-8xl lg:text-9xl font-light text-white mb-6 tracking-[0.15em] italic">
-            <span className="inline-block mr-4">f</span>
-            <span className="inline-block mr-4">r</span>
-            <span className="inline-block mr-4">e</span>
-            <span className="inline-block mr-4">e</span>
-            <span className="inline-block mr-4">d</span>
-            <span className="inline-block mr-4">o</span>
-            <span className="inline-block mr-4">m</span>
-            <span className="inline-block mr-4">s</span>
-          </h2>
+          <h3 className="text-4xl md:text-6xl lg:text-7xl font-medium text-white tracking-widest">
+            Full-Stack
+          </h3>
         </div>
 
+        {/* "imagination" text - right side, positioned vertically */}
         <div
-          className="text-center max-w-2xl"
+          className="absolute bottom-32 right-8 md:bottom-40 md:right-16"
+          style={{ opacity: titleOpacity }}
+        >
+          <h4 className="text-3xl md:text-5xl lg:text-6xl font-light text-white/90 tracking-wider italic">
+            Software Engineer
+          </h4>
+        </div>
+
+        {/* Description text - bottom left */}
+        <div
+          className="absolute bottom-32 left-8 md:bottom-40 md:left-16 max-w-md"
           style={{ opacity: subtitleOpacity }}
         >
-          <p className="text-lg md:text-xl text-white/80 leading-relaxed mb-4">
+          <p className="text-sm md:text-base text-white/80 leading-relaxed mb-2">
             Ideate, visualize, create digital experiences, and share
             your vision with the world, using modern web technologies
             and creative innovation.
           </p>
-          <p className="text-base md:text-lg text-white/60">
+          <p className="text-xs md:text-sm text-white/60">
             Available now on Web and Mobile.
           </p>
         </div>
-      </section>
+
+        {/* Brand text - bottom left corner */}
+        <div
+          className="absolute bottom-8 left-8"
+          style={{ opacity: titleOpacity }}
+        >
+          <div className="text-white">
+            <div className="text-lg md:text-xl font-light tracking-wider">
+              Jayvic
+            </div>
+            <div className="text-xs md:text-sm font-bold tracking-[0.3em] uppercase">
+              SAN ANTONIO
+            </div>
+          </div>
+        </div>
+
+        {/* Work Experience button - bottom right */}
+        <div
+          className="absolute bottom-8 right-8 pointer-events-auto"
+          style={{ opacity: titleOpacity }}
+        >
+          <button className="px-6 py-3 bg-white text-black font-medium rounded-full hover:bg-white/90 transition-all duration-300 hover:scale-105 text-sm md:text-base">
+            Work Experience
+          </button>
+        </div>
+      </div>
 
       {/* Content sections with gray background */}
+
       <div className="relative z-10 bg-gray-100 min-w-screen">
         {/* Spacer section for scroll transition */}
         <section className="h-screen"></section>
-
         {/* About Section */}
         <section className="min-h-screen flex flex-col items-center justify-center px-4 py-20">
           <div className="max-w-4xl text-center">
