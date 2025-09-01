@@ -83,6 +83,7 @@ export default function Page() {
   const [showName, setShowName] = useState(false);
   const [videoReady, setVideoReady] = useState(false);
   const [shouldPlayVideo, setShouldPlayVideo] = useState(false);
+  const [isExpanding, setIsExpanding] = useState(false);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -119,14 +120,21 @@ export default function Page() {
     startedRef.current = true;
     setInitialPill(true);
     const timers: number[] = [];
-    // Wait 600ms before expanding the pill
-    timers.push(window.setTimeout(() => setInitialPill(false), 600));
-    // Reveal other elements after expansion starts
-    timers.push(window.setTimeout(() => setShowName(true), 750));
+
+    // After a short delay, start a single smooth expansion.
     timers.push(
-      window.setTimeout(() => setShowTitleGroup(true), 900)
+      window.setTimeout(() => {
+        setInitialPill(false); // triggers CSS transition to final size
+        setIsExpanding(true);
+        timers.push(window.setTimeout(() => setIsExpanding(false), 2000)); // match slower transition duration
+      }, 800)
     );
-    timers.push(window.setTimeout(() => setShowDesc(true), 1100));
+
+    // Reveal other elements while expansion progresses
+    timers.push(window.setTimeout(() => setShowName(true), 1000));
+    timers.push(window.setTimeout(() => setShowTitleGroup(true), 1500));
+    timers.push(window.setTimeout(() => setShowDesc(true), 1800));
+
     return () => timers.forEach((t) => window.clearTimeout(t));
   }, []);
 
@@ -159,12 +167,11 @@ export default function Page() {
 
   // After the pill finishes expanding, allow the video to play
   useEffect(() => {
-    if (!initialPill) {
-      const expansionGraceMs = 650; // wait for container transition to fully finish
-      const t = window.setTimeout(() => setShouldPlayVideo(true), expansionGraceMs);
+    if (!initialPill && !isExpanding) {
+      const t = window.setTimeout(() => setShouldPlayVideo(true), 200); // tiny grace after final step
       return () => window.clearTimeout(t);
     }
-  }, [initialPill]);
+  }, [initialPill, isExpanding]);
 
   // When ready and allowed, start the video programmatically
   useEffect(() => {
@@ -221,6 +228,12 @@ export default function Page() {
   const titleOpacity = Math.max(1 - scrollY / 300, 0);
   const subtitleOpacity = Math.max(1 - (scrollY - 100) / 300, 0);
 
+  // Intro continuous animation: start small and smoothly transition to final hero
+  const isIntro = initialPill || isExpanding;
+  const pillWidth = initialPill ? '15vw' : `${videoWidth}vw`;
+  const pillHeight = initialPill ? '8vh' : `${videoHeight}vh`;
+  const pillRadius = initialPill ? 100 : videoBorderRadius; // becomes less rounded as it grows
+
   return (
     <div
       ref={containerRef}
@@ -233,21 +246,21 @@ export default function Page() {
           top: '50%',
           left: '50%',
           transform: `translate(-50%, -55%)`,
-          width: initialPill ? '15vw' : `${videoWidth}vw`,
-          height: initialPill ? '8vh' : `${videoHeight}vh`,
-          borderRadius: `${initialPill ? 100 : videoBorderRadius}px`,
+          width: pillWidth,
+          height: pillHeight,
+          borderRadius: `${pillRadius}px`,
           transition:
-            'top 0.4s ease-out, transform 0.4s ease-out, width 0.6s cubic-bezier(0.22, 1, 0.36, 1), height 0.6s cubic-bezier(0.22, 1, 0.36, 1), border-radius 0.6s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.4s ease-out, backdrop-filter 0.4s ease-out, box-shadow 0.4s ease-out',
+            'top 0.4s ease-out, transform 0.4s ease-out, width 2s cubic-bezier(0.22, 1, 0.36, 1), height 2s cubic-bezier(0.22, 1, 0.36, 1), border-radius 2s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out',
           backgroundColor:
-            initialPill || scrollProgress > 0.7
+            isIntro || scrollProgress > 0.7
               ? 'rgba(255, 255, 255, 0.95)'
               : 'transparent',
           backdropFilter:
-            initialPill || scrollProgress > 0.7
+            isIntro || scrollProgress > 0.7
               ? 'blur(20px)'
               : 'none',
           boxShadow:
-            initialPill || scrollProgress > 0.7
+            isIntro || scrollProgress > 0.7
               ? '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
               : '0 8px 20px -2px rgba(0, 0, 0, 0.08)',
         }}
@@ -313,12 +326,9 @@ export default function Page() {
           className="relative w-full h-full overflow-hidden"
           style={{
             borderRadius: `${videoBorderRadius}px`,
-            // During the initial pill, dim the video so the frosted white background shows through
-            opacity: initialPill
-              ? 0.2
-              : scrollProgress < 0.8
-              ? 1
-              : 0.3,
+            // Keep video hidden until intro completes, then fade it in
+            opacity: isIntro ? 0 : scrollProgress < 0.8 ? 1 : 0.3,
+            transition: 'opacity 0.8s ease-out',
           }}
         >
           <video
@@ -346,7 +356,7 @@ export default function Page() {
           </video>
           <div
             className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30"
-            style={{ opacity: initialPill ? 0 : 1 }}
+            style={{ opacity: isIntro ? 0 : 1 }}
           />
 
           {/* Watermark cover - covers bottom right corner */}
