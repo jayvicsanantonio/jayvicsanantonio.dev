@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 import Image from 'next/image';
-import AmbientBackground from '@/components/pages/AmbientBackground';
+import Link from 'next/link';
 
 export default function Page() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -65,7 +65,7 @@ export default function Page() {
 
   // Video morphing transformations - starts as rounded rectangle, transforms INTO navigation bar
   const videoScale = Math.max(1 - scrollProgress * 0.15, 0.85); // Very subtle shrinking
-  const videoBorderRadius = Math.max(24 - scrollProgress * 4, 20); // Starts with 24px radius, less rounded
+  const videoBorderRadius = Math.max(24 - scrollProgress * 4, 32); // Starts with 24px radius, less rounded
   const videoWidth = Math.max(95 - scrollProgress * 80, 15); // Starts at 95vw, almost touching sides
   const videoHeight = Math.max(80 - scrollProgress * 62, 8); // Starts at 70vh, much taller
 
@@ -92,11 +92,9 @@ export default function Page() {
       <div
         className="fixed z-30 overflow-hidden flex items-center justify-center"
         style={{
-          top: scrollProgress > 0.6 ? '5rem' : '45%',
+          top: '50%',
           left: '50%',
-          transform: `translate(-50%, ${
-            scrollProgress > 0.6 ? '0' : '-50%'
-          })`,
+          transform: `translate(-50%, -50%)`,
           width: `${videoWidth}vw`,
           height: `${videoHeight}vh`,
           borderRadius: `${videoBorderRadius}px`,
@@ -128,10 +126,20 @@ export default function Page() {
             loop
             playsInline
             className="w-full h-full object-cover"
+            style={{
+              filter: `
+                brightness(1.8) 
+                contrast(1.4) 
+                saturate(1.8) 
+                hue-rotate(5deg)
+                gamma(1.2)
+              `,
+              transform: 'scale(1.05)', // Slight zoom to crop out watermark
+            }}
           >
-            <source src="/matrix-vertical.mp4" type="video/mp4" />
+            <source src="/matrix-horizontal.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/40" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30" />
 
           {/* Watermark cover - covers bottom right corner */}
           <div className="absolute bottom-0 right-0 w-20 h-12 bg-gradient-to-tl from-black via-black/80 to-transparent"></div>
@@ -160,7 +168,10 @@ export default function Page() {
                 playsInline
                 className="w-full h-full object-cover"
               >
-                <source src="/matrix-vertical.mp4" type="video/mp4" />
+                <source
+                  src="/matrix-horizontal.mp4"
+                  type="video/mp4"
+                />
               </video>
             </div>
             <span
@@ -201,12 +212,25 @@ export default function Page() {
             className="object-contain object-bottom"
             style={{
               filter: `
-                brightness(0.8) 
+                brightness(${0.8 + scrollProgress * 0.4}) 
                 saturate(1.4) 
                 hue-rotate(15deg)
-                drop-shadow(0 0 20px rgba(0, 139, 139, 0.25)) 
-                drop-shadow(0 0 40px rgba(0, 139, 139, 0.15))
-                drop-shadow(0 0 60px rgba(0, 139, 139, 0.08))
+                drop-shadow(0 0 ${
+                  20 + scrollProgress * 40
+                }px rgba(0, 139, 139, ${
+                0.25 + scrollProgress * 0.3
+              })) 
+                drop-shadow(0 0 ${
+                  40 + scrollProgress * 80
+                }px rgba(0, 139, 139, ${
+                0.15 + scrollProgress * 0.25
+              }))
+                drop-shadow(0 0 ${
+                  60 + scrollProgress * 120
+                }px rgba(0, 139, 139, ${0.08 + scrollProgress * 0.2}))
+                drop-shadow(0 0 ${
+                  100 + scrollProgress * 200
+                }px rgba(0, 139, 139, ${scrollProgress * 0.15}))
               `,
             }}
             priority
@@ -216,12 +240,32 @@ export default function Page() {
 
       {/* Text Overlays - positioned around the video and person */}
       <div className="fixed inset-0 z-50 pointer-events-none">
-        {/* "of" text - top right */}
-        <div
-          className="absolute bottom-16 right-8 md:bottom-60 md:right-16"
+        {/* "Jayvic" text - top left */}
+        {/* <div
+          className="absolute top-16 left-8 md:top-20 md:left-16"
           style={{ opacity: titleOpacity }}
         >
-          <h3 className="text-4xl md:text-6xl lg:text-7xl font-medium text-white tracking-widest">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-medium text-white tracking-wider">
+            Jayvic
+          </h2>
+        </div> */}
+
+        {/* "San Antonio" text - top left */}
+        {/* <div
+          className="absolute top-24 left-8 md:top-28 md:left-16"
+          style={{ opacity: titleOpacity }}
+        >
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-light text-white tracking-wider">
+            SAN ANTONIO
+          </h1>
+        </div> */}
+
+        {/* "of" text - top right */}
+        <div
+          className="absolute sm:bottom-40 right-8 md:bottom-52 md:right-16"
+          style={{ opacity: titleOpacity }}
+        >
+          <h3 className="text-lg md:text-3xl lg:text-4xl 2xl:text-6xl font-medium text-white tracking-widest">
             Full-Stack
           </h3>
         </div>
@@ -231,36 +275,35 @@ export default function Page() {
           className="absolute bottom-32 right-8 md:bottom-40 md:right-16"
           style={{ opacity: titleOpacity }}
         >
-          <h4 className="text-3xl md:text-5xl lg:text-6xl font-light text-white/90 tracking-wider italic">
+          <h4 className="text-lg md:text-3xl lg:text-4xl 2xl:text-5xl font-light text-white/90 tracking-wider italic">
             Software Engineer
           </h4>
         </div>
 
         {/* Description text - bottom left */}
         <div
-          className="absolute bottom-32 left-8 md:bottom-40 md:left-16 max-w-md"
+          className="absolute bottom-32 left-8 md:bottom-40 md:left-16 max-w-96"
           style={{ opacity: subtitleOpacity }}
         >
           <p className="text-sm md:text-base text-white/80 leading-relaxed mb-2">
-            Ideate, visualize, create digital experiences, and share
-            your vision with the world, using modern web technologies
-            and creative innovation.
+            I experiment with AI daily—and build web platforms that
+            put it to work.
           </p>
-          <p className="text-xs md:text-sm text-white/60">
-            Available now on Web and Mobile.
-          </p>
+          {/* <p className="text-xs md:text-sm text-white/60">
+            Social Media Buttons
+          </p> */}
         </div>
 
         {/* Brand text - bottom left corner */}
         <div
-          className="absolute bottom-8 left-8"
+          className="absolute bottom-4 left-12"
           style={{ opacity: titleOpacity }}
         >
           <div className="text-white">
-            <div className="text-lg md:text-xl font-light tracking-wider">
+            <div className="text-lg md:text-3xl font-light tracking-wider">
               Jayvic
             </div>
-            <div className="text-xs md:text-sm font-bold tracking-[0.3em] uppercase">
+            <div className="text-xs md:text-2xl font-bold tracking-[0.3em] uppercase">
               SAN ANTONIO
             </div>
           </div>
@@ -271,17 +314,37 @@ export default function Page() {
           className="absolute bottom-8 right-8 pointer-events-auto"
           style={{ opacity: titleOpacity }}
         >
-          <button className="px-6 py-3 bg-white text-black font-medium rounded-full hover:bg-white/90 transition-all duration-300 hover:scale-105 text-sm md:text-base">
+          <Link
+            href="/work"
+            className="px-6 py-3 bg-white text-black font-medium rounded-full hover:bg-white/90 transition-all duration-300 hover:scale-105 text-sm md:text-base"
+          >
             Work Experience
-          </button>
+          </Link>
         </div>
       </div>
 
-      {/* Content sections with smooth transition to AmbientBackground */}
+      {/* Content sections with smooth transition from black to gray */}
       <div className="relative z-10 min-w-screen">
-        {/* Smooth transition from black to AmbientBackground */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-transparent h-screen"></div>
-        <AmbientBackground />
+        {/* Smooth transition from black to gray */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-800 to-gray-200 h-[200vh]"></div>
+
+        {/* Expanding person highlight effect */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: `radial-gradient(ellipse 80vw 60vh at 50% 100%, 
+                rgba(0, 139, 139, ${Math.min(
+                  scrollProgress * 0.4,
+                  0.2
+                )}) 0%, 
+                rgba(0, 139, 139, ${Math.min(
+                  scrollProgress * 0.2,
+                  0.1
+                )}) 40%, 
+                transparent 70%)`,
+            opacity: Math.min(scrollProgress * 2, 1),
+          }}
+        />
         {/* Spacer section for scroll transition */}
         <section className="h-screen"></section>
         {/* About Section */}

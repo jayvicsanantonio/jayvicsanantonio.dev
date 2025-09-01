@@ -7,7 +7,7 @@ import Header from '@/components/pages/Header';
 import Footer from '@/components/pages/Footer';
 import AmbientBackground from '@/components/pages/AmbientBackground';
 import CursorGlow from '@/components/pages/CursorGlow';
-
+import { usePathname } from 'next/navigation';
 export default function Body({
   children,
   fontVars,
@@ -15,13 +15,14 @@ export default function Body({
   children: React.ReactNode;
   fontVars?: string;
 }) {
+  const pathname = usePathname();
   return (
     <body
       className={`dark ${
         fontVars ?? ''
       } flex flex-col md:flex-row min-h-screen dark:bg-gray-950 text-gray-200`}
     >
-      <AmbientBackground />
+      {pathname !== '/' && <AmbientBackground />}
       <CursorGlow />
       {children}
       <Toaster />
