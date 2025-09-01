@@ -84,7 +84,10 @@ export default function Page() {
   const subtitleOpacity = Math.max(1 - (scrollY - 100) / 300, 0);
 
   return (
-    <div ref={containerRef} className="relative overflow-x-hidden">
+    <div
+      ref={containerRef}
+      className="relative overflow-x-hidden bg-black"
+    >
       {/* Morphing Video - transforms INTO navigation bar */}
       <div
         className="fixed z-30 overflow-hidden flex items-center justify-center"
@@ -274,9 +277,11 @@ export default function Page() {
         </div>
       </div>
 
-      {/* Content sections with gray background */}
-
-      <div className="relative z-10 bg-gray-100 min-w-screen">
+      {/* Content sections with smooth transition to AmbientBackground */}
+      <div className="relative z-10 min-w-screen">
+        {/* Smooth transition from black to AmbientBackground */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-transparent h-screen"></div>
+        <AmbientBackground />
         {/* Spacer section for scroll transition */}
         <section className="h-screen"></section>
         {/* About Section */}
