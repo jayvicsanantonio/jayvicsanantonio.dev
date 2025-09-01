@@ -77,7 +77,7 @@ export default function Page() {
   useEffect(() => {
     const t1 = setTimeout(() => setShowTitleGroup(true), 900);
     const t2 = setTimeout(() => setShowDetails(true), 600);
-    const t3 = setTimeout(() => setShowName(true), 300);
+    const t3 = setTimeout(() => setShowName(true), 100);
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
@@ -221,6 +221,22 @@ export default function Page() {
             I experiment with AI daily—and build web platforms that
             put it to work.
           </p>
+        </div>
+
+        {/* Name inside the pill when nav state */}
+        <div
+          className="absolute inset-0 z-50 flex items-center justify-center pointer-events-none"
+          style={{ opacity: navTextOpacity }}
+        >
+          <div className="px-3">
+            {/* Short label on very small widths, full name from sm and up */}
+            <span className="inline sm:hidden text-[10px] font-semibold text-black tracking-wide">
+              Jayvic
+            </span>
+            <span className="hidden sm:inline text-xs md:text-sm lg:text-base font-semibold text-black tracking-wide">
+              Jayvic San Antonio
+            </span>
+          </div>
         </div>
 
         {/* The actual video that morphs */}
