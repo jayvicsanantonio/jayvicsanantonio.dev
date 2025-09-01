@@ -430,10 +430,10 @@ export default function Page() {
           className="absolute bottom-4 left-16 transition-opacity duration-700"
           style={{
             opacity: showName
-              ? 'clamp(0, calc(1 - var(--scroll-y, 0) / 300), 1)'
+              ? 'clamp(0, calc(1 - var(--scroll-y, 0) / 160), 1)'
               : 0,
             transform:
-              'translateY(calc(-1 * clamp(0px, calc(var(--scroll-y, 0) * 1px), 72px)))',
+              'translateY(calc(-1.3 * var(--scroll-y, 0) * 1px))',
             willChange: 'opacity, transform',
           }}
         >
@@ -452,10 +452,10 @@ export default function Page() {
           className="absolute bottom-8 right-16 pointer-events-auto transition-opacity duration-700"
           style={{
             opacity: showName
-              ? 'clamp(0, calc(1 - var(--scroll-y, 0) / 300), 1)'
+              ? 'clamp(0, calc(1 - var(--scroll-y, 0) / 160), 1)'
               : 0,
             transform:
-              'translateY(calc(-1 * clamp(0px, calc(var(--scroll-y, 0) * 1px), 72px)))',
+              'translateY(calc(-1.3 * var(--scroll-y, 0) * 1px))',
             willChange: 'opacity, transform',
           }}
         >
