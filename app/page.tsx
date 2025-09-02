@@ -372,9 +372,9 @@ export default function Page() {
           <div
             className="absolute inset-0 pointer-events-none flex items-center justify-center"
             style={{
-              // Cyan gradient pill for high contrast
+              // Cyan gradient pill for high contrast (slightly darker than before)
               background:
-                'linear-gradient(180deg, #2AF6E2 0%, #00CFC1 100%)',
+                'linear-gradient(180deg, #18CCC1 0%, #00A69E 100%)',
               opacity: 'var(--cyan, 0)',
               transition: 'opacity 0.5s ease-out',
             }}
