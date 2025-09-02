@@ -403,18 +403,29 @@ export default function Page() {
 
       {/* Initial pill overlay (decoupled from container transforms) */}
       {initialPill && (
-        <div className="fixed z-[60] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+        <div
+          className="fixed z-[60] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+          style={{ top: '46%' }}
+        >
           <div
-            className="flex items-center gap-3 px-6 py-3"
+            className="flex items-center justify-center"
             style={{
+              // Match the final cyan pill size and shape, but keep original white style
+              width: 'calc(96vw - 2 * var(--closeMaxX, 38vw))',
+              height: 'calc(86vh - 2 * var(--closeMaxY, 39vh))',
+              borderRadius: '384px',
               backgroundColor: 'rgba(255, 255, 255, 0.98)',
-              borderRadius: '9999px',
-              overflow: 'hidden',
               boxShadow:
                 'inset 0 0 0 2px rgba(0,0,0,0.10), 0 8px 24px rgba(0,0,0,0.14)',
             }}
           >
-            <span className="inline text-sm md:text-base lg:text-lg font-semibold text-black tracking-wide">
+            <span
+              className="font-semibold tracking-wide"
+              style={{
+                color: 'black',
+                fontSize: 'clamp(14px, 2.1vw, 22px)'
+              }}
+            >
               Hi, I'm Jayvic 👋
             </span>
           </div>
