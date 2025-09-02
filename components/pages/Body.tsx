@@ -9,6 +9,7 @@ import AmbientBackground from '@/components/pages/AmbientBackground';
 import CursorGlow from '@/components/pages/CursorGlow';
 import { usePathname } from 'next/navigation';
 import { useScrollToTop } from '@/hooks/useScrollToTop';
+import { useWebVitalsLogger } from '@/hooks/useWebVitalsLogger';
 export default function Body({
   children,
   fontVars,
@@ -18,7 +19,7 @@ export default function Body({
 }) {
   const pathname = usePathname();
   useScrollToTop();
-
+  useWebVitalsLogger();
 
   return (
     <body
