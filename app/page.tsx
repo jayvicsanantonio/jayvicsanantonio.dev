@@ -135,7 +135,7 @@ export default function Page() {
         const vh = window.innerHeight || 1;
         const p = Math.min(y / MAX, 1);
         const pf = Math.min(p * 1.8, 1); // accelerated progress for faster shrink
-        const ps = Math.min(y / (vh * 0.10), 1); // progress to 10% viewport height
+        const ps = Math.min(y / (vh * 0.1), 1); // progress to 10% viewport height
         root.style.setProperty('--scroll-y', String(y));
         root.style.setProperty('--p', String(p));
         root.style.setProperty('--pf', String(pf));
@@ -318,10 +318,10 @@ export default function Page() {
               />
               {/* Short label on very small widths, full name from sm and up */}
               <span className="inline sm:hidden text-[10px] font-semibold text-black tracking-wide">
-                Jayvic
+                Hi, I'm Jayvic 👋
               </span>
               <span className="hidden sm:inline text-xs md:text-sm lg:text-base font-semibold text-black tracking-wide">
-                Jayvic San Antonio
+                Hi, I'm Jayvic 👋
               </span>
             </div>
           </div>
@@ -380,17 +380,11 @@ export default function Page() {
                 'inset 0 0 0 2px rgba(0,0,0,0.10), 0 8px 24px rgba(0,0,0,0.14)',
             }}
           >
-            <Image
-              src="/icon.svg"
-              alt="Site icon"
-              width={28}
-              height={28}
-            />
             <span className="hidden sm:inline text-sm md:text-base lg:text-lg font-semibold text-black tracking-wide">
-              Jayvic San Antonio
+              Hi, I'm Jayvic 👋
             </span>
             <span className="inline sm:hidden text-[12px] font-semibold text-black tracking-wide">
-              Jayvic
+              Hi, I'm Jayvic 👋
             </span>
           </div>
         </div>
@@ -439,10 +433,10 @@ export default function Page() {
         <div
           className="absolute bottom-4 left-16 transition-opacity duration-700"
           style={{
-opacity: showName
+            opacity: showName
               ? 'clamp(0, calc(1 - var(--ps, 0)), 1)'
               : 0,
-transform:
+            transform:
               'translateY(calc(-1.6 * var(--scroll-y, 0) * 1px))',
             willChange: 'opacity, transform',
           }}
