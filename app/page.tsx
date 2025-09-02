@@ -173,9 +173,15 @@ export default function Page() {
         root.style.setProperty('--sh', String(sh));
         root.style.setProperty('--gate', String(gate));
         root.style.setProperty('--overlay-up', String(overlayUp));
+
+        // Cyan overlay opacity: ramps in from sh≈0.45 and holds at 1 afterwards
+        const cyan = Math.min(Math.max((sh - 0.45) / 0.55, 0), 1);
+        root.style.setProperty('--cyan', String(cyan));
+        root.style.setProperty('--cyan', String(cyan));
+
         // Final opening size targets (tweak to taste)
-        root.style.setProperty('--closeMaxY', '34vh');
-        root.style.setProperty('--closeMaxX', '42vw');
+        root.style.setProperty('--closeMaxY', '39vh');
+        root.style.setProperty('--closeMaxX', '38vw');
       };
       const onScroll = () => {
         if (raf) return;
@@ -276,7 +282,7 @@ export default function Page() {
             : '0 25px 50px -12px rgba(0, 0, 0, var(--shadow-a))',
           // Box-like shutter that closes from all sides. Corners round more as it closes.
           clipPath:
-            'inset(calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) round calc(16px + var(--sh, 0) * 160px))',
+            'inset(calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) round calc(24px + var(--sh, 0) * 360px))',
         }}
       >
         <div
@@ -329,7 +335,7 @@ export default function Page() {
         <div
           className="relative w-full h-full overflow-hidden"
           style={{
-            borderRadius: 'calc(16px + 160px * var(--sh, 0))',
+            borderRadius: 'calc(24px + 360px * var(--sh, 0))',
             // Keep video hidden until intro completes, then fade it in and keep at full opacity
             opacity: isIntro ? 0 : 1,
             transition: 'opacity 0.8s ease-out',
@@ -359,15 +365,31 @@ export default function Page() {
             style={{ opacity: isIntro ? 0 : 1 }}
           />
 
-          {/* Cyan overlay: fades in as shutter closes to transition video to solid color */}
+          {/* Cyan overlay: fades in as shutter closes to transition video to solid color, now with centered text */}
           <div
-            className="absolute inset-0 pointer-events-none"
+            className="absolute inset-0 pointer-events-none flex items-center justify-center"
             style={{
-              backgroundColor: '#00ffff',
-              opacity: 'clamp(0, (var(--sh, 0) - 0.45) * 2.2, 1)',
+              // Darker cyan-teal for stronger contrast with white text
+              backgroundColor: '#053C3C',
+              opacity: 'var(--cyan, 0)',
               transition: 'opacity 0.5s ease-out',
             }}
-          />
+          >
+            <span
+              className="text-white font-semibold tracking-wide"
+              style={{
+                // Responsive size, no wrap to avoid clipping in narrow final width
+                fontSize: 'clamp(14px, 2.1vw, 22px)',
+                whiteSpace: 'nowrap',
+                maxWidth: '90%',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                textShadow: '0 2px 6px rgba(0,0,0,0.55)',
+              }}
+            >
+              Hi, I'm Jayvic 👋
+            </span>
+          </div>
 
           {/* Watermark cover - covers bottom right corner */}
           <div className="absolute bottom-0 right-0 w-20 h-12 bg-gradient-to-tl from-black via-black/80 to-transparent"></div>
@@ -433,6 +455,40 @@ export default function Page() {
 
       {/* Text Overlays - positioned around the video and person */}
       <div className="fixed inset-0 z-50 pointer-events-none">
+
+        {/* Left frosted nav outside pill */}
+        <Link
+          href="/projects"
+          aria-label="Projects"
+          className="absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white/90 shadow-[0_4px_30px_rgba(0,0,0,0.12)]"
+          style={{
+            width: '56px',
+            height: '56px',
+            top: '46%',
+            left: 'calc(50% - ((96vw - 2 * var(--closeMaxX)) / 2) - 42px)',
+            transform: 'translate(-50%, -50%)',
+            opacity: 'clamp(0, (var(--sh, 0) - 0.70) * 5, 1)',
+          }}
+        >
+          🌸
+        </Link>
+
+        {/* Right frosted nav outside pill */}
+        <Link
+          href="/work"
+          aria-label="Work"
+          className="absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white/90 shadow-[0_4px_30px_rgba(0,0,0,0.12)]"
+          style={{
+            width: '56px',
+            height: '56px',
+            top: '46%',
+            left: 'calc(50% + ((96vw - 2 * var(--closeMaxX)) / 2) + 42px)',
+            transform: 'translate(-50%, -50%)',
+            opacity: 'clamp(0, (var(--sh, 0) - 0.70) * 5, 1)',
+          }}
+        >
+          🏮
+        </Link>
         {/* Bottom row: brand on left, CTA on right; vertically centered and synchronized */}
         <div
           className="absolute bottom-4 left-16 right-16 transition-opacity duration-300 pointer-events-none"
