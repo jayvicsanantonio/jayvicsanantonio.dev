@@ -423,7 +423,7 @@ export default function Page() {
               className="font-semibold tracking-wide"
               style={{
                 color: 'black',
-                fontSize: 'clamp(14px, 2.1vw, 22px)'
+                fontSize: 'clamp(14px, 2.1vw, 22px)',
               }}
             >
               Hi, I'm Jayvic 👋
@@ -475,12 +475,12 @@ export default function Page() {
         <Link
           href="/projects"
           aria-label="Projects"
-          className="absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white/90 shadow-[0_4px_30px_rgba(0,0,0,0.12)]"
+          className="nav-bouncy absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white/90 shadow-[0_4px_30px_rgba(0,0,0,0.12)]"
           style={{
-            width: '56px',
-            height: '56px',
+            width: '84px',
+            height: '72px',
             top: '46%',
-            left: 'calc(50% - ((96vw - 2 * var(--closeMaxX)) / 2) - 42px)',
+left: 'calc(50% - ((96vw - 2 * var(--closeMaxX)) / 2) - 54px)',
             transform: 'translate(-50%, -50%)',
             opacity: 'var(--ui, 0)',
           }}
@@ -488,8 +488,8 @@ export default function Page() {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
-            width="24"
-            height="24"
+            width="36"
+            height="36"
             fill="currentColor"
             aria-hidden="true"
           >
@@ -502,12 +502,12 @@ export default function Page() {
           aria-label="LinkedIn"
           target="_blank"
           rel="noopener noreferrer"
-          className="absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white shadow-[0_4px_30px_rgba(0,0,0,0.12)]"
+          className="nav-bouncy absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white shadow-[0_4px_30px_rgba(0,0,0,0.12)]"
           style={{
-            width: '56px',
-            height: '56px',
+            width: '84px',
+            height: '72px',
             top: '46%',
-            left: 'calc(50% - ((96vw - 2 * var(--closeMaxX)) / 2) - 126px)',
+left: 'calc(50% - ((96vw - 2 * var(--closeMaxX)) / 2) - 150px)',
             transform: 'translate(-50%, -50%)',
             opacity: 'var(--ui, 0)',
           }}
@@ -515,8 +515,8 @@ export default function Page() {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
-            width="24"
-            height="24"
+            width="36"
+            height="36"
             fill="currentColor"
             aria-hidden="true"
           >
@@ -527,12 +527,12 @@ export default function Page() {
         <Link
           href="/work"
           aria-label="Work"
-          className="absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white/90 shadow-[0_4px_30px_rgba(0,0,0,0.12)]"
+          className="nav-bouncy absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white/90 shadow-[0_4px_30px_rgba(0,0,0,0.12)]"
           style={{
-            width: '56px',
-            height: '56px',
+            width: '84px',
+            height: '72px',
             top: '46%',
-            left: 'calc(50% + ((96vw - 2 * var(--closeMaxX)) / 2) + 42px)',
+left: 'calc(50% + ((96vw - 2 * var(--closeMaxX)) / 2) + 54px)',
             transform: 'translate(-50%, -50%)',
             opacity: 'var(--ui, 0)',
           }}
@@ -540,8 +540,8 @@ export default function Page() {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
-            width="24"
-            height="24"
+            width="36"
+            height="36"
             fill="currentColor"
             aria-hidden="true"
           >
@@ -554,12 +554,12 @@ export default function Page() {
           aria-label="GitHub"
           target="_blank"
           rel="noopener noreferrer"
-          className="absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white shadow-[0_4px_30px_rgba(0,0,0,0.12)]"
+          className="nav-bouncy absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white shadow-[0_4px_30px_rgba(0,0,0,0.12)]"
           style={{
-            width: '56px',
-            height: '56px',
+            width: '84px',
+            height: '72px',
             top: '46%',
-            left: 'calc(50% + ((96vw - 2 * var(--closeMaxX)) / 2) + 126px)',
+left: 'calc(50% + ((96vw - 2 * var(--closeMaxX)) / 2) + 150px)',
             transform: 'translate(-50%, -50%)',
             opacity: 'var(--ui, 0)',
           }}
@@ -567,8 +567,8 @@ export default function Page() {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
-            width="24"
-            height="24"
+            width="36"
+            height="36"
             fill="currentColor"
             aria-hidden="true"
           >
@@ -626,6 +626,44 @@ export default function Page() {
         {/* About Section */}
         <section className="min-h-[154rem] flex flex-col items-center justify-center px-4 py-20"></section>
       </div>
+      {/* Cute bouncy hover animation for nav buttons */}
+      <style jsx global>{`
+        .nav-bouncy {
+          will-change: transform;
+        }
+        .nav-bouncy:hover {
+          animation: nav-bounce 440ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .nav-bouncy:active {
+          animation: nav-bounce-tap 260ms
+            cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        @keyframes nav-bounce {
+          0% {
+            transform: translate(-50%, -50%) scale(1);
+          }
+          45% {
+            transform: translate(-50%, -50%) scale(1.16);
+          }
+          75% {
+            transform: translate(-50%, -50%) scale(0.94);
+          }
+          100% {
+            transform: translate(-50%, -50%) scale(1);
+          }
+        }
+        @keyframes nav-bounce-tap {
+          0% {
+            transform: translate(-50%, -50%) scale(1);
+          }
+          50% {
+            transform: translate(-50%, -50%) scale(0.92);
+          }
+          100% {
+            transform: translate(-50%, -50%) scale(1);
+          }
+        }
+      `}</style>
     </div>
   );
 }
