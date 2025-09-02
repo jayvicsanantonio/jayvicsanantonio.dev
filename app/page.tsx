@@ -178,6 +178,9 @@ export default function Page() {
         const cyan = Math.min(Math.max((sh - 0.45) / 0.55, 0), 1);
         root.style.setProperty('--cyan', String(cyan));
         root.style.setProperty('--cyan', String(cyan));
+        // UI reveal progress for text and nav; starts when shutter mostly closed
+        const ui = Math.min(Math.max((sh - 0.95) / 0.05, 0), 1);
+        root.style.setProperty('--ui', String(ui));
 
         // Final opening size targets (tweak to taste)
         root.style.setProperty('--closeMaxY', '39vh');
@@ -370,7 +373,8 @@ export default function Page() {
             className="absolute inset-0 pointer-events-none flex items-center justify-center"
             style={{
               // Cyan gradient pill for high contrast
-              background: 'linear-gradient(180deg, #2AF6E2 0%, #00CFC1 100%)',
+              background:
+                'linear-gradient(180deg, #2AF6E2 0%, #00CFC1 100%)',
               opacity: 'var(--cyan, 0)',
               transition: 'opacity 0.5s ease-out',
             }}
@@ -384,6 +388,7 @@ export default function Page() {
                 maxWidth: '90%',
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
+                opacity: 'var(--ui, 0)',
                 textShadow: '0 2px 8px rgba(0,0,0,0.6)',
               }}
             >
@@ -466,7 +471,7 @@ export default function Page() {
             top: '46%',
             left: 'calc(50% - ((96vw - 2 * var(--closeMaxX)) / 2) - 42px)',
             transform: 'translate(-50%, -50%)',
-            opacity: 'clamp(0, (var(--sh, 0) - 0.70) * 5, 1)',
+            opacity: 'var(--ui, 0)',
           }}
         >
           <svg
@@ -493,7 +498,7 @@ export default function Page() {
             top: '46%',
             left: 'calc(50% - ((96vw - 2 * var(--closeMaxX)) / 2) - 126px)',
             transform: 'translate(-50%, -50%)',
-            opacity: 'clamp(0, (var(--sh, 0) - 0.70) * 5, 1)',
+            opacity: 'var(--ui, 0)',
           }}
         >
           <svg
@@ -518,7 +523,7 @@ export default function Page() {
             top: '46%',
             left: 'calc(50% + ((96vw - 2 * var(--closeMaxX)) / 2) + 42px)',
             transform: 'translate(-50%, -50%)',
-            opacity: 'clamp(0, (var(--sh, 0) - 0.70) * 5, 1)',
+            opacity: 'var(--ui, 0)',
           }}
         >
           <svg
@@ -545,7 +550,7 @@ export default function Page() {
             top: '46%',
             left: 'calc(50% + ((96vw - 2 * var(--closeMaxX)) / 2) + 126px)',
             transform: 'translate(-50%, -50%)',
-            opacity: 'clamp(0, (var(--sh, 0) - 0.70) * 5, 1)',
+            opacity: 'var(--ui, 0)',
           }}
         >
           <svg
