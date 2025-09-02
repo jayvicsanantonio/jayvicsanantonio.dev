@@ -141,6 +141,10 @@ export default function Page() {
         const START = 120; // px where shutter begins
         const LENGTH = 900; // px to fully close
         const sh = Math.min(Math.max((y - START) / LENGTH, 0), 1);
+        const gate = Math.min(Math.max((sh - 0.45) / 0.55, 0), 1); // gate from 0 at sh=0.45 to 1 at sh=1
+        const yn = vh ? y / vh : 0; // normalized scroll in viewport heights
+        const brandUp = 1.6 * yn * gate; // normalized upward travel (0..)
+        const ctaUp = 1.2 * yn * gate;
 
         root.style.setProperty('--scroll-y', String(y));
         root.style.setProperty('--p', String(p));
@@ -148,6 +152,9 @@ export default function Page() {
         root.style.setProperty('--ps', String(ps));
         root.style.setProperty('--vh', String(vh));
         root.style.setProperty('--sh', String(sh));
+        root.style.setProperty('--gate', String(gate));
+        root.style.setProperty('--brand-up', String(brandUp));
+        root.style.setProperty('--cta-up', String(ctaUp));
         // Final opening size targets (tweak to taste)
         root.style.setProperty('--closeMaxY', '34vh');
         root.style.setProperty('--closeMaxX', '42vw');
@@ -423,13 +430,14 @@ export default function Page() {
         </div>
         {/* Brand text - bottom left corner */}
         <div
-          className="absolute bottom-4 left-16 transition-opacity duration-700"
+          className="absolute bottom-4 left-16 transition-opacity duration-300"
           style={{
-            opacity: showName
-              ? 'clamp(0, calc(1 - var(--ps, 0)), 1)'
-              : 0,
+            // Fade starts immediately when upward motion begins; completes by ~35% vh of upward travel
+            opacity: showName ? 'calc(1 - clamp(0, var(--brand-up, 0) / 0.35, 1))' : 0,
+            // Move upward only after shutter reaches the large rounded box (~image reference)
+            // Threshold tuned at ~0.45 of shutter progress; ramps to 1 by sh=1
             transform:
-              'translateY(calc(-1.6 * var(--scroll-y, 0) * 1px))',
+              'translateY(calc(-1.6 * var(--scroll-y, 0) * var(--gate, 0) * 1px))',
             willChange: 'opacity, transform',
           }}
         >
@@ -445,13 +453,14 @@ export default function Page() {
 
         {/* Work Experience button - bottom right */}
         <div
-          className="absolute bottom-8 right-16 pointer-events-auto transition-opacity duration-700"
+          className="absolute bottom-8 right-16 pointer-events-auto transition-opacity duration-300"
           style={{
-            opacity: showName
-              ? 'clamp(0, calc(1 - var(--ps, 0)), 1)'
-              : 0,
+            // Fade starts immediately when upward motion begins; completes by ~35% vh of upward travel
+            opacity: showName ? 'calc(1 - clamp(0, var(--cta-up, 0) / 0.35, 1))' : 0,
+            // Move upward only after shutter reaches the large rounded box (~image reference)
+            // Threshold tuned at ~0.45 of shutter progress; ramps to 1 by sh=1
             transform:
-              'translateY(calc(-1.2 * var(--scroll-y, 0) * 1px))',
+              'translateY(calc(-1.2 * var(--scroll-y, 0) * var(--gate, 0) * 1px))',
             willChange: 'opacity, transform',
           }}
         >
