@@ -8,6 +8,7 @@ import Footer from '@/components/pages/Footer';
 import AmbientBackground from '@/components/pages/AmbientBackground';
 import CursorGlow from '@/components/pages/CursorGlow';
 import { usePathname } from 'next/navigation';
+import { useScrollToTop } from '@/hooks/useScrollToTop';
 export default function Body({
   children,
   fontVars,
@@ -16,6 +17,9 @@ export default function Body({
   fontVars?: string;
 }) {
   const pathname = usePathname();
+  useScrollToTop();
+
+
   return (
     <body
       className={`dark ${
