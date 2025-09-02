@@ -135,7 +135,7 @@ export default function Page() {
         const vh = window.innerHeight || 1;
         const p = Math.min(y / MAX, 1);
         const pf = Math.min(p * 1.8, 1); // accelerated progress for faster shrink
-        const ps = Math.min(y / (vh * 0.10), 1); // progress to 10% viewport height
+        const ps = Math.min(y / (vh * 0.1), 1); // progress to 10% viewport height
 
         // New: shutter progress variables
         const START = 120; // px where shutter begins
@@ -145,6 +145,7 @@ export default function Page() {
         const yn = vh ? y / vh : 0; // normalized scroll in viewport heights
         const brandUp = 1.6 * yn * gate; // normalized upward travel (0..)
         const ctaUp = 1.2 * yn * gate;
+        const overlayUp = 1.4 * yn * gate; // unified for group fade
 
         root.style.setProperty('--scroll-y', String(y));
         root.style.setProperty('--p', String(p));
@@ -155,6 +156,7 @@ export default function Page() {
         root.style.setProperty('--gate', String(gate));
         root.style.setProperty('--brand-up', String(brandUp));
         root.style.setProperty('--cta-up', String(ctaUp));
+        root.style.setProperty('--overlay-up', String(overlayUp));
         // Final opening size targets (tweak to taste)
         root.style.setProperty('--closeMaxY', '34vh');
         root.style.setProperty('--closeMaxX', '42vw');
@@ -226,7 +228,8 @@ export default function Page() {
           top: '46%',
           left: '50%',
           '--intro-scale': String(introScale),
-          transform: 'translate(-50%, -50%) scale(var(--intro-scale))',
+          transform:
+            'translate(-50%, -50%) scale(var(--intro-scale))',
           width: '96vw',
           height: '86vh',
           borderRadius: containerRadius,
@@ -305,7 +308,6 @@ export default function Page() {
           </p>
         </div>
 
-
         {/* The actual video that morphs */}
         <div
           className="relative w-full h-full overflow-hidden"
@@ -357,17 +359,8 @@ export default function Page() {
                 'inset 0 0 0 2px rgba(0,0,0,0.10), 0 8px 24px rgba(0,0,0,0.14)',
             }}
           >
-            <Image
-              src="/icon.svg"
-              alt="Site icon"
-              width={28}
-              height={28}
-            />
             <span className="hidden sm:inline text-sm md:text-base lg:text-lg font-semibold text-black tracking-wide">
-              Jayvic San Antonio
-            </span>
-            <span className="inline sm:hidden text-[12px] font-semibold text-black tracking-wide">
-              Jayvic
+              Hi, I'm Jayvic 👋
             </span>
           </div>
         </div>
@@ -416,60 +409,53 @@ export default function Page() {
         <div
           className="absolute inset-0 flex items-center justify-center"
           style={{
-            opacity: initialPill ? 0 : 'max(0, calc((var(--p, 0) - 0.7) * 3))',
+            opacity: initialPill
+              ? 0
+              : 'max(0, calc((var(--p, 0) - 0.7) * 3))',
           }}
         >
           <div className="px-3">
             <div className="flex items-center gap-3">
-              <Image src="/icon.svg" alt="Site icon" width={16} height={16} />
-              {/* Short label on very small widths, full name from sm and up */}
-              <span className="inline sm:hidden text-[10px] font-semibold text-black tracking-wide">Jayvic</span>
-              <span className="hidden sm:inline text-xs md:text-sm lg:text-base font-semibold text-black tracking-wide">Jayvic San Antonio</span>
+              <Image
+                src="/icon.svg"
+                alt="Site icon"
+                width={16}
+                height={16}
+              />
+              <span className="inline text-xs md:text-sm lg:text-base font-semibold text-black tracking-wide">
+                Hi, I'm Jayvic 👋
+              </span>
             </div>
           </div>
         </div>
-        {/* Brand text - bottom left corner */}
+        {/* Bottom row: brand on left, CTA on right; vertically centered and synchronized */}
         <div
-          className="absolute bottom-4 left-16 transition-opacity duration-300"
+          className="absolute bottom-4 left-16 right-16 transition-opacity duration-300 pointer-events-none"
           style={{
-            // Fade starts immediately when upward motion begins; completes by ~35% vh of upward travel
-            opacity: showName ? 'calc(1 - clamp(0, var(--brand-up, 0) / 0.35, 1))' : 0,
-            // Move upward only after shutter reaches the large rounded box (~image reference)
-            // Threshold tuned at ~0.45 of shutter progress; ramps to 1 by sh=1
-            transform:
-              'translateY(calc(-1.6 * var(--scroll-y, 0) * var(--gate, 0) * 1px))',
-            willChange: 'opacity, transform',
-          }}
-        >
-          <div className="text-white">
-            <div className="text-lg md:text-3xl font-light tracking-wider">
-              Jayvic
-            </div>
-            <div className="text-xs md:text-2xl font-bold tracking-[0.3em] uppercase">
-              SAN ANTONIO
-            </div>
-          </div>
-        </div>
-
-        {/* Work Experience button - bottom right */}
-        <div
-          className="absolute bottom-8 right-16 pointer-events-auto transition-opacity duration-300"
-          style={{
-            // Fade starts immediately when upward motion begins; completes by ~35% vh of upward travel
-            opacity: showName ? 'calc(1 - clamp(0, var(--cta-up, 0) / 0.35, 1))' : 0,
-            // Move upward only after shutter reaches the large rounded box (~image reference)
-            // Threshold tuned at ~0.45 of shutter progress; ramps to 1 by sh=1
+            opacity: showName
+              ? 'calc(1 - clamp(0, var(--overlay-up, 0) / 0.35, 1))'
+              : 0,
             transform:
               'translateY(calc(-1.2 * var(--scroll-y, 0) * var(--gate, 0) * 1px))',
             willChange: 'opacity, transform',
           }}
         >
-          <Link
-            href="/work"
-            className="px-6 py-3 bg-white text-black font-medium rounded-full hover:bg-white/90 transition-all duration-300 hover:scale-105 text-sm md:text-base"
-          >
-            Work Experience
-          </Link>
+          <div className="flex items-center justify-between gap-6">
+            <div className="text-white">
+              <div className="text-lg md:text-3xl font-light tracking-wider">
+                Jayvic
+              </div>
+              <div className="text-xs md:text-2xl font-bold tracking-[0.3em] uppercase">
+                SAN ANTONIO
+              </div>
+            </div>
+            <Link
+              href="/work"
+              className="pointer-events-auto px-6 py-2.5 md:py-3 bg-white text-black font-medium rounded-full hover:bg-white/90 transition-all duration-300 hover:scale-105 text-sm md:text-base"
+            >
+              Work Experience
+            </Link>
+          </div>
         </div>
       </div>
 
