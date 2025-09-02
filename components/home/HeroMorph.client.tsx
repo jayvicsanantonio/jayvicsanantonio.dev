@@ -5,6 +5,53 @@ import Image from "next/image";
 import Link from "next/link";
 import AnimatedText from "@/components/ui/AnimatedText";
 
+/*
+  CSS variable contract used by HeroMorph
+  --------------------------------------------------
+  --scroll-y: current window.scrollY in px
+  --vh: viewport height in px
+  --p: normalized scroll progress (0..1) based on CFG.scroll.max
+  --sh: shutter progress (0..1) based on CFG.scroll.shutterStartPx + length
+  --gate: motion gate (0..1) used to gate some transforms
+  --overlay-up: normalized upward translation factor for overlay text
+  --cyan: opacity of cyan overlay (0..1)
+  --ui: reveal progress of UI/nav (0..1)
+  --closeMaxX / --closeMaxY: target inset distances for clipPath closing
+*/
+const CFG = {
+  timings: {
+    introStartDelay: 800,
+    introExpansionDuration: 2000,
+    reveal: {
+      name: 1000,
+      title: 3600,
+      desc: 3200,
+    },
+    graceAfterExpandMs: 200,
+  },
+  scroll: {
+    max: 1800,
+    shutterStartPx: 120,
+    shutterLengthPx: 900,
+    cyanStartT: 0.45, // begins to fade in around 45% shutter
+    uiRevealStartT: 0.95, // UI reveals near closed
+  },
+  closeMaxY: "39vh",
+  closeMaxX: "38vw",
+  overlayUpDampen: 0.35,
+  video: {
+    playbackRate: 0.75,
+    scale: 1.05,
+    preload: "metadata" as const,
+  },
+  nav: {
+    centerTop: "46%",
+    buttonSize: { w: 84, h: 72 },
+    leftOffsetsPx: { projects: 54, linkedin: 150 },
+    rightOffsetsPx: { work: 54, github: 150 },
+  },
+} as const;
+
 export default function HeroMorph() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -15,20 +62,15 @@ export default function HeroMorph() {
   const [showTitleGroup, setShowTitleGroup] = useState(false);
   const [showDesc, setShowDesc] = useState(false);
   const [showName, setShowName] = useState(false);
-  const [videoReady, setVideoReady] = useState(false);
   const [shouldPlayVideo, setShouldPlayVideo] = useState(false);
   const [isExpanding, setIsExpanding] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.playbackRate = 0.75;
-      // Ensure autoplay policies are satisfied and video begins loading
+      videoRef.current.playbackRate = CFG.video.playbackRate;
       videoRef.current.muted = true;
-      // Kick off loading early so onLoadedData can fire without autoplay
-      try {
-        videoRef.current.load();
-      } catch {}
+      // With preload=metadata, we rely on the later play() call to initiate fetching.
     }
     return;
   }, []);
@@ -59,29 +101,31 @@ export default function HeroMorph() {
       window.setTimeout(() => {
         setInitialPill(false); // triggers CSS transition to final size
         setIsExpanding(true);
-        timers.push(window.setTimeout(() => setIsExpanding(false), 2000)); // match slower transition duration
-      }, 800)
+        timers.push(
+          window.setTimeout(() => setIsExpanding(false), CFG.timings.introExpansionDuration)
+        );
+      }, CFG.timings.introStartDelay)
     );
 
     // Reveal other elements while expansion progresses
-    timers.push(window.setTimeout(() => setShowName(true), 1000));
-    timers.push(window.setTimeout(() => setShowTitleGroup(true), 3600));
-    timers.push(window.setTimeout(() => setShowDesc(true), 3200));
+    timers.push(window.setTimeout(() => setShowName(true), CFG.timings.reveal.name));
+    timers.push(window.setTimeout(() => setShowTitleGroup(true), CFG.timings.reveal.title));
+    timers.push(window.setTimeout(() => setShowDesc(true), CFG.timings.reveal.desc));
 
     // Set up CSS variable based scroll loop (no React renders on scroll)
     const root = containerRef.current;
     if (root) {
       let raf = 0;
-      const MAX = 1800;
       const update = () => {
         const y = window.scrollY;
         const vh = window.innerHeight || 1;
-        const p = Math.min(y / MAX, 1);
+        const p = Math.min(y / CFG.scroll.max, 1);
 
         // Shutter progress
-        const START = 120; // px where shutter begins
-        const LENGTH = 900; // px to fully close
-        const sh = Math.min(Math.max((y - START) / LENGTH, 0), 1);
+        const sh = Math.min(
+          Math.max((y - CFG.scroll.shutterStartPx) / CFG.scroll.shutterLengthPx, 0),
+          1
+        );
 
         // Movement gate and upward travel (normalized to viewport)
         let gate = Math.min(Math.max((sh - 0.45) / 0.55, 0), 1);
@@ -96,17 +140,21 @@ export default function HeroMorph() {
         root.style.setProperty("--gate", String(gate));
         root.style.setProperty("--overlay-up", String(overlayUp));
 
-        // Cyan overlay opacity: ramps in from sh≈0.45 and holds at 1 afterwards
-        const cyan = Math.min(Math.max((sh - 0.45) / 0.55, 0), 1);
+        // Cyan overlay opacity: ramps in from sh≈CFG.scroll.cyanStartT and holds at 1 afterwards
+        const CYAN_START = CFG.scroll.cyanStartT;
+        const CYAN_DEN = 1 - CYAN_START;
+        const cyan = Math.min(Math.max((sh - CYAN_START) / CYAN_DEN, 0), 1);
         root.style.setProperty("--cyan", String(cyan));
 
         // UI reveal progress for text and nav; starts when shutter mostly closed
-        const ui = Math.min(Math.max((sh - 0.95) / 0.05, 0), 1);
+        const UI_START = CFG.scroll.uiRevealStartT; // 0.95
+        const UI_DEN = 1 - UI_START; // 0.05
+        const ui = Math.min(Math.max((sh - UI_START) / UI_DEN, 0), 1);
         root.style.setProperty("--ui", String(ui));
 
-        // Final opening size targets (tweak to taste)
-        root.style.setProperty("--closeMaxY", "39vh");
-        root.style.setProperty("--closeMaxX", "38vw");
+        // Final opening size targets
+        root.style.setProperty("--closeMaxY", CFG.closeMaxY);
+        root.style.setProperty("--closeMaxX", CFG.closeMaxX);
       };
       const onScroll = () => {
         if (raf) return;
@@ -138,17 +186,17 @@ export default function HeroMorph() {
   // After the pill finishes expanding, allow the video to play
   useEffect(() => {
     if (!initialPill && !isExpanding) {
-      const t = window.setTimeout(() => setShouldPlayVideo(true), 200); // tiny grace after final step
+      const t = window.setTimeout(() => setShouldPlayVideo(true), CFG.timings.graceAfterExpandMs);
       return () => window.clearTimeout(t);
     }
   }, [initialPill, isExpanding]);
 
   // When ready and allowed, start the video programmatically
   useEffect(() => {
-    if (shouldPlayVideo && videoReady && videoRef.current) {
+    if (shouldPlayVideo && videoRef.current) {
       videoRef.current.play().catch(() => {});
     }
-  }, [shouldPlayVideo, videoReady]);
+  }, [shouldPlayVideo]);
 
   // Intro continuous animation: start small and smoothly transition to final hero
   const isIntro = initialPill || isExpanding;
@@ -161,9 +209,8 @@ export default function HeroMorph() {
       <div
         className="fixed z-30 overflow-hidden flex items-center justify-center"
         style={{
-          top: "46%",
+          top: CFG.nav.centerTop,
           left: "50%",
-          // @ts-expect-error CSS custom property string
           "--intro-scale": String(introScale),
           transform: "translate(-50%, -50%) scale(var(--intro-scale))",
           width: "96vw",
@@ -175,9 +222,7 @@ export default function HeroMorph() {
           transition: isExpanding
             ? "top 0.4s ease-out, transform 2s cubic-bezier(0.22, 1, 0.36, 1), border-radius 2s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.6s ease-out"
             : "top 0.4s ease-out, border-radius 0s, background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.3s ease-out",
-          // @ts-expect-error CSS custom property string
           "--bg-a": isIntro ? "0.95" : "calc(max(0, (var(--p, 0) - 0.7) * 3) * 0.95)",
-          // @ts-expect-error CSS custom property string
           "--shadow-a": isIntro ? "0.25" : "calc(max(0, (var(--p, 0) - 0.7) * 3) * 0.25)",
           backgroundColor: initialPill ? "transparent" : "rgba(255, 255, 255, var(--bg-a))",
           backdropFilter: isIntro && !initialPill ? "blur(20px)" : isIntro ? "blur(0px)" : "blur(calc(max(0, (var(--p, 0) - 0.7) * 3) * 20px))",
@@ -231,14 +276,11 @@ export default function HeroMorph() {
             muted
             loop
             playsInline
-            preload="auto"
+            preload={CFG.video.preload}
             aria-hidden
             tabIndex={-1}
-            onLoadedData={() => setVideoReady(true)}
-            onCanPlay={() => setVideoReady(true)}
-            onCanPlayThrough={() => setVideoReady(true)}
             className="w-full h-full object-cover"
-            style={{ willChange: "opacity, transform", transform: "scale(1.05)" }}
+            style={{ willChange: "opacity, transform", transform: `scale(${CFG.video.scale})` }}
           >
             <source src="/matrix-horizontal.mp4" type="video/mp4" />
           </video>
@@ -249,8 +291,7 @@ export default function HeroMorph() {
             className="absolute inset-0 pointer-events-none flex items-center justify-center"
             style={{
               background: "linear-gradient(180deg, #18CCC1 0%, #00A69E 100%)",
-              // @ts-expect-error CSS custom property string
-              opacity: "var(--cyan, 0)",
+            opacity: "var(--cyan, 0)",
               transition: "opacity 0.5s ease-out",
             }}
           >
@@ -263,7 +304,6 @@ export default function HeroMorph() {
                 maxWidth: "90%",
                 overflow: "hidden",
                 textOverflow: "ellipsis",
-                // @ts-expect-error CSS custom property string
                 opacity: "var(--ui, 0)",
                 textShadow: "0 2px 8px rgba(0,0,0,0.6)",
               }}
@@ -336,12 +376,11 @@ export default function HeroMorph() {
                 aria-label="Projects"
                 className="nav-bouncy absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white/90 shadow-[0_4px_30px_rgba(0,0,0,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
                 style={{
-                  width: "84px",
-                  height: "72px",
-                  top: "46%",
-                  left: "calc(50% - ((96vw - 2 * var(--closeMaxX)) / 2) - 54px)",
+                  width: `${CFG.nav.buttonSize.w}px`,
+                  height: `${CFG.nav.buttonSize.h}px`,
+                  top: CFG.nav.centerTop,
+                  left: `calc(50% - ((96vw - 2 * var(--closeMaxX)) / 2) - ${CFG.nav.leftOffsetsPx.projects}px)`,
                   transform: "translate(-50%, -50%)",
-                  // @ts-expect-error CSS custom property string
                   opacity: "var(--ui, 0)",
                 }}
               >
@@ -359,12 +398,11 @@ export default function HeroMorph() {
                 rel="noopener noreferrer"
                 className="nav-bouncy absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white shadow-[0_4px_30px_rgba(0,0,0,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
                 style={{
-                  width: "84px",
-                  height: "72px",
-                  top: "46%",
-                  left: "calc(50% - ((96vw - 2 * var(--closeMaxX)) / 2) - 150px)",
+                  width: `${CFG.nav.buttonSize.w}px`,
+                  height: `${CFG.nav.buttonSize.h}px`,
+                  top: CFG.nav.centerTop,
+                  left: `calc(50% - ((96vw - 2 * var(--closeMaxX)) / 2) - ${CFG.nav.leftOffsetsPx.linkedin}px)`,
                   transform: "translate(-50%, -50%)",
-                  // @ts-expect-error CSS custom property string
                   opacity: "var(--ui, 0)",
                 }}
               >
@@ -380,12 +418,11 @@ export default function HeroMorph() {
                 aria-label="Work"
                 className="nav-bouncy absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white/90 shadow-[0_4px_30px_rgba(0,0,0,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
                 style={{
-                  width: "84px",
-                  height: "72px",
-                  top: "46%",
-                  left: "calc(50% + ((96vw - 2 * var(--closeMaxX)) / 2) + 54px)",
+                  width: `${CFG.nav.buttonSize.w}px`,
+                  height: `${CFG.nav.buttonSize.h}px`,
+                  top: CFG.nav.centerTop,
+                  left: `calc(50% + ((96vw - 2 * var(--closeMaxX)) / 2) + ${CFG.nav.rightOffsetsPx.work}px)`,
                   transform: "translate(-50%, -50%)",
-                  // @ts-expect-error CSS custom property string
                   opacity: "var(--ui, 0)",
                 }}
               >
@@ -403,12 +440,11 @@ export default function HeroMorph() {
                 rel="noopener noreferrer"
                 className="nav-bouncy absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white shadow-[0_4px_30px_rgba(0,0,0,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
                 style={{
-                  width: "84px",
-                  height: "72px",
-                  top: "46%",
-                  left: "calc(50% + ((96vw - 2 * var(--closeMaxX)) / 2) + 150px)",
+                  width: `${CFG.nav.buttonSize.w}px`,
+                  height: `${CFG.nav.buttonSize.h}px`,
+                  top: CFG.nav.centerTop,
+                  left: `calc(50% + ((96vw - 2 * var(--closeMaxX)) / 2) + ${CFG.nav.rightOffsetsPx.github}px)`,
                   transform: "translate(-50%, -50%)",
-                  // @ts-expect-error CSS custom property string
                   opacity: "var(--ui, 0)",
                 }}
               >
@@ -424,7 +460,9 @@ export default function HeroMorph() {
         <div
           className="absolute bottom-4 left-16 right-16 transition-opacity duration-300 pointer-events-none"
           style={{
-            opacity: showName ? "calc(1 - clamp(0, var(--overlay-up, 0) / 0.35, 1))" : 0,
+            opacity: showName
+              ? `calc(1 - clamp(0, var(--overlay-up, 0) / ${CFG.overlayUpDampen}, 1))`
+              : 0,
             transform: "translateY(calc(-1.2 * var(--scroll-y, 0) * var(--gate, 0) * 1px))",
             willChange: "opacity, transform",
           }}
@@ -452,7 +490,6 @@ export default function HeroMorph() {
           style={{
             background:
               "radial-gradient(ellipse 80vw 60vh at 50% 100%, rgba(0,139,139,0.2) 0%, rgba(0,139,139,0.1) 40%, transparent 70%)",
-            // @ts-expect-error CSS custom property string
             opacity: "min(calc(var(--p, 0) * 2), 1)",
           }}
         />
