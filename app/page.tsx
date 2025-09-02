@@ -82,6 +82,7 @@ export default function Page() {
   const [videoReady, setVideoReady] = useState(false);
   const [shouldPlayVideo, setShouldPlayVideo] = useState(false);
   const [isExpanding, setIsExpanding] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -98,6 +99,24 @@ export default function Page() {
 
     // Scroll handling moved to CSS variable loop below to avoid React renders.
     return;
+  }, []);
+
+  // Respect user reduced motion preference
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const media = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    );
+    const onChange = () => setReduceMotion(media.matches);
+    onChange();
+    if (media.addEventListener)
+      media.addEventListener('change', onChange);
+    else media.addListener(onChange);
+    return () => {
+      if (media.removeEventListener)
+        media.removeEventListener('change', onChange);
+      else media.removeListener(onChange);
+    };
   }, []);
 
   // Intro sequencing independent of video readiness
@@ -134,33 +153,29 @@ export default function Page() {
         const y = window.scrollY;
         const vh = window.innerHeight || 1;
         const p = Math.min(y / MAX, 1);
-        const pf = Math.min(p * 1.8, 1); // accelerated progress for faster shrink
-        const ps = Math.min(y / (vh * 0.1), 1); // progress to 10% viewport height
 
-        // New: shutter progress variables
+        // Shutter progress
         const START = 120; // px where shutter begins
         const LENGTH = 900; // px to fully close
         const sh = Math.min(Math.max((y - START) / LENGTH, 0), 1);
-        const gate = Math.min(Math.max((sh - 0.45) / 0.55, 0), 1); // gate from 0 at sh=0.45 to 1 at sh=1
-        const yn = vh ? y / vh : 0; // normalized scroll in viewport heights
-        const brandUp = 1.6 * yn * gate; // normalized upward travel (0..)
-        const ctaUp = 1.2 * yn * gate;
-        const overlayUp = 1.4 * yn * gate; // unified for group fade
+
+        // Movement gate and upward travel (normalized to viewport)
+        let gate = Math.min(Math.max((sh - 0.45) / 0.55, 0), 1);
+        const yn = vh ? y / vh : 0;
+        const overlayUp = reduceMotion
+          ? Math.min(yn / 0.2, 1)
+          : 1.4 * yn * gate;
+        if (reduceMotion) gate = 0; // no motion when reduced
 
         root.style.setProperty('--scroll-y', String(y));
         root.style.setProperty('--p', String(p));
-        root.style.setProperty('--pf', String(pf));
-        root.style.setProperty('--ps', String(ps));
         root.style.setProperty('--vh', String(vh));
         root.style.setProperty('--sh', String(sh));
         root.style.setProperty('--gate', String(gate));
-        root.style.setProperty('--brand-up', String(brandUp));
-        root.style.setProperty('--cta-up', String(ctaUp));
         root.style.setProperty('--overlay-up', String(overlayUp));
         // Final opening size targets (tweak to taste)
         root.style.setProperty('--closeMaxY', '34vh');
         root.style.setProperty('--closeMaxX', '42vw');
-        root.style.setProperty('--clip-r-add', '140px');
       };
       const onScroll = () => {
         if (raf) return;
@@ -214,7 +229,7 @@ export default function Page() {
   const introScale = initialPill ? 0.14 : 1; // transform-based intro sizing (no width/height animation)
   const containerRadius = initialPill
     ? '9999px'
-    : 'calc(24px + 240px * var(--pf, var(--p, 0)))'; // round faster with scroll
+    : 'calc(16px + 160px * var(--sh, 0))'; // unified rounding driven by shutter
 
   return (
     <div
@@ -234,7 +249,9 @@ export default function Page() {
           height: '86vh',
           borderRadius: containerRadius,
           border: 'none',
-          willChange: 'transform, opacity, filter, clip-path',
+          willChange: isExpanding
+            ? 'transform, opacity, filter, clip-path'
+            : undefined,
           transformOrigin: '50% 50%',
           transition: isExpanding
             ? 'top 0.4s ease-out, transform 2s cubic-bezier(0.22, 1, 0.36, 1), border-radius 2s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.6s ease-out'
@@ -259,7 +276,7 @@ export default function Page() {
             : '0 25px 50px -12px rgba(0, 0, 0, var(--shadow-a))',
           // Box-like shutter that closes from all sides. Corners round more as it closes.
           clipPath:
-            'inset(calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) round calc(24px + var(--sh, 0) * var(--clip-r-add, 120px)))',
+            'inset(calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) round calc(16px + var(--sh, 0) * 160px))',
         }}
       >
         <div
@@ -312,8 +329,7 @@ export default function Page() {
         <div
           className="relative w-full h-full overflow-hidden"
           style={{
-            borderRadius:
-              'calc(24px + 240px * var(--pf, var(--p, 0)))',
+            borderRadius: 'calc(16px + 160px * var(--sh, 0))',
             // Keep video hidden until intro completes, then fade it in and keep at full opacity
             opacity: isIntro ? 0 : 1,
             transition: 'opacity 0.8s ease-out',
@@ -325,6 +341,8 @@ export default function Page() {
             loop
             playsInline
             preload="auto"
+            aria-hidden
+            tabIndex={-1}
             onLoadedData={() => setVideoReady(true)}
             onCanPlay={() => setVideoReady(true)}
             onCanPlayThrough={() => setVideoReady(true)}
@@ -339,6 +357,16 @@ export default function Page() {
           <div
             className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30"
             style={{ opacity: isIntro ? 0 : 1 }}
+          />
+
+          {/* Cyan overlay: fades in as shutter closes to transition video to solid color */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              backgroundColor: '#00ffff',
+              opacity: 'clamp(0, (var(--sh, 0) - 0.45) * 2.2, 1)',
+              transition: 'opacity 0.5s ease-out',
+            }}
           />
 
           {/* Watermark cover - covers bottom right corner */}
@@ -359,7 +387,7 @@ export default function Page() {
                 'inset 0 0 0 2px rgba(0,0,0,0.10), 0 8px 24px rgba(0,0,0,0.14)',
             }}
           >
-            <span className="hidden sm:inline text-sm md:text-base lg:text-lg font-semibold text-black tracking-wide">
+            <span className="inline text-sm md:text-base lg:text-lg font-semibold text-black tracking-wide">
               Hi, I'm Jayvic 👋
             </span>
           </div>
@@ -405,29 +433,6 @@ export default function Page() {
 
       {/* Text Overlays - positioned around the video and person */}
       <div className="fixed inset-0 z-50 pointer-events-none">
-        {/* Name in pill - now outside shutter so it remains visible */}
-        <div
-          className="absolute inset-0 flex items-center justify-center"
-          style={{
-            opacity: initialPill
-              ? 0
-              : 'max(0, calc((var(--p, 0) - 0.7) * 3))',
-          }}
-        >
-          <div className="px-3">
-            <div className="flex items-center gap-3">
-              <Image
-                src="/icon.svg"
-                alt="Site icon"
-                width={16}
-                height={16}
-              />
-              <span className="inline text-xs md:text-sm lg:text-base font-semibold text-black tracking-wide">
-                Hi, I'm Jayvic 👋
-              </span>
-            </div>
-          </div>
-        </div>
         {/* Bottom row: brand on left, CTA on right; vertically centered and synchronized */}
         <div
           className="absolute bottom-4 left-16 right-16 transition-opacity duration-300 pointer-events-none"
