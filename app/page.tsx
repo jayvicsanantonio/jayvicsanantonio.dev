@@ -135,12 +135,23 @@ export default function Page() {
         const vh = window.innerHeight || 1;
         const p = Math.min(y / MAX, 1);
         const pf = Math.min(p * 1.8, 1); // accelerated progress for faster shrink
-        const ps = Math.min(y / (vh * 0.1), 1); // progress to 10% viewport height
+        const ps = Math.min(y / (vh * 0.10), 1); // progress to 10% viewport height
+
+        // New: shutter progress variables
+        const START = 120; // px where shutter begins
+        const LENGTH = 900; // px to fully close
+        const sh = Math.min(Math.max((y - START) / LENGTH, 0), 1);
+
         root.style.setProperty('--scroll-y', String(y));
         root.style.setProperty('--p', String(p));
         root.style.setProperty('--pf', String(pf));
         root.style.setProperty('--ps', String(ps));
         root.style.setProperty('--vh', String(vh));
+        root.style.setProperty('--sh', String(sh));
+        // Final opening size targets (tweak to taste)
+        root.style.setProperty('--closeMaxY', '34vh');
+        root.style.setProperty('--closeMaxX', '42vw');
+        root.style.setProperty('--clip-r-add', '140px');
       };
       const onScroll = () => {
         if (raf) return;
@@ -207,24 +218,17 @@ export default function Page() {
         style={{
           top: '46%',
           left: '50%',
-          '--sx':
-            'clamp(0.15625, calc((96 - 360 * var(--pf, var(--p, 0))) / 96), 1)',
-          '--sy':
-            'clamp(0.09302, calc((86 - 460 * var(--pf, var(--p, 0))) / 86), 1)',
           '--intro-scale': String(introScale),
-          '--i-sx': initialPill ? '1' : '1',
-          '--i-sy': initialPill ? '1' : '1',
-          transform:
-            'translate(-50%, -50%) scale(var(--sx), var(--sy)) scale(var(--i-sx), var(--i-sy)) scale(var(--intro-scale))',
+          transform: 'translate(-50%, -50%) scale(var(--intro-scale))',
           width: '96vw',
           height: '86vh',
           borderRadius: containerRadius,
           border: 'none',
-          willChange: 'transform, opacity, filter',
+          willChange: 'transform, opacity, filter, clip-path',
           transformOrigin: '50% 50%',
           transition: isExpanding
-            ? 'top 0.4s ease-out, transform 2s cubic-bezier(0.22, 1, 0.36, 1), border-radius 2s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out'
-            : 'top 0.4s ease-out, border-radius 0s, background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out',
+            ? 'top 0.4s ease-out, transform 2s cubic-bezier(0.22, 1, 0.36, 1), border-radius 2s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.6s ease-out'
+            : 'top 0.4s ease-out, border-radius 0s, background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.3s ease-out',
           '--bg-a': isIntro
             ? '0.95'
             : 'calc(max(0, (var(--p, 0) - 0.7) * 3) * 0.95)',
@@ -243,14 +247,15 @@ export default function Page() {
           boxShadow: initialPill
             ? 'none'
             : '0 25px 50px -12px rgba(0, 0, 0, var(--shadow-a))',
+          // Box-like shutter that closes from all sides. Corners round more as it closes.
+          clipPath:
+            'inset(calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) round calc(24px + var(--sh, 0) * var(--clip-r-add, 120px)))',
         }}
       >
         <div
           className="absolute sm:bottom-40 right-8 md:bottom-22 md:right-10 z-50 transition-opacity duration-700"
           style={{
-            opacity: showTitleGroup
-              ? 'clamp(0, calc(1 - var(--scroll-y) / 300), 1)'
-              : 0,
+            opacity: showTitleGroup ? 1 : 0,
           }}
         >
           <h3 className="text-lg md:text-3xl lg:text-4xl 2xl:text-6xl font-medium text-white tracking-widest">
@@ -267,9 +272,7 @@ export default function Page() {
         <div
           className="absolute bottom-32 right-8 md:bottom-10 md:right-10 z-50 transition-opacity duration-700"
           style={{
-            opacity: showTitleGroup
-              ? 'clamp(0, calc(1 - var(--scroll-y) / 300), 1)'
-              : 0,
+            opacity: showTitleGroup ? 1 : 0,
           }}
         >
           <h4 className="text-lg md:text-3xl lg:text-4xl 2xl:text-5xl font-light text-white/90 tracking-wider italic">
@@ -286,9 +289,7 @@ export default function Page() {
         <div
           className="absolute bottom-32 left-8 md:bottom-10 md:left-10 max-w-80 z-50 transition-opacity duration-700"
           style={{
-            opacity: showDesc
-              ? 'clamp(0, calc(1 - (var(--scroll-y) - 100) / 300), 1)'
-              : 0,
+            opacity: showDesc ? 1 : 0,
           }}
         >
           <p className="text-sm md:text-base text-white/80 leading-relaxed mb-2">
@@ -297,35 +298,6 @@ export default function Page() {
           </p>
         </div>
 
-        {/* Name inside the pill when nav state */}
-        <div
-          className="absolute inset-0 z-50 flex items-center justify-center pointer-events-none"
-          style={{
-            transform: 'none',
-            transformOrigin: '50% 50%',
-            opacity: initialPill
-              ? 0
-              : 'max(0, calc((var(--p, 0) - 0.7) * 3))',
-          }}
-        >
-          <div className="px-3">
-            <div className="flex items-center gap-3">
-              <Image
-                src="/icon.svg"
-                alt="Site icon"
-                width={16}
-                height={16}
-              />
-              {/* Short label on very small widths, full name from sm and up */}
-              <span className="inline sm:hidden text-[10px] font-semibold text-black tracking-wide">
-                Hi, I'm Jayvic 👋
-              </span>
-              <span className="hidden sm:inline text-xs md:text-sm lg:text-base font-semibold text-black tracking-wide">
-                Hi, I'm Jayvic 👋
-              </span>
-            </div>
-          </div>
-        </div>
 
         {/* The actual video that morphs */}
         <div
@@ -333,10 +305,8 @@ export default function Page() {
           style={{
             borderRadius:
               'calc(24px + 240px * var(--pf, var(--p, 0)))',
-            // Keep video hidden until intro completes, then fade it in; dim slightly when nav-like
-            opacity: isIntro
-              ? 0
-              : 'calc(1 - clamp(0, (var(--p, 0) - 0.8) * 3.5, 0.7))',
+            // Keep video hidden until intro completes, then fade it in and keep at full opacity
+            opacity: isIntro ? 0 : 1,
             transition: 'opacity 0.8s ease-out',
           }}
         >
@@ -380,11 +350,17 @@ export default function Page() {
                 'inset 0 0 0 2px rgba(0,0,0,0.10), 0 8px 24px rgba(0,0,0,0.14)',
             }}
           >
+            <Image
+              src="/icon.svg"
+              alt="Site icon"
+              width={28}
+              height={28}
+            />
             <span className="hidden sm:inline text-sm md:text-base lg:text-lg font-semibold text-black tracking-wide">
-              Hi, I'm Jayvic 👋
+              Jayvic San Antonio
             </span>
             <span className="inline sm:hidden text-[12px] font-semibold text-black tracking-wide">
-              Hi, I'm Jayvic 👋
+              Jayvic
             </span>
           </div>
         </div>
@@ -429,6 +405,22 @@ export default function Page() {
 
       {/* Text Overlays - positioned around the video and person */}
       <div className="fixed inset-0 z-50 pointer-events-none">
+        {/* Name in pill - now outside shutter so it remains visible */}
+        <div
+          className="absolute inset-0 flex items-center justify-center"
+          style={{
+            opacity: initialPill ? 0 : 'max(0, calc((var(--p, 0) - 0.7) * 3))',
+          }}
+        >
+          <div className="px-3">
+            <div className="flex items-center gap-3">
+              <Image src="/icon.svg" alt="Site icon" width={16} height={16} />
+              {/* Short label on very small widths, full name from sm and up */}
+              <span className="inline sm:hidden text-[10px] font-semibold text-black tracking-wide">Jayvic</span>
+              <span className="hidden sm:inline text-xs md:text-sm lg:text-base font-semibold text-black tracking-wide">Jayvic San Antonio</span>
+            </div>
+          </div>
+        </div>
         {/* Brand text - bottom left corner */}
         <div
           className="absolute bottom-4 left-16 transition-opacity duration-700"
