@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import AnimatedText from '@/components/ui/AnimatedText';
+import { Icon } from '@iconify/react';
 
 /*
   CSS variable contract used by HeroMorph
@@ -470,16 +471,12 @@ export default function HeroMorph() {
                   opacity: 'var(--ui, 0)',
                 }}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  width="36"
-                  height="36"
-                  fill="currentColor"
+                <Icon
+                  icon="mdi:application-brackets"
+                  width={36}
+                  height={36}
                   aria-hidden="true"
-                >
-                  <path d="M3 6a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6z" />
-                </svg>
+                />
               </Link>
             </li>
 
@@ -499,16 +496,12 @@ export default function HeroMorph() {
                   opacity: 'var(--ui, 0)',
                 }}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  width="36"
-                  height="36"
-                  fill="currentColor"
+                <Icon
+                  icon="mdi:linkedin"
+                  width={40}
+                  height={40}
                   aria-hidden="true"
-                >
-                  <path d="M22.225 0H1.771C.792 0 0 .771 0 1.723v20.554C0 23.229.792 24 1.771 24h20.451C23.2 24 24 23.229 24 22.277V1.723C24 .771 23.2 0 22.222 0zM7 20.452H3.69V9H7v11.452zM5.345 7.433a2.006 2.006 0 1 1 0-4.012 2.006 2.006 0 0 1 0 4.012zM20.452 20.452h-3.31V14.9c0-1.324-.027-3.027-1.845-3.027-1.847 0-2.13 1.443-2.13 2.935v5.645H9.86V9h3.176v1.561h.046c.442-.838 1.52-1.722 3.13-1.722 3.35 0 3.962 2.205 3.962 5.07v6.543z" />
-                </svg>
+                />
               </Link>
             </li>
 
@@ -526,16 +519,12 @@ export default function HeroMorph() {
                   opacity: 'var(--ui, 0)',
                 }}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  width="36"
-                  height="36"
-                  fill="currentColor"
+                <Icon
+                  icon="mdi:timeline-text"
+                  width={36}
+                  height={36}
                   aria-hidden="true"
-                >
-                  <path d="M10 4h4a2 2 0 0 1 2 2v2h3a1 1 0 0 1 1 1v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9a1 1 0 0 1 1-1h3V6a2 2 0 0 1 2-2zm4 4V6h-4v2h4z" />
-                </svg>
+                />
               </Link>
             </li>
 
@@ -555,16 +544,12 @@ export default function HeroMorph() {
                   opacity: 'var(--ui, 0)',
                 }}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  width="36"
-                  height="36"
-                  fill="currentColor"
+                <Icon
+                  icon="mdi:github"
+                  width={40}
+                  height={40}
                   aria-hidden="true"
-                >
-                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58 0-.29-.01-1.06-.02-2.08-3.34.73-4.04-1.61-4.04-1.61-.55-1.4-1.34-1.77-1.34-1.77-1.09-.75.08-.74.08-.74 1.2.09 1.83 1.23 1.83 1.23 1.07 1.83 2.82 1.3 3.51.99.11-.77.42-1.3.76-1.6-2.67-.3-5.47-1.34-5.47-5.95 0-1.31.47-2.38 1.23-3.22-.12-.3-.54-1.52.12-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.87.12 3.17.77.84 1.23 1.9 1.23 3.22 0 4.62-2.8 5.65-5.48 5.95.43.37.81 1.1.81 2.22 0 1.61-.01 2.91-.01 3.3 0 .32.21.69.82.58C20.56 21.8 24 17.3 24 12 24 5.37 18.63 0 12 0z" />
-                </svg>
+                />
               </Link>
             </li>
           </ul>
