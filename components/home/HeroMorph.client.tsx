@@ -461,7 +461,7 @@ export default function HeroMorph() {
               <Link
                 href="/projects"
                 aria-label="Projects"
-                className="nav-bouncy absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white/90 shadow-[0_4px_30px_rgba(0,0,0,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                className="nav-bouncy group absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white/90 shadow-[0_4px_30px_rgba(0,0,0,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
                 style={{
                   width: `${CFG.nav.buttonSize.w}px`,
                   height: `${CFG.nav.buttonSize.h}px`,
@@ -477,6 +477,9 @@ export default function HeroMorph() {
                   height={36}
                   aria-hidden="true"
                 />
+                <span className="pointer-events-none absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full rounded-md bg-black/80 px-2 py-1 text-[11px] md:text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-lg">
+                  Projects
+                </span>
               </Link>
             </li>
 
@@ -486,7 +489,7 @@ export default function HeroMorph() {
                 aria-label="LinkedIn"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="nav-bouncy absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white shadow-[0_4px_30px_rgba(0,0,0,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                className="nav-bouncy group absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white shadow-[0_4px_30px_rgba(0,0,0,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
                 style={{
                   width: `${CFG.nav.buttonSize.w}px`,
                   height: `${CFG.nav.buttonSize.h}px`,
@@ -502,6 +505,9 @@ export default function HeroMorph() {
                   height={40}
                   aria-hidden="true"
                 />
+                <span className="pointer-events-none absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full rounded-md bg-black/80 px-2 py-1 text-[11px] md:text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-lg">
+                  LinkedIn
+                </span>
               </Link>
             </li>
 
@@ -509,7 +515,7 @@ export default function HeroMorph() {
               <Link
                 href="/work"
                 aria-label="Work"
-                className="nav-bouncy absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white/90 shadow-[0_4px_30px_rgba(0,0,0,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                className="nav-bouncy group absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white/90 shadow-[0_4px_30px_rgba(0,0,0,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
                 style={{
                   width: `${CFG.nav.buttonSize.w}px`,
                   height: `${CFG.nav.buttonSize.h}px`,
@@ -525,6 +531,9 @@ export default function HeroMorph() {
                   height={36}
                   aria-hidden="true"
                 />
+                <span className="pointer-events-none absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full rounded-md bg-black/80 px-2 py-1 text-[11px] md:text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-lg">
+                  Work Experience
+                </span>
               </Link>
             </li>
 
@@ -534,7 +543,7 @@ export default function HeroMorph() {
                 aria-label="GitHub"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="nav-bouncy absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white shadow-[0_4px_30px_rgba(0,0,0,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                className="nav-bouncy group absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white shadow-[0_4px_30px_rgba(0,0,0,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
                 style={{
                   width: `${CFG.nav.buttonSize.w}px`,
                   height: `${CFG.nav.buttonSize.h}px`,
@@ -550,6 +559,9 @@ export default function HeroMorph() {
                   height={40}
                   aria-hidden="true"
                 />
+                <span className="pointer-events-none absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full rounded-md bg-black/80 px-2 py-1 text-[11px] md:text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-lg">
+                  GitHub
+                </span>
               </Link>
             </li>
           </ul>
