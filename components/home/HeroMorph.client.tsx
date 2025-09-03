@@ -47,7 +47,7 @@ const CFG = {
   },
   nav: {
     centerTop: '46%',
-    buttonSize: { w: 84, h: 62 },
+buttonSize: { w: 84, h: 72 },
     leftOffsetsPx: { projects: 54, linkedin: 150 },
     rightOffsetsPx: { work: 54, github: 150 },
   },
@@ -461,21 +461,41 @@ export default function HeroMorph() {
               <Link
                 href="/projects"
                 aria-label="Projects"
-                className="nav-bouncy group absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white/90 shadow-[0_4px_30px_rgba(0,0,0,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+className="group absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white/90 shadow-[0_4px_30px_rgba(0,0,0,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
                 style={{
                   width: `${CFG.nav.buttonSize.w}px`,
                   height: `${CFG.nav.buttonSize.h}px`,
                   top: CFG.nav.centerTop,
                   left: `calc(50% - ((96vw - 2 * var(--closeMaxX)) / 2) - ${CFG.nav.leftOffsetsPx.projects}px)`,
-                  transform: 'translate(-50%, -50%)',
+                  transform: 'translate(-50%, -50%) translate(calc(var(--mx, 0) * 6px), calc(var(--my, 0) * 6px))',
+transition: 'transform 260ms cubic-bezier(0.22, 1, 0.36, 1)',
                   opacity: 'var(--ui, 0)',
+                  willChange: 'transform',
+                }}
+                onMouseMove={(e) => {
+                  const t = e.currentTarget as HTMLElement;
+                  const r = t.getBoundingClientRect();
+                  const mx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+                  const my = ((e.clientY - r.top) / r.height - 0.5) * 2;
+                  t.style.setProperty('--mx', String(mx));
+                  t.style.setProperty('--my', String(my));
+                }}
+                onMouseLeave={(e) => {
+                  const t = e.currentTarget as HTMLElement;
+                  t.style.setProperty('--mx', '0');
+                  t.style.setProperty('--my', '0');
                 }}
               >
-                <Icon
+<Icon
                   icon="mdi:application-brackets"
                   width={36}
                   height={36}
                   aria-hidden="true"
+                  style={{
+                    transform: 'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
+transition: 'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
+                    willChange: 'transform',
+                  }}
                 />
                 <span className="pointer-events-none absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full rounded-md bg-black/80 px-2 py-1 text-[11px] md:text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-lg">
                   Projects
@@ -489,21 +509,41 @@ export default function HeroMorph() {
                 aria-label="LinkedIn"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="nav-bouncy group absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white shadow-[0_4px_30px_rgba(0,0,0,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+className="group absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white shadow-[0_4px_30px_rgba(0,0,0,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
                 style={{
                   width: `${CFG.nav.buttonSize.w}px`,
                   height: `${CFG.nav.buttonSize.h}px`,
                   top: CFG.nav.centerTop,
                   left: `calc(50% - ((96vw - 2 * var(--closeMaxX)) / 2) - ${CFG.nav.leftOffsetsPx.linkedin}px)`,
-                  transform: 'translate(-50%, -50%)',
+                  transform: 'translate(-50%, -50%) translate(calc(var(--mx, 0) * 6px), calc(var(--my, 0) * 6px))',
+transition: 'transform 260ms cubic-bezier(0.22, 1, 0.36, 1)',
                   opacity: 'var(--ui, 0)',
+                  willChange: 'transform',
+                }}
+                onMouseMove={(e) => {
+                  const t = e.currentTarget as HTMLElement;
+                  const r = t.getBoundingClientRect();
+                  const mx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+                  const my = ((e.clientY - r.top) / r.height - 0.5) * 2;
+                  t.style.setProperty('--mx', String(mx));
+                  t.style.setProperty('--my', String(my));
+                }}
+                onMouseLeave={(e) => {
+                  const t = e.currentTarget as HTMLElement;
+                  t.style.setProperty('--mx', '0');
+                  t.style.setProperty('--my', '0');
                 }}
               >
-                <Icon
-                  icon="mdi:linkedin"
+<Icon
+icon="mdi:linkedin"
                   width={40}
                   height={40}
                   aria-hidden="true"
+                  style={{
+                    transform: 'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
+transition: 'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
+                    willChange: 'transform',
+                  }}
                 />
                 <span className="pointer-events-none absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full rounded-md bg-black/80 px-2 py-1 text-[11px] md:text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-lg">
                   LinkedIn
@@ -515,21 +555,41 @@ export default function HeroMorph() {
               <Link
                 href="/work"
                 aria-label="Work"
-                className="nav-bouncy group absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white/90 shadow-[0_4px_30px_rgba(0,0,0,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+className="group absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white/90 shadow-[0_4px_30px_rgba(0,0,0,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
                 style={{
                   width: `${CFG.nav.buttonSize.w}px`,
                   height: `${CFG.nav.buttonSize.h}px`,
                   top: CFG.nav.centerTop,
                   left: `calc(50% + ((96vw - 2 * var(--closeMaxX)) / 2) + ${CFG.nav.rightOffsetsPx.work}px)`,
-                  transform: 'translate(-50%, -50%)',
+                  transform: 'translate(-50%, -50%) translate(calc(var(--mx, 0) * 6px), calc(var(--my, 0) * 6px))',
+transition: 'transform 260ms cubic-bezier(0.22, 1, 0.36, 1)',
                   opacity: 'var(--ui, 0)',
+                  willChange: 'transform',
+                }}
+                onMouseMove={(e) => {
+                  const t = e.currentTarget as HTMLElement;
+                  const r = t.getBoundingClientRect();
+                  const mx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+                  const my = ((e.clientY - r.top) / r.height - 0.5) * 2;
+                  t.style.setProperty('--mx', String(mx));
+                  t.style.setProperty('--my', String(my));
+                }}
+                onMouseLeave={(e) => {
+                  const t = e.currentTarget as HTMLElement;
+                  t.style.setProperty('--mx', '0');
+                  t.style.setProperty('--my', '0');
                 }}
               >
-                <Icon
-                  icon="mdi:timeline-text"
+<Icon
+icon="mdi:timeline-text"
                   width={36}
                   height={36}
                   aria-hidden="true"
+                  style={{
+                    transform: 'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
+                    transition: 'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
+                    willChange: 'transform',
+                  }}
                 />
                 <span className="pointer-events-none absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full rounded-md bg-black/80 px-2 py-1 text-[11px] md:text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-lg">
                   Work Experience
@@ -543,21 +603,41 @@ export default function HeroMorph() {
                 aria-label="GitHub"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="nav-bouncy group absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white shadow-[0_4px_30px_rgba(0,0,0,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+className="group absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white shadow-[0_4px_30px_rgba(0,0,0,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
                 style={{
                   width: `${CFG.nav.buttonSize.w}px`,
                   height: `${CFG.nav.buttonSize.h}px`,
                   top: CFG.nav.centerTop,
                   left: `calc(50% + ((96vw - 2 * var(--closeMaxX)) / 2) + ${CFG.nav.rightOffsetsPx.github}px)`,
-                  transform: 'translate(-50%, -50%)',
+                  transform: 'translate(-50%, -50%) translate(calc(var(--mx, 0) * 6px), calc(var(--my, 0) * 6px))',
+                  transition: 'transform 140ms cubic-bezier(0.22, 1, 0.36, 1)',
                   opacity: 'var(--ui, 0)',
+                  willChange: 'transform',
+                }}
+                onMouseMove={(e) => {
+                  const t = e.currentTarget as HTMLElement;
+                  const r = t.getBoundingClientRect();
+                  const mx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+                  const my = ((e.clientY - r.top) / r.height - 0.5) * 2;
+                  t.style.setProperty('--mx', String(mx));
+                  t.style.setProperty('--my', String(my));
+                }}
+                onMouseLeave={(e) => {
+                  const t = e.currentTarget as HTMLElement;
+                  t.style.setProperty('--mx', '0');
+                  t.style.setProperty('--my', '0');
                 }}
               >
-                <Icon
-                  icon="mdi:github"
+<Icon
+icon="mdi:github"
                   width={40}
                   height={40}
                   aria-hidden="true"
+                  style={{
+                    transform: 'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
+                    transition: 'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
+                    willChange: 'transform',
+                  }}
                 />
                 <span className="pointer-events-none absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full rounded-md bg-black/80 px-2 py-1 text-[11px] md:text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-lg">
                   GitHub
