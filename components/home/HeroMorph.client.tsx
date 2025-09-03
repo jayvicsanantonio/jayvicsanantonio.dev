@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import AnimatedText from '@/components/ui/AnimatedText';
+import { GlassButton } from '@/components/ui/GlassButton';
 import { Icon } from '@iconify/react';
 
 /*
@@ -458,17 +459,16 @@ export default function HeroMorph() {
         <nav aria-label="Primary" className="contents">
           <ul className="contents">
             <li className="contents">
-              <Link
-                href="/projects"
-                aria-label="Projects"
-className="group absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white/90 shadow-[0_4px_30px_rgba(0,0,0,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+              <div
+                className="group absolute pointer-events-auto"
                 style={{
                   width: `${CFG.nav.buttonSize.w}px`,
                   height: `${CFG.nav.buttonSize.h}px`,
                   top: CFG.nav.centerTop,
                   left: `calc(50% - ((96vw - 2 * var(--closeMaxX)) / 2) - ${CFG.nav.leftOffsetsPx.projects}px)`,
-                  transform: 'translate(-50%, -50%) translate(calc(var(--mx, 0) * 6px), calc(var(--my, 0) * 6px))',
-transition: 'transform 260ms cubic-bezier(0.22, 1, 0.36, 1)',
+                  transform:
+                    'translate(-50%, -50%) translate(calc(var(--mx, 0) * 6px), calc(var(--my, 0) * 6px))',
+                  transition: 'transform 260ms cubic-bezier(0.22, 1, 0.36, 1)',
                   opacity: 'var(--ui, 0)',
                   willChange: 'transform',
                 }}
@@ -486,37 +486,42 @@ transition: 'transform 260ms cubic-bezier(0.22, 1, 0.36, 1)',
                   t.style.setProperty('--my', '0');
                 }}
               >
-<Icon
-                  icon="mdi:application-brackets"
-                  width={36}
-                  height={36}
-                  aria-hidden="true"
-                  style={{
-                    transform: 'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
-transition: 'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
-                    willChange: 'transform',
-                  }}
-                />
+                <GlassButton
+                  href="/projects"
+                  aria-label="Projects"
+                  className="inline-flex w-full h-full items-center justify-center rounded-full text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                >
+                  <Icon
+                    icon="mdi:application-brackets"
+                    width={36}
+                    height={36}
+                    aria-hidden="true"
+                    style={{
+                      transform:
+                        'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
+                      transition:
+                        'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
+                      willChange: 'transform',
+                    }}
+                  />
+                </GlassButton>
                 <span className="pointer-events-none absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full rounded-md bg-black/80 px-2 py-1 text-[11px] md:text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-lg">
                   Projects
                 </span>
-              </Link>
+              </div>
             </li>
 
             <li className="contents">
-              <Link
-                href="https://www.linkedin.com/in/jayvicsanantonio/"
-                aria-label="LinkedIn"
-                target="_blank"
-                rel="noopener noreferrer"
-className="group absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white shadow-[0_4px_30px_rgba(0,0,0,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+              <div
+                className="group absolute pointer-events-auto"
                 style={{
                   width: `${CFG.nav.buttonSize.w}px`,
                   height: `${CFG.nav.buttonSize.h}px`,
                   top: CFG.nav.centerTop,
                   left: `calc(50% - ((96vw - 2 * var(--closeMaxX)) / 2) - ${CFG.nav.leftOffsetsPx.linkedin}px)`,
-                  transform: 'translate(-50%, -50%) translate(calc(var(--mx, 0) * 6px), calc(var(--my, 0) * 6px))',
-transition: 'transform 260ms cubic-bezier(0.22, 1, 0.36, 1)',
+                  transform:
+                    'translate(-50%, -50%) translate(calc(var(--mx, 0) * 6px), calc(var(--my, 0) * 6px))',
+                  transition: 'transform 260ms cubic-bezier(0.22, 1, 0.36, 1)',
                   opacity: 'var(--ui, 0)',
                   willChange: 'transform',
                 }}
@@ -534,35 +539,44 @@ transition: 'transform 260ms cubic-bezier(0.22, 1, 0.36, 1)',
                   t.style.setProperty('--my', '0');
                 }}
               >
-<Icon
-icon="mdi:linkedin"
-                  width={40}
-                  height={40}
-                  aria-hidden="true"
-                  style={{
-                    transform: 'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
-transition: 'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
-                    willChange: 'transform',
-                  }}
-                />
+                <GlassButton
+                  href="https://www.linkedin.com/in/jayvicsanantonio/"
+                  aria-label="LinkedIn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full h-full items-center justify-center rounded-full text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                >
+                  <Icon
+                    icon="mdi:linkedin"
+                    width={40}
+                    height={40}
+                    aria-hidden="true"
+                    style={{
+                      transform:
+                        'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
+                      transition:
+                        'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
+                      willChange: 'transform',
+                    }}
+                  />
+                </GlassButton>
                 <span className="pointer-events-none absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full rounded-md bg-black/80 px-2 py-1 text-[11px] md:text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-lg">
                   LinkedIn
                 </span>
-              </Link>
+              </div>
             </li>
 
             <li className="contents">
-              <Link
-                href="/work"
-                aria-label="Work"
-className="group absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white/90 shadow-[0_4px_30px_rgba(0,0,0,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+              <div
+                className="group absolute pointer-events-auto"
                 style={{
                   width: `${CFG.nav.buttonSize.w}px`,
                   height: `${CFG.nav.buttonSize.h}px`,
                   top: CFG.nav.centerTop,
                   left: `calc(50% + ((96vw - 2 * var(--closeMaxX)) / 2) + ${CFG.nav.rightOffsetsPx.work}px)`,
-                  transform: 'translate(-50%, -50%) translate(calc(var(--mx, 0) * 6px), calc(var(--my, 0) * 6px))',
-transition: 'transform 260ms cubic-bezier(0.22, 1, 0.36, 1)',
+                  transform:
+                    'translate(-50%, -50%) translate(calc(var(--mx, 0) * 6px), calc(var(--my, 0) * 6px))',
+                  transition: 'transform 260ms cubic-bezier(0.22, 1, 0.36, 1)',
                   opacity: 'var(--ui, 0)',
                   willChange: 'transform',
                 }}
@@ -580,36 +594,41 @@ transition: 'transform 260ms cubic-bezier(0.22, 1, 0.36, 1)',
                   t.style.setProperty('--my', '0');
                 }}
               >
-<Icon
-icon="mdi:timeline-text"
-                  width={36}
-                  height={36}
-                  aria-hidden="true"
-                  style={{
-                    transform: 'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
-                    transition: 'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
-                    willChange: 'transform',
-                  }}
-                />
+                <GlassButton
+                  href="/work"
+                  aria-label="Work"
+                  className="inline-flex w-full h-full items-center justify-center rounded-full text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                >
+                  <Icon
+                    icon="mdi:timeline-text"
+                    width={36}
+                    height={36}
+                    aria-hidden="true"
+                    style={{
+                      transform:
+                        'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
+                      transition:
+                        'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
+                      willChange: 'transform',
+                    }}
+                  />
+                </GlassButton>
                 <span className="pointer-events-none absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full rounded-md bg-black/80 px-2 py-1 text-[11px] md:text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-lg">
                   Work Experience
                 </span>
-              </Link>
+              </div>
             </li>
 
             <li className="contents">
-              <Link
-                href="https://github.com/jayvicsanantonio"
-                aria-label="GitHub"
-                target="_blank"
-                rel="noopener noreferrer"
-className="group absolute pointer-events-auto inline-flex items-center justify-center rounded-full ring-1 ring-white/30 bg-white/15 backdrop-blur-md text-white shadow-[0_4px_30px_rgba(0,0,0,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+              <div
+                className="group absolute pointer-events-auto"
                 style={{
                   width: `${CFG.nav.buttonSize.w}px`,
                   height: `${CFG.nav.buttonSize.h}px`,
                   top: CFG.nav.centerTop,
                   left: `calc(50% + ((96vw - 2 * var(--closeMaxX)) / 2) + ${CFG.nav.rightOffsetsPx.github}px)`,
-                  transform: 'translate(-50%, -50%) translate(calc(var(--mx, 0) * 6px), calc(var(--my, 0) * 6px))',
+                  transform:
+                    'translate(-50%, -50%) translate(calc(var(--mx, 0) * 6px), calc(var(--my, 0) * 6px))',
                   transition: 'transform 140ms cubic-bezier(0.22, 1, 0.36, 1)',
                   opacity: 'var(--ui, 0)',
                   willChange: 'transform',
@@ -628,21 +647,31 @@ className="group absolute pointer-events-auto inline-flex items-center justify-c
                   t.style.setProperty('--my', '0');
                 }}
               >
-<Icon
-icon="mdi:github"
-                  width={40}
-                  height={40}
-                  aria-hidden="true"
-                  style={{
-                    transform: 'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
-                    transition: 'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
-                    willChange: 'transform',
-                  }}
-                />
+                <GlassButton
+                  href="https://github.com/jayvicsanantonio"
+                  aria-label="GitHub"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full h-full items-center justify-center rounded-full text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                >
+                  <Icon
+                    icon="mdi:github"
+                    width={40}
+                    height={40}
+                    aria-hidden="true"
+                    style={{
+                      transform:
+                        'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
+                      transition:
+                        'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
+                      willChange: 'transform',
+                    }}
+                  />
+                </GlassButton>
                 <span className="pointer-events-none absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full rounded-md bg-black/80 px-2 py-1 text-[11px] md:text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-lg">
                   GitHub
                 </span>
-              </Link>
+              </div>
             </li>
           </ul>
         </nav>
