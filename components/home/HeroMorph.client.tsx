@@ -359,12 +359,12 @@ export default function HeroMorph() {
             style={{ opacity: isIntro ? 0 : 1 }}
           />
 
-          {/* Cyan overlay: fades in as shutter closes to transition video to solid color, now with centered text */}
+          {/* Cyan overlay: fades in as shutter closes; styled like glass buttons (cyan-tinted) */}
           <div
-            className="absolute inset-0 pointer-events-none flex items-center justify-center"
+            className="absolute inset-0 pointer-events-none flex items-center justify-center border border-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_8px_30px_rgba(0,0,0,0.22)] backdrop-blur-[16px] backdrop-saturate-[160%] before:content-[''] before:absolute before:inset-0 before:pointer-events-none before:bg-[radial-gradient(120%_60%_at_50%_0%,rgba(255,255,255,0.35),rgba(255,255,255,0)_60%)]"
             style={{
               background:
-                'linear-gradient(180deg, #18CCC1 0%, #00A69E 100%)',
+                'linear-gradient(180deg, rgba(24,204,193,0.28) 0%, rgba(0,166,158,0.20) 100%)',
               opacity: 'var(--cyan, 0)',
               transition: 'opacity 0.5s ease-out',
             }}
