@@ -11,39 +11,68 @@ export default function CursorGlow() {
     const glow = glowRef.current;
     if (!dot || !glow) return;
 
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const pointerFine = window.matchMedia('(pointer: fine)');
+
+    // Respect preference and input modality
+    if (prefersReduced.matches || !pointerFine.matches) return;
+
     let raf = 0;
+    let started = false;
     let targetX = 0;
     let targetY = 0;
     let currentX = 0;
     let currentY = 0;
 
-    const onMove = (e: MouseEvent) => {
-      targetX = e.clientX;
-      targetY = e.clientY;
-      if (dot) {
-        dot.style.transform = `translate3d(${targetX - 3}px, ${
-          targetY - 3
-        }px, 0)`;
-      }
-    };
-
     const loop = () => {
       currentX += (targetX - currentX) * 0.12;
       currentY += (targetY - currentY) * 0.12;
-      if (glow) {
-        glow.style.transform = `translate3d(${currentX - 60}px, ${
-          currentY - 60
-        }px, 0)`;
-      }
+      glow.style.transform = `translate3d(${currentX - 60}px, ${currentY - 60}px, 0)`;
       raf = requestAnimationFrame(loop);
     };
 
+    const onMove = (e: MouseEvent) => {
+      targetX = e.clientX;
+      targetY = e.clientY;
+      dot.style.transform = `translate3d(${targetX - 3}px, ${targetY - 3}px, 0)`;
+      if (!started) {
+        started = true;
+        raf = requestAnimationFrame(loop);
+      }
+    };
+
+    const onChange = () => {
+      // Stop and detach if preferences change at runtime
+      if (prefersReduced.matches || !pointerFine.matches) {
+        window.removeEventListener('mousemove', onMove);
+        if (raf) cancelAnimationFrame(raf);
+      }
+    };
+
     window.addEventListener('mousemove', onMove, { passive: true });
-    raf = requestAnimationFrame(loop);
+    if (prefersReduced.addEventListener) {
+      prefersReduced.addEventListener('change', onChange);
+      pointerFine.addEventListener('change', onChange);
+    } else {
+      // Safari fallback
+      // @ts-ignore
+      prefersReduced.addListener(onChange);
+      // @ts-ignore
+      pointerFine.addListener(onChange);
+    }
 
     return () => {
       window.removeEventListener('mousemove', onMove);
-      cancelAnimationFrame(raf);
+      if (prefersReduced.removeEventListener) {
+        prefersReduced.removeEventListener('change', onChange);
+        pointerFine.removeEventListener('change', onChange);
+      } else {
+        // @ts-ignore
+        prefersReduced.removeListener(onChange);
+        // @ts-ignore
+        pointerFine.removeListener(onChange);
+      }
+      if (raf) cancelAnimationFrame(raf);
     };
   }, []);
 

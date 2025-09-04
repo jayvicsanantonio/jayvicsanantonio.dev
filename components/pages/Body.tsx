@@ -3,8 +3,6 @@
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/react';
 import { Toaster } from '@/components/ui/sonner';
-import Header from '@/components/pages/Header';
-import Footer from '@/components/pages/Footer';
 import AmbientBackground from '@/components/pages/AmbientBackground';
 import CursorGlow from '@/components/pages/CursorGlow';
 import { usePathname } from 'next/navigation';

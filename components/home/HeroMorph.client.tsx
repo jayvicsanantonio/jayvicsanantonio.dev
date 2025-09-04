@@ -67,6 +67,7 @@ export default function HeroMorph() {
   const [shouldPlayVideo, setShouldPlayVideo] = useState(false);
   const [isExpanding, setIsExpanding] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
+  const [hasVideo, setHasVideo] = useState(false);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -92,6 +93,25 @@ export default function HeroMorph() {
       if (media.removeEventListener)
         media.removeEventListener('change', onChange);
       else media.removeListener(onChange);
+    };
+  }, []);
+
+  // Check if hero video asset exists; if not, fall back gracefully
+  useEffect(() => {
+    let active = true;
+    if (typeof window !== 'undefined') {
+      fetch('/matrix-horizontal.mp4', { method: 'HEAD' })
+        .then((res) => {
+          if (!active) return;
+          setHasVideo(res.ok);
+        })
+        .catch(() => {
+          if (!active) return;
+          setHasVideo(false);
+        });
+    }
+    return () => {
+      active = false;
     };
   }, []);
 
@@ -338,22 +358,34 @@ export default function HeroMorph() {
             transition: 'opacity 0.8s ease-out',
           }}
         >
-          <video
-            ref={videoRef}
-            muted
-            loop
-            playsInline
-            preload={CFG.video.preload}
-            aria-hidden
-            tabIndex={-1}
-            className="w-full h-full object-cover"
-            style={{
-              willChange: 'opacity, transform',
-              transform: `scale(${CFG.video.scale})`,
-            }}
-          >
-            <source src="/matrix-horizontal.mp4" type="video/mp4" />
-          </video>
+          {hasVideo ? (
+            <video
+              ref={videoRef}
+              muted
+              loop
+              playsInline
+              preload={CFG.video.preload}
+              aria-hidden
+              tabIndex={-1}
+              poster="/images/home/placeholder-image.webp"
+              onError={() => setHasVideo(false)}
+              className="w-full h-full object-cover"
+              style={{
+                willChange: 'opacity, transform',
+                transform: `scale(${CFG.video.scale})`,
+              }}
+            >
+              <source src="/matrix-horizontal.mp4" type="video/mp4" />
+            </video>
+          ) : (
+            <div
+              aria-hidden
+              className="w-full h-full bg-[radial-gradient(80%_60%_at_50%_0%,rgba(59,130,246,0.20),transparent_60%),radial-gradient(60%_50%_at_50%_100%,rgba(168,85,247,0.16),transparent_60%)]"
+              style={{
+                transform: `scale(${CFG.video.scale})`,
+              }}
+            />
+          )}
           <div
             className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30"
             style={{ opacity: isIntro ? 0 : 1 }}
