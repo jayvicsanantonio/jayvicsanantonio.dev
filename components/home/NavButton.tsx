@@ -1,4 +1,5 @@
 import { GlassButton } from '@/components/ui/GlassButton';
+import { cn } from '@/lib/utils';
 import React from 'react';
 
 export type NavButtonProps = {
@@ -58,14 +59,22 @@ export default function NavButton({
         t.style.setProperty('--my', '0');
       }}
     >
-      <GlassButton
-        href={href}
-        aria-label={ariaLabel}
-        className="inline-flex w-full h-full items-center justify-center rounded-full text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
-        {...linkProps}
-      >
-        {children}
-      </GlassButton>
+      {(() => {
+        const { className: linkClassName, ...restLinkProps } = linkProps;
+        return (
+          <GlassButton
+            href={href}
+            aria-label={ariaLabel}
+            className={cn(
+              'inline-flex w-full h-full items-center justify-center rounded-full text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80',
+              linkClassName
+            )}
+            {...restLinkProps}
+          >
+            {children}
+          </GlassButton>
+        );
+      })()}
       <span className="pointer-events-none absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full rounded-md bg-black/80 px-2 py-1 text-[11px] md:text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-lg">
         {tooltip}
       </span>

@@ -39,7 +39,7 @@ export default function IconButton({
   };
 
   return (
-    <Link href={link} onClick={() => callback()} className="block">
+    <Link href={link} onClick={() => callback()} className={"block"}>
       <motion.div
         ref={ref}
         className={`flex items-center py-3 rounded-xl cursor-pointer border border-white/0 transition-colors will-change-transform duration-200 font-oswald px-3 sm:px-4 ${

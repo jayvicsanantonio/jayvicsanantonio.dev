@@ -15,6 +15,11 @@ export function useScrollToTop(options?: UseScrollToTopOptions) {
   const behavior = options?.behavior ?? 'auto';
   const containers = options?.containers ?? [];
 
+  // Avoid interfering with React View Transitions; scrolling during capture can abort.
+  if (typeof document !== 'undefined' && 'startViewTransition' in document) {
+    return;
+  }
+
   const resolvedContainers = useMemo(() => {
     if (typeof document === 'undefined') return [] as HTMLElement[];
     const els: HTMLElement[] = [];

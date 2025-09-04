@@ -57,7 +57,7 @@ export default function ProjectsPage() {
       <div className="mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Header */}
         <div className="space-y-5 max-w-3xl">
-          <div className="font-oswald uppercase inline-block rounded-lg bg-white/5 px-3 py-1 tracking-wide text-white/90">
+          <div className="font-oswald uppercase inline-block rounded-lg bg-white/5 px-3 py-1 tracking-wide text-white/90 vt-tag-projects">
             Projects
           </div>
           <h1 className="font-oswald text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight text-cyan-300/90">

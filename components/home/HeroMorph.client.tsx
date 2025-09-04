@@ -368,6 +368,7 @@ export default function HeroMorph() {
                 offsetPx={CFG.nav.leftOffsetsPx.projects}
                 size={CFG.nav.buttonSize}
                 top={CFG.nav.centerTop}
+                className="vt-tag-projects"
               >
                 <Icon
                   icon="mdi:application-brackets"
@@ -420,6 +421,7 @@ export default function HeroMorph() {
                 offsetPx={CFG.nav.rightOffsetsPx.work}
                 size={CFG.nav.buttonSize}
                 top={CFG.nav.centerTop}
+                className="vt-tag-work"
               >
                 <Icon
                   icon="mdi:timeline-text"
@@ -475,7 +477,7 @@ export default function HeroMorph() {
           <GlassButton
             href="/projects"
             aria-label="Projects"
-            className="w-14 h-14 rounded-full"
+            className="w-14 h-14 rounded-full vt-tag-projects"
           >
             <Icon
               icon="mdi:application-brackets"
@@ -501,7 +503,7 @@ export default function HeroMorph() {
           <GlassButton
             href="/work"
             aria-label="Work Experience"
-            className="w-14 h-14 rounded-full"
+            className="w-14 h-14 rounded-full vt-tag-work"
           >
             <Icon
               icon="mdi:timeline-text"

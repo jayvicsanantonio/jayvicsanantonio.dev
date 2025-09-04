@@ -8,6 +8,8 @@ import CursorGlow from '@/components/pages/CursorGlow';
 import { usePathname } from 'next/navigation';
 import { useScrollToTop } from '@/hooks/useScrollToTop';
 import { useWebVitalsLogger } from '@/hooks/useWebVitalsLogger';
+import { unstable_ViewTransition as ViewTransition } from 'react';
+
 export default function Body({
   children,
   fontVars,
@@ -25,9 +27,14 @@ export default function Body({
         fontVars ?? ''
       } flex flex-col md:flex-row min-h-screen dark:bg-gray-950 text-gray-200`}
     >
-      {pathname !== '/' && <AmbientBackground />}
       <CursorGlow />
-      {children}
+      {/* React ViewTransition wrapper per Next.js docs; key by pathname to scope updates */}
+      <ViewTransition>
+        <div key={pathname}>
+          {pathname !== '/' && <AmbientBackground />}
+          {children}
+        </div>
+      </ViewTransition>
       <Toaster />
       <SpeedInsights />
       <Analytics />

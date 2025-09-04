@@ -3,6 +3,9 @@ import { withSentryConfig } from '@sentry/nextjs';
 
 const nextConfig = {
   reactStrictMode: true,
+  experimental: {
+    viewTransition: true,
+  },
   images: {
     remotePatterns: [
       {
