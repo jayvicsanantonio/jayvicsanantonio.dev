@@ -4,8 +4,11 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import AnimatedText from '@/components/ui/AnimatedText';
-import { GlassButton } from '@/components/ui/GlassButton';
 import { Icon } from '@iconify/react';
+import NavButton from '@/components/home/NavButton';
+import usePrefersReducedMotion from '@/hooks/use-prefers-reduced-motion';
+import { useIntroSequence } from '@/hooks/home/useIntroSequence';
+import { useScrollCssVariables } from '@/hooks/home/useScrollCssVariables';
 
 /*
   CSS variable contract used by HeroMorph
@@ -57,16 +60,10 @@ buttonSize: { w: 84, h: 72 },
 export default function HeroMorph() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const startedRef = useRef(false);
 
   // Intro/scroll states
-  const [initialPill, setInitialPill] = useState(true);
-  const [showTitleGroup, setShowTitleGroup] = useState(false);
-  const [showDesc, setShowDesc] = useState(false);
-  const [showName, setShowName] = useState(false);
-  const [shouldPlayVideo, setShouldPlayVideo] = useState(false);
-  const [isExpanding, setIsExpanding] = useState(false);
-  const [reduceMotion, setReduceMotion] = useState(false);
+  const { initialPill, showTitleGroup, showDesc, showName, isExpanding, shouldPlayVideo } = useIntroSequence(CFG);
+  const reduceMotion = usePrefersReducedMotion();
   const [hasVideo, setHasVideo] = useState(false);
 
   useEffect(() => {
@@ -78,23 +75,6 @@ export default function HeroMorph() {
     return;
   }, []);
 
-  // Respect user reduced motion preference
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const media = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    );
-    const onChange = () => setReduceMotion(media.matches);
-    onChange();
-    if (media.addEventListener)
-      media.addEventListener('change', onChange);
-    else media.addListener(onChange);
-    return () => {
-      if (media.removeEventListener)
-        media.removeEventListener('change', onChange);
-      else media.removeListener(onChange);
-    };
-  }, []);
 
   // Check if hero video asset exists; if not, fall back gracefully
   useEffect(() => {
@@ -115,137 +95,13 @@ export default function HeroMorph() {
     };
   }, []);
 
-  // Intro sequencing independent of video readiness
-  useEffect(() => {
-    if (startedRef.current) return;
-    startedRef.current = true;
-    setInitialPill(true);
-    const timers: number[] = [];
+  // Scroll-driven CSS variables (no React renders on scroll)
+  useScrollCssVariables(
+    containerRef,
+    { scroll: CFG.scroll, closeMaxX: CFG.closeMaxX, closeMaxY: CFG.closeMaxY },
+    reduceMotion
+  );
 
-    // After a short delay, start a single smooth expansion.
-    timers.push(
-      window.setTimeout(() => {
-        setInitialPill(false); // triggers CSS transition to final size
-        setIsExpanding(true);
-        timers.push(
-          window.setTimeout(
-            () => setIsExpanding(false),
-            CFG.timings.introExpansionDuration
-          )
-        );
-      }, CFG.timings.introStartDelay)
-    );
-
-    // Reveal other elements while expansion progresses
-    timers.push(
-      window.setTimeout(
-        () => setShowName(true),
-        CFG.timings.reveal.name
-      )
-    );
-    timers.push(
-      window.setTimeout(
-        () => setShowTitleGroup(true),
-        CFG.timings.reveal.title
-      )
-    );
-    timers.push(
-      window.setTimeout(
-        () => setShowDesc(true),
-        CFG.timings.reveal.desc
-      )
-    );
-
-    // Set up CSS variable based scroll loop (no React renders on scroll)
-    const root = containerRef.current;
-    if (root) {
-      let raf = 0;
-      const update = () => {
-        const y = window.scrollY;
-        const vh = window.innerHeight || 1;
-        const p = Math.min(y / CFG.scroll.max, 1);
-
-        // Shutter progress
-        const sh = Math.min(
-          Math.max(
-            (y - CFG.scroll.shutterStartPx) /
-              CFG.scroll.shutterLengthPx,
-            0
-          ),
-          1
-        );
-
-        // Movement gate and upward travel (normalized to viewport)
-        let gate = Math.min(Math.max((sh - 0.45) / 0.55, 0), 1);
-        const yn = vh ? y / vh : 0;
-        const overlayUp = reduceMotion
-          ? Math.min(yn / 0.2, 1)
-          : 1.4 * yn * gate;
-        if (reduceMotion) gate = 0; // no motion when reduced
-
-        root.style.setProperty('--scroll-y', String(y));
-        root.style.setProperty('--p', String(p));
-        root.style.setProperty('--vh', String(vh));
-        root.style.setProperty('--sh', String(sh));
-        root.style.setProperty('--gate', String(gate));
-        root.style.setProperty('--overlay-up', String(overlayUp));
-
-        // Cyan overlay opacity: ramps in from sh≈CFG.scroll.cyanStartT and holds at 1 afterwards
-        const CYAN_START = CFG.scroll.cyanStartT;
-        const CYAN_DEN = 1 - CYAN_START;
-        const cyan = Math.min(
-          Math.max((sh - CYAN_START) / CYAN_DEN, 0),
-          1
-        );
-        root.style.setProperty('--cyan', String(cyan));
-
-        // UI reveal progress for text and nav; starts when shutter mostly closed
-        const UI_START = CFG.scroll.uiRevealStartT; // 0.95
-        const UI_DEN = 1 - UI_START; // 0.05
-        const ui = Math.min(Math.max((sh - UI_START) / UI_DEN, 0), 1);
-        root.style.setProperty('--ui', String(ui));
-
-        // Final opening size targets
-        root.style.setProperty('--closeMaxY', CFG.closeMaxY);
-        root.style.setProperty('--closeMaxX', CFG.closeMaxX);
-      };
-      const onScroll = () => {
-        if (raf) return;
-        raf = requestAnimationFrame(() => {
-          update();
-          raf = 0;
-        });
-      };
-      const onResize = () => update();
-      window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', onResize);
-      update();
-      timers.push(0); // sentinel
-      const cleanup = () => {
-        if (raf) cancelAnimationFrame(raf);
-        window.removeEventListener('scroll', onScroll);
-        window.removeEventListener('resize', onResize);
-      };
-      // store cleanup using a symbol id in timers (not used), return below
-      return () => {
-        cleanup();
-        timers.forEach((t) => t && window.clearTimeout(t));
-      };
-    }
-
-    return () => timers.forEach((t) => window.clearTimeout(t));
-  }, [reduceMotion]);
-
-  // After the pill finishes expanding, allow the video to play
-  useEffect(() => {
-    if (!initialPill && !isExpanding) {
-      const t = window.setTimeout(
-        () => setShouldPlayVideo(true),
-        CFG.timings.graceAfterExpandMs
-      );
-      return () => window.clearTimeout(t);
-    }
-  }, [initialPill, isExpanding]);
 
   // When ready and allowed, start the video programmatically
   useEffect(() => {
@@ -491,219 +347,109 @@ export default function HeroMorph() {
         <nav aria-label="Primary" className="contents">
           <ul className="contents">
             <li className="contents">
-              <div
-                className="group absolute pointer-events-auto"
-                style={{
-                  width: `${CFG.nav.buttonSize.w}px`,
-                  height: `${CFG.nav.buttonSize.h}px`,
-                  top: CFG.nav.centerTop,
-                  left: `calc(50% - ((96vw - 2 * var(--closeMaxX)) / 2) - ${CFG.nav.leftOffsetsPx.projects}px)`,
-                  transform:
-                    'translate(-50%, -50%) translate(calc(var(--mx, 0) * 6px), calc(var(--my, 0) * 6px))',
-                  transition: 'transform 260ms cubic-bezier(0.22, 1, 0.36, 1)',
-                  opacity: 'var(--ui, 0)',
-                  willChange: 'transform',
-                }}
-                onMouseMove={(e) => {
-                  const t = e.currentTarget as HTMLElement;
-                  const r = t.getBoundingClientRect();
-                  const mx = ((e.clientX - r.left) / r.width - 0.5) * 2;
-                  const my = ((e.clientY - r.top) / r.height - 0.5) * 2;
-                  t.style.setProperty('--mx', String(mx));
-                  t.style.setProperty('--my', String(my));
-                }}
-                onMouseLeave={(e) => {
-                  const t = e.currentTarget as HTMLElement;
-                  t.style.setProperty('--mx', '0');
-                  t.style.setProperty('--my', '0');
-                }}
+              <NavButton
+                href="/projects"
+                ariaLabel="Projects"
+                tooltip="Projects"
+                side="left"
+                offsetPx={CFG.nav.leftOffsetsPx.projects}
+                size={CFG.nav.buttonSize}
+                top={CFG.nav.centerTop}
               >
-                <GlassButton
-                  href="/projects"
-                  aria-label="Projects"
-                  className="inline-flex w-full h-full items-center justify-center rounded-full text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
-                >
-                  <Icon
-                    icon="mdi:application-brackets"
-                    width={36}
-                    height={36}
-                    aria-hidden="true"
-                    style={{
-                      transform:
-                        'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
-                      transition:
-                        'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
-                      willChange: 'transform',
-                    }}
-                  />
-                </GlassButton>
-                <span className="pointer-events-none absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full rounded-md bg-black/80 px-2 py-1 text-[11px] md:text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-lg">
-                  Projects
-                </span>
-              </div>
+                <Icon
+                  icon="mdi:application-brackets"
+                  width={36}
+                  height={36}
+                  aria-hidden="true"
+                  style={{
+                    transform:
+                      'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
+                    transition:
+                      'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
+                    willChange: 'transform',
+                  }}
+                />
+              </NavButton>
             </li>
-
             <li className="contents">
-              <div
-                className="group absolute pointer-events-auto"
-                style={{
-                  width: `${CFG.nav.buttonSize.w}px`,
-                  height: `${CFG.nav.buttonSize.h}px`,
-                  top: CFG.nav.centerTop,
-                  left: `calc(50% - ((96vw - 2 * var(--closeMaxX)) / 2) - ${CFG.nav.leftOffsetsPx.linkedin}px)`,
-                  transform:
-                    'translate(-50%, -50%) translate(calc(var(--mx, 0) * 6px), calc(var(--my, 0) * 6px))',
-                  transition: 'transform 260ms cubic-bezier(0.22, 1, 0.36, 1)',
-                  opacity: 'var(--ui, 0)',
-                  willChange: 'transform',
-                }}
-                onMouseMove={(e) => {
-                  const t = e.currentTarget as HTMLElement;
-                  const r = t.getBoundingClientRect();
-                  const mx = ((e.clientX - r.left) / r.width - 0.5) * 2;
-                  const my = ((e.clientY - r.top) / r.height - 0.5) * 2;
-                  t.style.setProperty('--mx', String(mx));
-                  t.style.setProperty('--my', String(my));
-                }}
-                onMouseLeave={(e) => {
-                  const t = e.currentTarget as HTMLElement;
-                  t.style.setProperty('--mx', '0');
-                  t.style.setProperty('--my', '0');
-                }}
+              <NavButton
+                href="https://www.linkedin.com/in/jayvicsanantonio/"
+                ariaLabel="LinkedIn"
+                tooltip="LinkedIn"
+                side="left"
+                offsetPx={CFG.nav.leftOffsetsPx.linkedin}
+                size={CFG.nav.buttonSize}
+                top={CFG.nav.centerTop}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <GlassButton
-                  href="https://www.linkedin.com/in/jayvicsanantonio/"
-                  aria-label="LinkedIn"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex w-full h-full items-center justify-center rounded-full text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
-                >
-                  <Icon
-                    icon="mdi:linkedin"
-                    width={40}
-                    height={40}
-                    aria-hidden="true"
-                    style={{
-                      transform:
-                        'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
-                      transition:
-                        'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
-                      willChange: 'transform',
-                    }}
-                  />
-                </GlassButton>
-                <span className="pointer-events-none absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full rounded-md bg-black/80 px-2 py-1 text-[11px] md:text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-lg">
-                  LinkedIn
-                </span>
-              </div>
+                <Icon
+                  icon="mdi:linkedin"
+                  width={40}
+                  height={40}
+                  aria-hidden="true"
+                  style={{
+                    transform:
+                      'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
+                    transition:
+                      'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
+                    willChange: 'transform',
+                  }}
+                />
+              </NavButton>
             </li>
-
             <li className="contents">
-              <div
-                className="group absolute pointer-events-auto"
-                style={{
-                  width: `${CFG.nav.buttonSize.w}px`,
-                  height: `${CFG.nav.buttonSize.h}px`,
-                  top: CFG.nav.centerTop,
-                  left: `calc(50% + ((96vw - 2 * var(--closeMaxX)) / 2) + ${CFG.nav.rightOffsetsPx.work}px)`,
-                  transform:
-                    'translate(-50%, -50%) translate(calc(var(--mx, 0) * 6px), calc(var(--my, 0) * 6px))',
-                  transition: 'transform 260ms cubic-bezier(0.22, 1, 0.36, 1)',
-                  opacity: 'var(--ui, 0)',
-                  willChange: 'transform',
-                }}
-                onMouseMove={(e) => {
-                  const t = e.currentTarget as HTMLElement;
-                  const r = t.getBoundingClientRect();
-                  const mx = ((e.clientX - r.left) / r.width - 0.5) * 2;
-                  const my = ((e.clientY - r.top) / r.height - 0.5) * 2;
-                  t.style.setProperty('--mx', String(mx));
-                  t.style.setProperty('--my', String(my));
-                }}
-                onMouseLeave={(e) => {
-                  const t = e.currentTarget as HTMLElement;
-                  t.style.setProperty('--mx', '0');
-                  t.style.setProperty('--my', '0');
-                }}
+              <NavButton
+                href="/work"
+                ariaLabel="Work"
+                tooltip="Work Experience"
+                side="right"
+                offsetPx={CFG.nav.rightOffsetsPx.work}
+                size={CFG.nav.buttonSize}
+                top={CFG.nav.centerTop}
               >
-                <GlassButton
-                  href="/work"
-                  aria-label="Work"
-                  className="inline-flex w-full h-full items-center justify-center rounded-full text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
-                >
-                  <Icon
-                    icon="mdi:timeline-text"
-                    width={36}
-                    height={36}
-                    aria-hidden="true"
-                    style={{
-                      transform:
-                        'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
-                      transition:
-                        'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
-                      willChange: 'transform',
-                    }}
-                  />
-                </GlassButton>
-                <span className="pointer-events-none absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full rounded-md bg-black/80 px-2 py-1 text-[11px] md:text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-lg">
-                  Work Experience
-                </span>
-              </div>
+                <Icon
+                  icon="mdi:timeline-text"
+                  width={36}
+                  height={36}
+                  aria-hidden="true"
+                  style={{
+                    transform:
+                      'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
+                    transition:
+                      'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
+                    willChange: 'transform',
+                  }}
+                />
+              </NavButton>
             </li>
-
             <li className="contents">
-              <div
-                className="group absolute pointer-events-auto"
-                style={{
-                  width: `${CFG.nav.buttonSize.w}px`,
-                  height: `${CFG.nav.buttonSize.h}px`,
-                  top: CFG.nav.centerTop,
-                  left: `calc(50% + ((96vw - 2 * var(--closeMaxX)) / 2) + ${CFG.nav.rightOffsetsPx.github}px)`,
-                  transform:
-                    'translate(-50%, -50%) translate(calc(var(--mx, 0) * 6px), calc(var(--my, 0) * 6px))',
-                  transition: 'transform 140ms cubic-bezier(0.22, 1, 0.36, 1)',
-                  opacity: 'var(--ui, 0)',
-                  willChange: 'transform',
-                }}
-                onMouseMove={(e) => {
-                  const t = e.currentTarget as HTMLElement;
-                  const r = t.getBoundingClientRect();
-                  const mx = ((e.clientX - r.left) / r.width - 0.5) * 2;
-                  const my = ((e.clientY - r.top) / r.height - 0.5) * 2;
-                  t.style.setProperty('--mx', String(mx));
-                  t.style.setProperty('--my', String(my));
-                }}
-                onMouseLeave={(e) => {
-                  const t = e.currentTarget as HTMLElement;
-                  t.style.setProperty('--mx', '0');
-                  t.style.setProperty('--my', '0');
-                }}
+              <NavButton
+                href="https://github.com/jayvicsanantonio"
+                ariaLabel="GitHub"
+                tooltip="GitHub"
+                side="right"
+                offsetPx={CFG.nav.rightOffsetsPx.github}
+                size={CFG.nav.buttonSize}
+                top={CFG.nav.centerTop}
+                target="_blank"
+                rel="noopener noreferrer"
+                transitionMs={140}
               >
-                <GlassButton
-                  href="https://github.com/jayvicsanantonio"
-                  aria-label="GitHub"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex w-full h-full items-center justify-center rounded-full text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
-                >
-                  <Icon
-                    icon="mdi:github"
-                    width={40}
-                    height={40}
-                    aria-hidden="true"
-                    style={{
-                      transform:
-                        'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
-                      transition:
-                        'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
-                      willChange: 'transform',
-                    }}
-                  />
-                </GlassButton>
-                <span className="pointer-events-none absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full rounded-md bg-black/80 px-2 py-1 text-[11px] md:text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-lg">
-                  GitHub
-                </span>
-              </div>
+                <Icon
+                  icon="mdi:github"
+                  width={40}
+                  height={40}
+                  aria-hidden="true"
+                  style={{
+                    transform:
+                      'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
+                    transition:
+                      'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
+                    willChange: 'transform',
+                  }}
+                />
+              </NavButton>
             </li>
           </ul>
         </nav>
