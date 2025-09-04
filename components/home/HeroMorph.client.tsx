@@ -2,6 +2,7 @@
 
 import NavButton from "@/components/home/NavButton";
 import AnimatedText from "@/components/ui/AnimatedText";
+import { GlassButton } from "@/components/ui/GlassButton";
 import { useIntroSequence } from "@/hooks/home/useIntroSequence";
 import { useScrollCssVariables } from "@/hooks/home/useScrollCssVariables";
 import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
@@ -104,7 +105,11 @@ export default function HeroMorph() {
   // Scroll-driven CSS variables (no React renders on scroll)
   useScrollCssVariables(
     containerRef,
-    { scroll: CFG.scroll, closeMaxX: CFG.closeMaxX, closeMaxY: CFG.closeMaxY },
+    {
+      scroll: CFG.scroll,
+      closeMaxX: "calc((96vw - var(--nav-row-w, 20vw)) / 2)",
+      closeMaxY: "calc((min(86svh, 86vh) - var(--pill-h, 8vh)) / 2)",
+    },
     reduceMotion,
   );
 
@@ -123,7 +128,10 @@ export default function HeroMorph() {
     : "calc(16px + 160px * var(--sh, 0))"; // unified rounding driven by shutter
 
   return (
-    <div ref={containerRef} className="relative overflow-x-hidden bg-black">
+    <div
+      ref={containerRef}
+      className="relative overflow-x-hidden bg-black [--nav-row-w:258px] sm:[--nav-row-w:20vw] [--pill-h:54px] sm:[--pill-h:8vh]"
+    >
       {/* Morphing Video - transforms INTO navigation bar */}
       <div
         className="fixed z-30 overflow-hidden flex items-center justify-center"
@@ -247,31 +255,36 @@ export default function HeroMorph() {
             style={{ opacity: isIntro ? 0 : 1 }}
           />
 
-          {/* Cyan overlay: fades in as shutter closes; styled like glass buttons (cyan-tinted) */}
+          {/* Cyan overlay: fades in as shutter closes; pill width matches mobile nav row */}
           <div
-            className="absolute inset-0 pointer-events-none flex items-center justify-center border border-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_8px_30px_rgba(0,0,0,0.22)] backdrop-blur-[16px] backdrop-saturate-[160%] before:content-[''] before:absolute before:inset-0 before:pointer-events-none before:bg-[radial-gradient(120%_60%_at_50%_0%,rgba(255,255,255,0.35),rgba(255,255,255,0)_60%)]"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(24,204,193,0.28) 0%, rgba(0,166,158,0.20) 100%)",
-              opacity: "var(--cyan, 0)",
-              transition: "opacity 0.5s ease-out",
-            }}
+            className="absolute inset-0 pointer-events-none flex items-center justify-center"
+            style={{ opacity: isIntro ? 0 : undefined }}
           >
-            <span
-              className="text-white font-semibold tracking-wide"
+            {/* Inner pill: xs gets fixed width; sm+ fills container as before */}
+            <div
+              className="sm:w-full sm:h-full w-[var(--nav-row-w)] h-14 rounded-[384px] flex items-center justify-center border border-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_8px_30px_rgba(0,0,0,0.22)] backdrop-blur-[16px] backdrop-saturate-[160%] relative before:content-[''] before:absolute before:inset-0 before:pointer-events-none before:bg-[radial-gradient(120%_60%_at_50%_0%,rgba(255,255,255,0.35),rgba(255,255,255,0)_60%)]"
               style={{
-                // Responsive size, no wrap to avoid clipping in narrow final width
-                fontSize: "clamp(14px, 2.1vw, 22px)",
-                whiteSpace: "nowrap",
-                maxWidth: "90%",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                opacity: "var(--ui, 0)",
-                textShadow: "0 2px 8px rgba(0,0,0,0.6)",
+                background:
+                  "linear-gradient(180deg, rgba(24,204,193,0.28) 0%, rgba(0,166,158,0.20) 100%)",
+                opacity: "var(--cyan, 0)",
+                transition: "opacity 0.5s ease-out",
               }}
             >
-              Hi, I'm Jayvic 👋
-            </span>
+              <span
+                className="text-white font-semibold tracking-wide"
+                style={{
+                  fontSize: "clamp(14px, 2.1vw, 22px)",
+                  whiteSpace: "nowrap",
+                  maxWidth: "90%",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  opacity: "var(--ui, 0)",
+                  textShadow: "0 2px 8px rgba(0,0,0,0.6)",
+                }}
+              >
+                Hi, I'm Jayvic 👋
+              </span>
+            </div>
           </div>
 
           {/* Watermark cover - covers bottom right corner */}
@@ -289,8 +302,8 @@ export default function HeroMorph() {
             className="flex items-center justify-center"
             style={{
               // Match the final cyan pill size and shape, but keep original white style
-              width: "calc(96vw - 2 * var(--closeMaxX, 38vw))",
-              height: "calc(86vh - 2 * var(--closeMaxY, 39vh))",
+              width: "var(--nav-row-w, calc(96vw - 2 * var(--closeMaxX)))",
+              height: "var(--pill-h, calc(86vh - 2 * var(--closeMaxY)))",
               borderRadius: "384px",
               backgroundColor: "rgba(255, 255, 255, 0.98)",
               boxShadow:
@@ -302,6 +315,7 @@ export default function HeroMorph() {
               style={{
                 color: "black",
                 fontSize: "clamp(14px, 2.1vw, 22px)",
+                whiteSpace: "nowrap",
               }}
             >
               Hi, I'm Jayvic 👋
@@ -343,7 +357,7 @@ export default function HeroMorph() {
       {/* Text Overlays - positioned around the video and person */}
       <div className="fixed inset-0 z-50 pointer-events-none">
         {/* Nav buttons aligned with cyan box: two on left, two on right */}
-        <nav aria-label="Primary" className="contents">
+        <nav aria-label="Primary" className="hidden sm:contents">
           <ul className="contents">
             <li className="contents">
               <NavButton
@@ -452,6 +466,60 @@ export default function HeroMorph() {
             </li>
           </ul>
         </nav>
+
+        {/* Mobile nav row (xs only): buttons side-by-side below the cyan pill */}
+        <div
+          className="absolute left-1/2 -translate-x-1/2 top-[52%] sm:hidden flex items-center gap-3 pointer-events-none w-[var(--nav-row-w)] justify-between"
+          style={{ opacity: "var(--ui, 0)" }}
+        >
+          <GlassButton
+            href="/projects"
+            aria-label="Projects"
+            className="w-14 h-14 rounded-full"
+          >
+            <Icon
+              icon="mdi:application-brackets"
+              width={28}
+              height={28}
+              aria-hidden="true"
+            />
+          </GlassButton>
+          <GlassButton
+            href="https://www.linkedin.com/in/jayvicsanantonio/"
+            aria-label="LinkedIn"
+            className="w-14 h-14 rounded-full"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon
+              icon="mdi:linkedin"
+              width={30}
+              height={30}
+              aria-hidden="true"
+            />
+          </GlassButton>
+          <GlassButton
+            href="/work"
+            aria-label="Work Experience"
+            className="w-14 h-14 rounded-full"
+          >
+            <Icon
+              icon="mdi:timeline-text"
+              width={28}
+              height={28}
+              aria-hidden="true"
+            />
+          </GlassButton>
+          <GlassButton
+            href="https://github.com/jayvicsanantonio"
+            aria-label="GitHub"
+            className="w-14 h-14 rounded-full"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon icon="mdi:github" width={30} height={30} aria-hidden="true" />
+          </GlassButton>
+        </div>
 
         {/* Bottom row: brand on left, CTA on right; vertically centered and synchronized */}
         <div
