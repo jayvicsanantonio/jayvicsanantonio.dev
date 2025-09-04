@@ -133,7 +133,7 @@ export default function HeroMorph() {
           ["--intro-scale" as any]: String(introScale),
           transform: "translate(-50%, -50%) scale(var(--intro-scale))",
           width: "96vw",
-          height: "86vh",
+          height: "min(86svh, 86vh)",
           borderRadius: containerRadius,
           border: "none",
           willChange: isExpanding
@@ -167,10 +167,10 @@ export default function HeroMorph() {
         }}
       >
         <div
-          className="absolute sm:bottom-40 right-8 md:bottom-22 md:right-10 z-50 transition-opacity duration-700"
+          className="absolute left-1/2 -translate-x-1/2 bottom-64 text-center sm:bottom-40 sm:right-8 sm:left-auto sm:translate-x-0 md:bottom-22 md:right-10 z-50 transition-opacity duration-700"
           style={{ opacity: showTitleGroup ? 1 : 0 }}
         >
-          <h3 className="text-lg md:text-3xl lg:text-4xl 2xl:text-6xl font-medium text-white tracking-widest">
+          <h3 className="text-base sm:text-2xl md:text-3xl lg:text-4xl 2xl:text-6xl font-medium text-white tracking-widest">
             <AnimatedText
               text="Full-Stack"
               start={showTitleGroup}
@@ -181,10 +181,10 @@ export default function HeroMorph() {
 
         {/* right side tagline */}
         <div
-          className="absolute bottom-32 right-8 md:bottom-10 md:right-10 z-50 transition-opacity duration-700"
+          className="absolute left-1/2 -translate-x-1/2 bottom-52 text-center sm:right-8 sm:left-auto sm:translate-x-0 md:bottom-10 md:right-10 z-50 transition-opacity duration-700"
           style={{ opacity: showTitleGroup ? 1 : 0 }}
         >
-          <h4 className="text-lg md:text-3xl lg:text-4xl 2xl:text-5xl font-light text-white/90 tracking-wider italic">
+          <h4 className="text-base sm:text-2xl md:text-3xl lg:text-4xl 2xl:text-5xl font-light text-white/90 tracking-wider italic">
             <AnimatedText
               text="Software Engineer"
               start={showTitleGroup}
@@ -196,7 +196,7 @@ export default function HeroMorph() {
 
         {/* Description text - bottom left */}
         <div
-          className="absolute bottom-32 left-8 md:bottom-10 md:left-10 max-w-80 z-50 transition-opacity duration-700"
+          className="absolute top-6 left-1/2 -translate-x-1/2 text-center sm:top-auto sm:left-8 sm:translate-x-0 sm:text-left sm:bottom-32 md:bottom-10 md:left-10 max-w-[22rem] z-50 transition-opacity duration-700"
           style={{ opacity: showDesc ? 1 : 0 }}
         >
           <p className="text-sm md:text-base text-white/80 leading-relaxed mb-2">
@@ -319,7 +319,7 @@ export default function HeroMorph() {
         }}
       >
         <div
-          className="relative w-[32rem] md:w-[60rem]"
+          className="relative w-[22rem] sm:w-[28rem] md:w-[60rem]"
           style={{
             height: "calc(50rem - 10rem * var(--p))",
             transform: "scale(clamp(0.6, calc(1 - 0.4 * var(--p)), 1))",
@@ -455,8 +455,9 @@ export default function HeroMorph() {
 
         {/* Bottom row: brand on left, CTA on right; vertically centered and synchronized */}
         <div
-          className="absolute bottom-4 left-16 right-16 transition-opacity duration-300 pointer-events-none"
+          className="absolute inset-x-4 sm:inset-x-16 transition-opacity duration-300 pointer-events-none"
           style={{
+            bottom: "max(env(safe-area-inset-bottom), 16px)",
             opacity: showName
               ? `calc(1 - clamp(0, var(--overlay-up, 0) / ${CFG.overlayUpDampen}, 1))`
               : 0,
@@ -476,7 +477,7 @@ export default function HeroMorph() {
             </div>
             <Link
               href="/work"
-              className="pointer-events-auto px-6 py-2.5 md:py-3 bg-white text-black font-medium rounded-full hover:bg-white/90 transition-all duration-300 hover:scale-105 text-sm md:text-base"
+              className="pointer-events-auto px-5 py-2 sm:px-6 sm:py-2.5 md:py-3 bg-white text-black font-medium rounded-full hover:bg-white/90 transition-all duration-300 hover:scale-105 text-xs sm:text-sm md:text-base"
             >
               Work Experience
             </Link>
@@ -487,7 +488,7 @@ export default function HeroMorph() {
       {/* Content sections with smooth transition from black to gray */}
       <div className="relative z-10 min-w-screen">
         {/* Smooth transition from black to gray */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-800 to-gray-200 h-[154rem]"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-800 to-gray-200 h-[220svh] md:h-[180svh] lg:h-[154rem]"></div>
 
         {/* Expanding person highlight effect */}
         <div
@@ -500,7 +501,7 @@ export default function HeroMorph() {
         />
 
         {/* About Section spacer */}
-        <section className="min-h-[154rem] flex flex-col items-center justify-center px-4 py-20"></section>
+        <section className="min-h-[220svh] md:min-h-[180svh] lg:min-h-[154rem] flex flex-col items-center justify-center px-4 py-20"></section>
       </div>
     </div>
   );
