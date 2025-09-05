@@ -85,15 +85,16 @@ export default function ProjectsHeaderBubble({
 
       {/* Text Bubble - Left aligned with icon container */}
       <div
-        className="absolute isolate overflow-hidden pointer-events-auto border border-white/30 bg-[linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0.12))] backdrop-blur-[16px] backdrop-saturate-[160%] shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_8px_30px_rgba(0,0,0,0.22)] before:content-[''] before:absolute before:inset-0 before:pointer-events-none before:opacity-[0.85] before:bg-[radial-gradient(60%_40%_at_50%_18%,rgba(255,255,255,0.55),rgba(255,255,255,0)_70%)] flex items-center justify-start"
+        className="absolute isolate overflow-hidden pointer-events-auto border border-white/30 bg-[linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0.12))] backdrop-blur-[16px] backdrop-saturate-[160%] shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_8px_30px_rgba(0,0,0,0.22)] before:content-[''] before:absolute before:inset-0 before:pointer-events-none before:opacity-[0.85] before:bg-[radial-gradient(60%_40%_at_50%_18%,rgba(255,255,255,0.55),rgba(255,255,255,0)_70%)] before:rounded-[inherit] flex items-center justify-start"
         style={{
           left: "0px",
           top: "0px",
-          width: showBubble ? "200px" : "64px",
+          width: showBubble ? "200px" : "80px",
           height: "64px",
           borderRadius: "32px",
           opacity: 1,
           transition: "width 1200ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+          willChange: "width",
           zIndex: 5,
         }}
       >
