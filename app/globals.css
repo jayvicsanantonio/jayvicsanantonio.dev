@@ -344,47 +344,72 @@
     }
 }
 
-/* View Transitions: base page cross-fade */
+/* View Transitions: cinematic cross-fade with subtle zoom/blur */
 ::view-transition-old(root) {
-    animation: vt-fade-out 240ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: vt-cinematic-out 420ms cubic-bezier(0.22, 0.8, 0.22, 1) both;
 }
 ::view-transition-new(root) {
-    animation: vt-fade-in 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    /* slight delay to let the old frame recede first */
+    animation: vt-cinematic-in 560ms cubic-bezier(0.16, 1, 0.3, 1) 60ms both;
 }
 
-@keyframes vt-fade-out {
+@keyframes vt-cinematic-out {
+    0% {
+        opacity: 1;
+        transform: scale(1) translateY(0px);
+        filter: none;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.985) translateY(4px);
+        filter: blur(10px) saturate(0.9) brightness(0.9);
+    }
+}
+@keyframes vt-cinematic-in {
+    0% {
+        opacity: 0;
+        transform: scale(1.02) translateY(8px);
+        filter: blur(12px) saturate(1.1) brightness(1.05);
+    }
+    60% {
+        opacity: 1;
+        transform: scale(1.002) translateY(0px);
+        filter: blur(0px) saturate(1.05) brightness(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0px);
+        filter: none;
+    }
+}
+
+/* Cinematic hero transitions for tagged elements (projects/work buttons) */
+::view-transition-old(tag-projects),
+::view-transition-old(tag-work) {
+    animation: vt-hero-lift 320ms cubic-bezier(0.22, 0.8, 0.22, 1) both;
+}
+::view-transition-new(tag-projects),
+::view-transition-new(tag-work) {
+    animation: vt-hero-pop 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes vt-hero-lift {
     to {
         opacity: 0;
+        transform: translateY(-6px) scale(0.92) rotateZ(-1.2deg);
+        filter: blur(4px) drop-shadow(0 10px 24px rgba(0, 0, 0, 0.35));
     }
 }
-@keyframes vt-fade-in {
+@keyframes vt-hero-pop {
     from {
         opacity: 0;
-    }
-}
-
-/* Enhanced Projects button transition - fast appearance */
-::view-transition-old(tag-projects) {
-    animation: vt-projects-shrink 200ms cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-::view-transition-new(tag-projects) {
-    animation: vt-projects-expand 150ms cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-@keyframes vt-projects-shrink {
-    to {
-        opacity: 0;
-        transform: scale(0.95) translateY(-4px) rotateZ(2deg);
-    }
-}
-@keyframes vt-projects-expand {
-    from {
-        opacity: 0;
-        transform: scale(1.05) translateY(4px) rotateZ(-2deg);
+        transform: translateY(10px) scale(1.06) rotateZ(1.2deg);
+        filter: blur(6px) drop-shadow(0 14px 36px rgba(0, 0, 0, 0.4));
     }
     to {
         opacity: 1;
-        transform: scale(1) translateY(0) rotateZ(0deg);
+        transform: translateY(0) scale(1) rotateZ(0deg);
+        filter: none;
     }
 }
 
@@ -392,7 +417,9 @@
     ::view-transition-old(root),
     ::view-transition-new(root),
     ::view-transition-old(tag-projects),
-    ::view-transition-new(tag-projects) {
+    ::view-transition-new(tag-projects),
+    ::view-transition-old(tag-work),
+    ::view-transition-new(tag-work) {
         animation: none !important;
     }
 }
