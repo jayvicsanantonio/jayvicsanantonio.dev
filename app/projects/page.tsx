@@ -5,7 +5,7 @@ import AmbientBackground from "@/components/pages/AmbientBackground";
 
 import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
 import { motion } from "framer-motion";
-import type { MotionProps, Transition } from "framer-motion";
+import type { Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -16,15 +16,14 @@ import React, { Suspense } from "react";
 import ProjectsHeaderBubble from "@/components/projects/ProjectsHeaderBubble";
 
 // Filters and ordering constants
-const SKILL_FILTERS = [
-  "All",
+const PREFERRED_FILTER_ORDER = [
   "Enterprise",
   "Startup",
   "Hobby",
   "Client",
   "Open Source",
   "Sandboxes",
-];
+] as const;
 
 const PRIORITY_ORDER = [
   "yahoo-dsp",
@@ -119,10 +118,19 @@ function SkillsAndCases({
   const initialFromQuery =
     (searchParams?.get("skill") || searchParams?.get("filter")) ?? undefined;
 
+  // Derive filters from project skills, with preferred order first and rest alphabetical
+  const filters = React.useMemo(() => {
+    const set = new Set<string>();
+    for (const p of PROJECTS) {
+      for (const s of p.skills) set.add(s);
+    }
+    const rest = Array.from(set).filter((s) => !PREFERRED_FILTER_ORDER.includes(s as any));
+    rest.sort((a, b) => a.localeCompare(b));
+    return ["All", ...PREFERRED_FILTER_ORDER.filter((s) => set.has(s)), ...rest];
+  }, []);
+
   const [active, setActive] = React.useState<string>(() =>
-    initialFromQuery && SKILL_FILTERS.includes(initialFromQuery)
-      ? initialFromQuery
-      : "All",
+    initialFromQuery && filters.includes(initialFromQuery) ? initialFromQuery : "All",
   );
 
   // Announce filter changes for screen readers
@@ -148,17 +156,24 @@ function SkillsAndCases({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active, pathname, router]);
 
-  const cardReveal: MotionProps = prefersReducedMotion
-    ? {}
-    : {
-        initial: { opacity: 0, y: 16 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true, amount: 0.3 },
-      };
+  const EASING = [0.22, 1, 0.36, 1] as const;
 
-  const cardTransition: Transition = prefersReducedMotion
-    ? { duration: 0 }
-    : { duration: 0.45, ease: [0.22, 1, 0.36, 1] };
+  const containerVariants: Variants = {
+    hidden: {},
+    show: {
+      transition: { staggerChildren: 0.06, delayChildren: 0.02 },
+    },
+  };
+
+  const cardVariants: Variants = prefersReducedMotion
+    ? {
+        hidden: { opacity: 1, y: 0 },
+        show: { opacity: 1, y: 0, transition: { duration: 0 } },
+      }
+    : {
+        hidden: { opacity: 0, y: 16 },
+        show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: EASING as any } },
+      };
 
 
   const visible = React.useMemo(() => {
@@ -183,7 +198,7 @@ function SkillsAndCases({
       {/* SR announcement for filter changes */}
       <span className="sr-only" aria-live="polite" role="status">{announce}</span>
       <div className="flex flex-wrap gap-2">
-        {SKILL_FILTERS.map((s) => (
+        {filters.map((s) => (
           <button
             key={s}
             onClick={() => setActive(s)}
@@ -200,15 +215,18 @@ function SkillsAndCases({
       </div>
 
       {/* Projects rail */}
-      <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {visible.map((c, i) => (
+      <motion.div
+        key={active}
+        className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6"
+        variants={prefersReducedMotion ? undefined : containerVariants}
+        initial={prefersReducedMotion ? undefined : "hidden"}
+        whileInView={prefersReducedMotion ? undefined : "show"}
+        viewport={prefersReducedMotion ? undefined : { once: true, amount: 0.2 }}
+      >
+        {visible.map((c) => (
           <motion.article
             key={c.slug}
-            {...cardReveal}
-            transition={{
-              ...cardTransition,
-              delay: prefersReducedMotion ? 0 : 0.01 * i,
-            }}
+            variants={prefersReducedMotion ? undefined : cardVariants}
             className="group relative rounded-2xl p-[1px] min-h-[430px] bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(168,85,247,0.22),rgba(34,211,238,0.2))] shadow-[0_8px_28px_rgba(0,0,0,0.35)] ring-1 ring-white/5"
           >
             <div className="flex h-full flex-col rounded-2xl border border-white/5 bg-gray-950/70 backdrop-blur-md overflow-hidden">
@@ -246,7 +264,7 @@ function SkillsAndCases({
             </div>
           </motion.article>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }
