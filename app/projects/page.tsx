@@ -3,6 +3,7 @@
 import { PROJECTS } from "@/app/projects/project-data";
 import AmbientBackground from "@/components/pages/AmbientBackground";
 import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
+import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
@@ -57,12 +58,23 @@ export default function ProjectsPage() {
       <div className="mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Header */}
         <div className="space-y-5 max-w-3xl">
-          <div className="font-oswald uppercase inline-block rounded-lg bg-white/5 px-3 py-1 tracking-wide text-white/90 vt-tag-projects">
-            Projects
+          {/* Glass Projects button matching nav button style */}
+          <div className="inline-flex items-center justify-center w-21 h-18 rounded-full isolate overflow-hidden pointer-events-auto border border-white/30 bg-[linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0.12))] backdrop-blur-[16px] backdrop-saturate-[160%] shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_8px_30px_rgba(0,0,0,0.22)] transition duration-200 ease-out before:content-[''] before:absolute before:inset-0 before:rounded-full before:pointer-events-none before:opacity-[0.85] before:bg-[radial-gradient(60%_40%_at_50%_18%,rgba(255,255,255,0.55),rgba(255,255,255,0)_70%)] hover:border-white/50 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.22),0_10px_36px_rgba(0,0,0,0.26)] vt-tag-projects">
+            <span className="relative z-10 flex items-center justify-center">
+              <Icon
+                icon="mdi:application-brackets"
+                width={32}
+                height={32}
+                className="text-white/90"
+                aria-hidden="true"
+              />
+            </span>
           </div>
+
           <h1 className="font-oswald text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight text-cyan-300/90">
             Crafted Artifacts
           </h1>
+
           <p className="text-gray-300/85 text-base sm:text-lg max-w-[720px]">
             A curated collection of platforms, tools, and experiments—built with
             care, tuned for performance, and shaped by design.
