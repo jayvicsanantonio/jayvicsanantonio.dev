@@ -218,15 +218,19 @@ function SkillsAndCases({
       <motion.div
         key={active}
         className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6"
-        variants={prefersReducedMotion ? undefined : containerVariants}
-        initial={prefersReducedMotion ? undefined : "hidden"}
-        whileInView={prefersReducedMotion ? undefined : "show"}
-        viewport={prefersReducedMotion ? undefined : { once: true, amount: 0.2 }}
+        {...(!prefersReducedMotion
+          ? {
+              variants: containerVariants,
+              initial: "hidden" as const,
+              whileInView: "show" as const,
+              viewport: { once: true, amount: 0.2 },
+            }
+          : {})}
       >
         {visible.map((c) => (
           <motion.article
             key={c.slug}
-            variants={prefersReducedMotion ? undefined : cardVariants}
+            {...(!prefersReducedMotion ? { variants: cardVariants } : {})}
             className="group relative rounded-2xl p-[1px] min-h-[430px] bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(168,85,247,0.22),rgba(34,211,238,0.2))] shadow-[0_8px_28px_rgba(0,0,0,0.35)] ring-1 ring-white/5"
           >
             <div className="flex h-full flex-col rounded-2xl border border-white/5 bg-gray-950/70 backdrop-blur-md overflow-hidden">

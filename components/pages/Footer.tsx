@@ -46,10 +46,3 @@ export default function Footer() {
   );
 }
 
-function Social({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="flex items-center space-x-6 text-sm font-medium text-gray-500 dark:text-gray-400">
-      {children}
-    </div>
-  );
-}

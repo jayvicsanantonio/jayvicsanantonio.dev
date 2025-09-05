@@ -60,7 +60,11 @@ export default function NavButton({
       }}
     >
       {(() => {
-        const { className: linkClassName, ...restLinkProps } = linkProps;
+        const { className: linkClassName, target, rel } = linkProps as {
+          className?: string;
+          target?: React.HTMLAttributeAnchorTarget;
+          rel?: string;
+        };
         return (
           <GlassButton
             href={href}
@@ -69,7 +73,8 @@ export default function NavButton({
               'inline-flex w-full h-full items-center justify-center rounded-full text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80',
               linkClassName
             )}
-            {...restLinkProps}
+            {...(target ? { target } : {})}
+            {...(rel ? { rel } : {})}
           >
             {children}
           </GlassButton>
