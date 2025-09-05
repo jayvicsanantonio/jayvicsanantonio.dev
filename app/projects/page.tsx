@@ -17,7 +17,8 @@ import GlassHeaderBubble from "@/components/ui/GlassHeaderBubble";
 import { Icon } from "@iconify/react";
 
 // Filters and ordering constants
-const PREFERRED_FILTER_ORDER = [
+const SKILL_FILTERS = [
+  "All",
   "Enterprise",
   "Startup",
   "Hobby",
@@ -133,19 +134,11 @@ function SkillsAndCases({
   const initialFromQuery =
     (searchParams?.get("skill") || searchParams?.get("filter")) ?? undefined;
 
-  // Derive filters from project skills, with preferred order first and rest alphabetical
-  const filters = React.useMemo(() => {
-    const set = new Set<string>();
-    for (const p of PROJECTS) {
-      for (const s of p.skills) set.add(s);
-    }
-    const rest = Array.from(set).filter((s) => !PREFERRED_FILTER_ORDER.includes(s as any));
-    rest.sort((a, b) => a.localeCompare(b));
-    return ["All", ...PREFERRED_FILTER_ORDER.filter((s) => set.has(s)), ...rest];
-  }, []);
-
+  // Fixed, curated filters
   const [active, setActive] = React.useState<string>(() =>
-    initialFromQuery && filters.includes(initialFromQuery) ? initialFromQuery : "All",
+    initialFromQuery && SKILL_FILTERS.includes(initialFromQuery as any)
+      ? (initialFromQuery as (typeof SKILL_FILTERS)[number])
+      : "All",
   );
 
   // Announce filter changes for screen readers
@@ -213,7 +206,7 @@ function SkillsAndCases({
       {/* SR announcement for filter changes */}
       <span className="sr-only" aria-live="polite" role="status">{announce}</span>
       <div className="flex flex-wrap gap-2">
-        {filters.map((s) => (
+        {SKILL_FILTERS.map((s) => (
           <button
             key={s}
             onClick={() => setActive(s)}
