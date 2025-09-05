@@ -2,10 +2,10 @@
 
 import AmbientBackground from "@/components/pages/AmbientBackground";
 import { Badge } from "@/components/ui/badge";
-import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
-import { motion, useScroll, useTransform } from "framer-motion";
 import GlassHeaderBubble from "@/components/ui/GlassHeaderBubble";
+import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
 import { Icon } from "@iconify/react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Check } from "lucide-react";
 import { useRef } from "react";
 
@@ -167,7 +167,7 @@ export default function WorkPage() {
             prefersReducedMotion={prefersReducedMotion}
             label="WORK"
             vtClassName="vt-tag-work"
-            expandedWidthPx={220}
+            expandedWidthPx={180}
             icon={
               <Icon
                 icon="mdi:timeline-text"
@@ -189,22 +189,31 @@ export default function WorkPage() {
         </div>
 
         {/* Timeline */}
-        <div ref={containerRef} className="relative mt-10 sm:mt-12 lg:mt-16 w-full">
+        <div
+          ref={containerRef}
+          className="relative mt-10 sm:mt-12 lg:mt-16 w-full"
+        >
           {/* Spine track (subtle) */}
           <div
             aria-hidden
             className="hidden lg:block absolute lg:-translate-x-1/2 top-0 h-full w-px bg-white/5"
-            style={{ left: '50vw' }}
+            style={{ left: "50vw" }}
           />
           {/* Spine fill that grows with scroll */}
           <motion.div
             aria-hidden
-            style={{ scaleY: prefersReducedMotion ? 1 : spineScale, left: '50vw' }}
+            style={{
+              scaleY: prefersReducedMotion ? 1 : spineScale,
+              left: "50vw",
+            }}
             className="hidden lg:block origin-top pointer-events-none absolute lg:-translate-x-1/2 top-0 h-full w-1 bg-[linear-gradient(to_bottom,rgba(59,130,246,0.75),rgba(168,85,247,0.55),rgba(34,211,238,0.35),transparent)] shadow-[0_0_14px_rgba(59,130,246,0.25)] [transform:translateZ(0)]"
           />
 
           {/* Elegant cap at the start of the spine */}
-          <div className="hidden lg:block absolute lg:-translate-x-1/2 top-0 translate-y-[-6px]" style={{ left: '50vw' }}>
+          <div
+            className="hidden lg:block absolute lg:-translate-x-1/2 top-0 translate-y-[-6px]"
+            style={{ left: "50vw" }}
+          >
             <div className="relative">
               {/* Distinct cap: gradient sphere (larger than nodes) */}
               <span className="block h-3.5 w-3.5 rounded-full bg-[radial-gradient(closest-side,rgba(59,130,246,0.95),rgba(168,85,247,0.9))] shadow-[0_0_16px_rgba(59,130,246,0.45)] ring-1 ring-white/20" />
@@ -244,78 +253,78 @@ export default function WorkPage() {
                 const isRight = index % 2 === 0;
                 return (
                   <li key={`${item.title}-${item.period}`} className="relative">
-                  {/* Node on spine */}
-                  <div className="hidden lg:block absolute lg:left-1/2 lg:-translate-x-1/2 top-6">
-                    <span className="relative z-10 block h-2.5 w-2.5 rounded-full bg-cyan-300 ring-1 ring-cyan-400/60 shadow-[0_0_10px_3px_rgba(34,211,238,0.35)]" />
-                  </div>
+                    {/* Node on spine */}
+                    <div className="hidden lg:block absolute lg:left-1/2 lg:-translate-x-1/2 top-6">
+                      <span className="relative z-10 block h-2.5 w-2.5 rounded-full bg-cyan-300 ring-1 ring-cyan-400/60 shadow-[0_0_10px_3px_rgba(34,211,238,0.35)]" />
+                    </div>
 
-                  <div
-                    className={`relative ${
-                      // On lg+, allocate viewport-side gutter so cards hug a 2vw gap from the 50vw spine
-                      isRight ? "lg:pl-[52vw]" : "lg:pr-[52vw]"
-                    }`}
-                  >
-                    {/* Card */}
-                    <motion.article
-                      {...(reveal as any)}
-                      className={`group relative w-full rounded-2xl p-[1px] sm:p-[1.2px] lg:w-[min(436px,42vw)] shadow-[0_8px_28px_rgba(0,0,0,0.35)] ring-1 ring-white/5 transition-transform duration-300 hover:-translate-y-0.5 bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(168,85,247,0.22),rgba(34,211,238,0.2))] ${
-                        isRight ? "lg:mr-auto" : "lg:ml-auto"
-                      } lg:mx-0 mx-auto`}
+                    <div
+                      className={`relative ${
+                        // On lg+, allocate viewport-side gutter so cards hug a 2vw gap from the 50vw spine
+                        isRight ? "lg:pl-[52vw]" : "lg:pr-[52vw]"
+                      }`}
                     >
-                      {/* Subtle halo */}
-                      <div
-                        aria-hidden
-                        className="pointer-events-none absolute -inset-4 -z-10 rounded-3xl opacity-20 blur-xl bg-[radial-gradient(80%_60%_at_50%_40%,rgba(59,130,246,0.22),transparent_70%),radial-gradient(70%_60%_at_60%_60%,rgba(168,85,247,0.18),transparent_70%)]"
-                      />
+                      {/* Card */}
+                      <motion.article
+                        {...(reveal as any)}
+                        className={`group relative w-full rounded-2xl p-[1px] sm:p-[1.2px] lg:w-[min(436px,42vw)] shadow-[0_8px_28px_rgba(0,0,0,0.35)] ring-1 ring-white/5 transition-transform duration-300 hover:-translate-y-0.5 bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(168,85,247,0.22),rgba(34,211,238,0.2))] ${
+                          isRight ? "lg:mr-auto" : "lg:ml-auto"
+                        } lg:mx-0 mx-auto`}
+                      >
+                        {/* Subtle halo */}
+                        <div
+                          aria-hidden
+                          className="pointer-events-none absolute -inset-4 -z-10 rounded-3xl opacity-20 blur-xl bg-[radial-gradient(80%_60%_at_50%_40%,rgba(59,130,246,0.22),transparent_70%),radial-gradient(70%_60%_at_60%_60%,rgba(168,85,247,0.18),transparent_70%)]"
+                        />
 
-                      {/* Inner frosted panel */}
-                      <div className="relative rounded-2xl border border-white/5 bg-gray-950/70 backdrop-blur-md p-5 sm:p-6">
-                        <div className="text-left">
-                          <h3 className="font-oswald text-2xl text-white">
-                            {item.title}
-                          </h3>
-                          <div className="mt-1 flex items-baseline justify-between gap-3">
-                            <p className="text-sm lg:text-base uppercase tracking-[0.14em] text-gray-300/90">
-                              {item.company}
-                            </p>
-                            <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] lg:text-[11px] uppercase tracking-[0.12em] font-medium text-gray-300 whitespace-nowrap">
-                              {item.period}
-                            </span>
+                        {/* Inner frosted panel */}
+                        <div className="relative rounded-2xl border border-white/5 bg-gray-950/70 backdrop-blur-md p-5 sm:p-6">
+                          <div className="text-left">
+                            <h3 className="font-oswald text-2xl text-white">
+                              {item.title}
+                            </h3>
+                            <div className="mt-1 flex items-baseline justify-between gap-3">
+                              <p className="text-sm lg:text-base uppercase tracking-[0.14em] text-gray-300/90">
+                                {item.company}
+                              </p>
+                              <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] lg:text-[11px] uppercase tracking-[0.12em] font-medium text-gray-300 whitespace-nowrap">
+                                {item.period}
+                              </span>
+                            </div>
+                            <div className="mt-3 h-px bg-linear-to-r from-transparent via-white/5 to-transparent" />
                           </div>
-                          <div className="mt-3 h-px bg-linear-to-r from-transparent via-white/5 to-transparent" />
-                        </div>
 
-                        <ul className="mt-4 space-y-3 text-[0.95rem]/relaxed sm:text-[0.98rem]/relaxed">
-                          {item.bullets.map((b, i) => (
-                            <li
-                              key={i}
-                              className="flex gap-2 text-gray-300/90 break-words"
-                            >
-                              <Check
-                                size={18}
-                                className="mt-0.5 text-cyan-300/80 shrink-0"
-                              />
-                              <span>{b}</span>
-                            </li>
-                          ))}
-                        </ul>
+                          <ul className="mt-4 space-y-3 text-[0.95rem]/relaxed sm:text-[0.98rem]/relaxed">
+                            {item.bullets.map((b, i) => (
+                              <li
+                                key={i}
+                                className="flex gap-2 text-gray-300/90 break-words"
+                              >
+                                <Check
+                                  size={18}
+                                  className="mt-0.5 text-cyan-300/80 shrink-0"
+                                />
+                                <span>{b}</span>
+                              </li>
+                            ))}
+                          </ul>
 
-                        <div className="mt-6 flex flex-wrap gap-2">
-                          {item.tags.map((t) => (
-                            <Badge
-                              key={t}
-                              className="text-xs"
-                              variant="secondary"
-                            >
-                              {t}
-                            </Badge>
-                          ))}
+                          <div className="mt-6 flex flex-wrap gap-2">
+                            {item.tags.map((t) => (
+                              <Badge
+                                key={t}
+                                className="text-xs"
+                                variant="secondary"
+                              >
+                                {t}
+                              </Badge>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    </motion.article>
-                  </div>
-                </li>
-              );
+                      </motion.article>
+                    </div>
+                  </li>
+                );
               })}
             </ul>
           </div>

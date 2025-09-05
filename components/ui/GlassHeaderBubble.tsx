@@ -33,11 +33,11 @@ export default function GlassHeaderBubble({
 
     const timer1: ReturnType<typeof setTimeout> = setTimeout(
       () => setShowBubble(true),
-      2000,
+      500,
     );
     const timer2: ReturnType<typeof setTimeout> = setTimeout(
       () => setShowText(true),
-      3200,
+      1000,
     );
 
     return () => {
@@ -82,7 +82,7 @@ export default function GlassHeaderBubble({
       {/* Main Icon Button */}
       <div
         className={[
-          "relative z-10 w-20 h-16 rounded-full isolate overflow-hidden pointer-events-auto border border-white/30 bg-[linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0.12))] backdrop-blur-[16px] backdrop-saturate-[160%] shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_8px_30px_rgba(0,0,0,0.22)] before:content-[''] before:absolute before:inset-0 before:rounded-full before:pointer-events-none before:opacity-[0.85] before:bg-[radial-gradient(60%_40%_at_50%_18%,rgba(255,255,255,0.55),rgba(255,255,255,0)_70%)] hover:border-white/50 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.22),0_10px_36px_rgba(0,0,0,0.26)] flex items-center justify-center",
+          "relative z-10 w-20 h-16 rounded-full flex items-center justify-center",
           vtClassName ?? "",
         ].join(" ")}
       >
@@ -106,8 +106,11 @@ export default function GlassHeaderBubble({
       >
         <span className="relative z-10 flex items-center w-full">
           {/* Space for icon width */}
-          <div style={{ width: `${collapsedWidthPx}px` }} className="flex-shrink-0" />
-          <span className="font-oswald uppercase tracking-wide text-white/90 font-semibold text-sm whitespace-nowrap pl-4">
+          <div
+            style={{ width: `${collapsedWidthPx}px` }}
+            className="flex-shrink-0"
+          />
+          <span className="font-oswald uppercase tracking-wide text-white/90 font-semibold text-sm md:text-lg whitespace-nowrap">
             {prefersReducedMotion ? (
               label
             ) : showText ? (
@@ -122,8 +125,9 @@ export default function GlassHeaderBubble({
                         index < visibleLetters
                           ? "translateY(0px) scale(1) rotateX(0deg)"
                           : "translateY(12px) scale(0.7) rotateX(-30deg)",
-                      filter: index < visibleLetters ? "blur(0px)" : "blur(3px)",
-                      transitionDelay: `${index * 80}ms`,
+                      filter:
+                        index < visibleLetters ? "blur(0px)" : "blur(3px)",
+                      transitionDelay: `${index * 1}ms`,
                       textShadow:
                         index < visibleLetters
                           ? "0 0 12px rgba(59, 130, 246, 0.4), 0 0 4px rgba(255, 255, 255, 0.1)"
