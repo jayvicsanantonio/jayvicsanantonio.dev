@@ -8,7 +8,8 @@ import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 import type { MotionProps, Transition } from "framer-motion";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { Suspense, useEffect, useState } from "react";
 
 // PROJECTS now sourced from project-data.ts
@@ -41,15 +42,30 @@ function LinkButton({
   href: string;
   children: React.ReactNode;
 }) {
+  const isExternal =
+    href.startsWith("http") || href.startsWith("mailto:") || href.startsWith("tel:");
+
+  if (isExternal) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-gray-200 hover:bg-white/10 transition-colors focus-ring"
+      >
+        {children}
+      </a>
+    );
+  }
+
   return (
-    <a
+    <Link
       href={href}
-      target="_blank"
-      rel="noopener noreferrer"
       className="inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-gray-200 hover:bg-white/10 transition-colors focus-ring"
+      prefetch
     >
       {children}
-    </a>
+    </Link>
   );
 }
 
@@ -220,6 +236,8 @@ function SkillsAndCases({
 }: {
   prefersReducedMotion: boolean;
 }) {
+  const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
   const initialFromQuery =
     (searchParams?.get("skill") || searchParams?.get("filter")) ?? undefined;
@@ -229,6 +247,29 @@ function SkillsAndCases({
       ? initialFromQuery
       : "All",
   );
+
+  // Announce filter changes for screen readers
+  const [announce, setAnnounce] = React.useState<string>("");
+
+  // Keep URL query param in sync with active filter (replace to avoid history spam)
+  React.useEffect(() => {
+    try {
+      const params = new URLSearchParams(searchParams?.toString());
+      if (active === "All") {
+        params.delete("skill");
+        params.delete("filter");
+      } else {
+        params.set("skill", active);
+      }
+      const qs = params.toString();
+      router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+      setAnnounce(`Filter: ${active}`);
+    } catch {
+      // no-op
+    }
+    // Intentionally omitting searchParams from deps to avoid feedback loop
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [active, pathname, router]);
 
   const cardReveal: MotionProps = prefersReducedMotion
     ? {}
@@ -262,6 +303,8 @@ function SkillsAndCases({
   return (
     <div className="mt-12">
       {/* Matrix */}
+      {/* SR announcement for filter changes */}
+      <span className="sr-only" aria-live="polite" role="status">{announce}</span>
       <div className="flex flex-wrap gap-2">
         {SKILL_FILTERS.map((s) => (
           <button
