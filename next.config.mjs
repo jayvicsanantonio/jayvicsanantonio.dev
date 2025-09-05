@@ -1,4 +1,3 @@
-import nextPWA from 'next-pwa';
 import { withSentryConfig } from '@sentry/nextjs';
 
 const nextConfig = {
@@ -18,14 +17,8 @@ const nextConfig = {
   },
 };
 
-const withPWA = nextPWA({
-  dest: 'public',
-  register: true,
-  skipWaiting: true,
-  disable: process.env.NODE_ENV === 'development',
-});
 
-export default withSentryConfig(withPWA(nextConfig), {
+export default withSentryConfig(nextConfig, {
   org: 'jayvic-san-antonio-hl',
   project: 'jayvicsanantonio-dev',
 

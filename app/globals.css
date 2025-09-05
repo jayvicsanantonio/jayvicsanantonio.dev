@@ -363,12 +363,12 @@
     }
 }
 
-/* Enhanced Projects button transition - smooth morph */
+/* Enhanced Projects button transition - fast appearance */
 ::view-transition-old(tag-projects) {
-    animation: vt-projects-shrink 300ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation: vt-projects-shrink 200ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 ::view-transition-new(tag-projects) {
-    animation: vt-projects-expand 400ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation: vt-projects-expand 150ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes vt-projects-shrink {

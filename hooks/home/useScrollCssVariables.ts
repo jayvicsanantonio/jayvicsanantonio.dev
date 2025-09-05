@@ -12,13 +12,13 @@ export type ScrollCfg = {
   closeMaxY: string;
 };
 
-export function useScrollCssVariables(
-  rootRef: React.RefObject<HTMLElement>,
+export function useScrollCssVariables<T extends HTMLElement>(
+  rootRef: React.RefObject<T | null>,
   cfg: ScrollCfg,
   reduceMotion: boolean
 ) {
   useEffect(() => {
-    const root = rootRef.current as HTMLElement | null;
+    const root = rootRef.current;
     if (!root) return;
 
     let raf = 0;
