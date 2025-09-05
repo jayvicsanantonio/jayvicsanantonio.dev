@@ -4,6 +4,7 @@ import AmbientBackground from "@/components/pages/AmbientBackground";
 import { Badge } from "@/components/ui/badge";
 import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
 import { motion, useScroll, useTransform } from "framer-motion";
+import WorkHeaderBubble from "@/components/work/WorkHeaderBubble";
 import { Check } from "lucide-react";
 import { useRef } from "react";
 
@@ -160,9 +161,8 @@ export default function WorkPage() {
       <div className="mx-auto px-4 sm:px-6 lg:px-8 py-20">
         {/* Intro */}
         <div className="space-y-5 max-w-3xl">
-          <div className="font-oswald uppercase inline-block rounded-lg bg-white/5 px-3 py-1 tracking-wide text-white/90  vt-tag-work">
-            Work
-          </div>
+          {/* Glass Bubble Animation - Icon + Text Bubble */}
+          <WorkHeaderBubble prefersReducedMotion={prefersReducedMotion} />
           <h1 className="font-oswald text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight text-cyan-300/90">
             A Timeline of Crafting Impact
           </h1>
