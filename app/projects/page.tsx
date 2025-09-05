@@ -13,7 +13,8 @@ import React, { Suspense } from "react";
 
 // PROJECTS now sourced from project-data.ts
 
-import ProjectsHeaderBubble from "@/components/projects/ProjectsHeaderBubble";
+import GlassHeaderBubble from "@/components/ui/GlassHeaderBubble";
+import { Icon } from "@iconify/react";
 
 // Filters and ordering constants
 const PREFERRED_FILTER_ORDER = [
@@ -86,7 +87,21 @@ export default function ProjectsPage() {
         {/* Header */}
         <div className="space-y-5 max-w-3xl">
           {/* Glass Bubble Animation - Icon + Text Bubble */}
-          <ProjectsHeaderBubble prefersReducedMotion={prefersReducedMotion} />
+          <GlassHeaderBubble
+            prefersReducedMotion={prefersReducedMotion}
+            label="PROJECTS"
+            vtClassName="vt-tag-projects"
+            expandedWidthPx={200}
+            icon={
+              <Icon
+                icon="mdi:application-brackets"
+                width={28}
+                height={28}
+                className="text-white/90"
+                aria-hidden="true"
+              />
+            }
+          />
 
           <h1 className="font-oswald text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight text-cyan-300/90">
             Crafted Artifacts

@@ -4,7 +4,8 @@ import AmbientBackground from "@/components/pages/AmbientBackground";
 import { Badge } from "@/components/ui/badge";
 import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
 import { motion, useScroll, useTransform } from "framer-motion";
-import WorkHeaderBubble from "@/components/work/WorkHeaderBubble";
+import GlassHeaderBubble from "@/components/ui/GlassHeaderBubble";
+import { Icon } from "@iconify/react";
 import { Check } from "lucide-react";
 import { useRef } from "react";
 
@@ -162,7 +163,21 @@ export default function WorkPage() {
         {/* Intro */}
         <div className="space-y-5 max-w-3xl">
           {/* Glass Bubble Animation - Icon + Text Bubble */}
-          <WorkHeaderBubble prefersReducedMotion={prefersReducedMotion} />
+          <GlassHeaderBubble
+            prefersReducedMotion={prefersReducedMotion}
+            label="WORK"
+            vtClassName="vt-tag-work"
+            expandedWidthPx={220}
+            icon={
+              <Icon
+                icon="mdi:timeline-text"
+                width={28}
+                height={28}
+                className="text-white/90"
+                aria-hidden="true"
+              />
+            }
+          />
           <h1 className="font-oswald text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight text-cyan-300/90">
             A Timeline of Crafting Impact
           </h1>

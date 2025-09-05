@@ -1,15 +1,24 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Icon } from "@iconify/react";
 
-export default function ProjectsHeaderBubble({
-  prefersReducedMotion,
-  label = "PROJECTS",
-}: {
+export type GlassHeaderBubbleProps = {
   prefersReducedMotion: boolean;
-  label?: string;
-}) {
+  label: string;
+  icon: React.ReactNode;
+  vtClassName?: string; // e.g., vt-tag-projects, vt-tag-work
+  collapsedWidthPx?: number; // defaults to 80 (w-20)
+  expandedWidthPx?: number; // defaults to 200
+};
+
+export default function GlassHeaderBubble({
+  prefersReducedMotion,
+  label,
+  icon,
+  vtClassName,
+  collapsedWidthPx = 80,
+  expandedWidthPx = 200,
+}: GlassHeaderBubbleProps) {
   const [showBubble, setShowBubble] = useState(false);
   const [showText, setShowText] = useState(false);
   const [visibleLetters, setVisibleLetters] = useState(0);
@@ -70,26 +79,23 @@ export default function ProjectsHeaderBubble({
 
   return (
     <div className="relative inline-flex items-center">
-      {/* Main Icon Button - Always visible, on top */}
-      <div className="relative z-10 w-20 h-16 rounded-full isolate overflow-hidden pointer-events-auto border border-white/30 bg-[linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0.12))] backdrop-blur-[16px] backdrop-saturate-[160%] shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_8px_30px_rgba(0,0,0,0.22)] before:content-[''] before:absolute before:inset-0 before:rounded-full before:pointer-events-none before:opacity-[0.85] before:bg-[radial-gradient(60%_40%_at_50%_18%,rgba(255,255,255,0.55),rgba(255,255,255,0)_70%)] hover:border-white/50 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.22),0_10px_36px_rgba(0,0,0,0.26)] vt-tag-projects flex items-center justify-center">
-        <span className="relative z-10">
-          <Icon
-            icon="mdi:application-brackets"
-            width={28}
-            height={28}
-            className="text-white/90"
-            aria-hidden="true"
-          />
-        </span>
+      {/* Main Icon Button */}
+      <div
+        className={[
+          "relative z-10 w-20 h-16 rounded-full isolate overflow-hidden pointer-events-auto border border-white/30 bg-[linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0.12))] backdrop-blur-[16px] backdrop-saturate-[160%] shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_8px_30px_rgba(0,0,0,0.22)] before:content-[''] before:absolute before:inset-0 before:rounded-full before:pointer-events-none before:opacity-[0.85] before:bg-[radial-gradient(60%_40%_at_50%_18%,rgba(255,255,255,0.55),rgba(255,255,255,0)_70%)] hover:border-white/50 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.22),0_10px_36px_rgba(0,0,0,0.26)] flex items-center justify-center",
+          vtClassName ?? "",
+        ].join(" ")}
+      >
+        <span className="relative z-10">{icon}</span>
       </div>
 
-      {/* Text Bubble - Left aligned with icon container */}
+      {/* Text Bubble */}
       <div
         className="absolute isolate overflow-hidden pointer-events-auto border border-white/30 bg-[linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0.12))] backdrop-blur-[16px] backdrop-saturate-[160%] shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_8px_30px_rgba(0,0,0,0.22)] before:content-[''] before:absolute before:inset-0 before:pointer-events-none before:opacity-[0.85] before:bg-[radial-gradient(60%_40%_at_50%_18%,rgba(255,255,255,0.55),rgba(255,255,255,0)_70%)] before:rounded-[inherit] flex items-center justify-start"
         style={{
           left: "0px",
           top: "0px",
-          width: showBubble ? "200px" : "80px",
+          width: showBubble ? `${expandedWidthPx}px` : `${collapsedWidthPx}px`,
           height: "64px",
           borderRadius: "32px",
           opacity: 1,
@@ -99,8 +105,8 @@ export default function ProjectsHeaderBubble({
         }}
       >
         <span className="relative z-10 flex items-center w-full">
-          <div className="w-20 flex-shrink-0"></div>{" "}
-          {/* Space for icon */}
+          {/* Space for icon width */}
+          <div style={{ width: `${collapsedWidthPx}px` }} className="flex-shrink-0" />
           <span className="font-oswald uppercase tracking-wide text-white/90 font-semibold text-sm whitespace-nowrap pl-4">
             {prefersReducedMotion ? (
               label
