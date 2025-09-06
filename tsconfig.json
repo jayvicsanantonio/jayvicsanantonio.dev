@@ -13,6 +13,16 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+
+    // Tightening
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "useUnknownInCatchVariables": true,
+    "noFallthroughCasesInSwitch": true,
+    "exactOptionalPropertyTypes": true,
+    "noUnusedLocals": true,
+    "forceConsistentCasingInFileNames": true,
+
     "plugins": [
       {
         "name": "next"

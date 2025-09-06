@@ -9,7 +9,6 @@ export const metadata: Metadata = {
   title: 'Jayvic San Antonio | Software Engineer',
   description:
     'Highly skilled senior web developer with a proven track record of delivering successful web projects. Experienced in JavaScript and passionate about building innovative solutions. Contact me to learn more about my expertise.',
-  manifest: '/manifest.json',
   icons: {
     icon: [
       {

@@ -2,7 +2,6 @@
 
 import {
   useState,
-  useCallback,
   useEffect,
   useRef,
   MouseEventHandler,
@@ -19,13 +18,8 @@ export default function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const lastScrollYRef = useRef(0);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [isScrolled, setIsScrolled] = useState(false);
   const menuContainerRef = useRef<HTMLDivElement | null>(null);
 
-  const closeDrawer = useCallback(() => {
-    setIsNavOpen(false);
-  }, []);
 
   // Auto-hide on scroll down, reveal on scroll up
   useEffect(() => {
@@ -36,13 +30,6 @@ export default function Header() {
         setIsVisible(delta < 0 || currentY < 24);
         lastScrollYRef.current = currentY;
       }
-      setIsScrolled(currentY > 8);
-      // Scroll progress for circular indicator
-      const doc = document.documentElement;
-      const total = doc.scrollHeight - doc.clientHeight;
-      const p =
-        total > 0 ? Math.min(1, Math.max(0, currentY / total)) : 0;
-      setScrollProgress(p);
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });

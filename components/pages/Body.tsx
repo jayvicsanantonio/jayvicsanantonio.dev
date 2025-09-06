@@ -1,12 +1,13 @@
-'use client';
+"use client";
 
-import { SpeedInsights } from '@vercel/speed-insights/next';
-import { Analytics } from '@vercel/analytics/react';
-import { Toaster } from '@/components/ui/sonner';
-import Header from '@/components/pages/Header';
-import Footer from '@/components/pages/Footer';
-import AmbientBackground from '@/components/pages/AmbientBackground';
-import CursorGlow from '@/components/pages/CursorGlow';
+import AmbientBackground from "@/components/pages/AmbientBackground";
+import CursorGlow from "@/components/pages/CursorGlow";
+import { Toaster } from "@/components/ui/sonner";
+import { useWebVitalsLogger } from "@/hooks/useWebVitalsLogger";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { usePathname } from "next/navigation";
+import { unstable_ViewTransition as ViewTransition } from "react";
 
 export default function Body({
   children,
@@ -15,21 +16,26 @@ export default function Body({
   children: React.ReactNode;
   fontVars?: string;
 }) {
+  const pathname = usePathname();
+
+  useWebVitalsLogger();
+
+  const isHome = pathname === "/";
+
   return (
     <body
       className={`dark ${
-        fontVars ?? ''
-      } flex flex-col md:flex-row min-h-screen dark:bg-gray-950 text-gray-200`}
+        fontVars ?? ""
+      } flex flex-col min-h-screen dark:bg-gray-950 text-gray-200`}
     >
-      <AmbientBackground />
       <CursorGlow />
-      <div
-        className={`font-source-sans flex flex-col w-3xl lg:w-6xl md:px-12 mx-4 lg:mx-auto`}
-      >
-        <Header />
-        <main className="flex-1 py-12">{children}</main>
-        <Footer />
-      </div>
+      {/* React ViewTransition wrapper per Next.js docs; key by pathname to scope updates */}
+      <ViewTransition>
+        <div key={pathname}>
+          {pathname !== "/" && <AmbientBackground />}
+          {isHome ? children : <div className="container">{children}</div>}
+        </div>
+      </ViewTransition>
       <Toaster />
       <SpeedInsights />
       <Analytics />

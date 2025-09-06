@@ -29,7 +29,7 @@ export default function MainMenu({
         <IconButton
           IconName={House}
           link="/"
-          callback={closeDrawer}
+          {...(closeDrawer ? { callback: closeDrawer } : {})}
           subtitle="Start the journey"
         >
           Home
@@ -53,7 +53,7 @@ export default function MainMenu({
         <IconButton
           IconName={LayoutPanelLeft}
           link="/projects"
-          callback={closeDrawer}
+          {...(closeDrawer ? { callback: closeDrawer } : {})}
           subtitle="Selected builds & projects"
         >
           Projects
@@ -77,7 +77,7 @@ export default function MainMenu({
         <IconButton
           IconName={FileUser}
           link="/work"
-          callback={closeDrawer}
+          {...(closeDrawer ? { callback: closeDrawer } : {})}
           subtitle="Experience & highlights"
         >
           Work

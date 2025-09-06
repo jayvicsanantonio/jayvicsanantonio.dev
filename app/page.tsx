@@ -1,19 +1,10 @@
-'use client';
-
-import { useRef } from 'react';
-import Hero from '@/components/pages/home/Hero';
-import AboutMe from '@/components/pages/home/AboutMe';
-import FeaturedProjects from '@/components/pages/home/FeaturedProjects';
+import HeroMorph from '@/components/home/HeroMorph.client';
 
 export default function Page() {
-  const aboutRef = useRef<HTMLElement>(null);
-  const featuredProjectsRef = useRef<HTMLElement>(null);
-
   return (
-    <>
-      <Hero aboutRef={aboutRef} />
-      <AboutMe aboutRef={aboutRef} />
-      <FeaturedProjects impactRef={featuredProjectsRef} />
-    </>
+    <main>
+      <h1 className="sr-only">Jayvic San Antonio — Software Engineer</h1>
+      <HeroMorph />
+    </main>
   );
 }
