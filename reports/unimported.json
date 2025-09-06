@@ -1,0 +1,90 @@
+
+       summary               unimported v1.31.1 (next)
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+       entry file 1        : app/global-error.tsx
+       entry file 2        : app/layout.tsx
+       entry file 3        : app/not-found.tsx
+       entry file 4        : app/page.tsx
+       entry file 5        : app/projects/_components/ProjectLink.tsx
+       entry file 6        : app/projects/_components/SkillsAndCases.tsx
+       entry file 7        : app/projects/layout.tsx
+       entry file 8        : app/projects/page.tsx
+       entry file 9        : app/projects/project-data.tsx
+       entry file 10       : app/work/layout.tsx
+       entry file 11       : app/work/page.tsx
+       entry file 12       : app/api/send/route.ts
+       entry file 13       : app/api/sentry-example-api/route.ts
+
+       unresolved imports  : 1
+       unused dependencies : 6
+       unimported files    : 42
+
+
+─────┬────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+     │ 1 unresolved imports
+─────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1 │ @t3-oss/env-nextjs at env.ts
+─────┴────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+─────┬────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+     │ 6 unused dependencies
+─────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1 │ @radix-ui/react-label
+   2 │ @radix-ui/react-slot
+   3 │ @radix-ui/react-toast
+   4 │ @tailwindcss/postcss
+   5 │ react-syntax-highlighter
+   6 │ tailwindcss-animate
+─────┴────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+─────┬────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+     │ 42 unimported files
+─────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1 │ components/dev/VTDiagnostics.tsx
+   2 │ components/icons/Bluesky.tsx
+   3 │ components/pages/Footer.tsx
+   4 │ components/pages/Header.tsx
+   5 │ components/pages/HolidayLights.tsx
+   6 │ components/pages/home/SocialMediaIconButton.tsx
+   7 │ components/pages/Icon.tsx
+   8 │ components/pages/IconButton.tsx
+   9 │ components/pages/MainMenu.tsx
+  10 │ components/pages/ProjectButton.tsx
+  11 │ components/pages/ScrollDown.tsx
+  12 │ components/ui/breadcrumb.tsx
+  13 │ components/ui/breadcrumb/Breadcrumb.tsx
+  14 │ components/ui/breadcrumb/BreadcrumbEllipsis.tsx
+  15 │ components/ui/breadcrumb/BreadcrumbItem.tsx
+  16 │ components/ui/breadcrumb/BreadcrumbLink.tsx
+  17 │ components/ui/breadcrumb/BreadcrumbList.tsx
+  18 │ components/ui/breadcrumb/BreadcrumbPage.tsx
+  19 │ components/ui/breadcrumb/BreadcrumbSeparator.tsx
+  20 │ components/ui/button.tsx
+  21 │ components/ui/card.tsx
+  22 │ components/ui/card/Card.tsx
+  23 │ components/ui/card/CardContent.tsx
+  24 │ components/ui/card/CardDescription.tsx
+  25 │ components/ui/card/CardFooter.tsx
+  26 │ components/ui/card/CardHeader.tsx
+  27 │ components/ui/card/CardTitle.tsx
+  28 │ components/ui/input.tsx
+  29 │ components/ui/label.tsx
+  30 │ components/ui/textarea.tsx
+  31 │ hooks/use-local-storage.ts
+  32 │ hooks/useBoop.ts
+  33 │ hooks/useEscapeKey.ts
+  34 │ hooks/useLetterReveal.ts
+  35 │ hooks/useScrollToTop.ts
+  36 │ hooks/useWindowSize.ts
+  37 │ instrumentation-client.ts
+  38 │ instrumentation.ts
+  39 │ sentry.edge.config.ts
+  40 │ sentry.server.config.ts
+  41 │ types/stroke-line-cap.ts
+  42 │ types/stroke-line-join.ts
+─────┴────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+       Inspect the results and run npx unimported -u to update ignore lists
