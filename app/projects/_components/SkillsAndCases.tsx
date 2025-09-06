@@ -1,12 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { ExternalLink, Github, Play } from 'lucide-react';
 import Image from 'next/image';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';
 
-
-import { PROJECTS } from '@/app/projects/project-data';
+import { PROJECTS } from '@/app/projects/projects.data';
+import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
 
 import ProjectLink from './ProjectLink';
 
@@ -32,11 +33,8 @@ const PRIORITY_ORDER = [
   'ember-upgrade-guide',
 ];
 
-export default function SkillsAndCases({
-  prefersReducedMotion,
-}: {
-  prefersReducedMotion: boolean;
-}) {
+export default function SkillsAndCases() {
+  const prefersReducedMotion = usePrefersReducedMotion();
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -172,13 +170,31 @@ export default function SkillsAndCases({
                 </p>
 
                 <div className="mt-auto flex flex-wrap gap-2">
-                  {c.links.map((l) => (
-                    <ProjectLink key={`${c.slug}-${l.label}`} href={l.href}>
-                      {l.icon}
-                      {l.icon ? <>&nbsp;</> : null}
-                      {l.label}
-                    </ProjectLink>
-                  ))}
+                  {c.links.map((l) => {
+                    let icon: React.ReactNode = null;
+                    switch (l.icon) {
+                      case 'github':
+                        icon = <Github size={18} />;
+                        break;
+                      case 'watch':
+                        icon = <Play size={16} />;
+                        break;
+                      case 'marketplace':
+                      case 'external':
+                      case 'view':
+                        icon = <ExternalLink size={16} />;
+                        break;
+                      default:
+                        icon = null;
+                    }
+                    return (
+                      <ProjectLink key={`${c.slug}-${l.label}`} href={l.href}>
+                        {icon}
+                        {icon ? <>&nbsp;</> : null}
+                        {l.label}
+                      </ProjectLink>
+                    );
+                  })}
                 </div>
               </div>
             </div>
