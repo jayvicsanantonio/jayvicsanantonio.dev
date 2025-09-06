@@ -1,4 +1,3 @@
-import { Icon } from '@iconify/react';
 import React from 'react';
 
 import GlassHeaderBubble from '@/components/ui/GlassHeaderBubble';
@@ -12,15 +11,6 @@ export default function WorkLayout({ children }: { children: React.ReactNode }) 
             label="WORK"
             vtClassName="vt-tag-work"
             expandedWidthPx={180}
-            icon={
-              <Icon
-                icon="mdi:timeline-text"
-                width={28}
-                height={28}
-                className="text-white/90"
-                aria-hidden="true"
-              />
-            }
           />
         </div>
       </div>

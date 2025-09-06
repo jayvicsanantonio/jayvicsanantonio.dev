@@ -8,7 +8,6 @@ import React from 'react';
 import { NavPill } from '@/components/ui/NavPill';
 export type GlassHeaderBubbleProps = {
   label: string;
-  icon: React.ReactNode;
   vtClassName?: string; // e.g., vt-tag-projects, vt-tag-work
   collapsedWidthPx?: number; // defaults to 80 (w-20)
   expandedWidthPx?: number; // defaults to 200
@@ -16,7 +15,6 @@ export type GlassHeaderBubbleProps = {
 
 export default function GlassHeaderBubble({
   label: _label,
-  icon: _icon,
   vtClassName: _vtClassName,
   collapsedWidthPx: _collapsedWidthPx = 80,
   expandedWidthPx: _expandedWidthPx = 200,
