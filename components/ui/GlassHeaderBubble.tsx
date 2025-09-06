@@ -93,7 +93,7 @@ export default function GlassHeaderBubble({
           }
           label="Projects"
           active={isProjects}
-          vtTagName={isProjects ? "projects" : undefined}
+          {...(isProjects ? { vtTagName: "projects" } : {})}
           tooltip={!isProjects ? "Projects" : undefined}
           tooltipPlacement={!isProjects ? "below" : undefined}
           prefersReducedMotion={prefersReducedMotion}
@@ -106,14 +106,16 @@ export default function GlassHeaderBubble({
         <Link
           href="/"
           aria-label="Home"
-          className="pointer-events-auto inline-flex items-center justify-center rounded-full h-[clamp(48px,9.5vw,72px)] px-5 sm:px-6 md:px-7 bg-cyan-900 text-white font-semibold shadow-[0_10px_24px_rgba(0,0,0,0.25)] hover:bg-cyan-800 transition-colors"
+          className="pointer-events-auto inline-flex items-center justify-center rounded-full h-[clamp(48px,9.5vw,72px)] px-5 sm:px-6 md:px-20 bg-cyan-900 text-white font-semibold shadow-[0_10px_24px_rgba(0,0,0,0.25)] hover:bg-cyan-800 transition-colors"
           onClick={(e) => {
             e.preventDefault();
             // Force a full reload to ensure the homepage remounts and animations restart
-            if (typeof window !== 'undefined') window.location.assign('/');
+            if (typeof window !== "undefined") window.location.assign("/");
           }}
         >
-          <span className="text-[clamp(14px,2.2vw,22px)]">Hi, I'm Jayvic 👋</span>
+          <span className="text-[clamp(14px,2.2vw,22px)]">
+            Hi, I'm Jayvic 👋
+          </span>
         </Link>
 
         {/* Work (right) */}
@@ -129,7 +131,7 @@ export default function GlassHeaderBubble({
           }
           label="Work"
           active={isWork}
-          vtTagName={isWork ? "work" : undefined}
+          {...(isWork ? { vtTagName: "work" } : {})}
           tooltip={!isWork ? "Work" : undefined}
           tooltipPlacement={!isWork ? "below" : undefined}
           prefersReducedMotion={prefersReducedMotion}

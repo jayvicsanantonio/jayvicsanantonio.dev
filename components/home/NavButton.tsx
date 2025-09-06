@@ -76,7 +76,7 @@ export default function NavButton({
             icon={children}
             // hero pills are icon-only (inactive), but keep vt-tag for transitions if provided
             active={false}
-            vtTagName={vtTagName}
+            {...(vtTagName ? { vtTagName } : {})}
             collapsedPx={size.w}
             heightPx={size.h}
             tooltip={tooltip}
