@@ -1,20 +1,18 @@
 "use client";
 
 import { PROJECTS } from "@/app/projects/project-data";
-import AmbientBackground from "@/components/pages/AmbientBackground";
 
 import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
-import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { Suspense } from "react";
+import React from "react";
 
 // PROJECTS now sourced from project-data.ts
 
-import GlassHeaderBubble from "@/components/ui/GlassHeaderBubble";
-import { Icon } from "@iconify/react";
+import AnimatedText from "@/components/ui/AnimatedText";
+import { GlassButton } from "@/components/ui/GlassButton";
 
 // Filters and ordering constants
 const SKILL_FILTERS = [
@@ -37,7 +35,7 @@ const PRIORITY_ORDER = [
   "ember-upgrade-guide",
 ];
 
-function LinkButton({
+function ProjectLink({
   href,
   children,
 }: {
@@ -45,29 +43,27 @@ function LinkButton({
   children: React.ReactNode;
 }) {
   const isExternal =
-    href.startsWith("http") || href.startsWith("mailto:") || href.startsWith("tel:");
+    href.startsWith("http") ||
+    href.startsWith("mailto:") ||
+    href.startsWith("tel:");
 
   if (isExternal) {
     return (
-      <a
+      <GlassButton
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-gray-200 hover:bg-white/10 transition-colors focus-ring"
+        className="h-9 px-3 text-sm gap-2"
       >
         {children}
-      </a>
+      </GlassButton>
     );
   }
 
   return (
-    <Link
-      href={href}
-      className="inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-gray-200 hover:bg-white/10 transition-colors focus-ring"
-      prefetch
-    >
+    <GlassButton href={href} className="h-9 px-3 text-sm gap-2" prefetch>
       {children}
-    </Link>
+    </GlassButton>
   );
 }
 
@@ -76,40 +72,16 @@ export default function ProjectsPage() {
 
   return (
     <section className="relative w-full">
-      <AmbientBackground />
-
-      {/* Top-centered header bubble */}
-      <div className="fixed inset-x-0 top-[max(env(safe-area-inset-top),16px)] z-50 flex justify-center pointer-events-none">
-        <div className="pointer-events-auto">
-          <GlassHeaderBubble
-            prefersReducedMotion={prefersReducedMotion}
-            label="PROJECTS"
-            vtClassName="vt-tag-projects"
-            expandedWidthPx={200}
-            icon={
-              <Icon
-                icon="mdi:application-brackets"
-                width={28}
-                height={28}
-                className="text-white/90"
-                aria-hidden="true"
-              />
-            }
-          />
-        </div>
-      </div>
-
-      {/* Ambient orbs */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-24 left-1/2 -translate-x-1/2 h-[40rem] w-[40rem] rounded-full opacity-20 blur-3xl bg-[radial-gradient(closest-side,rgba(59,130,246,0.25),transparent)]" />
-        <div className="absolute bottom-0 right-0 h-[26rem] w-[26rem] rounded-full opacity-15 blur-3xl bg-[radial-gradient(closest-side,rgba(168,85,247,0.25),transparent)]" />
-      </div>
-
-      <div className="mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16">
+      <div className="container pt-52 pb-16">
         {/* Header */}
-        <div className="space-y-5 max-w-3xl">
+        <div className="space-y-5">
           <h1 className="font-oswald text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight text-cyan-300/90">
-            Crafted Artifacts
+            <span className="sr-only">Projects</span>
+            <AnimatedText
+              text="Crafted Artifacts"
+              start={!prefersReducedMotion}
+              perCharDelay={45}
+            />
           </h1>
 
           <p className="text-gray-300/85 text-base sm:text-lg max-w-[720px]">
@@ -119,9 +91,8 @@ export default function ProjectsPage() {
         </div>
 
         {/* Projects only */}
-        <Suspense fallback={null}>
-          <SkillsAndCases prefersReducedMotion={prefersReducedMotion} />
-        </Suspense>
+
+        <SkillsAndCases prefersReducedMotion={prefersReducedMotion} />
       </div>
     </section>
   );
@@ -184,9 +155,12 @@ function SkillsAndCases({
       }
     : {
         hidden: { opacity: 0, y: 16 },
-        show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: EASING as any } },
+        show: {
+          opacity: 1,
+          y: 0,
+          transition: { duration: 0.45, ease: EASING as any },
+        },
       };
-
 
   const visible = React.useMemo(() => {
     const filtered = PROJECTS.filter(
@@ -208,17 +182,19 @@ function SkillsAndCases({
     <div className="mt-12">
       {/* Matrix */}
       {/* SR announcement for filter changes */}
-      <span className="sr-only" aria-live="polite" role="status">{announce}</span>
+      <span className="sr-only" aria-live="polite" role="status">
+        {announce}
+      </span>
       <div className="flex flex-wrap gap-2">
         {SKILL_FILTERS.map((s) => (
           <button
             key={s}
             onClick={() => setActive(s)}
-            className={`rounded-full px-3 py-1.5 text-xs sm:text-sm border focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:ring-blue-400/60 ${
+            className={`relative inline-flex items-center rounded-full px-3 py-1.5 text-xs sm:text-sm transition-colors border backdrop-blur-md backdrop-saturate-[140%] ${
               active === s
-                ? "bg-purple-600/70 text-white border-purple-500/70"
-                : "bg-white/5 text-white/90 border-white/10"
-            }`}
+                ? "text-white border-cyan-400/60 bg-cyan-900/70 shadow-[0_8px_28px_rgba(0,0,0,0.35)]"
+                : "text-white/90 border-white/30 bg-[linear-gradient(180deg,rgba(255,255,255,0.10),rgba(255,255,255,0.06))] hover:border-white/50"
+            } focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:ring-cyan-400/60`}
             aria-pressed={active === s}
           >
             {s}
@@ -269,11 +245,11 @@ function SkillsAndCases({
 
                 <div className="mt-auto flex flex-wrap gap-2">
                   {c.links.map((l) => (
-                    <LinkButton key={`${c.slug}-${l.label}`} href={l.href}>
+                    <ProjectLink key={`${c.slug}-${l.label}`} href={l.href}>
                       {l.icon}
                       {l.icon ? <>&nbsp;</> : null}
                       {l.label}
-                    </LinkButton>
+                    </ProjectLink>
                   ))}
                 </div>
               </div>

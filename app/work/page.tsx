@@ -1,10 +1,7 @@
 "use client";
 
-import AmbientBackground from "@/components/pages/AmbientBackground";
 import { Badge } from "@/components/ui/badge";
-import GlassHeaderBubble from "@/components/ui/GlassHeaderBubble";
 import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
-import { Icon } from "@iconify/react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Check } from "lucide-react";
 import { useRef } from "react";
@@ -158,36 +155,13 @@ export default function WorkPage() {
 
   return (
     <section className="relative w-full">
-      <AmbientBackground />
-
-      {/* Top-centered header bubble */}
-      <div className="fixed inset-x-0 top-[max(env(safe-area-inset-top),16px)] z-50 flex justify-center pointer-events-none">
-        <div className="pointer-events-auto">
-          <GlassHeaderBubble
-            prefersReducedMotion={prefersReducedMotion}
-            label="WORK"
-            vtClassName="vt-tag-work"
-            expandedWidthPx={180}
-            icon={
-              <Icon
-                icon="mdi:timeline-text"
-                width={28}
-                height={28}
-                className="text-white/90"
-                aria-hidden="true"
-              />
-            }
-          />
-        </div>
-      </div>
-
-      <div className="mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20">
+      <div className="container pt-52 pb-16">
         {/* Intro */}
-        <div className="space-y-5 max-w-3xl">
+        <div className="space-y-5">
           <h1 className="font-oswald text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight text-cyan-300/90">
             A Timeline of Crafting Impact
           </h1>
-          <p className="text-gray-300/85 text-base sm:text-lg">
+          <p className="text-gray-300/85 text-base sm:text-lg max-w-[720px]">
             A decade of building adtech platforms, real‑time systems, and
             scalable web experiences—shipping performance wins, leading teams,
             and crafting thoughtful interfaces.

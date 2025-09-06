@@ -5,7 +5,7 @@ import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
 import { Icon } from "@iconify/react";
 import React from "react";
 
-export default function ProjectsLayout({
+export default function WorkLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -14,17 +14,16 @@ export default function ProjectsLayout({
 
   return (
     <>
-      {/* Top-centered header bubble shared across all /projects routes */}
       <div className="fixed inset-x-0 top-[max(env(safe-area-inset-top),16px)] z-50 flex justify-center pointer-events-none py-10">
         <div className="pointer-events-auto">
           <GlassHeaderBubble
             prefersReducedMotion={prefersReducedMotion}
-            label="PROJECTS"
-            vtClassName="vt-tag-projects"
-            expandedWidthPx={200}
+            label="WORK"
+            vtClassName="vt-tag-work"
+            expandedWidthPx={180}
             icon={
               <Icon
-                icon="mdi:application-brackets"
+                icon="mdi:timeline-text"
                 width={28}
                 height={28}
                 className="text-white/90"

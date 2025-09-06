@@ -2,7 +2,7 @@
 
 Date: 2025-09-04
 
-Scope: app/page.tsx, components/home/HeroMorph.client.tsx, components/ui/AnimatedText.tsx, components/ui/GlassButton.tsx, app/layout.tsx, components/pages/Body.tsx, components/pages/AmbientBackground.tsx, components/pages/CursorGlow.tsx, hooks/useScrollToTop.ts, hooks/useWebVitalsLogger.ts, app/globals.css, package.json, next.config.mjs
+Scope: app/page.tsx, components/home/HeroMorph.client.tsx, components/ui/AnimatedText.tsx, components/ui/GlassButton.tsx, app/layout.tsx, components/pages/Body.tsx, components/pages/AmbientBackground.tsx, components/pages/CursorGlow.tsx, hooks/SScrollToTop.ts, hooks/useWebVitalsLogger.ts, app/globals.css, package.json, next.config.mjs
 
 Executive summary
 - Strong foundation: server/client boundaries are sensible, performance-critical scroll work is done via CSS variables to avoid React re-renders, reduced motion is respected, fonts and metadata are set up correctly.
@@ -73,4 +73,3 @@ Refactor suggestions (for follow-up work)
 - Extract useScrollCssVariables(rootRef, CFG) to encapsulate scroll/resize listeners and CSS var updates.
 - Extract useIntroSequence(CFG) to own intro timers and flags, reducing complexity in the component body.
 - Keep CFG central but consider splitting sections or moving to a small config module for readability.
-
