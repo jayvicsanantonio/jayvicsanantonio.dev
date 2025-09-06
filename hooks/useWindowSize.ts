@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export default function useWindowSize() {
   const [size, setSize] = useState({
@@ -16,11 +16,11 @@ export default function useWindowSize() {
       });
     }
 
-    window?.addEventListener("resize", handleResize);
+    window?.addEventListener('resize', handleResize);
     handleResize();
 
     return () => {
-      window?.removeEventListener("resize", handleResize);
+      window?.removeEventListener('resize', handleResize);
     };
   }, []);
 

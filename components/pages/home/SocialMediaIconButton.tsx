@@ -1,8 +1,9 @@
 'use client';
 
-import React, { MouseEventHandler, TouchEventHandler } from 'react';
 import { motion } from 'framer-motion';
-import useBoop from '@/hooks/use-boop';
+import React, { MouseEventHandler, TouchEventHandler } from 'react';
+
+import useBoop from '@/hooks/useBoop';
 
 export default function SocialMediaIconButton({
   Icon,
@@ -25,16 +26,11 @@ export default function SocialMediaIconButton({
       whileTap={{ scale: 0.98 }}
       target="_blank"
       rel="noopener noreferrer"
-      className="hover:text-cyan-300 transition will-change-transform"
+      className="transition will-change-transform hover:text-cyan-300"
       onMouseEnter={trigger as MouseEventHandler<HTMLAnchorElement>}
       onTouchStart={trigger as TouchEventHandler<HTMLAnchorElement>}
     >
-      <Icon
-        className={`${
-          className ? className : 'w-6 h-6 md:w-8 md:h-8'
-        }`}
-        aria-hidden="true"
-      />
+      <Icon className={`${className ? className : 'h-6 w-6 md:h-8 md:w-8'}`} aria-hidden="true" />
       <span className="sr-only">{children}</span>
     </motion.a>
   );

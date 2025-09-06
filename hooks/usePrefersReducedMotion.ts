@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-const QUERY = "(prefers-reduced-motion: no-preference)";
+import { useEffect, useState } from 'react';
+const QUERY = '(prefers-reduced-motion: no-preference)';
 
 const getInitialState = () => {
   // During SSR and the initial client render, default to reduced motion.
@@ -9,8 +9,7 @@ const getInitialState = () => {
 };
 
 export default function usePrefersReducedMotion() {
-  const [prefersReducedMotion, setPrefersReducedMotion] =
-    useState(getInitialState);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(getInitialState);
 
   useEffect(() => {
     const mediaQueryList = window.matchMedia(QUERY);
@@ -20,13 +19,13 @@ export default function usePrefersReducedMotion() {
     };
 
     if (mediaQueryList.addEventListener) {
-      mediaQueryList.addEventListener("change", listener);
+      mediaQueryList.addEventListener('change', listener);
     } else {
       mediaQueryList.addListener(listener);
     }
     return () => {
       if (mediaQueryList.removeEventListener) {
-        mediaQueryList.removeEventListener("change", listener);
+        mediaQueryList.removeEventListener('change', listener);
       } else {
         mediaQueryList.removeListener(listener);
       }

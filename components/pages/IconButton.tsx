@@ -1,11 +1,15 @@
 'use client';
 
-import { useRef } from 'react';
-import type React from 'react';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useRef } from 'react';
+
 import Icon from '@/components/pages/Icon';
-import { motion } from 'framer-motion';
+
+import type React from 'react';
+
+
 
 export default function IconButton({
   IconName,
@@ -39,13 +43,13 @@ export default function IconButton({
   };
 
   return (
-    <Link href={link} onClick={() => callback()} className={"block"}>
+    <Link href={link} onClick={() => callback()} className={'block'}>
       <motion.div
         ref={ref}
-        className={`flex items-center py-3 rounded-xl cursor-pointer border border-white/0 transition-colors will-change-transform duration-200 font-oswald px-3 sm:px-4 ${
+        className={`font-oswald flex cursor-pointer items-center rounded-xl border border-white/0 px-3 py-3 transition-colors duration-200 will-change-transform sm:px-4 ${
           isActive
-            ? 'text-white bg-[#151626] hover:no-underline border-white/10'
-            : 'dark:text-white text-gray-950 hover:bg-[#141524] hover:border-white/10'
+            ? 'border-white/10 bg-[#151626] text-white hover:no-underline'
+            : 'text-gray-950 hover:border-white/10 hover:bg-[#141524] dark:text-white'
         }`}
         whileHover={
           isActive
@@ -62,7 +66,7 @@ export default function IconButton({
         whileTap={isActive ? {} : { scale: 0.98 }}
         tabIndex={0}
       >
-        <div className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg bg-[#0f1020] text-white/90">
+        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0f1020] text-white/90 sm:h-10 sm:w-10">
           <Icon
             name={IconName}
             size={22}
@@ -78,9 +82,7 @@ export default function IconButton({
             {children}
           </span>
           {subtitle ? (
-            <span className="text-sm leading-tight text-white/60 -mt-0.5">
-              {subtitle}
-            </span>
+            <span className="-mt-0.5 text-sm leading-tight text-white/60">{subtitle}</span>
           ) : null}
         </div>
       </motion.div>

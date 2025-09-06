@@ -30,24 +30,15 @@ export function useIntroSequence(cfg: { timings: IntroTimings }) {
         setInitialPill(false);
         setIsExpanding(true);
         timers.push(
-          window.setTimeout(
-            () => setIsExpanding(false),
-            cfg.timings.introExpansionDuration
-          )
+          window.setTimeout(() => setIsExpanding(false), cfg.timings.introExpansionDuration),
         );
-      }, cfg.timings.introStartDelay)
+      }, cfg.timings.introStartDelay),
     );
 
     // Staggered reveals
-    timers.push(
-      window.setTimeout(() => setShowName(true), cfg.timings.reveal.name)
-    );
-    timers.push(
-      window.setTimeout(() => setShowTitleGroup(true), cfg.timings.reveal.title)
-    );
-    timers.push(
-      window.setTimeout(() => setShowDesc(true), cfg.timings.reveal.desc)
-    );
+    timers.push(window.setTimeout(() => setShowName(true), cfg.timings.reveal.name));
+    timers.push(window.setTimeout(() => setShowTitleGroup(true), cfg.timings.reveal.title));
+    timers.push(window.setTimeout(() => setShowDesc(true), cfg.timings.reveal.desc));
 
     return () => timers.forEach((t) => window.clearTimeout(t));
   }, [cfg.timings]);
@@ -55,10 +46,7 @@ export function useIntroSequence(cfg: { timings: IntroTimings }) {
   // Allow video play a little after expansion finishes
   useEffect(() => {
     if (!initialPill && !isExpanding) {
-      const t = window.setTimeout(
-        () => setShouldPlayVideo(true),
-        cfg.timings.graceAfterExpandMs
-      );
+      const t = window.setTimeout(() => setShouldPlayVideo(true), cfg.timings.graceAfterExpandMs);
       return () => window.clearTimeout(t);
     }
   }, [initialPill, isExpanding, cfg.timings.graceAfterExpandMs]);
@@ -72,4 +60,3 @@ export function useIntroSequence(cfg: { timings: IntroTimings }) {
     shouldPlayVideo,
   } as const;
 }
-

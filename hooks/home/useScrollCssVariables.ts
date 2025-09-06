@@ -15,7 +15,7 @@ export type ScrollCfg = {
 export function useScrollCssVariables<T extends HTMLElement>(
   rootRef: React.RefObject<T | null>,
   cfg: ScrollCfg,
-  reduceMotion: boolean
+  reduceMotion: boolean,
 ) {
   useEffect(() => {
     const root = rootRef.current;
@@ -29,7 +29,7 @@ export function useScrollCssVariables<T extends HTMLElement>(
 
       const sh = Math.min(
         Math.max((y - cfg.scroll.shutterStartPx) / cfg.scroll.shutterLengthPx, 0),
-        1
+        1,
       );
 
       let gate = Math.min(Math.max((sh - 0.45) / 0.55, 0), 1);
@@ -75,6 +75,15 @@ export function useScrollCssVariables<T extends HTMLElement>(
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onResize);
     };
-  }, [rootRef, cfg.scroll.max, cfg.scroll.shutterStartPx, cfg.scroll.shutterLengthPx, cfg.scroll.cyanStartT, cfg.scroll.uiRevealStartT, cfg.closeMaxX, cfg.closeMaxY, reduceMotion]);
+  }, [
+    rootRef,
+    cfg.scroll.max,
+    cfg.scroll.shutterStartPx,
+    cfg.scroll.shutterLengthPx,
+    cfg.scroll.cyanStartT,
+    cfg.scroll.uiRevealStartT,
+    cfg.closeMaxX,
+    cfg.closeMaxY,
+    reduceMotion,
+  ]);
 }
-

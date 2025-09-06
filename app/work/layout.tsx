@@ -1,20 +1,17 @@
-"use client";
+'use client';
 
-import GlassHeaderBubble from "@/components/ui/GlassHeaderBubble";
-import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
-import { Icon } from "@iconify/react";
-import React from "react";
+import { Icon } from '@iconify/react';
+import React from 'react';
 
-export default function WorkLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+import GlassHeaderBubble from '@/components/ui/GlassHeaderBubble';
+import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
+
+export default function WorkLayout({ children }: { children: React.ReactNode }) {
   const prefersReducedMotion = usePrefersReducedMotion();
 
   return (
     <>
-      <div className="fixed inset-x-0 top-[max(env(safe-area-inset-top),16px)] z-50 flex justify-center pointer-events-none py-10">
+      <div className="pointer-events-none fixed inset-x-0 top-[max(env(safe-area-inset-top),16px)] z-50 flex justify-center py-10">
         <div className="pointer-events-auto">
           <GlassHeaderBubble
             prefersReducedMotion={prefersReducedMotion}

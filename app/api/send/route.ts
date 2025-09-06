@@ -1,6 +1,10 @@
-import { EmailTemplate } from '@/components/templates/email';
 import { Resend } from 'resend';
+
+import { EmailTemplate } from '@/components/templates/email';
+import { env } from '@/env';
+
 import type { ReactElement } from 'react';
+
 
 export async function POST(request: Request) {
   try {
@@ -10,21 +14,11 @@ export async function POST(request: Request) {
       return Response.json({ error: 'Missing required fields' });
     }
 
-    const { RESEND_API_KEY, RESEND_FROM_EMAIL, RESEND_TO_EMAIL } =
-      process.env;
-
-    if (!RESEND_API_KEY || !RESEND_FROM_EMAIL || !RESEND_TO_EMAIL) {
-      return Response.json(
-        { error: 'Email service is not configured.' },
-        { status: 500 }
-      );
-    }
-
-    const resend = new Resend(RESEND_API_KEY);
+    const resend = new Resend(env.RESEND_API_KEY);
 
     const data = await resend.emails.send({
-      from: RESEND_FROM_EMAIL,
-      to: [RESEND_TO_EMAIL],
+      from: env.RESEND_FROM_EMAIL,
+      to: [env.RESEND_TO_EMAIL],
       subject: 'Personal Website Message',
       react: EmailTemplate({
         name,

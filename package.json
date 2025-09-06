@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "type-check": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
     "@iconify/react": "^4.1.1",
@@ -24,8 +28,6 @@
     "next": "^15.3.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-focus-lock": "^2.13.6",
-    "react-remove-scroll": "^2.6.3",
     "react-syntax-highlighter": "^15.6.1",
     "resend": "^3.2.0",
     "sonner": "^2.0.3",
@@ -34,14 +36,26 @@
     "web-vitals": "^4.2.0"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@t3-oss/env-nextjs": "^0.13.8",
     "@types/node": "^20",
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.9",
     "@types/react-syntax-highlighter": "^15.5.13",
+    "@typescript-eslint/eslint-plugin": "^8.42.0",
+    "@typescript-eslint/parser": "^8.42.0",
     "eslint": "^8",
     "eslint-config-next": "^14.2.18",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-unused-imports": "^4.2.0",
     "postcss": "^8.5.3",
+    "prettier": "^3.6.2",
+    "prettier-plugin-tailwindcss": "^0.6.14",
     "tailwindcss": "^4.1.3",
-    "typescript": "^5"
+    "typescript": "^5",
+    "zod": "^4.1.5"
   }
 }

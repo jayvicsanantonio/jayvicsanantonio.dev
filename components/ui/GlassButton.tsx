@@ -1,6 +1,7 @@
-import { cn } from "@/lib/utils";
-import Link from "next/link";
-import React, { forwardRef } from "react";
+import Link from 'next/link';
+import React, { forwardRef } from 'react';
+
+import { cn } from '@/lib/utils';
 
 export type GlassButtonProps = React.ComponentProps<typeof Link> & {
   className?: string;
@@ -14,27 +15,25 @@ const GlassButton = forwardRef<HTMLAnchorElement, GlassButtonProps>(
         {...props}
         className={cn(
           // Layout base: caller controls absolute pos/size
-          "inline-flex items-center justify-center rounded-full isolate overflow-hidden pointer-events-auto",
+          'pointer-events-auto isolate inline-flex items-center justify-center overflow-hidden rounded-full',
           // Neutral liquid glass base (frosted, saturated)
-          "border border-white/30 bg-[linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0.12))] backdrop-blur-[16px] backdrop-saturate-[160%]",
+          'border border-white/30 bg-[linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0.12))] backdrop-blur-[16px] backdrop-saturate-[160%]',
           // Depth and transitions
-          "shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_8px_30px_rgba(0,0,0,0.22)] transition duration-200 ease-out",
+          'shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_8px_30px_rgba(0,0,0,0.22)] transition duration-200 ease-out',
           // Gloss highlight that follows cursor via --mx/--my
-          "before:content-[''] before:absolute before:inset-0 before:rounded-full before:pointer-events-none before:opacity-[0.85] before:bg-[radial-gradient(60%_40%_at_calc(50%_+_var(--mx,0)_*_10px)_calc(18%_+_var(--my,0)_*_8px),rgba(255,255,255,0.55),rgba(255,255,255,0)_70%)]",
+          "before:pointer-events-none before:absolute before:inset-0 before:rounded-full before:bg-[radial-gradient(60%_40%_at_calc(50%_+_var(--mx,0)_*_10px)_calc(18%_+_var(--my,0)_*_8px),rgba(255,255,255,0.55),rgba(255,255,255,0)_70%)] before:opacity-[0.85] before:content-['']",
           // Hover polish
-          "hover:border-white/50 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.22),0_10px_36px_rgba(0,0,0,0.26)]",
+          'hover:border-white/50 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.22),0_10px_36px_rgba(0,0,0,0.26)]',
           className,
         )}
       >
         {/* Content sits above sheen/highlight */}
-        <span className="relative z-10 flex items-center justify-center">
-          {children}
-        </span>
+        <span className="relative z-10 flex items-center justify-center">{children}</span>
       </Link>
     );
   },
 );
 
-GlassButton.displayName = "GlassButton";
+GlassButton.displayName = 'GlassButton';
 
 export { GlassButton };

@@ -1,9 +1,10 @@
-import type { Metadata } from 'next';
+import { Inter_Tight } from 'next/font/google';
+import localFont from 'next/font/local';
 
 import Body from '@/components/pages/Body';
 import './globals.css';
-import localFont from 'next/font/local';
-import { Inter_Tight } from 'next/font/google';
+
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Jayvic San Antonio | Software Engineer',
@@ -66,11 +67,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Body
-        fontVars={`${sourceSansPro.variable} ${interTight.variable}`}
-      >
-        {children}
-      </Body>
+      <Body fontVars={`${sourceSansPro.variable} ${interTight.variable}`}>{children}</Body>
     </html>
   );
 }

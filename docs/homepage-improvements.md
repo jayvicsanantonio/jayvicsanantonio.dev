@@ -5,6 +5,7 @@ Last updated: 2025-09-02
 This document summarizes the architectural, accessibility, performance, and maintainability improvements applied to the Home page implementation while preserving the exact visual/animation choreography.
 
 Scope
+
 - Codebase: jayvicsanantonio.dev (Next.js 15, React 19, Tailwind CSS 4, TypeScript 5)
 - Primary files touched:
   - app/page.tsx
@@ -13,6 +14,7 @@ Scope
   - app/globals.css
 
 Goals
+
 - Preserve existing hero choreography and visuals
 - Improve readability and maintainability for junior engineers
 - Strengthen accessibility without changing the look and feel
@@ -21,7 +23,8 @@ Goals
 
 Summary of changes
 
-1) Architecture and componentization
+1. Architecture and componentization
+
 - Split page into server wrapper + client hero
   - app/page.tsx now only renders semantic main + sr-only h1 and composes the client hero component.
   - New components/home/HeroMorph.client.tsx holds all intro/scroll/video/nav logic.
@@ -29,11 +32,13 @@ Summary of changes
   - New components/ui/AnimatedText.tsx preserves per-letter animation and timing but exposes a single screen-reader-friendly string, hiding the letter spans from assistive tech.
 
 Benefits
+
 - Smaller hydration surface at the root level
 - Clear responsibilities and simpler mental model for future edits
 - Reusability of AnimatedText with consistent a11y behavior
 
-2) Accessibility and semantics
+2. Accessibility and semantics
+
 - Landmarks and headings
   - app/page.tsx wraps content in main and provides a visually hidden h1.
 - Navigation semantics and focus styles
@@ -44,10 +49,12 @@ Benefits
   - Screen readers receive one coherent string rather than per-letter fragments.
 
 Benefits
+
 - Better screen reader experience and logical tab order
 - Meets baseline WCAG expectations for landmarks and focus visibility
 
-3) Performance and runtime behavior
+3. Performance and runtime behavior
+
 - Scroll pipeline remains efficient
   - requestAnimationFrame-gated scroll handler updates CSS variables on a root ref (avoids React re-renders on scroll).
 - Video load/play strategy hardened (no visual change)
@@ -55,10 +62,12 @@ Benefits
   - Playback is attempted once the intro finishes (muted + playsInline still satisfy autoplay policies).
 
 Benefits
+
 - Reduces early network contention without changing user-visible behavior
 - Keeps visual smoothness and avoids layout thrash during scroll
 
-4) Maintainability, DX, and constants
+4. Maintainability, DX, and constants
+
 - Centralized configuration values
   - Introduced a CFG constants object in HeroMorph.client.tsx for all magic numbers (timings, thresholds, geometry, nav dimensions/offsets, video tuning, etc.).
 - Documented CSS variable contract
@@ -71,6 +80,7 @@ Benefits
   - Ensured high-contrast focus rings.
 
 Benefits
+
 - Easier for juniors to tweak timings and thresholds in one place
 - Styling is standardized; reduces inline CSS noise
 - Code is simpler, with fewer dead branches
@@ -96,6 +106,7 @@ Implementation details by file
   - Kept Tailwind-first styling elsewhere.
 
 CSS variable contract (as used in HeroMorph)
+
 - --scroll-y: current window.scrollY in px
 - --vh: viewport height in px
 - --p: normalized scroll progress (0..1) based on CFG.scroll.max
@@ -107,6 +118,7 @@ CSS variable contract (as used in HeroMorph)
 - --closeMaxX / --closeMaxY: inset distances driving the clipPath closing/opening
 
 Verification checklist
+
 - Visuals: Intro pill → expansion → morph into hero → cyan overlay → nav reveal behave exactly as before.
 - Keyboard: Tab through the four nav buttons and see a visible focus ring.
 - Screen reader: Hero text reads once; icons are ignored; headings/landmarks make sense.
@@ -114,8 +126,8 @@ Verification checklist
 - Mobile/iOS Safari: Muted/inline video plays after intro; transforms are smooth; viewport units behave normally.
 
 Next suggestions (optional)
+
 - Consider preload="none" for even more conservative video loading, if you want to push network further out.
 - Extract constants into a shared module if other routes will reuse the same patterns.
 - Add a small web-vitals console logger in development for LCP/INP/CLS.
 - Write a short contributor guide summarizing the CFG fields and CSS variable roles.
-

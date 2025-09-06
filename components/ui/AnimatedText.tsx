@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 export interface AnimatedTextProps {
   text: string;
@@ -30,7 +30,7 @@ export default function AnimatedText({
   }, [start, baseDelay, perCharDelay, letters.length, onComplete]);
 
   return (
-    <span className={className} style={{ display: "inline-block", whiteSpace: "pre" }}>
+    <span className={className} style={{ display: 'inline-block', whiteSpace: 'pre' }}>
       {/* Screen-reader friendly: expose the full string once, hide per-letter spans */}
       <span className="sr-only">{text}</span>
       <span aria-hidden>
@@ -38,22 +38,21 @@ export default function AnimatedText({
           <span
             key={`${ch}-${i}`}
             style={{
-              display: "inline-block",
-              willChange: "transform, opacity, filter",
-              transitionProperty: "opacity, transform, filter",
-              transitionDuration: "500ms, 500ms, 700ms",
-              transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
+              display: 'inline-block',
+              willChange: 'transform, opacity, filter',
+              transitionProperty: 'opacity, transform, filter',
+              transitionDuration: '500ms, 500ms, 700ms',
+              transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)',
               transitionDelay: `${baseDelay + i * perCharDelay}ms`,
               opacity: start ? 1 : 0,
-              transform: start ? "translateY(0) scale(1)" : "translateY(12px) scale(1.02)",
-              filter: start ? "blur(0px)" : "blur(2px)",
+              transform: start ? 'translateY(0) scale(1)' : 'translateY(12px) scale(1.02)',
+              filter: start ? 'blur(0px)' : 'blur(2px)',
             }}
           >
-            {ch === " " ? "\u00A0" : ch}
+            {ch === ' ' ? '\u00A0' : ch}
           </span>
         ))}
       </span>
     </span>
   );
 }
-

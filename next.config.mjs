@@ -17,7 +17,6 @@ const nextConfig = {
   },
 };
 
-
 export default withSentryConfig(nextConfig, {
   org: 'jayvic-san-antonio-hl',
   project: 'jayvicsanantonio-dev',

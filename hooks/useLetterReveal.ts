@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export function useLetterReveal(
   enabled: boolean,
@@ -39,4 +39,3 @@ export function useLetterReveal(
 
   return visible;
 }
-
