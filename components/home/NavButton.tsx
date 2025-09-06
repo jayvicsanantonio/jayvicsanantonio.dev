@@ -1,6 +1,6 @@
-import { GlassButton } from '@/components/ui/GlassButton';
 import { cn } from '@/lib/utils';
 import React from 'react';
+import { NavPill } from '@/components/ui/NavPill';
 
 export type NavButtonProps = {
   href: string;
@@ -65,24 +65,30 @@ export default function NavButton({
           target?: React.HTMLAttributeAnchorTarget;
           rel?: string;
         };
+        // Extract vt-tag-* from className and pass via vtTagName prop
+        const vtMatch = linkClassName?.match(/vt-tag-(projects|work)/);
+        const vtTagName = vtMatch ? vtMatch[1] : undefined;
+        const cleanedClassName = linkClassName?.replace(/vt-tag-(projects|work)/g, '').trim();
         return (
-          <GlassButton
+          <NavPill
             href={href}
-            aria-label={ariaLabel}
+            ariaLabel={ariaLabel}
+            icon={children}
+            // hero pills are icon-only (inactive), but keep vt-tag for transitions if provided
+            active={false}
+            vtTagName={vtTagName}
+            collapsedPx={size.w}
+            heightPx={size.h}
+            tooltip={tooltip}
             className={cn(
               'inline-flex w-full h-full items-center justify-center rounded-full text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80',
-              linkClassName
+              cleanedClassName
             )}
             {...(target ? { target } : {})}
             {...(rel ? { rel } : {})}
-          >
-            {children}
-          </GlassButton>
+          />
         );
       })()}
-      <span className="pointer-events-none absolute -top-3 left-1/2 -translate-x-1/2 -translate-y-full rounded-md bg-black/80 px-2 py-1 text-[11px] md:text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap shadow-lg">
-        {tooltip}
-      </span>
     </div>
   );
 }

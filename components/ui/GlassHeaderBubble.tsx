@@ -1,52 +1,10 @@
 "use client";
 
-import { GlassButton } from "@/components/ui/GlassButton";
+import { NavPill } from "@/components/ui/NavPill";
 import { Icon } from "@iconify/react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
-
-// Local hook to reveal letters one by one, mirroring the main text bubble behavior
-function useLetterReveal(
-  enabled: boolean,
-  label: string,
-  prefersReducedMotion: boolean,
-  startDelayMs = 300,
-  stepMs = 200,
-) {
-  const [visible, setVisible] = useState(0);
-
-  useEffect(() => {
-    if (!enabled) {
-      setVisible(0);
-      return;
-    }
-
-    if (prefersReducedMotion) {
-      setVisible(label.length);
-      return;
-    }
-
-    let current = 0;
-    let interval: ReturnType<typeof setInterval> | undefined;
-    const initial: ReturnType<typeof setTimeout> = setTimeout(() => {
-      interval = setInterval(() => {
-        current++;
-        setVisible(current);
-        if (current >= label.length) {
-          if (interval) clearInterval(interval);
-        }
-      }, stepMs);
-    }, startDelayMs);
-
-    return () => {
-      clearTimeout(initial);
-      if (interval) clearInterval(interval);
-    };
-  }, [enabled, label, prefersReducedMotion, startDelayMs, stepMs]);
-
-  return visible;
-}
-
 export type GlassHeaderBubbleProps = {
   prefersReducedMotion: boolean;
   label: string;
@@ -83,8 +41,7 @@ export default function GlassHeaderBubble({
     return vtClassName;
   })();
 
-  // Letter-by-letter for expanded nav buttons
-  // Expanded active nav width timing, similar to main bubble
+  // Delay the active pill expansion slightly to echo the main bubble
   const [expandActiveNav, setExpandActiveNav] = useState(false);
   useEffect(() => {
     setExpandActiveNav(false);
@@ -93,228 +50,111 @@ export default function GlassHeaderBubble({
         setExpandActiveNav(true);
         return;
       }
-      const t = setTimeout(() => setExpandActiveNav(true), 500); // match bubble's first stage
+      const t = setTimeout(() => setExpandActiveNav(true), 500);
       return () => clearTimeout(t);
     }
   }, [isProjects, isWork, prefersReducedMotion]);
-
-  const projectsVisibleLetters = useLetterReveal(
-    Boolean(expandActiveNav && isProjects),
-    "Projects",
-    prefersReducedMotion,
-    500, // begin letters ~500ms after width starts (i.e., ~1000ms total like main bubble)
-    200,
-  );
-  const workVisibleLetters = useLetterReveal(
-    Boolean(expandActiveNav && isWork),
-    "Work",
-    prefersReducedMotion,
-    500,
-    200,
-  );
-
-  // Bubble animation sequence
-  useEffect(() => {
-    if (prefersReducedMotion) {
-      setShowBubble(true);
-      setShowText(true);
-      return;
-    }
-
-    const timer1: ReturnType<typeof setTimeout> = setTimeout(
-      () => setShowBubble(true),
-      500,
-    );
-    const timer2: ReturnType<typeof setTimeout> = setTimeout(
-      () => setShowText(true),
-      1000,
-    );
-
-    return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-    };
-  }, [prefersReducedMotion]);
-
-  // Custom letter-by-letter animation
-  useEffect(() => {
-    if (!showText) {
-      setVisibleLetters(0);
-      return;
-    }
-
-    if (prefersReducedMotion) {
-      setVisibleLetters(label.length);
-      return;
-    }
-
-    let currentLetter = 0;
-    let letterTimer: ReturnType<typeof setInterval> | undefined;
-
-    const initialDelay: ReturnType<typeof setTimeout> = setTimeout(() => {
-      letterTimer = setInterval(() => {
-        currentLetter++;
-        setVisibleLetters(currentLetter);
-        if (currentLetter >= label.length) {
-          if (letterTimer !== undefined) clearInterval(letterTimer);
-        }
-      }, 200);
-    }, 300);
-
-    return () => {
-      clearTimeout(initialDelay);
-      if (letterTimer !== undefined) clearInterval(letterTimer);
-    };
-  }, [showText, prefersReducedMotion, label]);
 
   return (
     <div className="relative inline-flex items-center">
       {/* Inline nav buttons - order: LinkedIn, Projects, Home, Work, GitHub */}
       <nav
         aria-label="Header navigation"
-        className="flex items-center gap-2 flex-wrap"
+        className="flex items-center gap-1 sm:gap-2 flex-wrap"
       >
         {/* LinkedIn (left) */}
-        <GlassButton
+        <NavPill
           href="https://www.linkedin.com/in/jayvicsanantonio/"
-          aria-label="LinkedIn"
-          className="w-20 h-17 rounded-full"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Icon icon="mdi:linkedin" width={36} height={36} aria-hidden="true" />
-        </GlassButton>
+          ariaLabel="LinkedIn"
+          icon={
+            <Icon
+              icon="mdi:linkedin"
+              className="w-[clamp(24px,6vw,36px)] h-[clamp(24px,6vw,36px)]"
+              aria-hidden="true"
+            />
+          }
+          external
+          tooltip="LinkedIn"
+          tooltipPlacement="below"
+          collapsedPx={"clamp(56px,11vw,84px)"}
+          heightPx={"clamp(48px,9.5vw,72px)"}
+        />
 
-        {/* Projects (left). Show text when on /projects */}
-        <GlassButton
+        {/* Projects (left) */}
+        <NavPill
           href="/projects"
-          aria-label="Projects"
-          className={["rounded-full", isProjects ? "vt-tag-projects" : ""].join(
-            " ",
-          )}
-          style={{
-            width: isProjects ? (expandActiveNav ? 140 : 80) : 80,
-            height: 68,
-            transition: "width 1200ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-            willChange: "width",
-          }}
-        >
-          <span className="inline-flex items-center gap-2">
+          ariaLabel="Projects"
+          icon={
             <Icon
               icon="mdi:application-brackets"
-              width={32}
-              height={32}
+              className="w-[clamp(24px,6vw,36px)] h-[clamp(24px,6vw,36px)] font-bold"
               aria-hidden="true"
             />
-            {isProjects ? (
-              <span className="inline-flex text-sm text-white/90">
-                {"Projects".split("").map((letter, index) => (
-                  <span
-                    key={index}
-                    className="inline-block transition-all duration-300 ease-out"
-                    style={{
-                      opacity: index < projectsVisibleLetters ? 1 : 0,
-                      transform:
-                        index < projectsVisibleLetters
-                          ? "translateY(0px) scale(1) rotateX(0deg)"
-                          : "translateY(12px) scale(0.7) rotateX(-30deg)",
-                      filter:
-                        index < projectsVisibleLetters
-                          ? "blur(0px)"
-                          : "blur(3px)",
-                      transitionDelay: `${index * 1}ms`,
-                      textShadow:
-                        index < projectsVisibleLetters
-                          ? "0 0 12px rgba(59, 130, 246, 0.4), 0 0 4px rgba(255, 255, 255, 0.1)"
-                          : "none",
-                    }}
-                  >
-                    {letter}
-                  </span>
-                ))}
-              </span>
-            ) : null}
-          </span>
-        </GlassButton>
+          }
+          label="Projects"
+          active={isProjects}
+          vtTagName={isProjects ? "projects" : undefined}
+          tooltip={!isProjects ? "Projects" : undefined}
+          tooltipPlacement={!isProjects ? "below" : undefined}
+          prefersReducedMotion={prefersReducedMotion}
+          collapsedPx={"clamp(56px,11vw,84px)"}
+          expandedPx={"clamp(120px,40vw,180px)"}
+          heightPx={"clamp(48px,9.5vw,72px)"}
+        />
 
-        {/* Home (middle) with cyan accent */}
-        <GlassButton
+        {/* Home (middle): greeting pill (solid) */}
+        <Link
           href="/"
           aria-label="Home"
-          className={[
-            "rounded-full",
-            // tint border cyan to echo homepage cyan styling
-            "border-cyan-400/50 hover:border-cyan-300/60",
-            "w-20 h-17",
-          ].join(" ")}
-        >
-          <Icon
-            icon="mdi:home"
-            width={36}
-            height={36}
-            aria-hidden="true"
-            className="text-cyan-300 drop-shadow-[0_0_8px_rgba(34,211,238,0.45)]"
-          />
-        </GlassButton>
-
-        {/* Work (right). Show text when on /work */}
-        <GlassButton
-          href="/work"
-          aria-label="Work"
-          className={["rounded-full", isWork ? "vt-tag-work" : ""].join(" ")}
-          style={{
-            width: isWork ? (expandActiveNav ? 140 : 80) : 80,
-            height: 68,
-            transition: "width 1200ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-            willChange: "width",
+          className="pointer-events-auto inline-flex items-center justify-center rounded-full h-[clamp(48px,9.5vw,72px)] px-5 sm:px-6 md:px-7 bg-cyan-900 text-white font-semibold shadow-[0_10px_24px_rgba(0,0,0,0.25)] hover:bg-cyan-800 transition-colors"
+          onClick={(e) => {
+            e.preventDefault();
+            // Force a full reload to ensure the homepage remounts and animations restart
+            if (typeof window !== 'undefined') window.location.assign('/');
           }}
         >
-          <span className="inline-flex items-center gap-2">
+          <span className="text-[clamp(14px,2.2vw,22px)]">Hi, I'm Jayvic 👋</span>
+        </Link>
+
+        {/* Work (right) */}
+        <NavPill
+          href="/work"
+          ariaLabel="Work"
+          icon={
             <Icon
               icon="mdi:timeline-text"
-              width={32}
-              height={32}
+              className="w-[clamp(24px,6vw,36px)] h-[clamp(24px,6vw,36px)]"
               aria-hidden="true"
             />
-            {isWork ? (
-              <span className="inline-flex text-sm text-white/90">
-                {"Work".split("").map((letter, index) => (
-                  <span
-                    key={index}
-                    className="inline-block transition-all duration-300 ease-out"
-                    style={{
-                      opacity: index < workVisibleLetters ? 1 : 0,
-                      transform:
-                        index < workVisibleLetters
-                          ? "translateY(0px) scale(1) rotateX(0deg)"
-                          : "translateY(12px) scale(0.7) rotateX(-30deg)",
-                      filter:
-                        index < workVisibleLetters ? "blur(0px)" : "blur(3px)",
-                      transitionDelay: `${index * 1}ms`,
-                      textShadow:
-                        index < workVisibleLetters
-                          ? "0 0 12px rgba(59, 130, 246, 0.4), 0 0 4px rgba(255, 255, 255, 0.1)"
-                          : "none",
-                    }}
-                  >
-                    {letter}
-                  </span>
-                ))}
-              </span>
-            ) : null}
-          </span>
-        </GlassButton>
+          }
+          label="Work"
+          active={isWork}
+          vtTagName={isWork ? "work" : undefined}
+          tooltip={!isWork ? "Work" : undefined}
+          tooltipPlacement={!isWork ? "below" : undefined}
+          prefersReducedMotion={prefersReducedMotion}
+          collapsedPx={"clamp(56px,11vw,84px)"}
+          expandedPx={"clamp(104px,34vw,160px)"}
+          heightPx={"clamp(48px,9.5vw,72px)"}
+        />
 
         {/* GitHub (right) */}
-        <GlassButton
+        <NavPill
           href="https://github.com/jayvicsanantonio"
-          aria-label="GitHub"
-          className="w-20 h-17 rounded-full"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Icon icon="mdi:github" width={36} height={36} aria-hidden="true" />
-        </GlassButton>
+          ariaLabel="GitHub"
+          icon={
+            <Icon
+              icon="mdi:github"
+              className="w-[clamp(24px,6vw,36px)] h-[clamp(24px,6vw,36px)]"
+              aria-hidden="true"
+            />
+          }
+          external
+          tooltip="GitHub"
+          tooltipPlacement="below"
+          collapsedPx={"clamp(56px,11vw,84px)"}
+          heightPx={"clamp(48px,9.5vw,72px)"}
+        />
       </nav>
     </div>
   );
