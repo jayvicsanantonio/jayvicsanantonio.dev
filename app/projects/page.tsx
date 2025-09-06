@@ -92,7 +92,9 @@ export default function ProjectsPage() {
 
         {/* Projects only */}
 
-        <SkillsAndCases prefersReducedMotion={prefersReducedMotion} />
+        <React.Suspense fallback={null}>
+          <SkillsAndCases prefersReducedMotion={prefersReducedMotion} />
+        </React.Suspense>
       </div>
     </section>
   );

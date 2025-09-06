@@ -4,7 +4,7 @@ import { NavPill } from "@/components/ui/NavPill";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React from "react";
 export type GlassHeaderBubbleProps = {
   prefersReducedMotion: boolean;
   label: string;
@@ -22,38 +22,16 @@ export default function GlassHeaderBubble({
   collapsedWidthPx = 80,
   expandedWidthPx = 200,
 }: GlassHeaderBubbleProps) {
-  const [showBubble, setShowBubble] = useState(false);
-  const [showText, setShowText] = useState(false);
-  const [visibleLetters, setVisibleLetters] = useState(0);
   const pathname = usePathname();
 
   const isProjects = pathname?.startsWith("/projects");
   const isWork = pathname?.startsWith("/work");
-  const isHome = pathname === "/";
 
   // Only keep vtTag on the expanded nav button for current route.
   // If the parent passes vt-tag-... to this header bubble, suppress it
   // when that tag matches the current route to avoid duplicate VT elements.
-  const vtClassForIcon = (() => {
-    if (!vtClassName) return "";
-    if (isProjects && vtClassName.includes("vt-tag-projects")) return "";
-    if (isWork && vtClassName.includes("vt-tag-work")) return "";
-    return vtClassName;
-  })();
 
   // Delay the active pill expansion slightly to echo the main bubble
-  const [expandActiveNav, setExpandActiveNav] = useState(false);
-  useEffect(() => {
-    setExpandActiveNav(false);
-    if (isProjects || isWork) {
-      if (prefersReducedMotion) {
-        setExpandActiveNav(true);
-        return;
-      }
-      const t = setTimeout(() => setExpandActiveNav(true), 500);
-      return () => clearTimeout(t);
-    }
-  }, [isProjects, isWork, prefersReducedMotion]);
 
   return (
     <div className="relative inline-flex items-center">
@@ -94,8 +72,7 @@ export default function GlassHeaderBubble({
           label="Projects"
           active={isProjects}
           {...(isProjects ? { vtTagName: "projects" } : {})}
-          tooltip={!isProjects ? "Projects" : undefined}
-          tooltipPlacement={!isProjects ? "below" : undefined}
+          {...(!isProjects ? { tooltip: "Projects", tooltipPlacement: "below" as const } : {})}
           prefersReducedMotion={prefersReducedMotion}
           collapsedPx={"clamp(56px,11vw,84px)"}
           expandedPx={"clamp(120px,40vw,180px)"}
@@ -132,8 +109,7 @@ export default function GlassHeaderBubble({
           label="Work"
           active={isWork}
           {...(isWork ? { vtTagName: "work" } : {})}
-          tooltip={!isWork ? "Work" : undefined}
-          tooltipPlacement={!isWork ? "below" : undefined}
+          {...(!isWork ? { tooltip: "Work", tooltipPlacement: "below" as const } : {})}
           prefersReducedMotion={prefersReducedMotion}
           collapsedPx={"clamp(56px,11vw,84px)"}
           expandedPx={"clamp(104px,34vw,160px)"}

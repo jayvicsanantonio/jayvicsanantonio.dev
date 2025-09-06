@@ -1,11 +1,10 @@
 import { cn } from "@/lib/utils";
-import Link, { type LinkProps } from "next/link";
+import Link from "next/link";
 import React, { forwardRef } from "react";
 
-export type GlassButtonProps = LinkProps &
-  React.AnchorHTMLAttributes<HTMLAnchorElement> & {
-    className?: string;
-  };
+export type GlassButtonProps = React.ComponentProps<typeof Link> & {
+  className?: string;
+};
 
 const GlassButton = forwardRef<HTMLAnchorElement, GlassButtonProps>(
   ({ className, children, ...props }, ref) => {

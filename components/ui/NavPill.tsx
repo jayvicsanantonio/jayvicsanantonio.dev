@@ -19,7 +19,7 @@ export type NavPillProps = {
   tooltip?: string; // Tooltip text when non-active
   tooltipPlacement?: "above" | "below"; // Default: 'above'
   className?: string;
-} & React.AnchorHTMLAttributes<HTMLAnchorElement>;
+};
 
 export function NavPill({
   href,
@@ -37,7 +37,6 @@ export function NavPill({
   tooltip,
   tooltipPlacement = "above",
   className,
-  ...rest
 }: NavPillProps) {
   // View-transition tag (optional)
   const vtClass = vtTagName ? `vt-tag-${vtTagName}` : "";
@@ -81,7 +80,6 @@ export function NavPill({
         }}
         aria-current={active ? "page" : undefined}
         {...linkProps}
-        {...rest}
       >
         <span className="inline-flex items-center gap-2">
           {/* Icon with cursor-follow transform */}
