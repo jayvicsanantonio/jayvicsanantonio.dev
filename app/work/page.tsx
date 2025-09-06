@@ -159,10 +159,10 @@ export default function WorkPage() {
   return (
     <section className="relative w-full">
       <AmbientBackground />
-      <div className="mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        {/* Intro */}
-        <div className="space-y-5 max-w-3xl">
-          {/* Glass Bubble Animation - Icon + Text Bubble */}
+
+      {/* Top-centered header bubble */}
+      <div className="fixed inset-x-0 top-[max(env(safe-area-inset-top),16px)] z-50 flex justify-center pointer-events-none">
+        <div className="pointer-events-auto">
           <GlassHeaderBubble
             prefersReducedMotion={prefersReducedMotion}
             label="WORK"
@@ -178,6 +178,12 @@ export default function WorkPage() {
               />
             }
           />
+        </div>
+      </div>
+
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20">
+        {/* Intro */}
+        <div className="space-y-5 max-w-3xl">
           <h1 className="font-oswald text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight text-cyan-300/90">
             A Timeline of Crafting Impact
           </h1>

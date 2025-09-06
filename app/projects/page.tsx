@@ -78,16 +78,9 @@ export default function ProjectsPage() {
     <section className="relative w-full">
       <AmbientBackground />
 
-      {/* Ambient orbs */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-24 left-1/2 -translate-x-1/2 h-[40rem] w-[40rem] rounded-full opacity-20 blur-3xl bg-[radial-gradient(closest-side,rgba(59,130,246,0.25),transparent)]" />
-        <div className="absolute bottom-0 right-0 h-[26rem] w-[26rem] rounded-full opacity-15 blur-3xl bg-[radial-gradient(closest-side,rgba(168,85,247,0.25),transparent)]" />
-      </div>
-
-      <div className="mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* Header */}
-        <div className="space-y-5 max-w-3xl">
-          {/* Glass Bubble Animation - Icon + Text Bubble */}
+      {/* Top-centered header bubble */}
+      <div className="fixed inset-x-0 top-[max(env(safe-area-inset-top),16px)] z-50 flex justify-center pointer-events-none">
+        <div className="pointer-events-auto">
           <GlassHeaderBubble
             prefersReducedMotion={prefersReducedMotion}
             label="PROJECTS"
@@ -103,7 +96,18 @@ export default function ProjectsPage() {
               />
             }
           />
+        </div>
+      </div>
 
+      {/* Ambient orbs */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute -top-24 left-1/2 -translate-x-1/2 h-[40rem] w-[40rem] rounded-full opacity-20 blur-3xl bg-[radial-gradient(closest-side,rgba(59,130,246,0.25),transparent)]" />
+        <div className="absolute bottom-0 right-0 h-[26rem] w-[26rem] rounded-full opacity-15 blur-3xl bg-[radial-gradient(closest-side,rgba(168,85,247,0.25),transparent)]" />
+      </div>
+
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16">
+        {/* Header */}
+        <div className="space-y-5 max-w-3xl">
           <h1 className="font-oswald text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight text-cyan-300/90">
             Crafted Artifacts
           </h1>
