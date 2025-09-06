@@ -81,7 +81,7 @@ export default function CursorGlow() {
       <div
         ref={glowRef}
         aria-hidden
-        className="pointer-events-none fixed z-[60] h-[120px] w-[120px] rounded-full opacity-40 blur-2xl bg-[conic-gradient(from_180deg_at_50%_50%,rgba(59,130,246,0.25),rgba(168,85,247,0.25),rgba(34,211,238,0.2),rgba(59,130,246,0.25))] [transition:transform_60ms_linear]"
+        className="pointer-events-none fixed z-[60] h-[120px] w-[120px] rounded-full bg-[conic-gradient(from_180deg_at_50%_50%,rgba(59,130,246,0.25),rgba(168,85,247,0.25),rgba(34,211,238,0.2),rgba(59,130,246,0.25))] opacity-40 blur-2xl [transition:transform_60ms_linear]"
       />
       <div
         ref={dotRef}

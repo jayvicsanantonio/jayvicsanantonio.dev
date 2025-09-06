@@ -1,9 +1,7 @@
+import { useAnimationControls, AnimationControls } from 'framer-motion';
 import { useCallback } from 'react';
-import {
-  useAnimationControls,
-  AnimationControls,
-} from 'framer-motion';
-import usePrefersReducedMotion from './use-prefers-reduced-motion';
+
+import usePrefersReducedMotion from './usePrefersReducedMotion';
 
 interface BoopConfig {
   x?: number;
@@ -62,16 +60,7 @@ function useBoop({
         },
       });
     }, timing);
-  }, [
-    controls,
-    x,
-    y,
-    rotation,
-    scale,
-    timing,
-    springConfig,
-    prefersReducedMotion,
-  ]);
+  }, [controls, x, y, rotation, scale, timing, springConfig, prefersReducedMotion]);
 
   // Return controls instead of style. Initial state is handled by motion component.
   return [controls, trigger];

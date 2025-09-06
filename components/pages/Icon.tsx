@@ -2,7 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { MouseEventHandler, TouchEventHandler } from 'react';
-import useBoop from '@/hooks/use-boop';
+
+import useBoop from '@/hooks/useBoop';
 
 export default function Icon({
   name: Component,
@@ -106,9 +107,7 @@ export default function Icon({
       className="flex items-center justify-center"
       initial="rest"
       whileHover={isActive ? 'rest' : 'hover'}
-      variants={
-        isActive ? staticVariant : iconVariants[animationType]
-      }
+      variants={isActive ? staticVariant : iconVariants[animationType]}
     >
       <motion.svg
         width={size}
@@ -132,12 +131,7 @@ export default function Icon({
             <stop offset="100%" stopColor="#a855f7" />
           </linearGradient>
         </defs>
-        <Component
-          size={size}
-          stroke={stroke}
-          strokeWidth={strokeWidth}
-          {...props}
-        />
+        <Component size={size} stroke={stroke} strokeWidth={strokeWidth} {...props} />
       </motion.svg>
     </motion.div>
   );

@@ -1,8 +1,9 @@
-import { MouseEventHandler, TouchEventHandler } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
-import useBoop from '@/hooks/use-boop';
-import useWindowSize from '@/hooks/use-window-size';
+import { MouseEventHandler, TouchEventHandler } from 'react';
+
+import useBoop from '@/hooks/useBoop';
+import useWindowSize from '@/hooks/useWindowSize';
 
 export default function ScrollDown({
   sectionRef,
@@ -32,11 +33,11 @@ export default function ScrollDown({
 
   return (
     <div
-      className="absolute left-1/2 -translate-x-1/2 bottom-40"
+      className="absolute bottom-40 left-1/2 -translate-x-1/2"
       style={{ bottom: `${bottom / 4}rem` }}
     >
       <motion.button
-        className="cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 rounded-full p-2"
+        className="focus:ring-opacity-50 cursor-pointer rounded-full p-2 focus:ring-2 focus:ring-blue-400 focus:outline-hidden"
         onClick={scrollToNextSection}
         onMouseEnter={trigger as MouseEventHandler<HTMLButtonElement>}
         onTouchStart={trigger as TouchEventHandler<HTMLButtonElement>}

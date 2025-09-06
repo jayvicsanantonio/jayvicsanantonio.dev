@@ -1,1 +1,1 @@
-export type StrokeLineJoin = "round" | "bevel" | "miter" | "inherit";
+export type StrokeLineJoin = 'round' | 'bevel' | 'miter' | 'inherit';

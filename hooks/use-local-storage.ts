@@ -5,33 +5,33 @@
  * - Cleans up old keys when the key changes
  * - Provides type safety through generics
  */
-import { useEffect, useRef, useState, Dispatch, SetStateAction } from "react";
+import { useEffect, useRef, useState, Dispatch, SetStateAction } from 'react';
 
 export default function useLocalStorage<T>(
   key: string,
   initialValue: T,
 ): [T, Dispatch<SetStateAction<T>>] {
   const [state, setState] = useState<T>(() => {
-    if (typeof window === "undefined")
-      return typeof initialValue === "function" ? initialValue() : initialValue;
+    if (typeof window === 'undefined')
+      return typeof initialValue === 'function' ? initialValue() : initialValue;
 
     const valueInLocalStorage = window.localStorage.getItem(key);
 
     if (valueInLocalStorage) {
       try {
         return JSON.parse(valueInLocalStorage);
-      } catch (error) {
+      } catch {
         return window.localStorage.removeItem(key);
       }
     }
 
-    return typeof initialValue === "function" ? initialValue() : initialValue;
+    return typeof initialValue === 'function' ? initialValue() : initialValue;
   });
 
   const prevKeyRef = useRef(key);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === 'undefined') return;
 
     const prevKey = prevKeyRef.current;
 
@@ -47,8 +47,8 @@ export default function useLocalStorage<T>(
 
     try {
       window.localStorage.setItem(key, JSON.stringify(state));
-    } catch (error) {
-      console.error(`Failed to save state for key "${key}"`, error);
+    } catch {
+      // swallow write errors (e.g., private mode)
     }
 
     // Handle storage events from other tabs
@@ -57,18 +57,15 @@ export default function useLocalStorage<T>(
         try {
           setState(JSON.parse(e.newValue));
         } catch (error) {
-          console.warn(
-            `Failed to parse storage event value for key "${key}"`,
-            error,
-          );
+          console.warn(`Failed to parse storage event value for key "${key}"`, error);
         }
       }
     };
 
-    window.addEventListener("storage", handleStorageChange);
+    window.addEventListener('storage', handleStorageChange);
 
     return () => {
-      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener('storage', handleStorageChange);
     };
   }, [key, state]);
 

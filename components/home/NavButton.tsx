@@ -1,6 +1,7 @@
-import { cn } from '@/lib/utils';
 import React from 'react';
+
 import { NavPill } from '@/components/ui/NavPill';
+import { cn } from '@/lib/utils';
 
 export type NavButtonProps = {
   href: string;
@@ -33,7 +34,7 @@ export default function NavButton({
 
   return (
     <div
-      className="group absolute pointer-events-auto"
+      className="group pointer-events-auto absolute"
       style={{
         width: `${size.w}px`,
         height: `${size.h}px`,
@@ -60,7 +61,11 @@ export default function NavButton({
       }}
     >
       {(() => {
-        const { className: linkClassName, target, rel } = linkProps as {
+        const {
+          className: linkClassName,
+          target,
+          rel,
+        } = linkProps as {
           className?: string;
           target?: React.HTMLAttributeAnchorTarget;
           rel?: string;
@@ -81,8 +86,8 @@ export default function NavButton({
             heightPx={size.h}
             tooltip={tooltip}
             className={cn(
-              'inline-flex w-full h-full items-center justify-center rounded-full text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80',
-              cleanedClassName
+              'inline-flex h-full w-full items-center justify-center rounded-full text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80',
+              cleanedClassName,
             )}
             {...(target ? { target } : {})}
             {...(rel ? { rel } : {})}
@@ -92,4 +97,3 @@ export default function NavButton({
     </div>
   );
 }
-

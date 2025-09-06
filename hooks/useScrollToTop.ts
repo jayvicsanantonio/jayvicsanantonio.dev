@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useMemo } from 'react';
 import { usePathname } from 'next/navigation';
+import { useEffect, useMemo } from 'react';
 
 export type UseScrollToTopOptions = {
   // Optional: selectors or elements of custom scrollable containers to also reset
@@ -92,4 +92,3 @@ export function useScrollToTop(options?: UseScrollToTopOptions) {
     deferScroll();
   }, [pathname, resolvedContainers, behavior]);
 }
-

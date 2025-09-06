@@ -1,21 +1,18 @@
-"use client";
+'use client';
 
-import GlassHeaderBubble from "@/components/ui/GlassHeaderBubble";
-import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
-import { Icon } from "@iconify/react";
-import React from "react";
+import { Icon } from '@iconify/react';
+import React from 'react';
 
-export default function ProjectsLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+import GlassHeaderBubble from '@/components/ui/GlassHeaderBubble';
+import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
+
+export default function ProjectsLayout({ children }: { children: React.ReactNode }) {
   const prefersReducedMotion = usePrefersReducedMotion();
 
   return (
     <>
       {/* Top-centered header bubble shared across all /projects routes */}
-      <div className="fixed inset-x-0 top-[max(env(safe-area-inset-top),16px)] z-50 flex justify-center pointer-events-none py-10">
+      <div className="pointer-events-none fixed inset-x-0 top-[max(env(safe-area-inset-top),16px)] z-50 flex justify-center py-10">
         <div className="pointer-events-auto">
           <GlassHeaderBubble
             prefersReducedMotion={prefersReducedMotion}
