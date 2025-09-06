@@ -7,7 +7,6 @@ import React from 'react';
 
 import { NavPill } from '@/components/ui/NavPill';
 export type GlassHeaderBubbleProps = {
-  prefersReducedMotion: boolean;
   label: string;
   icon: React.ReactNode;
   vtClassName?: string; // e.g., vt-tag-projects, vt-tag-work
@@ -16,7 +15,6 @@ export type GlassHeaderBubbleProps = {
 };
 
 export default function GlassHeaderBubble({
-  prefersReducedMotion,
   label: _label,
   icon: _icon,
   vtClassName: _vtClassName,
@@ -71,7 +69,6 @@ export default function GlassHeaderBubble({
           active={isProjects}
           {...(isProjects ? { vtTagName: 'projects' } : {})}
           {...(!isProjects ? { tooltip: 'Projects', tooltipPlacement: 'below' as const } : {})}
-          prefersReducedMotion={prefersReducedMotion}
           collapsedPx={'clamp(56px,11vw,84px)'}
           expandedPx={'clamp(120px,40vw,180px)'}
           heightPx={'clamp(48px,9.5vw,72px)'}
@@ -106,7 +103,6 @@ export default function GlassHeaderBubble({
           active={isWork}
           {...(isWork ? { vtTagName: 'work' } : {})}
           {...(!isWork ? { tooltip: 'Work', tooltipPlacement: 'below' as const } : {})}
-          prefersReducedMotion={prefersReducedMotion}
           collapsedPx={'clamp(56px,11vw,84px)'}
           expandedPx={'clamp(104px,34vw,160px)'}
           heightPx={'clamp(48px,9.5vw,72px)'}

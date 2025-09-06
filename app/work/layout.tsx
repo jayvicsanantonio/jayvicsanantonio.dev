@@ -1,20 +1,14 @@
-'use client';
-
 import { Icon } from '@iconify/react';
 import React from 'react';
 
 import GlassHeaderBubble from '@/components/ui/GlassHeaderBubble';
-import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
 
 export default function WorkLayout({ children }: { children: React.ReactNode }) {
-  const prefersReducedMotion = usePrefersReducedMotion();
-
   return (
     <>
       <div className="pointer-events-none fixed inset-x-0 top-[max(env(safe-area-inset-top),16px)] z-50 flex justify-center py-10">
         <div className="pointer-events-auto">
           <GlassHeaderBubble
-            prefersReducedMotion={prefersReducedMotion}
             label="WORK"
             vtClassName="vt-tag-work"
             expandedWidthPx={180}
