@@ -1,0 +1,123 @@
+"use client";
+
+import { Icon } from "@iconify/react";
+
+import NavButton from "@/components/home/NavButton";
+
+export type PrimaryNavOverlayProps = {
+  centerTop: string;
+  leftOffsetsPx: { projects: number; linkedin: number };
+  rightOffsetsPx: { work: number; github: number };
+  buttonSize: { w: number; h: number };
+};
+
+export default function PrimaryNavOverlay({ centerTop, leftOffsetsPx, rightOffsetsPx, buttonSize }: PrimaryNavOverlayProps) {
+  return (
+    <div className="pointer-events-none fixed inset-0 z-50 hidden sm:contents">
+      <nav aria-label="Primary" className="hidden sm:contents">
+        <ul className="contents">
+          <li className="contents">
+            <NavButton
+              href="/projects"
+              ariaLabel="Projects"
+              tooltip="Projects"
+              side="left"
+              offsetPx={leftOffsetsPx.projects}
+              size={buttonSize}
+              top={centerTop}
+              className="vt-tag-projects"
+            >
+              <Icon
+                icon="mdi:application-brackets"
+                width={36}
+                height={36}
+                aria-hidden="true"
+                style={{
+                  transform: 'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
+                  transition: 'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
+                  willChange: 'transform',
+                }}
+              />
+            </NavButton>
+          </li>
+          <li className="contents">
+            <NavButton
+              href="https://www.linkedin.com/in/jayvicsanantonio/"
+              ariaLabel="LinkedIn"
+              tooltip="LinkedIn"
+              side="left"
+              offsetPx={leftOffsetsPx.linkedin}
+              size={buttonSize}
+              top={centerTop}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icon
+                icon="mdi:linkedin"
+                width={40}
+                height={40}
+                aria-hidden="true"
+                style={{
+                  transform: 'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
+                  transition: 'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
+                  willChange: 'transform',
+                }}
+              />
+            </NavButton>
+          </li>
+          <li className="contents">
+            <NavButton
+              href="/work"
+              ariaLabel="Work"
+              tooltip="Work Experience"
+              side="right"
+              offsetPx={rightOffsetsPx.work}
+              size={buttonSize}
+              top={centerTop}
+              className="vt-tag-work"
+            >
+              <Icon
+                icon="mdi:timeline-text"
+                width={36}
+                height={36}
+                aria-hidden="true"
+                style={{
+                  transform: 'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
+                  transition: 'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
+                  willChange: 'transform',
+                }}
+              />
+            </NavButton>
+          </li>
+          <li className="contents">
+            <NavButton
+              href="https://github.com/jayvicsanantonio"
+              ariaLabel="GitHub"
+              tooltip="GitHub"
+              side="right"
+              offsetPx={rightOffsetsPx.github}
+              size={buttonSize}
+              top={centerTop}
+              target="_blank"
+              rel="noopener noreferrer"
+              transitionMs={140}
+            >
+              <Icon
+                icon="mdi:github"
+                width={40}
+                height={40}
+                aria-hidden="true"
+                style={{
+                  transform: 'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
+                  transition: 'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
+                  willChange: 'transform',
+                }}
+              />
+            </NavButton>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  );
+}
+
