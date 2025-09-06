@@ -169,66 +169,56 @@ export default function WorkPage() {
         </div>
 
         {/* Timeline */}
-        <div
-          ref={containerRef}
-          className="relative mt-10 sm:mt-12 lg:mt-16 w-full"
-        >
-          {/* Spine track (subtle) */}
-          <div
-            aria-hidden
-            className="hidden lg:block absolute lg:-translate-x-1/2 top-0 h-full w-px bg-white/5"
-            style={{ left: "50vw" }}
-          />
-          {/* Spine fill that grows with scroll */}
-          <motion.div
-            aria-hidden
-            style={{
-              scaleY: prefersReducedMotion ? 1 : spineScale,
-              left: "50vw",
-            }}
-            className="hidden lg:block origin-top pointer-events-none absolute lg:-translate-x-1/2 top-0 h-full w-1 bg-[linear-gradient(to_bottom,rgba(59,130,246,0.75),rgba(168,85,247,0.55),rgba(34,211,238,0.35),transparent)] shadow-[0_0_14px_rgba(59,130,246,0.25)] [transform:translateZ(0)]"
-          />
-
-          {/* Elegant cap at the start of the spine */}
-          <div
-            className="hidden lg:block absolute lg:-translate-x-1/2 top-0 translate-y-[-6px]"
-            style={{ left: "50vw" }}
-          >
-            <div className="relative">
-              {/* Distinct cap: gradient sphere (larger than nodes) */}
-              <span className="block h-3.5 w-3.5 rounded-full bg-[radial-gradient(closest-side,rgba(59,130,246,0.95),rgba(168,85,247,0.9))] shadow-[0_0_16px_rgba(59,130,246,0.45)] ring-1 ring-white/20" />
-              {/* Soft halo */}
-              <span
-                aria-hidden
-                className="pointer-events-none absolute -inset-3 rounded-full opacity-25 blur-md bg-[radial-gradient(closest-side,rgba(59,130,246,0.35),rgba(168,85,247,0.25),transparent_70%)]"
-              />
-              {/* Gentle pulse */}
-              <motion.span
-                aria-hidden
-                className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-cyan-300/50"
-                initial={{ scale: 1, opacity: 0.6 }}
-                animate={{ scale: 1.45, opacity: 0 }}
-                transition={{
-                  duration: 2.2,
-                  repeat: Infinity,
-                  ease: "easeOut",
-                }}
-              />
-              {/* Intro rays */}
-              <span
-                aria-hidden
-                className="absolute left-1/2 top-1 h-[12px] w-px -translate-x-1/2 -rotate-[18deg] bg-cyan-300/25"
-              />
-              <span
-                aria-hidden
-                className="absolute left-1/2 top-1 h-[12px] w-px -translate-x-1/2 rotate-[18deg] bg-purple-400/25"
-              />
-            </div>
-          </div>
-
-          {/* Flow wrapper: use viewport width so percentage margins align with 50vw spine */}
+        <div ref={containerRef} className="relative mt-10 sm:mt-12 lg:mt-16">
+          {/* Flow wrapper: center 100vw wrapper so spine aligns at viewport center */}
           <div className="lg:relative lg:w-[100vw] lg:left-1/2 lg:-translate-x-1/2">
-            <ul className="relative w-full space-y-12 sm:space-y-16 lg:space-y-28 pl-0 pt-12 sm:pt-16 lg:pt-24">
+            {/* Spine track (subtle) */}
+            <div
+              aria-hidden
+              className="hidden lg:block lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:top-0 h-full w-px bg-white/5"
+            />
+            {/* Spine fill that grows with scroll */}
+            <motion.div
+              aria-hidden
+              style={{
+                scaleY: prefersReducedMotion ? 1 : spineScale,
+              }}
+              className="hidden lg:block origin-top pointer-events-none lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:top-0 h-full w-1 bg-[linear-gradient(to_bottom,rgba(59,130,246,0.75),rgba(168,85,247,0.55),rgba(34,211,238,0.35),transparent)] shadow-[0_0_14px_rgba(59,130,246,0.25)] [transform:translateZ(0)]"
+            />
+            {/* Elegant cap at the start of the spine */}
+            <div className="hidden lg:block lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:top-0 translate-y-[-6px]">
+              <div className="relative">
+                {/* Distinct cap: gradient sphere (larger than nodes) */}
+                <span className="block h-3.5 w-3.5 rounded-full bg-[radial-gradient(closest-side,rgba(59,130,246,0.95),rgba(168,85,247,0.9))] shadow-[0_0_16px_rgba(59,130,246,0.45)] ring-1 ring-white/20" />
+                {/* Soft halo */}
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute -inset-3 rounded-full opacity-25 blur-md bg-[radial-gradient(closest-side,rgba(59,130,246,0.35),rgba(168,85,247,0.25),transparent_70%)]"
+                />
+                {/* Gentle pulse */}
+                <motion.span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-cyan-300/50"
+                  initial={{ scale: 1, opacity: 0.6 }}
+                  animate={{ scale: 1.45, opacity: 0 }}
+                  transition={{
+                    duration: 2.2,
+                    repeat: Infinity,
+                    ease: "easeOut",
+                  }}
+                />
+                {/* Intro rays */}
+                <span
+                  aria-hidden
+                  className="absolute left-1/2 top-1 h-[12px] w-px -translate-x-1/2 -rotate-[18deg] bg-cyan-300/25"
+                />
+                <span
+                  aria-hidden
+                  className="absolute left-1/2 top-1 h-[12px] w-px -translate-x-1/2 rotate-[18deg] bg-purple-400/25"
+                />
+              </div>
+            </div>
+            <ul className="relative space-y-12 sm:space-y-16 lg:space-y-28 pl-0 pt-12 sm:pt-16 lg:pt-24">
               {EXPERIENCES.map((item, index) => {
                 const isRight = index % 2 === 0;
                 return (
@@ -247,7 +237,7 @@ export default function WorkPage() {
                       {/* Card */}
                       <motion.article
                         {...(reveal as any)}
-                        className={`group relative w-full rounded-2xl p-[1px] sm:p-[1.2px] lg:w-[min(436px,42vw)] shadow-[0_8px_28px_rgba(0,0,0,0.35)] ring-1 ring-white/5 transition-transform duration-300 hover:-translate-y-0.5 bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(168,85,247,0.22),rgba(34,211,238,0.2))] ${
+                        className={`group relative w-full rounded-2xl p-[1px] sm:p-[1.2px] lg:w-[min(500px,50vw)] shadow-[0_8px_28px_rgba(0,0,0,0.35)] ring-1 ring-white/5 transition-transform duration-300 hover:-translate-y-0.5 bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(168,85,247,0.22),rgba(34,211,238,0.2))] ${
                           isRight ? "lg:mr-auto" : "lg:ml-auto"
                         } lg:mx-0 mx-auto`}
                       >
