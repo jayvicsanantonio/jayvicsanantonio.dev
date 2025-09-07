@@ -1,7 +1,7 @@
 'use client';
 
+import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Play } from 'lucide-react';
 import Image from 'next/image';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';
@@ -174,15 +174,15 @@ export default function SkillsAndCases() {
                     let icon: React.ReactNode = null;
                     switch (l.icon) {
                       case 'github':
-                        icon = <Github size={18} />;
+                        icon = <Icon icon="mdi:github" width={18} height={18} />;
                         break;
                       case 'watch':
-                        icon = <Play size={16} />;
+                        icon = <Icon icon="mdi:play" width={16} height={16} />;
                         break;
                       case 'marketplace':
                       case 'external':
                       case 'view':
-                        icon = <ExternalLink size={16} />;
+                        icon = <Icon icon="mdi:open-in-new" width={16} height={16} />;
                         break;
                       default:
                         icon = null;
