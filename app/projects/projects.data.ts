@@ -12,7 +12,11 @@ export type Project = {
   };
   skills: string[];
   metrics: string[];
-  links: { label: string; href: string; icon?: 'github' | 'view' | 'watch' | 'marketplace' | 'external' }[];
+  links: {
+    label: string;
+    href: string;
+    icon?: 'github' | 'view' | 'watch' | 'marketplace' | 'external';
+  }[];
   sections: { label: string; content: string }[];
 };
 
@@ -37,9 +41,21 @@ export const PROJECTS: Project[] = [
       { label: 'View', href: 'https://jayvicsanantonio.github.io/ai-pacman/' },
     ],
     sections: [
-      { label: 'Context', content: 'A modern implementation of the classic Pac-Man game exploring React 19 features and simple game AI.' },
-      { label: 'Decisions', content: 'TypeScript for type safety; Vite for fast dev; Tailwind for styling; implemented collision detection and ghost AI.' },
-      { label: 'Results', content: 'Playable demo with complete game loop, responsive controls, and functional AI-driven opponents.' },
+      {
+        label: 'Context',
+        content:
+          'A modern implementation of the classic Pac-Man game exploring React 19 features and simple game AI.',
+      },
+      {
+        label: 'Decisions',
+        content:
+          'TypeScript for type safety; Vite for fast dev; Tailwind for styling; implemented collision detection and ghost AI.',
+      },
+      {
+        label: 'Results',
+        content:
+          'Playable demo with complete game loop, responsive controls, and functional AI-driven opponents.',
+      },
     ],
   },
   {
@@ -62,9 +78,19 @@ export const PROJECTS: Project[] = [
       { label: 'View', href: 'https://ai-timeline-six.vercel.app/' },
     ],
     sections: [
-      { label: 'Context', content: 'An interactive timeline of AI history built to be performant and accessible.' },
-      { label: 'Decisions', content: 'Next.js 15; TypeScript; Framer Motion for animations; WCAG-compliant design.' },
-      { label: 'Results', content: 'Fast, engaging, and accessible timeline that visually represents key moments in AI history.' },
+      {
+        label: 'Context',
+        content: 'An interactive timeline of AI history built to be performant and accessible.',
+      },
+      {
+        label: 'Decisions',
+        content: 'Next.js 15; TypeScript; Framer Motion for animations; WCAG-compliant design.',
+      },
+      {
+        label: 'Results',
+        content:
+          'Fast, engaging, and accessible timeline that visually represents key moments in AI history.',
+      },
     ],
   },
   {
@@ -80,13 +106,38 @@ export const PROJECTS: Project[] = [
       height: 400,
       ratio: '1200/400',
     },
-    skills: ['AdTech', 'Architecture', 'Performance', 'Testing', 'DX', 'Ember', 'React', 'Enterprise'],
-    metrics: ['+1150% throughput (uploads)', '$140M+ ad spend influenced', 'E2E stability via Cypress'],
+    skills: [
+      'AdTech',
+      'Architecture',
+      'Performance',
+      'Testing',
+      'DX',
+      'Ember',
+      'React',
+      'Enterprise',
+    ],
+    metrics: [
+      '+1150% throughput (uploads)',
+      '$140M+ ad spend influenced',
+      'E2E stability via Cypress',
+    ],
     links: [{ label: 'View', href: 'https://www.advertising.yahooinc.com/our-dsp' }],
     sections: [
-      { label: 'Context', content: 'Core developer across RTB tools and audience systems; owned performance-critical flows and mentored engineers.' },
-      { label: 'Decisions', content: 'Resilient upload pipeline patterns; reusable UI primitives; CI-friendly end-to-end testing with Cypress.' },
-      { label: 'Results', content: 'Increased upload capacity from 2M → 25M; contributed to features driving material spend; improved reliability and velocity.' },
+      {
+        label: 'Context',
+        content:
+          'Core developer across RTB tools and audience systems; owned performance-critical flows and mentored engineers.',
+      },
+      {
+        label: 'Decisions',
+        content:
+          'Resilient upload pipeline patterns; reusable UI primitives; CI-friendly end-to-end testing with Cypress.',
+      },
+      {
+        label: 'Results',
+        content:
+          'Increased upload capacity from 2M → 25M; contributed to features driving material spend; improved reliability and velocity.',
+      },
     ],
   },
   {
@@ -105,9 +156,18 @@ export const PROJECTS: Project[] = [
     skills: ['Sandboxes'],
     metrics: ['Popover API', 'Anchor Positioning API'],
     links: [
-      { label: 'View Sandbox', href: 'https://codesandbox.io/p/sandbox/christmas-countdown-using-popover-and-anchor-positioning-apis-c894q8?file=%2Findex.html&from-embed', icon: 'external' },
+      {
+        label: 'View Sandbox',
+        href: 'https://codesandbox.io/p/sandbox/christmas-countdown-using-popover-and-anchor-positioning-apis-c894q8?file=%2Findex.html&from-embed',
+        icon: 'external',
+      },
     ],
-    sections: [{ label: 'Context', content: 'Interactive holiday-themed UI exploring modern web platform features.' }],
+    sections: [
+      {
+        label: 'Context',
+        content: 'Interactive holiday-themed UI exploring modern web platform features.',
+      },
+    ],
   },
   {
     slug: 'aurora-borealis',
@@ -125,9 +185,18 @@ export const PROJECTS: Project[] = [
     skills: ['Sandboxes'],
     metrics: ['CSS Animation', 'Layered gradients'],
     links: [
-      { label: 'View Sandbox', href: 'https://codesandbox.io/p/sandbox/23lnhc?file=%2Fstyles.css', icon: 'external' },
+      {
+        label: 'View Sandbox',
+        href: 'https://codesandbox.io/p/sandbox/23lnhc?file=%2Fstyles.css',
+        icon: 'external',
+      },
     ],
-    sections: [{ label: 'Context', content: 'A visual experiment recreating northern lights with gradients and keyframes.' }],
+    sections: [
+      {
+        label: 'Context',
+        content: 'A visual experiment recreating northern lights with gradients and keyframes.',
+      },
+    ],
   },
   {
     slug: 'total-solar-eclipse',
@@ -145,9 +214,18 @@ export const PROJECTS: Project[] = [
     skills: ['Sandboxes'],
     metrics: ['Radial gradients', 'Pure CSS'],
     links: [
-      { label: 'View Sandbox', href: 'https://codesandbox.io/p/sandbox/qlnxgn?file=%2Fstyles.css', icon: 'external' },
+      {
+        label: 'View Sandbox',
+        href: 'https://codesandbox.io/p/sandbox/qlnxgn?file=%2Fstyles.css',
+        icon: 'external',
+      },
     ],
-    sections: [{ label: 'Context', content: 'Animating celestial motion with CSS only; inspired by April 2024 eclipse.' }],
+    sections: [
+      {
+        label: 'Context',
+        content: 'Animating celestial motion with CSS only; inspired by April 2024 eclipse.',
+      },
+    ],
   },
   {
     slug: 'barbenheimer-vscode-theme',
@@ -165,13 +243,30 @@ export const PROJECTS: Project[] = [
     skills: ['Open Source', 'Design Systems', 'DX'],
     metrics: ['Marketplace distribution', 'Multi-theme variants', 'Accessible contrast choices'],
     links: [
-      { label: 'Github', href: 'https://github.com/jayvicsanantonio/barbenheimer-vscode-theme', icon: 'github' },
-      { label: 'View Marketplace', href: 'https://marketplace.visualstudio.com/items?itemName=jayvicsanantonio.barbenheimer', icon: 'marketplace' },
+      {
+        label: 'Github',
+        href: 'https://github.com/jayvicsanantonio/barbenheimer-vscode-theme',
+        icon: 'github',
+      },
+      {
+        label: 'View Marketplace',
+        href: 'https://marketplace.visualstudio.com/items?itemName=jayvicsanantonio.barbenheimer',
+        icon: 'marketplace',
+      },
     ],
     sections: [
-      { label: 'Context', content: 'Built for daily use with balanced syntax roles and consistent UI surfaces.' },
-      { label: 'Decisions', content: 'Measured saturation; tuned selection/hover backgrounds; hardened readability.' },
-      { label: 'Results', content: 'Positive adoption; approachable and fun while maintaining legibility.' },
+      {
+        label: 'Context',
+        content: 'Built for daily use with balanced syntax roles and consistent UI surfaces.',
+      },
+      {
+        label: 'Decisions',
+        content: 'Measured saturation; tuned selection/hover backgrounds; hardened readability.',
+      },
+      {
+        label: 'Results',
+        content: 'Positive adoption; approachable and fun while maintaining legibility.',
+      },
     ],
   },
   {
@@ -190,13 +285,30 @@ export const PROJECTS: Project[] = [
     skills: ['Open Source', 'Design Systems', 'DX'],
     metrics: ['Published on Zed', 'Consistent token roles', 'Refined focus/selection states'],
     links: [
-      { label: 'Github', href: 'https://github.com/jayvicsanantonio/barbenheimer-zed-theme', icon: 'github' },
-      { label: 'View Marketplace', href: 'https://zed.dev/extensions/barbenheimer', icon: 'marketplace' },
+      {
+        label: 'Github',
+        href: 'https://github.com/jayvicsanantonio/barbenheimer-zed-theme',
+        icon: 'github',
+      },
+      {
+        label: 'View Marketplace',
+        href: 'https://zed.dev/extensions/barbenheimer',
+        icon: 'marketplace',
+      },
     ],
     sections: [
-      { label: 'Context', content: 'Designed related yet distinct variants preserving familiarity across modes.' },
-      { label: 'Decisions', content: 'Shared base hues with divergent accents; whitespace and contrast ergonomics.' },
-      { label: 'Results', content: 'Stable, readable themes with personality; easy switching without fatigue.' },
+      {
+        label: 'Context',
+        content: 'Designed related yet distinct variants preserving familiarity across modes.',
+      },
+      {
+        label: 'Decisions',
+        content: 'Shared base hues with divergent accents; whitespace and contrast ergonomics.',
+      },
+      {
+        label: 'Results',
+        content: 'Stable, readable themes with personality; easy switching without fatigue.',
+      },
     ],
   },
   {
@@ -219,7 +331,10 @@ export const PROJECTS: Project[] = [
       { label: 'View', href: 'https://mmchurch.ph/' },
     ],
     sections: [
-      { label: 'Context', content: 'Focused on simple publishing and intuitive structure for a broad audience.' },
+      {
+        label: 'Context',
+        content: 'Focused on simple publishing and intuitive structure for a broad audience.',
+      },
     ],
   },
   {
@@ -242,9 +357,21 @@ export const PROJECTS: Project[] = [
       { label: 'View', href: 'https://sync-flow-nine.vercel.app/' },
     ],
     sections: [
-      { label: 'Context', content: 'Designed to feel instantaneous across ecosystems with conflict resolution and fault‑tolerant event delivery.' },
-      { label: 'Decisions', content: 'Vercel edge + Hono; OAuth + webhooks with Redis-backed state to minimize polling.' },
-      { label: 'Results', content: 'Smooth two‑way sync; responsive UX under network variability; portable architecture.' },
+      {
+        label: 'Context',
+        content:
+          'Designed to feel instantaneous across ecosystems with conflict resolution and fault‑tolerant event delivery.',
+      },
+      {
+        label: 'Decisions',
+        content:
+          'Vercel edge + Hono; OAuth + webhooks with Redis-backed state to minimize polling.',
+      },
+      {
+        label: 'Results',
+        content:
+          'Smooth two‑way sync; responsive UX under network variability; portable architecture.',
+      },
     ],
   },
   {
@@ -252,7 +379,7 @@ export const PROJECTS: Project[] = [
     title: "Track N' Stick",
     period: '2024',
     blurb:
-      "Full-stack habit tracking app with streak visualization and goal management, showcasing robust, user-centric design.",
+      'Full-stack habit tracking app with streak visualization and goal management, showcasing robust, user-centric design.',
     image: {
       src: '/images/projects/tracknstick.png',
       alt: "Track N' Stick",
@@ -263,13 +390,26 @@ export const PROJECTS: Project[] = [
     skills: ['Hobby', 'React', 'TypeScript', 'Full Stack'],
     metrics: ['Habit tracking', 'Streak visualization', 'Goal management'],
     links: [
-      { label: 'Github', href: 'https://github.com/jayvicsanantonio/tracknstick.com', icon: 'github' },
+      {
+        label: 'Github',
+        href: 'https://github.com/jayvicsanantonio/tracknstick.com',
+        icon: 'github',
+      },
       { label: 'View', href: 'https://tracknstick.com/' },
     ],
     sections: [
-      { label: 'Context', content: 'Build sustainable habits through visual progress tracking and goal setting.' },
-      { label: 'Decisions', content: 'Clean, intuitive interface prioritizing ease of use and engagement.' },
-      { label: 'Results', content: 'Functional habit tracker with streak visualization and goal management.' },
+      {
+        label: 'Context',
+        content: 'Build sustainable habits through visual progress tracking and goal setting.',
+      },
+      {
+        label: 'Decisions',
+        content: 'Clean, intuitive interface prioritizing ease of use and engagement.',
+      },
+      {
+        label: 'Results',
+        content: 'Functional habit tracker with streak visualization and goal management.',
+      },
     ],
   },
   {
@@ -288,13 +428,26 @@ export const PROJECTS: Project[] = [
     skills: ['DX', 'Accessibility', 'React', 'Hobby'],
     metrics: ['Hundreds of links curated', 'Structured taxonomy', 'Fast search UX'],
     links: [
-      { label: 'Github', href: 'https://github.com/jayvicsanantonio/web-development-hub', icon: 'github' },
+      {
+        label: 'Github',
+        href: 'https://github.com/jayvicsanantonio/web-development-hub',
+        icon: 'github',
+      },
       { label: 'View', href: 'https://webdevhub.link/' },
     ],
     sections: [
-      { label: 'Context', content: 'Built to onboard engineers quickly and reduce search friction.' },
-      { label: 'Decisions', content: 'Lightweight stack with accessible components and semantic markup.' },
-      { label: 'Results', content: 'Faster discovery; repeatable curation model; easy contribution flow.' },
+      {
+        label: 'Context',
+        content: 'Built to onboard engineers quickly and reduce search friction.',
+      },
+      {
+        label: 'Decisions',
+        content: 'Lightweight stack with accessible components and semantic markup.',
+      },
+      {
+        label: 'Results',
+        content: 'Faster discovery; repeatable curation model; easy contribution flow.',
+      },
     ],
   },
   {
@@ -312,13 +465,20 @@ export const PROJECTS: Project[] = [
     },
     skills: ['Architecture', 'Performance', 'DX', 'Enterprise'],
     metrics: ['Digital lending marketplace', 'Mobile-first onboarding'],
-    links: [
-      { label: 'View', href: 'https://www.voyagerinnovation.com/fintq', icon: 'external' },
-    ],
+    links: [{ label: 'View', href: 'https://www.voyagerinnovation.com/fintq', icon: 'external' }],
     sections: [
-      { label: 'Context', content: 'Extend access to credit by bringing bank lending flows to mobile.' },
-      { label: 'Decisions', content: 'Secure journeys and an API-first integration surface for banks.' },
-      { label: 'Results', content: 'Scalable distribution of loan products across geographies via mobile.' },
+      {
+        label: 'Context',
+        content: 'Extend access to credit by bringing bank lending flows to mobile.',
+      },
+      {
+        label: 'Decisions',
+        content: 'Secure journeys and an API-first integration surface for banks.',
+      },
+      {
+        label: 'Results',
+        content: 'Scalable distribution of loan products across geographies via mobile.',
+      },
     ],
   },
   {
@@ -334,13 +494,36 @@ export const PROJECTS: Project[] = [
       height: 675,
       ratio: '1200/675',
     },
-    skills: ['Architecture', 'DX', 'Internet of Things', 'AWS', 'Node', 'Express', 'Android', 'BLE', 'Startup'],
+    skills: [
+      'Architecture',
+      'DX',
+      'Internet of Things',
+      'AWS',
+      'Node',
+      'Express',
+      'Android',
+      'BLE',
+      'Startup',
+    ],
     metrics: ['BLE wearable', 'Android app', 'AWS-hosted backend (Node + Express)'],
-    links: [{ label: 'Watch Video', href: 'https://www.youtube.com/watch?v=0wYUNuDsrRo', icon: 'watch' }],
+    links: [
+      { label: 'Watch Video', href: 'https://www.youtube.com/watch?v=0wYUNuDsrRo', icon: 'watch' },
+    ],
     sections: [
-      { label: 'Context', content: 'Infrastructure for an IoT wearable focused on personal safety, with Android app.' },
-      { label: 'Decisions', content: 'BLE for low power; Node.js + Express backend on AWS; reliable APIs and telemetry.' },
-      { label: 'Results', content: 'Responsive device–app experience with a scalable backend and streamlined workflows.' },
+      {
+        label: 'Context',
+        content: 'Infrastructure for an IoT wearable focused on personal safety, with Android app.',
+      },
+      {
+        label: 'Decisions',
+        content:
+          'BLE for low power; Node.js + Express backend on AWS; reliable APIs and telemetry.',
+      },
+      {
+        label: 'Results',
+        content:
+          'Responsive device–app experience with a scalable backend and streamlined workflows.',
+      },
     ],
   },
   {
@@ -363,9 +546,18 @@ export const PROJECTS: Project[] = [
       { label: 'View', href: 'https://upgrade.emberjs.com/' },
     ],
     sections: [
-      { label: 'Context', content: 'Streamlines upgrading Ember apps by surfacing changes and migration steps.' },
-      { label: 'Decisions', content: 'Focus on clarity and accuracy; developer‑friendly UX to minimize friction.' },
-      { label: 'Results', content: 'Increased confidence and speed of framework upgrades across teams.' },
+      {
+        label: 'Context',
+        content: 'Streamlines upgrading Ember apps by surfacing changes and migration steps.',
+      },
+      {
+        label: 'Decisions',
+        content: 'Focus on clarity and accuracy; developer‑friendly UX to minimize friction.',
+      },
+      {
+        label: 'Results',
+        content: 'Increased confidence and speed of framework upgrades across teams.',
+      },
     ],
   },
   {
@@ -383,11 +575,22 @@ export const PROJECTS: Project[] = [
     },
     skills: ['Enterprise', 'Node', 'SailsJS', 'Redis', 'MongoDB', 'Android'],
     metrics: ['500K–1M downloads', '4.5★ (22,339 ratings)'],
-    links: [{ label: 'Read Project', href: 'https://www.ajmatillano.com/eb-mobile', icon: 'external' }],
+    links: [
+      { label: 'Read Project', href: 'https://www.ajmatillano.com/eb-mobile', icon: 'external' },
+    ],
     sections: [
-      { label: 'Context', content: 'Large-scale consumer app integrating social feeds and Pinoy Henyo multiplayer.' },
-      { label: 'Decisions', content: 'Node and SailsJS with Redis and MongoDB to handle spikes in concurrency.' },
-      { label: 'Results', content: 'Successfully launched for the show’s 35th anniversary with strong adoption.' },
+      {
+        label: 'Context',
+        content: 'Large-scale consumer app integrating social feeds and Pinoy Henyo multiplayer.',
+      },
+      {
+        label: 'Decisions',
+        content: 'Node and SailsJS with Redis and MongoDB to handle spikes in concurrency.',
+      },
+      {
+        label: 'Results',
+        content: 'Successfully launched for the show’s 35th anniversary with strong adoption.',
+      },
     ],
   },
   {
@@ -405,11 +608,26 @@ export const PROJECTS: Project[] = [
     },
     skills: ['Enterprise', 'Express', 'Node', 'MongoDB', 'Redis', 'jQuery'],
     metrics: ['Highly trafficked sports content', 'Optimized build and deploy'],
-    links: [{ label: 'Read Article', href: 'https://www.techinasia.com/pinoyhoops-app-assist-basketball-fans', icon: 'external' }],
+    links: [
+      {
+        label: 'Read Article',
+        href: 'https://www.techinasia.com/pinoyhoops-app-assist-basketball-fans',
+        icon: 'external',
+      },
+    ],
     sections: [
-      { label: 'Context', content: 'Evolved an enterprise-grade content platform serving PH basketball fans.' },
-      { label: 'Decisions', content: 'Express + Node with MongoDB/Redis; streamlined templating and UI.' },
-      { label: 'Results', content: 'Responsive, reliable experience handling bursts of traffic around major games.' },
+      {
+        label: 'Context',
+        content: 'Evolved an enterprise-grade content platform serving PH basketball fans.',
+      },
+      {
+        label: 'Decisions',
+        content: 'Express + Node with MongoDB/Redis; streamlined templating and UI.',
+      },
+      {
+        label: 'Results',
+        content: 'Responsive, reliable experience handling bursts of traffic around major games.',
+      },
     ],
   },
 ];
@@ -417,4 +635,3 @@ export const PROJECTS: Project[] = [
 export function findProject(slug: string): Project | undefined {
   return PROJECTS.find((c) => c.slug === slug);
 }
-

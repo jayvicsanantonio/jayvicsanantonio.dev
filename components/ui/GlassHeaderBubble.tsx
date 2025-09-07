@@ -83,7 +83,7 @@ export default function GlassHeaderBubble({
             if (typeof window !== 'undefined') window.location.assign('/');
           }}
         >
-<span className="text-[clamp(14px,2.2vw,22px)]">Hi, I’m Jayvic 👋</span>
+          <span className="text-[clamp(14px,2.2vw,22px)]">Hi, I’m Jayvic 👋</span>
         </Link>
 
         {/* Work (right) */}

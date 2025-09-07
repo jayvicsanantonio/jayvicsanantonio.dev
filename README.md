@@ -1,109 +1,90 @@
 # Personal Website
 
-Welcome to the repository for my personal website! This site showcases some of the projects I've built throughout my career, a blog section with articles I've written, and details about my work experience. The site is built with modern web technologies including TypeScript, Next.js, React, TailwindCSS, and Vercel for CI/CD.
-
-## Table of Contents
-
-- [Tech Stack](#tech-stack)
-- [Features](#features)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Running the Development Server](#running-the-development-server)
-- [Deployment](#deployment)
-- [Project Structure](#project-structure)
-- [Contact](#contact)
+This is the source for my personal site built with Next.js (App Router), React 19, TypeScript, and Tailwind CSS v4. It showcases projects and work experience with a focus on performance and accessibility.
 
 ## Tech Stack
 
-- **Framework**: [Next.js](https://nextjs.org/)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **UI Library**: [React](https://reactjs.org/)
-- **Styling**: [TailwindCSS](https://tailwindcss.com/)
-- **Deployment**: [Vercel](https://vercel.com/)
-
-## Features
-
-- **Project Portfolio**: A comprehensive list of all my projects with detailed descriptions and links.
-- **Blog**: Articles and tutorials on various web development topics.
-- **Work Experience**: A timeline of my professional journey and roles.
+- Framework: Next.js 15 (App Router)
+- Language: TypeScript
+- UI: React 19, Tailwind CSS v4
+- Observability: Sentry
+- Performance: Lighthouse CI
+- Deploy: Vercel
 
 ## Getting Started
 
-### Prerequisites
+Prerequisites
 
-Make sure you have the following software installed:
+- Node.js 20+
+- pnpm 9+
 
-- [Node.js](https://nodejs.org/) (v20.x or later)
-- [npm](https://www.npmjs.com/)
-
-### Installation
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/jayvicsanantonio/jayvicsanantonio.dev.git
-   ```
-
-2. Navigate to the project directory:
-
-   ```bash
-   cd jayvicsanantonio.dev
-   ```
-
-3. Install the dependencies:
-
-   ```bash
-   npm install
-   ```
-
-### Running the Development Server
-
-Start the development server:
+Install dependencies
 
 ```bash
-npm run dev
+pnpm install
 ```
 
-Open http://localhost:3000 with your browser to see your website in action.
+Run the dev server
 
-## Deployment
+```bash
+pnpm dev
+```
 
-The website is automatically deployed on [Vercel](https://vercel.com/). Every push to the main branch triggers a deployment. To manually deploy, follow these steps:
+Type-check and lint
 
-1. Install the Vercel CLI:
+```bash
+pnpm type-check
+pnpm lint
+```
 
-   ```bash
-   npm install -g vercel
-   ```
+Build
 
-2. Run the deployment command:
+```bash
+pnpm build
+```
 
-   ```bash
-   vercel
-   ```
+Optional: Bundle analyze
 
-## Project Structure
+```bash
+ANALYZE=true pnpm build
+```
+
+## Project Structure (App Router)
 
 ```plaintext
-├── public          # Static files
-├── src
-│   ├── components  # React components
-│   ├── pages       # Next.js pages
-│   ├── styles      # TailwindCSS styles
-│   ├── utils       # Utility functions
-│   └── data        # Data files (projects, blog posts, etc.)
-├── .eslintrc.json  # ESLint configuration
-├── .prettierrc     # Prettier configuration
-├── tailwind.config.js # TailwindCSS configuration
-├── next.config.js  # Next.js configuration
-└── tsconfig.json   # TypeScript configuration
+app/                     # Route segments (server-first by default)
+  globals.css            # Tailwind v4 entry
+  (root pages)/
+components/              # Reusable components (UI, pages, home, projects, etc.)
+hooks/                   # Shared React hooks
+lib/                     # Shared utilities
+public/                  # Static assets
 ```
+
+Conventions (summary)
+
+- One React component per file (enforced by ESLint)
+- Client-only components must start with "use client"
+- UI/library components: prefer named exports; Next.js page/layout files use default export
+- Use the path alias `@/` for internal imports instead of deep relative paths when possible
+- Props: export reusable prop types/interfaces alongside components
+
+See CONTRIBUTING.md for more details.
+
+## Environment
+
+Create a `.env.local` with the following variables (see env.ts for schema):
+
+- SENTRY_DSN
+- NEXT_PUBLIC_SENTRY_DSN
+- RESEND_API_KEY
+- RESEND_FROM_EMAIL
+- RESEND_TO_EMAIL
+
+## CI
+
+A GitHub Actions workflow runs type-checks, linting, build, and Lighthouse CI.
 
 ## Contact
 
-Feel free to reach out to me at [hi@jayvicsanantonio.dev](mailto:hi@jayvicsanantonio.dev) or connect with me on [LinkedIn](https://www.linkedin.com/in/jayvicsanantonio/).
-
----
-
-Thank you for visiting my personal website repository!
+Reach me at [hi@jayvicsanantonio.dev](mailto:hi@jayvicsanantonio.dev) or on [LinkedIn](https://www.linkedin.com/in/jayvicsanantonio/).

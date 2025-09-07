@@ -25,6 +25,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Lint
+        run: pnpm lint
+
+      - name: Type check
+        run: pnpm type-check
+
       - name: Create .env.production for CI
         run: |
           cat > .env.production << 'EOF'
@@ -40,4 +46,3 @@ jobs:
 
       - name: Run Lighthouse CI
         run: pnpm lhci
-

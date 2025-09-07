@@ -1,4 +1,9 @@
 import { withSentryConfig } from '@sentry/nextjs';
+import createBundleAnalyzer from '@next/bundle-analyzer';
+
+const withBundleAnalyzer = createBundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+});
 
 const nextConfig = {
   reactStrictMode: true,
@@ -17,7 +22,7 @@ const nextConfig = {
   },
 };
 
-export default withSentryConfig(nextConfig, {
+export default withSentryConfig(withBundleAnalyzer(nextConfig), {
   org: 'jayvic-san-antonio-hl',
   project: 'jayvicsanantonio-dev',
 

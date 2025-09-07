@@ -220,7 +220,7 @@ export default function WorkTimeline() {
                           <p className="text-sm tracking-[0.14em] text-gray-300/90 uppercase lg:text-base">
                             {item.company}
                           </p>
-                          <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] font-medium tracking-[0.12em] whitespace-nowrap text-gray-300 uppercase lg:text:[11px]">
+                          <span className="lg:text:[11px] rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] font-medium tracking-[0.12em] whitespace-nowrap text-gray-300 uppercase">
                             {item.period}
                           </span>
                         </div>
@@ -230,7 +230,12 @@ export default function WorkTimeline() {
                       <ul className="mt-4 space-y-3 text-[0.95rem]/relaxed sm:text-[0.98rem]/relaxed">
                         {item.bullets.map((b, i) => (
                           <li key={i} className="flex gap-2 break-words text-gray-300/90">
-                                <Icon icon="mdi:check" width={18} height={18} className="mt-0.5 shrink-0 text-cyan-300/80" />
+                            <Icon
+                              icon="mdi:check"
+                              width={18}
+                              height={18}
+                              className="mt-0.5 shrink-0 text-cyan-300/80"
+                            />
                             <span>{b}</span>
                           </li>
                         ))}
@@ -254,4 +259,3 @@ export default function WorkTimeline() {
     </div>
   );
 }
-

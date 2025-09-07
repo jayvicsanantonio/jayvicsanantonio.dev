@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import AnimatedText from "@/components/ui/AnimatedText";
-import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
+import AnimatedText from '@/components/ui/AnimatedText';
+import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
 
 export default function AnimatedHeader() {
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -12,4 +12,3 @@ export default function AnimatedHeader() {
     </h1>
   );
 }
-
