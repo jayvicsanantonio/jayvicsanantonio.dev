@@ -14,7 +14,8 @@
     "lh:prepare": "mkdir -p .lighthouse",
     "lh:home": "pnpm dlx lighthouse http://localhost:3000 --preset=desktop --output=html --quiet --output-path=.lighthouse/home.desktop.html",
     "lh:projects": "pnpm dlx lighthouse http://localhost:3000/projects --preset=desktop --output=html --quiet --output-path=.lighthouse/projects.desktop.html",
-    "lh:work": "pnpm dlx lighthouse http://localhost:3000/work --preset=desktop --output=html --quiet --output-path=.lighthouse/work.desktop.html"
+    "lh:work": "pnpm dlx lighthouse http://localhost:3000/work --preset=desktop --output=html --quiet --output-path=.lighthouse/work.desktop.html",
+    "lhci": "lhci autorun"
   },
   "dependencies": {
     "@iconify/react": "^4.1.1",
@@ -41,6 +42,7 @@
     "@types/react-syntax-highlighter": "^15.5.13",
     "@typescript-eslint/eslint-plugin": "^8.42.0",
     "@typescript-eslint/parser": "^8.42.0",
+    "@lhci/cli": "^0.14.0",
     "eslint": "^8",
     "eslint-config-next": "^14.2.18",
     "eslint-plugin-import": "^2.32.0",
