@@ -12,8 +12,6 @@ Welcome to the repository for my personal website! This site showcases some of t
   - [Running the Development Server](#running-the-development-server)
 - [Deployment](#deployment)
 - [Project Structure](#project-structure)
-- [Contributing](#contributing)
-- [License](#license)
 - [Contact](#contact)
 
 ## Tech Stack
@@ -104,7 +102,7 @@ The website is automatically deployed on [Vercel](https://vercel.com/). Every pu
 
 ## Contact
 
-Feel free to reach out to me at [jayvicsanantonio@gmail.com](mailto:hi@jayvicsanantonio.dev) or connect with me on [LinkedIn](https://www.linkedin.com/in/jayvicsanantonio/).
+Feel free to reach out to me at [hi@jayvicsanantonio.dev](mailto:hi@jayvicsanantonio.dev) or connect with me on [LinkedIn](https://www.linkedin.com/in/jayvicsanantonio/).
 
 ---
 
