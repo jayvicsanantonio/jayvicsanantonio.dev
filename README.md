@@ -102,24 +102,9 @@ The website is automatically deployed on [Vercel](https://vercel.com/). Every pu
 └── tsconfig.json   # TypeScript configuration
 ```
 
-## Contributing
-
-Contributions are welcome! If you have any ideas, suggestions, or bug reports, please open an issue or create a pull request.
-
-1. Fork the repository.
-2. Create a new branch (git checkout -b feature-branch).
-3. Make your changes.
-4. Commit your changes (git commit -m 'Add some feature').
-5. Push to the branch (git push origin feature-branch).
-6. Open a pull request.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## Contact
 
-Feel free to reach out to me at [jayvicsanantonio@gmail.com](mailto:jayvicsanantonio@gmail.com) or connect with me on [LinkedIn](https://www.linkedin.com/in/jayvicsanantonio/).
+Feel free to reach out to me at [jayvicsanantonio@gmail.com](mailto:hi@jayvicsanantonio.dev) or connect with me on [LinkedIn](https://www.linkedin.com/in/jayvicsanantonio/).
 
 ---
 
