@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { Check } from "lucide-react";
-import { useRef } from "react";
+import { Icon } from '@iconify/react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 
-import { Badge } from "@/components/ui/Badge";
-import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
+import { Badge } from '@/components/ui/Badge';
+import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
 
 type Experience = {
   title: string;
@@ -230,7 +230,7 @@ export default function WorkTimeline() {
                       <ul className="mt-4 space-y-3 text-[0.95rem]/relaxed sm:text-[0.98rem]/relaxed">
                         {item.bullets.map((b, i) => (
                           <li key={i} className="flex gap-2 break-words text-gray-300/90">
-                            <Check size={18} className="mt-0.5 shrink-0 text-cyan-300/80" />
+                                <Icon icon="mdi:check" width={18} height={18} className="mt-0.5 shrink-0 text-cyan-300/80" />
                             <span>{b}</span>
                           </li>
                         ))}
