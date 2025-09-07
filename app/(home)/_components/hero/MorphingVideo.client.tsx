@@ -97,22 +97,22 @@ export default function MorphingVideo({
         className="absolute bottom-64 left-1/2 z-50 -translate-x-1/2 text-center transition-opacity duration-700 sm:right-8 sm:bottom-40 sm:left-auto sm:translate-x-0 md:right-10 md:bottom-22"
         style={{ opacity: showTitleGroup ? 1 : 0 }}
       >
-        <h3 className="text-base font-medium tracking-widest text-white sm:text-2xl md:text-3xl lg:text-4xl 2xl:text-6xl">
+        <h2 className="text-base font-medium tracking-widest text-white sm:text-2xl md:text-3xl lg:text-4xl 2xl:text-6xl">
           <AnimatedText text="Full-Stack" start={showTitleGroup} perCharDelay={45} />
-        </h3>
+        </h2>
       </div>
       <div
         className="absolute bottom-52 left-1/2 z-50 -translate-x-1/2 text-center transition-opacity duration-700 sm:right-8 sm:left-auto sm:translate-x-0 md:right-10 md:bottom-10"
         style={{ opacity: showTitleGroup ? 1 : 0 }}
       >
-        <h4 className="text-base font-light tracking-wider text-white/90 italic sm:text-2xl md:text-3xl lg:text-4xl 2xl:text-5xl">
+        <h3 className="text-base font-light tracking-wider text-white/90 italic sm:text-2xl md:text-3xl lg:text-4xl 2xl:text-5xl">
           <AnimatedText
             text="Software Engineer"
             start={showTitleGroup}
             perCharDelay={60}
             baseDelay={240}
           />
-        </h4>
+        </h3>
       </div>
 
       {/* Description */}
