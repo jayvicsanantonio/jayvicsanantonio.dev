@@ -1,0 +1,63 @@
+[
+  {
+    "path": "/",
+    "resourceCounts": [
+      { "resourceType": "script", "budget": 40 },
+      { "resourceType": "stylesheet", "budget": 10 },
+      { "resourceType": "third-party", "budget": 30 }
+    ],
+    "resourceSizes": [
+      { "resourceType": "total", "budget": 800 },
+      { "resourceType": "script", "budget": 450 },
+      { "resourceType": "stylesheet", "budget": 120 },
+      { "resourceType": "image", "budget": 300 },
+      { "resourceType": "third-party", "budget": 300 }
+    ],
+    "timings": [
+      { "metric": "interactive", "budget": 4000 },
+      { "metric": "first-contentful-paint", "budget": 2000 },
+      { "metric": "largest-contentful-paint", "budget": 2500 }
+    ]
+  },
+  {
+    "path": "/projects",
+    "resourceCounts": [
+      { "resourceType": "script", "budget": 45 },
+      { "resourceType": "stylesheet", "budget": 12 },
+      { "resourceType": "third-party", "budget": 30 }
+    ],
+    "resourceSizes": [
+      { "resourceType": "total", "budget": 900 },
+      { "resourceType": "script", "budget": 500 },
+      { "resourceType": "stylesheet", "budget": 140 },
+      { "resourceType": "image", "budget": 360 },
+      { "resourceType": "third-party", "budget": 320 }
+    ],
+    "timings": [
+      { "metric": "interactive", "budget": 4500 },
+      { "metric": "first-contentful-paint", "budget": 2200 },
+      { "metric": "largest-contentful-paint", "budget": 2800 }
+    ]
+  },
+  {
+    "path": "/work",
+    "resourceCounts": [
+      { "resourceType": "script", "budget": 45 },
+      { "resourceType": "stylesheet", "budget": 12 },
+      { "resourceType": "third-party", "budget": 30 }
+    ],
+    "resourceSizes": [
+      { "resourceType": "total", "budget": 900 },
+      { "resourceType": "script", "budget": 500 },
+      { "resourceType": "stylesheet", "budget": 140 },
+      { "resourceType": "image", "budget": 360 },
+      { "resourceType": "third-party", "budget": 320 }
+    ],
+    "timings": [
+      { "metric": "interactive", "budget": 4500 },
+      { "metric": "first-contentful-paint", "budget": 2200 },
+      { "metric": "largest-contentful-paint", "budget": 2800 }
+    ]
+  }
+]
+
