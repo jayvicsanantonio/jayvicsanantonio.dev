@@ -90,14 +90,6 @@ const config = [
     },
   },
 
-  // Overrides
-  {
-    files: ['hooks/useScrollToTop.ts'],
-    rules: {
-      'react-hooks/rules-of-hooks': 'off',
-      'react-hooks/exhaustive-deps': 'off',
-    },
-  },
 
   // Global ignores
   {
