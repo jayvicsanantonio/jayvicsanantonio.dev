@@ -1,7 +1,6 @@
 import React from 'react';
 
-import AnimatedHeader from '@/components/projects/AnimatedHeader.client';
-
+import AnimatedHeader from './_components/AnimatedHeader.client';
 import SkillsAndCases from './_components/SkillsAndCases';
 
 export default function ProjectsPage() {

@@ -5,8 +5,8 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import { usePathname } from 'next/navigation';
 import { unstable_ViewTransition as ViewTransition } from 'react';
 
-import AmbientBackground from '@/components/pages/AmbientBackground';
-import CursorGlow from '@/components/pages/CursorGlow';
+import AmbientBackground from '@/components/shell/AmbientBackground';
+import CursorGlow from '@/components/shell/CursorGlow';
 import { Toaster } from '@/components/ui/Toaster';
 import { useWebVitalsLogger } from '@/hooks/useWebVitalsLogger';
 

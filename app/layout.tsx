@@ -1,7 +1,7 @@
 import { Inter_Tight } from 'next/font/google';
 import localFont from 'next/font/local';
 
-import Body from '@/components/pages/Body';
+import Body from '@/components/shell/Body';
 import './globals.css';
 
 import type { Metadata } from 'next';

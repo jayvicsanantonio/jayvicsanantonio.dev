@@ -52,13 +52,60 @@ ANALYZE=true pnpm build
 ## Project Structure (App Router)
 
 ```plaintext
-app/                     # Route segments (server-first by default)
-  globals.css            # Tailwind v4 entry
-  (root pages)/
-components/              # Reusable components (UI, pages, home, projects, etc.)
-hooks/                   # Shared React hooks
-lib/                     # Shared utilities
-public/                  # Static assets
+app/                                 # Route segments (server-first by default)
+  globals.css                        # Tailwind v4 entry
+  layout.tsx                         # Root layout
+  page.tsx                           # Home page (mounts co-located client hero)
+  (home)/                            # Group segment (not in URL)
+    _components/                     # Home-only components
+      HeroMorph.client.tsx
+      NavButton.tsx
+      hero/                          # Home hero sub-islands
+        config.ts
+        InitialPillOverlay.client.tsx
+        MobileNavRow.client.tsx
+        MorphingVideo.client.tsx
+        PrimaryNavOverlay.client.tsx
+        ProfileImage.client.tsx
+        FooterBrandCTA.client.tsx
+    _hooks/                          # Home-only hooks
+      useIntroSequence.ts
+      useScrollCssVariables.ts
+  projects/
+    layout.tsx
+    page.tsx
+    projects.data.ts
+    _components/
+      AnimatedHeader.client.tsx
+      SkillsAndCases.tsx
+  work/
+    layout.tsx
+    page.tsx
+    _components/
+      WorkTimeline.client.tsx
+
+components/                          # Shared components
+  shell/                             # App shell (shared across routes)
+    Body.tsx
+    ClientAppShell.client.tsx
+    AmbientBackground.tsx
+    CursorGlow.tsx
+  ui/                                # Reusable UI primitives
+    AnimatedText.tsx
+    Badge.tsx
+    GlassButton.tsx
+    GlassHeaderBubble.tsx
+    NavPill.tsx
+    Toaster.tsx
+
+hooks/                               # Shared React hooks
+  usePrefersReducedMotion.ts
+  useWebVitalsLogger.ts
+
+lib/                                 # Shared utilities
+  utils.ts
+
+public/                              # Static assets
 ```
 
 Conventions (summary)

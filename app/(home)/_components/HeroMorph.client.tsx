@@ -3,24 +3,30 @@
 import dynamic from 'next/dynamic';
 import { useRef } from 'react';
 
-import { CFG } from '@/components/home/hero/config';
-import InitialPillOverlay from '@/components/home/hero/InitialPillOverlay.client';
-import MorphingVideo from '@/components/home/hero/MorphingVideo.client';
-import ProfileImage from '@/components/home/hero/ProfileImage.client';
-import { useIntroSequence } from '@/hooks/home/useIntroSequence';
-import { useScrollCssVariables } from '@/hooks/home/useScrollCssVariables';
+import { CFG } from '@/app/(home)/_components/hero/config';
+import InitialPillOverlay from '@/app/(home)/_components/hero/InitialPillOverlay.client';
+import MorphingVideo from '@/app/(home)/_components/hero/MorphingVideo.client';
+import ProfileImage from '@/app/(home)/_components/hero/ProfileImage.client';
+import { useIntroSequence } from '@/app/(home)/_hooks/useIntroSequence';
+import { useScrollCssVariables } from '@/app/(home)/_hooks/useScrollCssVariables';
 import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
 
 // Lazy-load non-critical UI islands to reduce initial JS
-const PrimaryNavOverlay = dynamic(() => import('@/components/home/hero/PrimaryNavOverlay.client'), {
+const PrimaryNavOverlay = dynamic(
+  () => import('@/app/(home)/_components/hero/PrimaryNavOverlay.client'),
+  {
+    ssr: false,
+  },
+);
+const MobileNavRow = dynamic(() => import('@/app/(home)/_components/hero/MobileNavRow.client'), {
   ssr: false,
 });
-const MobileNavRow = dynamic(() => import('@/components/home/hero/MobileNavRow.client'), {
-  ssr: false,
-});
-const FooterBrandCTA = dynamic(() => import('@/components/home/hero/FooterBrandCTA.client'), {
-  ssr: false,
-});
+const FooterBrandCTA = dynamic(
+  () => import('@/app/(home)/_components/hero/FooterBrandCTA.client'),
+  {
+    ssr: false,
+  },
+);
 export default function HeroMorph() {
   const containerRef = useRef<HTMLDivElement>(null);
 
