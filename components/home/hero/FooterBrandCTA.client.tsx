@@ -1,8 +1,14 @@
-"use client";
+'use client';
 
-import Link from "next/link";
+import Link from 'next/link';
 
-export default function FooterBrandCTA({ showName, overlayUpDampen }: { showName: boolean; overlayUpDampen: number }) {
+export default function FooterBrandCTA({
+  showName,
+  overlayUpDampen,
+}: {
+  showName: boolean;
+  overlayUpDampen: number;
+}) {
   return (
     <div
       className="pointer-events-none absolute inset-x-4 transition-opacity duration-300 sm:inset-x-16"
@@ -16,7 +22,9 @@ export default function FooterBrandCTA({ showName, overlayUpDampen }: { showName
       <div className="flex items-center justify-between gap-6">
         <div className="text-white">
           <div className="text-lg font-light tracking-wider md:text-3xl">Jayvic</div>
-          <div className="text-xs font-bold tracking-[0.3em] uppercase md:text-2xl">SAN ANTONIO</div>
+          <div className="text-xs font-bold tracking-[0.3em] uppercase md:text-2xl">
+            SAN ANTONIO
+          </div>
         </div>
         <Link
           href="/work"
@@ -28,4 +36,3 @@ export default function FooterBrandCTA({ showName, overlayUpDampen }: { showName
     </div>
   );
 }
-

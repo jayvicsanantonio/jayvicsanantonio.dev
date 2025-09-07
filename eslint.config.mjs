@@ -47,7 +47,7 @@ const config = [
 
       // Hooks correctness
       'react-hooks/rules-of-hooks': 'error',
-'react-hooks/exhaustive-deps': 'warn',
+      'react-hooks/exhaustive-deps': 'warn',
 
       // Allow typical apostrophes in text content without escaping
       'react/no-unescaped-entities': 'off',
@@ -89,7 +89,6 @@ const config = [
       'react/jsx-uses-react': 'off',
     },
   },
-
 
   // Global ignores
   {

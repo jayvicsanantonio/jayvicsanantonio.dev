@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { usePathname } from "next/navigation";
-import { unstable_ViewTransition as ViewTransition } from "react";
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { usePathname } from 'next/navigation';
+import { unstable_ViewTransition as ViewTransition } from 'react';
 
-import AmbientBackground from "@/components/pages/AmbientBackground";
-import CursorGlow from "@/components/pages/CursorGlow";
-import { Toaster } from "@/components/ui/Toaster";
-import { useWebVitalsLogger } from "@/hooks/useWebVitalsLogger";
+import AmbientBackground from '@/components/pages/AmbientBackground';
+import CursorGlow from '@/components/pages/CursorGlow';
+import { Toaster } from '@/components/ui/Toaster';
+import { useWebVitalsLogger } from '@/hooks/useWebVitalsLogger';
 
 export default function ClientAppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   useWebVitalsLogger();
 
-  const isHome = pathname === "/";
+  const isHome = pathname === '/';
 
   return (
     <>
@@ -23,7 +23,7 @@ export default function ClientAppShell({ children }: { children: React.ReactNode
       {/* React ViewTransition wrapper per Next.js docs; key by pathname to scope updates */}
       <ViewTransition>
         <div key={pathname}>
-          {pathname !== "/" && <AmbientBackground />}
+          {pathname !== '/' && <AmbientBackground />}
           {isHome ? children : <div className="container">{children}</div>}
         </div>
       </ViewTransition>
@@ -33,4 +33,3 @@ export default function ClientAppShell({ children }: { children: React.ReactNode
     </>
   );
 }
-

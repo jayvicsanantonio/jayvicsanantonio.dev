@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { Icon } from "@iconify/react";
+import { Icon } from '@iconify/react';
 
-import NavButton from "@/components/home/NavButton";
+import NavButton from '@/components/home/NavButton';
 
 export type PrimaryNavOverlayProps = {
   centerTop: string;
@@ -11,7 +11,12 @@ export type PrimaryNavOverlayProps = {
   buttonSize: { w: number; h: number };
 };
 
-export default function PrimaryNavOverlay({ centerTop, leftOffsetsPx, rightOffsetsPx, buttonSize }: PrimaryNavOverlayProps) {
+export default function PrimaryNavOverlay({
+  centerTop,
+  leftOffsetsPx,
+  rightOffsetsPx,
+  buttonSize,
+}: PrimaryNavOverlayProps) {
   return (
     <div className="pointer-events-none fixed inset-0 z-50 hidden sm:contents">
       <nav aria-label="Primary" className="hidden sm:contents">
@@ -33,7 +38,8 @@ export default function PrimaryNavOverlay({ centerTop, leftOffsetsPx, rightOffse
                 height={36}
                 aria-hidden="true"
                 style={{
-                  transform: 'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
+                  transform:
+                    'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
                   transition: 'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
                   willChange: 'transform',
                 }}
@@ -58,7 +64,8 @@ export default function PrimaryNavOverlay({ centerTop, leftOffsetsPx, rightOffse
                 height={40}
                 aria-hidden="true"
                 style={{
-                  transform: 'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
+                  transform:
+                    'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
                   transition: 'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
                   willChange: 'transform',
                 }}
@@ -82,7 +89,8 @@ export default function PrimaryNavOverlay({ centerTop, leftOffsetsPx, rightOffse
                 height={36}
                 aria-hidden="true"
                 style={{
-                  transform: 'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
+                  transform:
+                    'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
                   transition: 'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
                   willChange: 'transform',
                 }}
@@ -108,7 +116,8 @@ export default function PrimaryNavOverlay({ centerTop, leftOffsetsPx, rightOffse
                 height={40}
                 aria-hidden="true"
                 style={{
-                  transform: 'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
+                  transform:
+                    'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
                   transition: 'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
                   willChange: 'transform',
                 }}
@@ -120,4 +129,3 @@ export default function PrimaryNavOverlay({ centerTop, leftOffsetsPx, rightOffse
     </div>
   );
 }
-

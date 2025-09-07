@@ -34,7 +34,7 @@ export function NavPill({
   expandedPx: _expandedPx = 140,
   heightPx = 48,
   tooltip,
-  tooltipPlacement = "above",
+  tooltipPlacement = 'above',
   className,
 }: NavPillProps) {
   // View-transition tag (optional)

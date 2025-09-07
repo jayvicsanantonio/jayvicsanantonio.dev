@@ -2,6 +2,9 @@
   "name": "jayvicsanantonio.dev",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -15,7 +18,8 @@
     "lh:home": "pnpm dlx lighthouse http://localhost:3000 --preset=desktop --output=html --quiet --output-path=.lighthouse/home.desktop.html",
     "lh:projects": "pnpm dlx lighthouse http://localhost:3000/projects --preset=desktop --output=html --quiet --output-path=.lighthouse/projects.desktop.html",
     "lh:work": "pnpm dlx lighthouse http://localhost:3000/work --preset=desktop --output=html --quiet --output-path=.lighthouse/work.desktop.html",
-    "lhci": "lhci autorun"
+    "lhci": "lhci autorun",
+    "analyze": "ANALYZE=true pnpm build"
   },
   "dependencies": {
     "@iconify/react": "^4.1.1",
@@ -35,6 +39,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
+    "@next/bundle-analyzer": "^15.0.0",
     "@t3-oss/env-nextjs": "^0.13.8",
     "@types/node": "^20",
     "@types/react": "^19.1.12",

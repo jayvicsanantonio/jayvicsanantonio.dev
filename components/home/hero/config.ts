@@ -33,4 +33,3 @@ export const CFG = {
     rightOffsetsPx: { work: 54, github: 150 },
   },
 } as const;
-
