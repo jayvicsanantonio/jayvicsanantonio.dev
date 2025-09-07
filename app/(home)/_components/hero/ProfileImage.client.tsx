@@ -28,7 +28,7 @@ export default function ProfileImage({ initialPill }: { initialPill: boolean }) 
             willChange: 'filter',
             filter: `brightness(calc(0.9 + 0.3 * var(--p))) saturate(1.3) hue-rotate(12deg) drop-shadow(0 0 calc(20px + 40px * var(--p)) rgba(0, 139, 139, 0.35)) drop-shadow(0 0 calc(60px + 120px * var(--p)) rgba(0, 139, 139, 0.18))`,
           }}
-          priority
+          fetchPriority="high"
         />
       </div>
     </div>
