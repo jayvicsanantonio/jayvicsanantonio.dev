@@ -16,7 +16,6 @@ export type NavPillProps = {
   collapsedPx?: number | string; // Default 48; can be CSS strings like 'clamp(...)'
   expandedPx?: number | string; // Default 140; CSS strings allowed
   heightPx?: number | string; // Default 48; CSS strings allowed
-  prefersReducedMotion?: boolean;
   tooltip?: string; // Tooltip text when non-active
   tooltipPlacement?: 'above' | 'below'; // Default: 'above'
   className?: string;
@@ -34,7 +33,6 @@ export function NavPill({
   collapsedPx = 48,
   expandedPx: _expandedPx = 140,
   heightPx = 48,
-  prefersReducedMotion: _prefersReducedMotion = false,
   tooltip,
   tooltipPlacement = "above",
   className,
