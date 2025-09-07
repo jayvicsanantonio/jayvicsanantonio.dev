@@ -2,7 +2,7 @@
 
 import { Icon } from '@iconify/react';
 
-import NavButton from '@/components/home/NavButton';
+import NavButton from '@/app/(home)/_components/NavButton';
 
 export type PrimaryNavOverlayProps = {
   centerTop: string;

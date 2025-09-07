@@ -1,4 +1,4 @@
-import HeroMorph from '@/components/home/HeroMorph.client';
+import HeroMorph from '@/app/(home)/_components/HeroMorph.client';
 
 export default function Page() {
   return (

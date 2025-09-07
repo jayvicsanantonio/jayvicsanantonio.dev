@@ -1,4 +1,4 @@
-import ClientAppShell from '@/components/pages/ClientAppShell.client';
+import ClientAppShell from '@/components/shell/ClientAppShell.client';
 
 export default function Body({
   children,
