@@ -1,6 +1,0 @@
-{
-  "entry": ["app/**/*.tsx", "app/**/*.ts"],
-  "paths": ["."],
-  "ignorePatterns": ["node_modules/**", ".next/**", "reports/**", "public/**", "**/*.d.ts"],
-  "tsConfig": "tsconfig.json"
-}
