@@ -6,7 +6,7 @@ import SkillsAndCases from './_components/SkillsAndCases';
 export default function ProjectsPage() {
   return (
     <section className="relative w-full">
-      <div className="container pt-52 pb-16">
+      <div className="container cq pt-40 sm:pt-52 pb-16">
         {/* Header */}
         <div className="space-y-5">
           <AnimatedHeader />

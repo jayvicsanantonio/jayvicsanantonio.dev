@@ -12,7 +12,7 @@ export default function ProfileImage({ initialPill }: { initialPill: boolean }) 
       }}
     >
       <div
-        className="relative w-[22rem] sm:w-[28rem] md:w-[60rem]"
+        className="relative w-[clamp(18rem,90vw,60rem)] sm:w-[clamp(24rem,80vw,60rem)] md:w-[60rem]"
         style={{
           height: 'calc(50rem - 10rem * var(--p))',
           transform: 'scale(clamp(0.6, calc(1 - 0.4 * var(--p)), 1))',

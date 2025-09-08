@@ -28,7 +28,7 @@ export default function FooterBrandCTA({
         </div>
         <Link
           href="/work"
-          className="pointer-events-auto rounded-full bg-white px-5 py-2 text-xs font-medium text-black transition-all duration-300 hover:scale-105 hover:bg-white/90 sm:px-6 sm:py-2.5 sm:text-sm md:py-3 md:text-base"
+          className="pointer-events-auto rounded-full bg-white min-h-11 px-6 py-2 text-sm font-medium text-black transition-all duration-300 hover:scale-105 hover:bg-white/90 sm:px-6 sm:py-2.5 sm:text-sm md:py-3 md:text-base"
         >
           Work Experience
         </Link>

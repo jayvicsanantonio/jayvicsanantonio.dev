@@ -134,7 +134,7 @@ export default function WorkTimeline() {
       };
 
   return (
-    <div ref={containerRef} className="relative mt-10 sm:mt-12 lg:mt-16">
+    <div ref={containerRef} className="relative mt-8 sm:mt-12 lg:mt-16">
       {/* Flow wrapper: center 100vw wrapper so spine aligns at viewport center */}
       <div className="lg:relative lg:left-1/2 lg:w-[100vw] lg:-translate-x-1/2">
         {/* Spine track (subtle) */}
@@ -183,7 +183,7 @@ export default function WorkTimeline() {
             />
           </div>
         </div>
-        <ul className="relative space-y-12 pt-12 pl-0 sm:space-y-16 sm:pt-16 lg:space-y-28 lg:pt-24">
+        <ul className="relative space-y-8 pt-10 pl-0 sm:space-y-12 sm:pt-16 lg:space-y-28 lg:pt-24">
           {EXPERIENCES.map((item, index) => {
             const isRight = index % 2 === 0;
             return (
@@ -202,7 +202,7 @@ export default function WorkTimeline() {
                   {/* Card */}
                   <motion.article
                     {...(reveal as any)}
-                    className={`group relative w-full rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(168,85,247,0.22),rgba(34,211,238,0.2))] p-[1px] shadow-[0_8px_28px_rgba(0,0,0,0.35)] ring-1 ring-white/5 transition-transform duration-300 hover:-translate-y-0.5 sm:p-[1.2px] lg:w-[min(500px,50vw)] ${
+                    className={`group cq relative w-full rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(168,85,247,0.22),rgba(34,211,238,0.2))] p-[1px] shadow-[0_8px_28px_rgba(0,0,0,0.35)] ring-1 ring-white/5 transition-transform duration-300 hover:-translate-y-0.5 sm:p-[1.2px] lg:w-[min(500px,50vw)] ${
                       isRight ? 'lg:mr-auto' : 'lg:ml-auto'
                     } mx-auto lg:mx-0`}
                   >
@@ -213,9 +213,9 @@ export default function WorkTimeline() {
                     />
 
                     {/* Inner frosted panel */}
-                    <div className="relative rounded-2xl border border-white/5 bg-gray-950/70 p-5 backdrop-blur-md sm:p-6">
+                    <div className="relative rounded-2xl border border-white/5 bg-gray-950/70 p-5 backdrop-blur-md sm:p-6 [@container(min-width:36rem)]:p-6">
                       <div className="text-left">
-                        <h3 className="font-oswald text-2xl text-white">{item.title}</h3>
+                        <h3 className="font-oswald text-xl [@container(min-width:28rem)]:text-2xl text-white">{item.title}</h3>
                         <div className="mt-1 flex items-baseline justify-between gap-3">
                           <p className="text-sm tracking-[0.14em] text-gray-300/90 uppercase lg:text-base">
                             {item.company}
@@ -227,7 +227,7 @@ export default function WorkTimeline() {
                         <div className="mt-3 h-px bg-linear-to-r from-transparent via-white/5 to-transparent" />
                       </div>
 
-                      <ul className="mt-4 space-y-3 text-[0.95rem]/relaxed sm:text-[0.98rem]/relaxed">
+                      <ul className="mt-4 space-y-3 [@container(min-width:34rem)]:space-y-4 text-[0.95rem]/relaxed sm:text-[0.98rem]/relaxed">
                         {item.bullets.map((b, i) => (
                           <li key={i} className="flex gap-2 break-words text-gray-300/90">
                             <Icon
