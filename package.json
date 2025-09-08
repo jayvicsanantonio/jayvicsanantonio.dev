@@ -8,16 +8,14 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:fast": "next build",
     "start": "next start",
-    "prebuild": "pnpm lint && pnpm type-check",
-    "lint": "biome lint .",
-    "lint:fix": "biome check --write .",
+    "prebuild": "pnpm check && pnpm type-check",
+
+    "check": "biome check .",
+    "fix": "biome check --write .",
     "format": "biome format --write .",
-    "format:check": "biome check .",
-    "type-check": "tsc -p tsconfig.json --noEmit",
-    "lh:prepare": "mkdir -p .lighthouse",
-    "lh:all": "pnpm lh:prepare && pnpm dlx lighthouse http://localhost:3000 --preset=desktop --output=html --quiet --output-path=.lighthouse/home.desktop.html && pnpm dlx lighthouse http://localhost:3000/projects --preset=desktop --output=html --quiet --output-path=.lighthouse/projects.desktop.html && pnpm dlx lighthouse http://localhost:3000/work --preset=desktop --output=html --quiet --output-path=.lighthouse/work.desktop.html",
+    "type-check": "tsc --noEmit",
+
     "lhci": "lhci autorun",
     "analyze": "ANALYZE=true pnpm build"
   },
