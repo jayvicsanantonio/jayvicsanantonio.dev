@@ -181,13 +181,6 @@
     content-visibility: auto;
   }
 
-  p.hyphenate {
-    overflow-wrap: break-word;
-    hyphens: auto;
-
-    /* Prefix for Safari */
-    -webkit-hyphens: auto;
-  }
 
   /* General hyphenation utility for any element */
   .hyphenate {
