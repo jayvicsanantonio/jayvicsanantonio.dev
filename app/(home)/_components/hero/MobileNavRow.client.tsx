@@ -13,14 +13,14 @@ export default function MobileNavRow() {
       <GlassButton
         href="/projects"
         aria-label="Projects"
-        className="vt-tag-projects h-14 w-14 rounded-full"
+        className="vt-tag-projects h-14 w-14"
       >
         <Icon icon="mdi:application-brackets" width={28} height={28} aria-hidden="true" />
       </GlassButton>
       <GlassButton
         href="https://www.linkedin.com/in/jayvicsanantonio/"
         aria-label="LinkedIn"
-        className="h-14 w-14 rounded-full"
+        className="h-14 w-14"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -29,14 +29,14 @@ export default function MobileNavRow() {
       <GlassButton
         href="/work"
         aria-label="Work Experience"
-        className="vt-tag-work h-14 w-14 rounded-full"
+        className="vt-tag-work h-14 w-14"
       >
         <Icon icon="mdi:timeline-text" width={28} height={28} aria-hidden="true" />
       </GlassButton>
       <GlassButton
         href="https://github.com/jayvicsanantonio"
         aria-label="GitHub"
-        className="h-14 w-14 rounded-full"
+        className="h-14 w-14"
         target="_blank"
         rel="noopener noreferrer"
       >

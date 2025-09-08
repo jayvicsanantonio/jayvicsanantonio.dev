@@ -63,7 +63,6 @@ export function NavPill({
         href={href}
         aria-label={ariaLabel}
         className={[
-          'inline-flex items-center justify-center rounded-full',
           cyanAccent ? 'border-cyan-400/50 hover:border-cyan-300/60' : '',
           active ? 'border-cyan-400/70 hover:border-cyan-300/70' : '',
           vtClass,

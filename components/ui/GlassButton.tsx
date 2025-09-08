@@ -17,9 +17,9 @@ const GlassButton = forwardRef<HTMLAnchorElement, GlassButtonProps>(
           // Layout base: caller controls absolute pos/size
           'pointer-events-auto isolate inline-flex items-center justify-center overflow-hidden rounded-full',
           // Neutral liquid glass base (frosted, saturated)
-          'border border-white/30 bg-[linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0.12))] backdrop-blur-[16px] backdrop-saturate-[160%]',
+'glass-base',
           // Depth and transitions
-          'shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_8px_30px_rgba(0,0,0,0.22)] transition duration-200 ease-out',
+'transition duration-200 ease-out',
           // Gloss highlight that follows cursor via --mx/--my
           "before:pointer-events-none before:absolute before:inset-0 before:rounded-full before:bg-[radial-gradient(60%_40%_at_calc(50%_+_var(--mx,0)_*_10px)_calc(18%_+_var(--my,0)_*_8px),rgba(255,255,255,0.55),rgba(255,255,255,0)_70%)] before:opacity-[0.85] before:content-['']",
           // Hover polish
