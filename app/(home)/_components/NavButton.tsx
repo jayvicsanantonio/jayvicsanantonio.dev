@@ -86,7 +86,7 @@ export default function NavButton({
             heightPx={size.h}
             tooltip={tooltip}
             className={cn(
-              'inline-flex h-full w-full items-center justify-center rounded-full text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80',
+              'text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80',
               cleanedClassName,
             )}
             {...(target ? { target } : {})}
