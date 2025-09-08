@@ -7,7 +7,7 @@ This guide documents conventions and workflows to help contributors move quickly
 - Node 20+ (see .nvmrc)
 - pnpm 9+
 - TypeScript strict mode
-- ESLint + Prettier (Tailwind class sorting)
+- Biome (formatter + linter)
 
 Run locally
 
@@ -27,8 +27,7 @@ pnpm format:check
 ## Conventions
 
 - One React component per file
-  - Enforced by ESLint rule `react/no-multi-comp`
-  - Keep files focused and small; extract subcomponents into their own files
+  - Convention (keep files focused and small; extract subcomponents into their own files)
 
 - Export style
   - Next.js page/layout/route files: default export
@@ -46,7 +45,7 @@ pnpm format:check
 
 - Imports
   - Prefer `@/` alias over deep relative paths
-  - Keep import order tidy (builtins, external, internal, parent, sibling, index)
+  - Biome’s organize imports handles basic ordering; no custom grouping enforced
 
 - Props & types
   - Export prop types/interfaces next to components for reuse

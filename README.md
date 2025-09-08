@@ -110,7 +110,7 @@ public/                              # Static assets
 
 Conventions (summary)
 
-- One React component per file (enforced by ESLint)
+- One React component per file (convention; Biome lints/format where applicable)
 - Client-only components must start with "use client"
 - UI/library components: prefer named exports; Next.js page/layout files use default export
 - Use the path alias `@/` for internal imports instead of deep relative paths when possible
