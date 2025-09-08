@@ -192,14 +192,26 @@ export default function WorkTimeline() {
                 <div className="absolute top-6 hidden lg:left-1/2 lg:block lg:-translate-x-1/2">
 <span className="relative z-10 block h-2.5 w-2.5 rounded-full bg-cyan-300 shadow-[0_0_10px_3px_rgba(34,211,238,0.35)] ring-1 ring-cyan-400/60" />
                   {!prefersReducedMotion ? (
-                    <motion.span
-                      aria-hidden
-                      initial={{ scale: 1, opacity: 0.5 }}
-                      whileInView={{ scale: 2.4, opacity: 0 }}
-                      viewport={{ once: true, amount: 0.6 }}
-                      transition={{ duration: 1.8, ease: 'easeOut', delay: index * 0.12 }}
-                      className="pointer-events-none absolute top-1/2 left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full ring-2 ring-cyan-300/40"
-                    />
+                    <>
+                      {/* Primary, brighter ripple */}
+                      <motion.span
+                        aria-hidden
+                        initial={{ scale: 1, opacity: 0.65 }}
+                        whileInView={{ scale: 3.2, opacity: 0 }}
+                        viewport={{ once: true, amount: 0.6 }}
+                        transition={{ duration: 1.9, ease: 'easeOut', delay: index * 0.12 }}
+                        className="pointer-events-none absolute top-1/2 left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full ring-2 ring-cyan-300/60 shadow-[0_0_24px_2px_rgba(34,211,238,0.35)]"
+                      />
+                      {/* Secondary ripple for depth */}
+                      <motion.span
+                        aria-hidden
+                        initial={{ scale: 1, opacity: 0.45 }}
+                        whileInView={{ scale: 2.4, opacity: 0 }}
+                        viewport={{ once: true, amount: 0.6 }}
+                        transition={{ duration: 1.7, ease: 'easeOut', delay: index * 0.12 + 0.14 }}
+                        className="pointer-events-none absolute top-1/2 left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full ring-2 ring-purple-400/40"
+                      />
+                    </>
                   ) : null}
                 </div>
 
