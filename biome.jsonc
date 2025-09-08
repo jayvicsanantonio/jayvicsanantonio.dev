@@ -35,13 +35,7 @@
     }
   },
   "files": {
-    "includes": [
-      "app/**",
-      "components/**",
-      "hooks/**",
-      "lib/**",
-      "docs/**"
-    ]
+    "includes": ["app/**", "components/**", "hooks/**", "lib/**", "docs/**"]
   },
   "javascript": {
     "formatter": {
@@ -50,4 +44,3 @@
     }
   }
 }
-

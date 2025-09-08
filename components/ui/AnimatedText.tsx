@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 export interface AnimatedTextProps {
   text: string;
@@ -20,6 +20,7 @@ export default function AnimatedText({
   onComplete,
 }: AnimatedTextProps) {
   const letters = Array.from(text);
+  const letterObjs = React.useMemo(() => letters.map((ch, idx) => ({ ch, key: `${ch}-${idx}-${text.length}` })), [text, letters.length]);
 
   // Fire onComplete after the last letter finishes its transition
   useEffect(() => {
@@ -34,9 +35,9 @@ export default function AnimatedText({
       {/* Screen-reader friendly: expose the full string once, hide per-letter spans */}
       <span className="sr-only">{text}</span>
       <span aria-hidden>
-        {letters.map((ch, i) => (
+        {letterObjs.map((item, i) => (
           <span
-            key={`${ch}-${i}`}
+            key={item.key}
             style={{
               display: 'inline-block',
               willChange: 'transform, opacity, filter',
@@ -49,7 +50,7 @@ export default function AnimatedText({
               filter: start ? 'blur(0px)' : 'blur(2px)',
             }}
           >
-            {ch === ' ' ? '\u00A0' : ch}
+            {item.ch === ' ' ? '\u00A0' : item.ch}
           </span>
         ))}
       </span>

@@ -44,6 +44,7 @@ export function NavPill({
 
   return (
     <div
+      role="group"
       className="group relative inline-block"
       onMouseMove={(e) => {
         const t = e.currentTarget as HTMLElement;
@@ -93,13 +94,15 @@ export function NavPill({
             {/* Force icon cyan when active */}
             {(() => {
               if (React.isValidElement(icon)) {
-                const prevClass = (icon.props as any).className || '';
-                return React.cloneElement(icon as any, {
+                type IconProps = { className?: string; color?: string; style?: React.CSSProperties };
+                const el = icon as React.ReactElement<IconProps>;
+                const prevClass = el.props.className ?? '';
+                return React.cloneElement(el, {
                   className: [prevClass, active ? 'text-cyan-300' : ''].filter(Boolean).join(' '),
-                  color: active ? '#22d3ee' : (icon.props as any).color,
+                  color: active ? '#22d3ee' : el.props.color,
                   style: {
-                    ...(icon.props as any).style,
-                    color: active ? '#22d3ee' : (icon.props as any).style?.color,
+                    ...(el.props.style ?? {}),
+                    color: active ? '#22d3ee' : el.props.style?.color,
                   },
                 });
               }

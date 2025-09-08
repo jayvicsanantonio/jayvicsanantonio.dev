@@ -1,5 +1,6 @@
 'use client';
 
+import type React from 'react';
 import { useEffect, useRef, useState } from 'react';
 
 import AnimatedText from '@/components/ui/AnimatedText';
@@ -67,7 +68,7 @@ export default function MorphingVideo({
       style={{
         top: centerTop,
         left: '50%',
-        ['--intro-scale' as any]: String(isIntro ? (initialPill ? 0.14 : 1) : 1),
+        '--intro-scale': String(isIntro ? (initialPill ? 0.14 : 1) : 1),
         transform: 'translate(-50%, -50%) scale(var(--intro-scale))',
         width: '96vw',
         height: 'min(86svh, 86vh)',
@@ -78,8 +79,8 @@ export default function MorphingVideo({
         transition: isExpanding
           ? 'top 0.4s ease-out, transform 2s cubic-bezier(0.22, 1, 0.36, 1), border-radius 2s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.6s ease-out'
           : 'top 0.4s ease-out, border-radius 0s, background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.3s ease-out',
-        ['--bg-a' as any]: isIntro ? '0.95' : 'calc(max(0, (var(--p, 0) - 0.7) * 3) * 0.95)',
-        ['--shadow-a' as any]: isIntro ? '0.25' : 'calc(max(0, (var(--p, 0) - 0.7) * 3) * 0.25)',
+        '--bg-a': isIntro ? '0.95' : 'calc(max(0, (var(--p, 0) - 0.7) * 3) * 0.95)',
+        '--shadow-a': isIntro ? '0.25' : 'calc(max(0, (var(--p, 0) - 0.7) * 3) * 0.25)',
         backgroundColor: initialPill ? 'transparent' : 'rgba(255, 255, 255, var(--bg-a))',
         backdropFilter:
           isIntro && !initialPill
@@ -90,7 +91,7 @@ export default function MorphingVideo({
         boxShadow: initialPill ? 'none' : '0 25px 50px -12px rgba(0, 0, 0, var(--shadow-a))',
         clipPath:
           'inset(calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) round calc(24px + var(--sh, 0) * 360px))',
-      }}
+      } as (React.CSSProperties & Record<'--intro-scale' | '--bg-a' | '--shadow-a', string>)
     >
       {/* Titles */}
       <div

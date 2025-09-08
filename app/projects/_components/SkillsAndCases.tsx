@@ -39,7 +39,7 @@ export default function SkillsAndCases() {
 
   // Fixed, curated filters
   const [active, setActive] = React.useState<string>(() =>
-    initialFromQuery && SKILL_FILTERS.includes(initialFromQuery as any)
+    initialFromQuery && (SKILL_FILTERS as readonly string[]).includes(initialFromQuery)
       ? (initialFromQuery as (typeof SKILL_FILTERS)[number])
       : 'All',
   );
@@ -68,7 +68,7 @@ export default function SkillsAndCases() {
       // no-op
     }
     // Intentionally omitting searchParams from deps to avoid feedback loop
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // biome-ignore lint/correctness/useExhaustiveDependencies: avoid feedback loop with searchParams
   }, [active, pathname, router]);
 
   // CSS-first entrance animation; we keep Framer only for future interactions
@@ -92,13 +92,14 @@ export default function SkillsAndCases() {
   return (
     <div className="mt-12">
       {/* SR announcement for filter changes */}
-      <span className="sr-only" aria-live="polite" role="status">
+      <output className="sr-only" aria-live="polite">
         {announce}
-      </span>
+      </output>
       <div className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
         <div className="inline-flex gap-2 whitespace-nowrap sm:flex sm:flex-wrap">
           {SKILL_FILTERS.map((s) => (
             <button
+              type="button"
               key={s}
               onClick={() => setActive(s)}
               className={`relative inline-flex min-h-11 items-center rounded-full border px-3 py-2 text-xs backdrop-blur-md backdrop-saturate-[140%] transition-colors sm:text-sm ${

@@ -1,4 +1,4 @@
-import React from 'react';
+import type React from 'react';
 
 import { NavPill } from '@/components/ui/NavPill';
 import { cn } from '@/lib/utils';
