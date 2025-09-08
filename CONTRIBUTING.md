@@ -7,7 +7,8 @@ This guide documents conventions and workflows to help contributors move quickly
 - Node 20+ (see .nvmrc)
 - pnpm 9+
 - TypeScript strict mode
-- Biome (formatter + linter)
+- Biome (formatter + linter for JS/TS/JSON)
+- Prettier (auto-format CSS/Markdown only)
 
 Run locally
 
