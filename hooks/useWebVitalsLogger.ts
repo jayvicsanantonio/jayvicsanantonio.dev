@@ -12,7 +12,6 @@ export function useWebVitalsLogger() {
         const log = (name: string, value: number, rating?: string, id?: string) => {
           if (!active) return;
           const rounded = Math.round(value * 100) / 100;
-          // eslint-disable-next-line no-console
           console.log(`[WebVitals] ${name}: ${rounded}`, { rating, id });
         };
         onLCP(({ value, rating, id }) => log('LCP', value, rating, id));

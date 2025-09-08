@@ -191,6 +191,28 @@ export default function WorkTimeline() {
                 {/* Node on spine */}
                 <div className="absolute top-6 hidden lg:left-1/2 lg:block lg:-translate-x-1/2">
                   <span className="relative z-10 block h-2.5 w-2.5 rounded-full bg-cyan-300 shadow-[0_0_10px_3px_rgba(34,211,238,0.35)] ring-1 ring-cyan-400/60" />
+                  {!prefersReducedMotion ? (
+                    <>
+                      {/* Primary, brighter ripple */}
+                      <motion.span
+                        aria-hidden
+                        initial={{ scale: 1, opacity: 0.65 }}
+                        whileInView={{ scale: 3.2, opacity: 0 }}
+                        viewport={{ once: true, amount: 0.6 }}
+                        transition={{ duration: 1.9, ease: 'easeOut', delay: index * 0.12 }}
+                        className="pointer-events-none absolute top-1/2 left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full shadow-[0_0_24px_2px_rgba(34,211,238,0.35)] ring-2 ring-cyan-300/60"
+                      />
+                      {/* Secondary ripple for depth */}
+                      <motion.span
+                        aria-hidden
+                        initial={{ scale: 1, opacity: 0.45 }}
+                        whileInView={{ scale: 2.4, opacity: 0 }}
+                        viewport={{ once: true, amount: 0.6 }}
+                        transition={{ duration: 1.7, ease: 'easeOut', delay: index * 0.12 + 0.14 }}
+                        className="pointer-events-none absolute top-1/2 left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full ring-2 ring-purple-400/40"
+                      />
+                    </>
+                  ) : null}
                 </div>
 
                 <div
@@ -202,7 +224,7 @@ export default function WorkTimeline() {
                   {/* Card */}
                   <motion.article
                     {...(reveal as any)}
-                    className={`group cq relative w-full rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(168,85,247,0.22),rgba(34,211,238,0.2))] p-[1px] shadow-[0_8px_28px_rgba(0,0,0,0.35)] ring-1 ring-white/5 transition-transform duration-300 hover:-translate-y-0.5 sm:p-[1.2px] lg:w-[min(500px,50vw)] ${
+                    className={`group cq relative w-full transform-gpu rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(168,85,247,0.22),rgba(34,211,238,0.2))] p-[1px] shadow-[0_8px_28px_rgba(0,0,0,0.35)] ring-1 ring-white/5 transition-transform duration-300 after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl after:bg-[linear-gradient(120deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.12)_50%,rgba(255,255,255,0)_100%)] after:opacity-0 after:mix-blend-overlay after:transition-opacity after:duration-300 group-hover:after:opacity-100 focus-within:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)] focus-within:after:opacity-100 hover:-translate-y-0.5 sm:p-[1.2px] md:hover:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)] lg:w-[min(500px,50vw)] ${
                       isRight ? 'lg:mr-auto' : 'lg:ml-auto'
                     } mx-auto lg:mx-0`}
                   >
@@ -215,7 +237,9 @@ export default function WorkTimeline() {
                     {/* Inner frosted panel */}
                     <div className="relative rounded-2xl border border-white/5 bg-gray-950/70 p-5 backdrop-blur-md sm:p-6 [@container(min-width:36rem)]:p-6">
                       <div className="text-left">
-                        <h3 className="font-oswald text-xl [@container(min-width:28rem)]:text-2xl text-white">{item.title}</h3>
+                        <h3 className="font-oswald text-xl text-white [@container(min-width:28rem)]:text-2xl">
+                          {item.title}
+                        </h3>
                         <div className="mt-1 flex items-baseline justify-between gap-3">
                           <p className="text-sm tracking-[0.14em] text-gray-300/90 uppercase lg:text-base">
                             {item.company}
@@ -227,7 +251,7 @@ export default function WorkTimeline() {
                         <div className="mt-3 h-px bg-linear-to-r from-transparent via-white/5 to-transparent" />
                       </div>
 
-                      <ul className="mt-4 space-y-3 [@container(min-width:34rem)]:space-y-4 text-[0.95rem]/relaxed sm:text-[0.98rem]/relaxed">
+                      <ul className="mt-4 space-y-3 text-[0.95rem]/relaxed sm:text-[0.98rem]/relaxed [@container(min-width:34rem)]:space-y-4">
                         {item.bullets.map((b, i) => (
                           <li key={i} className="flex gap-2 break-words text-gray-300/90">
                             <Icon

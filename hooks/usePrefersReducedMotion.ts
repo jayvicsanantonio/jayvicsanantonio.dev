@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 const QUERY = '(prefers-reduced-motion: no-preference)';
 
 const getInitialState = () => {
-  // During SSR and the initial client render, default to reduced motion.
-  // This avoids hydration mismatches caused by transforms/animations.
   // The real preference is applied after mount in the effect below.
   return false;
 };
