@@ -118,7 +118,7 @@ export default function SkillsAndCases() {
           <button
             key={s}
             onClick={() => setActive(s)}
-            className={`relative inline-flex items-center rounded-full border px-3 py-1.5 text-xs backdrop-blur-md backdrop-saturate-[140%] transition-colors sm:text-sm ${
+            className={`relative inline-flex items-center rounded-full border px-3 py-2 min-h-11 text-xs backdrop-blur-md backdrop-saturate-[140%] transition-colors sm:text-sm ${
               active === s
                 ? 'border-cyan-400/60 bg-cyan-900/70 text-white shadow-[0_8px_28px_rgba(0,0,0,0.35)]'
                 : 'border-white/30 bg-[linear-gradient(180deg,rgba(255,255,255,0.10),rgba(255,255,255,0.06))] text-white/90 hover:border-white/50'
@@ -133,7 +133,7 @@ export default function SkillsAndCases() {
       {/* Projects grid */}
       <motion.div
         key={active}
-        className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3"
+        className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
         {...(!prefersReducedMotion
           ? {
               variants: containerVariants,
@@ -147,7 +147,7 @@ export default function SkillsAndCases() {
           <motion.article
             key={c.slug}
             {...(!prefersReducedMotion ? { variants: cardVariants } : {})}
-            className="group relative min-h-[430px] rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(168,85,247,0.22),rgba(34,211,238,0.2))] p-[1px] shadow-[0_8px_28px_rgba(0,0,0,0.35)] ring-1 ring-white/5"
+            className="group relative min-h-[360px] md:min-h-[430px] rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(168,85,247,0.22),rgba(34,211,238,0.2))] p-[1px] shadow-[0_8px_28px_rgba(0,0,0,0.35)] ring-1 ring-white/5"
           >
             <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-white/5 bg-gray-950/70 backdrop-blur-md">
               <Image

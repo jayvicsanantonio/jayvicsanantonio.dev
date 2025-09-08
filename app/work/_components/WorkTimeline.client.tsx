@@ -134,7 +134,7 @@ export default function WorkTimeline() {
       };
 
   return (
-    <div ref={containerRef} className="relative mt-10 sm:mt-12 lg:mt-16">
+    <div ref={containerRef} className="relative mt-8 sm:mt-12 lg:mt-16">
       {/* Flow wrapper: center 100vw wrapper so spine aligns at viewport center */}
       <div className="lg:relative lg:left-1/2 lg:w-[100vw] lg:-translate-x-1/2">
         {/* Spine track (subtle) */}
@@ -183,7 +183,7 @@ export default function WorkTimeline() {
             />
           </div>
         </div>
-        <ul className="relative space-y-12 pt-12 pl-0 sm:space-y-16 sm:pt-16 lg:space-y-28 lg:pt-24">
+        <ul className="relative space-y-8 pt-10 pl-0 sm:space-y-12 sm:pt-16 lg:space-y-28 lg:pt-24">
           {EXPERIENCES.map((item, index) => {
             const isRight = index % 2 === 0;
             return (
