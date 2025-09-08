@@ -85,6 +85,13 @@
   container-type: inline-size;
 }
 
+/* Prefer-reduced-motion helpers */
+@layer base {
+  @media (prefers-reduced-motion: reduce) {
+    .motion-safe-only { display: none !important; }
+  }
+}
+
 /* Reusable composition utilities */
 @utility glass-base {
   border: 1px solid rgba(255, 255, 255, 0.3);

@@ -53,7 +53,8 @@ export default function SkillsAndCases() {
   // Keep URL query param in sync with active filter (replace to avoid history spam)
   React.useEffect(() => {
     try {
-      const params = new URLSearchParams(searchParams?.toString());
+      const currentQS = searchParams?.toString() ?? '';
+      const params = new URLSearchParams(currentQS);
       if (active === 'All') {
         params.delete('skill');
         params.delete('filter');
@@ -61,7 +62,10 @@ export default function SkillsAndCases() {
         params.set('skill', active);
       }
       const qs = params.toString();
-      router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+      // Avoid redundant replaces that can trigger nested view transitions
+      if (qs !== currentQS) {
+        router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+      }
       setAnnounce(`Filter: ${active}`);
     } catch {
       // no-op
@@ -72,26 +76,9 @@ export default function SkillsAndCases() {
 
   const EASING = [0.22, 1, 0.36, 1] as const;
 
-  const containerVariants: Variants = {
-    hidden: {},
-    show: {
-      transition: { staggerChildren: 0.06, delayChildren: 0.02 },
-    },
-  };
+  // CSS-first entrance animation; we keep Framer only for future interactions
 
-  const cardVariants: Variants = prefersReducedMotion
-    ? {
-        hidden: { opacity: 1, y: 0 },
-        show: { opacity: 1, y: 0, transition: { duration: 0 } },
-      }
-    : {
-        hidden: { opacity: 0, y: 16 },
-        show: {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.45, ease: EASING as any },
-        },
-      };
+  // Card animation handled via CSS keyframes (animate-fade-in-up)
 
   const visible = React.useMemo(() => {
     const filtered = PROJECTS.filter((c) => active === 'All' || c.skills.includes(active));
@@ -133,23 +120,15 @@ export default function SkillsAndCases() {
       </div>
 
       {/* Projects grid */}
-      <motion.div
+      <div
         key={active}
-        className="mt-8 grid grid-cols-1 gap-6 [@container(min-width:48rem)]:grid-cols-2 md:grid-cols-2 lg:grid-cols-3"
-        {...(!prefersReducedMotion
-          ? {
-              variants: containerVariants,
-              initial: 'hidden' as const,
-              whileInView: 'show' as const,
-              viewport: { once: true, amount: 0.2 },
-            }
-          : {})}
+        className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
       >
-        {visible.map((c) => (
-          <motion.article
+        {visible.map((c, i) => (
+          <article
             key={c.slug}
-            {...(!prefersReducedMotion ? { variants: cardVariants } : {})}
-            className="group cq relative min-h-[360px] md:min-h-[430px] rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(168,85,247,0.22),rgba(34,211,238,0.2))] p-[1px] shadow-[0_8px_28px_rgba(0,0,0,0.35)] ring-1 ring-white/5"
+            className={`group cq relative min-h-[360px] md:min-h-[430px] rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(168,85,247,0.22),rgba(34,211,238,0.2))] p-[1px] shadow-[0_8px_28px_rgba(0,0,0,0.35)] ring-1 ring-white/5 transform-gpu transition-transform duration-300 hover:-translate-y-0.5 [transform-style:preserve-3d] md:hover:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)] focus-within:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)] after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl after:bg-[linear-gradient(120deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.14)_50%,rgba(255,255,255,0)_100%)] after:opacity-0 after:transition-opacity after:duration-300 after:mix-blend-overlay group-hover:after:opacity-100 focus-within:after:opacity-100 ${!prefersReducedMotion ? 'animate-fade-in-up' : ''}`}
+            style={{ animationDelay: !prefersReducedMotion ? `${80 * i}ms` : undefined }}
           >
             <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-white/5 bg-gray-950/70 backdrop-blur-md [@container(min-width:36rem)]:grid [@container(min-width:36rem)]:grid-cols-[1fr,1.5fr]">
               <Image
@@ -158,7 +137,7 @@ export default function SkillsAndCases() {
                 width={c.image.width}
                 height={c.image.height}
                 style={{ aspectRatio: c.image.ratio }}
-                className="h-36 w-full object-cover md:h-44 [@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-full"
+                className="h-36 w-full object-cover md:h-44 [@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-full transform-gpu transition-transform duration-500 ease-out [will-change:transform] md:group-hover:scale-[1.03] md:group-hover:translate-y-[-2px]"
               />
               <div className="flex flex-1 flex-col gap-3 p-5 [@container(min-width:36rem)]:p-6">
                 <div className="flex items-center justify-between gap-4">
@@ -200,9 +179,9 @@ export default function SkillsAndCases() {
                 </div>
               </div>
             </div>
-          </motion.article>
+          </article>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }

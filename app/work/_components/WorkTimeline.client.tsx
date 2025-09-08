@@ -190,7 +190,17 @@ export default function WorkTimeline() {
               <li key={`${item.title}-${item.period}`} className="relative">
                 {/* Node on spine */}
                 <div className="absolute top-6 hidden lg:left-1/2 lg:block lg:-translate-x-1/2">
-                  <span className="relative z-10 block h-2.5 w-2.5 rounded-full bg-cyan-300 shadow-[0_0_10px_3px_rgba(34,211,238,0.35)] ring-1 ring-cyan-400/60" />
+<span className="relative z-10 block h-2.5 w-2.5 rounded-full bg-cyan-300 shadow-[0_0_10px_3px_rgba(34,211,238,0.35)] ring-1 ring-cyan-400/60" />
+                  {!prefersReducedMotion ? (
+                    <motion.span
+                      aria-hidden
+                      initial={{ scale: 1, opacity: 0.5 }}
+                      whileInView={{ scale: 2.4, opacity: 0 }}
+                      viewport={{ once: true, amount: 0.6 }}
+                      transition={{ duration: 1.8, ease: 'easeOut', delay: index * 0.12 }}
+                      className="pointer-events-none absolute top-1/2 left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full ring-2 ring-cyan-300/40"
+                    />
+                  ) : null}
                 </div>
 
                 <div
@@ -202,7 +212,7 @@ export default function WorkTimeline() {
                   {/* Card */}
                   <motion.article
                     {...(reveal as any)}
-                    className={`group cq relative w-full rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(168,85,247,0.22),rgba(34,211,238,0.2))] p-[1px] shadow-[0_8px_28px_rgba(0,0,0,0.35)] ring-1 ring-white/5 transition-transform duration-300 hover:-translate-y-0.5 sm:p-[1.2px] lg:w-[min(500px,50vw)] ${
+                    className={`group cq relative w-full rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(168,85,247,0.22),rgba(34,211,238,0.2))] p-[1px] shadow-[0_8px_28px_rgba(0,0,0,0.35)] ring-1 ring-white/5 transform-gpu transition-transform duration-300 hover:-translate-y-0.5 md:hover:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)] focus-within:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)] after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl after:bg-[linear-gradient(120deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.12)_50%,rgba(255,255,255,0)_100%)] after:opacity-0 after:transition-opacity after:duration-300 after:mix-blend-overlay group-hover:after:opacity-100 focus-within:after:opacity-100 sm:p-[1.2px] lg:w-[min(500px,50vw)] ${
                       isRight ? 'lg:mr-auto' : 'lg:ml-auto'
                     } mx-auto lg:mx-0`}
                   >
