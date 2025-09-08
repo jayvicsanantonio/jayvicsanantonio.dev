@@ -10,6 +10,10 @@ const nextConfig = {
   experimental: {
     viewTransition: true,
   },
+  eslint: {
+    // Re-enable ESLint during Next build
+    ignoreDuringBuilds: false,
+  },
   images: {
     remotePatterns: [
       {

@@ -8,11 +8,11 @@ export default function WorkPage() {
       {/* Ambient background */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-x-0 top-0 h-[36vh] bg-[radial-gradient(50%_35%_at_50%_0%,rgba(34,211,238,0.18),transparent)] opacity-40" />
-<div className="motion-safe-only scroll-element absolute left-1/2 top-1/2 h-[120vw] w-[120vw] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl opacity-[0.08] [background:conic-gradient(from_0deg_at_50%_50%,rgba(168,85,247,0.45),rgba(59,130,246,0.35),rgba(34,211,238,0.30),rgba(168,85,247,0.45))] animate-spin-slow [animation-duration:22s]" />
+        <div className="motion-safe-only scroll-element animate-spin-slow absolute top-1/2 left-1/2 h-[120vw] w-[120vw] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.08] blur-3xl [animation-duration:22s] [background:conic-gradient(from_0deg_at_50%_50%,rgba(168,85,247,0.45),rgba(59,130,246,0.35),rgba(34,211,238,0.30),rgba(168,85,247,0.45))]" />
       </div>
-      <div className="container cq pt-40 sm:pt-52 pb-16">
+      <div className="cq container pt-40 pb-16 sm:pt-52">
         {/* Intro */}
-        <div className="space-y-5 animate-fade-in-up">
+        <div className="animate-fade-in-up space-y-5">
           <h1 className="font-oswald text-3xl font-bold tracking-tight text-cyan-300/90 sm:text-4xl lg:text-6xl">
             A Timeline of Crafting Impact
           </h1>

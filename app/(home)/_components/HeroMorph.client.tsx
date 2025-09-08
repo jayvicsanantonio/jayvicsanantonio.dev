@@ -50,7 +50,7 @@ export default function HeroMorph() {
   return (
     <div
       ref={containerRef}
-      className="relative overflow-x-hidden bg-black [--nav-row-w:calc(3.5rem*4+0.75rem*3)] [--pill-h:54px] sm:[--nav-row-w:20vw] md:[--nav-row-w:24vw] sm:[--pill-h:8vh]"
+      className="relative overflow-x-hidden bg-black [--nav-row-w:calc(3.5rem*4+0.75rem*3)] [--pill-h:54px] sm:[--nav-row-w:20vw] sm:[--pill-h:8vh] md:[--nav-row-w:24vw]"
     >
       <MorphingVideo
         centerTop={CFG.nav.centerTop}
