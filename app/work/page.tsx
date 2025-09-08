@@ -5,7 +5,7 @@ import WorkTimeline from './_components/WorkTimeline.client';
 export default function WorkPage() {
   return (
     <section className="relative w-full">
-      <div className="container pt-52 pb-16">
+      <div className="container cq pt-40 sm:pt-52 pb-16">
         {/* Intro */}
         <div className="space-y-5">
           <h1 className="font-oswald text-3xl font-bold tracking-tight text-cyan-300/90 sm:text-4xl lg:text-6xl">

@@ -113,8 +113,9 @@ export default function SkillsAndCases() {
       <span className="sr-only" aria-live="polite" role="status">
         {announce}
       </span>
-      <div className="flex flex-wrap gap-2">
-        {SKILL_FILTERS.map((s) => (
+      <div className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
+        <div className="inline-flex gap-2 whitespace-nowrap sm:flex sm:flex-wrap">
+          {SKILL_FILTERS.map((s) => (
           <button
             key={s}
             onClick={() => setActive(s)}
@@ -128,12 +129,13 @@ export default function SkillsAndCases() {
             {s}
           </button>
         ))}
+        </div>
       </div>
 
       {/* Projects grid */}
       <motion.div
         key={active}
-        className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+        className="mt-8 grid grid-cols-1 gap-6 [@container(min-width:48rem)]:grid-cols-2 md:grid-cols-2 lg:grid-cols-3"
         {...(!prefersReducedMotion
           ? {
               variants: containerVariants,
@@ -147,25 +149,25 @@ export default function SkillsAndCases() {
           <motion.article
             key={c.slug}
             {...(!prefersReducedMotion ? { variants: cardVariants } : {})}
-            className="group relative min-h-[360px] md:min-h-[430px] rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(168,85,247,0.22),rgba(34,211,238,0.2))] p-[1px] shadow-[0_8px_28px_rgba(0,0,0,0.35)] ring-1 ring-white/5"
+            className="group cq relative min-h-[360px] md:min-h-[430px] rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(168,85,247,0.22),rgba(34,211,238,0.2))] p-[1px] shadow-[0_8px_28px_rgba(0,0,0,0.35)] ring-1 ring-white/5"
           >
-            <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-white/5 bg-gray-950/70 backdrop-blur-md">
+            <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-white/5 bg-gray-950/70 backdrop-blur-md [@container(min-width:36rem)]:grid [@container(min-width:36rem)]:grid-cols-[1fr,1.5fr]">
               <Image
                 src={c.image.src}
                 alt={c.image.alt}
                 width={c.image.width}
                 height={c.image.height}
                 style={{ aspectRatio: c.image.ratio }}
-                className="h-40 w-full object-cover md:h-44"
+                className="h-36 w-full object-cover md:h-44 [@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-full"
               />
-              <div className="flex flex-1 flex-col gap-3 p-5">
+              <div className="flex flex-1 flex-col gap-3 p-5 [@container(min-width:36rem)]:p-6">
                 <div className="flex items-center justify-between gap-4">
                   <h3 className="font-oswald text-xl text-white">{c.title}</h3>
                   <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] font-medium tracking-[0.12em] whitespace-nowrap text-gray-300 uppercase">
                     {c.period}
                   </span>
                 </div>
-                <p className="flex-1 overflow-hidden text-[0.98rem]/relaxed text-gray-300/90">
+                <p className="flex-1 overflow-hidden text-[0.98rem]/relaxed text-gray-300/90 hyphenate">
                   {c.blurb}
                 </p>
 
