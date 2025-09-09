@@ -93,8 +93,8 @@ export default function SkillsAndCases() {
       <output className="sr-only" aria-live="polite">
         {announce}
       </output>
-      <div className="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0">
-        <div className="inline-flex gap-2 whitespace-nowrap sm:flex sm:flex-wrap">
+      <div>
+        <div className="flex flex-wrap gap-2">
           {SKILL_FILTERS.map((s) => (
             <button
               type="button"
