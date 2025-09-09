@@ -48,9 +48,9 @@ export default function SkillsAndCases() {
   const [announce, setAnnounce] = React.useState<string>('');
 
   // Keep URL query param in sync with active filter (replace to avoid history spam)
+  const currentQS = React.useMemo(() => searchParams?.toString() ?? '', [searchParams]);
   React.useEffect(() => {
     try {
-      const currentQS = searchParams?.toString() ?? '';
       const params = new URLSearchParams(currentQS);
       if (active === 'All') {
         params.delete('skill');
@@ -67,9 +67,7 @@ export default function SkillsAndCases() {
     } catch {
       // no-op
     }
-    // Intentionally omitting searchParams from deps to avoid feedback loop
-    // biome-ignore lint/correctness/useExhaustiveDependencies: avoid feedback loop with searchParams
-  }, [active, pathname, router]);
+  }, [active, pathname, router, currentQS]);
 
   // CSS-first entrance animation; we keep Framer only for future interactions
 

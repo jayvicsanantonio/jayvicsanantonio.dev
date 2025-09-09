@@ -19,16 +19,19 @@ export default function AnimatedText({
   className,
   onComplete,
 }: AnimatedTextProps) {
-  const letters = Array.from(text);
-  const letterObjs = React.useMemo(() => letters.map((ch, idx) => ({ ch, key: `${ch}-${idx}-${text.length}` })), [text, letters.length]);
+  const letterObjs = React.useMemo(
+    () => Array.from(text).map((ch, idx) => ({ ch, key: `${ch}-${idx}-${text.length}` })),
+    [text],
+  );
 
   // Fire onComplete after the last letter finishes its transition
   useEffect(() => {
     if (!start) return;
-    const total = baseDelay + (letters.length - 1) * perCharDelay + 500; // 500ms ~ transition duration
+    const charCount = Array.from(text).length;
+    const total = baseDelay + (charCount - 1) * perCharDelay + 500; // 500ms ~ transition duration
     const t = window.setTimeout(() => onComplete?.(), total);
     return () => window.clearTimeout(t);
-  }, [start, baseDelay, perCharDelay, letters.length, onComplete]);
+  }, [start, baseDelay, perCharDelay, text, onComplete]);
 
   return (
     <span className={className} style={{ display: 'inline-block', whiteSpace: 'pre' }}>

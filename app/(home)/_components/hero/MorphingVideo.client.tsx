@@ -62,36 +62,40 @@ export default function MorphingVideo({
     }
   }, [shouldPlayVideo]);
 
+  type CSSVars = React.CSSProperties & Record<'--intro-scale' | '--bg-a' | '--shadow-a', string>;
+
+  const containerStyle: CSSVars = {
+    top: centerTop,
+    left: '50%',
+    '--intro-scale': String(isIntro ? (initialPill ? 0.14 : 1) : 1),
+    transform: 'translate(-50%, -50%) scale(var(--intro-scale))',
+    width: '96vw',
+    height: 'min(86svh, 86vh)',
+    borderRadius: containerRadius,
+    border: 'none',
+    willChange: isExpanding ? 'transform, opacity, filter, clip-path' : undefined,
+    transformOrigin: '50% 50%',
+    transition: isExpanding
+      ? 'top 0.4s ease-out, transform 2s cubic-bezier(0.22, 1, 0.36, 1), border-radius 2s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.6s ease-out'
+      : 'top 0.4s ease-out, border-radius 0s, background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.3s ease-out',
+    '--bg-a': isIntro ? '0.95' : 'calc(max(0, (var(--p, 0) - 0.7) * 3) * 0.95)',
+    '--shadow-a': isIntro ? '0.25' : 'calc(max(0, (var(--p, 0) - 0.7) * 3) * 0.25)',
+    backgroundColor: initialPill ? 'transparent' : 'rgba(255, 255, 255, var(--bg-a))',
+    backdropFilter:
+      isIntro && !initialPill
+        ? 'blur(20px)'
+        : isIntro
+          ? 'blur(0px)'
+          : 'blur(calc(max(0, (var(--p, 0) - 0.7) * 3) * 20px))',
+    boxShadow: initialPill ? 'none' : '0 25px 50px -12px rgba(0, 0, 0, var(--shadow-a))',
+    clipPath:
+      'inset(calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) round calc(24px + var(--sh, 0) * 360px))',
+  };
+
   return (
     <div
       className="fixed z-30 flex items-center justify-center overflow-hidden"
-      style={{
-        top: centerTop,
-        left: '50%',
-        '--intro-scale': String(isIntro ? (initialPill ? 0.14 : 1) : 1),
-        transform: 'translate(-50%, -50%) scale(var(--intro-scale))',
-        width: '96vw',
-        height: 'min(86svh, 86vh)',
-        borderRadius: containerRadius,
-        border: 'none',
-        willChange: isExpanding ? 'transform, opacity, filter, clip-path' : undefined,
-        transformOrigin: '50% 50%',
-        transition: isExpanding
-          ? 'top 0.4s ease-out, transform 2s cubic-bezier(0.22, 1, 0.36, 1), border-radius 2s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.6s ease-out'
-          : 'top 0.4s ease-out, border-radius 0s, background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.3s ease-out',
-        '--bg-a': isIntro ? '0.95' : 'calc(max(0, (var(--p, 0) - 0.7) * 3) * 0.95)',
-        '--shadow-a': isIntro ? '0.25' : 'calc(max(0, (var(--p, 0) - 0.7) * 3) * 0.25)',
-        backgroundColor: initialPill ? 'transparent' : 'rgba(255, 255, 255, var(--bg-a))',
-        backdropFilter:
-          isIntro && !initialPill
-            ? 'blur(20px)'
-            : isIntro
-              ? 'blur(0px)'
-              : 'blur(calc(max(0, (var(--p, 0) - 0.7) * 3) * 20px))',
-        boxShadow: initialPill ? 'none' : '0 25px 50px -12px rgba(0, 0, 0, var(--shadow-a))',
-        clipPath:
-          'inset(calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) round calc(24px + var(--sh, 0) * 360px))',
-      } as (React.CSSProperties & Record<'--intro-scale' | '--bg-a' | '--shadow-a', string>)
+      style={containerStyle}
     >
       {/* Titles */}
       <div

@@ -33,7 +33,7 @@ export default function NavButton({
       : `calc(50% + ((96vw - 2 * var(--closeMaxX)) / 2) + ${offsetPx}px)`;
 
   return (
-    <div
+    <fieldset
       className="group pointer-events-auto absolute"
       style={{
         width: `${size.w}px`,
@@ -46,11 +46,11 @@ export default function NavButton({
         opacity: 'var(--ui, 0)',
         willChange: 'transform',
       }}
-      onMouseMove={(e) => {
-        const t = e.currentTarget as HTMLElement;
+      onMouseMove={(_e) => {
+        const t = _e.currentTarget as HTMLElement;
         const r = t.getBoundingClientRect();
-        const mx = ((e.clientX - r.left) / r.width - 0.5) * 2;
-        const my = ((e.clientY - r.top) / r.height - 0.5) * 2;
+        const mx = ((_e.clientX - r.left) / r.width - 0.5) * 2;
+        const my = ((_e.clientY - r.top) / r.height - 0.5) * 2;
         t.style.setProperty('--mx', String(mx));
         t.style.setProperty('--my', String(my));
       }}
@@ -94,6 +94,6 @@ export default function NavButton({
           />
         );
       })()}
-    </div>
+    </fieldset>
   );
 }
