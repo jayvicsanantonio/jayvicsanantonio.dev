@@ -10,21 +10,20 @@
     "build": "next build",
     "start": "next start",
     "prebuild": "pnpm check && pnpm type-check",
-
     "check": "pnpm run check:code && pnpm run check:content",
     "check:code": "biome check .",
     "check:content": "prettier --check \"**/*.{css,md,mdx}\"",
-
     "fix": "pnpm run fix:code && pnpm run fix:content",
     "fix:code": "biome check --write .",
     "fix:content": "prettier --write \"**/*.{css,md,mdx}\"",
-
     "format": "pnpm run format:code && pnpm run format:content",
     "format:code": "biome format --write .",
     "format:content": "prettier --write \"**/*.{css,md,mdx}\"",
-
     "type-check": "tsc --noEmit",
-    "analyze": "ANALYZE=true pnpm build"
+    "analyze": "ANALYZE=true pnpm build",
+    "lh:prepare": "mkdir -p .lighthouse",
+    "lh:all": "pnpm lh:prepare && pnpm dlx lighthouse http://localhost:3000 --preset=desktop --output=html --quiet --output-path=.lighthouse/home.desktop.html && pnpm dlx lighthouse http://localhost:3000/projects --preset=desktop --output=html --quiet --output-path=.lighthouse/projects.desktop.html && pnpm dlx lighthouse http://localhost:3000/work --preset=desktop --output=html --quiet --output-path=.lighthouse/work.desktop.html",
+    "lhci": "lhci autorun"
   },
   "dependencies": {
     "@iconify/react": "^4.1.1",
