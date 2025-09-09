@@ -56,7 +56,7 @@ export default function GlassHeaderBubble({
               tooltipPlacement="below"
               collapsedPx={'clamp(56px,11vw,84px)'}
               heightPx={'clamp(48px,9.5vw,72px)'}
-              className="bg-white/20 backdrop-blur-[24px] backdrop-saturate-200 border-white/55 hover:border-white/60"
+              className="bg-white/10 backdrop-blur-[24px] backdrop-saturate-200 border-white/55 hover:border-white/60"
             />
           </span>
 
