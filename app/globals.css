@@ -369,3 +369,13 @@
     @apply bg-background text-foreground overflow-x-hidden antialiased;
   }
 }
+
+/* View Transitions tags: map vt-tag-* classes to view-transition-name */
+@layer base {
+  .vt-tag-projects {
+    view-transition-name: projects;
+  }
+  .vt-tag-work {
+    view-transition-name: work;
+  }
+}
