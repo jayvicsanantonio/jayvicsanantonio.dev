@@ -43,7 +43,7 @@ export function NavPill({
   const linkProps = external ? { target: '_blank', rel: 'noopener noreferrer' as const } : {};
 
   return (
-    <div
+    <fieldset
       className="group relative inline-block"
       onMouseMove={(e) => {
         const t = e.currentTarget as HTMLElement;
@@ -93,13 +93,18 @@ export function NavPill({
             {/* Force icon cyan when active */}
             {(() => {
               if (React.isValidElement(icon)) {
-                const prevClass = (icon.props as any).className || '';
-                return React.cloneElement(icon as any, {
+                type IconProps = {
+                  className?: string;
+                  color?: string;
+                  style?: React.CSSProperties;
+                };
+                const el = icon as React.ReactElement<IconProps>;
+                const prevClass = el.props.className ?? '';
+                return React.cloneElement(el, {
                   className: [prevClass, active ? 'text-cyan-300' : ''].filter(Boolean).join(' '),
-                  color: active ? '#22d3ee' : (icon.props as any).color,
                   style: {
-                    ...(icon.props as any).style,
-                    color: active ? '#22d3ee' : (icon.props as any).style?.color,
+                    ...(el.props.style ?? {}),
+                    color: active ? '#22d3ee' : el.props.style?.color,
                   },
                 });
               }
@@ -130,6 +135,6 @@ export function NavPill({
           className="pointer-events-none absolute top-[calc(100%+6px)] left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-cyan-300 shadow-[0_0_8px_rgba(34,211,238,0.65)]"
         />
       ) : null}
-    </div>
+    </fieldset>
   );
 }

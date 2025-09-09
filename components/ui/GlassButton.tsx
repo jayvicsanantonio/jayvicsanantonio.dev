@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import React, { forwardRef } from 'react';
+import type React from 'react';
+import { forwardRef } from 'react';
 
 import { cn } from '@/lib/utils';
 

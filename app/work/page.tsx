@@ -1,5 +1,3 @@
-import React from 'react';
-
 import WorkTimeline from './_components/WorkTimeline.client';
 
 export default function WorkPage() {

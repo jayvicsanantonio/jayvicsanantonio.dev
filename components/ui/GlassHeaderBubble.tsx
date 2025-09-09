@@ -3,7 +3,6 @@
 import { Icon } from '@iconify/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React from 'react';
 
 import { NavPill } from '@/components/ui/NavPill';
 export type GlassHeaderBubbleProps = {

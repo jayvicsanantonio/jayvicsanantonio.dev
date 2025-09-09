@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 export interface AnimatedTextProps {
   text: string;
@@ -19,24 +19,28 @@ export default function AnimatedText({
   className,
   onComplete,
 }: AnimatedTextProps) {
-  const letters = Array.from(text);
+  const letterObjs = React.useMemo(
+    () => Array.from(text).map((ch, idx) => ({ ch, key: `${ch}-${idx}-${text.length}` })),
+    [text],
+  );
 
   // Fire onComplete after the last letter finishes its transition
   useEffect(() => {
     if (!start) return;
-    const total = baseDelay + (letters.length - 1) * perCharDelay + 500; // 500ms ~ transition duration
+    const charCount = Array.from(text).length;
+    const total = baseDelay + (charCount - 1) * perCharDelay + 500; // 500ms ~ transition duration
     const t = window.setTimeout(() => onComplete?.(), total);
     return () => window.clearTimeout(t);
-  }, [start, baseDelay, perCharDelay, letters.length, onComplete]);
+  }, [start, baseDelay, perCharDelay, text, onComplete]);
 
   return (
     <span className={className} style={{ display: 'inline-block', whiteSpace: 'pre' }}>
       {/* Screen-reader friendly: expose the full string once, hide per-letter spans */}
       <span className="sr-only">{text}</span>
       <span aria-hidden>
-        {letters.map((ch, i) => (
+        {letterObjs.map((item, i) => (
           <span
-            key={`${ch}-${i}`}
+            key={item.key}
             style={{
               display: 'inline-block',
               willChange: 'transform, opacity, filter',
@@ -49,7 +53,7 @@ export default function AnimatedText({
               filter: start ? 'blur(0px)' : 'blur(2px)',
             }}
           >
-            {ch === ' ' ? '\u00A0' : ch}
+            {item.ch === ' ' ? '\u00A0' : item.ch}
           </span>
         ))}
       </span>

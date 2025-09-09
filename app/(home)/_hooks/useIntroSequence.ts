@@ -40,7 +40,11 @@ export function useIntroSequence(cfg: { timings: IntroTimings }) {
     timers.push(window.setTimeout(() => setShowTitleGroup(true), cfg.timings.reveal.title));
     timers.push(window.setTimeout(() => setShowDesc(true), cfg.timings.reveal.desc));
 
-    return () => timers.forEach((t) => window.clearTimeout(t));
+    return () => {
+      timers.forEach((t) => {
+        window.clearTimeout(t);
+      });
+    };
   }, [cfg.timings]);
 
   // Allow video play a little after expansion finishes

@@ -55,9 +55,7 @@ export default function CursorGlow() {
       pointerFine.addEventListener('change', onChange);
     } else {
       // Safari fallback
-      // @ts-ignore
       prefersReduced.addListener(onChange);
-      // @ts-ignore
       pointerFine.addListener(onChange);
     }
 
@@ -67,9 +65,7 @@ export default function CursorGlow() {
         prefersReduced.removeEventListener('change', onChange);
         pointerFine.removeEventListener('change', onChange);
       } else {
-        // @ts-ignore
         prefersReduced.removeListener(onChange);
-        // @ts-ignore
         pointerFine.removeListener(onChange);
       }
       if (raf) cancelAnimationFrame(raf);
