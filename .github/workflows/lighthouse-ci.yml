@@ -36,9 +36,6 @@ jobs:
           cat > .env.production << 'EOF'
           SENTRY_DSN=${{ secrets.SENTRY_DSN || 'https://example.com' }}
           NEXT_PUBLIC_SENTRY_DSN=${{ secrets.NEXT_PUBLIC_SENTRY_DSN || 'https://example.com' }}
-          RESEND_API_KEY=${{ secrets.RESEND_API_KEY || 'test_api_key' }}
-          RESEND_FROM_EMAIL=${{ secrets.RESEND_FROM_EMAIL || 'from@example.com' }}
-          RESEND_TO_EMAIL=${{ secrets.RESEND_TO_EMAIL || 'to@example.com' }}
           EOF
 
       - name: Build

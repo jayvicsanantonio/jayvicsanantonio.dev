@@ -124,9 +124,6 @@ Create a `.env.local` with the following variables (see env.ts for schema):
 
 - SENTRY_DSN
 - NEXT_PUBLIC_SENTRY_DSN
-- RESEND_API_KEY
-- RESEND_FROM_EMAIL
-- RESEND_TO_EMAIL
 
 ## CI
 
