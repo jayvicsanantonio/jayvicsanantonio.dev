@@ -1,6 +1,5 @@
+import Link from 'next/link';
 import type React from 'react';
-
-import { GlassButton } from '@/components/ui/GlassButton';
 
 export default function ProjectLink({
   href,
@@ -12,22 +11,26 @@ export default function ProjectLink({
   const isExternal =
     href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:');
 
+  const cls = [
+    'inline-flex h-9 gap-2 px-3 text-sm items-center justify-center rounded-full isolate overflow-hidden',
+    // Pure Tailwind glass approximation
+    'border border-white/30 bg-white/15 backdrop-blur-lg backdrop-saturate-150 shadow-lg',
+    // Interaction states
+    'transition ease-out duration-200 hover:border-white/50 hover:shadow-xl',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40',
+  ].join(' ');
+
   if (isExternal) {
     return (
-      <GlassButton
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="h-9 gap-2 px-3 text-sm"
-      >
+      <Link href={href} target="_blank" rel="noopener noreferrer" className={cls}>
         {children}
-      </GlassButton>
+      </Link>
     );
   }
 
   return (
-    <GlassButton href={href} className="h-9 gap-2 px-3 text-sm" prefetch>
+    <Link href={href} className={cls} prefetch>
       {children}
-    </GlassButton>
+    </Link>
   );
 }
