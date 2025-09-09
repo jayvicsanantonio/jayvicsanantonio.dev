@@ -32,55 +32,113 @@ export default function GlassHeaderBubble({
   return (
     <div className={`relative inline-flex items-center ${_vtClassName ?? ''}`}>
       {/* Inline nav buttons - order: LinkedIn, Projects, Home, Work, GitHub */}
-      <nav aria-label="Header navigation" className="flex flex-wrap items-center gap-1 sm:gap-2">
-        {/* LinkedIn (left) */}
-        <NavPill
-          href="https://www.linkedin.com/in/jayvicsanantonio/"
-          ariaLabel="LinkedIn"
-          icon={
-            <Icon
-              icon="mdi:linkedin"
-              className="h-[clamp(24px,6vw,36px)] w-[clamp(24px,6vw,36px)]"
-              aria-hidden="true"
+      {/* On small screens, the greeting pill sits on its own row above the icon row */}
+      <nav
+        aria-label="Header navigation"
+        className="inline-grid w-fit grid-cols-1 justify-items-center gap-2 sm:flex sm:w-auto sm:items-center sm:gap-2"
+      >
+        {/* Icon row (mobile): becomes contents on sm+ so items flow inline around greeting */}
+        <div className="order-2 flex items-center gap-2 sm:order-none sm:contents">
+          {/* LinkedIn (left) */}
+          <span className="sm:order-1">
+            <NavPill
+              href="https://www.linkedin.com/in/jayvicsanantonio/"
+              ariaLabel="LinkedIn"
+              icon={
+                <Icon
+                  icon="mdi:linkedin"
+                  className="h-[clamp(24px,6vw,36px)] w-[clamp(24px,6vw,36px)]"
+                  aria-hidden="true"
+                />
+              }
+              external
+              tooltip="LinkedIn"
+              tooltipPlacement="below"
+              collapsedPx={'clamp(56px,11vw,84px)'}
+              heightPx={'clamp(48px,9.5vw,72px)'}
+              className="bg-white/20 backdrop-blur-[24px] backdrop-saturate-200 border-white/55 hover:border-white/60"
             />
-          }
-          external
-          tooltip="LinkedIn"
-          tooltipPlacement="below"
-          collapsedPx={'clamp(56px,11vw,84px)'}
-          heightPx={'clamp(48px,9.5vw,72px)'}
-          className="bg-white/20 backdrop-blur-[24px] backdrop-saturate-200 border-white/55 hover:border-white/60"
-        />
+          </span>
 
-        {/* Projects (left) */}
-        <NavPill
-          href="/projects"
-          ariaLabel="Projects"
-          icon={
-            <Icon
-              icon="mdi:application-brackets"
-              className="h-[clamp(24px,6vw,36px)] w-[clamp(24px,6vw,36px)] font-bold"
-              aria-hidden="true"
+          {/* Projects (left) */}
+          <span className="sm:order-2">
+            <NavPill
+              href="/projects"
+              ariaLabel="Projects"
+              icon={
+                <Icon
+                  icon="mdi:application-brackets"
+                  className="h-[clamp(24px,6vw,36px)] w-[clamp(24px,6vw,36px)] font-bold"
+                  aria-hidden="true"
+                />
+              }
+              label="Projects"
+              active={isProjects}
+              {...(isProjects ? { vtTagName: 'projects' } : {})}
+              {...(!isProjects ? { tooltip: 'Projects', tooltipPlacement: 'below' as const } : {})}
+              collapsedPx={'clamp(56px,11vw,84px)'}
+              expandedPx={'clamp(120px,40vw,180px)'}
+              heightPx={'clamp(48px,9.5vw,72px)'}
+              className={[
+                'bg-white/20 backdrop-blur-[24px] backdrop-saturate-200',
+                !isProjects ? 'border-white/55 hover:border-white/60' : '',
+              ].join(' ')}
             />
-          }
-          label="Projects"
-          active={isProjects}
-          {...(isProjects ? { vtTagName: 'projects' } : {})}
-          {...(!isProjects ? { tooltip: 'Projects', tooltipPlacement: 'below' as const } : {})}
-          collapsedPx={'clamp(56px,11vw,84px)'}
-          expandedPx={'clamp(120px,40vw,180px)'}
-          heightPx={'clamp(48px,9.5vw,72px)'}
-          className={[
-            'bg-white/20 backdrop-blur-[24px] backdrop-saturate-200',
-            !isProjects ? 'border-white/55 hover:border-white/60' : '',
-          ].join(' ')}
-        />
+          </span>
+
+          {/* Work (right) */}
+          <span className="sm:order-4">
+            <NavPill
+              href="/work"
+              ariaLabel="Work"
+              icon={
+                <Icon
+                  icon="mdi:timeline-text"
+                  className="h-[clamp(24px,6vw,36px)] w-[clamp(24px,6vw,36px)]"
+                  aria-hidden="true"
+                />
+              }
+              label="Work"
+              active={isWork}
+              {...(isWork ? { vtTagName: 'work' } : {})}
+              {...(!isWork ? { tooltip: 'Work', tooltipPlacement: 'below' as const } : {})}
+              collapsedPx={'clamp(56px,11vw,84px)'}
+              expandedPx={'clamp(104px,34vw,160px)'}
+              heightPx={'clamp(48px,9.5vw,72px)'}
+              className={[
+                'bg-white/20 backdrop-blur-[24px] backdrop-saturate-200',
+                !isWork ? 'border-white/55 hover:border-white/60' : '',
+              ].join(' ')}
+            />
+          </span>
+
+          {/* GitHub (right) */}
+          <span className="sm:order-5">
+            <NavPill
+              href="https://github.com/jayvicsanantonio"
+              ariaLabel="GitHub"
+              icon={
+                <Icon
+                  icon="mdi:github"
+                  className="h-[clamp(24px,6vw,36px)] w-[clamp(24px,6vw,36px)]"
+                  aria-hidden="true"
+                />
+              }
+              external
+              tooltip="GitHub"
+              tooltipPlacement="below"
+              collapsedPx={'clamp(56px,11vw,84px)'}
+              heightPx={'clamp(48px,9.5vw,72px)'}
+              className="bg-white/20 backdrop-blur-[24px] backdrop-saturate-200 border-white/55 hover:border-white/60"
+            />
+          </span>
+        </div>
 
         {/* Home (middle): greeting pill (solid) */}
         <Link
           href="/"
           aria-label="Home"
-          className="pointer-events-auto inline-flex h-[clamp(48px,9.5vw,72px)] items-center justify-center rounded-full bg-cyan-900 px-5 font-semibold text-white shadow-[0_10px_24px_rgba(0,0,0,0.25)] transition-colors hover:bg-cyan-800 sm:px-6 md:px-20"
+          className="pointer-events-auto order-1 inline-flex h-[clamp(48px,9.5vw,72px)] items-center justify-center rounded-full bg-cyan-900 px-5 font-semibold text-white shadow-[0_10px_24px_rgba(0,0,0,0.25)] transition-colors hover:bg-cyan-800 w-full sm:order-3 sm:w-auto sm:px-6 md:px-20"
           onClick={(e) => {
             e.preventDefault();
             // Force a full reload to ensure the homepage remounts and animations restart
@@ -89,49 +147,6 @@ export default function GlassHeaderBubble({
         >
           <span className="text-[clamp(14px,2.2vw,22px)]">Hi, I’m Jayvic 👋</span>
         </Link>
-
-        {/* Work (right) */}
-        <NavPill
-          href="/work"
-          ariaLabel="Work"
-          icon={
-            <Icon
-              icon="mdi:timeline-text"
-              className="h-[clamp(24px,6vw,36px)] w-[clamp(24px,6vw,36px)]"
-              aria-hidden="true"
-            />
-          }
-          label="Work"
-          active={isWork}
-          {...(isWork ? { vtTagName: 'work' } : {})}
-          {...(!isWork ? { tooltip: 'Work', tooltipPlacement: 'below' as const } : {})}
-          collapsedPx={'clamp(56px,11vw,84px)'}
-          expandedPx={'clamp(104px,34vw,160px)'}
-          heightPx={'clamp(48px,9.5vw,72px)'}
-          className={[
-            'bg-white/20 backdrop-blur-[24px] backdrop-saturate-200',
-            !isWork ? 'border-white/55 hover:border-white/60' : '',
-          ].join(' ')}
-        />
-
-        {/* GitHub (right) */}
-        <NavPill
-          href="https://github.com/jayvicsanantonio"
-          ariaLabel="GitHub"
-          icon={
-            <Icon
-              icon="mdi:github"
-              className="h-[clamp(24px,6vw,36px)] w-[clamp(24px,6vw,36px)]"
-              aria-hidden="true"
-            />
-          }
-          external
-          tooltip="GitHub"
-          tooltipPlacement="below"
-          collapsedPx={'clamp(56px,11vw,84px)'}
-          heightPx={'clamp(48px,9.5vw,72px)'}
-          className="bg-white/20 backdrop-blur-[24px] backdrop-saturate-200 border-white/55 hover:border-white/60"
-        />
       </nav>
     </div>
   );
