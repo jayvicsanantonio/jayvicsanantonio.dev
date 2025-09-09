@@ -73,6 +73,8 @@ export function NavPill({
           height: heightPx,
           transition: 'width 200ms ease-out',
           willChange: 'width',
+          WebkitBackdropFilter: 'blur(24px) saturate(200%)',
+          backdropFilter: 'blur(24px) saturate(200%)',
         }}
         aria-current={active ? 'page' : undefined}
         {...linkProps}

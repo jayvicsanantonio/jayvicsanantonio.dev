@@ -369,3 +369,52 @@
     @apply bg-background text-foreground overflow-x-hidden antialiased;
   }
 }
+
+/* View Transitions tags: map vt-tag-* classes to view-transition-name */
+@layer base {
+  .vt-tag-projects {
+    view-transition-name: projects;
+  }
+  .vt-tag-work {
+    view-transition-name: work;
+  }
+  .vt-tag-top-bubble {
+    view-transition-name: top-bubble;
+  }
+}
+
+/* View Transition timing and layering */
+@layer base {
+  @media (prefers-reduced-motion: no-preference) {
+    /* Container morph: slightly longer and delayed for nicer staging */
+    ::view-transition-image-pair(top-bubble) {
+      animation-duration: 440ms;
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+      animation-delay: 80ms;
+    }
+    /* Ensure the header bubble transition appears above other transitions */
+    ::view-transition-group(top-bubble) {
+      z-index: 50;
+    }
+
+    /* Active pill morphs (projects/work): snappier */
+    /* biome-ignore lint/correctness/noUnknownTypeSelector: view-transition named targets are valid */
+    ::view-transition-image-pair(projects),
+    /* biome-ignore lint/correctness/noUnknownTypeSelector: view-transition named targets are valid */
+      ::view-transition-image-pair(work) {
+      animation-duration: 300ms;
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-image-pair(top-bubble),
+    /* biome-ignore lint/correctness/noUnknownTypeSelector: view-transition named targets are valid */
+      ::view-transition-image-pair(projects),
+    /* biome-ignore lint/correctness/noUnknownTypeSelector: view-transition named targets are valid */
+      ::view-transition-image-pair(work) {
+      animation-duration: 0.01ms;
+    }
+  }
+}

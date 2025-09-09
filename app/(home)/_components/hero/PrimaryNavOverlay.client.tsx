@@ -18,8 +18,8 @@ export default function PrimaryNavOverlay({
   buttonSize,
 }: PrimaryNavOverlayProps) {
   return (
-    <div className="pointer-events-none fixed inset-0 z-50 hidden sm:contents">
-      <nav aria-label="Primary" className="hidden sm:contents">
+    <div className="pointer-events-none fixed inset-0 z-[70] hidden sm:block">
+      <nav aria-label="Primary" className="hidden sm:block">
         <ul className="contents">
           <li className="contents">
             <NavButton

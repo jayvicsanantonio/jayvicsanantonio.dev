@@ -30,7 +30,7 @@ export default function GlassHeaderBubble({
   // Delay the active pill expansion slightly to echo the main bubble
 
   return (
-    <div className="relative inline-flex items-center">
+    <div className={`relative inline-flex items-center ${_vtClassName ?? ''}`}>
       {/* Inline nav buttons - order: LinkedIn, Projects, Home, Work, GitHub */}
       <nav aria-label="Header navigation" className="flex flex-wrap items-center gap-1 sm:gap-2">
         {/* LinkedIn (left) */}
@@ -49,6 +49,7 @@ export default function GlassHeaderBubble({
           tooltipPlacement="below"
           collapsedPx={'clamp(56px,11vw,84px)'}
           heightPx={'clamp(48px,9.5vw,72px)'}
+          className="bg-white/20 backdrop-blur-[24px] backdrop-saturate-200 border-white/55 hover:border-white/60"
         />
 
         {/* Projects (left) */}
@@ -69,6 +70,10 @@ export default function GlassHeaderBubble({
           collapsedPx={'clamp(56px,11vw,84px)'}
           expandedPx={'clamp(120px,40vw,180px)'}
           heightPx={'clamp(48px,9.5vw,72px)'}
+          className={[
+            'bg-white/20 backdrop-blur-[24px] backdrop-saturate-200',
+            !isProjects ? 'border-white/55 hover:border-white/60' : '',
+          ].join(' ')}
         />
 
         {/* Home (middle): greeting pill (solid) */}
@@ -103,6 +108,10 @@ export default function GlassHeaderBubble({
           collapsedPx={'clamp(56px,11vw,84px)'}
           expandedPx={'clamp(104px,34vw,160px)'}
           heightPx={'clamp(48px,9.5vw,72px)'}
+          className={[
+            'bg-white/20 backdrop-blur-[24px] backdrop-saturate-200',
+            !isWork ? 'border-white/55 hover:border-white/60' : '',
+          ].join(' ')}
         />
 
         {/* GitHub (right) */}
@@ -121,6 +130,7 @@ export default function GlassHeaderBubble({
           tooltipPlacement="below"
           collapsedPx={'clamp(56px,11vw,84px)'}
           heightPx={'clamp(48px,9.5vw,72px)'}
+          className="bg-white/20 backdrop-blur-[24px] backdrop-saturate-200 border-white/55 hover:border-white/60"
         />
       </nav>
     </div>

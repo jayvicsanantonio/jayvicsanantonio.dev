@@ -87,6 +87,7 @@ export default function NavButton({
             tooltip={tooltip}
             className={cn(
               'text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80',
+              'bg-white/20 backdrop-blur-[24px] backdrop-saturate-200 border-white/55 hover:border-white/60',
               cleanedClassName,
             )}
             {...(target ? { target } : {})}
