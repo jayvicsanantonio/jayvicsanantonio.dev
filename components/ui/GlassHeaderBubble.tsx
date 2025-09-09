@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { Icon } from "@iconify/react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Icon } from '@iconify/react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-import { NavPill } from "@/components/ui/NavPill";
+import { NavPill } from '@/components/ui/NavPill';
 export type GlassHeaderBubbleProps = {
   label: string;
   vtClassName?: string; // e.g., vt-tag-projects, vt-tag-work
@@ -20,8 +20,8 @@ export default function GlassHeaderBubble({
 }: GlassHeaderBubbleProps) {
   const pathname = usePathname();
 
-  const isProjects = pathname?.startsWith("/projects");
-  const isWork = pathname?.startsWith("/work");
+  const isProjects = pathname?.startsWith('/projects');
+  const isWork = pathname?.startsWith('/work');
 
   // Only keep vtTag on the expanded nav button for current route.
   // If the parent passes vt-tag-... to this header bubble, suppress it
@@ -30,7 +30,7 @@ export default function GlassHeaderBubble({
   // Delay the active pill expansion slightly to echo the main bubble
 
   return (
-    <div className={`relative inline-flex items-center ${_vtClassName ?? ""}`}>
+    <div className={`relative inline-flex items-center ${_vtClassName ?? ''}`}>
       {/* Inline nav buttons - order: LinkedIn, Projects, Home, Work, GitHub */}
       <nav aria-label="Header navigation" className="flex flex-wrap items-center gap-1 sm:gap-2">
         {/* LinkedIn (left) */}
@@ -47,8 +47,8 @@ export default function GlassHeaderBubble({
           external
           tooltip="LinkedIn"
           tooltipPlacement="below"
-          collapsedPx={"clamp(56px,11vw,84px)"}
-          heightPx={"clamp(48px,9.5vw,72px)"}
+          collapsedPx={'clamp(56px,11vw,84px)'}
+          heightPx={'clamp(48px,9.5vw,72px)'}
           className="bg-white/20 backdrop-blur-[24px] backdrop-saturate-200 border-white/55 hover:border-white/60"
         />
 
@@ -65,15 +65,15 @@ export default function GlassHeaderBubble({
           }
           label="Projects"
           active={isProjects}
-          {...(isProjects ? { vtTagName: "projects" } : {})}
-          {...(!isProjects ? { tooltip: "Projects", tooltipPlacement: "below" as const } : {})}
-          collapsedPx={"clamp(56px,11vw,84px)"}
-          expandedPx={"clamp(120px,40vw,180px)"}
-          heightPx={"clamp(48px,9.5vw,72px)"}
+          {...(isProjects ? { vtTagName: 'projects' } : {})}
+          {...(!isProjects ? { tooltip: 'Projects', tooltipPlacement: 'below' as const } : {})}
+          collapsedPx={'clamp(56px,11vw,84px)'}
+          expandedPx={'clamp(120px,40vw,180px)'}
+          heightPx={'clamp(48px,9.5vw,72px)'}
           className={[
-            "bg-white/20 backdrop-blur-[24px] backdrop-saturate-200",
-            !isProjects ? "border-white/55 hover:border-white/60" : "",
-          ].join(" ")}
+            'bg-white/20 backdrop-blur-[24px] backdrop-saturate-200',
+            !isProjects ? 'border-white/55 hover:border-white/60' : '',
+          ].join(' ')}
         />
 
         {/* Home (middle): greeting pill (solid) */}
@@ -84,7 +84,7 @@ export default function GlassHeaderBubble({
           onClick={(e) => {
             e.preventDefault();
             // Force a full reload to ensure the homepage remounts and animations restart
-            if (typeof window !== "undefined") window.location.assign("/");
+            if (typeof window !== 'undefined') window.location.assign('/');
           }}
         >
           <span className="text-[clamp(14px,2.2vw,22px)]">Hi, I’m Jayvic 👋</span>
@@ -103,15 +103,15 @@ export default function GlassHeaderBubble({
           }
           label="Work"
           active={isWork}
-          {...(isWork ? { vtTagName: "work" } : {})}
-          {...(!isWork ? { tooltip: "Work", tooltipPlacement: "below" as const } : {})}
-          collapsedPx={"clamp(56px,11vw,84px)"}
-          expandedPx={"clamp(104px,34vw,160px)"}
-          heightPx={"clamp(48px,9.5vw,72px)"}
+          {...(isWork ? { vtTagName: 'work' } : {})}
+          {...(!isWork ? { tooltip: 'Work', tooltipPlacement: 'below' as const } : {})}
+          collapsedPx={'clamp(56px,11vw,84px)'}
+          expandedPx={'clamp(104px,34vw,160px)'}
+          heightPx={'clamp(48px,9.5vw,72px)'}
           className={[
-            "bg-white/20 backdrop-blur-[24px] backdrop-saturate-200",
-            !isWork ? "border-white/55 hover:border-white/60" : "",
-          ].join(" ")}
+            'bg-white/20 backdrop-blur-[24px] backdrop-saturate-200',
+            !isWork ? 'border-white/55 hover:border-white/60' : '',
+          ].join(' ')}
         />
 
         {/* GitHub (right) */}
@@ -128,8 +128,8 @@ export default function GlassHeaderBubble({
           external
           tooltip="GitHub"
           tooltipPlacement="below"
-          collapsedPx={"clamp(56px,11vw,84px)"}
-          heightPx={"clamp(48px,9.5vw,72px)"}
+          collapsedPx={'clamp(56px,11vw,84px)'}
+          heightPx={'clamp(48px,9.5vw,72px)'}
           className="bg-white/20 backdrop-blur-[24px] backdrop-saturate-200 border-white/55 hover:border-white/60"
         />
       </nav>

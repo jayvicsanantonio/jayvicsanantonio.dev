@@ -398,8 +398,10 @@
     }
 
     /* Active pill morphs (projects/work): snappier */
+    /* biome-ignore lint/correctness/noUnknownTypeSelector: view-transition named targets are valid */
     ::view-transition-image-pair(projects),
-    ::view-transition-image-pair(work) {
+    /* biome-ignore lint/correctness/noUnknownTypeSelector: view-transition named targets are valid */
+      ::view-transition-image-pair(work) {
       animation-duration: 300ms;
       animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
     }
@@ -408,8 +410,10 @@
   /* Respect reduced motion */
   @media (prefers-reduced-motion: reduce) {
     ::view-transition-image-pair(top-bubble),
-    ::view-transition-image-pair(projects),
-    ::view-transition-image-pair(work) {
+    /* biome-ignore lint/correctness/noUnknownTypeSelector: view-transition named targets are valid */
+      ::view-transition-image-pair(projects),
+    /* biome-ignore lint/correctness/noUnknownTypeSelector: view-transition named targets are valid */
+      ::view-transition-image-pair(work) {
       animation-duration: 0.01ms;
     }
   }
