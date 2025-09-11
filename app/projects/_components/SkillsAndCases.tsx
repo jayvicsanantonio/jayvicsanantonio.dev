@@ -118,10 +118,10 @@ export default function SkillsAndCases() {
         {visible.map((c, i) => (
           <article
             key={c.slug}
-            className={`group cq relative min-h-[360px] rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(168,85,247,0.22),rgba(34,211,238,0.2))] p-[1px] shadow-[0_8px_28px_rgba(0,0,0,0.35)] ring-1 ring-white/5 md:min-h-[430px] ${!prefersReducedMotion ? 'animate-fade-in-up' : ''}`}
+            className={`group cq relative min-h-[360px] rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.25),rgba(168,85,247,0.15),rgba(34,211,238,0.12))] p-[1px] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_12px_32px_rgba(0,0,0,0.4)] ring-1 ring-white/10 backdrop-blur-[24px] backdrop-saturate-[140%] transition-all duration-300 hover:bg-[linear-gradient(135deg,rgba(59,130,246,0.3),rgba(168,85,247,0.2),rgba(34,211,238,0.15))] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_16px_40px_rgba(0,0,0,0.5)] hover:ring-white/15 md:min-h-[430px] ${!prefersReducedMotion ? 'animate-fade-in-up' : ''}`}
             style={{ animationDelay: !prefersReducedMotion ? `${80 * i}ms` : undefined }}
           >
-            <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-white/5 bg-gray-950/70 backdrop-blur-md [@container(min-width:36rem)]:grid [@container(min-width:36rem)]:grid-cols-[1fr,1.5fr]">
+            <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-white/8 bg-gray-950/50 backdrop-blur-[20px] backdrop-saturate-[150%] [@container(min-width:36rem)]:grid [@container(min-width:36rem)]:grid-cols-[1fr,1.5fr] before:pointer-events-none before:absolute before:inset-0 before:rounded-2xl before:bg-[radial-gradient(100%_50%_at_50%_0%,rgba(255,255,255,0.05),rgba(255,255,255,0)_50%)] before:content-['']">
               <Image
                 src={c.image.src}
                 alt={c.image.alt}
