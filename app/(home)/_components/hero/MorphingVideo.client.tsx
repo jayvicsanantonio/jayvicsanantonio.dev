@@ -175,7 +175,7 @@ export default function MorphingVideo({
           style={{ opacity: isIntro ? 0 : undefined }}
         >
           <div
-            className="relative flex h-14 w-full max-w-[var(--nav-row-w)] items-center justify-center rounded-[384px] border border-white/30 backdrop-blur-[16px] backdrop-saturate-[160%] shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_8px_30px_rgba(0,0,0,0.22)] before:pointer-events-none before:absolute before:inset-0 before:bg-[radial-gradient(120%_60%_at_50%_0%,rgba(255,255,255,0.35),rgba(255,255,255,0)_60%)] before:content-[''] sm:h-full sm:w-full sm:max-w-none"
+            className="relative flex h-12 w-[calc(100vw-3rem)] max-w-[20rem] items-center justify-center rounded-[384px] border border-white/30 backdrop-blur-[16px] backdrop-saturate-[160%] shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_8px_30px_rgba(0,0,0,0.22)] before:pointer-events-none before:absolute before:inset-0 before:bg-[radial-gradient(120%_60%_at_50%_0%,rgba(255,255,255,0.35),rgba(255,255,255,0)_60%)] before:content-[''] sm:h-14 sm:w-full sm:max-w-[var(--nav-row-w)] sm:h-full sm:w-full sm:max-w-none"
             style={{
               background:
                 'linear-gradient(180deg, rgba(24,204,193,0.28) 0%, rgba(0,166,158,0.20) 100%)',
@@ -184,9 +184,9 @@ export default function MorphingVideo({
             }}
           >
             <span
-              className="font-semibold tracking-wide text-white px-2"
+              className="font-semibold tracking-wide text-white px-3"
               style={{
-                fontSize: 'clamp(14px, 2.1vw, 22px)',
+                fontSize: 'clamp(15px, 2.5vw, 22px)',
                 whiteSpace: 'nowrap',
                 maxWidth: '90%',
                 overflow: 'hidden',
