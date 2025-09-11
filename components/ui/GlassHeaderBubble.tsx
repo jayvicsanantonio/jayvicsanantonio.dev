@@ -134,18 +134,20 @@ export default function GlassHeaderBubble({
           </span>
         </div>
 
-        {/* Home (middle): greeting pill (solid) */}
+        {/* Home (middle): greeting pill (glass with dark cyan) */}
         <Link
           href="/"
           aria-label="Home"
-          className="pointer-events-auto order-1 inline-flex h-[clamp(48px,9.5vw,72px)] items-center justify-center rounded-full bg-cyan-900 px-5 font-semibold text-white shadow-[0_10px_24px_rgba(0,0,0,0.25)] transition-colors hover:bg-cyan-800 w-full sm:order-3 sm:w-auto sm:px-6 md:px-20"
+          className="pointer-events-auto order-1 inline-flex h-[clamp(48px,9.5vw,72px)] items-center justify-center rounded-full border border-cyan-400/30 bg-cyan-900/40 px-5 font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_10px_30px_rgba(0,139,139,0.3)] backdrop-blur-[20px] backdrop-saturate-[180%] transition-all hover:bg-cyan-800/50 hover:border-cyan-400/40 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.15),0_12px_35px_rgba(0,139,139,0.4)] w-full sm:order-3 sm:w-auto sm:px-6 md:px-20 before:pointer-events-none before:absolute before:inset-0 before:rounded-full before:bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,255,255,0.13),rgba(0,255,255,0)_50%)] before:content-['']"
           onClick={(e) => {
             e.preventDefault();
             // Force a full reload to ensure the homepage remounts and animations restart
             if (typeof window !== 'undefined') window.location.assign('/');
           }}
         >
-          <span className="text-[clamp(14px,2.2vw,22px)]">Hi, I’m Jayvic 👋</span>
+          <span className="relative text-[clamp(14px,2.2vw,22px)] text-cyan-50">
+            Hi, I'm Jayvic 👋
+          </span>
         </Link>
       </nav>
     </div>
