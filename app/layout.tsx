@@ -29,6 +29,11 @@ export const metadata: Metadata = {
 
 export const viewport = {
   themeColor: '#030712',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: 'cover',
 };
 
 const sourceSansPro = localFont({
