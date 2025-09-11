@@ -69,7 +69,7 @@ export default function MorphingVideo({
     left: '50%',
     '--intro-scale': String(isIntro ? (initialPill ? 0.14 : 1) : 1),
     transform: 'translate(-50%, -50%) scale(var(--intro-scale))',
-    width: '96vw',
+    width: 'min(96vw, 96svw)',
     height: 'min(86svh, 86vh)',
     borderRadius: containerRadius,
     border: 'none',
@@ -99,18 +99,18 @@ export default function MorphingVideo({
     >
       {/* Titles */}
       <div
-        className="absolute bottom-64 left-1/2 z-50 -translate-x-1/2 text-center transition-opacity duration-700 sm:right-8 sm:bottom-40 sm:left-auto sm:translate-x-0 md:right-10 md:bottom-22"
+        className="absolute bottom-40 left-1/2 z-50 -translate-x-1/2 text-center px-4 transition-opacity duration-700 sm:bottom-40 sm:right-8 sm:left-auto sm:translate-x-0 sm:px-0 md:right-10 md:bottom-22"
         style={{ opacity: showTitleGroup ? 1 : 0 }}
       >
-        <h2 className="text-base font-medium tracking-widest text-white sm:text-2xl md:text-3xl lg:text-4xl 2xl:text-6xl">
+        <h2 className="text-lg font-medium tracking-widest text-white text-balance sm:text-2xl md:text-3xl lg:text-4xl 2xl:text-6xl">
           <AnimatedText text="Full-Stack" start={showTitleGroup} perCharDelay={45} />
         </h2>
       </div>
       <div
-        className="absolute bottom-52 left-1/2 z-50 -translate-x-1/2 text-center transition-opacity duration-700 sm:right-8 sm:left-auto sm:translate-x-0 md:right-10 md:bottom-10"
+        className="absolute bottom-28 left-1/2 z-50 -translate-x-1/2 text-center px-4 transition-opacity duration-700 sm:bottom-10 sm:right-8 sm:left-auto sm:translate-x-0 sm:px-0 md:right-10 md:bottom-10"
         style={{ opacity: showTitleGroup ? 1 : 0 }}
       >
-        <h3 className="text-base font-light tracking-wider text-white/90 italic sm:text-2xl md:text-3xl lg:text-4xl 2xl:text-5xl">
+        <h3 className="text-lg font-light tracking-wider text-white/90 italic text-balance sm:text-2xl md:text-3xl lg:text-4xl 2xl:text-5xl">
           <AnimatedText
             text="Software Engineer"
             start={showTitleGroup}
@@ -122,10 +122,10 @@ export default function MorphingVideo({
 
       {/* Description */}
       <div
-        className="absolute top-6 left-1/2 z-50 max-w-[22rem] -translate-x-1/2 text-center transition-opacity duration-700 sm:top-auto sm:bottom-32 sm:left-8 sm:translate-x-0 sm:text-left md:bottom-10 md:left-10"
+        className="absolute top-6 left-1/2 z-50 max-w-[20rem] -translate-x-1/2 text-center px-4 transition-opacity duration-700 sm:top-auto sm:bottom-32 sm:left-8 sm:max-w-[22rem] sm:translate-x-0 sm:text-left sm:px-0 md:bottom-10 md:left-10"
         style={{ opacity: showDesc ? 1 : 0 }}
       >
-        <p className="mb-2 text-sm leading-relaxed text-white/80 md:text-base">
+        <p className="mb-2 text-sm leading-relaxed text-white/80 text-balance md:text-base">
           I experiment with AI daily—and build web platforms that put it to work.
         </p>
       </div>
@@ -171,11 +171,11 @@ export default function MorphingVideo({
 
         {/* Cyan overlay pill (opacity driven by --cyan/ui) */}
         <div
-          className="pointer-events-none absolute inset-0 flex items-center justify-center"
+          className="pointer-events-none absolute inset-0 flex items-center justify-center px-4 sm:px-0"
           style={{ opacity: isIntro ? 0 : undefined }}
         >
           <div
-            className="relative flex h-14 w-[var(--nav-row-w)] items-center justify-center rounded-[384px] border border-white/30 backdrop-blur-[16px] backdrop-saturate-[160%] shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_8px_30px_rgba(0,0,0,0.22)] before:pointer-events-none before:absolute before:inset-0 before:bg-[radial-gradient(120%_60%_at_50%_0%,rgba(255,255,255,0.35),rgba(255,255,255,0)_60%)] before:content-[''] sm:h-full sm:w-full"
+            className="relative flex h-12 w-[calc(100vw-3rem)] max-w-[20rem] items-center justify-center rounded-[384px] border border-white/30 backdrop-blur-[16px] backdrop-saturate-[160%] shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_8px_30px_rgba(0,0,0,0.22)] before:pointer-events-none before:absolute before:inset-0 before:bg-[radial-gradient(120%_60%_at_50%_0%,rgba(255,255,255,0.35),rgba(255,255,255,0)_60%)] before:content-[''] sm:h-14 sm:w-full sm:max-w-[var(--nav-row-w)] sm:h-full sm:w-full sm:max-w-none"
             style={{
               background:
                 'linear-gradient(180deg, rgba(24,204,193,0.28) 0%, rgba(0,166,158,0.20) 100%)',
@@ -184,9 +184,9 @@ export default function MorphingVideo({
             }}
           >
             <span
-              className="font-semibold tracking-wide text-white"
+              className="font-semibold tracking-wide text-white px-3"
               style={{
-                fontSize: 'clamp(14px, 2.1vw, 22px)',
+                fontSize: 'clamp(15px, 2.5vw, 22px)',
                 whiteSpace: 'nowrap',
                 maxWidth: '90%',
                 overflow: 'hidden',
@@ -195,7 +195,7 @@ export default function MorphingVideo({
                 textShadow: '0 2px 8px rgba(0,0,0,0.6)',
               }}
             >
-              Hi, I’m Jayvic 👋
+              Hi, I'm Jayvic 👋
             </span>
           </div>
         </div>

@@ -302,11 +302,53 @@
   /* Smooth scrolling and performance optimizations */
   html {
     scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+  }
+
+  body {
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+  }
+
+  /* iOS-specific fixes */
+  @supports (-webkit-touch-callout: none) {
+    /* iOS only */
+    body {
+      /* Prevent rubber-band scrolling */
+      overscroll-behavior-y: contain;
+    }
+
+    /* Fix for iOS Safari viewport height - using fallback pattern */
+    .min-h-screen {
+      min-height: 100vh; /* fallback for browsers that don't support -webkit-fill-available */
+      /* biome-ignore lint/suspicious/noDuplicateProperties: Intentional fallback pattern for iOS Safari */
+      min-height: -webkit-fill-available; /* iOS Safari specific */
+    }
   }
 
   /* Scroll-based animations will use transform for better performance */
   .scroll-element {
     will-change: transform, opacity;
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  /* Optimize mobile touch interactions */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Fix for viewport units on mobile */
+  @supports (height: 100svh) {
+    .h-screen {
+      height: 100svh;
+    }
+    .min-h-screen {
+      min-height: 100svh;
+    }
   }
 
   /* Custom scrollbar */

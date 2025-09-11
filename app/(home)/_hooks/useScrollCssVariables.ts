@@ -22,8 +22,15 @@ export function useScrollCssVariables<T extends HTMLElement>(
     if (!root) return;
 
     let raf = 0;
+    let lastY = -1;
+
     const update = () => {
-      const y = window.scrollY;
+      const y = window.scrollY || window.pageYOffset || 0;
+
+      // Skip if scroll position hasn't changed
+      if (y === lastY) return;
+      lastY = y;
+
       const vh = window.innerHeight || 1;
       const p = Math.min(y / cfg.scroll.max, 1);
 
@@ -37,43 +44,59 @@ export function useScrollCssVariables<T extends HTMLElement>(
       const overlayUp = reduceMotion ? Math.min(yn / 0.2, 1) : 1.4 * yn * gate;
       if (reduceMotion) gate = 0;
 
-      root.style.setProperty('--scroll-y', String(y));
-      root.style.setProperty('--p', String(p));
-      root.style.setProperty('--vh', String(vh));
-      root.style.setProperty('--sh', String(sh));
-      root.style.setProperty('--gate', String(gate));
-      root.style.setProperty('--overlay-up', String(overlayUp));
+      // Batch DOM writes
+      const props: Record<string, string> = {
+        '--scroll-y': String(y),
+        '--p': String(p),
+        '--vh': String(vh),
+        '--sh': String(sh),
+        '--gate': String(gate),
+        '--overlay-up': String(overlayUp),
+      };
 
       const CYAN_START = cfg.scroll.cyanStartT;
       const CYAN_DEN = 1 - CYAN_START;
       const cyan = Math.min(Math.max((sh - CYAN_START) / CYAN_DEN, 0), 1);
-      root.style.setProperty('--cyan', String(cyan));
+      props['--cyan'] = String(cyan);
 
       const UI_START = cfg.scroll.uiRevealStartT;
       const UI_DEN = 1 - UI_START;
       const ui = Math.min(Math.max((sh - UI_START) / UI_DEN, 0), 1);
-      root.style.setProperty('--ui', String(ui));
+      props['--ui'] = String(ui);
 
-      root.style.setProperty('--closeMaxY', cfg.closeMaxY);
-      root.style.setProperty('--closeMaxX', cfg.closeMaxX);
-    };
-    const onScroll = () => {
-      if (raf) return;
-      raf = requestAnimationFrame(() => {
-        update();
-        raf = 0;
+      props['--closeMaxY'] = cfg.closeMaxY;
+      props['--closeMaxX'] = cfg.closeMaxX;
+
+      // Apply all properties at once
+      Object.entries(props).forEach(([key, value]) => {
+        root.style.setProperty(key, value);
       });
     };
-    const onResize = () => update();
+
+    const onScroll = () => {
+      if (raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(update);
+    };
+
+    let resizeTimer: number;
+    const onResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(update, 150);
+    };
 
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onResize);
+    window.addEventListener('resize', onResize, { passive: true });
+    window.addEventListener('orientationchange', onResize, { passive: true });
+
+    // Initial update
     update();
 
     return () => {
       if (raf) cancelAnimationFrame(raf);
+      clearTimeout(resizeTimer);
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onResize);
+      window.removeEventListener('orientationchange', onResize);
     };
   }, [
     rootRef,

@@ -50,7 +50,7 @@ export default function HeroMorph() {
   return (
     <div
       ref={containerRef}
-      className="relative overflow-x-hidden bg-black [--nav-row-w:calc(3.5rem*4+0.75rem*3)] [--pill-h:54px] sm:[--nav-row-w:20vw] sm:[--pill-h:8vh] md:[--nav-row-w:24vw]"
+      className="relative overflow-x-hidden bg-black touch-pan-y overscroll-y-contain [--nav-row-w:calc(3.5rem*4+0.75rem*3)] [--pill-h:54px] sm:[--nav-row-w:20vw] sm:[--pill-h:8vh] md:[--nav-row-w:24vw]"
     >
       <MorphingVideo
         centerTop={CFG.nav.centerTop}
@@ -82,7 +82,7 @@ export default function HeroMorph() {
       </div>
 
       <div className="relative z-10 min-w-screen">
-        <div className="absolute inset-0 h-[220svh] bg-gradient-to-b from-black via-gray-800 to-gray-200 md:h-[180svh] lg:h-[154rem]"></div>
+        <div className="absolute inset-0 h-[220svh] bg-gradient-to-b from-black via-gray-800 to-gray-200 will-change-transform md:h-[180svh] lg:h-[154rem]"></div>
 
         <div
           className="pointer-events-none absolute inset-0"
