@@ -22,7 +22,7 @@ export default function FooterBrandCTA({
       }}
     >
       <div className="flex items-center justify-between gap-4 sm:gap-6">
-        <div className="text-white min-w-0">
+        <div className="text-white min-w-0 flex-shrink-0">
           <div className="text-base font-light tracking-wider sm:text-lg md:text-3xl">Jayvic</div>
           <div className="text-[10px] font-bold tracking-[0.2em] uppercase sm:text-xs md:text-2xl md:tracking-[0.3em]">
             SAN ANTONIO
@@ -30,7 +30,7 @@ export default function FooterBrandCTA({
         </div>
         <Link
           href="/work"
-          className="pointer-events-auto min-h-10 whitespace-nowrap rounded-full bg-white px-4 py-2 text-xs font-medium text-black transition-all duration-300 hover:scale-105 hover:bg-white/90 sm:min-h-11 sm:px-6 sm:py-2.5 sm:text-sm md:py-3 md:text-base"
+          className="pointer-events-auto flex items-center justify-center h-10 whitespace-nowrap rounded-full bg-white px-5 text-xs font-medium text-black transition-all duration-300 hover:scale-105 hover:bg-white/90 sm:h-11 sm:px-6 sm:text-sm md:h-12 md:px-8 md:text-base"
         >
           Work Experience
         </Link>

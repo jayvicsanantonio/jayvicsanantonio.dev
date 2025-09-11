@@ -15,13 +15,6 @@ export default function MobileNavRow() {
       }}
     >
       <GlassButton
-        href="/projects"
-        aria-label="Projects"
-        className="vt-tag-projects h-12 w-12 min-w-[3rem] bg-white/30 backdrop-blur-[28px] backdrop-saturate-[220%] border-white/60 hover:border-white/65 will-change-transform"
-      >
-        <Icon icon="mdi:application-brackets" width={24} height={24} aria-hidden="true" />
-      </GlassButton>
-      <GlassButton
         href="https://www.linkedin.com/in/jayvicsanantonio/"
         aria-label="LinkedIn"
         className="h-12 w-12 min-w-[3rem] bg-white/30 backdrop-blur-[28px] backdrop-saturate-[220%] border-white/60 hover:border-white/65 will-change-transform"
@@ -29,6 +22,13 @@ export default function MobileNavRow() {
         rel="noopener noreferrer"
       >
         <Icon icon="mdi:linkedin" width={26} height={26} aria-hidden="true" />
+      </GlassButton>
+      <GlassButton
+        href="/projects"
+        aria-label="Projects"
+        className="vt-tag-projects h-12 w-12 min-w-[3rem] bg-white/30 backdrop-blur-[28px] backdrop-saturate-[220%] border-white/60 hover:border-white/65 will-change-transform"
+      >
+        <Icon icon="mdi:application-brackets" width={24} height={24} aria-hidden="true" />
       </GlassButton>
       <GlassButton
         href="/work"
