@@ -1,9 +1,9 @@
-export const runtime = "edge";
+export const runtime = 'edge';
 
-import Image from "next/image";
-import Link from "next/link";
-import NavRow from "@/app/mobile/_components/NavRow.client";
-import AnimatedText from "@/components/ui/AnimatedText";
+import Image from 'next/image';
+import Link from 'next/link';
+import NavRow from '@/app/mobile/_components/NavRow.client';
+import AnimatedText from '@/components/ui/AnimatedText';
 
 export default function MobileHomePage() {
   return (
@@ -29,9 +29,9 @@ export default function MobileHomePage() {
           className="absolute inset-0 opacity-[0.14] mix-blend-screen"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.12) 1px, transparent 0), linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 0)",
-            backgroundSize: "64px 64px, 64px 64px",
-            backgroundPosition: "0 0, 0 0",
+              'linear-gradient(rgba(255,255,255,0.12) 1px, transparent 0), linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 0)',
+            backgroundSize: '64px 64px, 64px 64px',
+            backgroundPosition: '0 0, 0 0',
           }}
         />
 
@@ -54,7 +54,7 @@ export default function MobileHomePage() {
             className="h-auto w-full object-contain object-bottom"
             style={{
               filter:
-                "brightness(0.95) saturate(1.25) drop-shadow(0 0 60px rgba(0,139,139,0.30)) drop-shadow(0 10px 40px rgba(0,0,0,0.45))",
+                'brightness(0.95) saturate(1.25) drop-shadow(0 0 60px rgba(0,139,139,0.30)) drop-shadow(0 10px 40px rgba(0,0,0,0.45))',
             }}
           />
         </div>
@@ -112,7 +112,7 @@ export default function MobileHomePage() {
             width={1200}
             height={900}
             className="h-auto w-full object-contain object-bottom"
-            style={{ filter: "brightness(0.95) drop-shadow(0 14px 42px rgba(0,0,0,0.5))" }}
+            style={{ filter: 'brightness(0.95) drop-shadow(0 14px 42px rgba(0,0,0,0.5))' }}
           />
         </div>
 
