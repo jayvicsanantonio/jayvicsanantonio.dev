@@ -1,0 +1,29 @@
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+import { userAgent } from 'next/server'
+
+export function middleware(req: NextRequest) {
+  // Only handle the homepage
+  if (req.nextUrl.pathname !== '/') return NextResponse.next()
+
+  const ua = userAgent(req)
+
+  // Skip bots and non-mobile devices
+  if (ua.isBot) return NextResponse.next()
+
+  const isMobile = ua.device.type === 'mobile' || ua.device.type === 'tablet'
+
+  if (isMobile) {
+    const url = req.nextUrl.clone()
+    url.pathname = '/mobile'
+    return NextResponse.rewrite(url)
+  }
+
+  return NextResponse.next()
+}
+
+// Only run on the root path
+export const config = {
+  matcher: ['/'],
+}
+
