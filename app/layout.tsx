@@ -1,4 +1,3 @@
-import { Inter_Tight } from 'next/font/google';
 import localFont from 'next/font/local';
 
 import Body from '@/components/shell/Body';
@@ -58,9 +57,15 @@ const sourceSansPro = localFont({
   variable: '--font-source-sans',
 });
 
-// Map Inter Tight onto the legacy --font-oswald variable so existing classes continue to work
-const interTight = Inter_Tight({
-  subsets: ['latin'],
+// Use a local fallback mapped to the legacy --font-oswald variable so existing classes continue to work
+const oswaldLocal = localFont({
+  src: [
+    {
+      path: '../public/fonts/oswald.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+  ],
   display: 'swap',
   variable: '--font-oswald',
 });
@@ -72,7 +77,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Body fontVars={`${sourceSansPro.variable} ${interTight.variable}`}>{children}</Body>
+      <Body fontVars={`${sourceSansPro.variable} ${oswaldLocal.variable}`}>{children}</Body>
     </html>
   );
 }
