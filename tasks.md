@@ -185,6 +185,7 @@ className = "[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-
 **Details**:
 
 - [ ] **Wrap view transition CSS in feature queries**:
+
   ```css
   @supports (view-transition-name: test) {
     .vt-tag-projects {
@@ -197,6 +198,7 @@ className = "[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-
     }
   }
   ```
+
 - [ ] **Add fallback transition styles** for non-supporting browsers
 - [ ] **Implement CSS-based page transition fallbacks** using opacity and transform
 
