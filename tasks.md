@@ -16,7 +16,8 @@ Safari has historically lagged behind Chrome in supporting modern CSS features. 
 
 **Problem**: Container queries (`@container` and `container-type`) are used extensively for responsive components but are not supported in Safari versions before 16.0. This causes layout breakage where components don't respond to their container size, leading to overlapping content, incorrect spacing, and broken grid layouts.
 
-**Current Impact**: 
+**Current Impact**:
+
 - WorkTimeline cards don't resize properly in their containers
 - SkillsAndCases grid layout fails to adapt to component width
 - Mobile layouts break on older iOS Safari versions
@@ -26,11 +27,12 @@ Safari has historically lagged behind Chrome in supporting modern CSS features. 
 **Context**: We need to detect browser support for container queries to provide appropriate fallbacks.
 
 **Details**:
+
 - [ ] **Create `lib/utils/containerQueries.ts`** with detection function:
   ```typescript
   export const supportsContainerQueries = (): boolean => {
-    if (typeof window === 'undefined') return false;
-    return CSS.supports('container-type: inline-size');
+    if (typeof window === "undefined") return false;
+    return CSS.supports("container-type: inline-size");
   };
   ```
 - [ ] **Add CSS feature detection in `app/globals.css`**:
@@ -43,9 +45,15 @@ Safari has historically lagged behind Chrome in supporting modern CSS features. 
   ```
 - [ ] **Create responsive utility classes** that mirror container query breakpoints:
   ```css
-  .container-fallback-sm { /* equivalent to [@container(min-width:24rem)] */ }
-  .container-fallback-md { /* equivalent to [@container(min-width:32rem)] */ }
-  .container-fallback-lg { /* equivalent to [@container(min-width:42rem)] */ }
+  .container-fallback-sm {
+    /* equivalent to [@container(min-width:24rem)] */
+  }
+  .container-fallback-md {
+    /* equivalent to [@container(min-width:32rem)] */
+  }
+  .container-fallback-lg {
+    /* equivalent to [@container(min-width:42rem)] */
+  }
   ```
 
 **Why this approach**: Progressive enhancement ensures the site works everywhere while taking advantage of container queries where supported.
@@ -54,20 +62,22 @@ Safari has historically lagged behind Chrome in supporting modern CSS features. 
 
 **Context**: Lines 239, 241, 255 in `WorkTimeline.client.tsx` use container queries for responsive padding and text sizing that fail in Safari.
 
-**Current Problem**: 
+**Current Problem**:
+
 ```tsx
 // This breaks in Safari < 16.0
-className="[@container(min-width:36rem)]:p-6"
-className="[@container(min-width:28rem)]:text-2xl" 
-className="[@container(min-width:34rem)]:space-y-4"
+className = "[@container(min-width:36rem)]:p-6";
+className = "[@container(min-width:28rem)]:text-2xl";
+className = "[@container(min-width:34rem)]:space-y-4";
 ```
 
 **Details**:
+
 - [ ] **Replace container query classes with conditional rendering**:
   ```tsx
   const useContainerQueries = supportsContainerQueries();
-  const containerClasses = useContainerQueries 
-    ? "[@container(min-width:36rem)]:p-6" 
+  const containerClasses = useContainerQueries
+    ? "[@container(min-width:36rem)]:p-6"
     : "sm:p-6 md:p-8";
   ```
 - [ ] **Add responsive breakpoint fallbacks** using standard Tailwind classes
@@ -81,12 +91,15 @@ className="[@container(min-width:34rem)]:space-y-4"
 **Context**: Lines 125, 132, 134 use container queries for grid layout and image sizing that completely breaks the card layout in Safari.
 
 **Current Problem**: The grid layout fails to activate and images don't size properly:
+
 ```tsx
-className="[@container(min-width:36rem)]:grid [@container(min-width:36rem)]:grid-cols-[1fr,1.5fr]"
-className="[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-full"
+className =
+  "[@container(min-width:36rem)]:grid [@container(min-width:36rem)]:grid-cols-[1fr,1.5fr]";
+className = "[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-full";
 ```
 
 **Details**:
+
 - [ ] **Implement responsive grid with standard breakpoints**:
   ```tsx
   const gridClasses = supportsContainerQueries()
@@ -104,20 +117,23 @@ className="[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-fu
 **Context**: The `@utility cq` declaration in `globals.css:85` enables container queries but needs fallback handling.
 
 **Details**:
+
 - [ ] **Wrap container utility in feature detection**:
+
   ```css
   @supports (container-type: inline-size) {
     @utility cq {
       container-type: inline-size;
     }
   }
-  
+
   @supports not (container-type: inline-size) {
     .cq {
       /* No container context, rely on viewport-based responsive design */
     }
   }
   ```
+
 - [ ] **Create utility classes for common container query patterns**
 - [ ] **Add documentation** for when to use container queries vs viewport queries
 
@@ -128,6 +144,7 @@ className="[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-fu
 **Problem**: View Transitions API is used for smooth page morphing between routes but is completely unsupported in Safari. This causes the navigation to fall back to instant page changes, creating a jarring user experience compared to Chrome's smooth transitions.
 
 **Current Impact**:
+
 - No smooth morphing between pages in Safari
 - `vt-tag-*` classes have no effect
 - Inconsistent user experience between browsers
@@ -137,13 +154,14 @@ className="[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-fu
 **Context**: We need to detect browser support and gracefully handle unsupported browsers.
 
 **Details**:
+
 - [ ] **Create `lib/utils/viewTransitions.ts`**:
+
   ```typescript
   export const supportsViewTransitions = (): boolean => {
-    return typeof document !== 'undefined' && 
-           'startViewTransition' in document;
+    return typeof document !== "undefined" && "startViewTransition" in document;
   };
-  
+
   export const safeViewTransition = (callback: () => void) => {
     if (supportsViewTransitions()) {
       document.startViewTransition(callback);
@@ -152,6 +170,7 @@ className="[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-fu
     }
   };
   ```
+
 - [ ] **Add hook for view transition support**: `hooks/useViewTransitions.ts`
 - [ ] **Create fallback animation utilities** for non-supporting browsers
 
@@ -164,13 +183,14 @@ className="[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-fu
 **Current Problem**: CSS rules for `::view-transition-image-pair()` are ignored, bloating the stylesheet.
 
 **Details**:
+
 - [ ] **Wrap view transition CSS in feature queries**:
   ```css
   @supports (view-transition-name: test) {
     .vt-tag-projects {
       view-transition-name: projects;
     }
-    
+
     ::view-transition-image-pair(projects) {
       animation-duration: 300ms;
       animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
@@ -187,11 +207,12 @@ className="[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-fu
 **Context**: Components using `vt-tag-*` classes need fallback behavior for Safari.
 
 **Details**:
+
 - [ ] **Update navigation components** to conditionally apply view transition tags
 - [ ] **Implement CSS transition fallbacks** for Safari:
   ```tsx
-  const transitionClasses = supportsViewTransitions() 
-    ? "vt-tag-projects" 
+  const transitionClasses = supportsViewTransitions()
+    ? "vt-tag-projects"
     : "transition-opacity duration-300";
   ```
 - [ ] **Add loading states** for navigation in Safari
@@ -204,6 +225,7 @@ className="[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-fu
 **Context**: Ensure navigation feels smooth and consistent across all browsers.
 
 **Details**:
+
 - [ ] **Create automated tests** for navigation timing
 - [ ] **Test on various Safari versions** (desktop and mobile)
 - [ ] **Measure perceived performance** of navigation transitions
@@ -216,6 +238,7 @@ className="[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-fu
 **Problem**: Safari's implementation of `backdrop-filter` is significantly less optimized than Chrome's. When combined with animations, it causes severe performance degradation, often dropping below 30fps during transitions. This is especially problematic with the extensive glass morphism effects used throughout the site.
 
 **Current Impact**:
+
 - Choppy animations on all glass components
 - Poor performance on mobile Safari
 - Inconsistent visual quality between browsers
@@ -225,6 +248,7 @@ className="[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-fu
 **Context**: We need to identify every use of backdrop-filter to prioritize optimization efforts.
 
 **Details**:
+
 - [ ] **Create comprehensive inventory** of all backdrop-filter usage:
   - `GlassButton.tsx:21` - Navigation buttons
   - `GlassHeaderBubble.tsx` - Multiple glass elements
@@ -241,6 +265,7 @@ className="[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-fu
 **Context**: Glass morphism components combine backdrop-filter with other effects, compounding performance issues in Safari.
 
 **Details**:
+
 - [ ] **Add hardware acceleration hints** to all glass components:
   ```css
   .glass-optimized {
@@ -271,25 +296,29 @@ className="[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-fu
 **Context**: Lines 79-80 animate backdrop-filter simultaneously with multiple other properties, causing severe performance issues.
 
 **Current Problem**:
+
 ```typescript
 transition: isExpanding
-  ? 'backdrop-filter 0.5s ease-out, transform 2s cubic-bezier(0.22, 1, 0.36, 1), ...'
-  : '...'
+  ? "backdrop-filter 0.5s ease-out, transform 2s cubic-bezier(0.22, 1, 0.36, 1), ..."
+  : "...";
 ```
 
 **Details**:
+
 - [ ] **Split complex transition into stages**:
+
   ```typescript
   // Stage 1: Transform and layout
-  transition: 'transform 2s cubic-bezier(0.22, 1, 0.36, 1), border-radius 2s...'
-  
+  transition: "transform 2s cubic-bezier(0.22, 1, 0.36, 1), border-radius 2s...";
+
   // Stage 2: Visual effects (delayed)
   const backdropTransition = {
-    transitionDelay: '1.8s',
-    transitionProperty: 'backdrop-filter',
-    transitionDuration: '0.2s'
+    transitionDelay: "1.8s",
+    transitionProperty: "backdrop-filter",
+    transitionDuration: "0.2s",
   };
   ```
+
 - [ ] **Add conditional backdrop-filter application** based on animation state
 - [ ] **Implement Safari-specific animation sequence** with reduced complexity
 - [ ] **Use CSS custom properties** for dynamic backdrop-filter values
@@ -301,19 +330,22 @@ transition: isExpanding
 **Context**: Safari needs different strategies for glass effects to maintain performance.
 
 **Details**:
+
 - [ ] **Create Safari-specific glass utilities**:
+
   ```css
   .glass-safari {
     background: rgba(255, 255, 255, 0.85);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     /* Solid background instead of backdrop-filter during animations */
   }
-  
+
   .glass-safari.animated {
     backdrop-filter: none;
     background: rgba(255, 255, 255, 0.9);
   }
   ```
+
 - [ ] **Implement conditional backdrop-filter application**:
   ```tsx
   const useBackdropFilter = !isSafari || !isAnimating;
@@ -328,6 +360,7 @@ transition: isExpanding
 **Problem**: Framer Motion animations combined with backdrop-filter and 3D transforms cause Safari's compositor to struggle. The library's default optimization strategies are tuned for Chrome, leading to poor performance in Safari.
 
 **Current Impact**:
+
 - Timeline animations stutter and drop frames
 - 3D transform animations are janky
 - Poor interaction responsiveness
@@ -337,42 +370,45 @@ transition: isExpanding
 **Context**: Line 228 combines Framer Motion with backdrop-filter and 3D transforms, causing performance issues.
 
 **Current Problem**:
+
 ```tsx
-className="transform-gpu backdrop-blur-[24px] hover:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)]"
+className =
+  "transform-gpu backdrop-blur-[24px] hover:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)]";
 ```
 
 **Details**:
+
 - [ ] **Create Safari-specific animation variants**:
+
   ```tsx
   const safariVariants = {
     initial: { opacity: 0, y: 20 },
-    animate: { 
-      opacity: 1, 
+    animate: {
+      opacity: 1,
       y: 0,
-      transition: { duration: 0.3, ease: "easeOut" }
+      transition: { duration: 0.3, ease: "easeOut" },
     },
     hover: {
       y: -4, // Simpler transform for Safari
-      transition: { duration: 0.2 }
-    }
+      transition: { duration: 0.2 },
+    },
   };
-  
+
   const chromeVariants = {
     // More complex 3D transforms
     hover: {
       rotateX: 0.6,
       rotateY: -0.6,
       y: -4,
-      transition: { duration: 0.2 }
-    }
+      transition: { duration: 0.2 },
+    },
   };
   ```
+
 - [ ] **Separate backdrop-filter from motion components**:
   ```tsx
   <motion.div variants={motionVariants}>
-    <div className={backdropClasses}>
-      {/* Content */}
-    </div>
+    <div className={backdropClasses}>{/* Content */}</div>
   </motion.div>
   ```
 - [ ] **Implement staggered animations** for timeline entries
@@ -385,12 +421,13 @@ className="transform-gpu backdrop-blur-[24px] hover:[transform:perspective(1000p
 **Context**: All Framer Motion components need Safari-specific optimizations.
 
 **Details**:
+
 - [ ] **Create motion optimization hook**:
   ```tsx
   const useMotionConfig = () => {
     const isSafari = useMemo(() => /* safari detection */, []);
     return {
-      transition: isSafari 
+      transition: isSafari
         ? { type: "tween", ease: "easeOut" }
         : { type: "spring", damping: 20 },
       reducedMotion: isSafari && prefersReducedMotion
@@ -408,13 +445,14 @@ className="transform-gpu backdrop-blur-[24px] hover:[transform:perspective(1000p
 **Context**: Centralize animation logic for consistent Safari optimization.
 
 **Details**:
+
 - [ ] **Build browser detection utility**:
   ```tsx
   export const getBrowserCapabilities = () => ({
-    supportsBackdropFilter: CSS.supports('backdrop-filter: blur(1px)'),
-    supports3DTransforms: CSS.supports('transform: perspective(1px)'),
-    supportsWillChange: CSS.supports('will-change: transform'),
-    isSafari: /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent)
+    supportsBackdropFilter: CSS.supports("backdrop-filter: blur(1px)"),
+    supports3DTransforms: CSS.supports("transform: perspective(1px)"),
+    supportsWillChange: CSS.supports("will-change: transform"),
+    isSafari: /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent),
   });
   ```
 - [ ] **Create optimized animation variants** for different scenarios
@@ -428,6 +466,7 @@ className="transform-gpu backdrop-blur-[24px] hover:[transform:perspective(1000p
 **Context**: Validate that optimizations achieve 60fps performance in Safari.
 
 **Details**:
+
 - [ ] **Set up FPS monitoring** using `requestAnimationFrame` callbacks
 - [ ] **Test on various iOS devices** including older models
 - [ ] **Compare performance metrics** between Safari and Chrome
@@ -445,6 +484,7 @@ className="transform-gpu backdrop-blur-[24px] hover:[transform:perspective(1000p
 **Context**: Lines 211-256 in `globals.css` use deep nesting that Safari's parser handles less efficiently.
 
 **Current Problem**:
+
 ```css
 .lights {
   & svg {
@@ -458,12 +498,20 @@ className="transform-gpu backdrop-blur-[24px] hover:[transform:perspective(1000p
 ```
 
 **Details**:
+
 - [ ] **Flatten nested selectors** to reduce parser complexity:
   ```css
-  .lights svg { display: block; width: 100%; }
-  .lights svg:nth-child(n+2) { display: none; }
+  .lights svg {
+    display: block;
+    width: 100%;
+  }
+  .lights svg:nth-child(n + 2) {
+    display: none;
+  }
   @media (min-width: 400px) {
-    .lights svg:nth-child(n+2) { display: block; }
+    .lights svg:nth-child(n + 2) {
+      display: block;
+    }
   }
   ```
 - [ ] **Simplify complex selector chains** for better Safari performance
@@ -477,6 +525,7 @@ className="transform-gpu backdrop-blur-[24px] hover:[transform:perspective(1000p
 **Context**: Safari requires different strategies for GPU compositing optimization.
 
 **Details**:
+
 - [ ] **Add strategic `will-change` properties**:
   ```css
   .scroll-element {
@@ -496,9 +545,10 @@ className="transform-gpu backdrop-blur-[24px] hover:[transform:perspective(1000p
 **Context**: The `useScrollCssVariables` hook drives many animations but may not be optimized for Safari.
 
 **Details**:
+
 - [ ] **Add passive event listeners** for better scroll performance:
   ```typescript
-  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener("scroll", onScroll, { passive: true });
   ```
 - [ ] **Implement RAF throttling** for scroll updates:
   ```typescript
@@ -517,20 +567,23 @@ className="transform-gpu backdrop-blur-[24px] hover:[transform:perspective(1000p
 **Context**: `content-visibility: auto` is used for performance but has limited Safari support.
 
 **Details**:
+
 - [ ] **Add feature detection**:
+
   ```css
   @supports (content-visibility: auto) {
     .content-visibility-auto {
       content-visibility: auto;
     }
   }
-  
+
   @supports not (content-visibility: auto) {
     .content-visibility-auto {
       /* Fallback intersection observer implementation */
     }
   }
   ```
+
 - [ ] **Implement IntersectionObserver fallback** for non-supporting browsers
 - [ ] **Test rendering performance** with and without content-visibility
 - [ ] **Add progressive enhancement** for content loading
@@ -548,9 +601,10 @@ className="transform-gpu backdrop-blur-[24px] hover:[transform:perspective(1000p
 **Current Problem**: Text wrapping differs between Safari and Chrome, affecting visual consistency.
 
 **Details**:
+
 - [ ] **Detect text-balance support**:
   ```typescript
-  const supportsTextBalance = CSS.supports('text-wrap: balance');
+  const supportsTextBalance = CSS.supports("text-wrap: balance");
   ```
 - [ ] **Implement manual text balancing** for Safari:
   ```tsx
@@ -568,6 +622,7 @@ className="transform-gpu backdrop-blur-[24px] hover:[transform:perspective(1000p
 **Context**: Safari has different font rendering characteristics that may affect readability.
 
 **Details**:
+
 - [ ] **Add Safari-specific font smoothing**:
   ```css
   body {
@@ -590,6 +645,7 @@ className="transform-gpu backdrop-blur-[24px] hover:[transform:perspective(1000p
 **Context**: Safari on iOS has unique viewport behavior that needs special handling.
 
 **Details**:
+
 - [ ] **Verify `-webkit-fill-available` implementation** in existing code
 - [ ] **Test viewport height calculations** on various iOS devices
 - [ ] **Ensure proper scrolling behavior** with rubber-band effects disabled
@@ -602,6 +658,7 @@ className="transform-gpu backdrop-blur-[24px] hover:[transform:perspective(1000p
 **Context**: Safari on touch devices has different interaction behaviors.
 
 **Details**:
+
 - [ ] **Review touch handling** in interactive components
 - [ ] **Optimize hover states** for mobile Safari (remove or adapt)
 - [ ] **Test accessibility features** like VoiceOver integration
@@ -614,6 +671,7 @@ className="transform-gpu backdrop-blur-[24px] hover:[transform:perspective(1000p
 **Context**: Safari has strict autoplay policies and different video handling.
 
 **Details**:
+
 - [ ] **Review video element** in MorphingVideo component
 - [ ] **Add Safari-specific video attributes** like `playsinline`
 - [ ] **Test autoplay behavior** on iOS Safari
@@ -630,6 +688,7 @@ className="transform-gpu backdrop-blur-[24px] hover:[transform:perspective(1000p
 **Context**: Establish systematic testing for Safari compatibility.
 
 **Details**:
+
 - [ ] **Set up local Safari testing environment** with various versions
 - [ ] **Configure BrowserStack or similar** for comprehensive Safari testing
 - [ ] **Create automated visual regression tests** using Playwright
@@ -642,6 +701,7 @@ className="transform-gpu backdrop-blur-[24px] hover:[transform:perspective(1000p
 **Context**: Track performance improvements and regressions.
 
 **Details**:
+
 - [ ] **Implement FPS monitoring** using Performance API
 - [ ] **Add Safari-specific performance metrics** to analytics
 - [ ] **Create performance regression alerts** in CI/CD
@@ -654,6 +714,7 @@ className="transform-gpu backdrop-blur-[24px] hover:[transform:perspective(1000p
 **Context**: Ensure the user experience is consistent across browsers.
 
 **Details**:
+
 - [ ] **Test complete user flows** in Safari vs Chrome
 - [ ] **Verify animation smoothness** subjectively and objectively
 - [ ] **Validate visual consistency** using screenshot comparison
@@ -666,6 +727,7 @@ className="transform-gpu backdrop-blur-[24px] hover:[transform:perspective(1000p
 **Context**: Document Safari-specific considerations for future development.
 
 **Details**:
+
 - [ ] **Document Safari-specific patterns** and best practices
 - [ ] **Update browser support documentation** with compatibility matrix
 - [ ] **Create troubleshooting guide** for common Safari issues
@@ -682,6 +744,7 @@ className="transform-gpu backdrop-blur-[24px] hover:[transform:perspective(1000p
 **Context**: Enable gradual rollout and quick rollback of Safari optimizations.
 
 **Details**:
+
 - [ ] **Add feature flags** for major Safari optimizations
 - [ ] **Implement A/B testing** for different optimization strategies
 - [ ] **Create rollback strategies** for performance regressions
@@ -694,6 +757,7 @@ className="transform-gpu backdrop-blur-[24px] hover:[transform:perspective(1000p
 **Context**: Track actual user experience improvements for Safari users.
 
 **Details**:
+
 - [ ] **Add Safari-specific analytics events** for performance tracking
 - [ ] **Monitor Core Web Vitals** specifically for Safari users
 - [ ] **Track user engagement metrics** before and after optimizations
@@ -706,6 +770,7 @@ className="transform-gpu backdrop-blur-[24px] hover:[transform:perspective(1000p
 **Context**: Integrate Safari testing into development workflow.
 
 **Details**:
+
 - [ ] **Add Safari testing** to CI/CD pipeline
 - [ ] **Implement performance regression tests** for Safari
 - [ ] **Update deployment checklist** with Safari-specific checks
@@ -716,7 +781,9 @@ className="transform-gpu backdrop-blur-[24px] hover:[transform:perspective(1000p
 ## Priority Timeline
 
 ### Week 1 (Critical) - Foundation
+
 **Focus**: Address layout-breaking issues that prevent basic functionality
+
 - **Task 1.1-1.4**: Container Queries Fallback Implementation
   - Impact: Fixes broken layouts in Safari < 16.0
   - Effort: High (requires comprehensive component refactoring)
@@ -725,7 +792,9 @@ className="transform-gpu backdrop-blur-[24px] hover:[transform:perspective(1000p
   - Effort: Medium (mostly CSS and utility function changes)
 
 ### Week 2 (High Priority) - Performance
+
 **Focus**: Address animation performance issues affecting user experience
+
 - **Task 3.1-3.3**: Backdrop-Filter Performance Optimization
   - Impact: Dramatically improves animation smoothness
   - Effort: High (requires rethinking animation strategies)
@@ -734,7 +803,9 @@ className="transform-gpu backdrop-blur-[24px] hover:[transform:perspective(1000p
   - Effort: Medium (focused on specific components)
 
 ### Week 3 (Medium Priority) - Polish
+
 **Focus**: Fine-tune performance and address remaining compatibility issues
+
 - **Task 5.1-5.3**: CSS Performance Optimization
   - Impact: Improves overall rendering performance
   - Effort: Medium (CSS refactoring and optimization)
@@ -743,7 +814,9 @@ className="transform-gpu backdrop-blur-[24px] hover:[transform:perspective(1000p
   - Effort: Low (mostly CSS and minor component updates)
 
 ### Week 4 (Testing & Monitoring) - Validation
+
 **Focus**: Ensure optimizations work and establish ongoing monitoring
+
 - **Task 8.1-8.4**: Comprehensive Testing and Validation
   - Impact: Validates all improvements work as expected
   - Effort: Medium (test setup and execution)
@@ -754,11 +827,13 @@ className="transform-gpu backdrop-blur-[24px] hover:[transform:perspective(1000p
 ## Success Criteria
 
 ### Functional Requirements
+
 - [ ] **Layout Consistency**: All layouts work identically in Safari and Chrome across all viewport sizes
 - [ ] **Feature Parity**: All interactive features function the same in both browsers
 - [ ] **Visual Consistency**: No visual differences between browsers (within design tolerances)
 
-### Performance Requirements  
+### Performance Requirements
+
 - [ ] **60fps Animations**: All animations maintain 60fps in Safari, including:
   - Page transitions and navigation
   - Scroll-driven animations
@@ -768,11 +843,13 @@ className="transform-gpu backdrop-blur-[24px] hover:[transform:perspective(1000p
 - [ ] **Memory Usage**: No memory leaks or excessive GPU memory usage in Safari
 
 ### User Experience Requirements
+
 - [ ] **Smooth Interactions**: All user interactions feel responsive and smooth
 - [ ] **Progressive Enhancement**: Graceful degradation provides good experience on older Safari versions
 - [ ] **Accessibility**: All accessibility features work consistently across browsers
 
 ### Technical Requirements
+
 - [ ] **Browser Support**: Full compatibility with Safari 14+ and iOS Safari 14+
 - [ ] **Performance Monitoring**: Real-time performance metrics for Safari users
 - [ ] **Maintainability**: Clear patterns and documentation for ongoing Safari compatibility
