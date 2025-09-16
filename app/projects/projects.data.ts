@@ -38,7 +38,7 @@ export const PROJECTS: Project[] = [
     metrics: ['React 19', 'Ghost AI', 'Collision Detection'],
     links: [
       { label: 'Github', href: 'https://github.com/jayvicsanantonio/ai-pacman', icon: 'github' },
-      { label: 'View', href: 'https://jayvicsanantonio.github.io/ai-pacman/' },
+      { label: 'View', href: 'https://jayvicsanantonio.github.io/ai-pacman/', icon: 'external' },
     ],
     sections: [
       {
@@ -75,7 +75,7 @@ export const PROJECTS: Project[] = [
     metrics: ['Next.js 15', 'Framer Motion', 'Accessibility'],
     links: [
       { label: 'Github', href: 'https://github.com/jayvicsanantonio/ai-timeline', icon: 'github' },
-      { label: 'View', href: 'https://ai-timeline-six.vercel.app/' },
+      { label: 'View', href: 'https://ai-timeline-six.vercel.app/', icon: 'external' },
     ],
     sections: [
       {
@@ -121,7 +121,9 @@ export const PROJECTS: Project[] = [
       '$140M+ ad spend influenced',
       'E2E stability via Cypress',
     ],
-    links: [{ label: 'View', href: 'https://www.advertising.yahooinc.com/our-dsp' }],
+    links: [
+      { label: 'View', href: 'https://www.advertising.yahooinc.com/our-dsp', icon: 'external' },
+    ],
     sections: [
       {
         label: 'Context',
@@ -137,6 +139,46 @@ export const PROJECTS: Project[] = [
         label: 'Results',
         content:
           'Increased upload capacity from 2M → 25M; contributed to features driving material spend; improved reliability and velocity.',
+      },
+    ],
+  },
+  {
+    slug: 'ai-humanity-passport',
+    title: 'Humanity+ Passport',
+    period: '2025',
+    blurb:
+      'AI-powered evaluator that analyzes GitHub repositories and awards a Humanity+ badge for socially responsible software; built for the OpenAI Open Model Hackathon.',
+    image: {
+      src: '/images/projects/ai-humanity.png',
+      alt: 'Humanity+ Passport',
+      width: 1200,
+      height: 675,
+      ratio: '1200/675',
+    },
+    skills: ['AI', 'TypeScript', 'Hobby', 'Hackathon'],
+    metrics: ['Groq + gpt-oss-20b', 'AI repo analysis', 'Dynamic SVG badges'],
+    links: [
+      {
+        label: 'Github',
+        href: 'https://github.com/jayvicsanantonio/ai-humanity-passport',
+        icon: 'github',
+      },
+      { label: 'View', href: 'https://ai-humanity-passport.vercel.app/', icon: 'external' },
+    ],
+    sections: [
+      {
+        label: 'Context',
+        content:
+          'An AI service that evaluates open‑source repositories and issues Humanity+ badges to highlight positive societal impact.',
+      },
+      {
+        label: 'Decisions',
+        content:
+          'Emphasized transparent criteria and fast analysis; generated shareable SVG badges for verified outcomes.',
+      },
+      {
+        label: 'Results',
+        content: 'Live demo and badge issuance flow encouraging socially responsible development.',
       },
     ],
   },
@@ -328,7 +370,7 @@ export const PROJECTS: Project[] = [
     metrics: ['Mobile‑first UX', 'Fast loading', 'Clear content structure'],
     links: [
       { label: 'Github', href: 'https://github.com/nesceal/mmchurch', icon: 'github' },
-      { label: 'View', href: 'https://mmchurch.ph/' },
+      { label: 'View', href: 'https://mmchurch.ph/', icon: 'external' },
     ],
     sections: [
       {
@@ -354,7 +396,7 @@ export const PROJECTS: Project[] = [
     metrics: ['<100ms edge latency targets', 'Event‑driven updates', 'Zero‑cold‑start UX'],
     links: [
       { label: 'Github', href: 'https://github.com/jayvicsanantonio/sync-flow', icon: 'github' },
-      { label: 'View', href: 'https://sync-flow-nine.vercel.app/' },
+      { label: 'View', href: 'https://sync-flow-nine.vercel.app/', icon: 'external' },
     ],
     sections: [
       {
@@ -395,7 +437,7 @@ export const PROJECTS: Project[] = [
         href: 'https://github.com/jayvicsanantonio/tracknstick.com',
         icon: 'github',
       },
-      { label: 'View', href: 'https://tracknstick.com/' },
+      { label: 'View', href: 'https://tracknstick.com/', icon: 'external' },
     ],
     sections: [
       {
@@ -433,7 +475,7 @@ export const PROJECTS: Project[] = [
         href: 'https://github.com/jayvicsanantonio/web-development-hub',
         icon: 'github',
       },
-      { label: 'View', href: 'https://webdevhub.link/' },
+      { label: 'View', href: 'https://webdevhub.link/', icon: 'external' },
     ],
     sections: [
       {
@@ -543,7 +585,7 @@ export const PROJECTS: Project[] = [
     metrics: ['Used by the Ember community', 'Guided upgrades across framework releases'],
     links: [
       { label: 'Github', href: 'https://github.com/ember-learn/upgrade-guide', icon: 'github' },
-      { label: 'View', href: 'https://upgrade.emberjs.com/' },
+      { label: 'View', href: 'https://upgrade.emberjs.com/', icon: 'external' },
     ],
     sections: [
       {

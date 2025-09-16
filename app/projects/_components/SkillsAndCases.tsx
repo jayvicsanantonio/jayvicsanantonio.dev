@@ -22,9 +22,10 @@ const SKILL_FILTERS = [
 
 const PRIORITY_ORDER = [
   'yahoo-dsp',
+  'ai-humanity-passport',
+  'tracknstick',
   'webdevhub',
   'sync-flow',
-  'tracknstick',
   'barbenheimer-vscode-theme',
   'barbenheimer-zed-theme',
   'ember-upgrade-guide',
