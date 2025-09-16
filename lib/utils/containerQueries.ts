@@ -2,6 +2,53 @@
 // Provides fallback strategies for Safari compatibility with container queries
 
 /**
+ * CONTAINER QUERIES vs VIEWPORT QUERIES - DECISION GUIDE
+ *
+ * 🎯 USE CONTAINER QUERIES WHEN:
+ * --------------------------------
+ * ✅ Component layout depends on its container size, not viewport size
+ * ✅ Building reusable components that adapt to their context
+ * ✅ Component might appear in sidebars, modals, or flexible containers
+ * ✅ You need intrinsic responsive design (component responds to its own space)
+ * ✅ Component should work the same way regardless of where it's placed
+ *
+ * Examples:
+ * - Card components that switch from vertical to horizontal layout
+ * - Navigation components that collapse based on available space
+ * - Timeline items that increase padding in wider containers
+ * - Product grids that adjust columns based on container width
+ * - Form fields that stack/unstack based on form width
+ *
+ * 📱 USE VIEWPORT QUERIES WHEN:
+ * -----------------------------
+ * ✅ Layout depends on overall screen size or device type
+ * ✅ Setting global page layout and typography scales
+ * ✅ Defining responsive breakpoints for entire page layouts
+ * ✅ Working with mobile-first responsive design principles
+ * ✅ Need to respond to device characteristics (orientation, resolution)
+ *
+ * Examples:
+ * - Page headers that change layout on mobile vs desktop
+ * - Global font size scaling based on screen size
+ * - Responsive grid systems for entire page layouts
+ * - Navigation that switches between mobile hamburger and desktop menu
+ * - Responsive typography and spacing scales
+ *
+ * 🔧 IMPLEMENTATION STRATEGY:
+ * ---------------------------
+ * 1. Always use getAdaptiveClasses() for automatic Safari fallbacks
+ * 2. Container queries where supported, viewport queries as fallback
+ * 3. Test on Safari < 16.0 to ensure fallback behavior works
+ * 4. Use ResizeObserver for precise container width detection when needed
+ *
+ * 🚀 PERFORMANCE HIERARCHY (fastest to slowest):
+ * -----------------------------------------------
+ * 1. Viewport queries (no container size calculations)
+ * 2. Container queries (efficient browser-native implementation)
+ * 3. ResizeObserver (manual container width detection)
+ */
+
+/**
  * Detects if the browser supports CSS container queries
  * @returns {boolean} True if container queries are supported
  */
