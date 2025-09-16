@@ -10,7 +10,7 @@
     "build": "next build",
     "start": "next start",
     "prebuild": "pnpm check && pnpm type-check",
-    "check": "pnpm run check:code && pnpm run check:content",
+    "check": "pnpm run check:code && pnpm run check:content && pnpm run type-check",
     "check:code": "biome check .",
     "check:content": "prettier --check \"**/*.{css,md,mdx}\"",
     "fix": "pnpm run fix:code && pnpm run fix:content",
