@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import AnimatedHeader from "./_components/AnimatedHeader.client";
-import SkillsAndCases from "./_components/SkillsAndCases";
+import AnimatedHeader from './_components/AnimatedHeader.client';
+import SkillsAndCases from './_components/SkillsAndCases';
 
 export default function ProjectsPage() {
   return (
@@ -19,7 +19,7 @@ export default function ProjectsPage() {
 
         {/* Projects only */}
         <React.Suspense fallback={null}>
-          <div className="animate-fade-in-up" style={{ animationDelay: "160ms" }}>
+          <div className="animate-fade-in-up" style={{ animationDelay: '160ms' }}>
             <SkillsAndCases />
           </div>
         </React.Suspense>
