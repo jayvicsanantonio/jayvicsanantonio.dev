@@ -6,7 +6,9 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
 import { Badge } from '@/components/ui/Badge';
+import { useContainerSize } from '@/hooks/useContainerSize';
 import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
+import { getAdaptiveClasses } from '@/lib/utils/containerQueries';
 
 type Experience = {
   title: string;
@@ -122,6 +124,17 @@ export default function WorkTimeline() {
   });
   const spineScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
+  // Container size detection for Safari fallback (provides enhanced responsive behavior)
+  const { containerRef: sizeRef } = useContainerSize();
+
+  // Ref callback to combine both refs
+  const setContainerRef = (node: HTMLDivElement | null) => {
+    containerRef.current = node;
+    if (sizeRef.current !== node) {
+      (sizeRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
+    }
+  };
+
   const reveal: MotionProps = prefersReducedMotion
     ? { initial: {}, whileInView: {}, viewport: {}, transition: {} }
     : {
@@ -135,7 +148,7 @@ export default function WorkTimeline() {
       };
 
   return (
-    <div ref={containerRef} className="relative mt-8 sm:mt-12 lg:mt-16">
+    <div ref={setContainerRef} className="relative mt-8 sm:mt-12 lg:mt-16">
       {/* Flow wrapper: center 100vw wrapper so spine aligns at viewport center */}
       <div className="lg:relative lg:left-1/2 lg:w-[100vw] lg:-translate-x-1/2">
         {/* Spine track (subtle) */}
@@ -236,9 +249,19 @@ export default function WorkTimeline() {
                     />
 
                     {/* Inner frosted panel */}
-                    <div className="relative rounded-2xl border border-white/8 bg-gray-950/50 p-5 backdrop-blur-[20px] backdrop-saturate-[150%] sm:p-6 [@container(min-width:36rem)]:p-6 before:pointer-events-none before:absolute before:inset-0 before:rounded-2xl before:bg-[radial-gradient(100%_50%_at_50%_0%,rgba(255,255,255,0.05),rgba(255,255,255,0)_50%)] before:content-['']">
+                    <div
+                      className={`relative rounded-2xl border border-white/8 bg-gray-950/50 p-5 backdrop-blur-[20px] backdrop-saturate-[150%] sm:p-6 before:pointer-events-none before:absolute before:inset-0 before:rounded-2xl before:bg-[radial-gradient(100%_50%_at_50%_0%,rgba(255,255,255,0.05),rgba(255,255,255,0)_50%)] before:content-[''] ${getAdaptiveClasses(
+                        '[@container(min-width:36rem)]:p-6',
+                        'lg:p-6',
+                      )}`}
+                    >
                       <div className="text-left">
-                        <h3 className="font-oswald text-xl text-white [@container(min-width:28rem)]:text-2xl">
+                        <h3
+                          className={`font-oswald text-xl text-white ${getAdaptiveClasses(
+                            '[@container(min-width:28rem)]:text-2xl',
+                            'sm:text-2xl',
+                          )}`}
+                        >
                           {item.title}
                         </h3>
                         <div className="mt-1 flex items-baseline justify-between gap-3">
@@ -252,7 +275,12 @@ export default function WorkTimeline() {
                         <div className="mt-3 h-px bg-linear-to-r from-transparent via-white/5 to-transparent" />
                       </div>
 
-                      <ul className="mt-4 space-y-3 text-[0.95rem]/relaxed sm:text-[0.98rem]/relaxed [@container(min-width:34rem)]:space-y-4">
+                      <ul
+                        className={`mt-4 space-y-3 text-[0.95rem]/relaxed sm:text-[0.98rem]/relaxed ${getAdaptiveClasses(
+                          '[@container(min-width:34rem)]:space-y-4',
+                          'md:space-y-4',
+                        )}`}
+                      >
                         {item.bullets.map((b) => (
                           <li key={b} className="flex gap-2 break-words text-gray-300/90">
                             <Icon
