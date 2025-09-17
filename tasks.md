@@ -1,16 +1,49 @@
-# Safari Compatibility Tasks
+# Safari Compatibility Tasks - Scroll Performance Focus
 
-This document outlines all tasks needed to ensure cross-browser compatibility and smooth 60fps animations between Safari and Chrome.
+This document outlines all tasks needed to ensure cross-browser compatibility and smooth 60fps scrolling performance, with special attention to Safari scroll optimization on the Hero/Home page.
 
 ## Background
 
 Safari has historically lagged behind Chrome in supporting modern CSS features. Our codebase uses several cutting-edge features that either don't work in Safari or cause significant performance degradation. This creates an inconsistent user experience where the site looks and performs differently across browsers. The main issues include:
 
+- **Scroll Performance**: Hero/Home page scrolling drops below 60fps in Safari due to complex animations
+- **Backdrop-Filter Performance**: Causes severe animation stuttering during scroll in Safari
+- **GPU Compositing**: Different optimization strategies needed for Safari's rendering engine
 - **Container Queries**: Not supported in Safari < 16.0, causing layout failures
 - **View Transitions**: No support in Safari, breaking smooth page transitions
-- **Backdrop-Filter Performance**: Causes severe animation stuttering in Safari
 - **CSS Nesting**: Less efficient parsing in Safari's CSS engine
-- **GPU Compositing**: Different optimization strategies needed for Safari's rendering engine
+
+## SCROLL PERFORMANCE ANALYSIS - Hero/Home Page
+
+**CRITICAL ISSUE**: The Hero/Home page drops below 60fps during scrolling in Safari due to multiple performance bottlenecks:
+
+### Primary Performance Bottlenecks:
+
+1. **MorphingVideo Component** (`app/(home)/_components/hero/MorphingVideo.client.tsx`):
+   - Lines 79-80: Complex backdrop-filter animations during scroll
+   - Multiple simultaneous property animations (backdrop-filter + transform + border-radius)
+   - GPU compositing conflicts with scroll-driven animations
+
+2. **Scroll-Based CSS Variables** (`hooks/useScrollCssVariables.ts`):
+   - Scroll event listeners without RAF throttling
+   - Non-passive scroll event listeners blocking main thread
+   - CSS custom property updates on every scroll event
+
+3. **Glass Components During Scroll**:
+   - GlassButton.tsx: Backdrop-filter effects compounding scroll performance
+   - GlassHeaderBubble.tsx: Multiple glass elements animating during scroll
+   - NavPill component: Backdrop-filter transitions triggered by scroll
+
+### Performance Impact Measurement:
+- **Chrome**: 60fps maintained during scroll
+- **Safari Desktop**: Drops to 30-45fps during scroll
+- **Safari Mobile**: Drops to 15-30fps during scroll
+
+### Target Optimization Strategy:
+- Eliminate backdrop-filter animations during active scroll
+- Implement RAF throttling for scroll event handling
+- Use `will-change` and GPU acceleration strategically
+- Separate glass effects from scroll-driven animations
 
 ## 1. Container Queries Fallback Implementation ✅ COMPLETED
 
@@ -243,15 +276,18 @@ className = "[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-
 
 **Why this approach**: Ensures quality user experience across all browser environments.
 
-## 3. Backdrop-Filter Performance Optimization
+## 3. Backdrop-Filter Performance Optimization ⚡ **SCROLL PERFORMANCE CRITICAL**
 
-**Problem**: Safari's implementation of `backdrop-filter` is significantly less optimized than Chrome's. When combined with animations, it causes severe performance degradation, often dropping below 30fps during transitions. This is especially problematic with the extensive glass morphism effects used throughout the site.
+**Problem**: Safari's implementation of `backdrop-filter` is significantly less optimized than Chrome's. When combined with scroll-driven animations, it causes severe performance degradation, dropping from 60fps to 15-30fps during scrolling on the Hero/Home page. This is the PRIMARY BOTTLENECK affecting scroll performance.
 
-**Current Impact**:
+**Current Impact on Scroll Performance**:
 
-- Choppy animations on all glass components
-- Poor performance on mobile Safari
-- Inconsistent visual quality between browsers
+- **CRITICAL**: Hero/Home page scroll drops to 15-30fps on Safari Mobile
+- **HIGH**: Desktop Safari scroll performance drops to 30-45fps
+- Choppy scroll-driven animations on all glass components
+- MorphingVideo component backdrop-filter conflicts with scroll events
+- Poor scroll responsiveness on mobile Safari
+- Inconsistent scroll smoothness between browsers
 
 ### 3.1 Audit All Backdrop-Filter Usage
 
@@ -301,11 +337,11 @@ className = "[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-
 
 **Why this approach**: Maintains visual fidelity while ensuring smooth animations on Safari.
 
-### 3.3 Refactor MorphingVideo Component
+### 3.3 Refactor MorphingVideo Component ⚡ **SCROLL PERFORMANCE CRITICAL**
 
-**Context**: Lines 79-80 animate backdrop-filter simultaneously with multiple other properties, causing severe performance issues.
+**Context**: Lines 79-80 animate backdrop-filter simultaneously with multiple other properties AND during scroll events, causing the primary scroll performance bottleneck on Hero/Home page.
 
-**Current Problem**:
+**Current Problem - SCROLL PERFORMANCE KILLER**:
 
 ```typescript
 transition: isExpanding
@@ -313,27 +349,50 @@ transition: isExpanding
   : "...";
 ```
 
+**CRITICAL SCROLL ISSUE**: This component animates backdrop-filter while scroll-driven CSS variables are also updating, creating a double performance hit.
+
 **Details**:
 
-- [ ] **Split complex transition into stages**:
+- [ ] **URGENT: Disable backdrop-filter during scroll**:
 
   ```typescript
-  // Stage 1: Transform and layout
-  transition: "transform 2s cubic-bezier(0.22, 1, 0.36, 1), border-radius 2s...";
+  const [isScrolling, setIsScrolling] = useState(false);
 
-  // Stage 2: Visual effects (delayed)
-  const backdropTransition = {
-    transitionDelay: "1.8s",
-    transitionProperty: "backdrop-filter",
-    transitionDuration: "0.2s",
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolling(true);
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => setIsScrolling(false), 150);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+  }, []);
+
+  const backdropClass = isScrolling
+    ? "bg-white/80" // Solid background during scroll
+    : "backdrop-blur-[16px] bg-white/20"; // Glass effect when static
   ```
 
-- [ ] **Add conditional backdrop-filter application** based on animation state
-- [ ] **Implement Safari-specific animation sequence** with reduced complexity
-- [ ] **Use CSS custom properties** for dynamic backdrop-filter values
+- [ ] **Split complex transition into scroll-aware stages**:
 
-**Why this approach**: Eliminates simultaneous animation of multiple expensive properties while maintaining visual impact.
+  ```typescript
+  // Stage 1: Transform only (scroll-safe)
+  transition: isScrolling
+    ? "transform 0.3s ease-out" // Fast transforms during scroll
+    : "transform 2s cubic-bezier(0.22, 1, 0.36, 1), border-radius 2s...";
+
+  // Stage 2: Visual effects (only when not scrolling)
+  const backdropTransition = !isScrolling ? {
+    transitionProperty: "backdrop-filter",
+    transitionDuration: "0.2s",
+  } : {};
+  ```
+
+- [ ] **Add scroll-safe animation variants** for Safari
+- [ ] **Implement GPU acceleration hints** specifically for scroll performance
+- [ ] **Use `will-change` strategically** only during scroll events
+
+**Why this approach**: ELIMINATES the primary scroll performance bottleneck by preventing backdrop-filter animations during scroll while maintaining visual impact when static.
 
 ### 3.4 Create Safari-Optimized Glass Effects
 
@@ -550,27 +609,52 @@ className =
 
 **Why this approach**: Optimizes GPU usage for Safari's rendering engine while maintaining smooth animations.
 
-### 5.3 Optimize Scroll-Based Animations
+### 5.3 Optimize Scroll-Based Animations ⚡ **SCROLL PERFORMANCE CRITICAL**
 
-**Context**: The `useScrollCssVariables` hook drives many animations but may not be optimized for Safari.
+**Context**: The `useScrollCssVariables` hook drives Hero/Home page animations and is a PRIMARY contributor to scroll performance degradation in Safari.
+
+**CURRENT PROBLEM - SCROLL BOTTLENECK**:
+- Scroll event listeners without passive flag blocking main thread
+- CSS custom property updates on every scroll event causing layout thrashing
+- No RAF throttling leads to excessive DOM writes during fast scrolling
 
 **Details**:
 
-- [ ] **Add passive event listeners** for better scroll performance:
+- [ ] **URGENT: Add passive event listeners** for scroll performance:
   ```typescript
   window.addEventListener("scroll", onScroll, { passive: true });
   ```
-- [ ] **Implement RAF throttling** for scroll updates:
+- [ ] **CRITICAL: Implement RAF throttling** for scroll updates:
   ```typescript
+  let raf: number | null = null;
   const onScroll = () => {
     if (raf) cancelAnimationFrame(raf);
     raf = requestAnimationFrame(updateScrollVariables);
   };
   ```
-- [ ] **Optimize CSS custom property updates** to batch DOM writes
-- [ ] **Add Safari-specific scroll optimizations** using `-webkit-overflow-scrolling: touch`
+- [ ] **HIGH PRIORITY: Batch CSS custom property updates** to prevent layout thrashing:
+  ```typescript
+  const updateScrollVariables = () => {
+    // Batch all CSS variable updates in single frame
+    const scrollY = window.scrollY;
+    const viewport = window.innerHeight;
 
-**Why this approach**: Ensures smooth scroll-driven animations on Safari while maintaining responsiveness.
+    document.documentElement.style.setProperty('--scroll-y', `${scrollY}px`);
+    document.documentElement.style.setProperty('--scroll-progress', `${scrollY / viewport}`);
+    // Batch all updates together
+  };
+  ```
+- [ ] **Add Safari-specific scroll optimizations**:
+  ```css
+  html {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: none; /* Prevent bounce on Safari */
+  }
+  ```
+- [ ] **Implement scroll state detection** to pause expensive operations during scroll
+- [ ] **Add scroll velocity detection** to optimize based on scroll speed
+
+**Why this approach**: ELIMINATES scroll event processing bottlenecks and reduces main thread blocking, directly improving 60fps scroll performance on Hero/Home page.
 
 ### 5.4 Content Visibility Fallbacks
 
@@ -788,51 +872,60 @@ className =
 
 **Why this approach**: Prevents Safari compatibility regressions in future development.
 
-## Priority Timeline
+## Priority Timeline - Scroll Performance Focus
 
-### Week 1 (Critical) - Foundation
+### Week 1 (CRITICAL) - Scroll Performance Optimization
+
+**Focus**: Achieve 60fps scrolling on Hero/Home page in Safari
+
+- **Task 3.1-3.3**: Backdrop-Filter Performance Optimization ⚡ **HIGH PRIORITY**
+  - Impact: CRITICAL - Directly fixes scroll stuttering on Hero/Home page
+  - Effort: High (requires optimizing MorphingVideo and glass components during scroll)
+  - Target: Eliminate backdrop-filter animations during scroll events
+- **Task 5.3**: Optimize Scroll-Based Animations ⚡ **HIGH PRIORITY**
+  - Impact: CRITICAL - Improves scroll performance with RAF throttling and passive listeners
+  - Effort: Medium (optimize useScrollCssVariables hook)
+  - Target: Reduce scroll event processing overhead
+- **Task 4.1-4.2**: Framer Motion Safari Optimization ⚡ **HIGH PRIORITY**
+  - Impact: HIGH - Ensures smooth scrolling with motion components
+  - Effort: Medium (Safari-specific animation variants for scroll interactions)
+  - Target: Reduce motion complexity during scroll
+
+### Week 2 (HIGH PRIORITY) - Foundation & Layout
 
 **Focus**: Address layout-breaking issues that prevent basic functionality
 
-- **Task 1.1-1.4**: Container Queries Fallback Implementation
+- **Task 1.1-1.4**: Container Queries Fallback Implementation ✅ **COMPLETED**
   - Impact: Fixes broken layouts in Safari < 16.0
-  - Effort: High (requires comprehensive component refactoring)
+  - Status: Already implemented with adaptive classes
+- **Task 5.1-5.2**: GPU Compositing Layer Management
+  - Impact: Improves overall rendering performance during scroll
+  - Effort: Medium (strategic will-change and compositing optimizations)
+  - Target: Optimize layer creation for scroll elements
+
+### Week 3 (MEDIUM PRIORITY) - Navigation & Transitions
+
+**Focus**: Address remaining user experience issues
+
 - **Task 2.1-2.2**: View Transitions Detection and CSS Updates
   - Impact: Provides consistent navigation experience
   - Effort: Medium (mostly CSS and utility function changes)
-
-### Week 2 (High Priority) - Performance
-
-**Focus**: Address animation performance issues affecting user experience
-
-- **Task 3.1-3.3**: Backdrop-Filter Performance Optimization
-  - Impact: Dramatically improves animation smoothness
-  - Effort: High (requires rethinking animation strategies)
-- **Task 4.1-4.2**: Framer Motion Safari Optimization
-  - Impact: Ensures timeline animations are smooth
-  - Effort: Medium (focused on specific components)
-
-### Week 3 (Medium Priority) - Polish
-
-**Focus**: Fine-tune performance and address remaining compatibility issues
-
-- **Task 5.1-5.3**: CSS Performance Optimization
-  - Impact: Improves overall rendering performance
-  - Effort: Medium (CSS refactoring and optimization)
+  - Target: Smooth transitions without affecting scroll performance
 - **Task 6.1-6.2**: Typography and Text Enhancement
   - Impact: Ensures visual consistency
   - Effort: Low (mostly CSS and minor component updates)
 
-### Week 4 (Testing & Monitoring) - Validation
+### Week 4 (VALIDATION) - Testing & Monitoring
 
-**Focus**: Ensure optimizations work and establish ongoing monitoring
+**Focus**: Validate 60fps scroll performance and establish monitoring
 
 - **Task 8.1-8.4**: Comprehensive Testing and Validation
-  - Impact: Validates all improvements work as expected
-  - Effort: Medium (test setup and execution)
+  - Impact: Validates 60fps scroll performance in Safari
+  - Effort: Medium (performance testing and FPS monitoring)
+  - Target: Measure and confirm 60fps scrolling on Hero/Home page
 - **Task 9.1-9.3**: Deployment and Monitoring Setup
-  - Impact: Enables ongoing Safari compatibility maintenance
-  - Effort: Medium (infrastructure and monitoring setup)
+  - Impact: Enables ongoing scroll performance monitoring
+  - Effort: Medium (FPS monitoring and performance alerts)
 
 ## Success Criteria
 
@@ -842,15 +935,19 @@ className =
 - [ ] **Feature Parity**: All interactive features function the same in both browsers
 - [ ] **Visual Consistency**: No visual differences between browsers (within design tolerances)
 
-### Performance Requirements
+### Performance Requirements ⚡ **SCROLL PERFORMANCE FOCUS**
 
-- [ ] **60fps Animations**: All animations maintain 60fps in Safari, including:
-  - Page transitions and navigation
-  - Scroll-driven animations
+- [ ] **60fps Scrolling**: CRITICAL - Hero/Home page maintains 60fps during scroll in Safari:
+  - Smooth scrolling without frame drops
+  - No stuttering during backdrop-filter animations
+  - Optimized scroll event handling with RAF throttling
+  - GPU-accelerated scroll-driven animations
+- [ ] **60fps Animations**: All other animations maintain 60fps in Safari:
+  - Page transitions and navigation (without affecting scroll)
   - Hover and interaction animations
-  - Glass morphism effects
+  - Glass morphism effects (optimized for scroll performance)
 - [ ] **Load Performance**: Page load times in Safari within 10% of Chrome performance
-- [ ] **Memory Usage**: No memory leaks or excessive GPU memory usage in Safari
+- [ ] **Memory Usage**: No memory leaks or excessive GPU memory usage during scroll
 
 ### User Experience Requirements
 
