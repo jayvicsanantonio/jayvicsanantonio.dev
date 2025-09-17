@@ -1,21 +1,12 @@
 'use client';
 
 import { Icon } from '@iconify/react';
+import type { MotionProps } from 'framer-motion';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 
 import { Badge } from '@/components/ui/Badge';
-import { useContainerSize } from '@/hooks/useContainerSize';
 import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
-import { useScrollState } from '@/lib/utils/browserUtils';
-import { supportsContainerQueries } from '@/lib/utils/containerQueries';
-import { getOptimizedGlassClasses } from '@/lib/utils/glassEffects';
-import {
-  getCardHoverVariants,
-  getMotionAcceleration,
-  getSafariOptimizedReveal,
-  getStaggerConfig,
-} from '@/lib/utils/motionUtils';
 
 type Experience = {
   title: string;
@@ -125,49 +116,26 @@ const EXPERIENCES: Experience[] = [
 export default function WorkTimeline() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
-  const { isScrolling } = useScrollState();
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start 0.9', 'end 0.6'],
   });
   const spineScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
-  // Container size detection for Safari fallback (provides enhanced responsive behavior)
-  const { containerRef: sizeRef } = useContainerSize();
-
-  // Hydration-safe container query support detection
-  const [isHydrated, setIsHydrated] = React.useState(false);
-  const hasContainerQuerySupport = React.useMemo(() => {
-    if (!isHydrated) return false;
-    return supportsContainerQueries();
-  }, [isHydrated]);
-
-  React.useEffect(() => {
-    setIsHydrated(true);
-  }, []);
-
-  // Helper function to get adaptive classes with hydration safety
-  const getAdaptiveClasses = React.useCallback(
-    (containerClasses: string, fallbackClasses: string): string => {
-      return hasContainerQuerySupport ? containerClasses : fallbackClasses;
-    },
-    [hasContainerQuerySupport],
-  );
-
-  // Ref callback to combine both refs
-  const setContainerRef = (node: HTMLDivElement | null) => {
-    containerRef.current = node;
-    if (sizeRef.current !== node) {
-      (sizeRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
-    }
-  };
-
-  // Safari-optimized motion configurations
-  const cardHoverVariants = getCardHoverVariants();
-  const staggerConfig = getStaggerConfig(EXPERIENCES.length);
+  const reveal: MotionProps = prefersReducedMotion
+    ? { initial: {}, whileInView: {}, viewport: {}, transition: {} }
+    : {
+        initial: { opacity: 0 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, amount: 0.3 },
+        transition: {
+          duration: 0.55,
+          ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+        },
+      };
 
   return (
-    <div ref={setContainerRef} className="relative mt-8 sm:mt-12 lg:mt-16">
+    <div ref={containerRef} className="relative mt-8 sm:mt-12 lg:mt-16">
       {/* Flow wrapper: center 100vw wrapper so spine aligns at viewport center */}
       <div className="lg:relative lg:left-1/2 lg:w-[100vw] lg:-translate-x-1/2">
         {/* Spine track (subtle) */}
@@ -216,18 +184,7 @@ export default function WorkTimeline() {
             />
           </div>
         </div>
-        <motion.ul
-          className="relative space-y-8 pt-10 pl-0 sm:space-y-12 sm:pt-16 lg:space-y-28 lg:pt-24"
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={{
-            initial: {},
-            animate: {
-              transition: staggerConfig,
-            },
-          }}
-        >
+        <ul className="relative space-y-8 pt-10 pl-0 sm:space-y-12 sm:pt-16 lg:space-y-28 lg:pt-24">
           {EXPERIENCES.map((item, index) => {
             const isRight = index % 2 === 0;
             return (
@@ -267,12 +224,10 @@ export default function WorkTimeline() {
                 >
                   {/* Card */}
                   <motion.article
-                    {...getSafariOptimizedReveal(prefersReducedMotion, index * 0.1)}
-                    variants={cardHoverVariants}
-                    whileHover="hover"
-                    className={`group cq relative w-full ${getMotionAcceleration()} rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.25),rgba(168,85,247,0.15),rgba(34,211,238,0.12))] p-[1px] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_12px_32px_rgba(0,0,0,0.4)] ring-1 ring-white/10 transition-all duration-300 after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl after:bg-[linear-gradient(120deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.12)_50%,rgba(255,255,255,0)_100%)] after:opacity-0 after:mix-blend-overlay after:transition-opacity after:duration-300 hover:bg-[linear-gradient(135deg,rgba(59,130,246,0.3),rgba(168,85,247,0.2),rgba(34,211,238,0.15))] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_16px_40px_rgba(0,0,0,0.5)] hover:ring-white/15 group-hover:after:opacity-100 focus-within:after:opacity-100 lg:w-[min(500px,50vw)] ${
+                    {...reveal}
+                    className={`group cq relative w-full transform-gpu rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.25),rgba(168,85,247,0.15),rgba(34,211,238,0.12))] p-[1px] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_12px_32px_rgba(0,0,0,0.4)] ring-1 ring-white/10 backdrop-blur-[24px] backdrop-saturate-[140%] transition-all duration-300 after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl after:bg-[linear-gradient(120deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.12)_50%,rgba(255,255,255,0)_100%)] after:opacity-0 after:mix-blend-overlay after:transition-opacity after:duration-300 hover:bg-[linear-gradient(135deg,rgba(59,130,246,0.3),rgba(168,85,247,0.2),rgba(34,211,238,0.15))] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_16px_40px_rgba(0,0,0,0.5)] hover:ring-white/15 group-hover:after:opacity-100 focus-within:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)] focus-within:after:opacity-100 hover:-translate-y-0.5 sm:p-[1.2px] md:hover:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)] lg:w-[min(500px,50vw)] ${
                       isRight ? 'lg:mr-auto' : 'lg:ml-auto'
-                    } mx-auto lg:mx-0 ${getOptimizedGlassClasses('card', isScrolling, false)}`}
+                    } mx-auto lg:mx-0`}
                   >
                     {/* Subtle halo */}
                     <div
@@ -281,21 +236,9 @@ export default function WorkTimeline() {
                     />
 
                     {/* Inner frosted panel */}
-                    <div
-                      className={`relative rounded-2xl border border-white/8 bg-gray-950/50 p-5 sm:p-6 before:pointer-events-none before:absolute before:inset-0 before:rounded-2xl before:bg-[radial-gradient(100%_50%_at_50%_0%,rgba(255,255,255,0.05),rgba(255,255,255,0)_50%)] before:content-[''] ${getAdaptiveClasses(
-                        '[@container(min-width:36rem)]:p-6',
-                        'lg:p-6',
-                      )} ${getOptimizedGlassClasses('card', isScrolling, true)}`}
-                      suppressHydrationWarning
-                    >
+                    <div className="relative rounded-2xl border border-white/8 bg-gray-950/50 p-5 backdrop-blur-[20px] backdrop-saturate-[150%] sm:p-6 [@container(min-width:36rem)]:p-6 before:pointer-events-none before:absolute before:inset-0 before:rounded-2xl before:bg-[radial-gradient(100%_50%_at_50%_0%,rgba(255,255,255,0.05),rgba(255,255,255,0)_50%)] before:content-['']">
                       <div className="text-left">
-                        <h3
-                          className={`font-oswald text-xl text-white ${getAdaptiveClasses(
-                            '[@container(min-width:28rem)]:text-2xl',
-                            'sm:text-2xl',
-                          )}`}
-                          suppressHydrationWarning
-                        >
+                        <h3 className="font-oswald text-xl text-white [@container(min-width:28rem)]:text-2xl">
                           {item.title}
                         </h3>
                         <div className="mt-1 flex items-baseline justify-between gap-3">
@@ -309,13 +252,7 @@ export default function WorkTimeline() {
                         <div className="mt-3 h-px bg-linear-to-r from-transparent via-white/5 to-transparent" />
                       </div>
 
-                      <ul
-                        className={`mt-4 space-y-3 text-[0.95rem]/relaxed sm:text-[0.98rem]/relaxed ${getAdaptiveClasses(
-                          '[@container(min-width:34rem)]:space-y-4',
-                          'md:space-y-4',
-                        )}`}
-                        suppressHydrationWarning
-                      >
+                      <ul className="mt-4 space-y-3 text-[0.95rem]/relaxed sm:text-[0.98rem]/relaxed [@container(min-width:34rem)]:space-y-4">
                         {item.bullets.map((b) => (
                           <li key={b} className="flex gap-2 break-words text-gray-300/90">
                             <Icon
@@ -342,7 +279,7 @@ export default function WorkTimeline() {
               </li>
             );
           })}
-        </motion.ul>
+        </ul>
       </div>
     </div>
   );

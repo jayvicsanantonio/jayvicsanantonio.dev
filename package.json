@@ -10,7 +10,7 @@
     "build": "next build",
     "start": "next start",
     "prebuild": "pnpm check && pnpm type-check",
-    "check": "pnpm run check:code && pnpm run check:content && pnpm run type-check",
+    "check": "pnpm run check:code && pnpm run check:content",
     "check:code": "biome check .",
     "check:content": "prettier --check \"**/*.{css,md,mdx}\"",
     "fix": "pnpm run fix:code && pnpm run fix:content",
@@ -23,15 +23,7 @@
     "analyze": "ANALYZE=true pnpm build",
     "lh:prepare": "mkdir -p .lighthouse",
     "lh:all": "pnpm lh:prepare && pnpm dlx lighthouse http://localhost:3000 --preset=desktop --output=html --quiet --output-path=.lighthouse/home.desktop.html && pnpm dlx lighthouse http://localhost:3000/projects --preset=desktop --output=html --quiet --output-path=.lighthouse/projects.desktop.html && pnpm dlx lighthouse http://localhost:3000/work --preset=desktop --output=html --quiet --output-path=.lighthouse/work.desktop.html",
-    "lhci": "lhci autorun",
-    "test": "playwright test",
-    "test:safari": "playwright test --project=\"Desktop Safari\"",
-    "test:safari-mobile": "playwright test --project=\"Mobile Safari\"",
-    "test:cross-browser": "playwright test tests/cross-browser.spec.ts",
-    "test:performance": "playwright test tests/safari-desktop.spec.ts --grep=\"performance\"",
-    "test:visual": "playwright test tests/cross-browser.spec.ts --grep=\"visual\"",
-    "test:headed": "playwright test --headed",
-    "test:debug": "playwright test --debug"
+    "lhci": "lhci autorun"
   },
   "dependencies": {
     "@iconify/react": "^4.1.1",
@@ -53,7 +45,6 @@
     "@biomejs/biome": "^2.2.3",
     "@lhci/cli": "^0.14.0",
     "@next/bundle-analyzer": "^15.0.0",
-    "@playwright/test": "^1.48.0",
     "@t3-oss/env-nextjs": "^0.13.8",
     "@types/node": "^20",
     "@types/react": "^19.1.12",

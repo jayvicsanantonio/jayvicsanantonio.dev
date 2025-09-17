@@ -3,7 +3,6 @@
 import React from 'react';
 
 import { GlassButton } from '@/components/ui/GlassButton';
-import { getBrowserCapabilities, useScrollState } from '@/lib/utils/browserUtils';
 
 export type NavPillProps = {
   href: string;
@@ -38,50 +37,27 @@ export function NavPill({
   tooltipPlacement = 'above',
   className,
 }: NavPillProps) {
-  // Safari optimization hooks
-  const { isScrolling } = useScrollState();
-  const capabilities = getBrowserCapabilities();
-
   // View-transition tag (optional)
   const vtClass = vtTagName ? `vt-tag-${vtTagName}` : '';
 
   const linkProps = external ? { target: '_blank', rel: 'noopener noreferrer' as const } : {};
 
-  // Safari-optimized backdrop filter
-  const getBackdropFilter = () => {
-    if (capabilities.isSafari && isScrolling) {
-      return 'blur(0px)'; // Disable during scroll for performance
-    }
-    if (capabilities.isSafari) {
-      return 'blur(12px) saturate(150%)'; // Reduced intensity for Safari
-    }
-    return 'blur(24px) saturate(200%)'; // Full effects for Chrome
-  };
-
   return (
     <fieldset
       className="group relative inline-block"
-      onMouseMove={
-        capabilities.isSafari && isScrolling
-          ? undefined // Disable cursor tracking during scroll in Safari
-          : (e) => {
-              const t = e.currentTarget as HTMLElement;
-              const r = t.getBoundingClientRect();
-              const mx = ((e.clientX - r.left) / r.width - 0.5) * 2;
-              const my = ((e.clientY - r.top) / r.height - 0.5) * 2;
-              t.style.setProperty('--mx', String(mx));
-              t.style.setProperty('--my', String(my));
-            }
-      }
-      onMouseLeave={
-        capabilities.isSafari && isScrolling
-          ? undefined
-          : (e) => {
-              const t = e.currentTarget as HTMLElement;
-              t.style.setProperty('--mx', '0');
-              t.style.setProperty('--my', '0');
-            }
-      }
+      onMouseMove={(e) => {
+        const t = e.currentTarget as HTMLElement;
+        const r = t.getBoundingClientRect();
+        const mx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+        const my = ((e.clientY - r.top) / r.height - 0.5) * 2;
+        t.style.setProperty('--mx', String(mx));
+        t.style.setProperty('--my', String(my));
+      }}
+      onMouseLeave={(e) => {
+        const t = e.currentTarget as HTMLElement;
+        t.style.setProperty('--mx', '0');
+        t.style.setProperty('--my', '0');
+      }}
     >
       <GlassButton
         href={href}
@@ -95,11 +71,10 @@ export function NavPill({
         style={{
           width: collapsedPx,
           height: heightPx,
-          transition:
-            capabilities.isSafari && isScrolling ? 'width 150ms ease-out' : 'width 200ms ease-out',
-          willChange: isScrolling ? 'width, transform' : 'width',
-          WebkitBackdropFilter: getBackdropFilter(),
-          backdropFilter: getBackdropFilter(),
+          transition: 'width 200ms ease-out',
+          willChange: 'width',
+          WebkitBackdropFilter: 'blur(24px) saturate(200%)',
+          backdropFilter: 'blur(24px) saturate(200%)',
         }}
         aria-current={active ? 'page' : undefined}
         {...linkProps}
@@ -111,18 +86,9 @@ export function NavPill({
             className="inline-flex"
             style={{
               transform:
-                capabilities.isSafari && isScrolling
-                  ? 'translate3d(0, 0, 0)' // Simplified transform during scroll
-                  : capabilities.isSafari
-                    ? 'translate(calc(var(--mx, 0) * 8px), calc(var(--my, 0) * 8px))' // Reduced movement for Safari
-                    : 'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
-              transition:
-                capabilities.isSafari && isScrolling
-                  ? 'none' // No transition during scroll in Safari
-                  : capabilities.isSafari
-                    ? 'transform 250ms ease-out' // Simpler transition for Safari
-                    : 'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
-              willChange: isScrolling ? 'transform' : undefined,
+                'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
+              transition: 'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
+              willChange: 'transform',
               color: active ? '#22d3ee' : undefined,
             }}
           >
