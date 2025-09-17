@@ -3,6 +3,7 @@
 import React from 'react';
 
 import { GlassButton } from '@/components/ui/GlassButton';
+import { useNavigationTransition } from '@/hooks/useNavigationTransition';
 
 export type NavPillProps = {
   href: string;
@@ -37,10 +38,16 @@ export function NavPill({
   tooltipPlacement = 'above',
   className,
 }: NavPillProps) {
-  // View-transition tag (optional)
-  const vtClass = vtTagName ? `vt-tag-${vtTagName}` : '';
+  const { isSupported, isTransitioning, getClickHandler } = useNavigationTransition();
+
+  // View-transition tag (only apply when supported)
+  const vtClass = vtTagName && isSupported ? `vt-tag-${vtTagName}` : '';
+
+  // Fallback transition classes for Safari
+  const fallbackClass = vtTagName && !isSupported ? 'page-transition-target' : '';
 
   const linkProps = external ? { target: '_blank', rel: 'noopener noreferrer' as const } : {};
+  const clickHandler = getClickHandler(href, { external, target: linkProps.target, rel: linkProps.rel });
 
   return (
     <fieldset
@@ -66,17 +73,20 @@ export function NavPill({
           cyanAccent ? 'border-cyan-400/50 hover:border-cyan-300/60' : '',
           active ? 'border-cyan-400/70 hover:border-cyan-300/70' : '',
           vtClass,
+          fallbackClass,
+          isTransitioning && !isSupported ? 'opacity-75' : '', // Visual feedback during Safari transitions
           className ?? '',
         ].join(' ')}
         style={{
           width: collapsedPx,
           height: heightPx,
-          transition: 'width 200ms ease-out',
-          willChange: 'width',
+          transition: 'width 200ms ease-out, opacity 200ms ease-out',
+          willChange: 'width, opacity',
           WebkitBackdropFilter: 'blur(24px) saturate(200%)',
           backdropFilter: 'blur(24px) saturate(200%)',
         }}
         aria-current={active ? 'page' : undefined}
+        onClick={clickHandler}
         {...linkProps}
       >
         <span className="inline-flex items-center gap-2">

@@ -217,23 +217,36 @@ className = "[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-
 
 **Why this approach**: Reduces CSS bloat in Safari while maintaining smooth transitions where supported. Provides graceful degradation with CSS-based animations for browsers without View Transitions API support.
 
-### 2.3 Refactor Navigation Components
+### 2.3 Refactor Navigation Components ✅ COMPLETED
 
 **Context**: Components using `vt-tag-*` classes need fallback behavior for Safari.
 
+**IMPLEMENTATION STATUS**: **COMPLETED** with comprehensive navigation transition system.
+
 **Details**:
 
-- [ ] **Update navigation components** to conditionally apply view transition tags
-- [ ] **Implement CSS transition fallbacks** for Safari:
-  ```tsx
-  const transitionClasses = supportsViewTransitions()
-    ? "vt-tag-projects"
-    : "transition-opacity duration-300";
-  ```
-- [ ] **Add loading states** for navigation in Safari
-- [ ] **Test navigation smoothness** across different page types
+- [x] **Updated navigation components** to conditionally apply view transition tags:
+  - `NavPill.tsx`: Uses `useNavigationTransition` hook for smart class application
+  - `NavRow.client.tsx`: Mobile navigation with fallback support
+  - `MobileNavRow.client.tsx`: Hero mobile navigation with transition handling
 
-**Why this approach**: Provides consistent navigation experience regardless of browser capabilities.
+- [x] **Implemented CSS transition fallbacks** for Safari:
+  ```tsx
+  const vtClass = vtTagName && isSupported ? `vt-tag-${vtTagName}` : '';
+  const fallbackClass = vtTagName && !isSupported ? 'page-transition-target' : '';
+  ```
+
+- [x] **Added loading states** for navigation in Safari:
+  - Visual feedback with `opacity-75` during transitions
+  - `isTransitioning` state management in hooks
+  - Smooth opacity transitions for loading feedback
+
+- [x] **Created navigation transition utilities**:
+  - `useNavigationTransition` hook: Centralizes navigation logic with view transition support
+  - Smart click handling: Preserves browser behavior for Cmd/Ctrl clicks
+  - External link handling: Maintains normal behavior for external navigation
+
+**Why this approach**: Provides consistent navigation experience regardless of browser capabilities while maintaining all standard browser navigation behaviors.
 
 ### 2.4 Test Cross-Browser Navigation
 

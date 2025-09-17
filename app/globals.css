@@ -513,7 +513,8 @@
   /* Fallback transitions for browsers without View Transitions support (Safari) */
   @supports not (view-transition-name: test) {
     .vt-tag-projects,
-    .vt-tag-work {
+    .vt-tag-work,
+    .page-transition-target {
       transition: opacity 300ms cubic-bezier(0.22, 1, 0.36, 1);
     }
 
@@ -546,6 +547,7 @@
     @media (prefers-reduced-motion: reduce) {
       .vt-tag-projects,
       .vt-tag-work,
+      .page-transition-target,
       .page-transition-enter,
       .page-transition-enter-active,
       .page-transition-exit,
