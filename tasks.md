@@ -35,11 +35,13 @@ Safari has historically lagged behind Chrome in supporting modern CSS features. 
    - NavPill component: Backdrop-filter transitions triggered by scroll
 
 ### Performance Impact Measurement:
+
 - **Chrome**: 60fps maintained during scroll
 - **Safari Desktop**: Drops to 30-45fps during scroll
 - **Safari Mobile**: Drops to 15-30fps during scroll
 
 ### Target Optimization Strategy:
+
 - Eliminate backdrop-filter animations during active scroll
 - Implement RAF throttling for scroll event handling
 - Use `will-change` and GPU acceleration strategically
@@ -365,7 +367,7 @@ transition: isExpanding
       scrollTimeout = setTimeout(() => setIsScrolling(false), 150);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
   }, []);
 
   const backdropClass = isScrolling
@@ -382,10 +384,12 @@ transition: isExpanding
     : "transform 2s cubic-bezier(0.22, 1, 0.36, 1), border-radius 2s...";
 
   // Stage 2: Visual effects (only when not scrolling)
-  const backdropTransition = !isScrolling ? {
-    transitionProperty: "backdrop-filter",
-    transitionDuration: "0.2s",
-  } : {};
+  const backdropTransition = !isScrolling
+    ? {
+        transitionProperty: "backdrop-filter",
+        transitionDuration: "0.2s",
+      }
+    : {};
   ```
 
 - [ ] **Add scroll-safe animation variants** for Safari
@@ -614,6 +618,7 @@ className =
 **Context**: The `useScrollCssVariables` hook drives Hero/Home page animations and is a PRIMARY contributor to scroll performance degradation in Safari.
 
 **CURRENT PROBLEM - SCROLL BOTTLENECK**:
+
 - Scroll event listeners without passive flag blocking main thread
 - CSS custom property updates on every scroll event causing layout thrashing
 - No RAF throttling leads to excessive DOM writes during fast scrolling
@@ -633,17 +638,19 @@ className =
   };
   ```
 - [ ] **HIGH PRIORITY: Batch CSS custom property updates** to prevent layout thrashing:
+
   ```typescript
   const updateScrollVariables = () => {
     // Batch all CSS variable updates in single frame
     const scrollY = window.scrollY;
     const viewport = window.innerHeight;
 
-    document.documentElement.style.setProperty('--scroll-y', `${scrollY}px`);
-    document.documentElement.style.setProperty('--scroll-progress', `${scrollY / viewport}`);
+    document.documentElement.style.setProperty("--scroll-y", `${scrollY}px`);
+    document.documentElement.style.setProperty("--scroll-progress", `${scrollY / viewport}`);
     // Batch all updates together
   };
   ```
+
 - [ ] **Add Safari-specific scroll optimizations**:
   ```css
   html {
