@@ -278,8 +278,39 @@
     --ring: 216 12.2% 83.9%;
   }
 
-  .content-visibility-auto {
-    content-visibility: auto;
+  /* Content visibility with Safari fallbacks */
+  @supports (content-visibility: auto) {
+    .content-visibility-auto {
+      content-visibility: auto;
+      contain-intrinsic-size: 0 500px; /* Prevent layout shifts */
+    }
+  }
+
+  @supports not (content-visibility: auto) {
+    .content-visibility-auto {
+      /* Fallback: use intersection observer detection in JavaScript */
+      /* Safari and older browsers will rely on JS-based lazy loading */
+      contain: layout style paint;
+    }
+  }
+
+  /* Utility classes for manual visibility control */
+  .content-hidden {
+    content-visibility: hidden;
+  }
+
+  @supports not (content-visibility: hidden) {
+    .content-hidden {
+      /* Fallback for Safari */
+      visibility: hidden;
+      position: absolute;
+      clip: rect(0, 0, 0, 0);
+    }
+  }
+
+  /* Fallback containment for browsers without content-visibility */
+  .contain-layout-style-paint {
+    contain: layout style paint;
   }
 
   /* General hyphenation utility for any element */
@@ -312,60 +343,103 @@
     }
   }
 
+  /* Flattened lit selectors for Safari performance optimization */
   .lit {
     animation: 2s linear infinite lights;
-
-    &.yellow {
-      animation-delay: 0.5s;
-    }
-
-    &.blue {
-      animation-delay: 1s;
-    }
-
-    &.red {
-      animation-delay: 1.5s;
-    }
   }
 
+  .lit.yellow {
+    animation-delay: 0.5s;
+  }
+
+  .lit.blue {
+    animation-delay: 1s;
+  }
+
+  .lit.red {
+    animation-delay: 1.5s;
+  }
+
+  /* Flattened lights selectors for Safari performance optimization */
   .lights {
     align-items: top;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
     position: absolute;
     inset-inline: 0;
+  }
 
-    &.top {
-      top: 52px;
-    }
+  .lights.top {
+    top: 52px;
+  }
 
-    & svg {
+  .lights svg {
+    display: block;
+    width: 100%;
+  }
+
+  /* Default: hide lights 2+ on mobile */
+  .lights svg:nth-child(n + 2) {
+    display: none;
+  }
+
+  /* Show 2+ lights on 400px+ screens */
+  @media (min-width: 400px) {
+    .lights svg:nth-child(n + 2) {
       display: block;
-      width: 100%;
     }
-
-    & svg:nth-child(2) ~ svg {
+    .lights svg:nth-child(n + 3) {
       display: none;
-
-      @media (min-width: 400px) {
-        display: block;
-      }
     }
+  }
 
-    & svg:nth-child(3) ~ svg {
-      display: none;
-
-      @media (min-width: 500px) {
-        display: block;
-      }
+  /* Show 3+ lights on 500px+ screens */
+  @media (min-width: 500px) {
+    .lights svg:nth-child(n + 3) {
+      display: block;
     }
-
-    & svg:nth-child(4) ~ svg {
+    .lights svg:nth-child(n + 4) {
       display: none;
+    }
+  }
 
-      @media (min-width: 600px) {
-        display: block;
-      }
+  /* Show all lights on 600px+ screens */
+  @media (min-width: 600px) {
+    .lights svg:nth-child(n + 4) {
+      display: block;
+    }
+  }
+
+  /* Safari GPU Compositing Layer Management */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+
+  .scroll-element {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+  }
+
+  .animating-element {
+    will-change: transform, opacity;
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* Safari-specific scroll optimizations */
+  html {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: none; /* Prevent bounce on Safari */
+  }
+
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    .gpu-accelerated,
+    .scroll-element,
+    .animating-element {
+      will-change: auto;
+      transform: none;
     }
   }
 
