@@ -16,7 +16,7 @@ export function middleware(req: NextRequest) {
 
   if (isMobile || isSafari) {
     const url = req.nextUrl.clone()
-    url.pathname = '/mobile'
+    url.pathname = '/lite'
     return NextResponse.rewrite(url)
   }
 
