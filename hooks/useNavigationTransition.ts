@@ -6,6 +6,7 @@
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 import { useViewTransitions } from '@/hooks/useViewTransitions';
+import { navigationPerformanceMonitor } from '@/lib/utils/navigationPerformance';
 
 interface UseNavigationTransitionOptions {
   /** Whether this is an external link */
@@ -42,11 +43,20 @@ export function useNavigationTransition(): UseNavigationTransitionReturn {
       return;
     }
 
-    // Internal navigation with view transition support
-    await startTransition(() => {
-      router.push(href);
-    });
-  }, [router, startTransition]);
+    // Start performance monitoring
+    const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+    navigationPerformanceMonitor.startNavigation(currentUrl, href, isSupported);
+
+    try {
+      // Internal navigation with view transition support
+      await startTransition(() => {
+        router.push(href);
+      });
+    } finally {
+      // End performance monitoring
+      navigationPerformanceMonitor.endNavigation();
+    }
+  }, [router, startTransition, isSupported]);
 
   const getClickHandler = useCallback((href: string, options: UseNavigationTransitionOptions = {}) => {
     return (e: React.MouseEvent<HTMLAnchorElement>) => {
