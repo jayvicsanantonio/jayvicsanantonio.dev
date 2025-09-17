@@ -40,6 +40,15 @@ export function NavPill({
 }: NavPillProps) {
   const { isSupported, isTransitioning, getClickHandler } = useNavigationTransition();
 
+  // Browser detection (hydration-safe)
+  const [isSafari, setIsSafari] = React.useState(false);
+  React.useEffect(() => {
+    if (typeof navigator !== 'undefined') {
+      setIsSafari(/Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent));
+    }
+  }, []);
+  const safariReducedClass = isSafari ? 'bg-white/80 bg-none' : '';
+
   // View-transition tag (only apply when supported)
   const vtClass = vtTagName && isSupported ? `vt-tag-${vtTagName}` : '';
 
@@ -74,6 +83,8 @@ export function NavPill({
           active ? 'border-cyan-400/70 hover:border-cyan-300/70' : '',
           vtClass,
           fallbackClass,
+          'glass-optimized',
+          safariReducedClass,
           isTransitioning && !isSupported ? 'opacity-75' : '', // Visual feedback during Safari transitions
           className ?? '',
         ].join(' ')}
@@ -82,8 +93,9 @@ export function NavPill({
           height: heightPx,
           transition: 'width 200ms ease-out, opacity 200ms ease-out',
           willChange: 'width, opacity',
-          WebkitBackdropFilter: 'blur(24px) saturate(200%)',
-          backdropFilter: 'blur(24px) saturate(200%)',
+          ...(isSafari
+            ? { WebkitBackdropFilter: 'none', backdropFilter: 'none' }
+            : { WebkitBackdropFilter: 'blur(24px) saturate(200%)', backdropFilter: 'blur(24px) saturate(200%)' }),
         }}
         aria-current={active ? 'page' : undefined}
         onClick={clickHandler}

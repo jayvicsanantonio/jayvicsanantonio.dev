@@ -21,8 +21,10 @@ const GlassButton = forwardRef<HTMLAnchorElement, GlassButtonProps>(
           'border border-white/10 bg-gradient-to-b from-white/20 to-white/15 backdrop-blur-[16px] backdrop-saturate-150',
           // Depth (approximate former glass-base shadow)
           'shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_8px_30px_rgba(0,0,0,0.22)]',
-          // Transitions
+// Transitions
           'transition duration-200 ease-out',
+          // Hardware acceleration hints for Safari/WebKit
+          'glass-optimized',
           // Gloss highlight that follows cursor via --mx/--my
           "before:pointer-events-none before:absolute before:inset-0 before:rounded-full before:bg-[radial-gradient(60%_40%_at_calc(50%_+_var(--mx,0)_*_10px)_calc(18%_+_var(--my,0)_*_8px),rgba(255,255,255,0.55),rgba(255,255,255,0)_70%)] before:opacity-[0.85] before:content-['']",
           // Hover polish

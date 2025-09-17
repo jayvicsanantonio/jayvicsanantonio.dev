@@ -320,7 +320,7 @@ className = "[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-
 
 **Details**:
 
-- [ ] **Add hardware acceleration hints** to all glass components:
+- [x] **Add hardware acceleration hints** to all glass components:
   ```css
   .glass-optimized {
     transform: translateZ(0);
@@ -330,18 +330,21 @@ className = "[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-
     backface-visibility: hidden;
   }
   ```
-- [ ] **Separate backdrop-filter from animations**:
+  Applied to: GlassButton base, WorkTimeline outer card, SkillsAndCases outer card, NavPill
+- [x] **Separate backdrop-filter from animations**:
   ```css
   .glass-element {
     backdrop-filter: blur(16px);
     transition: transform 0.3s ease-out; /* Don't animate backdrop-filter */
   }
   ```
-- [ ] **Implement Safari-specific reduced effects**:
+  Implemented by removing blur from animated wrappers and keeping blur on inner panels in WorkTimeline/SkillsAndCases
+- [x] **Implement Safari-specific reduced effects**:
   ```tsx
   const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
   const backdropClass = isSafari ? "bg-white/80" : "backdrop-blur-[16px] bg-white/20";
   ```
+  Implemented in NavPill: disables backdropFilter in Safari and adds a solid bg fallback
 
 **Why this approach**: Maintains visual fidelity while ensuring smooth animations on Safari.
 
