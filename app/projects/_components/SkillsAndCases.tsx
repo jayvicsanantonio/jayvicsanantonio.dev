@@ -6,7 +6,9 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';
 
 import { PROJECTS } from '@/app/projects/projects.data';
+import { useContainerSize } from '@/hooks/useContainerSize';
 import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
+import { supportsContainerQueries } from '@/lib/utils/containerQueries';
 
 import ProjectLink from './ProjectLink';
 
@@ -36,6 +38,33 @@ export default function SkillsAndCases() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
+  // Container size detection for Safari fallback (provides enhanced responsive behavior)
+  const { containerRef } = useContainerSize();
+
+  // Hydration-safe container query support detection
+  const [isHydrated, setIsHydrated] = React.useState(false);
+  const hasContainerQuerySupport = React.useMemo(() => {
+    if (!isHydrated) return false;
+    return supportsContainerQueries();
+  }, [isHydrated]);
+
+  React.useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
+  // Helper function to get adaptive classes with hydration safety
+  const getAdaptiveClasses = React.useCallback(
+    (containerClasses: string, fallbackClasses: string): string => {
+      return hasContainerQuerySupport ? containerClasses : fallbackClasses;
+    },
+    [hasContainerQuerySupport],
+  );
+
+  // Ref callback to handle type compatibility
+  const setContainerRef = (node: HTMLDivElement | null) => {
+    (containerRef as React.MutableRefObject<HTMLElement | null>).current = node;
+  };
   const initialFromQuery = (searchParams?.get('skill') || searchParams?.get('filter')) ?? undefined;
 
   // Fixed, curated filters
@@ -89,7 +118,7 @@ export default function SkillsAndCases() {
   }, [active]);
 
   return (
-    <div className="mt-12">
+    <div ref={setContainerRef} className="mt-12">
       {/* SR announcement for filter changes */}
       <output className="sr-only" aria-live="polite">
         {announce}
@@ -122,16 +151,32 @@ export default function SkillsAndCases() {
             className={`group cq relative min-h-[360px] rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.25),rgba(168,85,247,0.15),rgba(34,211,238,0.12))] p-[1px] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_12px_32px_rgba(0,0,0,0.4)] ring-1 ring-white/10 backdrop-blur-[24px] backdrop-saturate-[140%] transition-all duration-300 hover:bg-[linear-gradient(135deg,rgba(59,130,246,0.3),rgba(168,85,247,0.2),rgba(34,211,238,0.15))] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_16px_40px_rgba(0,0,0,0.5)] hover:ring-white/15 md:min-h-[430px] ${!prefersReducedMotion ? 'animate-fade-in-up' : ''}`}
             style={{ animationDelay: !prefersReducedMotion ? `${80 * i}ms` : undefined }}
           >
-            <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-white/8 bg-gray-950/50 backdrop-blur-[20px] backdrop-saturate-[150%] [@container(min-width:36rem)]:grid [@container(min-width:36rem)]:grid-cols-[1fr,1.5fr] before:pointer-events-none before:absolute before:inset-0 before:rounded-2xl before:bg-[radial-gradient(100%_50%_at_50%_0%,rgba(255,255,255,0.05),rgba(255,255,255,0)_50%)] before:content-['']">
+            <div
+              className={`flex h-full flex-col overflow-hidden rounded-2xl border border-white/8 bg-gray-950/50 backdrop-blur-[20px] backdrop-saturate-[150%] before:pointer-events-none before:absolute before:inset-0 before:rounded-2xl before:bg-[radial-gradient(100%_50%_at_50%_0%,rgba(255,255,255,0.05),rgba(255,255,255,0)_50%)] before:content-[''] ${getAdaptiveClasses(
+                '[@container(min-width:36rem)]:grid [@container(min-width:36rem)]:grid-cols-[1fr,1.5fr]',
+                'lg:grid lg:grid-cols-[1fr,1.5fr]',
+              )}`}
+              suppressHydrationWarning
+            >
               <Image
                 src={c.image.src}
                 alt={c.image.alt}
                 width={c.image.width}
                 height={c.image.height}
                 style={{ aspectRatio: c.image.ratio }}
-                className="h-36 w-full object-cover md:h-44 [@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-full"
+                className={`h-36 w-full object-cover md:h-44 ${getAdaptiveClasses(
+                  '[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-full',
+                  'sm:h-44 lg:h-full',
+                )}`}
+                suppressHydrationWarning
               />
-              <div className="flex flex-1 flex-col gap-3 p-5 [@container(min-width:36rem)]:p-6">
+              <div
+                className={`flex flex-1 flex-col gap-3 p-5 ${getAdaptiveClasses(
+                  '[@container(min-width:36rem)]:p-6',
+                  'lg:p-6',
+                )}`}
+                suppressHydrationWarning
+              >
                 <div className="flex items-center justify-between gap-4">
                   <h3 className="font-oswald text-xl text-white">{c.title}</h3>
                   <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] font-medium tracking-[0.12em] whitespace-nowrap text-gray-300 uppercase">

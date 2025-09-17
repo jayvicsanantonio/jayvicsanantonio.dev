@@ -4,6 +4,10 @@ import type React from 'react';
 import { useEffect, useRef, useState } from 'react';
 
 import AnimatedText from '@/components/ui/AnimatedText';
+import { getBrowserCapabilities } from '@/lib/utils/browserUtils';
+import { getOptimizedGlassClasses, getSafariScrollOptimization } from '@/lib/utils/glassEffects';
+import { getTextBalanceClasses } from '@/lib/utils/textBalance';
+import { useSafariVideoOptimization, createSafariVideoLoader } from '@/lib/utils/videoOptimization';
 
 export type MorphingVideoProps = {
   centerTop: string;
@@ -30,6 +34,20 @@ export default function MorphingVideo({
 }: MorphingVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [hasVideo, setHasVideo] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false);
+  const scrollTimeoutRef = useRef<number | undefined>(undefined);
+
+  // Safari video optimization
+  const safariVideo = useSafariVideoOptimization(videoRef, {
+    autoplay: true,
+    muted: true,
+    playsInline: true,
+    preload: video.preload,
+    loop: true,
+    disablePictureInPicture: true,
+  });
+
+  const videoLoader = createSafariVideoLoader('/matrix-horizontal.mp4');
 
   useEffect(() => {
     if (videoRef.current) {
@@ -62,7 +80,73 @@ export default function MorphingVideo({
     }
   }, [shouldPlayVideo]);
 
+  // Scroll state detection for Safari performance optimization
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolling(true);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+      // AGGRESSIVE: Faster scroll detection for Safari - shorter timeout
+      scrollTimeoutRef.current = window.setTimeout(() => {
+        setIsScrolling(false);
+      }, isSafari ? 50 : 150); // Much faster for Safari
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+    };
+  }, []);
+
   type CSSVars = React.CSSProperties & Record<'--intro-scale' | '--bg-a' | '--shadow-a', string>;
+
+  // Get browser capabilities for Safari optimization
+  const capabilities = getBrowserCapabilities();
+  const isSafari = capabilities.isSafari;
+
+  // Create scroll-aware transition and backdrop-filter
+  const getScrollAwareTransition = () => {
+    if (isSafari && isScrolling) {
+      // AGGRESSIVE: No transitions at all during scroll in Safari - instant changes only
+      return 'none';
+    }
+
+    if (isSafari) {
+      // AGGRESSIVE: Simplified transitions for Safari even when not scrolling
+      return isExpanding
+        ? 'transform 1s ease-out, top 0.3s ease-out'
+        : 'transform 1s ease-out, top 0.3s ease-out';
+    }
+
+    // Normal transitions for other browsers
+    return isExpanding
+      ? 'top 0.4s ease-out, transform 2s cubic-bezier(0.22, 1, 0.36, 1), border-radius 2s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.6s ease-out'
+      : 'top 0.4s ease-out, border-radius 0s, background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.3s ease-out';
+  };
+
+  const getScrollAwareBackdropFilter = () => {
+    // NUCLEAR: Completely disable backdrop-filter for all Safari states during scroll
+    if (isSafari && isScrolling) {
+      return 'none';
+    }
+
+    // NUCLEAR: Disable backdrop-filter completely for Safari
+    if (isSafari) {
+      return 'none'; // No backdrop-filter at all for Safari
+    }
+
+    // Full backdrop-filter for other browsers only
+    return isIntro && !initialPill
+      ? 'blur(20px)'
+      : isIntro
+        ? 'blur(0px)'
+        : 'blur(calc(max(0, (var(--p, 0) - 0.7) * 3) * 20px))';
+  };
 
   const containerStyle: CSSVars = {
     top: centerTop,
@@ -73,28 +157,30 @@ export default function MorphingVideo({
     height: 'min(86svh, 86vh)',
     borderRadius: containerRadius,
     border: 'none',
-    willChange: isExpanding ? 'transform, opacity, filter, clip-path' : undefined,
+    willChange:
+      isExpanding && !isScrolling
+        ? 'transform, opacity, filter, clip-path'
+        : isScrolling
+          ? 'transform'
+          : undefined,
     transformOrigin: '50% 50%',
-    transition: isExpanding
-      ? 'top 0.4s ease-out, transform 2s cubic-bezier(0.22, 1, 0.36, 1), border-radius 2s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.6s ease-out'
-      : 'top 0.4s ease-out, border-radius 0s, background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.3s ease-out',
+    transition: getScrollAwareTransition(),
     '--bg-a': isIntro ? '0.95' : 'calc(max(0, (var(--p, 0) - 0.7) * 3) * 0.95)',
     '--shadow-a': isIntro ? '0.25' : 'calc(max(0, (var(--p, 0) - 0.7) * 3) * 0.25)',
-    backgroundColor: initialPill ? 'transparent' : 'rgba(255, 255, 255, var(--bg-a))',
-    backdropFilter:
-      isIntro && !initialPill
-        ? 'blur(20px)'
-        : isIntro
-          ? 'blur(0px)'
-          : 'blur(calc(max(0, (var(--p, 0) - 0.7) * 3) * 20px))',
+    backgroundColor: initialPill ? 'transparent' :
+      isSafari && isScrolling
+        ? 'rgba(255, 255, 255, 0.85)' // NUCLEAR: Static background during scroll
+        : 'rgba(255, 255, 255, var(--bg-a))',
+    backdropFilter: getScrollAwareBackdropFilter(),
     boxShadow: initialPill ? 'none' : '0 25px 50px -12px rgba(0, 0, 0, var(--shadow-a))',
-    clipPath:
-      'inset(calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) round calc(24px + var(--sh, 0) * 360px))',
+    clipPath: isSafari && isScrolling
+      ? 'inset(0 0 0 0 round 24px)' // NUCLEAR: Static clip-path during scroll
+      : 'inset(calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) round calc(24px + var(--sh, 0) * 360px))',
   };
 
   return (
     <div
-      className="fixed z-30 flex items-center justify-center overflow-hidden"
+      className={`fixed z-30 flex items-center justify-center overflow-hidden ${getSafariScrollOptimization(isScrolling)}`}
       style={containerStyle}
     >
       {/* Titles */}
@@ -102,7 +188,11 @@ export default function MorphingVideo({
         className="absolute bottom-40 left-1/2 z-50 -translate-x-1/2 text-center px-4 transition-opacity duration-700 sm:bottom-40 sm:right-8 sm:left-auto sm:translate-x-0 sm:px-0 md:right-10 md:bottom-22"
         style={{ opacity: showTitleGroup ? 1 : 0 }}
       >
-        <h2 className="text-lg font-medium tracking-widest text-white text-balance sm:text-2xl md:text-3xl lg:text-4xl 2xl:text-6xl">
+        <h2
+          className={getTextBalanceClasses(
+            'text-lg font-medium tracking-widest text-white sm:text-2xl md:text-3xl lg:text-4xl 2xl:text-6xl',
+          )}
+        >
           <AnimatedText text="Full-Stack" start={showTitleGroup} perCharDelay={45} />
         </h2>
       </div>
@@ -110,7 +200,11 @@ export default function MorphingVideo({
         className="absolute bottom-28 left-1/2 z-50 -translate-x-1/2 text-center px-4 transition-opacity duration-700 sm:bottom-10 sm:right-8 sm:left-auto sm:translate-x-0 sm:px-0 md:right-10 md:bottom-10"
         style={{ opacity: showTitleGroup ? 1 : 0 }}
       >
-        <h3 className="text-lg font-light tracking-wider text-white/90 italic text-balance sm:text-2xl md:text-3xl lg:text-4xl 2xl:text-5xl">
+        <h3
+          className={getTextBalanceClasses(
+            'text-lg font-light tracking-wider text-white/90 italic sm:text-2xl md:text-3xl lg:text-4xl 2xl:text-5xl',
+          )}
+        >
           <AnimatedText
             text="Software Engineer"
             start={showTitleGroup}
@@ -125,7 +219,11 @@ export default function MorphingVideo({
         className="absolute top-6 left-1/2 z-50 max-w-[20rem] -translate-x-1/2 text-center px-4 transition-opacity duration-700 sm:top-auto sm:bottom-32 sm:left-8 sm:max-w-[22rem] sm:translate-x-0 sm:text-left sm:px-0 md:bottom-10 md:left-10"
         style={{ opacity: showDesc ? 1 : 0 }}
       >
-        <p className="mb-2 text-sm leading-relaxed text-white/80 text-balance md:text-base">
+        <p
+          className={getTextBalanceClasses(
+            'mb-2 text-sm leading-relaxed text-white/80 md:text-base',
+          )}
+        >
           I experiment with AI daily—and build web platforms that put it to work.
         </p>
       </div>
@@ -142,20 +240,26 @@ export default function MorphingVideo({
         {hasVideo ? (
           <video
             ref={videoRef}
-            muted
-            loop
-            playsInline
-            preload={video.preload}
+            {...safariVideo.videoProps}
             aria-hidden
             tabIndex={-1}
             onError={() => setHasVideo(false)}
+            onLoadedData={() => {
+              // Enable autoplay for Safari if blocked initially
+              if (safariVideo.isSafari && !safariVideo.canAutoplay) {
+                safariVideo.enableAutoplay();
+              }
+            }}
             className="h-full w-full object-cover"
             style={{
               willChange: 'opacity, transform',
               transform: `scale(${video.scale})`,
             }}
+            data-safari-video-optimized={safariVideo.isSafari}
           >
-            <source src="/matrix-horizontal.mp4" type="video/mp4" />
+            <source src={videoLoader.src} type="video/mp4" />
+            {/* Fallback for older browsers */}
+            Your browser does not support the video tag.
           </video>
         ) : (
           <div
@@ -175,7 +279,7 @@ export default function MorphingVideo({
           style={{ opacity: isIntro ? 0 : undefined }}
         >
           <div
-            className="relative flex h-12 w-[calc(100vw-3rem)] max-w-[20rem] items-center justify-center rounded-[384px] border border-white/30 backdrop-blur-[16px] backdrop-saturate-[160%] shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_8px_30px_rgba(0,0,0,0.22)] before:pointer-events-none before:absolute before:inset-0 before:bg-[radial-gradient(120%_60%_at_50%_0%,rgba(255,255,255,0.35),rgba(255,255,255,0)_60%)] before:content-[''] sm:h-14 sm:w-full sm:max-w-[var(--nav-row-w)] sm:h-full sm:w-full sm:max-w-none"
+            className={`relative flex h-12 w-[calc(100vw-3rem)] max-w-[20rem] items-center justify-center rounded-[384px] border border-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_8px_30px_rgba(0,0,0,0.22)] before:pointer-events-none before:absolute before:inset-0 before:bg-[radial-gradient(120%_60%_at_50%_0%,rgba(255,255,255,0.35),rgba(255,255,255,0)_60%)] before:content-[''] sm:h-full sm:w-full sm:max-w-none ${getOptimizedGlassClasses('hero', isScrolling, false)}`}
             style={{
               background:
                 'linear-gradient(180deg, rgba(24,204,193,0.28) 0%, rgba(0,166,158,0.20) 100%)',

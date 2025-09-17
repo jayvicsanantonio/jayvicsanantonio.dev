@@ -70,19 +70,126 @@
   }
 }
 
-@utility container {
-  margin-inline: auto;
-  padding-inline: clamp(1rem, 5vw, 2rem);
-  @media (width >= --theme(--breakpoint-sm)) {
-    max-width: none;
-  }
-  @media (width >= 1400px) {
-    max-width: 1400px;
-  }
-}
-
+/* Container Query Support - Temporarily simplified */
 @utility cq {
   container-type: inline-size;
+}
+
+/* Common Container Query Utility Patterns */
+@layer utilities {
+  /* Container query responsive grid patterns */
+  .cq-grid-auto {
+    @supports (container-type: inline-size) {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+      gap: 1rem;
+    }
+
+    @supports not (container-type: inline-size) {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+      gap: 1rem;
+    }
+  }
+
+  /* Container query responsive text sizing */
+  .cq-text-responsive {
+    @supports (container-type: inline-size) {
+      font-size: clamp(0.875rem, 0.8rem + 2cqi, 1.125rem);
+    }
+
+    @supports not (container-type: inline-size) {
+      font-size: clamp(0.875rem, 0.8rem + 2vw, 1.125rem);
+    }
+  }
+
+  /* Container query responsive spacing */
+  .cq-spacing-responsive {
+    @supports (container-type: inline-size) {
+      padding: clamp(1rem, 0.5rem + 4cqi, 2rem);
+    }
+
+    @supports not (container-type: inline-size) {
+      padding: clamp(1rem, 0.5rem + 4vw, 2rem);
+    }
+  }
+
+  /* Specific patterns for common component layouts */
+
+  /* Card layout: side-by-side when container is wide enough */
+  .cq-card-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @supports (container-type: inline-size) {
+      @container (min-width: 36rem) {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        gap: 1.5rem;
+      }
+    }
+
+    @supports not (container-type: inline-size) {
+      @media (min-width: 1024px) {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        gap: 1.5rem;
+      }
+    }
+  }
+
+  /* Timeline layout: enhanced spacing in larger containers */
+  .cq-timeline-item {
+    padding: 1.25rem;
+
+    @supports (container-type: inline-size) {
+      @container (min-width: 36rem) {
+        padding: 1.5rem;
+      }
+    }
+
+    @supports not (container-type: inline-size) {
+      @media (min-width: 1024px) {
+        padding: 1.5rem;
+      }
+    }
+  }
+
+  /* Project grid: responsive columns based on container width */
+  .cq-project-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+
+    @supports (container-type: inline-size) {
+      @container (min-width: 32rem) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @container (min-width: 48rem) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      @container (min-width: 64rem) {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    @supports not (container-type: inline-size) {
+      @media (min-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @media (min-width: 1024px) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      @media (min-width: 1280px) {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  }
 }
 
 /* Prefer-reduced-motion helpers */
@@ -103,6 +210,19 @@
   ::backdrop,
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
+  }
+
+  /* Safari-specific font rendering optimizations */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-kerning: normal;
+    font-variant-ligatures: common-ligatures;
+  }
+
+  /* Optimize font display for better loading */
+  @font-face {
+    font-display: swap;
   }
 }
 
@@ -171,8 +291,130 @@
     --ring: 216 12.2% 83.9%;
   }
 
-  .content-visibility-auto {
-    content-visibility: auto;
+  /* Content visibility with Safari fallbacks */
+  @supports (content-visibility: auto) {
+    .content-visibility-auto {
+      content-visibility: auto;
+      contain-intrinsic-size: 0 500px; /* Prevent layout shifts */
+    }
+  }
+
+  @supports not (content-visibility: auto) {
+    .content-visibility-auto {
+      /* Fallback: use intersection observer detection in JavaScript */
+      /* Safari and older browsers will rely on JS-based lazy loading */
+      contain: layout style paint;
+    }
+  }
+
+  /* Utility classes for manual visibility control */
+  .content-hidden {
+    content-visibility: hidden;
+  }
+
+  @supports not (content-visibility: hidden) {
+    .content-hidden {
+      /* Fallback for Safari */
+      visibility: hidden;
+      position: absolute;
+      clip: rect(0, 0, 0, 0);
+    }
+  }
+
+  /* Fallback containment for browsers without content-visibility */
+  .contain-layout-style-paint {
+    contain: layout style paint;
+  }
+
+  /* Text balance with Safari fallbacks */
+  @supports (text-wrap: balance) {
+    .text-balance {
+      text-wrap: balance;
+    }
+  }
+
+  @supports not (text-wrap: balance) {
+    .text-balance-fallback {
+      /* Enhanced line height for better visual balance */
+      line-height: 1.4;
+
+      /* Improved word spacing for Safari */
+      word-spacing: 0.1em;
+
+      /* Better hyphenation for text wrapping */
+      hyphens: auto;
+      -webkit-hyphens: auto;
+
+      /* Optimize text rendering for Safari */
+      text-rendering: optimizeLegibility;
+      -webkit-font-feature-settings: "liga", "kern";
+      font-feature-settings: "liga", "kern";
+    }
+
+    /* Responsive text balance adjustments */
+    @media (max-width: 640px) {
+      .text-balance-fallback {
+        word-spacing: 0.05em;
+        line-height: 1.3;
+      }
+    }
+  }
+
+  /* Enhanced typography utilities for Safari */
+  .text-crisp {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  .text-optimize-speed {
+    text-rendering: optimizeSpeed;
+  }
+
+  .text-optimize-quality {
+    text-rendering: optimizeQuality;
+  }
+
+  /* Consistent line height across browsers */
+  .leading-tight-safari {
+    line-height: 1.25;
+  }
+
+  .leading-snug-safari {
+    line-height: 1.375;
+  }
+
+  .leading-normal-safari {
+    line-height: 1.5;
+  }
+
+  .leading-relaxed-safari {
+    line-height: 1.625;
+  }
+
+  /* Safari-specific letter spacing adjustments */
+  .tracking-tighter-safari {
+    letter-spacing: -0.05em;
+  }
+
+  .tracking-tight-safari {
+    letter-spacing: -0.025em;
+  }
+
+  .tracking-normal-safari {
+    letter-spacing: 0em;
+  }
+
+  .tracking-wide-safari {
+    letter-spacing: 0.025em;
+  }
+
+  .tracking-wider-safari {
+    letter-spacing: 0.05em;
+  }
+
+  .tracking-widest-safari {
+    letter-spacing: 0.1em;
   }
 
   /* General hyphenation utility for any element */
@@ -205,60 +447,103 @@
     }
   }
 
+  /* Flattened lit selectors for Safari performance optimization */
   .lit {
     animation: 2s linear infinite lights;
-
-    &.yellow {
-      animation-delay: 0.5s;
-    }
-
-    &.blue {
-      animation-delay: 1s;
-    }
-
-    &.red {
-      animation-delay: 1.5s;
-    }
   }
 
+  .lit.yellow {
+    animation-delay: 0.5s;
+  }
+
+  .lit.blue {
+    animation-delay: 1s;
+  }
+
+  .lit.red {
+    animation-delay: 1.5s;
+  }
+
+  /* Flattened lights selectors for Safari performance optimization */
   .lights {
     align-items: top;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
     position: absolute;
     inset-inline: 0;
+  }
 
-    &.top {
-      top: 52px;
-    }
+  .lights.top {
+    top: 52px;
+  }
 
-    & svg {
+  .lights svg {
+    display: block;
+    width: 100%;
+  }
+
+  /* Default: hide lights 2+ on mobile */
+  .lights svg:nth-child(n + 2) {
+    display: none;
+  }
+
+  /* Show 2+ lights on 400px+ screens */
+  @media (min-width: 400px) {
+    .lights svg:nth-child(n + 2) {
       display: block;
-      width: 100%;
     }
-
-    & svg:nth-child(2) ~ svg {
+    .lights svg:nth-child(n + 3) {
       display: none;
-
-      @media (min-width: 400px) {
-        display: block;
-      }
     }
+  }
 
-    & svg:nth-child(3) ~ svg {
-      display: none;
-
-      @media (min-width: 500px) {
-        display: block;
-      }
+  /* Show 3+ lights on 500px+ screens */
+  @media (min-width: 500px) {
+    .lights svg:nth-child(n + 3) {
+      display: block;
     }
-
-    & svg:nth-child(4) ~ svg {
+    .lights svg:nth-child(n + 4) {
       display: none;
+    }
+  }
 
-      @media (min-width: 600px) {
-        display: block;
-      }
+  /* Show all lights on 600px+ screens */
+  @media (min-width: 600px) {
+    .lights svg:nth-child(n + 4) {
+      display: block;
+    }
+  }
+
+  /* Safari GPU Compositing Layer Management */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+
+  .scroll-element {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+  }
+
+  .animating-element {
+    will-change: transform, opacity;
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* Safari-specific scroll optimizations */
+  html {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: none; /* Prevent bounce on Safari */
+  }
+
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    .gpu-accelerated,
+    .scroll-element,
+    .animating-element {
+      will-change: auto;
+      transform: none;
     }
   }
 
@@ -312,12 +597,17 @@
     overscroll-behavior-y: contain;
   }
 
-  /* iOS-specific fixes */
+  /* iOS Safari-specific fixes and optimizations */
   @supports (-webkit-touch-callout: none) {
     /* iOS only */
     body {
       /* Prevent rubber-band scrolling */
       overscroll-behavior-y: contain;
+      /* Disable text selection for better touch experience */
+      -webkit-user-select: none;
+      user-select: none;
+      /* Remove tap highlight */
+      -webkit-tap-highlight-color: transparent;
     }
 
     /* Fix for iOS Safari viewport height - using fallback pattern */
@@ -325,6 +615,67 @@
       min-height: 100vh; /* fallback for browsers that don't support -webkit-fill-available */
       /* biome-ignore lint/suspicious/noDuplicateProperties: Intentional fallback pattern for iOS Safari */
       min-height: -webkit-fill-available; /* iOS Safari specific */
+    }
+
+    /* iOS Safari dynamic viewport utilities */
+    .ios-viewport-available {
+      min-height: -webkit-fill-available;
+    }
+
+    /* iOS notch and safe area handling */
+    .ios-notch {
+      padding-top: env(safe-area-inset-top);
+      padding-right: env(safe-area-inset-right);
+      padding-bottom: env(safe-area-inset-bottom);
+      padding-left: env(safe-area-inset-left);
+    }
+
+    /* Touch optimization utilities */
+    .ios-touch-optimized {
+      touch-action: manipulation;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* iOS scroll performance */
+    .ios-scroll-smooth {
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      scroll-behavior: smooth;
+    }
+
+    /* Prevent zoom on double-tap */
+    .ios-no-zoom {
+      touch-action: manipulation;
+    }
+
+    /* Touch interaction states */
+    .touch-active {
+      transform: scale(0.98);
+      opacity: 0.9;
+      transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+    }
+  }
+
+  /* Mobile hover state optimizations */
+  @media (hover: none) and (pointer: coarse) {
+    /* Mobile devices without hover capability */
+    .mobile-no-hover {
+      /* Convert hover states to active states */
+    }
+
+    /* Disable hover animations on mobile */
+    .mobile-no-hover:hover {
+      transform: none !important;
+      transition: none !important;
+    }
+
+    /* Use active states instead of hover on mobile */
+    .mobile-no-hover:active {
+      transform: scale(0.98);
+      opacity: 0.9;
     }
   }
 
@@ -400,6 +751,40 @@
     /* biome-ignore lint/correctness/noUnknownTypeSelector: view-transition named targets are valid */
       ::view-transition-image-pair(work) {
       animation-duration: 0.01ms;
+    }
+  }
+}
+
+/* Text balance CSS fallback for Safari compatibility */
+@layer utilities {
+  /* Native text-balance support */
+  @supports (text-wrap: balance) {
+    .text-balance {
+      text-wrap: balance;
+    }
+  }
+
+  /* Safari fallback with enhanced typography */
+  @supports not (text-wrap: balance) {
+    .text-balance {
+      /* Enhanced typography for manual balancing */
+      word-spacing: 0.05em;
+      letter-spacing: 0.01em;
+      line-height: 1.4;
+      hyphens: auto;
+      -webkit-hyphens: auto;
+      hyphenate-limit-chars: 6 3 3;
+      text-align: left;
+    }
+
+    /* Safari-specific text improvements */
+    @supports (-webkit-touch-callout: none) {
+      .text-balance {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+        word-break: break-word;
+      }
     }
   }
 }
