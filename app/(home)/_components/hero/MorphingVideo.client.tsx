@@ -4,6 +4,8 @@ import type React from 'react';
 import { useEffect, useRef, useState } from 'react';
 
 import AnimatedText from '@/components/ui/AnimatedText';
+import { getBrowserCapabilities } from '@/lib/utils/browserUtils';
+import { getOptimizedGlassClasses } from '@/lib/utils/glassEffects';
 
 export type MorphingVideoProps = {
   centerTop: string;
@@ -30,6 +32,8 @@ export default function MorphingVideo({
 }: MorphingVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [hasVideo, setHasVideo] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false);
+  const scrollTimeoutRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -62,7 +66,71 @@ export default function MorphingVideo({
     }
   }, [shouldPlayVideo]);
 
+  // Scroll state detection for Safari performance optimization
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolling(true);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+      scrollTimeoutRef.current = window.setTimeout(() => {
+        setIsScrolling(false);
+      }, 150);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+    };
+  }, []);
+
   type CSSVars = React.CSSProperties & Record<'--intro-scale' | '--bg-a' | '--shadow-a', string>;
+
+  // Get browser capabilities for Safari optimization
+  const capabilities = getBrowserCapabilities();
+  const isSafari = capabilities.isSafari;
+
+  // Create scroll-aware transition and backdrop-filter
+  const getScrollAwareTransition = () => {
+    if (isSafari && isScrolling) {
+      // Fast, scroll-safe transitions for Safari during scroll
+      return isExpanding
+        ? 'transform 0.3s ease-out, top 0.2s ease-out'
+        : 'transform 0.3s ease-out, top 0.2s ease-out';
+    }
+
+    // Normal transitions when not scrolling or in other browsers
+    return isExpanding
+      ? 'top 0.4s ease-out, transform 2s cubic-bezier(0.22, 1, 0.36, 1), border-radius 2s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.6s ease-out'
+      : 'top 0.4s ease-out, border-radius 0s, background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.3s ease-out';
+  };
+
+  const getScrollAwareBackdropFilter = () => {
+    // Disable backdrop-filter completely during scroll in Safari
+    if (isSafari && isScrolling) {
+      return 'blur(0px)';
+    }
+
+    // Reduced backdrop-filter for Safari even when not scrolling
+    if (isSafari) {
+      return isIntro && !initialPill
+        ? 'blur(10px)' // Reduced from 20px
+        : isIntro
+          ? 'blur(0px)'
+          : 'blur(calc(max(0, (var(--p, 0) - 0.7) * 3) * 10px))'; // Reduced from 20px
+    }
+
+    // Full backdrop-filter for other browsers
+    return isIntro && !initialPill
+      ? 'blur(20px)'
+      : isIntro
+        ? 'blur(0px)'
+        : 'blur(calc(max(0, (var(--p, 0) - 0.7) * 3) * 20px))';
+  };
 
   const containerStyle: CSSVars = {
     top: centerTop,
@@ -73,20 +141,18 @@ export default function MorphingVideo({
     height: 'min(86svh, 86vh)',
     borderRadius: containerRadius,
     border: 'none',
-    willChange: isExpanding ? 'transform, opacity, filter, clip-path' : undefined,
+    willChange:
+      isExpanding && !isScrolling
+        ? 'transform, opacity, filter, clip-path'
+        : isScrolling
+          ? 'transform'
+          : undefined,
     transformOrigin: '50% 50%',
-    transition: isExpanding
-      ? 'top 0.4s ease-out, transform 2s cubic-bezier(0.22, 1, 0.36, 1), border-radius 2s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.6s ease-out'
-      : 'top 0.4s ease-out, border-radius 0s, background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.3s ease-out',
+    transition: getScrollAwareTransition(),
     '--bg-a': isIntro ? '0.95' : 'calc(max(0, (var(--p, 0) - 0.7) * 3) * 0.95)',
     '--shadow-a': isIntro ? '0.25' : 'calc(max(0, (var(--p, 0) - 0.7) * 3) * 0.25)',
     backgroundColor: initialPill ? 'transparent' : 'rgba(255, 255, 255, var(--bg-a))',
-    backdropFilter:
-      isIntro && !initialPill
-        ? 'blur(20px)'
-        : isIntro
-          ? 'blur(0px)'
-          : 'blur(calc(max(0, (var(--p, 0) - 0.7) * 3) * 20px))',
+    backdropFilter: getScrollAwareBackdropFilter(),
     boxShadow: initialPill ? 'none' : '0 25px 50px -12px rgba(0, 0, 0, var(--shadow-a))',
     clipPath:
       'inset(calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) round calc(24px + var(--sh, 0) * 360px))',
@@ -175,7 +241,7 @@ export default function MorphingVideo({
           style={{ opacity: isIntro ? 0 : undefined }}
         >
           <div
-            className="relative flex h-12 w-[calc(100vw-3rem)] max-w-[20rem] items-center justify-center rounded-[384px] border border-white/30 backdrop-blur-[16px] backdrop-saturate-[160%] shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_8px_30px_rgba(0,0,0,0.22)] before:pointer-events-none before:absolute before:inset-0 before:bg-[radial-gradient(120%_60%_at_50%_0%,rgba(255,255,255,0.35),rgba(255,255,255,0)_60%)] before:content-[''] sm:h-full sm:w-full sm:max-w-none"
+            className={`relative flex h-12 w-[calc(100vw-3rem)] max-w-[20rem] items-center justify-center rounded-[384px] border border-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_8px_30px_rgba(0,0,0,0.22)] before:pointer-events-none before:absolute before:inset-0 before:bg-[radial-gradient(120%_60%_at_50%_0%,rgba(255,255,255,0.35),rgba(255,255,255,0)_60%)] before:content-[''] sm:h-full sm:w-full sm:max-w-none ${getOptimizedGlassClasses('hero', isScrolling, false)}`}
             style={{
               background:
                 'linear-gradient(180deg, rgba(24,204,193,0.28) 0%, rgba(0,166,158,0.20) 100%)',

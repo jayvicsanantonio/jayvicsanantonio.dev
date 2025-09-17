@@ -5,9 +5,25 @@
       "Bash(npx prettier:*)",
       "Bash(pnpm check:*)",
       "mcp__playwright__browser_navigate",
-      "Bash(pnpm dev:*)"
+      "Bash(pnpm dev:*)",
+      "Bash(npm run lint)",
+      "Bash(npm run:*)"
     ],
     "deny": [],
     "ask": []
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"$CLAUDE_PROJECT_DIR\" && pnpm check",
+            "timeout": 60
+          }
+        ]
+      }
+    ]
   }
 }
