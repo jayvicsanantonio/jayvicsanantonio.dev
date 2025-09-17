@@ -1,20 +1,26 @@
 export const runtime = 'edge';
 
-import Image from 'next/image';
-import Link from 'next/link';
 import { Oswald } from 'next/font/google';
-import GlassHeaderBubble from '@/components/ui/GlassHeaderBubble';
+import Image from 'next/image';
 import AnimatedText from '@/components/ui/AnimatedText';
+import GlassHeaderBubble from '@/components/ui/GlassHeaderBubble';
 
 const oswald = Oswald({ subsets: ['latin'] });
 
 export default function MobileHomePage() {
   return (
-    <main className="bg-black text-white">
+    <main className="bg-black text-white overflow-x-hidden min-h-screen">
       <h1 className="sr-only">Jayvic San Antonio — Software Engineer</h1>
 
+      {/* Top-centered header bubble */}
+      <div className="pointer-events-none fixed left-0 right-0 top-[max(env(safe-area-inset-top),16px)] z-[70] py-6 sm:py-10">
+        <div className="pointer-events-auto flex justify-center">
+          <GlassHeaderBubble label="Hi, I'm Jayvic 👋" />
+        </div>
+      </div>
+
       {/* Section 1: Hero with video */}
-      <section className="relative mx-3 mt-3 h-[calc(100svh-1.5rem)] overflow-hidden rounded-[28px] border border-white/10 sm:mx-4 sm:rounded-[36px]">
+      <section className="relative mx-3 mt-3 h-[calc(100svh-1.5rem)] overflow-hidden rounded-[28px] border border-white/10 sm:mx-4 sm:rounded-[36px] overscroll-behavior-y-contain">
         {/* Background video */}
         <video
           className="absolute inset-0 h-full w-full object-cover"
@@ -39,12 +45,14 @@ export default function MobileHomePage() {
         />
 
         {/* Enhanced vignette to cover corners and sides */}
-        <div className="absolute inset-0 bg-[radial-gradient(80%_60%_at_50%_0%,rgba(59,130,246,0.18),transparent_60%),radial-gradient(60%_50%_at_50%_100%,rgba(16,185,129,0.16),transparent_60%),radial-gradient(circle_at_0%_0%,rgba(0,0,0,0.8),transparent_25%),radial-gradient(circle_at_100%_0%,rgba(0,0,0,0.8),transparent_25%),radial-gradient(circle_at_0%_100%,rgba(0,0,0,0.8),transparent_25%),radial-gradient(circle_at_100%_100%,rgba(0,0,0,0.8),transparent_25%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(80%_60%_at_50%_0%,rgba(59,130,246,0.18),transparent_60%),radial-gradient(60%_50%_at_50%_100%,rgba(16,185,129,0.16),transparent_60%),radial-gradient(circle_at_0%_0%,rgba(0,0,0,0.9),transparent_30%),radial-gradient(circle_at_100%_0%,rgba(0,0,0,0.9),transparent_30%),radial-gradient(circle_at_0%_100%,rgba(0,0,0,0.9),transparent_30%),radial-gradient(circle_at_100%_100%,rgba(0,0,0,0.9),transparent_30%)]" />
 
-        {/* Navigation using GlassHeaderBubble */}
-        <div className="absolute left-1/2 top-6 -translate-x-1/2">
-          <GlassHeaderBubble label="Hi, I'm Jayvic 👋" />
-        </div>
+        {/* Targeted overlay to hide watermarks */}
+        <div className="absolute bottom-0 right-0 w-24 h-16 bg-gradient-to-tl from-black/90 via-black/70 to-transparent" />
+        <div className="absolute top-0 right-0 w-20 h-12 bg-gradient-to-bl from-black/80 via-black/60 to-transparent" />
+        <div className="absolute bottom-0 left-0 w-20 h-12 bg-gradient-to-tr from-black/80 via-black/60 to-transparent" />
+
+
 
         {/* Tagline centered within the section */}
         <p className="pointer-events-none absolute left-1/2 top-1/2 w-[min(22rem,88vw)] -translate-x-1/2 -translate-y-1/2 px-2 text-center text-base leading-relaxed text-white/90">
@@ -69,14 +77,11 @@ export default function MobileHomePage() {
 
         {/* Title at bottom */}
         <div className="pointer-events-none absolute left-1/2 bottom-8 w-[17.625rem] -translate-x-1/2 text-center z-10">
-          <h2 className={`font-bold tracking-wide text-white drop-shadow-[0_4px_20px_rgba(0,139,139,0.4)] drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)] ${oswald.className}`}>
+          <h2
+            className={`font-bold tracking-wide text-white drop-shadow-[0_4px_20px_rgba(0,139,139,0.4)] drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)] ${oswald.className}`}
+          >
             <div className="text-[36px] leading-none">
-              <AnimatedText
-                text="FULL-STACK"
-                start={true}
-                perCharDelay={80}
-                baseDelay={120}
-              />
+              <AnimatedText text="FULL-STACK" start={true} perCharDelay={80} baseDelay={120} />
             </div>
             <div className="text-[24px] leading-tight">
               <AnimatedText
@@ -95,8 +100,6 @@ export default function MobileHomePage() {
         {/* Corner mask for rounded look */}
         <div className="pointer-events-none absolute inset-0 rounded-[28px] ring-1 ring-white/5 sm:rounded-[36px]" />
       </section>
-
-
     </main>
   );
 }
