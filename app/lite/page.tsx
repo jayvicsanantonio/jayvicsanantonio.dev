@@ -1,11 +1,11 @@
-export const runtime = "edge";
+export const runtime = 'edge';
 
-import { Oswald } from "next/font/google";
-import Image from "next/image";
-import AnimatedText from "@/components/ui/AnimatedText";
-import GlassHeaderBubble from "@/components/ui/GlassHeaderBubble";
+import { Oswald } from 'next/font/google';
+import Image from 'next/image';
+import AnimatedText from '@/components/ui/AnimatedText';
+import GlassHeaderBubble from '@/components/ui/GlassHeaderBubble';
 
-const oswald = Oswald({ subsets: ["latin"] });
+const oswald = Oswald({ subsets: ['latin'] });
 
 export default function MobileHomePage() {
   return (
@@ -53,9 +53,9 @@ export default function MobileHomePage() {
           className="absolute inset-0 opacity-[0.14] mix-blend-screen"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.12) 1px, transparent 0), linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 0)",
-            backgroundSize: "64px 64px, 64px 64px",
-            backgroundPosition: "0 0, 0 0",
+              'linear-gradient(rgba(255,255,255,0.12) 1px, transparent 0), linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 0)',
+            backgroundSize: '64px 64px, 64px 64px',
+            backgroundPosition: '0 0, 0 0',
           }}
         />
 
@@ -102,7 +102,7 @@ export default function MobileHomePage() {
             className="h-auto w-full object-contain object-bottom"
             style={{
               filter:
-                "brightness(0.95) saturate(1.25) drop-shadow(0 0 60px rgba(0,139,139,0.30)) drop-shadow(0 10px 40px rgba(0,0,0,0.45))",
+                'brightness(0.95) saturate(1.25) drop-shadow(0 0 60px rgba(0,139,139,0.30)) drop-shadow(0 10px 40px rgba(0,0,0,0.45))',
             }}
           />
         </div>
@@ -179,7 +179,7 @@ export default function MobileHomePage() {
                   </p>
                   <p>
                     Excited to bring your vision to life? Let's collaborate and build something
-                    incredible together!{" "}
+                    incredible together!{' '}
                     <span className="text-cyan-300 underline cursor-pointer">Let's chat!</span>
                   </p>
                 </div>
@@ -204,28 +204,28 @@ export default function MobileHomePage() {
                   <div className="mt-3 h-px bg-linear-to-r from-transparent via-white/5 to-transparent" />
                   <div className="mt-6 flex flex-wrap gap-2">
                     {[
-                      "JavaScript",
-                      "TypeScript",
-                      "React",
-                      "Next.js",
-                      "Remix",
-                      "Node.js",
-                      "Express.js",
-                      "Tailwind CSS",
-                      "React Native",
-                      "Expo",
-                      "Ember.js",
-                      "HTML",
-                      "CSS",
-                      "SASS / SCSS",
-                      "AWS",
-                      "MongoDB",
-                      "Redis",
-                      "MySQL",
-                      "PostgreSQL",
-                      "Java",
-                      "Cypress",
-                      "Git",
+                      'JavaScript',
+                      'TypeScript',
+                      'React',
+                      'Next.js',
+                      'Remix',
+                      'Node.js',
+                      'Express.js',
+                      'Tailwind CSS',
+                      'React Native',
+                      'Expo',
+                      'Ember.js',
+                      'HTML',
+                      'CSS',
+                      'SASS / SCSS',
+                      'AWS',
+                      'MongoDB',
+                      'Redis',
+                      'MySQL',
+                      'PostgreSQL',
+                      'Java',
+                      'Cypress',
+                      'Git',
                     ].map((skill) => (
                       <span
                         key={skill}
@@ -254,18 +254,18 @@ export default function MobileHomePage() {
                   <div className="mt-3 h-px bg-linear-to-r from-transparent via-white/5 to-transparent" />
                   <div className="mt-6 space-y-3">
                     {[
-                      "Frontend Development",
-                      "Web Performance Optimization",
-                      "Agile and Scrum Methodologies",
-                      "Cross-functional Collaboration",
-                      "Problem-solving and Debugging",
-                      "Responsive Design",
-                      "Adaptability and Learning",
-                      "Mentoring and Knowledge Sharing",
-                      "Documentation Proficiency",
-                      "Technical Leadership",
-                      "Software Engineering Best Practices",
-                      "Startup Development",
+                      'Frontend Development',
+                      'Web Performance Optimization',
+                      'Agile and Scrum Methodologies',
+                      'Cross-functional Collaboration',
+                      'Problem-solving and Debugging',
+                      'Responsive Design',
+                      'Adaptability and Learning',
+                      'Mentoring and Knowledge Sharing',
+                      'Documentation Proficiency',
+                      'Technical Leadership',
+                      'Software Engineering Best Practices',
+                      'Startup Development',
                     ].map((expertise) => (
                       <div key={expertise} className="flex items-center gap-3">
                         <div className="h-2 w-2 rounded-full bg-cyan-300/80" />
