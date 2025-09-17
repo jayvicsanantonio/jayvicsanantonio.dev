@@ -10,7 +10,6 @@ Safari has historically lagged behind Chrome in supporting modern CSS features. 
 - **Backdrop-Filter Performance**: Causes severe animation stuttering during scroll in Safari
 - **GPU Compositing**: Different optimization strategies needed for Safari's rendering engine
 - **Container Queries**: Not supported in Safari < 16.0, causing layout failures
-- **View Transitions**: No support in Safari, breaking smooth page transitions
 - **CSS Nesting**: Less efficient parsing in Safari's CSS engine
 
 ## SCROLL PERFORMANCE ANALYSIS - Hero/Home Page
@@ -182,103 +181,7 @@ className = "[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-
 
 **Why this approach**: While we cannot provide CSS-level fallbacks for the utility itself, the JavaScript-based approach provides more flexible and reliable Safari compatibility through component-level adaptive classes. Additionally, using proven Tailwind patterns instead of custom utilities ensures consistent behavior across all use cases.
 
-## 2. View Transitions Progressive Enhancement
-
-**Problem**: View Transitions API is used for smooth page morphing between routes but is completely unsupported in Safari. This causes the navigation to fall back to instant page changes, creating a jarring user experience compared to Chrome's smooth transitions.
-
-**Current Impact**:
-
-- No smooth morphing between pages in Safari
-- `vt-tag-*` classes have no effect
-- Inconsistent user experience between browsers
-
-### 2.1 Create View Transition Detection Utility
-
-**Context**: We need to detect browser support and gracefully handle unsupported browsers.
-
-**Details**:
-
-- [ ] **Create `lib/utils/viewTransitions.ts`**:
-
-  ```typescript
-  export const supportsViewTransitions = (): boolean => {
-    return typeof document !== "undefined" && "startViewTransition" in document;
-  };
-
-  export const safeViewTransition = (callback: () => void) => {
-    if (supportsViewTransitions()) {
-      document.startViewTransition(callback);
-    } else {
-      callback();
-    }
-  };
-  ```
-
-- [ ] **Add hook for view transition support**: `hooks/useViewTransitions.ts`
-- [ ] **Create fallback animation utilities** for non-supporting browsers
-
-**Why this approach**: Enables progressive enhancement where supported browsers get smooth transitions while others get instant navigation.
-
-### 2.2 Update View Transition CSS
-
-**Context**: Lines 374-402 in `globals.css` define view transition animations that do nothing in Safari.
-
-**Current Problem**: CSS rules for `::view-transition-image-pair()` are ignored, bloating the stylesheet.
-
-**Details**:
-
-- [ ] **Wrap view transition CSS in feature queries**:
-
-  ```css
-  @supports (view-transition-name: test) {
-    .vt-tag-projects {
-      view-transition-name: projects;
-    }
-
-    ::view-transition-image-pair(projects) {
-      animation-duration: 300ms;
-      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-    }
-  }
-  ```
-
-- [ ] **Add fallback transition styles** for non-supporting browsers
-- [ ] **Implement CSS-based page transition fallbacks** using opacity and transform
-
-**Why this approach**: Reduces CSS bloat in Safari while maintaining smooth transitions where supported.
-
-### 2.3 Refactor Navigation Components
-
-**Context**: Components using `vt-tag-*` classes need fallback behavior for Safari.
-
-**Details**:
-
-- [ ] **Update navigation components** to conditionally apply view transition tags
-- [ ] **Implement CSS transition fallbacks** for Safari:
-  ```tsx
-  const transitionClasses = supportsViewTransitions()
-    ? "vt-tag-projects"
-    : "transition-opacity duration-300";
-  ```
-- [ ] **Add loading states** for navigation in Safari
-- [ ] **Test navigation smoothness** across different page types
-
-**Why this approach**: Provides consistent navigation experience regardless of browser capabilities.
-
-### 2.4 Test Cross-Browser Navigation
-
-**Context**: Ensure navigation feels smooth and consistent across all browsers.
-
-**Details**:
-
-- [ ] **Create automated tests** for navigation timing
-- [ ] **Test on various Safari versions** (desktop and mobile)
-- [ ] **Measure perceived performance** of navigation transitions
-- [ ] **Validate fallback animations** feel natural and not abrupt
-
-**Why this approach**: Ensures quality user experience across all browser environments.
-
-## 3. Backdrop-Filter Performance Optimization ⚡ **SCROLL PERFORMANCE CRITICAL**
+## 2. Backdrop-Filter Performance Optimization ⚡ **SCROLL PERFORMANCE CRITICAL**
 
 **Problem**: Safari's implementation of `backdrop-filter` is significantly less optimized than Chrome's. When combined with scroll-driven animations, it causes severe performance degradation, dropping from 60fps to 15-30fps during scrolling on the Hero/Home page. This is the PRIMARY BOTTLENECK affecting scroll performance.
 
@@ -291,7 +194,7 @@ className = "[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-
 - Poor scroll responsiveness on mobile Safari
 - Inconsistent scroll smoothness between browsers
 
-### 3.1 Audit All Backdrop-Filter Usage
+### 2.1 Audit All Backdrop-Filter Usage
 
 **Context**: We need to identify every use of backdrop-filter to prioritize optimization efforts.
 
@@ -308,7 +211,7 @@ className = "[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-
 
 **Why this approach**: Systematic audit ensures we optimize the most impactful elements first.
 
-### 3.2 Optimize Glass Morphism Components
+### 2.2 Optimize Glass Morphism Components
 
 **Context**: Glass morphism components combine backdrop-filter with other effects, compounding performance issues in Safari.
 
@@ -339,7 +242,7 @@ className = "[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-
 
 **Why this approach**: Maintains visual fidelity while ensuring smooth animations on Safari.
 
-### 3.3 Refactor MorphingVideo Component ⚡ **SCROLL PERFORMANCE CRITICAL**
+### 2.3 Refactor MorphingVideo Component ⚡ **SCROLL PERFORMANCE CRITICAL**
 
 **Context**: Lines 79-80 animate backdrop-filter simultaneously with multiple other properties AND during scroll events, causing the primary scroll performance bottleneck on Hero/Home page.
 
@@ -398,7 +301,7 @@ transition: isExpanding
 
 **Why this approach**: ELIMINATES the primary scroll performance bottleneck by preventing backdrop-filter animations during scroll while maintaining visual impact when static.
 
-### 3.4 Create Safari-Optimized Glass Effects
+### 2.4 Create Safari-Optimized Glass Effects
 
 **Context**: Safari needs different strategies for glass effects to maintain performance.
 
@@ -428,7 +331,7 @@ transition: isExpanding
 
 **Why this approach**: Provides the best possible glass effect performance on Safari while maintaining visual consistency.
 
-## 4. Framer Motion Safari Optimization
+## 3. Framer Motion Safari Optimization
 
 **Problem**: Framer Motion animations combined with backdrop-filter and 3D transforms cause Safari's compositor to struggle. The library's default optimization strategies are tuned for Chrome, leading to poor performance in Safari.
 
@@ -438,7 +341,7 @@ transition: isExpanding
 - 3D transform animations are janky
 - Poor interaction responsiveness
 
-### 4.1 Refactor WorkTimeline Animations
+### 3.1 Refactor WorkTimeline Animations
 
 **Context**: Line 228 combines Framer Motion with backdrop-filter and 3D transforms, causing performance issues.
 
@@ -489,7 +392,7 @@ className =
 
 **Why this approach**: Optimizes for each browser's strengths while maintaining smooth animations.
 
-### 4.2 Optimize Motion Components
+### 3.2 Optimize Motion Components
 
 **Context**: All Framer Motion components need Safari-specific optimizations.
 
@@ -513,7 +416,7 @@ className =
 
 **Why this approach**: Provides consistent motion design while optimizing for browser capabilities.
 
-### 4.3 Create Animation Utility Functions
+### 3.3 Create Animation Utility Functions
 
 **Context**: Centralize animation logic for consistent Safari optimization.
 
@@ -534,7 +437,7 @@ className =
 
 **Why this approach**: Ensures consistent optimization strategies across all components.
 
-### 4.4 Test Animation Performance
+### 3.4 Test Animation Performance
 
 **Context**: Validate that optimizations achieve 60fps performance in Safari.
 
@@ -548,11 +451,11 @@ className =
 
 **Why this approach**: Ensures optimizations deliver measurable performance improvements.
 
-## 5. CSS Performance Optimization
+## 4. CSS Performance Optimization
 
 **Problem**: Safari's CSS engine has different optimization characteristics than Chrome. Complex nesting, certain selectors, and GPU compositing strategies that work well in Chrome can cause performance issues in Safari.
 
-### 5.1 Flatten Complex CSS Nesting
+### 4.1 Flatten Complex CSS Nesting
 
 **Context**: Lines 211-256 in `globals.css` use deep nesting that Safari's parser handles less efficiently.
 
@@ -593,7 +496,7 @@ className =
 
 **Why this approach**: Reduces CSS parsing overhead in Safari while maintaining the same visual result.
 
-### 5.2 GPU Compositing Layer Management
+### 4.2 GPU Compositing Layer Management
 
 **Context**: Safari requires different strategies for GPU compositing optimization.
 
@@ -613,7 +516,7 @@ className =
 
 **Why this approach**: Optimizes GPU usage for Safari's rendering engine while maintaining smooth animations.
 
-### 5.3 Optimize Scroll-Based Animations ⚡ **SCROLL PERFORMANCE CRITICAL**
+### 4.3 Optimize Scroll-Based Animations ⚡ **SCROLL PERFORMANCE CRITICAL**
 
 **Context**: The `useScrollCssVariables` hook drives Hero/Home page animations and is a PRIMARY contributor to scroll performance degradation in Safari.
 
@@ -663,7 +566,7 @@ className =
 
 **Why this approach**: ELIMINATES scroll event processing bottlenecks and reduces main thread blocking, directly improving 60fps scroll performance on Hero/Home page.
 
-### 5.4 Content Visibility Fallbacks
+### 4.4 Content Visibility Fallbacks
 
 **Context**: `content-visibility: auto` is used for performance but has limited Safari support.
 
@@ -691,11 +594,11 @@ className =
 
 **Why this approach**: Provides performance benefits where supported while ensuring compatibility.
 
-## 6. Text and Typography Enhancements
+## 5. Text and Typography Enhancements
 
 **Problem**: CSS `text-balance` is used for improved typography but isn't supported in Safari, causing different text wrapping behavior between browsers.
 
-### 6.1 Text-Balance Fallbacks
+### 5.1 Text-Balance Fallbacks
 
 **Context**: Lines 105, 113, 128 in `MorphingVideo.client.tsx` use `text-balance` which Safari doesn't support.
 
@@ -718,7 +621,7 @@ className =
 
 **Why this approach**: Ensures consistent typography appearance across all browsers.
 
-### 6.2 Font Rendering Optimization
+### 5.2 Font Rendering Optimization
 
 **Context**: Safari has different font rendering characteristics that may affect readability.
 
@@ -737,11 +640,11 @@ className =
 
 **Why this approach**: Maintains consistent typography quality across browsers.
 
-## 7. Browser-Specific Fixes
+## 6. Browser-Specific Fixes
 
 **Problem**: Various Safari-specific rendering quirks and interaction behaviors need attention.
 
-### 7.1 iOS Safari Viewport Handling
+### 6.1 iOS Safari Viewport Handling
 
 **Context**: Safari on iOS has unique viewport behavior that needs special handling.
 
@@ -754,7 +657,7 @@ className =
 
 **Why this approach**: Ensures consistent layout behavior on iOS Safari.
 
-### 7.2 Touch and Interaction Optimization
+### 6.2 Touch and Interaction Optimization
 
 **Context**: Safari on touch devices has different interaction behaviors.
 
@@ -767,7 +670,7 @@ className =
 
 **Why this approach**: Provides optimal user experience on Safari across all device types.
 
-### 7.3 Video Playback Optimization
+### 6.3 Video Playback Optimization
 
 **Context**: Safari has strict autoplay policies and different video handling.
 
@@ -780,11 +683,11 @@ className =
 
 **Why this approach**: Ensures consistent video playback experience across browsers.
 
-## 8. Testing and Validation
+## 7. Testing and Validation
 
 **Problem**: Need comprehensive testing strategy to validate Safari compatibility improvements.
 
-### 8.1 Cross-Browser Testing Setup
+### 7.1 Cross-Browser Testing Setup
 
 **Context**: Establish systematic testing for Safari compatibility.
 
@@ -797,7 +700,7 @@ className =
 
 **Why this approach**: Ensures comprehensive coverage of Safari compatibility issues.
 
-### 8.2 Performance Monitoring
+### 7.2 Performance Monitoring
 
 **Context**: Track performance improvements and regressions.
 
@@ -810,7 +713,7 @@ className =
 
 **Why this approach**: Provides data-driven insights into Safari performance improvements.
 
-### 8.3 User Experience Validation
+### 7.3 User Experience Validation
 
 **Context**: Ensure the user experience is consistent across browsers.
 
@@ -823,7 +726,7 @@ className =
 
 **Why this approach**: Ensures users have consistent experience regardless of browser choice.
 
-### 8.4 Documentation Updates
+### 7.4 Documentation Updates
 
 **Context**: Document Safari-specific considerations for future development.
 
@@ -836,11 +739,11 @@ className =
 
 **Why this approach**: Enables team to maintain Safari compatibility in future development.
 
-## 9. Deployment and Monitoring
+## 8. Deployment and Monitoring
 
 **Problem**: Need strategies for safely deploying Safari optimizations and monitoring their effectiveness.
 
-### 9.1 Feature Flag Implementation
+### 8.1 Feature Flag Implementation
 
 **Context**: Enable gradual rollout and quick rollback of Safari optimizations.
 
@@ -853,7 +756,7 @@ className =
 
 **Why this approach**: Minimizes risk while enabling data-driven optimization decisions.
 
-### 9.2 Real User Monitoring
+### 8.2 Real User Monitoring
 
 **Context**: Track actual user experience improvements for Safari users.
 
@@ -866,7 +769,7 @@ className =
 
 **Why this approach**: Provides real-world validation of optimization effectiveness.
 
-### 9.3 Continuous Integration Updates
+### 8.3 Continuous Integration Updates
 
 **Context**: Integrate Safari testing into development workflow.
 
@@ -885,15 +788,15 @@ className =
 
 **Focus**: Achieve 60fps scrolling on Hero/Home page in Safari
 
-- **Task 3.1-3.3**: Backdrop-Filter Performance Optimization ⚡ **HIGH PRIORITY**
+- **Task 2.1-2.3**: Backdrop-Filter Performance Optimization ⚡ **HIGH PRIORITY**
   - Impact: CRITICAL - Directly fixes scroll stuttering on Hero/Home page
   - Effort: High (requires optimizing MorphingVideo and glass components during scroll)
   - Target: Eliminate backdrop-filter animations during scroll events
-- **Task 5.3**: Optimize Scroll-Based Animations ⚡ **HIGH PRIORITY**
+- **Task 4.3**: Optimize Scroll-Based Animations ⚡ **HIGH PRIORITY**
   - Impact: CRITICAL - Improves scroll performance with RAF throttling and passive listeners
   - Effort: Medium (optimize useScrollCssVariables hook)
   - Target: Reduce scroll event processing overhead
-- **Task 4.1-4.2**: Framer Motion Safari Optimization ⚡ **HIGH PRIORITY**
+- **Task 3.1-3.2**: Framer Motion Safari Optimization ⚡ **HIGH PRIORITY**
   - Impact: HIGH - Ensures smooth scrolling with motion components
   - Effort: Medium (Safari-specific animation variants for scroll interactions)
   - Target: Reduce motion complexity during scroll
@@ -905,32 +808,31 @@ className =
 - **Task 1.1-1.4**: Container Queries Fallback Implementation ✅ **COMPLETED**
   - Impact: Fixes broken layouts in Safari < 16.0
   - Status: Already implemented with adaptive classes
-- **Task 5.1-5.2**: GPU Compositing Layer Management
+- **Task 4.1-4.2**: GPU Compositing Layer Management
   - Impact: Improves overall rendering performance during scroll
   - Effort: Medium (strategic will-change and compositing optimizations)
   - Target: Optimize layer creation for scroll elements
 
-### Week 3 (MEDIUM PRIORITY) - Navigation & Transitions
+### Week 3 (MEDIUM PRIORITY) - Typography & Browser-Specific Fixes
 
 **Focus**: Address remaining user experience issues
 
-- **Task 2.1-2.2**: View Transitions Detection and CSS Updates
-  - Impact: Provides consistent navigation experience
-  - Effort: Medium (mostly CSS and utility function changes)
-  - Target: Smooth transitions without affecting scroll performance
-- **Task 6.1-6.2**: Typography and Text Enhancement
+- **Task 5.1-5.2**: Typography and Text Enhancement
   - Impact: Ensures visual consistency
   - Effort: Low (mostly CSS and minor component updates)
+- **Task 6.1-6.3**: Browser-Specific Fixes
+  - Impact: Addresses Safari-specific rendering quirks
+  - Effort: Medium (viewport handling, touch optimization, video playback)
 
 ### Week 4 (VALIDATION) - Testing & Monitoring
 
 **Focus**: Validate 60fps scroll performance and establish monitoring
 
-- **Task 8.1-8.4**: Comprehensive Testing and Validation
+- **Task 7.1-7.4**: Comprehensive Testing and Validation
   - Impact: Validates 60fps scroll performance in Safari
   - Effort: Medium (performance testing and FPS monitoring)
   - Target: Measure and confirm 60fps scrolling on Hero/Home page
-- **Task 9.1-9.3**: Deployment and Monitoring Setup
+- **Task 8.1-8.3**: Deployment and Monitoring Setup
   - Impact: Enables ongoing scroll performance monitoring
   - Effort: Medium (FPS monitoring and performance alerts)
 
