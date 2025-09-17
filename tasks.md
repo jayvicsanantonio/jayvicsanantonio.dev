@@ -157,44 +157,49 @@ className = "[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-
 - `vt-tag-*` classes have no effect
 - Inconsistent user experience between browsers
 
-### 2.1 Create View Transition Detection Utility ✅ COMPLETED
+### 2.1 Create View Transition Detection Utility
 
 **Context**: We need to detect browser support and gracefully handle unsupported browsers.
 
-**IMPLEMENTATION STATUS**: **COMPLETED** with comprehensive Safari fallback support.
+**Details**:
+
+- [ ] **Create `lib/utils/viewTransitions.ts`**:
+
+  ```typescript
+  export const supportsViewTransitions = (): boolean => {
+    return typeof document !== "undefined" && "startViewTransition" in document;
+  };
+
+  export const safeViewTransition = (callback: () => void) => {
+    if (supportsViewTransitions()) {
+      document.startViewTransition(callback);
+    } else {
+      callback();
+    }
+  };
+  ```
+
+- [ ] **Add hook for view transition support**: `hooks/useViewTransitions.ts`
+- [ ] **Create fallback animation utilities** for non-supporting browsers
+
+**Why this approach**: Enables progressive enhancement where supported browsers get smooth transitions while others get instant navigation.
+
+### 2.2 Update View Transition CSS
+
+**Context**: Lines 374-402 in `globals.css` define view transition animations that do nothing in Safari.
+
+**Current Problem**: CSS rules for `::view-transition-image-pair()` are ignored, bloating the stylesheet.
 
 **Details**:
 
-- [x] **Created `lib/utils/viewTransitions.ts`** with detection and safe execution functions:
-  - `supportsViewTransitions()`: Detects View Transitions API support
-  - `safeViewTransition()`: Safely executes transitions with fallback for unsupported browsers
-  - `isBrowser()`: Type guard for browser environment detection
-- [x] **Added hook for view transition support**: `hooks/useViewTransitions.ts`
-  - Provides `isSupported`, `isTransitioning`, and `startTransition` utilities
-  - Handles state management for transition status
-- [x] **Created fallback animation utilities**: `lib/utils/fallbackAnimations.ts`
-  - CSS-based animations for browsers without View Transitions support
-  - Fade, slide, and scale animation presets
-  - Utility functions for applying animations to elements
-  - Crossfade utility for page transitions
-
-**Why this approach**: Enables progressive enhancement where supported browsers get smooth transitions while others get instant navigation with CSS-based fallback animations.
-
-### 2.2 Update View Transition CSS ✅ COMPLETED
-
-**Context**: Lines 480-512 in `globals.css` define view transition animations that do nothing in Safari.
-
-**IMPLEMENTATION STATUS**: **COMPLETED** with comprehensive Safari fallback CSS.
-
-**Details**:
-
-- [x] **Wrapped view transition CSS in feature queries**:
+- [ ] **Wrap view transition CSS in feature queries**:
 
   ```css
   @supports (view-transition-name: test) {
     .vt-tag-projects {
       view-transition-name: projects;
     }
+
     ::view-transition-image-pair(projects) {
       animation-duration: 300ms;
       animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
@@ -202,94 +207,41 @@ className = "[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-
   }
   ```
 
-- [x] **Added fallback transition styles** for non-supporting browsers:
+- [ ] **Add fallback transition styles** for non-supporting browsers
+- [ ] **Implement CSS-based page transition fallbacks** using opacity and transform
 
-  ```css
-  @supports not (view-transition-name: test) {
-    .vt-tag-projects,
-    .vt-tag-work {
-      transition: opacity 300ms cubic-bezier(0.22, 1, 0.36, 1);
-    }
-  }
-  ```
+**Why this approach**: Reduces CSS bloat in Safari while maintaining smooth transitions where supported.
 
-- [x] **Implemented CSS-based page transition fallbacks** using opacity and transform:
-  - `.page-transition-enter` and `.page-transition-enter-active` for page entry
-  - `.page-transition-exit` and `.page-transition-exit-active` for page exit
-  - Respects `prefers-reduced-motion` in both supported and fallback modes
-
-**Why this approach**: Reduces CSS bloat in Safari while maintaining smooth transitions where supported. Provides graceful degradation with CSS-based animations for browsers without View Transitions API support.
-
-### 2.3 Refactor Navigation Components ✅ COMPLETED
+### 2.3 Refactor Navigation Components
 
 **Context**: Components using `vt-tag-*` classes need fallback behavior for Safari.
 
-**IMPLEMENTATION STATUS**: **COMPLETED** with comprehensive navigation transition system.
-
 **Details**:
 
-- [x] **Updated navigation components** to conditionally apply view transition tags:
-  - `NavPill.tsx`: Uses `useNavigationTransition` hook for smart class application
-  - `NavRow.client.tsx`: Mobile navigation with fallback support
-  - `MobileNavRow.client.tsx`: Hero mobile navigation with transition handling
-
-- [x] **Implemented CSS transition fallbacks** for Safari:
-
+- [ ] **Update navigation components** to conditionally apply view transition tags
+- [ ] **Implement CSS transition fallbacks** for Safari:
   ```tsx
-  const vtClass = vtTagName && isSupported ? `vt-tag-${vtTagName}` : "";
-  const fallbackClass = vtTagName && !isSupported ? "page-transition-target" : "";
+  const transitionClasses = supportsViewTransitions()
+    ? "vt-tag-projects"
+    : "transition-opacity duration-300";
   ```
+- [ ] **Add loading states** for navigation in Safari
+- [ ] **Test navigation smoothness** across different page types
 
-- [x] **Added loading states** for navigation in Safari:
-  - Visual feedback with `opacity-75` during transitions
-  - `isTransitioning` state management in hooks
-  - Smooth opacity transitions for loading feedback
+**Why this approach**: Provides consistent navigation experience regardless of browser capabilities.
 
-- [x] **Created navigation transition utilities**:
-  - `useNavigationTransition` hook: Centralizes navigation logic with view transition support
-  - Smart click handling: Preserves browser behavior for Cmd/Ctrl clicks
-  - External link handling: Maintains normal behavior for external navigation
-
-**Why this approach**: Provides consistent navigation experience regardless of browser capabilities while maintaining all standard browser navigation behaviors.
-
-### 2.4 Test Cross-Browser Navigation ✅ COMPLETED
+### 2.4 Test Cross-Browser Navigation
 
 **Context**: Ensure navigation feels smooth and consistent across all browsers.
 
-**IMPLEMENTATION STATUS**: **COMPLETED** with comprehensive testing infrastructure.
-
 **Details**:
 
-- [x] **Created automated tests** for navigation timing:
-  - `tests/navigation-transitions.spec.ts`: Playwright tests for cross-browser validation
-  - Tests View Transitions API detection, CSS class application, and navigation performance
-  - Validates external link handling and reduced motion preferences
-  - Measures mobile vs desktop navigation consistency
+- [ ] **Create automated tests** for navigation timing
+- [ ] **Test on various Safari versions** (desktop and mobile)
+- [ ] **Measure perceived performance** of navigation transitions
+- [ ] **Validate fallback animations** feel natural and not abrupt
 
-- [x] **Created performance monitoring utilities**:
-  - `lib/utils/navigationPerformance.ts`: Navigation performance measurement system
-  - Integrated with `useNavigationTransition` hook for real-time monitoring
-  - Tracks metrics by browser, transition type, and user agent
-  - Provides export functionality for analysis
-
-- [x] **Created test suite components** for manual validation:
-  - `NavigationTestSuite.tsx`: Interactive testing component for development
-  - Real-time browser detection and feature support validation
-  - Performance metrics collection and export
-
-- [x] **Validated fallback animations** feel natural:
-  - `AnimationValidator.tsx`: Visual animation testing component
-  - Tests all fallback animation types (fade, slideUp, scale)
-  - Validates smooth 60fps performance across enter/exit states
-  - Confirms proper reduced motion handling
-
-- [x] **Created cross-browser testing script**:
-  - `scripts/test-navigation-browsers.js`: Automated testing across browser matrix
-  - Tests Chrome, Safari, Firefox on desktop and mobile
-  - Generates comprehensive reports with performance insights
-  - Validates cross-browser consistency and mobile compatibility
-
-**Why this approach**: Ensures quality user experience across all browser environments with both automated validation and manual testing tools for ongoing quality assurance.
+**Why this approach**: Ensures quality user experience across all browser environments.
 
 ## 3. Backdrop-Filter Performance Optimization
 
@@ -307,14 +259,14 @@ className = "[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-
 
 **Details**:
 
-- [x] **Create comprehensive inventory** of all backdrop-filter usage\*\* ([docs/safari-backdrop-filter-audit.md](docs/safari-backdrop-filter-audit.md)):
+- [ ] **Create comprehensive inventory** of all backdrop-filter usage:
   - `GlassButton.tsx:21` - Navigation buttons
   - `GlassHeaderBubble.tsx` - Multiple glass elements
   - `MorphingVideo.client.tsx` - Hero section backdrop effects
   - Mobile navigation components - Glass overlay effects
-- [x] **Categorize by performance impact**: High (animated), Medium (static), Low (occasional) — see audit doc
+- [ ] **Categorize by performance impact**: High (animated), Medium (static), Low (occasional)
 - [ ] **Measure current performance** using Chrome DevTools on Safari
-- [x] **Document visual requirements** for each backdrop-filter use case — captured in audit doc
+- [ ] **Document visual requirements** for each backdrop-filter use case
 
 **Why this approach**: Systematic audit ensures we optimize the most impactful elements first.
 
@@ -324,7 +276,7 @@ className = "[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-
 
 **Details**:
 
-- [x] **Add hardware acceleration hints** to all glass components:
+- [ ] **Add hardware acceleration hints** to all glass components:
   ```css
   .glass-optimized {
     transform: translateZ(0);
@@ -334,21 +286,18 @@ className = "[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-
     backface-visibility: hidden;
   }
   ```
-  Applied to: GlassButton base, WorkTimeline outer card, SkillsAndCases outer card, NavPill
-- [x] **Separate backdrop-filter from animations**:
+- [ ] **Separate backdrop-filter from animations**:
   ```css
   .glass-element {
     backdrop-filter: blur(16px);
     transition: transform 0.3s ease-out; /* Don't animate backdrop-filter */
   }
   ```
-  Implemented by removing blur from animated wrappers and keeping blur on inner panels in WorkTimeline/SkillsAndCases
-- [x] **Implement Safari-specific reduced effects**:
+- [ ] **Implement Safari-specific reduced effects**:
   ```tsx
   const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
   const backdropClass = isSafari ? "bg-white/80" : "backdrop-blur-[16px] bg-white/20";
   ```
-  Implemented in NavPill: disables backdropFilter in Safari and adds a solid bg fallback
 
 **Why this approach**: Maintains visual fidelity while ensuring smooth animations on Safari.
 
@@ -366,19 +315,23 @@ transition: isExpanding
 
 **Details**:
 
-- [x] **Split complex transition into stages**:
+- [ ] **Split complex transition into stages**:
 
   ```typescript
   // Stage 1: Transform and layout
   transition: "transform 2s cubic-bezier(0.22, 1, 0.36, 1), border-radius 2s...";
 
-  // Stage 2: Visual effects (delayed) — implemented with a 1.8s timeout gate instead of property animation
-  // The backdrop-filter is disabled during expansion and re-enabled after ~1.8s.
+  // Stage 2: Visual effects (delayed)
+  const backdropTransition = {
+    transitionDelay: "1.8s",
+    transitionProperty: "backdrop-filter",
+    transitionDuration: "0.2s",
+  };
   ```
 
-- [x] **Add conditional backdrop-filter application** based on animation state
-- [x] **Implement Safari-specific animation sequence** with reduced complexity (no backdrop-filter during expansion)
-- [x] **Use CSS custom properties** for dynamic backdrop-filter values (kept for post-intro)
+- [ ] **Add conditional backdrop-filter application** based on animation state
+- [ ] **Implement Safari-specific animation sequence** with reduced complexity
+- [ ] **Use CSS custom properties** for dynamic backdrop-filter values
 
 **Why this approach**: Eliminates simultaneous animation of multiple expensive properties while maintaining visual impact.
 

@@ -3,15 +3,8 @@
 import { Icon } from '@iconify/react';
 
 import { GlassButton } from '@/components/ui/GlassButton';
-import { useNavigationTransition } from '@/hooks/useNavigationTransition';
 
 export default function MobileNavRow() {
-  const { isSupported, isTransitioning, getClickHandler } = useNavigationTransition();
-
-  // Navigation click handlers
-  const projectsClickHandler = getClickHandler('/projects');
-  const workClickHandler = getClickHandler('/work');
-
   return (
     <div
       className="pointer-events-none absolute top-[calc(46%+4rem)] left-1/2 z-[70] flex w-[calc(100vw-2rem)] max-w-[var(--nav-row-w)] -translate-x-1/2 items-center justify-between gap-2 px-2 sm:hidden"
@@ -33,28 +26,14 @@ export default function MobileNavRow() {
       <GlassButton
         href="/projects"
         aria-label="Projects"
-        className={[
-          isSupported ? 'vt-tag-projects' : 'page-transition-target',
-          isTransitioning && !isSupported ? 'opacity-75' : '',
-          'h-12 w-12 min-w-[3rem] bg-white/30 backdrop-blur-[28px] backdrop-saturate-[220%] border-white/60 hover:border-white/65 will-change-transform',
-        ]
-          .filter(Boolean)
-          .join(' ')}
-        onClick={projectsClickHandler}
+        className="vt-tag-projects h-12 w-12 min-w-[3rem] bg-white/30 backdrop-blur-[28px] backdrop-saturate-[220%] border-white/60 hover:border-white/65 will-change-transform"
       >
         <Icon icon="mdi:application-brackets" width={24} height={24} aria-hidden="true" />
       </GlassButton>
       <GlassButton
         href="/work"
         aria-label="Work Experience"
-        className={[
-          isSupported ? 'vt-tag-work' : 'page-transition-target',
-          isTransitioning && !isSupported ? 'opacity-75' : '',
-          'h-12 w-12 min-w-[3rem] bg-white/30 backdrop-blur-[28px] backdrop-saturate-[220%] border-white/60 hover:border-white/65 will-change-transform',
-        ]
-          .filter(Boolean)
-          .join(' ')}
-        onClick={workClickHandler}
+        className="vt-tag-work h-12 w-12 min-w-[3rem] bg-white/30 backdrop-blur-[28px] backdrop-saturate-[220%] border-white/60 hover:border-white/65 will-change-transform"
       >
         <Icon icon="mdi:timeline-text" width={24} height={24} aria-hidden="true" />
       </GlassButton>

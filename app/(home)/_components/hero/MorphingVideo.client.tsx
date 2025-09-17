@@ -10,7 +10,6 @@ export type MorphingVideoProps = {
   isIntro: boolean;
   initialPill: boolean;
   isExpanding: boolean;
-  isScrolling?: boolean; // used to simplify clip-path on Safari while scrolling
   showTitleGroup: boolean;
   showDesc: boolean;
   shouldPlayVideo: boolean;
@@ -23,7 +22,6 @@ export default function MorphingVideo({
   isIntro,
   initialPill,
   isExpanding,
-  isScrolling = false,
   showTitleGroup,
   showDesc,
   shouldPlayVideo,
@@ -32,26 +30,6 @@ export default function MorphingVideo({
 }: MorphingVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [hasVideo, setHasVideo] = useState(false);
-
-  // Browser detection (hydration-safe) for Safari-specific handling
-  const [isSafari, setIsSafari] = useState(false);
-  useEffect(() => {
-    if (typeof navigator !== 'undefined') {
-      setIsSafari(/Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent));
-    }
-  }, []);
-
-  // Stage control for backdrop-filter: disable during heavy transforms, enable after
-  const [enableBackdrop, setEnableBackdrop] = useState(!isExpanding);
-  useEffect(() => {
-    if (isExpanding) {
-      // During expansion, prefer no backdrop-filter (especially for Safari)
-      setEnableBackdrop(false);
-      const t = window.setTimeout(() => setEnableBackdrop(true), 1800);
-      return () => window.clearTimeout(t);
-    }
-    setEnableBackdrop(true);
-  }, [isExpanding]);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -86,19 +64,6 @@ export default function MorphingVideo({
 
   type CSSVars = React.CSSProperties & Record<'--intro-scale' | '--bg-a' | '--shadow-a', string>;
 
-  // Compute backdrop-filter value without animating the property
-  const computedBackdrop = (() => {
-    // Safari: never apply backdrop-filter during expansion
-    if (isSafari && isExpanding) return 'none';
-    // Safari: force-disable backdrop-filter during active scrolling
-    if (isSafari && isScrolling) return 'none';
-    if (!enableBackdrop) return 'none';
-    if (isIntro && !initialPill) return 'blur(20px)';
-    if (isIntro) return 'blur(0px)';
-    // Post-intro: keep the dynamic effect but without animating the property
-    return 'blur(calc(max(0, (var(--p, 0) - 0.7) * 3) * 20px))';
-  })();
-
   const containerStyle: CSSVars = {
     top: centerTop,
     left: '50%',
@@ -106,42 +71,30 @@ export default function MorphingVideo({
     transform: 'translate(-50%, -50%) scale(var(--intro-scale))',
     width: 'min(96vw, 96svw)',
     height: 'min(86svh, 86vh)',
-    borderRadius: isSafari && isScrolling ? '24px' : containerRadius,
+    borderRadius: containerRadius,
     border: 'none',
-    willChange: isExpanding ? 'transform, opacity, clip-path' : undefined,
+    willChange: isExpanding ? 'transform, opacity, filter, clip-path' : undefined,
     transformOrigin: '50% 50%',
     transition: isExpanding
-      ? 'top 0.4s ease-out, transform 2s cubic-bezier(0.22, 1, 0.36, 1), border-radius 2s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.6s ease-out'
-      : 'top 0.4s ease-out, border-radius 0s, background-color 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.3s ease-out',
+      ? 'top 0.4s ease-out, transform 2s cubic-bezier(0.22, 1, 0.36, 1), border-radius 2s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.6s ease-out'
+      : 'top 0.4s ease-out, border-radius 0s, background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.3s ease-out',
     '--bg-a': isIntro ? '0.95' : 'calc(max(0, (var(--p, 0) - 0.7) * 3) * 0.95)',
     '--shadow-a': isIntro ? '0.25' : 'calc(max(0, (var(--p, 0) - 0.7) * 3) * 0.25)',
-    backgroundColor: initialPill
-      ? 'transparent'
-      : isSafari && isScrolling
-        // Freeze to a stable value during scroll (reduces per-frame paint churn)
-        ? 'rgba(255, 255, 255, 0.42)'
-        : 'rgba(255, 255, 255, var(--bg-a))',
-    backdropFilter: computedBackdrop,
-    WebkitBackdropFilter: computedBackdrop as unknown as string,
-    boxShadow: initialPill
-      ? 'none'
-      : isSafari && isScrolling
-        ? 'none'
-        : '0 25px 50px -12px rgba(0, 0, 0, var(--shadow-a))',
-    // Simplify clip-path on Safari while actively scrolling; otherwise use original
+    backgroundColor: initialPill ? 'transparent' : 'rgba(255, 255, 255, var(--bg-a))',
+    backdropFilter:
+      isIntro && !initialPill
+        ? 'blur(20px)'
+        : isIntro
+          ? 'blur(0px)'
+          : 'blur(calc(max(0, (var(--p, 0) - 0.7) * 3) * 20px))',
+    boxShadow: initialPill ? 'none' : '0 25px 50px -12px rgba(0, 0, 0, var(--shadow-a))',
     clipPath:
-      isSafari && isScrolling
-        ? undefined
-        : 'inset(calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) round calc(24px + var(--sh, 0) * 360px))',
+      'inset(calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) round calc(24px + var(--sh, 0) * 360px))',
   };
-
-  // Precompute visibility flags to avoid nested JSX conditionals
-  const showFallbackBg = !hasVideo && !(isSafari && isScrolling);
-  const showOverlayGradient = !(isSafari && isScrolling);
 
   return (
     <div
-      className="fixed z-30 flex items-center justify-center overflow-hidden glass-optimized"
+      className="fixed z-30 flex items-center justify-center overflow-hidden"
       style={containerStyle}
     >
       {/* Titles */}
@@ -186,7 +139,7 @@ export default function MorphingVideo({
           transition: 'opacity 0.8s ease-out',
         }}
       >
-        {hasVideo && (
+        {hasVideo ? (
           <video
             ref={videoRef}
             muted
@@ -204,21 +157,48 @@ export default function MorphingVideo({
           >
             <source src="/matrix-horizontal.mp4" type="video/mp4" />
           </video>
-        )}
-        {showFallbackBg && (
+        ) : (
           <div
             aria-hidden
             className="h-full w-full bg-[radial-gradient(80%_60%_at_50%_0%,rgba(59,130,246,0.20),transparent_60%),radial-gradient(60%_50%_at_50%_100%,rgba(168,85,247,0.16),transparent_60%)]"
             style={{ transform: `scale(${video.scale})` }}
           />
         )}
-        {/* Remove inner overlay gradient completely while scrolling in Safari */}
-        {showOverlayGradient ? (
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30"
+          style={{ opacity: isIntro ? 0 : 1 }}
+        />
+
+        {/* Cyan overlay pill (opacity driven by --cyan/ui) */}
+        <div
+          className="pointer-events-none absolute inset-0 flex items-center justify-center px-4 sm:px-0"
+          style={{ opacity: isIntro ? 0 : undefined }}
+        >
           <div
-            className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30"
-            style={{ opacity: isIntro ? 0 : 1 }}
-          />
-        ) : null}
+            className="relative flex h-12 w-[calc(100vw-3rem)] max-w-[20rem] items-center justify-center rounded-[384px] border border-white/30 backdrop-blur-[16px] backdrop-saturate-[160%] shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_8px_30px_rgba(0,0,0,0.22)] before:pointer-events-none before:absolute before:inset-0 before:bg-[radial-gradient(120%_60%_at_50%_0%,rgba(255,255,255,0.35),rgba(255,255,255,0)_60%)] before:content-[''] sm:h-full sm:w-full sm:max-w-none"
+            style={{
+              background:
+                'linear-gradient(180deg, rgba(24,204,193,0.28) 0%, rgba(0,166,158,0.20) 100%)',
+              opacity: 'var(--cyan, 0)',
+              transition: 'opacity 0.5s ease-out',
+            }}
+          >
+            <span
+              className="font-semibold tracking-wide text-white px-3"
+              style={{
+                fontSize: 'clamp(15px, 2.5vw, 22px)',
+                whiteSpace: 'nowrap',
+                maxWidth: '90%',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                opacity: 'var(--ui, 0)',
+                textShadow: '0 2px 8px rgba(0,0,0,0.6)',
+              }}
+            >
+              Hi, I'm Jayvic 👋
+            </span>
+          </div>
+        </div>
 
         {/* Watermark cover */}
         <div className="absolute right-0 bottom-0 h-12 w-20 bg-gradient-to-tl from-black via-black/80 to-transparent" />

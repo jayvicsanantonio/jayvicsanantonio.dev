@@ -477,86 +477,36 @@
   }
 }
 
-/* View Transitions with Safari fallbacks */
+/* View Transitions tags: map vt-tag-* classes to view-transition-name */
 @layer base {
-  /* View Transitions API support - only apply when supported */
-  @supports (view-transition-name: test) {
-    .vt-tag-projects {
-      view-transition-name: projects;
-    }
-    .vt-tag-work {
-      view-transition-name: work;
-    }
+  .vt-tag-projects {
+    view-transition-name: projects;
+  }
+  .vt-tag-work {
+    view-transition-name: work;
+  }
+}
 
-    @media (prefers-reduced-motion: no-preference) {
-      /* Active pill morphs (projects/work): snappier */
-      /* biome-ignore lint/correctness/noUnknownTypeSelector: view-transition named targets are valid */
-      ::view-transition-image-pair(projects),
-      /* biome-ignore lint/correctness/noUnknownTypeSelector: view-transition named targets are valid */
-        ::view-transition-image-pair(work) {
-        animation-duration: 300ms;
-        animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-      }
-    }
-
-    /* Respect reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      /* biome-ignore lint/correctness/noUnknownTypeSelector: view-transition named targets are valid */
-      ::view-transition-image-pair(projects),
-      /* biome-ignore lint/correctness/noUnknownTypeSelector: view-transition named targets are valid */
-        ::view-transition-image-pair(work) {
-        animation-duration: 0.01ms;
-      }
+/* View Transition timing and layering */
+@layer base {
+  @media (prefers-reduced-motion: no-preference) {
+    /* Active pill morphs (projects/work): snappier */
+    /* biome-ignore lint/correctness/noUnknownTypeSelector: view-transition named targets are valid */
+    ::view-transition-image-pair(projects),
+    /* biome-ignore lint/correctness/noUnknownTypeSelector: view-transition named targets are valid */
+      ::view-transition-image-pair(work) {
+      animation-duration: 300ms;
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
     }
   }
 
-  /* Fallback transitions for browsers without View Transitions support (Safari) */
-  @supports not (view-transition-name: test) {
-    .vt-tag-projects,
-    .vt-tag-work,
-    .page-transition-target {
-      transition: opacity 300ms cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    /* Fallback page transition styles */
-    .page-transition-enter {
-      opacity: 0;
-      transform: translateY(8px);
-      transition:
-        opacity 300ms cubic-bezier(0.22, 1, 0.36, 1),
-        transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .page-transition-enter-active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .page-transition-exit {
-      opacity: 1;
-      transform: translateY(0);
-      transition:
-        opacity 300ms cubic-bezier(0.22, 1, 0.36, 1),
-        transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .page-transition-exit-active {
-      opacity: 0;
-      transform: translateY(-8px);
-    }
-
-    /* Respect reduced motion in fallbacks */
-    @media (prefers-reduced-motion: reduce) {
-      .vt-tag-projects,
-      .vt-tag-work,
-      .page-transition-target,
-      .page-transition-enter,
-      .page-transition-enter-active,
-      .page-transition-exit,
-      .page-transition-exit-active {
-        transition-duration: 0.01ms;
-        transform: none;
-      }
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    /* biome-ignore lint/correctness/noUnknownTypeSelector: view-transition named targets are valid */
+    ::view-transition-image-pair(projects),
+    /* biome-ignore lint/correctness/noUnknownTypeSelector: view-transition named targets are valid */
+      ::view-transition-image-pair(work) {
+      animation-duration: 0.01ms;
     }
   }
 }

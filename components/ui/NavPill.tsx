@@ -3,7 +3,6 @@
 import React from 'react';
 
 import { GlassButton } from '@/components/ui/GlassButton';
-import { useNavigationTransition } from '@/hooks/useNavigationTransition';
 
 export type NavPillProps = {
   href: string;
@@ -38,33 +37,11 @@ export function NavPill({
   tooltipPlacement = 'above',
   className,
 }: NavPillProps) {
-  const { isSupported, getClickHandler } = useNavigationTransition();
+  // View-transition tag (optional)
+  const vtClass = vtTagName ? `vt-tag-${vtTagName}` : '';
 
-  // Browser detection (hydration-safe)
-  const [isSafari, setIsSafari] = React.useState(false);
-  React.useEffect(() => {
-    if (typeof navigator !== 'undefined') {
-      setIsSafari(/Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent));
-    }
-  }, []);
-  const _safariReducedClass = isSafari ? 'bg-white/80 bg-none' : '';
+  const linkProps = external ? { target: '_blank', rel: 'noopener noreferrer' as const } : {};
 
-  // View-transition tag (only apply when supported)
-  const _vtClass = vtTagName && isSupported ? `vt-tag-${vtTagName}` : '';
-
-  // Fallback transition classes for Safari
-  const _fallbackClass = vtTagName && !isSupported ? 'page-transition-target' : '';
-
-  const clickHandler = getClickHandler(
-    href,
-    external
-      ? ({ external: true, target: '_blank', rel: 'noopener noreferrer' } as {
-          external: true;
-          target: React.HTMLAttributeAnchorTarget;
-          rel: 'noopener noreferrer';
-        })
-      : {},
-  );
   return (
     <fieldset
       className="group relative inline-block"
@@ -88,27 +65,19 @@ export function NavPill({
         className={[
           cyanAccent ? 'border-cyan-400/50 hover:border-cyan-300/60' : '',
           active ? 'border-cyan-400/70 hover:border-cyan-300/70' : '',
-          _vtClass,
-          _fallbackClass,
-          'glass-optimized',
-          _safariReducedClass,
+          vtClass,
           className ?? '',
         ].join(' ')}
         style={{
           width: collapsedPx,
           height: heightPx,
-          transition: 'width 200ms ease-out, opacity 200ms ease-out',
-          willChange: 'width, opacity',
-          ...(isSafari
-            ? { WebkitBackdropFilter: 'none', backdropFilter: 'none' }
-            : {
-                WebkitBackdropFilter: 'blur(24px) saturate(200%)',
-                backdropFilter: 'blur(24px) saturate(200%)',
-              }),
+          transition: 'width 200ms ease-out',
+          willChange: 'width',
+          WebkitBackdropFilter: 'blur(24px) saturate(200%)',
+          backdropFilter: 'blur(24px) saturate(200%)',
         }}
         aria-current={active ? 'page' : undefined}
-        onClick={clickHandler}
-        {...(external ? { target: '_blank', rel: 'noopener noreferrer' as const } : {})}
+        {...linkProps}
       >
         <span className="inline-flex items-center gap-2">
           {/* Icon with cursor-follow transform */}
