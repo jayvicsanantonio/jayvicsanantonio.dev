@@ -12,8 +12,9 @@ export function middleware(req: NextRequest) {
   if (ua.isBot) return NextResponse.next()
 
   const isMobile = ua.device.type === 'mobile' || ua.device.type === 'tablet'
+  const isSafari = ua.browser.name === 'Safari'
 
-  if (isMobile) {
+  if (isMobile || isSafari) {
     const url = req.nextUrl.clone()
     url.pathname = '/mobile'
     return NextResponse.rewrite(url)
@@ -26,4 +27,3 @@ export function middleware(req: NextRequest) {
 export const config = {
   matcher: ['/'],
 }
-
