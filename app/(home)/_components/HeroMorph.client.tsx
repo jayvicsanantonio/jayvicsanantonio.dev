@@ -1,28 +1,37 @@
-'use client';
+"use client";
 
-import dynamic from 'next/dynamic';
-import { useRef } from 'react';
+import dynamic from "next/dynamic";
+import { useRef } from "react";
 
-import { CFG } from '@/app/(home)/_components/hero/config';
-import InitialPillOverlay from '@/app/(home)/_components/hero/InitialPillOverlay.client';
-import MorphingVideo from '@/app/(home)/_components/hero/MorphingVideo.client';
-import ProfileImage from '@/app/(home)/_components/hero/ProfileImage.client';
-import { useIntroSequence } from '@/app/(home)/_hooks/useIntroSequence';
-import { useScrollCssVariables } from '@/app/(home)/_hooks/useScrollCssVariables';
-import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
+import { CFG } from "@/app/(home)/_components/hero/config";
+import InitialPillOverlay from "@/app/(home)/_components/hero/InitialPillOverlay.client";
+import MorphingVideo from "@/app/(home)/_components/hero/MorphingVideo.client";
+import ProfileImage from "@/app/(home)/_components/hero/ProfileImage.client";
+import { useIntroSequence } from "@/app/(home)/_hooks/useIntroSequence";
+import { useScrollCssVariables } from "@/app/(home)/_hooks/useScrollCssVariables";
+import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
 // Lazy-load non-critical UI islands to reduce initial JS
 const PrimaryNavOverlay = dynamic(
-  () => import('@/app/(home)/_components/hero/PrimaryNavOverlay.client'),
+  () => import("@/app/(home)/_components/hero/PrimaryNavOverlay.client"),
   {
     ssr: false,
   },
 );
-const MobileNavRow = dynamic(() => import('@/app/(home)/_components/hero/MobileNavRow.client'), {
+const MobileNavRow = dynamic(() => import("@/app/(home)/_components/hero/MobileNavRow.client"), {
   ssr: false,
 });
 const FooterBrandCTA = dynamic(
-  () => import('@/app/(home)/_components/hero/FooterBrandCTA.client'),
+  () => import("@/app/(home)/_components/hero/FooterBrandCTA.client"),
+  {
+    ssr: false,
+  },
+);
+const AboutSection = dynamic(() => import("@/app/(home)/_components/AboutSection.client"), {
+  ssr: false,
+});
+const BlackTransitionOverlay = dynamic(
+  () => import("@/app/(home)/_components/BlackTransitionOverlay.client"),
   {
     ssr: false,
   },
@@ -38,19 +47,19 @@ export default function HeroMorph() {
     containerRef,
     {
       scroll: CFG.scroll,
-      closeMaxX: 'calc((96vw - var(--nav-row-w, 20vw)) / 2)',
-      closeMaxY: 'calc((min(86svh, 86vh) - var(--pill-h, 8vh)) / 2)',
+      closeMaxX: "calc((96vw - var(--nav-row-w, 20vw)) / 2)",
+      closeMaxY: "calc((min(86svh, 86vh) - var(--pill-h, 8vh)) / 2)",
     },
     reduceMotion,
   );
 
   const isIntro = initialPill || isExpanding;
-  const containerRadius = initialPill ? '9999px' : 'calc(16px + 160px * var(--sh, 0))';
+  const containerRadius = initialPill ? "9999px" : "calc(16px + 160px * var(--sh, 0))";
 
   return (
     <div
       ref={containerRef}
-      className="relative overflow-x-hidden bg-black touch-pan-y overscroll-y-contain [--nav-row-w:calc(3.5rem*4+0.75rem*3)] [--pill-h:54px] sm:[--nav-row-w:20vw] sm:[--pill-h:8vh] md:[--nav-row-w:24vw]"
+      className="relative overflow-hidden  bg-black [--nav-row-w:calc(3.5rem*4+0.75rem*3)] [--pill-h:54px] sm:[--nav-row-w:20vw] sm:[--pill-h:8vh] md:[--nav-row-w:24vw]"
     >
       <MorphingVideo
         centerTop={CFG.nav.centerTop}
@@ -81,20 +90,24 @@ export default function HeroMorph() {
         <FooterBrandCTA showName={showName} overlayUpDampen={CFG.overlayUpDampen} />
       </div>
 
-      <div className="relative z-10 min-w-screen">
+      <BlackTransitionOverlay />
+
+      <div className="relative z-10 w-full">
         <div className="absolute inset-0 h-[220svh] bg-gradient-to-b from-black via-gray-800 to-gray-200 will-change-transform md:h-[180svh] lg:h-[154rem]"></div>
 
         <div
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              'radial-gradient(ellipse 80vw 60vh at 50% 100%, rgba(0,139,139,0.2) 0%, rgba(0,139,139,0.1) 40%, transparent 70%)',
-            opacity: 'min(calc(var(--p, 0) * 2), 1)',
+              "radial-gradient(ellipse 80vw 60vh at 50% 100%, rgba(0,139,139,0.2) 0%, rgba(0,139,139,0.1) 40%, transparent 70%)",
+            opacity: "min(calc(var(--p, 0) * 2), 1)",
           }}
         />
 
         <section className="flex min-h-[220svh] flex-col items-center justify-center px-4 py-20 md:min-h-[180svh] lg:min-h-[154rem]"></section>
       </div>
+
+      <AboutSection />
     </div>
   );
 }
