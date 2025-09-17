@@ -7,6 +7,7 @@ import AnimatedText from '@/components/ui/AnimatedText';
 import { getBrowserCapabilities } from '@/lib/utils/browserUtils';
 import { getOptimizedGlassClasses } from '@/lib/utils/glassEffects';
 import { getTextBalanceClasses } from '@/lib/utils/textBalance';
+import { useSafariVideoOptimization, createSafariVideoLoader } from '@/lib/utils/videoOptimization';
 
 export type MorphingVideoProps = {
   centerTop: string;
@@ -35,6 +36,18 @@ export default function MorphingVideo({
   const [hasVideo, setHasVideo] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
   const scrollTimeoutRef = useRef<number | undefined>(undefined);
+
+  // Safari video optimization
+  const safariVideo = useSafariVideoOptimization(videoRef, {
+    autoplay: true,
+    muted: true,
+    playsInline: true,
+    preload: video.preload,
+    loop: true,
+    disablePictureInPicture: true,
+  });
+
+  const videoLoader = createSafariVideoLoader('/matrix-horizontal.mp4');
 
   useEffect(() => {
     if (videoRef.current) {
@@ -221,20 +234,26 @@ export default function MorphingVideo({
         {hasVideo ? (
           <video
             ref={videoRef}
-            muted
-            loop
-            playsInline
-            preload={video.preload}
+            {...safariVideo.videoProps}
             aria-hidden
             tabIndex={-1}
             onError={() => setHasVideo(false)}
+            onLoadedData={() => {
+              // Enable autoplay for Safari if blocked initially
+              if (safariVideo.isSafari && !safariVideo.canAutoplay) {
+                safariVideo.enableAutoplay();
+              }
+            }}
             className="h-full w-full object-cover"
             style={{
               willChange: 'opacity, transform',
               transform: `scale(${video.scale})`,
             }}
+            data-safari-video-optimized={safariVideo.isSafari}
           >
-            <source src="/matrix-horizontal.mp4" type="video/mp4" />
+            <source src={videoLoader.src} type="video/mp4" />
+            {/* Fallback for older browsers */}
+            Your browser does not support the video tag.
           </video>
         ) : (
           <div

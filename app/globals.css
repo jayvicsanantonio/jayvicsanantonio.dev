@@ -597,12 +597,17 @@
     overscroll-behavior-y: contain;
   }
 
-  /* iOS-specific fixes */
+  /* iOS Safari-specific fixes and optimizations */
   @supports (-webkit-touch-callout: none) {
     /* iOS only */
     body {
       /* Prevent rubber-band scrolling */
       overscroll-behavior-y: contain;
+      /* Disable text selection for better touch experience */
+      -webkit-user-select: none;
+      user-select: none;
+      /* Remove tap highlight */
+      -webkit-tap-highlight-color: transparent;
     }
 
     /* Fix for iOS Safari viewport height - using fallback pattern */
@@ -610,6 +615,67 @@
       min-height: 100vh; /* fallback for browsers that don't support -webkit-fill-available */
       /* biome-ignore lint/suspicious/noDuplicateProperties: Intentional fallback pattern for iOS Safari */
       min-height: -webkit-fill-available; /* iOS Safari specific */
+    }
+
+    /* iOS Safari dynamic viewport utilities */
+    .ios-viewport-available {
+      min-height: -webkit-fill-available;
+    }
+
+    /* iOS notch and safe area handling */
+    .ios-notch {
+      padding-top: env(safe-area-inset-top);
+      padding-right: env(safe-area-inset-right);
+      padding-bottom: env(safe-area-inset-bottom);
+      padding-left: env(safe-area-inset-left);
+    }
+
+    /* Touch optimization utilities */
+    .ios-touch-optimized {
+      touch-action: manipulation;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* iOS scroll performance */
+    .ios-scroll-smooth {
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      scroll-behavior: smooth;
+    }
+
+    /* Prevent zoom on double-tap */
+    .ios-no-zoom {
+      touch-action: manipulation;
+    }
+
+    /* Touch interaction states */
+    .touch-active {
+      transform: scale(0.98);
+      opacity: 0.9;
+      transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+    }
+  }
+
+  /* Mobile hover state optimizations */
+  @media (hover: none) and (pointer: coarse) {
+    /* Mobile devices without hover capability */
+    .mobile-no-hover {
+      /* Convert hover states to active states */
+    }
+
+    /* Disable hover animations on mobile */
+    .mobile-no-hover:hover {
+      transform: none !important;
+      transition: none !important;
+    }
+
+    /* Use active states instead of hover on mobile */
+    .mobile-no-hover:active {
+      transform: scale(0.98);
+      opacity: 0.9;
     }
   }
 
@@ -685,6 +751,40 @@
     /* biome-ignore lint/correctness/noUnknownTypeSelector: view-transition named targets are valid */
       ::view-transition-image-pair(work) {
       animation-duration: 0.01ms;
+    }
+  }
+}
+
+/* Text balance CSS fallback for Safari compatibility */
+@layer utilities {
+  /* Native text-balance support */
+  @supports (text-wrap: balance) {
+    .text-balance {
+      text-wrap: balance;
+    }
+  }
+
+  /* Safari fallback with enhanced typography */
+  @supports not (text-wrap: balance) {
+    .text-balance {
+      /* Enhanced typography for manual balancing */
+      word-spacing: 0.05em;
+      letter-spacing: 0.01em;
+      line-height: 1.4;
+      hyphens: auto;
+      -webkit-hyphens: auto;
+      hyphenate-limit-chars: 6 3 3;
+      text-align: left;
+    }
+
+    /* Safari-specific text improvements */
+    @supports (-webkit-touch-callout: none) {
+      .text-balance {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+        word-break: break-word;
+      }
     }
   }
 }

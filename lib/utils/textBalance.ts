@@ -86,21 +86,17 @@ export const balanceText = (
 
 /**
  * Get text balance classes with Safari fallback
+ * For SSR compatibility, always include text-balance and let CSS handle the fallback
  */
 export const getTextBalanceClasses = (
   baseClasses: string = '',
-  enableManualBalance: boolean = true,
+  _enableManualBalance: boolean = true,
 ): string => {
   const classes = [baseClasses];
-  const capabilities = getBrowserCapabilities();
 
-  if (supportsTextBalance()) {
-    // Native text-balance support
-    classes.push('text-balance');
-  } else if (capabilities.isSafari && enableManualBalance) {
-    // Safari fallback with manual balancing
-    classes.push('text-balance-fallback');
-  }
+  // Always add text-balance class for consistent SSR/client rendering
+  // CSS will handle the fallback via @supports queries
+  classes.push('text-balance');
 
   return classes.filter(Boolean).join(' ');
 };
