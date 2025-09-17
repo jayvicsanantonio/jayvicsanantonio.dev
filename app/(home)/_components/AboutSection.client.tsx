@@ -10,32 +10,56 @@ const oswald = Oswald({ subsets: ["latin"] });
 
 export default function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const aboutCardRef = useRef<HTMLDivElement>(null);
+  const skillsCardRef = useRef<HTMLDivElement>(null);
+  const expertiseCardRef = useRef<HTMLDivElement>(null);
+
+  const [cardVisibility, setCardVisibility] = useState({
+    aboutCard: false,
+    skillsCard: false,
+    expertiseCard: false,
+  });
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-
-      // Start showing content after black transition completes (around 1500px scroll)
-      const blackTransitionComplete = 1500;
-      const isInView = scrollY > blackTransitionComplete;
-
-      // Calculate progress for staggered animations
-      const progress = Math.max(0, Math.min(1, (scrollY - blackTransitionComplete) / 400));
-
-      setIsVisible(isInView);
-      setScrollProgress(progress);
-
-      // Debug logging
-      console.log("AboutSection scroll:", { scrollY, isInView, progress });
+    const observerOptions = {
+      threshold: 0.2, // Trigger when 20% of the card is visible
+      rootMargin: "-50px 0px -50px 0px", // Add some margin to delay triggering
     };
 
-    // Check initial state
-    handleScroll();
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const target = entry.target;
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+          // Add staggered delays based on which card is entering
+          if (target === aboutCardRef.current) {
+            setTimeout(() => {
+              setCardVisibility((prev) => ({ ...prev, aboutCard: true }));
+            }, 100);
+          } else if (target === skillsCardRef.current) {
+            setTimeout(() => {
+              setCardVisibility((prev) => ({ ...prev, skillsCard: true }));
+            }, 300);
+          } else if (target === expertiseCardRef.current) {
+            setTimeout(() => {
+              setCardVisibility((prev) => ({ ...prev, expertiseCard: true }));
+            }, 500);
+          }
+
+          // Unobserve after animation triggers to prevent re-triggering
+          observer.unobserve(target);
+        }
+      });
+    }, observerOptions);
+
+    // Observe all card elements
+    if (aboutCardRef.current) observer.observe(aboutCardRef.current);
+    if (skillsCardRef.current) observer.observe(skillsCardRef.current);
+    if (expertiseCardRef.current) observer.observe(expertiseCardRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   return (
@@ -43,10 +67,6 @@ export default function AboutSection() {
       ref={sectionRef}
       className="relative w-full overflow-hidden bg-cyan-950 z-[250]"
       style={{
-        opacity: isVisible ? 1 : 0,
-        transform: `translateY(${isVisible ? 0 : 60}px)`,
-        transition:
-          "opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1)",
         minHeight: "100vh",
       }}
     >
@@ -54,11 +74,13 @@ export default function AboutSection() {
         <div className="grid gap-8 lg:grid-cols-2 lg:items-start">
           {/* About Me Card */}
           <div
+            ref={aboutCardRef}
             className="group relative w-full h-full transform-gpu rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.25),rgba(168,85,247,0.15),rgba(34,211,238,0.12))] p-[1px] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_12px_32px_rgba(0,0,0,0.4)] ring-1 ring-white/10 backdrop-blur-[24px] backdrop-saturate-[140%] transition-all duration-700 after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl after:bg-[linear-gradient(120deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.12)_50%,rgba(255,255,255,0)_100%)] after:opacity-0 after:mix-blend-overlay after:transition-opacity after:duration-300 hover:bg-[linear-gradient(135deg,rgba(59,130,246,0.3),rgba(168,85,247,0.2),rgba(34,211,238,0.15))] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_16px_40px_rgba(0,0,0,0.5)] hover:ring-white/15 group-hover:after:opacity-100 focus-within:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)] focus-within:after:opacity-100 hover:-translate-y-0.5 sm:p-[1.2px] md:hover:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)]"
             style={{
-              opacity: isVisible ? 1 : 0,
-              transform: `translateX(${isVisible ? 0 : -40}px) scale(${isVisible ? 1 : 0.95})`,
-              transitionDelay: "0.2s",
+              opacity: cardVisibility.aboutCard ? 1 : 0,
+              transform: `translateY(${cardVisibility.aboutCard ? 0 : 60}px) scale(${cardVisibility.aboutCard ? 1 : 0.95})`,
+              transition:
+                "opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1)",
             }}
           >
             {/* Subtle halo */}
@@ -111,11 +133,14 @@ export default function AboutSection() {
           <div className="space-y-8">
             {/* Skills Card */}
             <div
+              ref={skillsCardRef}
               className="group relative w-full transform-gpu rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.25),rgba(168,85,247,0.15),rgba(34,211,238,0.12))] p-[1px] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_12px_32px_rgba(0,0,0,0.4)] ring-1 ring-white/10 backdrop-blur-[24px] backdrop-saturate-[140%] transition-all duration-700 after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl after:bg-[linear-gradient(120deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.12)_50%,rgba(255,255,255,0)_100%)] after:opacity-0 after:mix-blend-overlay after:transition-opacity after:duration-300 hover:bg-[linear-gradient(135deg,rgba(59,130,246,0.3),rgba(168,85,247,0.2),rgba(34,211,238,0.15))] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_16px_40px_rgba(0,0,0,0.5)] hover:ring-white/15 group-hover:after:opacity-100 focus-within:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)] focus-within:after:opacity-100 hover:-translate-y-0.5 sm:p-[1.2px] md:hover:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)]"
               style={{
-                opacity: isVisible ? 1 : 0,
-                transform: `translateX(${isVisible ? 0 : 40}px) scale(${isVisible ? 1 : 0.95})`,
-                transitionDelay: "0.4s",
+                opacity: cardVisibility.skillsCard ? 1 : 0,
+                transform: `translateY(${cardVisibility.skillsCard ? 0 : 60}px) scale(${cardVisibility.skillsCard ? 1 : 0.95})`,
+                transition:
+                  "opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1)",
+                transitionDelay: "0.2s",
               }}
             >
               {/* Subtle halo */}
@@ -161,9 +186,11 @@ export default function AboutSection() {
                       key={skill}
                       className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium tracking-[0.12em] text-gray-300 uppercase transition-all duration-300"
                       style={{
-                        opacity: isVisible ? 1 : 0,
-                        transform: `translateY(${isVisible ? 0 : 20}px)`,
-                        transitionDelay: `${0.6 + index * 0.05}s`,
+                        opacity: cardVisibility.skillsCard ? 1 : 0,
+                        transform: `translateY(${cardVisibility.skillsCard ? 0 : 20}px)`,
+                        transition:
+                          "opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)",
+                        transitionDelay: `${0.4 + index * 0.05}s`,
                       }}
                     >
                       {skill}
@@ -175,11 +202,14 @@ export default function AboutSection() {
 
             {/* Expertise Card */}
             <div
+              ref={expertiseCardRef}
               className="group relative w-full transform-gpu rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.25),rgba(168,85,247,0.15),rgba(34,211,238,0.12))] p-[1px] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_12px_32px_rgba(0,0,0,0.4)] ring-1 ring-white/10 backdrop-blur-[24px] backdrop-saturate-[140%] transition-all duration-700 after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl after:bg-[linear-gradient(120deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.12)_50%,rgba(255,255,255,0)_100%)] after:opacity-0 after:mix-blend-overlay after:transition-opacity after:duration-300 hover:bg-[linear-gradient(135deg,rgba(59,130,246,0.3),rgba(168,85,247,0.2),rgba(34,211,238,0.15))] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_16px_40px_rgba(0,0,0,0.5)] hover:ring-white/15 group-hover:after:opacity-100 focus-within:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)] focus-within:after:opacity-100 hover:-translate-y-0.5 sm:p-[1.2px] md:hover:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)]"
               style={{
-                opacity: isVisible ? 1 : 0,
-                transform: `translateX(${isVisible ? 0 : 40}px) scale(${isVisible ? 1 : 0.95})`,
-                transitionDelay: "0.8s",
+                opacity: cardVisibility.expertiseCard ? 1 : 0,
+                transform: `translateY(${cardVisibility.expertiseCard ? 0 : 60}px) scale(${cardVisibility.expertiseCard ? 1 : 0.95})`,
+                transition:
+                  "opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1)",
+                transitionDelay: "0.4s",
               }}
             >
               {/* Subtle halo */}
@@ -215,9 +245,11 @@ export default function AboutSection() {
                       key={expertise}
                       className="flex items-center gap-3 transition-all duration-300"
                       style={{
-                        opacity: isVisible ? 1 : 0,
-                        transform: `translateX(${isVisible ? 0 : 20}px)`,
-                        transitionDelay: `${1.0 + index * 0.1}s`,
+                        opacity: cardVisibility.expertiseCard ? 1 : 0,
+                        transform: `translateX(${cardVisibility.expertiseCard ? 0 : 20}px)`,
+                        transition:
+                          "opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)",
+                        transitionDelay: `${0.6 + index * 0.08}s`,
                       }}
                     >
                       <div className="h-2 w-2 rounded-full bg-cyan-300/80" />
