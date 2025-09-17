@@ -1,0 +1,453 @@
+# Safari Compatibility CI/CD Pipeline
+# Ensures Safari optimizations work correctly before deployment
+
+name: Safari Compatibility Testing
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Run daily to catch regressions
+    - cron: '0 2 * * *'
+
+env:
+  # Feature flags for testing
+  NEXT_PUBLIC_FEATURE_SAFARI_EXPERIMENTAL_2024: true
+  PLAYWRIGHT_BROWSERS_PATH: 0
+
+jobs:
+  # Build and prepare for testing
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Type check
+        run: pnpm type-check
+
+      - name: Lint and format check
+        run: pnpm check
+
+      - name: Build application
+        run: pnpm build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output
+          path: .next/
+          retention-days: 1
+
+  # Safari Desktop Testing
+  safari-desktop-tests:
+    needs: build
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-output
+          path: .next/
+
+      - name: Install Playwright browsers
+        run: pnpm dlx playwright install safari
+
+      - name: Start application
+        run: |
+          pnpm start &
+          npx wait-on http://localhost:3000
+        env:
+          PORT: 3000
+
+      - name: Run Safari Desktop tests
+        run: pnpm test:safari
+        env:
+          PLAYWRIGHT_BASE_URL: http://localhost:3000
+
+      - name: Upload Safari test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: safari-desktop-results
+          path: test-results/
+          retention-days: 7
+
+      - name: Upload Safari screenshots
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: safari-desktop-screenshots
+          path: test-results/**/*.png
+          retention-days: 7
+
+  # Safari Mobile Testing
+  safari-mobile-tests:
+    needs: build
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-output
+          path: .next/
+
+      - name: Install Playwright browsers
+        run: pnpm dlx playwright install webkit
+
+      - name: Start application
+        run: |
+          pnpm start &
+          npx wait-on http://localhost:3000
+        env:
+          PORT: 3000
+
+      - name: Run Safari Mobile tests
+        run: pnpm test:safari-mobile
+        env:
+          PLAYWRIGHT_BASE_URL: http://localhost:3000
+
+      - name: Upload Safari Mobile test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: safari-mobile-results
+          path: test-results/
+          retention-days: 7
+
+  # Cross-browser compatibility testing
+  cross-browser-tests:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-output
+          path: .next/
+
+      - name: Install Playwright browsers
+        run: pnpm dlx playwright install
+
+      - name: Start application
+        run: |
+          pnpm start &
+          npx wait-on http://localhost:3000
+        env:
+          PORT: 3000
+
+      - name: Run cross-browser tests
+        run: pnpm test:cross-browser
+        env:
+          PLAYWRIGHT_BASE_URL: http://localhost:3000
+
+      - name: Upload cross-browser results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cross-browser-results
+          path: test-results/
+          retention-days: 7
+
+  # Performance regression testing
+  performance-tests:
+    needs: build
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-output
+          path: .next/
+
+      - name: Install Playwright browsers
+        run: pnpm dlx playwright install safari
+
+      - name: Start application
+        run: |
+          pnpm start &
+          npx wait-on http://localhost:3000
+        env:
+          PORT: 3000
+
+      - name: Run performance tests
+        run: pnpm test:performance
+        env:
+          PLAYWRIGHT_BASE_URL: http://localhost:3000
+
+      - name: Upload performance results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: performance-results
+          path: test-results/
+          retention-days: 30
+
+  # Lighthouse CI for performance monitoring
+  lighthouse-ci:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-output
+          path: .next/
+
+      - name: Start application
+        run: |
+          pnpm start &
+          npx wait-on http://localhost:3000
+        env:
+          PORT: 3000
+
+      - name: Run Lighthouse CI
+        run: pnpm lhci
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
+      - name: Upload Lighthouse results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-results
+          path: .lighthouse/
+          retention-days: 30
+
+  # Visual regression testing
+  visual-regression:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-output
+          path: .next/
+
+      - name: Install Playwright browsers
+        run: pnpm dlx playwright install
+
+      - name: Start application
+        run: |
+          pnpm start &
+          npx wait-on http://localhost:3000
+        env:
+          PORT: 3000
+
+      - name: Run visual regression tests
+        run: pnpm test:visual
+        env:
+          PLAYWRIGHT_BASE_URL: http://localhost:3000
+
+      - name: Upload visual diff artifacts
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: visual-regression-diffs
+          path: test-results/**/*-diff.png
+          retention-days: 7
+
+  # Report aggregation and notification
+  test-report:
+    needs: [safari-desktop-tests, safari-mobile-tests, cross-browser-tests, performance-tests, lighthouse-ci]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download all test results
+        uses: actions/download-artifact@v4
+        with:
+          path: all-results/
+
+      - name: Generate test report
+        run: |
+          echo "# Safari Compatibility Test Report" > test-report.md
+          echo "" >> test-report.md
+          echo "## Test Summary" >> test-report.md
+          echo "- Safari Desktop: ${{ needs.safari-desktop-tests.result }}" >> test-report.md
+          echo "- Safari Mobile: ${{ needs.safari-mobile-tests.result }}" >> test-report.md
+          echo "- Cross-browser: ${{ needs.cross-browser-tests.result }}" >> test-report.md
+          echo "- Performance: ${{ needs.performance-tests.result }}" >> test-report.md
+          echo "- Lighthouse CI: ${{ needs.lighthouse-ci.result }}" >> test-report.md
+          echo "" >> test-report.md
+          echo "## Artifacts" >> test-report.md
+          echo "- Test results and screenshots are available in the Actions artifacts" >> test-report.md
+          echo "- Performance metrics are tracked in Lighthouse CI" >> test-report.md
+
+      - name: Comment PR with test results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('test-report.md', 'utf8');
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: report
+            });
+
+      - name: Notify on failure
+        if: failure() && github.ref == 'refs/heads/main'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'Safari Compatibility Tests Failed',
+              body: `Safari compatibility tests failed on main branch.\n\nWorkflow: ${context.workflow}\nRun: ${context.runNumber}\n\nPlease check the test results and fix any Safari-specific issues.`,
+              labels: ['bug', 'safari', 'performance']
+            });
+
+  # Deployment readiness check
+  deployment-readiness:
+    needs: [safari-desktop-tests, safari-mobile-tests, cross-browser-tests, performance-tests]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && success()
+    steps:
+      - name: Check deployment readiness
+        run: |
+          echo "✅ All Safari compatibility tests passed"
+          echo "✅ Performance tests passed"
+          echo "✅ Cross-browser tests passed"
+          echo "🚀 Ready for deployment"
+
+      - name: Set deployment status
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: 'success',
+              context: 'Safari Compatibility',
+              description: 'All Safari tests passed - ready for deployment'
+            });
+
+# Workflow-level environment variables
+env:
+  # Enable Safari-specific feature flags for testing
+  NEXT_PUBLIC_FEATURE_SAFARI_SCROLL_OPTIMIZATION: true
+  NEXT_PUBLIC_FEATURE_SAFARI_BACKDROP_FILTER_OPTIMIZATION: true
+  NEXT_PUBLIC_FEATURE_SAFARI_MOTION_OPTIMIZATION: true
+  NEXT_PUBLIC_FEATURE_SAFARI_GLASS_EFFECTS_OPTIMIZATION: true
+  NEXT_PUBLIC_FEATURE_SAFARI_VIDEO_OPTIMIZATION: true
+  NEXT_PUBLIC_FEATURE_SAFARI_TOUCH_OPTIMIZATION: true
+  NEXT_PUBLIC_FEATURE_SAFARI_PERFORMANCE_MONITORING: true

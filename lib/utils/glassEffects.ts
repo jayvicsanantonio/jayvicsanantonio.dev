@@ -1,5 +1,6 @@
 // Safari-optimized glass effect utilities for scroll performance
 import { getBrowserCapabilities } from './browserUtils';
+import { getFeatureFlags } from './featureFlags';
 
 export type GlassEffectConfig = {
   // Chrome/modern browser effects
@@ -112,7 +113,15 @@ export const getOptimizedGlassClasses = (
   isAnimating: boolean = false,
 ): string => {
   const capabilities = getBrowserCapabilities();
+  const featureFlags = getFeatureFlags();
   const config = glassConfigs[configKey];
+
+  // Check if glass effects optimization is enabled
+  if (!featureFlags.isEnabled('safariGlassEffectsOptimization')) {
+    // Return default configuration without Safari optimizations
+    const { backdrop, background, border } = config.default;
+    return [backdrop, background, border].filter(Boolean).join(' ');
+  }
 
   // Safari mobile gets most reduced effects
   if (capabilities.isSafari && capabilities.isMobile) {
