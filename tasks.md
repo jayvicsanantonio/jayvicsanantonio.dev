@@ -180,22 +180,20 @@ className = "[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-
 
 **Why this approach**: Enables progressive enhancement where supported browsers get smooth transitions while others get instant navigation with CSS-based fallback animations.
 
-### 2.2 Update View Transition CSS
+### 2.2 Update View Transition CSS ✅ COMPLETED
 
-**Context**: Lines 374-402 in `globals.css` define view transition animations that do nothing in Safari.
+**Context**: Lines 480-512 in `globals.css` define view transition animations that do nothing in Safari.
 
-**Current Problem**: CSS rules for `::view-transition-image-pair()` are ignored, bloating the stylesheet.
+**IMPLEMENTATION STATUS**: **COMPLETED** with comprehensive Safari fallback CSS.
 
 **Details**:
 
-- [ ] **Wrap view transition CSS in feature queries**:
-
+- [x] **Wrapped view transition CSS in feature queries**:
   ```css
   @supports (view-transition-name: test) {
     .vt-tag-projects {
       view-transition-name: projects;
     }
-
     ::view-transition-image-pair(projects) {
       animation-duration: 300ms;
       animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
@@ -203,10 +201,21 @@ className = "[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-
   }
   ```
 
-- [ ] **Add fallback transition styles** for non-supporting browsers
-- [ ] **Implement CSS-based page transition fallbacks** using opacity and transform
+- [x] **Added fallback transition styles** for non-supporting browsers:
+  ```css
+  @supports not (view-transition-name: test) {
+    .vt-tag-projects, .vt-tag-work {
+      transition: opacity 300ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+  }
+  ```
 
-**Why this approach**: Reduces CSS bloat in Safari while maintaining smooth transitions where supported.
+- [x] **Implemented CSS-based page transition fallbacks** using opacity and transform:
+  - `.page-transition-enter` and `.page-transition-enter-active` for page entry
+  - `.page-transition-exit` and `.page-transition-exit-active` for page exit
+  - Respects `prefers-reduced-motion` in both supported and fallback modes
+
+**Why this approach**: Reduces CSS bloat in Safari while maintaining smooth transitions where supported. Provides graceful degradation with CSS-based animations for browsers without View Transitions API support.
 
 ### 2.3 Refactor Navigation Components
 
