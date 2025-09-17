@@ -222,6 +222,40 @@ Steady (scroll to bottom)
 
 UA: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0 Safari/605.1.15
 
+### Additional run — 2025-09-17 03:52 UTC (Safari, macOS)
+
+Method: same probe (~10s): 5s intro (no scroll), 5s steady (scroll to bottom)
+
+Summary (combined)
+
+- avg FPS: 38.03 fps
+- min FPS: 2.15 fps
+- max FPS: 333.33 fps
+- p95 frame: 356.0 ms
+- long frames (>16.7ms): 253
+
+Intro (no scroll)
+
+- avg FPS: 59.22
+- min/max FPS: 16.95 / 333.33
+- p95 frame: 18.0 ms
+- long frames: 186
+
+Steady (scroll to bottom)
+
+- avg FPS: 17.01
+- min/max FPS: 2.15 / 250.00
+- p95 frame: 356.0 ms
+- long frames: 67
+
+UA: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0 Safari/605.1.15
+
+Analysis snapshot
+
+- Intro remains near 60 fps, consistent with prior runs. The steady scroll phase is still the limiting factor (~17 fps, p95 ~356 ms). The large long-frame count suggests occasional heavy paints, likely due to large gradients and any remaining large-area repaints.
+- Next experiment: temporarily disable the hero inner overlay gradient entirely during scrolling (already gated), ensure the hero gradient is fixed and outside the scroll subtree (done), and verify clip-path is not active during scroll (done). Consider also removing box-shadow during scroll for Safari, which we already applied.
+- Follow-up measurement: repeat this probe on a production build and on iOS Safari to validate trends.
+
 ### Additional run — 2025-09-17 02:55 UTC (Safari, macOS)
 
 Method: same probe (~10s): 5s intro (no scroll), 5s steady (scroll to bottom)

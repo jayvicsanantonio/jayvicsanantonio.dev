@@ -90,6 +90,8 @@ export default function MorphingVideo({
   const computedBackdrop = (() => {
     // Safari: never apply backdrop-filter during expansion
     if (isSafari && isExpanding) return 'none';
+    // Safari: force-disable backdrop-filter during active scrolling
+    if (isSafari && isScrolling) return 'none';
     if (!enableBackdrop) return 'none';
     if (isIntro && !initialPill) return 'blur(20px)';
     if (isIntro) return 'blur(0px)';
@@ -113,8 +115,14 @@ export default function MorphingVideo({
       : 'top 0.4s ease-out, border-radius 0s, background-color 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.3s ease-out',
     '--bg-a': isIntro ? '0.95' : 'calc(max(0, (var(--p, 0) - 0.7) * 3) * 0.95)',
     '--shadow-a': isIntro ? '0.25' : 'calc(max(0, (var(--p, 0) - 0.7) * 3) * 0.25)',
-    backgroundColor: initialPill ? 'transparent' : 'rgba(255, 255, 255, var(--bg-a))',
+    backgroundColor: initialPill
+      ? 'transparent'
+      : isSafari && isScrolling
+        // Freeze to a stable value during scroll (reduces per-frame paint churn)
+        ? 'rgba(255, 255, 255, 0.42)'
+        : 'rgba(255, 255, 255, var(--bg-a))',
     backdropFilter: computedBackdrop,
+    WebkitBackdropFilter: computedBackdrop as unknown as string,
     boxShadow: initialPill
       ? 'none'
       : isSafari && isScrolling
