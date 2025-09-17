@@ -303,14 +303,14 @@ className = "[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-
 
 **Details**:
 
-- [ ] **Create comprehensive inventory** of all backdrop-filter usage:
+- [x] **Create comprehensive inventory** of all backdrop-filter usage** ([docs/safari-backdrop-filter-audit.md](docs/safari-backdrop-filter-audit.md)):
   - `GlassButton.tsx:21` - Navigation buttons
   - `GlassHeaderBubble.tsx` - Multiple glass elements
   - `MorphingVideo.client.tsx` - Hero section backdrop effects
   - Mobile navigation components - Glass overlay effects
-- [ ] **Categorize by performance impact**: High (animated), Medium (static), Low (occasional)
+- [x] **Categorize by performance impact**: High (animated), Medium (static), Low (occasional) — see audit doc
 - [ ] **Measure current performance** using Chrome DevTools on Safari
-- [ ] **Document visual requirements** for each backdrop-filter use case
+- [x] **Document visual requirements** for each backdrop-filter use case — captured in audit doc
 
 **Why this approach**: Systematic audit ensures we optimize the most impactful elements first.
 
