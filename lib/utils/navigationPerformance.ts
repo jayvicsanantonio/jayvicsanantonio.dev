@@ -79,7 +79,7 @@ export class NavigationPerformanceMonitor {
    * Get metrics filtered by browser type
    */
   getMetricsByBrowser(browserPattern: RegExp): NavigationMetrics[] {
-    return this.metrics.filter(metric => browserPattern.test(metric.userAgent));
+    return this.metrics.filter((metric) => browserPattern.test(metric.userAgent));
   }
 
   /**
@@ -100,17 +100,17 @@ export class NavigationPerformanceMonitor {
     viewTransitions: { count: number; averageTime: number };
     fallbacks: { count: number; averageTime: number };
   } {
-    const viewTransitionMetrics = this.metrics.filter(m => m.usedViewTransitions);
-    const fallbackMetrics = this.metrics.filter(m => !m.usedViewTransitions);
+    const viewTransitionMetrics = this.metrics.filter((m) => m.usedViewTransitions);
+    const fallbackMetrics = this.metrics.filter((m) => !m.usedViewTransitions);
 
     return {
       viewTransitions: {
         count: viewTransitionMetrics.length,
-        averageTime: this.getAverageNavigationTime(m => m.usedViewTransitions),
+        averageTime: this.getAverageNavigationTime((m) => m.usedViewTransitions),
       },
       fallbacks: {
         count: fallbackMetrics.length,
-        averageTime: this.getAverageNavigationTime(m => !m.usedViewTransitions),
+        averageTime: this.getAverageNavigationTime((m) => !m.usedViewTransitions),
       },
     };
   }
@@ -119,15 +119,19 @@ export class NavigationPerformanceMonitor {
    * Export metrics as JSON for analysis
    */
   exportMetrics(): string {
-    return JSON.stringify({
-      metrics: this.metrics,
-      summary: {
-        totalNavigations: this.metrics.length,
-        averageTime: this.getAverageNavigationTime(),
-        performance: this.getPerformanceComparison(),
-        browsers: this.getBrowserSummary(),
+    return JSON.stringify(
+      {
+        metrics: this.metrics,
+        summary: {
+          totalNavigations: this.metrics.length,
+          averageTime: this.getAverageNavigationTime(),
+          performance: this.getPerformanceComparison(),
+          browsers: this.getBrowserSummary(),
+        },
       },
-    }, null, 2);
+      null,
+      2,
+    );
   }
 
   /**
@@ -145,7 +149,7 @@ export class NavigationPerformanceMonitor {
   private getBrowserSummary(): Record<string, number> {
     const browserCounts: Record<string, number> = {};
 
-    this.metrics.forEach(metric => {
+    this.metrics.forEach((metric) => {
       const browser = this.getBrowserName(metric.userAgent);
       browserCounts[browser] = (browserCounts[browser] || 0) + 1;
     });
@@ -170,10 +174,14 @@ export const navigationPerformanceMonitor = new NavigationPerformanceMonitor();
  */
 export function useNavigationPerformanceMonitor() {
   return {
-    startNavigation: navigationPerformanceMonitor.startNavigation.bind(navigationPerformanceMonitor),
+    startNavigation: navigationPerformanceMonitor.startNavigation.bind(
+      navigationPerformanceMonitor,
+    ),
     endNavigation: navigationPerformanceMonitor.endNavigation.bind(navigationPerformanceMonitor),
     getMetrics: navigationPerformanceMonitor.getMetrics.bind(navigationPerformanceMonitor),
-    getAverageTime: navigationPerformanceMonitor.getAverageNavigationTime.bind(navigationPerformanceMonitor),
+    getAverageTime: navigationPerformanceMonitor.getAverageNavigationTime.bind(
+      navigationPerformanceMonitor,
+    ),
     exportMetrics: navigationPerformanceMonitor.exportMetrics.bind(navigationPerformanceMonitor),
     clearMetrics: navigationPerformanceMonitor.clearMetrics.bind(navigationPerformanceMonitor),
   };

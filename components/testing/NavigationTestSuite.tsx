@@ -3,15 +3,14 @@
 
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { useNavigationPerformanceMonitor } from '@/lib/utils/navigationPerformance';
+import { useEffect, useState } from 'react';
 import { useViewTransitions } from '@/hooks/useViewTransitions';
-import { useNavigationTransition } from '@/hooks/useNavigationTransition';
+import { useNavigationPerformanceMonitor } from '@/lib/utils/navigationPerformance';
 
 interface TestResult {
   testName: string;
   passed: boolean;
-  metrics?: any;
+  metrics?: unknown;
   notes?: string;
 }
 
@@ -19,8 +18,7 @@ export function NavigationTestSuite() {
   const [testResults, setTestResults] = useState<TestResult[]>([]);
   const [isRunning, setIsRunning] = useState(false);
   const { isSupported: viewTransitionsSupported } = useViewTransitions();
-  const { navigate } = useNavigationTransition();
-  const { getMetrics, getAverageTime, exportMetrics, clearMetrics } = useNavigationPerformanceMonitor();
+  const { exportMetrics, clearMetrics } = useNavigationPerformanceMonitor();
 
   const runTests = async () => {
     setIsRunning(true);
@@ -48,27 +46,16 @@ export function NavigationTestSuite() {
     // Test 3: Navigation Performance (simulated)
     try {
       const testRoutes = ['/projects', '/work', '/'];
-      const navigationPromises = testRoutes.map(async (route, index) => {
+      const navigationPromises = testRoutes.map(async (_route, index) => {
         return new Promise<void>((resolve) => {
-          setTimeout(() => {
-            // Simulate navigation timing
-            const currentUrl = window.location.href;
-            const performanceMonitor = {
-              startNavigation: () => {},
-              endNavigation: () => ({
-                navigationTime: Math.random() * 100 + 50, // 50-150ms
-                usedViewTransitions: viewTransitionsSupported,
-                userAgent,
-                supportsViewTransitions: viewTransitionsSupported,
-                startTime: performance.now(),
-                endTime: performance.now() + Math.random() * 100 + 50,
-                fromUrl: currentUrl,
-                toUrl: route,
-              }),
-            };
+          setTimeout(
+            () => {
+              // Simulate navigation timing (omitting real perf monitor in type-check)
 
-            resolve();
-          }, 100 * (index + 1));
+              resolve();
+            },
+            100 * (index + 1),
+          );
         });
       });
 
@@ -117,7 +104,8 @@ export function NavigationTestSuite() {
 
   const getBrowserInfo = () => {
     const userAgent = navigator.userAgent;
-    if (/Safari/.test(userAgent) && !/Chrome/.test(userAgent)) return { name: 'Safari', color: 'bg-blue-500' };
+    if (/Safari/.test(userAgent) && !/Chrome/.test(userAgent))
+      return { name: 'Safari', color: 'bg-blue-500' };
     if (/Chrome/.test(userAgent)) return { name: 'Chrome', color: 'bg-green-500' };
     if (/Firefox/.test(userAgent)) return { name: 'Firefox', color: 'bg-orange-500' };
     if (/Edge/.test(userAgent)) return { name: 'Edge', color: 'bg-blue-600' };
@@ -137,7 +125,9 @@ export function NavigationTestSuite() {
 
       <div className="mb-4">
         <div className="flex items-center gap-2 mb-2">
-          <div className={`w-3 h-3 rounded-full ${viewTransitionsSupported ? 'bg-green-500' : 'bg-yellow-500'}`} />
+          <div
+            className={`w-3 h-3 rounded-full ${viewTransitionsSupported ? 'bg-green-500' : 'bg-yellow-500'}`}
+          />
           <span className="text-sm">
             View Transitions: {viewTransitionsSupported ? 'Supported' : 'Fallback Mode'}
           </span>
@@ -145,6 +135,7 @@ export function NavigationTestSuite() {
       </div>
 
       <button
+        type="button"
         onClick={runTests}
         disabled={isRunning}
         className="w-full mb-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
@@ -155,20 +146,21 @@ export function NavigationTestSuite() {
       {testResults.length > 0 && (
         <div className="space-y-2">
           <h4 className="font-medium text-gray-900">Test Results:</h4>
-          {testResults.map((result, index) => (
-            <div key={index} className="border rounded p-3">
+          {testResults.map((result) => (
+            <div key={result.testName} className="border rounded p-3">
               <div className="flex items-center gap-2 mb-1">
-                <div className={`w-2 h-2 rounded-full ${result.passed ? 'bg-green-500' : 'bg-red-500'}`} />
+                <div
+                  className={`w-2 h-2 rounded-full ${result.passed ? 'bg-green-500' : 'bg-red-500'}`}
+                />
                 <span className="font-medium text-sm">{result.testName}</span>
               </div>
-              {result.notes && (
-                <p className="text-xs text-gray-600 ml-4">{result.notes}</p>
-              )}
+              {result.notes && <p className="text-xs text-gray-600 ml-4">{result.notes}</p>}
             </div>
           ))}
 
           <div className="mt-4 pt-3 border-t">
             <button
+              type="button"
               onClick={() => {
                 const metrics = exportMetrics();
                 console.log('Navigation Performance Metrics:', metrics);

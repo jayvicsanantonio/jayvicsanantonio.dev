@@ -38,7 +38,7 @@ export const FALLBACK_ANIMATIONS = {
 export function applyFallbackAnimation(
   element: HTMLElement,
   animation: keyof typeof FALLBACK_ANIMATIONS,
-  direction: 'enter' | 'exit'
+  direction: 'enter' | 'exit',
 ): Promise<void> {
   return new Promise((resolve) => {
     const config = FALLBACK_ANIMATIONS[animation];
@@ -79,7 +79,7 @@ export function applyFallbackAnimation(
  */
 export async function crossfadeElements(
   exitElement: HTMLElement,
-  enterElement: HTMLElement
+  enterElement: HTMLElement,
 ): Promise<void> {
   await Promise.all([
     applyFallbackAnimation(exitElement, 'fade', 'exit'),

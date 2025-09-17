@@ -1,7 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { CFG } from '@/app/(home)/_components/hero/config';
 import InitialPillOverlay from '@/app/(home)/_components/hero/InitialPillOverlay.client';
@@ -27,12 +27,34 @@ const FooterBrandCTA = dynamic(
     ssr: false,
   },
 );
+const HeroPerfProbe = dynamic(() => import('@/components/testing/HeroPerfProbe.client'), {
+  ssr: false,
+});
+const FixedHeroGradient = dynamic(() => import('@/components/home/FixedHeroGradient.client'), {
+  ssr: false,
+});
 export default function HeroMorph() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const { initialPill, showTitleGroup, showDesc, showName, isExpanding, shouldPlayVideo } =
     useIntroSequence(CFG);
   const reduceMotion = usePrefersReducedMotion();
+
+  // Simple scroll activity detector (used to simplify clip-path on Safari only while scrolling)
+  const [isScrolling, setIsScrolling] = useState(false);
+  useEffect(() => {
+    let t: number | null = null;
+    const onScroll = () => {
+      setIsScrolling(true);
+      if (t) window.clearTimeout(t);
+      t = window.setTimeout(() => setIsScrolling(false), 160) as unknown as number;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      if (t) window.clearTimeout(t);
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, []);
 
   useScrollCssVariables(
     containerRef,
@@ -47,6 +69,9 @@ export default function HeroMorph() {
   const isIntro = initialPill || isExpanding;
   const containerRadius = initialPill ? '9999px' : 'calc(16px + 160px * var(--sh, 0))';
 
+  // No longer needed: global fixed gradient is rendered via portal
+  // (kept as comment for reference)
+
   return (
     <div
       ref={containerRef}
@@ -57,6 +82,7 @@ export default function HeroMorph() {
         isIntro={isIntro}
         initialPill={initialPill}
         isExpanding={isExpanding}
+        isScrolling={isScrolling}
         showTitleGroup={showTitleGroup}
         showDesc={showDesc}
         shouldPlayVideo={shouldPlayVideo}
@@ -67,6 +93,9 @@ export default function HeroMorph() {
       {initialPill && <InitialPillOverlay />}
 
       <ProfileImage initialPill={initialPill} />
+
+      {/* Global fixed gradient (portal) to keep background out of hero paints */}
+      <FixedHeroGradient />
 
       <div className="pointer-events-none fixed inset-0 z-50">
         <PrimaryNavOverlay
@@ -79,11 +108,12 @@ export default function HeroMorph() {
         <MobileNavRow />
 
         <FooterBrandCTA showName={showName} overlayUpDampen={CFG.overlayUpDampen} />
+
+        {/* Perf overlay (only renders if ?measure=hero) */}
+        <HeroPerfProbe />
       </div>
 
       <div className="relative z-10 min-w-screen">
-        <div className="absolute inset-0 h-[220svh] bg-gradient-to-b from-black via-gray-800 to-gray-200 will-change-transform md:h-[180svh] lg:h-[154rem]"></div>
-
         <div
           className="pointer-events-none absolute inset-0"
           style={{

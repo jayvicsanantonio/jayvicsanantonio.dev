@@ -3,9 +3,9 @@
 
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
-import { applyFallbackAnimation, FALLBACK_ANIMATIONS } from '@/lib/utils/fallbackAnimations';
+import { useEffect, useRef, useState } from 'react';
 import { useViewTransitions } from '@/hooks/useViewTransitions';
+import { applyFallbackAnimation, type FALLBACK_ANIMATIONS } from '@/lib/utils/fallbackAnimations';
 
 interface AnimationTest {
   name: string;
@@ -78,13 +78,13 @@ export function AnimationValidator() {
       await applyFallbackAnimation(element, test.animationType, test.direction);
 
       // Mark test as successful
-      setAnimationResults(prev => ({
+      setAnimationResults((prev) => ({
         ...prev,
         [test.name]: true,
       }));
     } catch (error) {
       console.error(`Animation test failed for ${test.name}:`, error);
-      setAnimationResults(prev => ({
+      setAnimationResults((prev) => ({
         ...prev,
         [test.name]: false,
       }));
@@ -95,7 +95,7 @@ export function AnimationValidator() {
 
   const runAllTests = async () => {
     for (const test of ANIMATION_TESTS) {
-      await new Promise(resolve => setTimeout(resolve, 500)); // Delay between tests
+      await new Promise((resolve) => setTimeout(resolve, 500)); // Delay between tests
       await runAnimationTest(test);
     }
   };
@@ -125,14 +125,18 @@ export function AnimationValidator() {
     <div className="fixed bottom-4 right-4 z-50 w-80 max-h-[60vh] overflow-auto bg-white/95 backdrop-blur-sm border border-gray-200 rounded-lg shadow-lg p-4">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-semibold text-gray-900">Animation Validator</h3>
-        <div className={`px-2 py-1 rounded text-xs text-white ${browserInfo.isSafari ? 'bg-blue-500' : 'bg-green-500'}`}>
+        <div
+          className={`px-2 py-1 rounded text-xs text-white ${browserInfo.isSafari ? 'bg-blue-500' : 'bg-green-500'}`}
+        >
           {browserInfo.name}
         </div>
       </div>
 
       <div className="mb-4">
         <div className="flex items-center gap-2 mb-2">
-          <div className={`w-3 h-3 rounded-full ${isSupported ? 'bg-green-500' : 'bg-yellow-500'}`} />
+          <div
+            className={`w-3 h-3 rounded-full ${isSupported ? 'bg-green-500' : 'bg-yellow-500'}`}
+          />
           <span className="text-sm">
             Mode: {isSupported ? 'View Transitions' : 'CSS Fallbacks'}
           </span>
@@ -159,15 +163,14 @@ export function AnimationValidator() {
         <div className="mb-4 p-3 bg-blue-50 rounded-lg">
           <div className="font-medium text-sm text-blue-900">{currentTest.name}</div>
           <div className="text-xs text-blue-700">{currentTest.description}</div>
-          {isAnimating && (
-            <div className="mt-2 text-xs text-blue-600">⏳ Animating...</div>
-          )}
+          {isAnimating && <div className="mt-2 text-xs text-blue-600">⏳ Animating...</div>}
         </div>
       )}
 
       {/* Test Controls */}
       <div className="space-y-2 mb-4">
         <button
+          type="button"
           onClick={runAllTests}
           disabled={isAnimating}
           className="w-full px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm"
@@ -178,6 +181,7 @@ export function AnimationValidator() {
         <div className="grid grid-cols-2 gap-1">
           {ANIMATION_TESTS.map((test) => (
             <button
+              type="button"
               key={test.name}
               onClick={() => runAnimationTest(test)}
               disabled={isAnimating}
@@ -185,8 +189,8 @@ export function AnimationValidator() {
                 animationResults[test.name] === true
                   ? 'bg-green-100 text-green-800'
                   : animationResults[test.name] === false
-                  ? 'bg-red-100 text-red-800'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-red-100 text-red-800'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               } disabled:opacity-50 disabled:cursor-not-allowed`}
             >
               {test.name}
@@ -210,7 +214,8 @@ export function AnimationValidator() {
 
           <div className="mt-3 pt-2 border-t">
             <div className="text-xs text-gray-600">
-              {Object.values(animationResults).filter(Boolean).length}/{Object.keys(animationResults).length} tests passed
+              {Object.values(animationResults).filter(Boolean).length}/
+              {Object.keys(animationResults).length} tests passed
             </div>
           </div>
         </div>
@@ -239,7 +244,8 @@ export function AnimationValidatorWrapper() {
   useEffect(() => {
     // Only show in development or when testing animations
     const isDev = process.env.NODE_ENV === 'development';
-    const isTestMode = typeof window !== 'undefined' && window.location.search.includes('test=animations');
+    const isTestMode =
+      typeof window !== 'undefined' && window.location.search.includes('test=animations');
     setShowValidator(isDev || isTestMode);
   }, []);
 

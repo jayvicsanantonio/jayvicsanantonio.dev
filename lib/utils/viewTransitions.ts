@@ -19,7 +19,7 @@ export function supportsViewTransitions(): boolean {
  * @returns {Promise<void>} Promise that resolves when transition completes
  */
 export async function safeViewTransition(
-  updateCallback: () => void | Promise<void>
+  updateCallback: () => void | Promise<void>,
 ): Promise<void> {
   if (!supportsViewTransitions()) {
     // Fallback: execute callback directly without view transition

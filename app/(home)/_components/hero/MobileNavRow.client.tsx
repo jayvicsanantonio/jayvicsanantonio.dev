@@ -37,7 +37,9 @@ export default function MobileNavRow() {
           isSupported ? 'vt-tag-projects' : 'page-transition-target',
           isTransitioning && !isSupported ? 'opacity-75' : '',
           'h-12 w-12 min-w-[3rem] bg-white/30 backdrop-blur-[28px] backdrop-saturate-[220%] border-white/60 hover:border-white/65 will-change-transform',
-        ].filter(Boolean).join(' ')}
+        ]
+          .filter(Boolean)
+          .join(' ')}
         onClick={projectsClickHandler}
       >
         <Icon icon="mdi:application-brackets" width={24} height={24} aria-hidden="true" />
@@ -49,7 +51,9 @@ export default function MobileNavRow() {
           isSupported ? 'vt-tag-work' : 'page-transition-target',
           isTransitioning && !isSupported ? 'opacity-75' : '',
           'h-12 w-12 min-w-[3rem] bg-white/30 backdrop-blur-[28px] backdrop-saturate-[220%] border-white/60 hover:border-white/65 will-change-transform',
-        ].filter(Boolean).join(' ')}
+        ]
+          .filter(Boolean)
+          .join(' ')}
         onClick={workClickHandler}
       >
         <Icon icon="mdi:timeline-text" width={24} height={24} aria-hidden="true" />

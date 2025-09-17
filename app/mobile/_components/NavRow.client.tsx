@@ -34,8 +34,10 @@ export default function NavRow() {
         className={[
           isSupported ? 'vt-tag-projects' : 'page-transition-target',
           isTransitioning && !isSupported ? 'opacity-75' : '',
-          'h-14 w-[3.75rem] min-w-[3.75rem] rounded-[999px] border border-white/70 bg-gradient-to-b from-white/55 to-white/20 text-white backdrop-blur-[22px] backdrop-saturate-[240%] shadow-[inset_0_1px_0_rgba(255,255,255,0.62),inset_0_-16px_28px_rgba(0,0,0,0.32),0_6px_18px_rgba(0,0,0,0.28)] hover:border-white/80 after:pointer-events-none after:absolute after:inset-0 after:rounded-[999px] after:bg-[radial-gradient(90%_60%_at_50%_0%,rgba(255,255,255,0.90),rgba(255,255,255,0.32)_46%,rgba(255,255,255,0.14)_72%,rgba(0,0,0,0.12)_100%)] after:opacity-90 after:content-[\'\']',
-        ].filter(Boolean).join(' ')}
+          "h-14 w-[3.75rem] min-w-[3.75rem] rounded-[999px] border border-white/70 bg-gradient-to-b from-white/55 to-white/20 text-white backdrop-blur-[22px] backdrop-saturate-[240%] shadow-[inset_0_1px_0_rgba(255,255,255,0.62),inset_0_-16px_28px_rgba(0,0,0,0.32),0_6px_18px_rgba(0,0,0,0.28)] hover:border-white/80 after:pointer-events-none after:absolute after:inset-0 after:rounded-[999px] after:bg-[radial-gradient(90%_60%_at_50%_0%,rgba(255,255,255,0.90),rgba(255,255,255,0.32)_46%,rgba(255,255,255,0.14)_72%,rgba(0,0,0,0.12)_100%)] after:opacity-90 after:content-['']",
+        ]
+          .filter(Boolean)
+          .join(' ')}
         onClick={projectsClickHandler}
       >
         <Icon
@@ -52,8 +54,10 @@ export default function NavRow() {
         className={[
           isSupported ? 'vt-tag-work' : 'page-transition-target',
           isTransitioning && !isSupported ? 'opacity-75' : '',
-          'h-14 w-[3.75rem] min-w-[3.75rem] rounded-[999px] border border-white/70 bg-gradient-to-b from-white/55 to-white/20 text-white backdrop-blur-[22px] backdrop-saturate-[240%] shadow-[inset_0_1px_0_rgba(255,255,255,0.62),inset_0_-16px_28px_rgba(0,0,0,0.32),0_6px_18px_rgba(0,0,0,0.28)] hover:border-white/80 after:pointer-events-none after:absolute after:inset-0 after:rounded-[999px] after:bg-[radial-gradient(90%_60%_at_50%_0%,rgba(255,255,255,0.90),rgba(255,255,255,0.32)_46%,rgba(255,255,255,0.14)_72%,rgba(0,0,0,0.12)_100%)] after:opacity-90 after:content-[\'\']',
-        ].filter(Boolean).join(' ')}
+          "h-14 w-[3.75rem] min-w-[3.75rem] rounded-[999px] border border-white/70 bg-gradient-to-b from-white/55 to-white/20 text-white backdrop-blur-[22px] backdrop-saturate-[240%] shadow-[inset_0_1px_0_rgba(255,255,255,0.62),inset_0_-16px_28px_rgba(0,0,0,0.32),0_6px_18px_rgba(0,0,0,0.28)] hover:border-white/80 after:pointer-events-none after:absolute after:inset-0 after:rounded-[999px] after:bg-[radial-gradient(90%_60%_at_50%_0%,rgba(255,255,255,0.90),rgba(255,255,255,0.32)_46%,rgba(255,255,255,0.14)_72%,rgba(0,0,0,0.12)_100%)] after:opacity-90 after:content-['']",
+        ]
+          .filter(Boolean)
+          .join(' ')}
         onClick={workClickHandler}
       >
         <Icon

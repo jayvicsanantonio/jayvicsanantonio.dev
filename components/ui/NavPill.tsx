@@ -38,7 +38,7 @@ export function NavPill({
   tooltipPlacement = 'above',
   className,
 }: NavPillProps) {
-  const { isSupported, isTransitioning, getClickHandler } = useNavigationTransition();
+  const { isSupported, getClickHandler } = useNavigationTransition();
 
   // Browser detection (hydration-safe)
   const [isSafari, setIsSafari] = React.useState(false);
@@ -47,17 +47,24 @@ export function NavPill({
       setIsSafari(/Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent));
     }
   }, []);
-  const safariReducedClass = isSafari ? 'bg-white/80 bg-none' : '';
+  const _safariReducedClass = isSafari ? 'bg-white/80 bg-none' : '';
 
   // View-transition tag (only apply when supported)
-  const vtClass = vtTagName && isSupported ? `vt-tag-${vtTagName}` : '';
+  const _vtClass = vtTagName && isSupported ? `vt-tag-${vtTagName}` : '';
 
   // Fallback transition classes for Safari
-  const fallbackClass = vtTagName && !isSupported ? 'page-transition-target' : '';
+  const _fallbackClass = vtTagName && !isSupported ? 'page-transition-target' : '';
 
-  const linkProps = external ? { target: '_blank', rel: 'noopener noreferrer' as const } : {};
-  const clickHandler = getClickHandler(href, { external, target: linkProps.target, rel: linkProps.rel });
-
+  const clickHandler = getClickHandler(
+    href,
+    external
+      ? ({ external: true, target: '_blank', rel: 'noopener noreferrer' } as {
+          external: true;
+          target: React.HTMLAttributeAnchorTarget;
+          rel: 'noopener noreferrer';
+        })
+      : {},
+  );
   return (
     <fieldset
       className="group relative inline-block"
@@ -81,11 +88,10 @@ export function NavPill({
         className={[
           cyanAccent ? 'border-cyan-400/50 hover:border-cyan-300/60' : '',
           active ? 'border-cyan-400/70 hover:border-cyan-300/70' : '',
-          vtClass,
-          fallbackClass,
+          _vtClass,
+          _fallbackClass,
           'glass-optimized',
-          safariReducedClass,
-          isTransitioning && !isSupported ? 'opacity-75' : '', // Visual feedback during Safari transitions
+          _safariReducedClass,
           className ?? '',
         ].join(' ')}
         style={{
@@ -95,11 +101,14 @@ export function NavPill({
           willChange: 'width, opacity',
           ...(isSafari
             ? { WebkitBackdropFilter: 'none', backdropFilter: 'none' }
-            : { WebkitBackdropFilter: 'blur(24px) saturate(200%)', backdropFilter: 'blur(24px) saturate(200%)' }),
+            : {
+                WebkitBackdropFilter: 'blur(24px) saturate(200%)',
+                backdropFilter: 'blur(24px) saturate(200%)',
+              }),
         }}
         aria-current={active ? 'page' : undefined}
         onClick={clickHandler}
-        {...linkProps}
+        {...(external ? { target: '_blank', rel: 'noopener noreferrer' as const } : {})}
       >
         <span className="inline-flex items-center gap-2">
           {/* Icon with cursor-follow transform */}

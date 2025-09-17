@@ -12,12 +12,12 @@ The View Transitions API provides smooth, native page transitions but is complet
 
 ## Browser Support Matrix
 
-| Browser          | View Transitions Support | Implementation Strategy          |
-| ---------------- | ----------------------- | -------------------------------- |
-| Chrome 111+      | ✅ Native support       | View Transitions API used directly |
-| Safari (all)     | ❌ No support           | CSS-based transition fallbacks |
-| Firefox 118+     | ✅ Native support       | View Transitions API used directly |
-| Edge 111+        | ✅ Native support       | View Transitions API used directly |
+| Browser      | View Transitions Support | Implementation Strategy            |
+| ------------ | ------------------------ | ---------------------------------- |
+| Chrome 111+  | ✅ Native support        | View Transitions API used directly |
+| Safari (all) | ❌ No support            | CSS-based transition fallbacks     |
+| Firefox 118+ | ✅ Native support        | View Transitions API used directly |
+| Edge 111+    | ✅ Native support        | View Transitions API used directly |
 
 ## Architecture
 
@@ -31,15 +31,15 @@ Provides utilities for detecting View Transitions API support and safe execution
 // Detect View Transitions API support
 export function supportsViewTransitions(): boolean {
   return (
-    typeof document !== 'undefined' &&
-    'startViewTransition' in document &&
-    typeof document.startViewTransition === 'function'
+    typeof document !== "undefined" &&
+    "startViewTransition" in document &&
+    typeof document.startViewTransition === "function"
   );
 }
 
 // Safely execute view transitions with fallback
 export async function safeViewTransition(
-  updateCallback: () => void | Promise<void>
+  updateCallback: () => void | Promise<void>,
 ): Promise<void> {
   if (!supportsViewTransitions()) {
     // Fallback: execute callback directly without view transition
@@ -56,7 +56,7 @@ export async function safeViewTransition(
     await transition.finished;
   } catch (error) {
     // Fallback if view transition fails
-    console.warn('View transition failed, falling back to direct update:', error);
+    console.warn("View transition failed, falling back to direct update:", error);
     await updateCallback();
   }
 }
@@ -108,45 +108,51 @@ export function useNavigationTransition(): UseNavigationTransitionReturn {
   const router = useRouter();
   const { isSupported, isTransitioning, startTransition } = useViewTransitions();
 
-  const navigate = useCallback(async (href: string, options: UseNavigationTransitionOptions = {}) => {
-    if (options.external) {
-      // Handle external links normally
-      window.open(href, options.target || '_blank', 'noopener,noreferrer');
-      return;
-    }
-
-    // Start performance monitoring
-    const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
-    navigationPerformanceMonitor.startNavigation(currentUrl, href, isSupported);
-
-    try {
-      // Internal navigation with view transition support
-      await startTransition(() => {
-        router.push(href);
-      });
-    } finally {
-      // End performance monitoring
-      navigationPerformanceMonitor.endNavigation();
-    }
-  }, [router, startTransition, isSupported]);
-
-  const getClickHandler = useCallback((href: string, options: UseNavigationTransitionOptions = {}) => {
-    return (e: React.MouseEvent<HTMLAnchorElement>) => {
-      // Let browser handle Cmd/Ctrl clicks, middle clicks, etc.
-      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) {
-        return;
-      }
-
-      // For external links, let the browser handle it
+  const navigate = useCallback(
+    async (href: string, options: UseNavigationTransitionOptions = {}) => {
       if (options.external) {
+        // Handle external links normally
+        window.open(href, options.target || "_blank", "noopener,noreferrer");
         return;
       }
 
-      // Prevent default navigation and use our transition system
-      e.preventDefault();
-      navigate(href, options);
-    };
-  }, [navigate]);
+      // Start performance monitoring
+      const currentUrl = typeof window !== "undefined" ? window.location.href : "";
+      navigationPerformanceMonitor.startNavigation(currentUrl, href, isSupported);
+
+      try {
+        // Internal navigation with view transition support
+        await startTransition(() => {
+          router.push(href);
+        });
+      } finally {
+        // End performance monitoring
+        navigationPerformanceMonitor.endNavigation();
+      }
+    },
+    [router, startTransition, isSupported],
+  );
+
+  const getClickHandler = useCallback(
+    (href: string, options: UseNavigationTransitionOptions = {}) => {
+      return (e: React.MouseEvent<HTMLAnchorElement>) => {
+        // Let browser handle Cmd/Ctrl clicks, middle clicks, etc.
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) {
+          return;
+        }
+
+        // For external links, let the browser handle it
+        if (options.external) {
+          return;
+        }
+
+        // Prevent default navigation and use our transition system
+        e.preventDefault();
+        navigate(href, options);
+      };
+    },
+    [navigate],
+  );
 
   return {
     isSupported,
@@ -204,8 +210,9 @@ Provides feature-detected CSS transitions:
     .page-transition-enter {
       opacity: 0;
       transform: translateY(8px);
-      transition: opacity 300ms cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+      transition:
+        opacity 300ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .page-transition-enter-active {
@@ -216,8 +223,9 @@ Provides feature-detected CSS transitions:
     .page-transition-exit {
       opacity: 1;
       transform: translateY(0);
-      transition: opacity 300ms cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+      transition:
+        opacity 300ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .page-transition-exit-active {
@@ -253,24 +261,24 @@ Provides programmatic CSS animations for advanced fallback scenarios:
 export const FALLBACK_ANIMATIONS = {
   /** Fade in/out transition */
   fade: {
-    enter: 'transition-opacity duration-300 ease-in-out opacity-0',
-    enterActive: 'opacity-100',
-    exit: 'transition-opacity duration-300 ease-in-out opacity-100',
-    exitActive: 'opacity-0',
+    enter: "transition-opacity duration-300 ease-in-out opacity-0",
+    enterActive: "opacity-100",
+    exit: "transition-opacity duration-300 ease-in-out opacity-100",
+    exitActive: "opacity-0",
   },
   /** Slide up transition */
   slideUp: {
-    enter: 'transition-transform duration-300 ease-out translate-y-4 opacity-0',
-    enterActive: 'translate-y-0 opacity-100',
-    exit: 'transition-transform duration-300 ease-in translate-y-0 opacity-100',
-    exitActive: '-translate-y-4 opacity-0',
+    enter: "transition-transform duration-300 ease-out translate-y-4 opacity-0",
+    enterActive: "translate-y-0 opacity-100",
+    exit: "transition-transform duration-300 ease-in translate-y-0 opacity-100",
+    exitActive: "-translate-y-4 opacity-0",
   },
   /** Scale transition */
   scale: {
-    enter: 'transition-transform duration-200 ease-out scale-95 opacity-0',
-    enterActive: 'scale-100 opacity-100',
-    exit: 'transition-transform duration-200 ease-in scale-100 opacity-100',
-    exitActive: 'scale-95 opacity-0',
+    enter: "transition-transform duration-200 ease-out scale-95 opacity-0",
+    enterActive: "scale-100 opacity-100",
+    exit: "transition-transform duration-200 ease-in scale-100 opacity-100",
+    exitActive: "scale-95 opacity-0",
   },
 } as const;
 
@@ -278,12 +286,12 @@ export const FALLBACK_ANIMATIONS = {
 export function applyFallbackAnimation(
   element: HTMLElement,
   animation: keyof typeof FALLBACK_ANIMATIONS,
-  direction: 'enter' | 'exit'
+  direction: "enter" | "exit",
 ): Promise<void> {
   return new Promise((resolve) => {
     const config = FALLBACK_ANIMATIONS[animation];
-    const initialClass = direction === 'enter' ? config.enter : config.exit;
-    const activeClass = direction === 'enter' ? config.enterActive : config.exitActive;
+    const initialClass = direction === "enter" ? config.enter : config.exit;
+    const activeClass = direction === "enter" ? config.enterActive : config.exitActive;
 
     // Apply initial state
     element.className = `${element.className} ${initialClass}`;
@@ -297,14 +305,14 @@ export function applyFallbackAnimation(
     // Clean up after animation
     const cleanup = () => {
       element.className = element.className
-        .replace(initialClass, '')
-        .replace(activeClass, '')
+        .replace(initialClass, "")
+        .replace(activeClass, "")
         .trim();
       resolve();
     };
 
     // Listen for transition end
-    element.addEventListener('transitionend', cleanup, { once: true });
+    element.addEventListener("transitionend", cleanup, { once: true });
 
     // Fallback timeout in case transitionend doesn't fire
     setTimeout(cleanup, 350);
@@ -495,17 +503,17 @@ export class NavigationPerformanceMonitor {
     fallbacks: { count: number; averageTime: number };
   } {
     // Compare performance between View Transitions and fallbacks
-    const viewTransitionMetrics = this.metrics.filter(m => m.usedViewTransitions);
-    const fallbackMetrics = this.metrics.filter(m => !m.usedViewTransitions);
+    const viewTransitionMetrics = this.metrics.filter((m) => m.usedViewTransitions);
+    const fallbackMetrics = this.metrics.filter((m) => !m.usedViewTransitions);
 
     return {
       viewTransitions: {
         count: viewTransitionMetrics.length,
-        averageTime: this.getAverageNavigationTime(m => m.usedViewTransitions),
+        averageTime: this.getAverageNavigationTime((m) => m.usedViewTransitions),
       },
       fallbacks: {
         count: fallbackMetrics.length,
-        averageTime: this.getAverageNavigationTime(m => !m.usedViewTransitions),
+        averageTime: this.getAverageNavigationTime((m) => !m.usedViewTransitions),
       },
     };
   }
@@ -519,45 +527,48 @@ export class NavigationPerformanceMonitor {
 Playwright tests for comprehensive browser validation:
 
 ```typescript
-test.describe('Navigation Transitions', () => {
-  test('should detect View Transitions API support correctly', async ({ page, browserName }) => {
+test.describe("Navigation Transitions", () => {
+  test("should detect View Transitions API support correctly", async ({ page, browserName }) => {
     const helper = new NavigationTestHelper(page);
     const supportsViewTransitions = await helper.checkViewTransitionSupport();
 
     // Chrome should support View Transitions, Safari might not
-    if (browserName === 'chromium') {
+    if (browserName === "chromium") {
       expect(supportsViewTransitions).toBe(true);
     }
 
     console.log(`${browserName}: View Transitions supported = ${supportsViewTransitions}`);
   });
 
-  test('should apply correct CSS classes based on browser support', async ({ page, browserName }) => {
+  test("should apply correct CSS classes based on browser support", async ({
+    page,
+    browserName,
+  }) => {
     const helper = new NavigationTestHelper(page);
     const supportsViewTransitions = await helper.checkViewTransitionSupport();
     const transitionElements = await helper.getVisibleTransitionElements();
 
     if (supportsViewTransitions) {
       // Should use vt-tag-* classes when supported
-      const hasViewTransitionClasses = transitionElements.some(className =>
-        className.includes('vt-tag-projects') || className.includes('vt-tag-work')
+      const hasViewTransitionClasses = transitionElements.some(
+        (className) => className.includes("vt-tag-projects") || className.includes("vt-tag-work"),
       );
       expect(hasViewTransitionClasses).toBe(true);
     } else {
       // Should use fallback classes when not supported
-      const hasFallbackClasses = transitionElements.some(className =>
-        className.includes('page-transition-target')
+      const hasFallbackClasses = transitionElements.some((className) =>
+        className.includes("page-transition-target"),
       );
-      console.log(`${browserName}: Transition elements = ${transitionElements.join(', ')}`);
+      console.log(`${browserName}: Transition elements = ${transitionElements.join(", ")}`);
     }
   });
 
-  test('should navigate smoothly across browsers', async ({ page, browserName }) => {
+  test("should navigate smoothly across browsers", async ({ page, browserName }) => {
     const helper = new NavigationTestHelper(page);
     const navigationTime = await helper.clickNavigationElement('[aria-label="Projects"]');
 
     // Verify navigation completed successfully
-    await expect(page).toHaveURL('/projects');
+    await expect(page).toHaveURL("/projects");
     expect(navigationTime).toBeLessThan(3000);
 
     console.log(`${browserName}: Navigation time = ${navigationTime}ms`);
@@ -692,7 +703,7 @@ Automated testing across browser matrix:
 ```javascript
 class NavigationTestRunner {
   async runTests() {
-    console.log('🚀 Starting cross-browser navigation tests...\n');
+    console.log("🚀 Starting cross-browser navigation tests...\n");
 
     // Run desktop tests
     for (const browser of BROWSERS) {
@@ -708,9 +719,9 @@ class NavigationTestRunner {
   }
 
   generateReport() {
-    console.log('\n📊 Generating test report...');
+    console.log("\n📊 Generating test report...");
 
-    const reportPath = path.join(__dirname, '..', 'test-results', 'navigation-browser-report.json');
+    const reportPath = path.join(__dirname, "..", "test-results", "navigation-browser-report.json");
     fs.writeFileSync(reportPath, JSON.stringify(this.results, null, 2));
 
     this.printSummary();
@@ -719,10 +730,18 @@ class NavigationTestRunner {
 
   printPerformanceInsights() {
     console.log(`\n⚡ Performance Insights:`);
-    console.log(`   • Safari fallback transitions: ${this.checkSafariTransitions() ? 'Working' : 'Issues detected'}`);
-    console.log(`   • Chrome view transitions: ${this.checkChromeTransitions() ? 'Working' : 'Issues detected'}`);
-    console.log(`   • Cross-browser consistency: ${this.checkConsistency() ? 'Good' : 'Needs improvement'}`);
-    console.log(`   • Mobile compatibility: ${this.checkMobileCompatibility() ? 'Good' : 'Needs improvement'}`);
+    console.log(
+      `   • Safari fallback transitions: ${this.checkSafariTransitions() ? "Working" : "Issues detected"}`,
+    );
+    console.log(
+      `   • Chrome view transitions: ${this.checkChromeTransitions() ? "Working" : "Issues detected"}`,
+    );
+    console.log(
+      `   • Cross-browser consistency: ${this.checkConsistency() ? "Good" : "Needs improvement"}`,
+    );
+    console.log(
+      `   • Mobile compatibility: ${this.checkMobileCompatibility() ? "Good" : "Needs improvement"}`,
+    );
   }
 }
 ```
@@ -732,32 +751,38 @@ class NavigationTestRunner {
 ### 🎯 Use View Transitions API When:
 
 ✅ **Supported browsers (Chrome, Firefox, Edge)**
+
 - Provides native, optimized transitions
 - Better performance than custom CSS animations
 - Automatic handling of complex transition states
 
 ✅ **Page-level navigation transitions**
+
 - Smooth morphing between different pages
 - Shared element transitions across routes
 - Complex transition choreography
 
 ✅ **Modern progressive web apps**
+
 - Taking advantage of cutting-edge browser features
 - Enhanced user experience in supporting browsers
 
 ### 🍎 Use CSS Fallbacks When:
 
 ✅ **Safari compatibility is required**
+
 - All Safari versions (desktop and mobile)
 - Ensures consistent experience across all browsers
 - Maintains professional appearance
 
 ✅ **Simple transition effects**
+
 - Fade in/out animations
 - Slide transitions
 - Scale/zoom effects
 
 ✅ **Component-level animations**
+
 - Loading states
 - Hover effects
 - State change animations
@@ -773,17 +798,20 @@ From fastest to slowest performance:
 ## Browser-Specific Considerations
 
 ### Safari Behavior
+
 - **No View Transitions support**: Always uses CSS fallbacks
 - **Webkit rendering**: Different optimization characteristics
 - **Mobile Safari**: Additional considerations for touch devices
 - **Performance**: CSS transitions generally perform well
 
 ### Chrome/Edge Behavior
+
 - **Full View Transitions support**: Native API implementation
 - **Optimal performance**: Hardware-accelerated transitions
 - **Modern features**: Latest transition capabilities
 
 ### Firefox Behavior
+
 - **Recent View Transitions support**: Available in Firefox 118+
 - **Progressive enhancement**: Graceful fallback for older versions
 
@@ -796,7 +824,7 @@ From fastest to slowest performance:
 const { navigate } = useNavigationTransition();
 
 const handleNavigation = () => {
-  navigate('/target-page');
+  navigate("/target-page");
 };
 ```
 
@@ -839,10 +867,10 @@ const customTransition = async () => {
     }).finished;
   } else {
     // Custom Safari fallback
-    const element = document.querySelector('.content');
-    await applyFallbackAnimation(element, 'slideUp', 'exit');
+    const element = document.querySelector(".content");
+    await applyFallbackAnimation(element, "slideUp", "exit");
     updateContent();
-    await applyFallbackAnimation(element, 'slideUp', 'enter');
+    await applyFallbackAnimation(element, "slideUp", "enter");
   }
 };
 ```
@@ -907,12 +935,12 @@ const customTransition = async () => {
 
 ```typescript
 // Debug transition support
-import { supportsViewTransitions } from '@/lib/utils/viewTransitions';
-console.log('View Transitions supported:', supportsViewTransitions());
+import { supportsViewTransitions } from "@/lib/utils/viewTransitions";
+console.log("View Transitions supported:", supportsViewTransitions());
 
 // Debug navigation performance
-import { navigationPerformanceMonitor } from '@/lib/utils/navigationPerformance';
-console.log('Navigation metrics:', navigationPerformanceMonitor.exportMetrics());
+import { navigationPerformanceMonitor } from "@/lib/utils/navigationPerformance";
+console.log("Navigation metrics:", navigationPerformanceMonitor.exportMetrics());
 
 // Enable development testing components
 // Add ?test=nav to URL to show NavigationTestSuite
@@ -934,7 +962,7 @@ console.log('Navigation metrics:', navigationPerformanceMonitor.exportMetrics())
 **After** (with view transitions):
 
 ```tsx
-import { useNavigationTransition } from '@/hooks/useNavigationTransition';
+import { useNavigationTransition } from "@/hooks/useNavigationTransition";
 
 function NavigationButton() {
   const { isSupported, isTransitioning, getClickHandler } = useNavigationTransition();
@@ -942,12 +970,10 @@ function NavigationButton() {
   return (
     <a
       href="/projects"
-      className={isSupported ? 'vt-tag-projects' : 'page-transition-target'}
-      onClick={getClickHandler('/projects')}
+      className={isSupported ? "vt-tag-projects" : "page-transition-target"}
+      onClick={getClickHandler("/projects")}
     >
-      <button disabled={isTransitioning}>
-        {isTransitioning ? 'Loading...' : 'Projects'}
-      </button>
+      <button disabled={isTransitioning}>{isTransitioning ? "Loading..." : "Projects"}</button>
     </a>
   );
 }

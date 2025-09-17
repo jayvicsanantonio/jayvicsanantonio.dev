@@ -189,6 +189,7 @@ className = "[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-
 **Details**:
 
 - [x] **Wrapped view transition CSS in feature queries**:
+
   ```css
   @supports (view-transition-name: test) {
     .vt-tag-projects {
@@ -202,9 +203,11 @@ className = "[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-
   ```
 
 - [x] **Added fallback transition styles** for non-supporting browsers:
+
   ```css
   @supports not (view-transition-name: test) {
-    .vt-tag-projects, .vt-tag-work {
+    .vt-tag-projects,
+    .vt-tag-work {
       transition: opacity 300ms cubic-bezier(0.22, 1, 0.36, 1);
     }
   }
@@ -231,9 +234,10 @@ className = "[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-
   - `MobileNavRow.client.tsx`: Hero mobile navigation with transition handling
 
 - [x] **Implemented CSS transition fallbacks** for Safari:
+
   ```tsx
-  const vtClass = vtTagName && isSupported ? `vt-tag-${vtTagName}` : '';
-  const fallbackClass = vtTagName && !isSupported ? 'page-transition-target' : '';
+  const vtClass = vtTagName && isSupported ? `vt-tag-${vtTagName}` : "";
+  const fallbackClass = vtTagName && !isSupported ? "page-transition-target" : "";
   ```
 
 - [x] **Added loading states** for navigation in Safari:
@@ -303,7 +307,7 @@ className = "[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-
 
 **Details**:
 
-- [x] **Create comprehensive inventory** of all backdrop-filter usage** ([docs/safari-backdrop-filter-audit.md](docs/safari-backdrop-filter-audit.md)):
+- [x] **Create comprehensive inventory** of all backdrop-filter usage\*\* ([docs/safari-backdrop-filter-audit.md](docs/safari-backdrop-filter-audit.md)):
   - `GlassButton.tsx:21` - Navigation buttons
   - `GlassHeaderBubble.tsx` - Multiple glass elements
   - `MorphingVideo.client.tsx` - Hero section backdrop effects
@@ -362,23 +366,19 @@ transition: isExpanding
 
 **Details**:
 
-- [ ] **Split complex transition into stages**:
+- [x] **Split complex transition into stages**:
 
   ```typescript
   // Stage 1: Transform and layout
   transition: "transform 2s cubic-bezier(0.22, 1, 0.36, 1), border-radius 2s...";
 
-  // Stage 2: Visual effects (delayed)
-  const backdropTransition = {
-    transitionDelay: "1.8s",
-    transitionProperty: "backdrop-filter",
-    transitionDuration: "0.2s",
-  };
+  // Stage 2: Visual effects (delayed) — implemented with a 1.8s timeout gate instead of property animation
+  // The backdrop-filter is disabled during expansion and re-enabled after ~1.8s.
   ```
 
-- [ ] **Add conditional backdrop-filter application** based on animation state
-- [ ] **Implement Safari-specific animation sequence** with reduced complexity
-- [ ] **Use CSS custom properties** for dynamic backdrop-filter values
+- [x] **Add conditional backdrop-filter application** based on animation state
+- [x] **Implement Safari-specific animation sequence** with reduced complexity (no backdrop-filter during expansion)
+- [x] **Use CSS custom properties** for dynamic backdrop-filter values (kept for post-intro)
 
 **Why this approach**: Eliminates simultaneous animation of multiple expensive properties while maintaining visual impact.
 

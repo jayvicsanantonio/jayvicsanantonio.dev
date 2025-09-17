@@ -25,7 +25,10 @@ interface UseNavigationTransitionReturn {
   /** Navigate with transition support */
   navigate: (href: string, options?: UseNavigationTransitionOptions) => Promise<void>;
   /** Get the appropriate click handler for links */
-  getClickHandler: (href: string, options?: UseNavigationTransitionOptions) => React.MouseEventHandler<HTMLAnchorElement>;
+  getClickHandler: (
+    href: string,
+    options?: UseNavigationTransitionOptions,
+  ) => React.MouseEventHandler<HTMLAnchorElement>;
 }
 
 /**
@@ -36,45 +39,51 @@ export function useNavigationTransition(): UseNavigationTransitionReturn {
   const router = useRouter();
   const { isSupported, isTransitioning, startTransition } = useViewTransitions();
 
-  const navigate = useCallback(async (href: string, options: UseNavigationTransitionOptions = {}) => {
-    if (options.external) {
-      // Handle external links normally
-      window.open(href, options.target || '_blank', 'noopener,noreferrer');
-      return;
-    }
-
-    // Start performance monitoring
-    const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
-    navigationPerformanceMonitor.startNavigation(currentUrl, href, isSupported);
-
-    try {
-      // Internal navigation with view transition support
-      await startTransition(() => {
-        router.push(href);
-      });
-    } finally {
-      // End performance monitoring
-      navigationPerformanceMonitor.endNavigation();
-    }
-  }, [router, startTransition, isSupported]);
-
-  const getClickHandler = useCallback((href: string, options: UseNavigationTransitionOptions = {}) => {
-    return (e: React.MouseEvent<HTMLAnchorElement>) => {
-      // Let browser handle Cmd/Ctrl clicks, middle clicks, etc.
-      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) {
-        return;
-      }
-
-      // For external links, let the browser handle it
+  const navigate = useCallback(
+    async (href: string, options: UseNavigationTransitionOptions = {}) => {
       if (options.external) {
+        // Handle external links normally
+        window.open(href, options.target || '_blank', 'noopener,noreferrer');
         return;
       }
 
-      // Prevent default navigation and use our transition system
-      e.preventDefault();
-      navigate(href, options);
-    };
-  }, [navigate]);
+      // Start performance monitoring
+      const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+      navigationPerformanceMonitor.startNavigation(currentUrl, href, isSupported);
+
+      try {
+        // Internal navigation with view transition support
+        await startTransition(() => {
+          router.push(href);
+        });
+      } finally {
+        // End performance monitoring
+        navigationPerformanceMonitor.endNavigation();
+      }
+    },
+    [router, startTransition, isSupported],
+  );
+
+  const getClickHandler = useCallback(
+    (href: string, options: UseNavigationTransitionOptions = {}) => {
+      return (e: React.MouseEvent<HTMLAnchorElement>) => {
+        // Let browser handle Cmd/Ctrl clicks, middle clicks, etc.
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) {
+          return;
+        }
+
+        // For external links, let the browser handle it
+        if (options.external) {
+          return;
+        }
+
+        // Prevent default navigation and use our transition system
+        e.preventDefault();
+        navigate(href, options);
+      };
+    },
+    [navigate],
+  );
 
   return {
     isSupported,

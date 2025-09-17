@@ -4,7 +4,11 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { supportsViewTransitions, safeViewTransition, isBrowser } from '@/lib/utils/viewTransitions';
+import {
+  isBrowser,
+  safeViewTransition,
+  supportsViewTransitions,
+} from '@/lib/utils/viewTransitions';
 
 interface UseViewTransitionsReturn {
   /** Whether View Transitions API is supported */
