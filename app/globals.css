@@ -211,6 +211,19 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
   }
+
+  /* Safari-specific font rendering optimizations */
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-kerning: normal;
+    font-variant-ligatures: common-ligatures;
+  }
+
+  /* Optimize font display for better loading */
+  @font-face {
+    font-display: swap;
+  }
 }
 
 @layer base {
@@ -311,6 +324,97 @@
   /* Fallback containment for browsers without content-visibility */
   .contain-layout-style-paint {
     contain: layout style paint;
+  }
+
+  /* Text balance with Safari fallbacks */
+  @supports (text-wrap: balance) {
+    .text-balance {
+      text-wrap: balance;
+    }
+  }
+
+  @supports not (text-wrap: balance) {
+    .text-balance-fallback {
+      /* Enhanced line height for better visual balance */
+      line-height: 1.4;
+
+      /* Improved word spacing for Safari */
+      word-spacing: 0.1em;
+
+      /* Better hyphenation for text wrapping */
+      hyphens: auto;
+      -webkit-hyphens: auto;
+
+      /* Optimize text rendering for Safari */
+      text-rendering: optimizeLegibility;
+      -webkit-font-feature-settings: "liga", "kern";
+      font-feature-settings: "liga", "kern";
+    }
+
+    /* Responsive text balance adjustments */
+    @media (max-width: 640px) {
+      .text-balance-fallback {
+        word-spacing: 0.05em;
+        line-height: 1.3;
+      }
+    }
+  }
+
+  /* Enhanced typography utilities for Safari */
+  .text-crisp {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  .text-optimize-speed {
+    text-rendering: optimizeSpeed;
+  }
+
+  .text-optimize-quality {
+    text-rendering: optimizeQuality;
+  }
+
+  /* Consistent line height across browsers */
+  .leading-tight-safari {
+    line-height: 1.25;
+  }
+
+  .leading-snug-safari {
+    line-height: 1.375;
+  }
+
+  .leading-normal-safari {
+    line-height: 1.5;
+  }
+
+  .leading-relaxed-safari {
+    line-height: 1.625;
+  }
+
+  /* Safari-specific letter spacing adjustments */
+  .tracking-tighter-safari {
+    letter-spacing: -0.05em;
+  }
+
+  .tracking-tight-safari {
+    letter-spacing: -0.025em;
+  }
+
+  .tracking-normal-safari {
+    letter-spacing: 0em;
+  }
+
+  .tracking-wide-safari {
+    letter-spacing: 0.025em;
+  }
+
+  .tracking-wider-safari {
+    letter-spacing: 0.05em;
+  }
+
+  .tracking-widest-safari {
+    letter-spacing: 0.1em;
   }
 
   /* General hyphenation utility for any element */

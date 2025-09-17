@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import AnimatedText from '@/components/ui/AnimatedText';
 import { getBrowserCapabilities } from '@/lib/utils/browserUtils';
 import { getOptimizedGlassClasses } from '@/lib/utils/glassEffects';
+import { getTextBalanceClasses } from '@/lib/utils/textBalance';
 
 export type MorphingVideoProps = {
   centerTop: string;
@@ -168,7 +169,11 @@ export default function MorphingVideo({
         className="absolute bottom-40 left-1/2 z-50 -translate-x-1/2 text-center px-4 transition-opacity duration-700 sm:bottom-40 sm:right-8 sm:left-auto sm:translate-x-0 sm:px-0 md:right-10 md:bottom-22"
         style={{ opacity: showTitleGroup ? 1 : 0 }}
       >
-        <h2 className="text-lg font-medium tracking-widest text-white text-balance sm:text-2xl md:text-3xl lg:text-4xl 2xl:text-6xl">
+        <h2
+          className={getTextBalanceClasses(
+            'text-lg font-medium tracking-widest text-white sm:text-2xl md:text-3xl lg:text-4xl 2xl:text-6xl',
+          )}
+        >
           <AnimatedText text="Full-Stack" start={showTitleGroup} perCharDelay={45} />
         </h2>
       </div>
@@ -176,7 +181,11 @@ export default function MorphingVideo({
         className="absolute bottom-28 left-1/2 z-50 -translate-x-1/2 text-center px-4 transition-opacity duration-700 sm:bottom-10 sm:right-8 sm:left-auto sm:translate-x-0 sm:px-0 md:right-10 md:bottom-10"
         style={{ opacity: showTitleGroup ? 1 : 0 }}
       >
-        <h3 className="text-lg font-light tracking-wider text-white/90 italic text-balance sm:text-2xl md:text-3xl lg:text-4xl 2xl:text-5xl">
+        <h3
+          className={getTextBalanceClasses(
+            'text-lg font-light tracking-wider text-white/90 italic sm:text-2xl md:text-3xl lg:text-4xl 2xl:text-5xl',
+          )}
+        >
           <AnimatedText
             text="Software Engineer"
             start={showTitleGroup}
@@ -191,7 +200,11 @@ export default function MorphingVideo({
         className="absolute top-6 left-1/2 z-50 max-w-[20rem] -translate-x-1/2 text-center px-4 transition-opacity duration-700 sm:top-auto sm:bottom-32 sm:left-8 sm:max-w-[22rem] sm:translate-x-0 sm:text-left sm:px-0 md:bottom-10 md:left-10"
         style={{ opacity: showDesc ? 1 : 0 }}
       >
-        <p className="mb-2 text-sm leading-relaxed text-white/80 text-balance md:text-base">
+        <p
+          className={getTextBalanceClasses(
+            'mb-2 text-sm leading-relaxed text-white/80 md:text-base',
+          )}
+        >
           I experiment with AI daily—and build web platforms that put it to work.
         </p>
       </div>
