@@ -7,7 +7,9 @@
       "mcp__playwright__browser_navigate",
       "Bash(pnpm dev:*)",
       "Bash(npm run lint)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "mcp__playwright__browser_evaluate",
+      "mcp__playwright__browser_close"
     ],
     "deny": [],
     "ask": []
