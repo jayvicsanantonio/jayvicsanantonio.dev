@@ -48,9 +48,9 @@ export default function MobileHomePage() {
         <div className="absolute inset-0 bg-[radial-gradient(80%_60%_at_50%_0%,rgba(59,130,246,0.18),transparent_60%),radial-gradient(60%_50%_at_50%_100%,rgba(16,185,129,0.16),transparent_60%),radial-gradient(circle_at_0%_0%,rgba(0,0,0,0.9),transparent_30%),radial-gradient(circle_at_100%_0%,rgba(0,0,0,0.9),transparent_30%),radial-gradient(circle_at_0%_100%,rgba(0,0,0,0.9),transparent_30%),radial-gradient(circle_at_100%_100%,rgba(0,0,0,0.9),transparent_30%)]" />
 
         {/* Targeted overlay to hide watermarks */}
-        <div className="absolute bottom-0 right-0 w-24 h-16 bg-gradient-to-tl from-black/90 via-black/70 to-transparent" />
+        <div className="absolute bottom-0 right-0 w-32 h-24 bg-gradient-to-tl from-black/95 via-black/85 to-transparent" />
         <div className="absolute top-0 right-0 w-20 h-12 bg-gradient-to-bl from-black/80 via-black/60 to-transparent" />
-        <div className="absolute bottom-0 left-0 w-20 h-12 bg-gradient-to-tr from-black/80 via-black/60 to-transparent" />
+        <div className="absolute bottom-0 left-0 w-32 h-20 bg-gradient-to-tr from-black/95 via-black/85 to-transparent" />
 
 
 
