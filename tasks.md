@@ -157,32 +157,28 @@ className = "[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-
 - `vt-tag-*` classes have no effect
 - Inconsistent user experience between browsers
 
-### 2.1 Create View Transition Detection Utility
+### 2.1 Create View Transition Detection Utility ✅ COMPLETED
 
 **Context**: We need to detect browser support and gracefully handle unsupported browsers.
 
+**IMPLEMENTATION STATUS**: **COMPLETED** with comprehensive Safari fallback support.
+
 **Details**:
 
-- [ ] **Create `lib/utils/viewTransitions.ts`**:
+- [x] **Created `lib/utils/viewTransitions.ts`** with detection and safe execution functions:
+  - `supportsViewTransitions()`: Detects View Transitions API support
+  - `safeViewTransition()`: Safely executes transitions with fallback for unsupported browsers
+  - `isBrowser()`: Type guard for browser environment detection
+- [x] **Added hook for view transition support**: `hooks/useViewTransitions.ts`
+  - Provides `isSupported`, `isTransitioning`, and `startTransition` utilities
+  - Handles state management for transition status
+- [x] **Created fallback animation utilities**: `lib/utils/fallbackAnimations.ts`
+  - CSS-based animations for browsers without View Transitions support
+  - Fade, slide, and scale animation presets
+  - Utility functions for applying animations to elements
+  - Crossfade utility for page transitions
 
-  ```typescript
-  export const supportsViewTransitions = (): boolean => {
-    return typeof document !== "undefined" && "startViewTransition" in document;
-  };
-
-  export const safeViewTransition = (callback: () => void) => {
-    if (supportsViewTransitions()) {
-      document.startViewTransition(callback);
-    } else {
-      callback();
-    }
-  };
-  ```
-
-- [ ] **Add hook for view transition support**: `hooks/useViewTransitions.ts`
-- [ ] **Create fallback animation utilities** for non-supporting browsers
-
-**Why this approach**: Enables progressive enhancement where supported browsers get smooth transitions while others get instant navigation.
+**Why this approach**: Enables progressive enhancement where supported browsers get smooth transitions while others get instant navigation with CSS-based fallback animations.
 
 ### 2.2 Update View Transition CSS
 
