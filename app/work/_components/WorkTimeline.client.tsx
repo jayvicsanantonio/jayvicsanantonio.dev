@@ -3,12 +3,12 @@
 import { Icon } from '@iconify/react';
 import type { MotionProps } from 'framer-motion';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 
 import { Badge } from '@/components/ui/Badge';
 import { useContainerSize } from '@/hooks/useContainerSize';
 import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
-import { getAdaptiveClasses } from '@/lib/utils/containerQueries';
+import { supportsContainerQueries } from '@/lib/utils/containerQueries';
 
 type Experience = {
   title: string;
@@ -126,6 +126,25 @@ export default function WorkTimeline() {
 
   // Container size detection for Safari fallback (provides enhanced responsive behavior)
   const { containerRef: sizeRef } = useContainerSize();
+
+  // Hydration-safe container query support detection
+  const [isHydrated, setIsHydrated] = React.useState(false);
+  const hasContainerQuerySupport = React.useMemo(() => {
+    if (!isHydrated) return false;
+    return supportsContainerQueries();
+  }, [isHydrated]);
+
+  React.useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
+  // Helper function to get adaptive classes with hydration safety
+  const getAdaptiveClasses = React.useCallback(
+    (containerClasses: string, fallbackClasses: string): string => {
+      return hasContainerQuerySupport ? containerClasses : fallbackClasses;
+    },
+    [hasContainerQuerySupport],
+  );
 
   // Ref callback to combine both refs
   const setContainerRef = (node: HTMLDivElement | null) => {
@@ -254,6 +273,7 @@ export default function WorkTimeline() {
                         '[@container(min-width:36rem)]:p-6',
                         'lg:p-6',
                       )}`}
+                      suppressHydrationWarning
                     >
                       <div className="text-left">
                         <h3
@@ -261,6 +281,7 @@ export default function WorkTimeline() {
                             '[@container(min-width:28rem)]:text-2xl',
                             'sm:text-2xl',
                           )}`}
+                          suppressHydrationWarning
                         >
                           {item.title}
                         </h3>
@@ -280,6 +301,7 @@ export default function WorkTimeline() {
                           '[@container(min-width:34rem)]:space-y-4',
                           'md:space-y-4',
                         )}`}
+                        suppressHydrationWarning
                       >
                         {item.bullets.map((b) => (
                           <li key={b} className="flex gap-2 break-words text-gray-300/90">

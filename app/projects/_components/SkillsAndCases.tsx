@@ -8,7 +8,7 @@ import React from 'react';
 import { PROJECTS } from '@/app/projects/projects.data';
 import { useContainerSize } from '@/hooks/useContainerSize';
 import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
-import { getAdaptiveClasses } from '@/lib/utils/containerQueries';
+import { supportsContainerQueries } from '@/lib/utils/containerQueries';
 
 import ProjectLink from './ProjectLink';
 
@@ -41,6 +41,25 @@ export default function SkillsAndCases() {
 
   // Container size detection for Safari fallback (provides enhanced responsive behavior)
   const { containerRef } = useContainerSize();
+
+  // Hydration-safe container query support detection
+  const [isHydrated, setIsHydrated] = React.useState(false);
+  const hasContainerQuerySupport = React.useMemo(() => {
+    if (!isHydrated) return false;
+    return supportsContainerQueries();
+  }, [isHydrated]);
+
+  React.useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
+  // Helper function to get adaptive classes with hydration safety
+  const getAdaptiveClasses = React.useCallback(
+    (containerClasses: string, fallbackClasses: string): string => {
+      return hasContainerQuerySupport ? containerClasses : fallbackClasses;
+    },
+    [hasContainerQuerySupport],
+  );
 
   // Ref callback to handle type compatibility
   const setContainerRef = (node: HTMLDivElement | null) => {
@@ -137,6 +156,7 @@ export default function SkillsAndCases() {
                 '[@container(min-width:36rem)]:grid [@container(min-width:36rem)]:grid-cols-[1fr,1.5fr]',
                 'lg:grid lg:grid-cols-[1fr,1.5fr]',
               )}`}
+              suppressHydrationWarning
             >
               <Image
                 src={c.image.src}
@@ -148,12 +168,14 @@ export default function SkillsAndCases() {
                   '[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-full',
                   'sm:h-44 lg:h-full',
                 )}`}
+                suppressHydrationWarning
               />
               <div
                 className={`flex flex-1 flex-col gap-3 p-5 ${getAdaptiveClasses(
                   '[@container(min-width:36rem)]:p-6',
                   'lg:p-6',
                 )}`}
+                suppressHydrationWarning
               >
                 <div className="flex items-center justify-between gap-4">
                   <h3 className="font-oswald text-xl text-white">{c.title}</h3>

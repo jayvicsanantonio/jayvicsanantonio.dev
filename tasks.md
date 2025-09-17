@@ -12,15 +12,19 @@ Safari has historically lagged behind Chrome in supporting modern CSS features. 
 - **CSS Nesting**: Less efficient parsing in Safari's CSS engine
 - **GPU Compositing**: Different optimization strategies needed for Safari's rendering engine
 
-## 1. Container Queries Fallback Implementation
+## 1. Container Queries Fallback Implementation ✅ COMPLETED
 
 **Problem**: Container queries (`@container` and `container-type`) are used extensively for responsive components but are not supported in Safari versions before 16.0. This causes layout breakage where components don't respond to their container size, leading to overlapping content, incorrect spacing, and broken grid layouts.
 
-**Current Impact**:
+**IMPLEMENTATION STATUS**: **COMPLETED** with critical discovery about Tailwind CSS v4 limitations.
 
-- WorkTimeline cards don't resize properly in their containers
-- SkillsAndCases grid layout fails to adapt to component width
-- Mobile layouts break on older iOS Safari versions
+**Current Impact** (RESOLVED):
+
+- ✅ WorkTimeline cards now resize properly with viewport-based fallbacks
+- ✅ SkillsAndCases grid layout adapts correctly using adaptive classes
+- ✅ Mobile layouts work consistently across Safari versions
+
+**CRITICAL DISCOVERY**: During implementation, we discovered that Tailwind CSS v4 does not support nesting `@utility` directives inside `@supports` blocks. This forced a redesign of the Safari compatibility strategy from CSS-based to JavaScript-based fallbacks, which ultimately proved more robust and flexible.
 
 ### 1.1 Add Container Query Feature Detection
 
@@ -28,14 +32,14 @@ Safari has historically lagged behind Chrome in supporting modern CSS features. 
 
 **Details**:
 
-- [ ] **Create `lib/utils/containerQueries.ts`** with detection function:
+- [x] **Create `lib/utils/containerQueries.ts`** with detection function:
   ```typescript
   export const supportsContainerQueries = (): boolean => {
     if (typeof window === "undefined") return false;
     return CSS.supports("container-type: inline-size");
   };
   ```
-- [ ] **Add CSS feature detection in `app/globals.css`**:
+- [x] **Add CSS feature detection in `app/globals.css`**:
   ```css
   @supports not (container-type: inline-size) {
     .cq-fallback {
@@ -43,7 +47,7 @@ Safari has historically lagged behind Chrome in supporting modern CSS features. 
     }
   }
   ```
-- [ ] **Create responsive utility classes** that mirror container query breakpoints:
+- [x] **Create responsive utility classes** that mirror container query breakpoints:
   ```css
   .container-fallback-sm {
     /* equivalent to [@container(min-width:24rem)] */
@@ -73,16 +77,16 @@ className = "[@container(min-width:34rem)]:space-y-4";
 
 **Details**:
 
-- [ ] **Replace container query classes with conditional rendering**:
+- [x] **Replace container query classes with conditional rendering**:
   ```tsx
   const useContainerQueries = supportsContainerQueries();
   const containerClasses = useContainerQueries
     ? "[@container(min-width:36rem)]:p-6"
     : "sm:p-6 md:p-8";
   ```
-- [ ] **Add responsive breakpoint fallbacks** using standard Tailwind classes
-- [ ] **Test layout at different viewport sizes** to ensure consistency
-- [ ] **Implement ResizeObserver fallback** for older Safari versions to manually trigger layout changes
+- [x] **Add responsive breakpoint fallbacks** using standard Tailwind classes
+- [x] **Test layout at different viewport sizes** to ensure consistency
+- [x] **Implement ResizeObserver fallback** for older Safari versions to manually trigger layout changes
 
 **Why this approach**: Maintains the desired responsive behavior while ensuring compatibility across all Safari versions.
 
@@ -100,15 +104,15 @@ className = "[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-
 
 **Details**:
 
-- [ ] **Implement responsive grid with standard breakpoints**:
+- [x] **Implement responsive grid with standard breakpoints**:
   ```tsx
   const gridClasses = supportsContainerQueries()
     ? "[@container(min-width:36rem)]:grid [@container(min-width:36rem)]:grid-cols-[1fr,1.5fr]"
     : "lg:grid lg:grid-cols-[1fr,1.5fr]";
   ```
-- [ ] **Create responsive image sizing fallbacks** using viewport-based breakpoints
-- [ ] **Add manual container width detection** using ResizeObserver for precise control
-- [ ] **Test card layouts in narrow containers** to ensure content doesn't overflow
+- [x] **Create responsive image sizing fallbacks** using viewport-based breakpoints
+- [x] **Add manual container width detection** using ResizeObserver for precise control
+- [x] **Test card layouts in narrow containers** to ensure content doesn't overflow
 
 **Why this approach**: Ensures the card layout works regardless of browser support while maintaining the intended responsive design.
 
@@ -116,28 +120,32 @@ className = "[@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-
 
 **Context**: The `@utility cq` declaration in `globals.css:85` enables container queries but needs fallback handling.
 
+**CRITICAL DISCOVERY**: Tailwind CSS v4 does not support `@utility` directives nested inside `@supports` blocks. Attempting to do so causes CSS parsing errors that break the entire layout.
+
 **Details**:
 
-- [ ] **Wrap container utility in feature detection**:
+- [x] **Simplified container utility implementation**:
 
   ```css
-  @supports (container-type: inline-size) {
-    @utility cq {
-      container-type: inline-size;
-    }
-  }
-
-  @supports not (container-type: inline-size) {
-    .cq {
-      /* No container context, rely on viewport-based responsive design */
-    }
+  /* Container Query Support - Simplified approach */
+  @utility cq {
+    container-type: inline-size;
   }
   ```
 
-- [ ] **Create utility classes for common container query patterns**
-- [ ] **Add documentation** for when to use container queries vs viewport queries
+- [x] **Removed complex @supports wrapping** that caused parsing errors
+- [x] **Implemented Safari fallbacks at the component level** using JavaScript utilities (`getAdaptiveClasses()`, `useContainerSize()`)
+- [x] **Created comprehensive documentation** for when to use container queries vs viewport queries
 
-**Why this approach**: Provides a single source of truth for container query usage while ensuring graceful degradation.
+**LESSONS LEARNED**:
+
+- **CSS Parsing Limitation**: `@utility` cannot be nested in `@supports` blocks in Tailwind v4
+- **Progressive Enhancement Strategy**: Fallbacks must be handled in JavaScript/component logic rather than pure CSS
+- **Error Impact**: CSS parsing errors can break entire page layouts, not just the specific feature
+- **Custom Utility Reliability**: Custom `@utility` declarations can have unexpected behavior (e.g., `page-container` centering issues, removed in favor of proven patterns)
+- **Proven Patterns**: Standard Tailwind classes (`mx-auto max-w-7xl px-4`) are more reliable than custom utilities
+
+**Why this approach**: While we cannot provide CSS-level fallbacks for the utility itself, the JavaScript-based approach provides more flexible and reliable Safari compatibility through component-level adaptive classes. Additionally, using proven Tailwind patterns instead of custom utilities ensures consistent behavior across all use cases.
 
 ## 2. View Transitions Progressive Enhancement
 

@@ -7,7 +7,7 @@ export default function WorkPage() {
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="motion-safe-only scroll-element animate-spin-slow absolute top-1/2 left-1/2 h-[120vw] w-[120vw] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.08] blur-3xl [animation-duration:22s] [background:conic-gradient(from_0deg_at_50%_50%,rgba(168,85,247,0.45),rgba(59,130,246,0.35),rgba(34,211,238,0.30),rgba(168,85,247,0.45))]" />
       </div>
-      <div className="cq container pt-48 pb-16 sm:pt-52">
+      <div className="cq mx-auto max-w-7xl px-4 pt-48 pb-16 sm:px-6 sm:pt-52 lg:px-8">
         {/* Intro */}
         <div className="animate-fade-in-up space-y-5">
           <h1 className="font-oswald text-3xl font-bold tracking-tight text-cyan-300/90 sm:text-4xl lg:text-6xl">

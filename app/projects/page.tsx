@@ -6,7 +6,7 @@ import SkillsAndCases from './_components/SkillsAndCases';
 export default function ProjectsPage() {
   return (
     <section className="relative w-full overflow-hidden">
-      <div className="cq container pt-48 pb-16 sm:pt-52">
+      <div className="cq mx-auto max-w-7xl px-4 pt-48 pb-16 sm:px-6 sm:pt-52 lg:px-8">
         {/* Header */}
         <div className="animate-fade-in-up space-y-5">
           <AnimatedHeader />
