@@ -175,14 +175,42 @@ export const getScrollAwareBackdrop = (
 
 /**
  * Create hardware acceleration classes for glass components
+ * AGGRESSIVE optimization for Safari scroll performance
  */
 export const getHardwareAcceleration = (isScrolling: boolean = false): string => {
-  const baseClasses = 'transform-gpu will-change-transform';
+  const capabilities = getBrowserCapabilities();
 
-  if (isScrolling) {
-    // Add specific GPU hints during scroll
-    return `${baseClasses} translate3d(0,0,0)`;
+  if (capabilities.isSafari) {
+    if (isScrolling) {
+      // AGGRESSIVE: Force GPU layer creation and prevent repaints during scroll
+      return 'transform-gpu will-change-transform translate3d(0,0,0) backface-visibility-hidden isolation-isolate';
+    } else {
+      // Maintain GPU layer but allow more flexibility when not scrolling
+      return 'transform-gpu will-change-auto translate3d(0,0,0)';
+    }
   }
 
+  // Standard acceleration for other browsers
+  const baseClasses = 'transform-gpu will-change-transform';
+  if (isScrolling) {
+    return `${baseClasses} translate3d(0,0,0)`;
+  }
   return baseClasses;
+};
+
+/**
+ * AGGRESSIVE Safari scroll optimization classes
+ */
+export const getSafariScrollOptimization = (isScrolling: boolean = false): string => {
+  const capabilities = getBrowserCapabilities();
+
+  if (!capabilities.isSafari) return '';
+
+  if (isScrolling) {
+    // AGGRESSIVE: Maximum optimization during scroll
+    return 'will-change-transform transform-gpu translate3d(0,0,0) backface-visibility-hidden isolation-isolate contain-layout contain-style contain-paint';
+  }
+
+  // Standard Safari optimization when not scrolling
+  return 'will-change-auto transform-gpu';
 };

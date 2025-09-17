@@ -22,22 +22,58 @@ export default function AnimatedText({
   onComplete,
 }: AnimatedTextProps) {
   const capabilities = getBrowserCapabilities();
+  const [isScrolling, setIsScrolling] = React.useState(false);
+
+  // NUCLEAR: Detect scroll state for performance optimization
+  useEffect(() => {
+    if (!capabilities.isSafari) return;
+
+    const handleScroll = () => {
+      setIsScrolling(true);
+      if ((window as any).__animatedTextScrollTimeout) {
+        clearTimeout((window as any).__animatedTextScrollTimeout);
+      }
+      (window as any).__animatedTextScrollTimeout = setTimeout(() => {
+        setIsScrolling(false);
+      }, 50);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if ((window as any).__animatedTextScrollTimeout) {
+        clearTimeout((window as any).__animatedTextScrollTimeout);
+      }
+    };
+  }, [capabilities.isSafari]);
 
   const letterObjs = React.useMemo(
     () => Array.from(text).map((ch, idx) => ({ ch, key: `${ch}-${idx}-${text.length}` })),
     [text],
   );
 
-  // Safari-optimized animation properties
+  // NUCLEAR Safari scroll optimization
   const getSafariOptimizedProps = () => {
+    if (capabilities.isSafari && isScrolling) {
+      // NUCLEAR: No animations during scroll
+      return {
+        willChange: 'auto',
+        transitionProperty: 'none',
+        transitionDuration: '0ms',
+        transform: 'translateY(0) scale(1)', // Static position
+        filter: 'none',
+        opacity: start ? 1 : 0.3, // Simple opacity only
+      };
+    }
+
     if (capabilities.isSafari) {
       return {
-        willChange: 'opacity, transform', // Remove filter from will-change for Safari
-        transitionProperty: 'opacity, transform', // Remove filter transition for Safari
-        transitionDuration: '400ms, 400ms', // Shorter duration for Safari
-        transitionTimingFunction: 'ease-out', // Simpler easing for Safari
-        transform: start ? 'translateY(0) scale(1)' : 'translateY(8px) scale(1)', // Reduced movement
-        filter: 'none', // No blur filter for Safari
+        willChange: 'opacity, transform',
+        transitionProperty: 'opacity, transform',
+        transitionDuration: '400ms, 400ms',
+        transitionTimingFunction: 'ease-out',
+        transform: start ? 'translateY(0) scale(1)' : 'translateY(8px) scale(1)',
+        filter: 'none',
       };
     }
 

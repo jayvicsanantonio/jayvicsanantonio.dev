@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import AnimatedText from '@/components/ui/AnimatedText';
 import { getBrowserCapabilities } from '@/lib/utils/browserUtils';
-import { getOptimizedGlassClasses } from '@/lib/utils/glassEffects';
+import { getOptimizedGlassClasses, getSafariScrollOptimization } from '@/lib/utils/glassEffects';
 import { getTextBalanceClasses } from '@/lib/utils/textBalance';
 import { useSafariVideoOptimization, createSafariVideoLoader } from '@/lib/utils/videoOptimization';
 
@@ -87,9 +87,10 @@ export default function MorphingVideo({
       if (scrollTimeoutRef.current) {
         clearTimeout(scrollTimeoutRef.current);
       }
+      // AGGRESSIVE: Faster scroll detection for Safari - shorter timeout
       scrollTimeoutRef.current = window.setTimeout(() => {
         setIsScrolling(false);
-      }, 150);
+      }, isSafari ? 50 : 150); // Much faster for Safari
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -111,34 +112,35 @@ export default function MorphingVideo({
   // Create scroll-aware transition and backdrop-filter
   const getScrollAwareTransition = () => {
     if (isSafari && isScrolling) {
-      // Fast, scroll-safe transitions for Safari during scroll
-      return isExpanding
-        ? 'transform 0.3s ease-out, top 0.2s ease-out'
-        : 'transform 0.3s ease-out, top 0.2s ease-out';
+      // AGGRESSIVE: No transitions at all during scroll in Safari - instant changes only
+      return 'none';
     }
 
-    // Normal transitions when not scrolling or in other browsers
+    if (isSafari) {
+      // AGGRESSIVE: Simplified transitions for Safari even when not scrolling
+      return isExpanding
+        ? 'transform 1s ease-out, top 0.3s ease-out'
+        : 'transform 1s ease-out, top 0.3s ease-out';
+    }
+
+    // Normal transitions for other browsers
     return isExpanding
       ? 'top 0.4s ease-out, transform 2s cubic-bezier(0.22, 1, 0.36, 1), border-radius 2s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.6s ease-out'
       : 'top 0.4s ease-out, border-radius 0s, background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.3s ease-out';
   };
 
   const getScrollAwareBackdropFilter = () => {
-    // Disable backdrop-filter completely during scroll in Safari
+    // NUCLEAR: Completely disable backdrop-filter for all Safari states during scroll
     if (isSafari && isScrolling) {
-      return 'blur(0px)';
+      return 'none';
     }
 
-    // Reduced backdrop-filter for Safari even when not scrolling
+    // NUCLEAR: Disable backdrop-filter completely for Safari
     if (isSafari) {
-      return isIntro && !initialPill
-        ? 'blur(10px)' // Reduced from 20px
-        : isIntro
-          ? 'blur(0px)'
-          : 'blur(calc(max(0, (var(--p, 0) - 0.7) * 3) * 10px))'; // Reduced from 20px
+      return 'none'; // No backdrop-filter at all for Safari
     }
 
-    // Full backdrop-filter for other browsers
+    // Full backdrop-filter for other browsers only
     return isIntro && !initialPill
       ? 'blur(20px)'
       : isIntro
@@ -165,16 +167,20 @@ export default function MorphingVideo({
     transition: getScrollAwareTransition(),
     '--bg-a': isIntro ? '0.95' : 'calc(max(0, (var(--p, 0) - 0.7) * 3) * 0.95)',
     '--shadow-a': isIntro ? '0.25' : 'calc(max(0, (var(--p, 0) - 0.7) * 3) * 0.25)',
-    backgroundColor: initialPill ? 'transparent' : 'rgba(255, 255, 255, var(--bg-a))',
+    backgroundColor: initialPill ? 'transparent' :
+      isSafari && isScrolling
+        ? 'rgba(255, 255, 255, 0.85)' // NUCLEAR: Static background during scroll
+        : 'rgba(255, 255, 255, var(--bg-a))',
     backdropFilter: getScrollAwareBackdropFilter(),
     boxShadow: initialPill ? 'none' : '0 25px 50px -12px rgba(0, 0, 0, var(--shadow-a))',
-    clipPath:
-      'inset(calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) round calc(24px + var(--sh, 0) * 360px))',
+    clipPath: isSafari && isScrolling
+      ? 'inset(0 0 0 0 round 24px)' // NUCLEAR: Static clip-path during scroll
+      : 'inset(calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) round calc(24px + var(--sh, 0) * 360px))',
   };
 
   return (
     <div
-      className="fixed z-30 flex items-center justify-center overflow-hidden"
+      className={`fixed z-30 flex items-center justify-center overflow-hidden ${getSafariScrollOptimization(isScrolling)}`}
       style={containerStyle}
     >
       {/* Titles */}
