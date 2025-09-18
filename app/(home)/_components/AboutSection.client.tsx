@@ -92,12 +92,24 @@ export default function AboutSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full px-10 lg:px-40 overflow-hidden bg-cyan-950 z-[250]"
+      className="relative w-full px-10 lg:px-40 overflow-hidden z-[250]"
       style={{
         minHeight: "100vh",
-        background: "linear-gradient(to top, black 0%, rgba(0,0,0,0.8) 5%, rgba(8, 51, 68, 1) 70%)",
+        background:
+          "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 5%, rgba(8, 51, 68, 0.6) 70%)",
       }}
     >
+      {/* Ambient background effects - similar to AmbientBackground.tsx */}
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        {/* Radial vignette */}
+        <div className="absolute inset-0 bg-[radial-gradient(80%_60%_at_50%_0%,rgba(59,130,246,0.15),transparent_60%),radial-gradient(60%_50%_at_50%_100%,rgba(168,85,247,0.12),transparent_60%)]" />
+
+        {/* Subtle grid */}
+        <div className="absolute inset-0 [background-image:linear-gradient(to_right,white_1px,transparent_1px),linear-gradient(to_bottom,white_1px,transparent_1px)] [background-size:64px_64px] opacity-[0.04] mix-blend-overlay" />
+
+        {/* Grain */}
+        <div className="absolute inset-0 [background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] [background-size:3px_3px] opacity-[0.06] mix-blend-soft-light" />
+      </div>
       <div className="container pt-32 pb-16 sm:pt-40 px-4 text-white">
         <div className="grid gap-8 lg:grid-cols-2 lg:items-start">
           {/* About Me Card */}
