@@ -95,6 +95,7 @@ export default function AboutSection() {
       className="relative w-full px-10 lg:px-40 overflow-hidden bg-cyan-950 z-[250]"
       style={{
         minHeight: "100vh",
+        background: "linear-gradient(to top, black 0%, rgba(0,0,0,0.8) 5%, rgba(8, 51, 68, 1) 70%)",
       }}
     >
       <div className="container pt-32 pb-16 sm:pt-40 px-4 text-white">
