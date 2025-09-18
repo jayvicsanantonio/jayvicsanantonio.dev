@@ -22,7 +22,7 @@ export default function MobileHomePage() {
         <div className="absolute inset-0 [background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] [background-size:3px_3px] opacity-[0.06] mix-blend-soft-light" />
 
         {/* Black gradient overlay - black at top (section 1) fading to transparent (section 2) */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-cyan-950/40 to-transparent" />
       </div>
       <h1 className="sr-only">Jayvic San Antonio — Full-Stack Software Engineer</h1>
       {/* Black gradient transition to section 2 */}
@@ -66,30 +66,6 @@ export default function MobileHomePage() {
         <div className="absolute bottom-0 right-0 w-32 h-24 bg-gradient-to-tl from-black/95 via-black/85 to-transparent" />
         <div className="absolute top-0 right-0 w-20 h-12 bg-gradient-to-bl from-black/80 via-black/60 to-transparent" />
         <div className="absolute bottom-0 left-0 w-32 h-20 bg-gradient-to-tr from-black/95 via-black/85 to-transparent" />
-
-        {/* Tagline in liquid glass container centered within the section */}
-        <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <div className="group relative w-[min(22rem,88vw)] transform-gpu rounded-3xl bg-gradient-to-b from-white/5 via-white/3 to-white/8 p-[1.5px] shadow-[inset_0_2px_0_rgba(255,255,255,0.15),inset_0_-1px_0_rgba(255,255,255,0.05),0_20px_60px_rgba(0,0,0,0.3)] backdrop-blur-[16px] backdrop-saturate-[180%] transition-all duration-500">
-            {/* Liquid glass shimmer effect */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 rounded-3xl bg-[linear-gradient(45deg,transparent_30%,rgba(255,255,255,0.08)_50%,transparent_70%)] opacity-60 animate-pulse"
-            />
-
-            {/* Subtle flowing highlight */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -inset-2 -z-10 rounded-3xl bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,rgba(59,130,246,0.15),transparent_70%),radial-gradient(ellipse_60%_80%_at_60%_60%,rgba(168,85,247,0.12),transparent_70%)] opacity-40 blur-lg"
-            />
-
-            {/* Inner liquid glass panel */}
-            <div className="relative rounded-3xl border border-white/10 bg-gradient-to-b from-white/8 via-transparent to-white/5 px-6 py-4 backdrop-blur-[12px] backdrop-saturate-[160%] before:pointer-events-none before:absolute before:inset-0 before:rounded-3xl before:bg-[radial-gradient(100%_100%_at_50%_0%,rgba(255,255,255,0.06),transparent_60%)] before:content-[''] after:pointer-events-none after:absolute after:inset-0 after:rounded-3xl after:bg-[linear-gradient(135deg,rgba(255,255,255,0.05),transparent_40%,rgba(255,255,255,0.02))] after:content-['']">
-              <p className="relative z-10 text-center text-base leading-relaxed text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
-                I experiment with AI daily—and build web platforms that put it to work.
-              </p>
-            </div>
-          </div>
-        </div>
 
         {/* Foreground person image */}
         <div className="absolute bottom-0 left-1/2 w-[92%] max-w-[28rem] -translate-x-1/2">
