@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
 // About section component with cinematic scroll-triggered reveal
 // Ported from lite page to match design system
 
-import { useEffect, useRef, useState } from "react";
-import { Oswald } from "next/font/google";
+import { Oswald } from 'next/font/google';
+import { useEffect, useRef, useState } from 'react';
 
-const oswald = Oswald({ subsets: ["latin"] });
+const oswald = Oswald({ subsets: ['latin'] });
 
 export default function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -29,7 +29,7 @@ export default function AboutSection() {
   useEffect(() => {
     const observerOptions = {
       threshold: 0.3, // Trigger when 30% of card is visible
-      rootMargin: "0px 0px -20% 0px", // Start animation slightly before fully in view
+      rootMargin: '0px 0px -20% 0px', // Start animation slightly before fully in view
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -87,16 +87,16 @@ export default function AboutSection() {
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [animationComplete.aboutCard]);
 
   return (
     <section
       ref={sectionRef}
       className="relative w-full px-10 lg:px-40 overflow-hidden z-[250]"
       style={{
-        minHeight: "100vh",
+        minHeight: '100vh',
         background:
-          "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 5%, rgba(8, 51, 68, 0.6) 70%)",
+          'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 5%, rgba(8, 51, 68, 0.6) 70%)',
       }}
     >
       {/* Ambient background effects - similar to AmbientBackground.tsx */}
@@ -119,7 +119,7 @@ export default function AboutSection() {
             style={{
               opacity: cardTransforms.aboutCard.opacity,
               transform: `scale(${cardTransforms.aboutCard.scale})`,
-              transition: "opacity 0.3s ease-out, transform 0.3s ease-out",
+              transition: 'opacity 0.3s ease-out, transform 0.3s ease-out',
             }}
           >
             {/* Subtle halo */}
@@ -161,7 +161,7 @@ export default function AboutSection() {
                 </p>
                 <p>
                   Excited to bring your vision to life? Let's collaborate and build something
-                  incredible together!{" "}
+                  incredible together!{' '}
                   <span className="text-cyan-300 underline cursor-pointer">Let's chat!</span>
                 </p>
               </div>
@@ -177,7 +177,7 @@ export default function AboutSection() {
               style={{
                 opacity: cardTransforms.skillsCard.opacity,
                 transform: `scale(${cardTransforms.skillsCard.scale})`,
-                transition: "opacity 0.3s ease-out, transform 0.3s ease-out",
+                transition: 'opacity 0.3s ease-out, transform 0.3s ease-out',
               }}
             >
               {/* Subtle halo */}
@@ -196,28 +196,28 @@ export default function AboutSection() {
                 <div className="mt-3 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
                 <div className="mt-6 flex flex-wrap gap-2">
                   {[
-                    "JavaScript",
-                    "TypeScript",
-                    "React",
-                    "Next.js",
-                    "Remix",
-                    "Node.js",
-                    "Express.js",
-                    "Tailwind CSS",
-                    "React Native",
-                    "Expo",
-                    "Ember.js",
-                    "HTML",
-                    "CSS",
-                    "SASS / SCSS",
-                    "AWS",
-                    "MongoDB",
-                    "Redis",
-                    "MySQL",
-                    "PostgreSQL",
-                    "Java",
-                    "Cypress",
-                    "Git",
+                    'JavaScript',
+                    'TypeScript',
+                    'React',
+                    'Next.js',
+                    'Remix',
+                    'Node.js',
+                    'Express.js',
+                    'Tailwind CSS',
+                    'React Native',
+                    'Expo',
+                    'Ember.js',
+                    'HTML',
+                    'CSS',
+                    'SASS / SCSS',
+                    'AWS',
+                    'MongoDB',
+                    'Redis',
+                    'MySQL',
+                    'PostgreSQL',
+                    'Java',
+                    'Cypress',
+                    'Git',
                   ].map((skill, index) => (
                     <span
                       key={skill}
@@ -225,7 +225,7 @@ export default function AboutSection() {
                       style={{
                         opacity: cardTransforms.skillsCard.opacity,
                         transform: `translateY(${cardTransforms.skillsCard.opacity > 0.5 ? 0 : 20}px)`,
-                        transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
+                        transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
                         transitionDelay: `${index * 0.05}s`,
                       }}
                     >
@@ -243,7 +243,7 @@ export default function AboutSection() {
               style={{
                 opacity: cardTransforms.expertiseCard.opacity,
                 transform: `scale(${cardTransforms.expertiseCard.scale})`,
-                transition: "opacity 0.3s ease-out, transform 0.3s ease-out",
+                transition: 'opacity 0.3s ease-out, transform 0.3s ease-out',
               }}
             >
               {/* Subtle halo */}
@@ -262,18 +262,18 @@ export default function AboutSection() {
                 <div className="mt-3 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
                 <div className="mt-6 space-y-3">
                   {[
-                    "Frontend Development",
-                    "Web Performance Optimization",
-                    "Agile and Scrum Methodologies",
-                    "Cross-functional Collaboration",
-                    "Problem-solving and Debugging",
-                    "Responsive Design",
-                    "Adaptability and Learning",
-                    "Mentoring and Knowledge Sharing",
-                    "Documentation Proficiency",
-                    "Technical Leadership",
-                    "Software Engineering Best Practices",
-                    "Startup Development",
+                    'Frontend Development',
+                    'Web Performance Optimization',
+                    'Agile and Scrum Methodologies',
+                    'Cross-functional Collaboration',
+                    'Problem-solving and Debugging',
+                    'Responsive Design',
+                    'Adaptability and Learning',
+                    'Mentoring and Knowledge Sharing',
+                    'Documentation Proficiency',
+                    'Technical Leadership',
+                    'Software Engineering Best Practices',
+                    'Startup Development',
                   ].map((expertise, index) => (
                     <div
                       key={expertise}
@@ -281,7 +281,7 @@ export default function AboutSection() {
                       style={{
                         opacity: cardTransforms.expertiseCard.opacity,
                         transform: `translateX(${cardTransforms.expertiseCard.opacity > 0.5 ? 0 : 20}px)`,
-                        transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
+                        transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
                         transitionDelay: `${index * 0.08}s`,
                       }}
                     >

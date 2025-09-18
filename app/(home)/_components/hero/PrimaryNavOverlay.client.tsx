@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { Icon } from "@iconify/react";
-import { useEffect, useState } from "react";
+import { Icon } from '@iconify/react';
+import { useEffect, useState } from 'react';
 
-import NavButton from "@/app/(home)/_components/NavButton";
+import NavButton from '@/app/(home)/_components/NavButton';
 
 export type PrimaryNavOverlayProps = {
   centerTop: string;
@@ -30,8 +30,8 @@ export default function PrimaryNavOverlay({
     };
 
     handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
@@ -39,7 +39,7 @@ export default function PrimaryNavOverlay({
       className="pointer-events-none fixed inset-0 z-[70] hidden sm:block will-change-transform"
       style={{
         transform: `translateY(${-scrollProgress * 100}vh)`,
-        transition: "transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+        transition: 'transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
       }}
     >
       <nav aria-label="Primary" className="hidden sm:block">
@@ -62,9 +62,9 @@ export default function PrimaryNavOverlay({
                 aria-hidden="true"
                 style={{
                   transform:
-                    "translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))",
-                  transition: "transform 360ms cubic-bezier(0.22, 1, 0.36, 1)",
-                  willChange: "transform",
+                    'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
+                  transition: 'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
+                  willChange: 'transform',
                 }}
               />
             </NavButton>
@@ -88,9 +88,9 @@ export default function PrimaryNavOverlay({
                 aria-hidden="true"
                 style={{
                   transform:
-                    "translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))",
-                  transition: "transform 360ms cubic-bezier(0.22, 1, 0.36, 1)",
-                  willChange: "transform",
+                    'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
+                  transition: 'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
+                  willChange: 'transform',
                 }}
               />
             </NavButton>
@@ -113,9 +113,9 @@ export default function PrimaryNavOverlay({
                 aria-hidden="true"
                 style={{
                   transform:
-                    "translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))",
-                  transition: "transform 360ms cubic-bezier(0.22, 1, 0.36, 1)",
-                  willChange: "transform",
+                    'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
+                  transition: 'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
+                  willChange: 'transform',
                 }}
               />
             </NavButton>
@@ -140,9 +140,9 @@ export default function PrimaryNavOverlay({
                 aria-hidden="true"
                 style={{
                   transform:
-                    "translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))",
-                  transition: "transform 360ms cubic-bezier(0.22, 1, 0.36, 1)",
-                  willChange: "transform",
+                    'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
+                  transition: 'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
+                  willChange: 'transform',
                 }}
               />
             </NavButton>
