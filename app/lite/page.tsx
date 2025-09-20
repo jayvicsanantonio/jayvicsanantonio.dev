@@ -115,7 +115,7 @@ export default function MobileHomePage() {
           {/* Top Row - About Me and Skills */}
           <div className="grid gap-8 lg:grid-cols-2 lg:items-stretch mb-8">
             {/* About Me Card */}
-            <div className="group relative w-full transform-gpu rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.25),rgba(168,85,247,0.15),rgba(34,211,238,0.12))] p-[1px] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_12px_32px_rgba(0,0,0,0.4)] ring-1 ring-white/10 backdrop-blur-[24px] backdrop-saturate-[140%] transition-all duration-300 after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl after:bg-[linear-gradient(120deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.12)_50%,rgba(255,255,255,0)_100%)] after:opacity-0 after:mix-blend-overlay after:transition-opacity after:duration-300 hover:bg-[linear-gradient(135deg,rgba(59,130,246,0.3),rgba(168,85,247,0.2),rgba(34,211,238,0.15))] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_16px_40px_rgba(0,0,0,0.5)] hover:ring-white/15 group-hover:after:opacity-100 focus-within:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)] focus-within:after:opacity-100 hover:-translate-y-0.5 sm:p-[1.2px] md:hover:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)]">
+            <div className="group relative w-full transform-gpu rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.25),rgba(255,255,255,0.08),rgba(34,211,238,0.20))] p-[1px] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_12px_32px_rgba(0,0,0,0.4)] ring-1 ring-white/10 backdrop-blur-[24px] backdrop-saturate-[140%] transition-all duration-300 after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl after:bg-[linear-gradient(120deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.12)_50%,rgba(255,255,255,0)_100%)] after:opacity-0 after:mix-blend-overlay after:transition-opacity after:duration-300 hover:bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(255,255,255,0.12),rgba(34,211,238,0.30))] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_16px_40px_rgba(0,0,0,0.5)] hover:ring-white/15 group-hover:after:opacity-100 focus-within:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)] focus-within:after:opacity-100 hover:-translate-y-0.5 sm:p-[1.2px] md:hover:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)]">
               {/* Subtle halo */}
               <div
                 aria-hidden
@@ -196,7 +196,7 @@ export default function MobileHomePage() {
             </div>
 
             {/* Skills Card */}
-            <div className="group relative w-full transform-gpu rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.25),rgba(168,85,247,0.15),rgba(34,211,238,0.12))] p-[1px] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_12px_32px_rgba(0,0,0,0.4)] ring-1 ring-white/10 backdrop-blur-[24px] backdrop-saturate-[140%] transition-all duration-300 after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl after:bg-[linear-gradient(120deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.12)_50%,rgba(255,255,255,0)_100%)] after:opacity-0 after:mix-blend-overlay after:transition-opacity after:duration-300 hover:bg-[linear-gradient(135deg,rgba(59,130,246,0.3),rgba(168,85,247,0.2),rgba(34,211,238,0.15))] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_16px_40px_rgba(0,0,0,0.5)] hover:ring-white/15 group-hover:after:opacity-100 focus-within:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)] focus-within:after:opacity-100 hover:-translate-y-0.5 sm:p-[1.2px] md:hover:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)]">
+            <div className="group relative w-full transform-gpu rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.25),rgba(255,255,255,0.08),rgba(34,211,238,0.20))] p-[1px] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_12px_32px_rgba(0,0,0,0.4)] ring-1 ring-white/10 backdrop-blur-[24px] backdrop-saturate-[140%] transition-all duration-300 after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl after:bg-[linear-gradient(120deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.12)_50%,rgba(255,255,255,0)_100%)] after:opacity-0 after:mix-blend-overlay after:transition-opacity after:duration-300 hover:bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(255,255,255,0.12),rgba(34,211,238,0.30))] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_16px_40px_rgba(0,0,0,0.5)] hover:ring-white/15 group-hover:after:opacity-100 focus-within:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)] focus-within:after:opacity-100 hover:-translate-y-0.5 sm:p-[1.2px] md:hover:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)]">
               {/* Subtle halo */}
               <div
                 aria-hidden
@@ -222,16 +222,20 @@ export default function MobileHomePage() {
                         'JavaScript',
                         'TypeScript',
                         'React',
-                        'Next.js',
+                        'NextJS',
                         'Tailwind CSS',
+                        'Shadcn UI',
                         'Framer Motion',
                         'React Native',
                         'Expo',
+                        'EmberJS',
                         'HTML',
                         'CSS',
                         'Sass',
                         'SVG',
                         'Accessibility',
+                        'VS Code Extensions',
+                        'Zed Extensions',
                       ].map((skill) => (
                         <span
                           key={skill}
@@ -250,14 +254,19 @@ export default function MobileHomePage() {
                     </h3>
                     <div className="flex flex-wrap gap-2">
                       {[
-                        'Node.js',
+                        'NodeJS',
                         'Hono',
                         'Express',
                         'Cloudflare Workers',
                         'Vercel Edge',
                         'REST APIs',
+                        'SailsJS',
+                        'Socket.IO',
                         'Rate Limiting',
-                        'Auth',
+                        'Caching',
+                        'Session Management',
+                        'Authentication',
+                        'Authorization',
                       ].map((skill) => (
                         <span
                           key={skill}
@@ -275,7 +284,16 @@ export default function MobileHomePage() {
                       Data
                     </h3>
                     <div className="flex flex-wrap gap-2">
-                      {['PostgreSQL', 'Prisma', 'MySQL', 'MongoDB', 'Redis'].map((skill) => (
+                      {[
+                        'Prisma',
+                        'Drizzle',
+                        'PostgreSQL',
+                        'MySQL',
+                        'SQLite',
+                        'MongoDB',
+                        'Redis',
+                        'Firebase',
+                      ].map((skill) => (
                         <span
                           key={skill}
                           className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium tracking-[0.12em] text-gray-300 uppercase"
@@ -292,16 +310,24 @@ export default function MobileHomePage() {
                       Quality and Testing
                     </h3>
                     <div className="flex flex-wrap gap-2">
-                      {['Zod', 'Vitest', 'Jest', 'Cypress', 'GitHub Actions', 'CI/CD'].map(
-                        (skill) => (
-                          <span
-                            key={skill}
-                            className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium tracking-[0.12em] text-gray-300 uppercase"
-                          >
-                            {skill}
-                          </span>
-                        ),
-                      )}
+                      {[
+                        'Zod',
+                        'Vitest',
+                        'React Testing Library',
+                        'Jest',
+                        'Playwright',
+                        'Cypress',
+                        'GitHub Actions',
+                        'Jenkins',
+                        'CI/CD',
+                      ].map((skill) => (
+                        <span
+                          key={skill}
+                          className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium tracking-[0.12em] text-gray-300 uppercase"
+                        >
+                          {skill}
+                        </span>
+                      ))}
                     </div>
                   </div>
 
@@ -329,27 +355,28 @@ export default function MobileHomePage() {
                     </h3>
                     <div className="flex flex-wrap gap-2">
                       {[
-                        'Gemini 2.5 Pro',
-                        'Claude Sonnet 4.0',
-                        'Claude Opus 4.1',
-                        'GPT-5 Codex High',
-                        'ChatGPT',
-                        'GitHub Copilot',
-                        'Perplexity',
-                        'LangChain',
-                        'OpenRouter',
-                        'Google AI Studio',
-                        'Gemini CLI',
                         'Cursor',
+                        'Warp.dev',
+                        'Claude Code',
+                        'Gemini CLI',
+                        'GitHub Copilot',
+                        'OpenRouter',
                         'Windsurf',
                         'Cline',
-                        'VS Code AI Agents',
-                        'Zed AI',
-                        'v0',
+                        'VS Code',
+                        'Zed',
+                        'Gemini',
+                        'ChatGPT',
+                        'Perplexity',
                         'Comet',
+                        'LangChain',
+                        'v0',
                         'Bolt.new',
                         'Lovable',
-                        'Warp.dev',
+                        'Google AI Studio',
+                        'Google Workspace',
+                        'Linear',
+                        'Jira',
                       ].map((skill) => (
                         <span
                           key={skill}
@@ -366,7 +393,7 @@ export default function MobileHomePage() {
           </div>
 
           {/* Bottom Row - Expertise Card (Full Width) */}
-          <div className="group relative w-full transform-gpu rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.25),rgba(168,85,247,0.15),rgba(34,211,238,0.12))] p-[1px] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_12px_32px_rgba(0,0,0,0.4)] ring-1 ring-white/10 backdrop-blur-[24px] backdrop-saturate-[140%] transition-all duration-300 after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl after:bg-[linear-gradient(120deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.12)_50%,rgba(255,255,255,0)_100%)] after:opacity-0 after:mix-blend-overlay after:transition-opacity after:duration-300 hover:bg-[linear-gradient(135deg,rgba(59,130,246,0.3),rgba(168,85,247,0.2),rgba(34,211,238,0.15))] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_16px_40px_rgba(0,0,0,0.5)] hover:ring-white/15 group-hover:after:opacity-100 focus-within:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)] focus-within:after:opacity-100 hover:-translate-y-0.5 sm:p-[1.2px] md:hover:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)]">
+          <div className="group relative w-full transform-gpu rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.25),rgba(255,255,255,0.08),rgba(34,211,238,0.20))] p-[1px] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_12px_32px_rgba(0,0,0,0.4)] ring-1 ring-white/10 backdrop-blur-[24px] backdrop-saturate-[140%] transition-all duration-300 after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl after:bg-[linear-gradient(120deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.12)_50%,rgba(255,255,255,0)_100%)] after:opacity-0 after:mix-blend-overlay after:transition-opacity after:duration-300 hover:bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(255,255,255,0.12),rgba(34,211,238,0.30))] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_16px_40px_rgba(0,0,0,0.5)] hover:ring-white/15 group-hover:after:opacity-100 focus-within:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)] focus-within:after:opacity-100 hover:-translate-y-0.5 sm:p-[1.2px] md:hover:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)]">
             {/* Subtle halo */}
             <div
               aria-hidden

@@ -14,7 +14,10 @@
       "Bash(pnpm install:*)",
       "Bash(pnpm fix:content:*)",
       "Bash(mkdir:*)",
-      "Bash(pnpm dlx lighthouse:*)"
+      "Bash(pnpm dlx lighthouse:*)",
+      "Bash(pnpm type-check:*)",
+      "Bash(pnpm fix:*)",
+      "Bash(pntml type-check:*)"
     ],
     "deny": [],
     "ask": []
