@@ -2,6 +2,7 @@ export const runtime = 'edge';
 
 import { Oswald } from 'next/font/google';
 import Image from 'next/image';
+import Link from 'next/link';
 import AnimatedText from '@/components/ui/AnimatedText';
 import GlassHeaderBubble from '@/components/ui/GlassHeaderBubble';
 
@@ -161,34 +162,36 @@ export default function MobileHomePage() {
                     When I'm not coding, I'm getting my steps in Pokemon Go, collecting Star Wars
                     Black Series figures, catching up on MCU movies and shows, and listening to Ed
                     Sheeran. I like early-morning coffee, long walks with good podcasts, and
-                    shipping work I'm proud to sign my name on. If you're working on something
-                    ambitious and care about the details, I'd love to build with you. You can reach
-                    me at my{' '}
-                    <a
+                    shipping work I'm proud to sign my name on.
+                  </p>
+                  <p>
+                    If you're working on something ambitious and care about the details, I'd love to
+                    build with you. You can reach me at my{' '}
+                    <Link
                       href="mailto:hi@jayvicsanantonio.dev"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200 decoration-purple-400/60 underline decoration-wavy decoration-2 underline-offset-4"
                     >
                       email
-                    </a>
+                    </Link>
                     , find me on{' '}
-                    <a
+                    <Link
                       href="https://www.linkedin.com/in/jayvicsanantonio"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200 decoration-purple-400/60 underline decoration-wavy decoration-2 underline-offset-4"
                     >
                       LinkedIn
-                    </a>
+                    </Link>
                     , and see more of my work{' '}
-                    <a
-                      href="https://jayvicsanantonio.dev/projects"
+                    <Link
+                      href="/projects"
                       rel="noopener noreferrer"
                       className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200 decoration-purple-400/60 underline decoration-wavy decoration-2 underline-offset-4"
                     >
                       here
-                    </a>
+                    </Link>
                     .
                   </p>
                 </div>
