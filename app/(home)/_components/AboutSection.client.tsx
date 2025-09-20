@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
 // About section component with cinematic scroll-triggered reveal
 // Ported from lite page to match design system
 
-import { Oswald } from "next/font/google";
-import { useEffect, useRef, useState } from "react";
+import { Oswald } from 'next/font/google';
+import { useEffect, useRef, useState } from 'react';
 
-const oswald = Oswald({ subsets: ["latin"] });
+const oswald = Oswald({ subsets: ['latin'] });
 
 export default function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -29,7 +29,7 @@ export default function AboutSection() {
   useEffect(() => {
     const observerOptions = {
       threshold: 0.3, // Trigger when 30% of card is visible
-      rootMargin: "0px 0px -20% 0px", // Start animation slightly before fully in view
+      rootMargin: '0px 0px -20% 0px', // Start animation slightly before fully in view
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -94,9 +94,9 @@ export default function AboutSection() {
       ref={sectionRef}
       className="relative w-full px-10 lg:px-40 overflow-hidden z-[250]"
       style={{
-        minHeight: "100vh",
+        minHeight: '100vh',
         background:
-          "linear-gradient(to bottom, rgba(8, 51, 68, 1) 0%, rgba(8, 51, 68, 0.1) 5%, rgba(0, 0, 0, 0.7) 70%)",
+          'linear-gradient(to bottom, rgba(8, 51, 68, 1) 0%, rgba(8, 51, 68, 0.1) 5%, rgba(0, 0, 0, 0.7) 70%)',
       }}
     >
       {/* Ambient background effects - similar to AmbientBackground.tsx */}
@@ -120,7 +120,7 @@ export default function AboutSection() {
             style={{
               opacity: cardTransforms.aboutCard.opacity,
               transform: `scale(${cardTransforms.aboutCard.scale})`,
-              transition: "opacity 0.3s ease-out, transform 0.3s ease-out",
+              transition: 'opacity 0.3s ease-out, transform 0.3s ease-out',
             }}
           >
             {/* Subtle halo */}
@@ -167,7 +167,7 @@ export default function AboutSection() {
                   Black Series figures, catching up on MCU movies and shows, and listening to Ed
                   Sheeran. I like early-morning coffee, long walks with good podcasts, and shipping
                   work I'm proud to sign my name on. If you're working on something ambitious and
-                  care about the details, I'd love to build with you. You can reach me at my{" "}
+                  care about the details, I'd love to build with you. You can reach me at my{' '}
                   <a
                     href="mailto:hi@jayvicsanantonio.dev"
                     target="_blank"
@@ -176,7 +176,7 @@ export default function AboutSection() {
                   >
                     email
                   </a>
-                  , find me on{" "}
+                  , find me on{' '}
                   <a
                     href="https://www.linkedin.com/in/jayvicsanantonio"
                     target="_blank"
@@ -185,7 +185,7 @@ export default function AboutSection() {
                   >
                     LinkedIn
                   </a>
-                  , and see more of my work{" "}
+                  , and see more of my work{' '}
                   <a
                     href="https://jayvicsanantonio.dev/projects"
                     rel="noopener noreferrer"
@@ -206,7 +206,7 @@ export default function AboutSection() {
             style={{
               opacity: cardTransforms.skillsCard.opacity,
               transform: `scale(${cardTransforms.skillsCard.scale})`,
-              transition: "opacity 0.3s ease-out, transform 0.3s ease-out",
+              transition: 'opacity 0.3s ease-out, transform 0.3s ease-out',
             }}
           >
             {/* Subtle halo */}
@@ -231,19 +231,19 @@ export default function AboutSection() {
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {[
-                      "JavaScript",
-                      "TypeScript",
-                      "React",
-                      "Next.js",
-                      "Tailwind CSS",
-                      "Framer Motion",
-                      "React Native",
-                      "Expo",
-                      "HTML",
-                      "CSS",
-                      "Sass",
-                      "SVG",
-                      "Accessibility",
+                      'JavaScript',
+                      'TypeScript',
+                      'React',
+                      'Next.js',
+                      'Tailwind CSS',
+                      'Framer Motion',
+                      'React Native',
+                      'Expo',
+                      'HTML',
+                      'CSS',
+                      'Sass',
+                      'SVG',
+                      'Accessibility',
                     ].map((skill, index) => (
                       <span
                         key={skill}
@@ -251,7 +251,7 @@ export default function AboutSection() {
                         style={{
                           opacity: cardTransforms.skillsCard.opacity,
                           transform: `translateY(${cardTransforms.skillsCard.opacity > 0.5 ? 0 : 20}px)`,
-                          transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
+                          transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
                           transitionDelay: `${index * 0.05}s`,
                         }}
                       >
@@ -268,14 +268,14 @@ export default function AboutSection() {
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {[
-                      "Node.js",
-                      "Hono",
-                      "Express",
-                      "Cloudflare Workers",
-                      "Vercel Edge",
-                      "REST APIs",
-                      "Rate Limiting",
-                      "Auth",
+                      'Node.js',
+                      'Hono',
+                      'Express',
+                      'Cloudflare Workers',
+                      'Vercel Edge',
+                      'REST APIs',
+                      'Rate Limiting',
+                      'Auth',
                     ].map((skill, index) => (
                       <span
                         key={skill}
@@ -283,7 +283,7 @@ export default function AboutSection() {
                         style={{
                           opacity: cardTransforms.skillsCard.opacity,
                           transform: `translateY(${cardTransforms.skillsCard.opacity > 0.5 ? 0 : 20}px)`,
-                          transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
+                          transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
                           transitionDelay: `${(index + 13) * 0.05}s`,
                         }}
                       >
@@ -299,14 +299,14 @@ export default function AboutSection() {
                     Data
                   </h3>
                   <div className="flex flex-wrap gap-2">
-                    {["PostgreSQL", "Prisma", "MySQL", "MongoDB", "Redis"].map((skill, index) => (
+                    {['PostgreSQL', 'Prisma', 'MySQL', 'MongoDB', 'Redis'].map((skill, index) => (
                       <span
                         key={skill}
                         className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium tracking-[0.12em] text-gray-300 uppercase transition-all duration-300"
                         style={{
                           opacity: cardTransforms.skillsCard.opacity,
                           transform: `translateY(${cardTransforms.skillsCard.opacity > 0.5 ? 0 : 20}px)`,
-                          transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
+                          transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
                           transitionDelay: `${(index + 21) * 0.05}s`,
                         }}
                       >
@@ -322,7 +322,7 @@ export default function AboutSection() {
                     Quality and Testing
                   </h3>
                   <div className="flex flex-wrap gap-2">
-                    {["Zod", "Vitest", "Jest", "Cypress", "GitHub Actions", "CI/CD"].map(
+                    {['Zod', 'Vitest', 'Jest', 'Cypress', 'GitHub Actions', 'CI/CD'].map(
                       (skill, index) => (
                         <span
                           key={skill}
@@ -330,7 +330,7 @@ export default function AboutSection() {
                           style={{
                             opacity: cardTransforms.skillsCard.opacity,
                             transform: `translateY(${cardTransforms.skillsCard.opacity > 0.5 ? 0 : 20}px)`,
-                            transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
+                            transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
                             transitionDelay: `${(index + 26) * 0.05}s`,
                           }}
                         >
@@ -347,14 +347,14 @@ export default function AboutSection() {
                     DevOps and Tooling
                   </h3>
                   <div className="flex flex-wrap gap-2">
-                    {["Docker", "Kubernetes", "Git"].map((skill, index) => (
+                    {['Docker', 'Kubernetes', 'Git'].map((skill, index) => (
                       <span
                         key={skill}
                         className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium tracking-[0.12em] text-gray-300 uppercase transition-all duration-300"
                         style={{
                           opacity: cardTransforms.skillsCard.opacity,
                           transform: `translateY(${cardTransforms.skillsCard.opacity > 0.5 ? 0 : 20}px)`,
-                          transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
+                          transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
                           transitionDelay: `${(index + 32) * 0.05}s`,
                         }}
                       >
@@ -371,27 +371,27 @@ export default function AboutSection() {
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {[
-                      "Gemini 2.5 Pro",
-                      "Claude Sonnet 4.0",
-                      "Claude Opus 4.1",
-                      "GPT-5 Codex High",
-                      "ChatGPT",
-                      "GitHub Copilot",
-                      "Perplexity",
-                      "LangChain",
-                      "OpenRouter",
-                      "Google AI Studio",
-                      "Gemini CLI",
-                      "Cursor",
-                      "Windsurf",
-                      "Cline",
-                      "VS Code AI Agents",
-                      "Zed AI",
-                      "v0",
-                      "Comet",
-                      "Bolt.new",
-                      "Lovable",
-                      "Warp.dev",
+                      'Gemini 2.5 Pro',
+                      'Claude Sonnet 4.0',
+                      'Claude Opus 4.1',
+                      'GPT-5 Codex High',
+                      'ChatGPT',
+                      'GitHub Copilot',
+                      'Perplexity',
+                      'LangChain',
+                      'OpenRouter',
+                      'Google AI Studio',
+                      'Gemini CLI',
+                      'Cursor',
+                      'Windsurf',
+                      'Cline',
+                      'VS Code AI Agents',
+                      'Zed AI',
+                      'v0',
+                      'Comet',
+                      'Bolt.new',
+                      'Lovable',
+                      'Warp.dev',
                     ].map((skill, index) => (
                       <span
                         key={skill}
@@ -399,7 +399,7 @@ export default function AboutSection() {
                         style={{
                           opacity: cardTransforms.skillsCard.opacity,
                           transform: `translateY(${cardTransforms.skillsCard.opacity > 0.5 ? 0 : 20}px)`,
-                          transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
+                          transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
                           transitionDelay: `${(index + 35) * 0.05}s`,
                         }}
                       >
@@ -420,7 +420,7 @@ export default function AboutSection() {
           style={{
             opacity: cardTransforms.expertiseCard.opacity,
             transform: `scale(${cardTransforms.expertiseCard.scale})`,
-            transition: "opacity 0.3s ease-out, transform 0.3s ease-out",
+            transition: 'opacity 0.3s ease-out, transform 0.3s ease-out',
           }}
         >
           {/* Subtle halo */}
@@ -438,49 +438,49 @@ export default function AboutSection() {
             <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {[
                 {
-                  title: "Reliability as a feature",
+                  title: 'Reliability as a feature',
                   description:
-                    "I design with clear contracts, structured outputs, and automated checks so changes ship confidently and stay healthy over time.",
+                    'I design with clear contracts, structured outputs, and automated checks so changes ship confidently and stay healthy over time.',
                 },
                 {
-                  title: "Performance and accessibility",
+                  title: 'Performance and accessibility',
                   description:
-                    "I sweat UX details and measure results, from Lighthouse wins to smoother motion and faster page loads on real networks and devices.",
+                    'I sweat UX details and measure results, from Lighthouse wins to smoother motion and faster page loads on real networks and devices.',
                 },
                 {
-                  title: "Edge-first architecture",
+                  title: 'Edge-first architecture',
                   description:
-                    "I simplify deployments and reduce latency by consolidating services, adding thoughtful rate limits and admin surfaces where they earn their keep.",
+                    'I simplify deployments and reduce latency by consolidating services, adding thoughtful rate limits and admin surfaces where they earn their keep.',
                 },
                 {
-                  title: "Security and trust",
+                  title: 'Security and trust',
                   description:
-                    "I harden APIs with authentication, headers, CORS discipline, and predictable error handling so teams can move quickly without surprises.",
+                    'I harden APIs with authentication, headers, CORS discipline, and predictable error handling so teams can move quickly without surprises.',
                 },
                 {
-                  title: "AI as leverage with guardrails",
+                  title: 'AI as leverage with guardrails',
                   description:
-                    "I integrate LLMs and coding assistants to boost velocity while keeping outputs structured, costs controlled, and reviews human-friendly.",
+                    'I integrate LLMs and coding assistants to boost velocity while keeping outputs structured, costs controlled, and reviews human-friendly.',
                 },
                 {
-                  title: "Data and APIs that age well",
+                  title: 'Data and APIs that age well',
                   description:
-                    "I design schemas and endpoints that are easy to read, paginate, cache, and evolve without breaking callers.",
+                    'I design schemas and endpoints that are easy to read, paginate, cache, and evolve without breaking callers.',
                 },
                 {
-                  title: "Testing that protects momentum",
+                  title: 'Testing that protects momentum',
                   description:
-                    "I balance unit, integration, and E2E coverage so the codebase remains fast to change and safe to deploy.",
+                    'I balance unit, integration, and E2E coverage so the codebase remains fast to change and safe to deploy.',
                 },
                 {
-                  title: "Developer experience and documentation",
+                  title: 'Developer experience and documentation',
                   description:
-                    "I write the docs I wish I had, improve onboarding paths, and shape tooling that keeps teams in flow.",
+                    'I write the docs I wish I had, improve onboarding paths, and shape tooling that keeps teams in flow.',
                 },
                 {
-                  title: "Mentorship and collaboration",
+                  title: 'Mentorship and collaboration',
                   description:
-                    "I help teammates level up through pairing, design reviews, and clear communication, keeping the team calm and productive.",
+                    'I help teammates level up through pairing, design reviews, and clear communication, keeping the team calm and productive.',
                 },
               ].map((expertise, index) => (
                 <div
@@ -489,7 +489,7 @@ export default function AboutSection() {
                   style={{
                     opacity: cardTransforms.expertiseCard.opacity,
                     transform: `translateY(${cardTransforms.expertiseCard.opacity > 0.5 ? 0 : 20}px)`,
-                    transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
+                    transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
                     transitionDelay: `${index * 0.08}s`,
                   }}
                 >

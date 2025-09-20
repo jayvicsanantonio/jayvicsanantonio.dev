@@ -44,13 +44,13 @@ Previous implementation suffered from scroll-induced React re-renders causing la
 
 ### Impact (Numbers First)
 
-| Metric | Desktop | Mobile | Source |
-|---|---:|---:|---|
-| First Contentful Paint | 0.3s | 1.2s | docs/artifacts/lighthouse-home-*.json |
-| Largest Contentful Paint | 1.0s | 6.6s | docs/artifacts/lighthouse-home-*.json |
-| Total Blocking Time | 90ms | 170ms | docs/artifacts/lighthouse-home-*.json |
-| Cumulative Layout Shift | 0 | 0 | docs/artifacts/lighthouse-home-*.json |
-| Bundle size (home route) | 246kB | N/A | pnpm build output |
+| Metric                   | Desktop | Mobile | Source                                 |
+| ------------------------ | ------: | -----: | -------------------------------------- |
+| First Contentful Paint   |    0.3s |   1.2s | docs/artifacts/lighthouse-home-\*.json |
+| Largest Contentful Paint |    1.0s |   6.6s | docs/artifacts/lighthouse-home-\*.json |
+| Total Blocking Time      |    90ms |  170ms | docs/artifacts/lighthouse-home-\*.json |
+| Cumulative Layout Shift  |       0 |      0 | docs/artifacts/lighthouse-home-\*.json |
+| Bundle size (home route) |   246kB |    N/A | pnpm build output                      |
 
 ### Risks & Follow-ups
 
