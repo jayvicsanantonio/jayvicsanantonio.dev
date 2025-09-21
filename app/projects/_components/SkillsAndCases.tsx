@@ -1,14 +1,14 @@
-'use client';
+'use client'
 
-import { Icon } from '@iconify/react';
-import Image from 'next/image';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import React from 'react';
+import { Icon } from '@iconify/react'
+import Image from 'next/image'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import React from 'react'
 
-import { PROJECTS } from '@/app/projects/projects.data';
-import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
+import { PROJECTS } from '@/app/projects/projects.data'
+import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion'
 
-import ProjectLink from './ProjectLink';
+import ProjectLink from './ProjectLink'
 
 const SKILL_FILTERS = [
   'All',
@@ -18,7 +18,7 @@ const SKILL_FILTERS = [
   'Client',
   'Open Source',
   'Sandboxes',
-] as const;
+] as const
 
 const PRIORITY_ORDER = [
   'yahoo-dsp',
@@ -29,64 +29,64 @@ const PRIORITY_ORDER = [
   'barbenheimer-vscode-theme',
   'barbenheimer-zed-theme',
   'ember-upgrade-guide',
-];
+]
 
 export default function SkillsAndCases() {
-  const prefersReducedMotion = usePrefersReducedMotion();
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const initialFromQuery = (searchParams?.get('skill') || searchParams?.get('filter')) ?? undefined;
+  const prefersReducedMotion = usePrefersReducedMotion()
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const initialFromQuery = (searchParams?.get('skill') || searchParams?.get('filter')) ?? undefined
 
   // Fixed, curated filters
   const [active, setActive] = React.useState<string>(() =>
     initialFromQuery && (SKILL_FILTERS as readonly string[]).includes(initialFromQuery)
       ? (initialFromQuery as (typeof SKILL_FILTERS)[number])
       : 'All',
-  );
+  )
 
   // Announce filter changes for screen readers
-  const [announce, setAnnounce] = React.useState<string>('');
+  const [announce, setAnnounce] = React.useState<string>('')
 
   // Keep URL query param in sync with active filter (replace to avoid history spam)
-  const currentQS = React.useMemo(() => searchParams?.toString() ?? '', [searchParams]);
+  const currentQS = React.useMemo(() => searchParams?.toString() ?? '', [searchParams])
   React.useEffect(() => {
     try {
-      const params = new URLSearchParams(currentQS);
+      const params = new URLSearchParams(currentQS)
       if (active === 'All') {
-        params.delete('skill');
-        params.delete('filter');
+        params.delete('skill')
+        params.delete('filter')
       } else {
-        params.set('skill', active);
+        params.set('skill', active)
       }
-      const qs = params.toString();
+      const qs = params.toString()
       // Avoid redundant replaces that can trigger nested view transitions
       if (qs !== currentQS) {
-        router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+        router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false })
       }
-      setAnnounce(`Filter: ${active}`);
+      setAnnounce(`Filter: ${active}`)
     } catch {
       // no-op
     }
-  }, [active, pathname, router, currentQS]);
+  }, [active, pathname, router, currentQS])
 
   // CSS-first entrance animation; we keep Framer only for future interactions
 
   // Card animation handled via CSS keyframes (animate-fade-in-up)
 
   const visible = React.useMemo(() => {
-    const filtered = PROJECTS.filter((c) => active === 'All' || c.skills.includes(active));
+    const filtered = PROJECTS.filter((c) => active === 'All' || c.skills.includes(active))
     return filtered.slice().sort((a, b) => {
-      const ai = PRIORITY_ORDER.indexOf(a.slug);
-      const bi = PRIORITY_ORDER.indexOf(b.slug);
+      const ai = PRIORITY_ORDER.indexOf(a.slug)
+      const bi = PRIORITY_ORDER.indexOf(b.slug)
       if (ai !== -1 || bi !== -1) {
-        if (ai === -1) return 1;
-        if (bi === -1) return -1;
-        return ai - bi;
+        if (ai === -1) return 1
+        if (bi === -1) return -1
+        return ai - bi
       }
-      return 0;
-    });
-  }, [active]);
+      return 0
+    })
+  }, [active])
 
   return (
     <div className="mt-12">
@@ -144,21 +144,21 @@ export default function SkillsAndCases() {
 
                 <div className="mt-auto flex flex-wrap gap-2">
                   {c.links.map((l) => {
-                    let icon: React.ReactNode = null;
+                    let icon: React.ReactNode = null
                     switch (l.icon) {
                       case 'github':
-                        icon = <Icon icon="mdi:github" width={18} height={18} />;
-                        break;
+                        icon = <Icon icon="mdi:github" width={18} height={18} />
+                        break
                       case 'watch':
-                        icon = <Icon icon="mdi:play" width={16} height={16} />;
-                        break;
+                        icon = <Icon icon="mdi:play" width={16} height={16} />
+                        break
                       case 'marketplace':
                       case 'external':
                       case 'view':
-                        icon = <Icon icon="mdi:open-in-new" width={16} height={16} />;
-                        break;
+                        icon = <Icon icon="mdi:open-in-new" width={16} height={16} />
+                        break
                       default:
-                        icon = null;
+                        icon = null
                     }
                     return (
                       <ProjectLink key={`${c.slug}-${l.label}`} href={l.href}>
@@ -166,7 +166,7 @@ export default function SkillsAndCases() {
                         {icon ? <>&nbsp;</> : null}
                         {l.label}
                       </ProjectLink>
-                    );
+                    )
                   })}
                 </div>
               </div>
@@ -175,5 +175,5 @@ export default function SkillsAndCases() {
         ))}
       </div>
     </div>
-  );
+  )
 }

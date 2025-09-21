@@ -1,35 +1,35 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 
-const QUERY = '(prefers-reduced-motion: no-preference)';
+const QUERY = '(prefers-reduced-motion: no-preference)'
 
 const getInitialState = () => {
   // The real preference is applied after mount in the effect below.
-  return false;
-};
+  return false
+}
 
 export default function usePrefersReducedMotion() {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(getInitialState);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(getInitialState)
 
   useEffect(() => {
-    const mediaQueryList = window.matchMedia(QUERY);
+    const mediaQueryList = window.matchMedia(QUERY)
 
     const listener = (event: MediaQueryListEvent) => {
-      setPrefersReducedMotion(!event.matches);
-    };
+      setPrefersReducedMotion(!event.matches)
+    }
 
     if (mediaQueryList.addEventListener) {
-      mediaQueryList.addEventListener('change', listener);
+      mediaQueryList.addEventListener('change', listener)
     } else {
-      mediaQueryList.addListener(listener);
+      mediaQueryList.addListener(listener)
     }
     return () => {
       if (mediaQueryList.removeEventListener) {
-        mediaQueryList.removeEventListener('change', listener);
+        mediaQueryList.removeEventListener('change', listener)
       } else {
-        mediaQueryList.removeListener(listener);
+        mediaQueryList.removeListener(listener)
       }
-    };
-  }, []);
+    }
+  }, [])
 
-  return prefersReducedMotion;
+  return prefersReducedMotion
 }

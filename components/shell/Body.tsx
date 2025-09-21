@@ -1,11 +1,11 @@
-import ClientAppShell from '@/components/shell/ClientAppShell.client';
+import ClientAppShell from '@/components/shell/ClientAppShell.client'
 
 export default function Body({
   children,
   fontVars,
 }: {
-  children: React.ReactNode;
-  fontVars?: string;
+  children: React.ReactNode
+  fontVars?: string
 }) {
   return (
     <body
@@ -13,5 +13,5 @@ export default function Body({
     >
       <ClientAppShell>{children}</ClientAppShell>
     </body>
-  );
+  )
 }

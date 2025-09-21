@@ -1,12 +1,12 @@
-import Link from 'next/link';
-import type React from 'react';
-import { forwardRef } from 'react';
+import Link from 'next/link'
+import type React from 'react'
+import { forwardRef } from 'react'
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils'
 
 export type GlassButtonProps = React.ComponentProps<typeof Link> & {
-  className?: string;
-};
+  className?: string
+}
 
 const GlassButton = forwardRef<HTMLAnchorElement, GlassButtonProps>(
   ({ className, children, ...props }, ref) => {
@@ -33,10 +33,10 @@ const GlassButton = forwardRef<HTMLAnchorElement, GlassButtonProps>(
         {/* Content sits above sheen/highlight */}
         <span className="relative z-10 flex items-center justify-center">{children}</span>
       </Link>
-    );
+    )
   },
-);
+)
 
-GlassButton.displayName = 'GlassButton';
+GlassButton.displayName = 'GlassButton'
 
-export { GlassButton };
+export { GlassButton }

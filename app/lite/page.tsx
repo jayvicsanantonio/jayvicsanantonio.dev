@@ -1,11 +1,12 @@
-export const runtime = 'edge';
+export const runtime = 'edge'
 
-import { Oswald } from 'next/font/google';
-import Image from 'next/image';
-import AnimatedText from '@/components/ui/AnimatedText';
-import GlassHeaderBubble from '@/components/ui/GlassHeaderBubble';
+import { Oswald } from 'next/font/google'
+import Image from 'next/image'
+import Link from 'next/link'
+import AnimatedText from '@/components/ui/AnimatedText'
+import GlassHeaderBubble from '@/components/ui/GlassHeaderBubble'
 
-const oswald = Oswald({ subsets: ['latin'] });
+const oswald = Oswald({ subsets: ['latin'] })
 
 export default function MobileHomePage() {
   return (
@@ -86,7 +87,7 @@ export default function MobileHomePage() {
         {/* Title at bottom */}
         <div className="pointer-events-none absolute left-1/2 bottom-8 w-[17.625rem] -translate-x-1/2 text-center z-10">
           <h2
-            className={`font-bold tracking-wide text-white drop-shadow-[0_4px_20px_rgba(0,139,139,0.4)] drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)] ${oswald.className}`}
+            className={`font-bold tracking-wide text-white drop-shadow-[0_4px_20px_rgba(0,139,139,0.4),_0_2px_10px_rgba(0,0,0,0.6)] ${oswald.className}`}
           >
             <div className="text-[36px] leading-none">
               <AnimatedText text="FULL-STACK" start={true} perCharDelay={80} baseDelay={120} />
@@ -161,34 +162,36 @@ export default function MobileHomePage() {
                     When I'm not coding, I'm getting my steps in Pokemon Go, collecting Star Wars
                     Black Series figures, catching up on MCU movies and shows, and listening to Ed
                     Sheeran. I like early-morning coffee, long walks with good podcasts, and
-                    shipping work I'm proud to sign my name on. If you're working on something
-                    ambitious and care about the details, I'd love to build with you. You can reach
-                    me at my{' '}
-                    <a
+                    shipping work I'm proud to sign my name on.
+                  </p>
+                  <p>
+                    If you're working on something ambitious and care about the details, I'd love to
+                    build with you. You can reach me at my{' '}
+                    <Link
                       href="mailto:hi@jayvicsanantonio.dev"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200 decoration-purple-400/60 underline decoration-wavy decoration-2 underline-offset-4"
+                      className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200"
                     >
                       email
-                    </a>
+                    </Link>
                     , find me on{' '}
-                    <a
+                    <Link
                       href="https://www.linkedin.com/in/jayvicsanantonio"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200 decoration-purple-400/60 underline decoration-wavy decoration-2 underline-offset-4"
+                      className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200"
                     >
                       LinkedIn
-                    </a>
+                    </Link>
                     , and see more of my work{' '}
-                    <a
-                      href="https://jayvicsanantonio.dev/projects"
+                    <Link
+                      href="/projects"
                       rel="noopener noreferrer"
-                      className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200 decoration-purple-400/60 underline decoration-wavy decoration-2 underline-offset-4"
+                      className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200"
                     >
                       here
-                    </a>
+                    </Link>
                     .
                   </p>
                 </div>
@@ -337,7 +340,14 @@ export default function MobileHomePage() {
                       DevOps and Tooling
                     </h3>
                     <div className="flex flex-wrap gap-2">
-                      {['Docker', 'Kubernetes', 'Git'].map((skill) => (
+                      {[
+                        'Amazon Web Services',
+                        'Vercel',
+                        'Cloudflare',
+                        'Netlify',
+                        'Docker',
+                        'Git',
+                      ].map((skill) => (
                         <span
                           key={skill}
                           className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium tracking-[0.12em] text-gray-300 uppercase"
@@ -476,5 +486,5 @@ export default function MobileHomePage() {
         </div>
       </section>
     </main>
-  );
+  )
 }

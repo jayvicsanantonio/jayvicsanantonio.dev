@@ -1,98 +1,99 @@
-'use client';
+'use client'
 
 // About section component with cinematic scroll-triggered reveal
 // Ported from lite page to match design system
 
-import { Oswald } from 'next/font/google';
-import { useEffect, useRef, useState } from 'react';
+import { Oswald } from 'next/font/google'
+import Link from 'next/link'
+import { useEffect, useRef, useState } from 'react'
 
-const oswald = Oswald({ subsets: ['latin'] });
+const oswald = Oswald({ subsets: ['latin'] })
 
 export default function AboutSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const aboutCardRef = useRef<HTMLDivElement>(null);
-  const skillsCardRef = useRef<HTMLDivElement>(null);
-  const expertiseCardRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null)
+  const aboutCardRef = useRef<HTMLDivElement>(null)
+  const skillsCardRef = useRef<HTMLDivElement>(null)
+  const expertiseCardRef = useRef<HTMLDivElement>(null)
 
   const [cardTransforms, setCardTransforms] = useState({
     aboutCard: { scale: 0.5, opacity: 0 },
     skillsCard: { scale: 0.5, opacity: 0 },
     expertiseCard: { scale: 0.5, opacity: 0 },
-  });
+  })
 
   const [animationComplete, setAnimationComplete] = useState({
     aboutCard: false,
     skillsCard: false,
     expertiseCard: false,
-  });
+  })
 
   useEffect(() => {
     const observerOptions = {
       threshold: 0.3, // Trigger when 30% of card is visible
       rootMargin: '0px 0px -20% 0px', // Start animation slightly before fully in view
-    };
+    }
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const target = entry.target;
+          const target = entry.target
 
           // Trigger animations with staggered delays - only once
           if (target === aboutCardRef.current && !animationComplete.aboutCard) {
             setCardTransforms((prev) => ({
               ...prev,
               aboutCard: { scale: 1, opacity: 1 },
-            }));
+            }))
             setAnimationComplete((prev) => ({
               ...prev,
               aboutCard: true,
-            }));
+            }))
 
             // Skills card appears after about card with delay
             setTimeout(() => {
               setCardTransforms((prev) => ({
                 ...prev,
                 skillsCard: { scale: 1, opacity: 1 },
-              }));
+              }))
               setAnimationComplete((prev) => ({
                 ...prev,
                 skillsCard: true,
-              }));
-            }, 300);
+              }))
+            }, 300)
 
             // Expertise card appears after skills card with delay
             setTimeout(() => {
               setCardTransforms((prev) => ({
                 ...prev,
                 expertiseCard: { scale: 1, opacity: 1 },
-              }));
+              }))
               setAnimationComplete((prev) => ({
                 ...prev,
                 expertiseCard: true,
-              }));
-            }, 600);
+              }))
+            }, 600)
 
             // Unobserve after triggering to prevent re-animation
-            observer.unobserve(target);
+            observer.unobserve(target)
           }
         }
-      });
-    }, observerOptions);
+      })
+    }, observerOptions)
 
     // Only observe the first card (About) to trigger the sequence
     if (aboutCardRef.current && !animationComplete.aboutCard) {
-      observer.observe(aboutCardRef.current);
+      observer.observe(aboutCardRef.current)
     }
 
     return () => {
-      observer.disconnect();
-    };
-  }, [animationComplete.aboutCard]);
+      observer.disconnect()
+    }
+  }, [animationComplete.aboutCard])
 
   return (
     <section
       ref={sectionRef}
-      className="relative w-full px-10 lg:px-40 overflow-hidden z-[250]"
+      className="relative w-full px-10 2xl:px-40 overflow-hidden z-[250]"
       style={{
         minHeight: '100vh',
         background:
@@ -166,33 +167,36 @@ export default function AboutSection() {
                   When I'm not coding, I'm getting my steps in Pokemon Go, collecting Star Wars
                   Black Series figures, catching up on MCU movies and shows, and listening to Ed
                   Sheeran. I like early-morning coffee, long walks with good podcasts, and shipping
-                  work I'm proud to sign my name on. If you're working on something ambitious and
-                  care about the details, I'd love to build with you. You can reach me at my{' '}
-                  <a
+                  work I'm proud to sign my name on.
+                </p>
+                <p>
+                  If you're working on something ambitious and care about the details, I'd love to
+                  build with you. You can reach me at my{' '}
+                  <Link
                     href="mailto:hi@jayvicsanantonio.dev"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200 decoration-purple-400/60 underline decoration-wavy decoration-2 underline-offset-4"
+                    className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200"
                   >
                     email
-                  </a>
+                  </Link>
                   , find me on{' '}
-                  <a
+                  <Link
                     href="https://www.linkedin.com/in/jayvicsanantonio"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200 decoration-purple-400/60 underline decoration-wavy decoration-2 underline-offset-4"
+                    className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200"
                   >
                     LinkedIn
-                  </a>
+                  </Link>
                   , and see more of my work{' '}
-                  <a
-                    href="https://jayvicsanantonio.dev/projects"
+                  <Link
+                    href="/projects"
                     rel="noopener noreferrer"
-                    className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200 decoration-purple-400/60 underline decoration-wavy decoration-2 underline-offset-4"
+                    className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200"
                   >
                     here
-                  </a>
+                  </Link>
                   .
                 </p>
               </div>
@@ -349,7 +353,14 @@ export default function AboutSection() {
                     DevOps and Tooling
                   </h3>
                   <div className="flex flex-wrap gap-2">
-                    {['Docker', 'Kubernetes', 'Git'].map((skill) => (
+                    {[
+                      'Amazon Web Services',
+                      'Vercel',
+                      'Cloudflare',
+                      'Netlify',
+                      'Docker',
+                      'Git',
+                    ].map((skill) => (
                       <span
                         key={skill}
                         className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium tracking-[0.12em] text-gray-300 uppercase transition-all duration-300"
@@ -502,5 +513,5 @@ export default function AboutSection() {
         </div>
       </div>
     </section>
-  );
+  )
 }

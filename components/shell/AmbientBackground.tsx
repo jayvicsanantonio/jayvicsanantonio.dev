@@ -10,5 +10,5 @@ export default function AmbientBackground() {
       {/* Grain */}
       <div className="absolute inset-0 [background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] [background-size:3px_3px] opacity-[0.06] mix-blend-soft-light" />
     </div>
-  );
+  )
 }

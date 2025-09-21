@@ -1,25 +1,25 @@
-'use client';
+'use client'
 
-import React from 'react';
+import React from 'react'
 
-import { GlassButton } from '@/components/ui/GlassButton';
+import { GlassButton } from '@/components/ui/GlassButton'
 
 export type NavPillProps = {
-  href: string;
-  ariaLabel: string;
-  icon: React.ReactNode;
-  label?: string; // Text shown when active
-  active?: boolean; // Controls expansion + letter reveal
-  vtTagName?: string; // e.g., 'projects' | 'work' — always applied when provided
-  cyanAccent?: boolean; // Optional cyan border tint (Home)
-  external?: boolean; // Open in new tab
-  collapsedPx?: number | string; // Default 48; can be CSS strings like 'clamp(...)'
-  expandedPx?: number | string; // Default 140; CSS strings allowed
-  heightPx?: number | string; // Default 48; CSS strings allowed
-  tooltip?: string; // Tooltip text when non-active
-  tooltipPlacement?: 'above' | 'below'; // Default: 'above'
-  className?: string;
-};
+  href: string
+  ariaLabel: string
+  icon: React.ReactNode
+  label?: string // Text shown when active
+  active?: boolean // Controls expansion + letter reveal
+  vtTagName?: string // e.g., 'projects' | 'work' — always applied when provided
+  cyanAccent?: boolean // Optional cyan border tint (Home)
+  external?: boolean // Open in new tab
+  collapsedPx?: number | string // Default 48; can be CSS strings like 'clamp(...)'
+  expandedPx?: number | string // Default 140; CSS strings allowed
+  heightPx?: number | string // Default 48; CSS strings allowed
+  tooltip?: string // Tooltip text when non-active
+  tooltipPlacement?: 'above' | 'below' // Default: 'above'
+  className?: string
+}
 
 export function NavPill({
   href,
@@ -38,25 +38,25 @@ export function NavPill({
   className,
 }: NavPillProps) {
   // View-transition tag (optional)
-  const vtClass = vtTagName ? `vt-tag-${vtTagName}` : '';
+  const vtClass = vtTagName ? `vt-tag-${vtTagName}` : ''
 
-  const linkProps = external ? { target: '_blank', rel: 'noopener noreferrer' as const } : {};
+  const linkProps = external ? { target: '_blank', rel: 'noopener noreferrer' as const } : {}
 
   return (
     <fieldset
       className="group relative inline-block"
       onMouseMove={(e) => {
-        const t = e.currentTarget as HTMLElement;
-        const r = t.getBoundingClientRect();
-        const mx = ((e.clientX - r.left) / r.width - 0.5) * 2;
-        const my = ((e.clientY - r.top) / r.height - 0.5) * 2;
-        t.style.setProperty('--mx', String(mx));
-        t.style.setProperty('--my', String(my));
+        const t = e.currentTarget as HTMLElement
+        const r = t.getBoundingClientRect()
+        const mx = ((e.clientX - r.left) / r.width - 0.5) * 2
+        const my = ((e.clientY - r.top) / r.height - 0.5) * 2
+        t.style.setProperty('--mx', String(mx))
+        t.style.setProperty('--my', String(my))
       }}
       onMouseLeave={(e) => {
-        const t = e.currentTarget as HTMLElement;
-        t.style.setProperty('--mx', '0');
-        t.style.setProperty('--my', '0');
+        const t = e.currentTarget as HTMLElement
+        t.style.setProperty('--mx', '0')
+        t.style.setProperty('--my', '0')
       }}
     >
       <GlassButton
@@ -96,21 +96,21 @@ export function NavPill({
             {(() => {
               if (React.isValidElement(icon)) {
                 type IconProps = {
-                  className?: string;
-                  color?: string;
-                  style?: React.CSSProperties;
-                };
-                const el = icon as React.ReactElement<IconProps>;
-                const prevClass = el.props.className ?? '';
+                  className?: string
+                  color?: string
+                  style?: React.CSSProperties
+                }
+                const el = icon as React.ReactElement<IconProps>
+                const prevClass = el.props.className ?? ''
                 return React.cloneElement(el, {
                   className: [prevClass, active ? 'text-cyan-300' : ''].filter(Boolean).join(' '),
                   style: {
                     ...(el.props.style ?? {}),
                     color: active ? '#22d3ee' : el.props.style?.color,
                   },
-                });
+                })
               }
-              return icon;
+              return icon
             })()}
           </span>
           {/* icon-only; no expanding pill text */}
@@ -138,5 +138,5 @@ export function NavPill({
         />
       ) : null}
     </fieldset>
-  );
+  )
 }

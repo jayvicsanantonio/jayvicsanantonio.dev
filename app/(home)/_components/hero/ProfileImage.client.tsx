@@ -1,6 +1,6 @@
-'use client';
+'use client'
 
-import Image from 'next/image';
+import Image from 'next/image'
 
 export default function ProfileImage({ initialPill }: { initialPill: boolean }) {
   return (
@@ -39,5 +39,5 @@ export default function ProfileImage({ initialPill }: { initialPill: boolean }) 
         />
       </div>
     </div>
-  );
+  )
 }

@@ -1,14 +1,14 @@
-'use client';
+'use client'
 
-import React, { useEffect } from 'react';
+import React, { useEffect } from 'react'
 
 export interface AnimatedTextProps {
-  text: string;
-  start: boolean;
-  perCharDelay?: number; // ms delay between letters
-  baseDelay?: number; // ms delay before first letter
-  className?: string;
-  onComplete?: () => void;
+  text: string
+  start: boolean
+  perCharDelay?: number // ms delay between letters
+  baseDelay?: number // ms delay before first letter
+  className?: string
+  onComplete?: () => void
 }
 
 export default function AnimatedText({
@@ -22,16 +22,16 @@ export default function AnimatedText({
   const letterObjs = React.useMemo(
     () => Array.from(text).map((ch, idx) => ({ ch, key: `${ch}-${idx}-${text.length}` })),
     [text],
-  );
+  )
 
   // Fire onComplete after the last letter finishes its transition
   useEffect(() => {
-    if (!start) return;
-    const charCount = Array.from(text).length;
-    const total = baseDelay + (charCount - 1) * perCharDelay + 500; // 500ms ~ transition duration
-    const t = window.setTimeout(() => onComplete?.(), total);
-    return () => window.clearTimeout(t);
-  }, [start, baseDelay, perCharDelay, text, onComplete]);
+    if (!start) return
+    const charCount = Array.from(text).length
+    const total = baseDelay + (charCount - 1) * perCharDelay + 500 // 500ms ~ transition duration
+    const t = window.setTimeout(() => onComplete?.(), total)
+    return () => window.clearTimeout(t)
+  }, [start, baseDelay, perCharDelay, text, onComplete])
 
   return (
     <span className={className} style={{ display: 'inline-block', whiteSpace: 'pre' }}>
@@ -58,5 +58,5 @@ export default function AnimatedText({
         ))}
       </span>
     </span>
-  );
+  )
 }
