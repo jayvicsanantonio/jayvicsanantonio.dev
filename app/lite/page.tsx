@@ -87,7 +87,7 @@ export default function MobileHomePage() {
         {/* Title at bottom */}
         <div className="pointer-events-none absolute left-1/2 bottom-8 w-[17.625rem] -translate-x-1/2 text-center z-10">
           <h2
-            className={`font-bold tracking-wide text-white drop-shadow-[0_4px_20px_rgba(0,139,139,0.4)] drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)] ${oswald.className}`}
+            className={`font-bold tracking-wide text-white drop-shadow-[0_4px_20px_rgba(0,139,139,0.4),_0_2px_10px_rgba(0,0,0,0.6)] ${oswald.className}`}
           >
             <div className="text-[36px] leading-none">
               <AnimatedText text="FULL-STACK" start={true} perCharDelay={80} baseDelay={120} />
