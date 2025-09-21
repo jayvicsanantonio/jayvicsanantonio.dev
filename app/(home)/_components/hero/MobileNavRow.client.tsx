@@ -1,8 +1,8 @@
-'use client';
+'use client'
 
-import { Icon } from '@iconify/react';
+import { Icon } from '@iconify/react'
 
-import { GlassButton } from '@/components/ui/GlassButton';
+import { GlassButton } from '@/components/ui/GlassButton'
 
 export default function MobileNavRow() {
   return (
@@ -47,5 +47,5 @@ export default function MobileNavRow() {
         <Icon icon="mdi:github" width={26} height={26} aria-hidden="true" />
       </GlassButton>
     </div>
-  );
+  )
 }

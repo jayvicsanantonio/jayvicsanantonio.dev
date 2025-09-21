@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 export default function InitialPillOverlay() {
   return (
@@ -28,5 +28,5 @@ export default function InitialPillOverlay() {
         </span>
       </div>
     </div>
-  );
+  )
 }

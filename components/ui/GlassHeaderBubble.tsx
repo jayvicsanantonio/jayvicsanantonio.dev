@@ -1,16 +1,16 @@
-'use client';
+'use client'
 
-import { Icon } from '@iconify/react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Icon } from '@iconify/react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
-import { NavPill } from '@/components/ui/NavPill';
+import { NavPill } from '@/components/ui/NavPill'
 export type GlassHeaderBubbleProps = {
-  label: string;
-  vtClassName?: string; // e.g., vt-tag-projects, vt-tag-work
-  collapsedWidthPx?: number; // defaults to 80 (w-20)
-  expandedWidthPx?: number; // defaults to 200
-};
+  label: string
+  vtClassName?: string // e.g., vt-tag-projects, vt-tag-work
+  collapsedWidthPx?: number // defaults to 80 (w-20)
+  expandedWidthPx?: number // defaults to 200
+}
 
 export default function GlassHeaderBubble({
   label: _label,
@@ -18,10 +18,10 @@ export default function GlassHeaderBubble({
   collapsedWidthPx: _collapsedWidthPx = 80,
   expandedWidthPx: _expandedWidthPx = 200,
 }: GlassHeaderBubbleProps) {
-  const pathname = usePathname();
+  const pathname = usePathname()
 
-  const isProjects = pathname?.startsWith('/projects');
-  const isWork = pathname?.startsWith('/work');
+  const isProjects = pathname?.startsWith('/projects')
+  const isWork = pathname?.startsWith('/work')
 
   // Only keep vtTag on the expanded nav button for current route.
   // If the parent passes vt-tag-... to this header bubble, suppress it
@@ -140,9 +140,9 @@ export default function GlassHeaderBubble({
           aria-label="Home"
           className="pointer-events-auto order-1 inline-flex h-[clamp(48px,9.5vw,72px)] items-center justify-center rounded-full border border-cyan-400/30 bg-cyan-900/40 px-5 font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_10px_30px_rgba(0,139,139,0.3)] backdrop-blur-[20px] backdrop-saturate-[180%] transition-all hover:bg-cyan-800/50 hover:border-cyan-400/40 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.15),0_12px_35px_rgba(0,139,139,0.4)] w-full sm:order-3 sm:w-auto sm:px-6 md:px-20 before:pointer-events-none before:absolute before:inset-0 before:rounded-full before:bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,255,255,0.13),rgba(0,255,255,0)_50%)] before:content-['']"
           onClick={(e) => {
-            e.preventDefault();
+            e.preventDefault()
             // Force a full reload to ensure the homepage remounts and animations restart
-            if (typeof window !== 'undefined') window.location.assign('/');
+            if (typeof window !== 'undefined') window.location.assign('/')
           }}
         >
           <span className="relative text-[clamp(14px,2.2vw,22px)] text-cyan-50">
@@ -151,5 +151,5 @@ export default function GlassHeaderBubble({
         </Link>
       </nav>
     </div>
-  );
+  )
 }

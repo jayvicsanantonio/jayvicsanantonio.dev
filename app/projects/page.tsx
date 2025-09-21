@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 
-import AnimatedHeader from './_components/AnimatedHeader.client';
-import SkillsAndCases from './_components/SkillsAndCases';
+import AnimatedHeader from './_components/AnimatedHeader.client'
+import SkillsAndCases from './_components/SkillsAndCases'
 
 export default function ProjectsPage() {
   return (
@@ -25,5 +25,5 @@ export default function ProjectsPage() {
         </React.Suspense>
       </div>
     </section>
-  );
+  )
 }

@@ -1,21 +1,21 @@
-'use client';
+'use client'
 
-import type React from 'react';
-import { useEffect, useRef, useState } from 'react';
+import type React from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-import AnimatedText from '@/components/ui/AnimatedText';
+import AnimatedText from '@/components/ui/AnimatedText'
 
 export type MorphingVideoProps = {
-  centerTop: string;
-  isIntro: boolean;
-  initialPill: boolean;
-  isExpanding: boolean;
-  showTitleGroup: boolean;
-  showDesc: boolean;
-  shouldPlayVideo: boolean;
-  containerRadius: string;
-  video: { playbackRate: number; scale: number; preload: 'auto' | 'metadata' | 'none' };
-};
+  centerTop: string
+  isIntro: boolean
+  initialPill: boolean
+  isExpanding: boolean
+  showTitleGroup: boolean
+  showDesc: boolean
+  shouldPlayVideo: boolean
+  containerRadius: string
+  video: { playbackRate: number; scale: number; preload: 'auto' | 'metadata' | 'none' }
+}
 
 export default function MorphingVideo({
   centerTop,
@@ -28,41 +28,41 @@ export default function MorphingVideo({
   containerRadius,
   video,
 }: MorphingVideoProps) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [hasVideo, setHasVideo] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [hasVideo, setHasVideo] = useState(false)
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.playbackRate = video.playbackRate;
-      videoRef.current.muted = true;
+      videoRef.current.playbackRate = video.playbackRate
+      videoRef.current.muted = true
     }
-  }, [video.playbackRate]);
+  }, [video.playbackRate])
 
   useEffect(() => {
-    let active = true;
+    let active = true
     if (typeof window !== 'undefined') {
       fetch('/matrix-horizontal.mp4', { method: 'HEAD' })
         .then((res) => {
-          if (!active) return;
-          setHasVideo(res.ok);
+          if (!active) return
+          setHasVideo(res.ok)
         })
         .catch(() => {
-          if (!active) return;
-          setHasVideo(false);
-        });
+          if (!active) return
+          setHasVideo(false)
+        })
     }
     return () => {
-      active = false;
-    };
-  }, []);
+      active = false
+    }
+  }, [])
 
   useEffect(() => {
     if (shouldPlayVideo && videoRef.current) {
-      videoRef.current.play().catch(() => {});
+      videoRef.current.play().catch(() => {})
     }
-  }, [shouldPlayVideo]);
+  }, [shouldPlayVideo])
 
-  type CSSVars = React.CSSProperties & Record<'--intro-scale' | '--bg-a' | '--shadow-a', string>;
+  type CSSVars = React.CSSProperties & Record<'--intro-scale' | '--bg-a' | '--shadow-a', string>
 
   const containerStyle: CSSVars = {
     top: centerTop,
@@ -90,7 +90,7 @@ export default function MorphingVideo({
     boxShadow: initialPill ? 'none' : '0 25px 50px -12px rgba(0, 0, 0, var(--shadow-a))',
     clipPath:
       'inset(calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) round calc(24px + var(--sh, 0) * 360px))',
-  };
+  }
 
   return (
     <div
@@ -204,5 +204,5 @@ export default function MorphingVideo({
         <div className="absolute right-0 bottom-0 h-12 w-20 bg-gradient-to-tl from-black via-black/80 to-transparent" />
       </div>
     </div>
-  );
+  )
 }

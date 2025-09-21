@@ -1,13 +1,13 @@
-'use client';
+'use client'
 
-import Link from 'next/link';
+import Link from 'next/link'
 
 export default function FooterBrandCTA({
   showName,
   overlayUpDampen,
 }: {
-  showName: boolean;
-  overlayUpDampen: number;
+  showName: boolean
+  overlayUpDampen: number
 }) {
   return (
     <div
@@ -36,5 +36,5 @@ export default function FooterBrandCTA({
         </Link>
       </div>
     </div>
-  );
+  )
 }

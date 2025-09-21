@@ -1,20 +1,20 @@
-'use client';
+'use client'
 
-import { Icon } from '@iconify/react';
-import type { MotionProps } from 'framer-motion';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { Icon } from '@iconify/react'
+import type { MotionProps } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
 
-import { Badge } from '@/components/ui/Badge';
-import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
+import { Badge } from '@/components/ui/Badge'
+import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion'
 
 type Experience = {
-  title: string;
-  company: string;
-  period: string;
-  bullets: string[];
-  tags: string[];
-};
+  title: string
+  company: string
+  period: string
+  bullets: string[]
+  tags: string[]
+}
 
 const EXPERIENCES: Experience[] = [
   {
@@ -111,16 +111,16 @@ const EXPERIENCES: Experience[] = [
     ],
     tags: ['Linux'],
   },
-];
+]
 
 export default function WorkTimeline() {
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const prefersReducedMotion = usePrefersReducedMotion();
+  const containerRef = useRef<HTMLDivElement | null>(null)
+  const prefersReducedMotion = usePrefersReducedMotion()
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start 0.9', 'end 0.6'],
-  });
-  const spineScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  })
+  const spineScale = useTransform(scrollYProgress, [0, 1], [0, 1])
 
   const reveal: MotionProps = prefersReducedMotion
     ? { initial: {}, whileInView: {}, viewport: {}, transition: {} }
@@ -132,7 +132,7 @@ export default function WorkTimeline() {
           duration: 0.8,
           ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
         },
-      };
+      }
 
   return (
     <div ref={containerRef} className="relative mt-8 sm:mt-12 lg:mt-16">
@@ -186,7 +186,7 @@ export default function WorkTimeline() {
         </div>
         <ul className="relative space-y-8 pt-10 pl-0 sm:space-y-12 sm:pt-16 lg:space-y-28 lg:pt-24">
           {EXPERIENCES.map((item, index) => {
-            const isRight = index % 2 === 0;
+            const isRight = index % 2 === 0
             return (
               <li key={`${item.title}-${item.period}`} className="relative">
                 {/* Node on spine */}
@@ -290,10 +290,10 @@ export default function WorkTimeline() {
                   </motion.article>
                 </div>
               </li>
-            );
+            )
           })}
         </ul>
       </div>
     </div>
-  );
+  )
 }

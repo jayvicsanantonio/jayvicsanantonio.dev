@@ -1,19 +1,19 @@
-import type React from 'react';
+import type React from 'react'
 
-import { NavPill } from '@/components/ui/NavPill';
-import { cn } from '@/lib/utils';
+import { NavPill } from '@/components/ui/NavPill'
+import { cn } from '@/lib/utils'
 
 export type NavButtonProps = {
-  href: string;
-  ariaLabel: string;
-  tooltip: string;
-  side: 'left' | 'right';
-  offsetPx: number;
-  size: { w: number; h: number };
-  top: string;
-  transitionMs?: number;
-  children: React.ReactNode;
-} & React.AnchorHTMLAttributes<HTMLAnchorElement>;
+  href: string
+  ariaLabel: string
+  tooltip: string
+  side: 'left' | 'right'
+  offsetPx: number
+  size: { w: number; h: number }
+  top: string
+  transitionMs?: number
+  children: React.ReactNode
+} & React.AnchorHTMLAttributes<HTMLAnchorElement>
 
 export default function NavButton({
   href,
@@ -30,7 +30,7 @@ export default function NavButton({
   const leftExpr =
     side === 'left'
       ? `calc(50% - ((96vw - 2 * var(--closeMaxX)) / 2) - ${offsetPx}px)`
-      : `calc(50% + ((96vw - 2 * var(--closeMaxX)) / 2) + ${offsetPx}px)`;
+      : `calc(50% + ((96vw - 2 * var(--closeMaxX)) / 2) + ${offsetPx}px)`
 
   return (
     <fieldset
@@ -47,17 +47,17 @@ export default function NavButton({
         willChange: 'transform',
       }}
       onMouseMove={(_e) => {
-        const t = _e.currentTarget as HTMLElement;
-        const r = t.getBoundingClientRect();
-        const mx = ((_e.clientX - r.left) / r.width - 0.5) * 2;
-        const my = ((_e.clientY - r.top) / r.height - 0.5) * 2;
-        t.style.setProperty('--mx', String(mx));
-        t.style.setProperty('--my', String(my));
+        const t = _e.currentTarget as HTMLElement
+        const r = t.getBoundingClientRect()
+        const mx = ((_e.clientX - r.left) / r.width - 0.5) * 2
+        const my = ((_e.clientY - r.top) / r.height - 0.5) * 2
+        t.style.setProperty('--mx', String(mx))
+        t.style.setProperty('--my', String(my))
       }}
       onMouseLeave={(e) => {
-        const t = e.currentTarget as HTMLElement;
-        t.style.setProperty('--mx', '0');
-        t.style.setProperty('--my', '0');
+        const t = e.currentTarget as HTMLElement
+        t.style.setProperty('--mx', '0')
+        t.style.setProperty('--my', '0')
       }}
     >
       {(() => {
@@ -66,14 +66,14 @@ export default function NavButton({
           target,
           rel,
         } = linkProps as {
-          className?: string;
-          target?: React.HTMLAttributeAnchorTarget;
-          rel?: string;
-        };
+          className?: string
+          target?: React.HTMLAttributeAnchorTarget
+          rel?: string
+        }
         // Extract vt-tag-* from className and pass via vtTagName prop
-        const vtMatch = linkClassName?.match(/vt-tag-(projects|work)/);
-        const vtTagName = vtMatch ? vtMatch[1] : undefined;
-        const cleanedClassName = linkClassName?.replace(/vt-tag-(projects|work)/g, '').trim();
+        const vtMatch = linkClassName?.match(/vt-tag-(projects|work)/)
+        const vtTagName = vtMatch ? vtMatch[1] : undefined
+        const cleanedClassName = linkClassName?.replace(/vt-tag-(projects|work)/g, '').trim()
         return (
           <NavPill
             href={href}
@@ -93,8 +93,8 @@ export default function NavButton({
             {...(target ? { target } : {})}
             {...(rel ? { rel } : {})}
           />
-        );
+        )
       })()}
     </fieldset>
-  );
+  )
 }

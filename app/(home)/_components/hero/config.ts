@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 export const CFG = {
   timings: {
@@ -32,4 +32,4 @@ export const CFG = {
     leftOffsetsPx: { projects: 54, linkedin: 150 },
     rightOffsetsPx: { work: 54, github: 150 },
   },
-} as const;
+} as const

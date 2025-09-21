@@ -1,15 +1,15 @@
-'use client';
+'use client'
 
-import dynamic from 'next/dynamic';
-import { useRef } from 'react';
+import dynamic from 'next/dynamic'
+import { useRef } from 'react'
 
-import { CFG } from '@/app/(home)/_components/hero/config';
-import InitialPillOverlay from '@/app/(home)/_components/hero/InitialPillOverlay.client';
-import MorphingVideo from '@/app/(home)/_components/hero/MorphingVideo.client';
-import ProfileImage from '@/app/(home)/_components/hero/ProfileImage.client';
-import { useIntroSequence } from '@/app/(home)/_hooks/useIntroSequence';
-import { useScrollCssVariables } from '@/app/(home)/_hooks/useScrollCssVariables';
-import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
+import { CFG } from '@/app/(home)/_components/hero/config'
+import InitialPillOverlay from '@/app/(home)/_components/hero/InitialPillOverlay.client'
+import MorphingVideo from '@/app/(home)/_components/hero/MorphingVideo.client'
+import ProfileImage from '@/app/(home)/_components/hero/ProfileImage.client'
+import { useIntroSequence } from '@/app/(home)/_hooks/useIntroSequence'
+import { useScrollCssVariables } from '@/app/(home)/_hooks/useScrollCssVariables'
+import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion'
 
 // Lazy-load non-critical UI islands to reduce initial JS
 const PrimaryNavOverlay = dynamic(
@@ -17,31 +17,31 @@ const PrimaryNavOverlay = dynamic(
   {
     ssr: false,
   },
-);
+)
 const MobileNavRow = dynamic(() => import('@/app/(home)/_components/hero/MobileNavRow.client'), {
   ssr: false,
-});
+})
 const FooterBrandCTA = dynamic(
   () => import('@/app/(home)/_components/hero/FooterBrandCTA.client'),
   {
     ssr: false,
   },
-);
+)
 const AboutSection = dynamic(() => import('@/app/(home)/_components/AboutSection.client'), {
   ssr: false,
-});
+})
 const BlackTransitionOverlay = dynamic(
   () => import('@/app/(home)/_components/BlackTransitionOverlay.client'),
   {
     ssr: false,
   },
-);
+)
 export default function HeroMorph() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null)
 
   const { initialPill, showTitleGroup, showDesc, showName, isExpanding, shouldPlayVideo } =
-    useIntroSequence(CFG);
-  const reduceMotion = usePrefersReducedMotion();
+    useIntroSequence(CFG)
+  const reduceMotion = usePrefersReducedMotion()
 
   useScrollCssVariables(
     containerRef,
@@ -51,10 +51,10 @@ export default function HeroMorph() {
       closeMaxY: 'calc((min(86svh, 86vh) - var(--pill-h, 8vh)) / 2)',
     },
     reduceMotion,
-  );
+  )
 
-  const isIntro = initialPill || isExpanding;
-  const containerRadius = initialPill ? '9999px' : 'calc(16px + 160px * var(--sh, 0))';
+  const isIntro = initialPill || isExpanding
+  const containerRadius = initialPill ? '9999px' : 'calc(16px + 160px * var(--sh, 0))'
 
   return (
     <div
@@ -109,5 +109,5 @@ export default function HeroMorph() {
 
       <AboutSection />
     </div>
-  );
+  )
 }

@@ -1,94 +1,94 @@
-'use client';
+'use client'
 
 // About section component with cinematic scroll-triggered reveal
 // Ported from lite page to match design system
 
-import { Oswald } from 'next/font/google';
-import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { Oswald } from 'next/font/google'
+import Link from 'next/link'
+import { useEffect, useRef, useState } from 'react'
 
-const oswald = Oswald({ subsets: ['latin'] });
+const oswald = Oswald({ subsets: ['latin'] })
 
 export default function AboutSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const aboutCardRef = useRef<HTMLDivElement>(null);
-  const skillsCardRef = useRef<HTMLDivElement>(null);
-  const expertiseCardRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null)
+  const aboutCardRef = useRef<HTMLDivElement>(null)
+  const skillsCardRef = useRef<HTMLDivElement>(null)
+  const expertiseCardRef = useRef<HTMLDivElement>(null)
 
   const [cardTransforms, setCardTransforms] = useState({
     aboutCard: { scale: 0.5, opacity: 0 },
     skillsCard: { scale: 0.5, opacity: 0 },
     expertiseCard: { scale: 0.5, opacity: 0 },
-  });
+  })
 
   const [animationComplete, setAnimationComplete] = useState({
     aboutCard: false,
     skillsCard: false,
     expertiseCard: false,
-  });
+  })
 
   useEffect(() => {
     const observerOptions = {
       threshold: 0.3, // Trigger when 30% of card is visible
       rootMargin: '0px 0px -20% 0px', // Start animation slightly before fully in view
-    };
+    }
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const target = entry.target;
+          const target = entry.target
 
           // Trigger animations with staggered delays - only once
           if (target === aboutCardRef.current && !animationComplete.aboutCard) {
             setCardTransforms((prev) => ({
               ...prev,
               aboutCard: { scale: 1, opacity: 1 },
-            }));
+            }))
             setAnimationComplete((prev) => ({
               ...prev,
               aboutCard: true,
-            }));
+            }))
 
             // Skills card appears after about card with delay
             setTimeout(() => {
               setCardTransforms((prev) => ({
                 ...prev,
                 skillsCard: { scale: 1, opacity: 1 },
-              }));
+              }))
               setAnimationComplete((prev) => ({
                 ...prev,
                 skillsCard: true,
-              }));
-            }, 300);
+              }))
+            }, 300)
 
             // Expertise card appears after skills card with delay
             setTimeout(() => {
               setCardTransforms((prev) => ({
                 ...prev,
                 expertiseCard: { scale: 1, opacity: 1 },
-              }));
+              }))
               setAnimationComplete((prev) => ({
                 ...prev,
                 expertiseCard: true,
-              }));
-            }, 600);
+              }))
+            }, 600)
 
             // Unobserve after triggering to prevent re-animation
-            observer.unobserve(target);
+            observer.unobserve(target)
           }
         }
-      });
-    }, observerOptions);
+      })
+    }, observerOptions)
 
     // Only observe the first card (About) to trigger the sequence
     if (aboutCardRef.current && !animationComplete.aboutCard) {
-      observer.observe(aboutCardRef.current);
+      observer.observe(aboutCardRef.current)
     }
 
     return () => {
-      observer.disconnect();
-    };
-  }, [animationComplete.aboutCard]);
+      observer.disconnect()
+    }
+  }, [animationComplete.aboutCard])
 
   return (
     <section
@@ -513,5 +513,5 @@ export default function AboutSection() {
         </div>
       </div>
     </section>
-  );
+  )
 }

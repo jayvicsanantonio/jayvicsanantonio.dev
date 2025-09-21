@@ -1,4 +1,4 @@
-import WorkTimeline from './_components/WorkTimeline.client';
+import WorkTimeline from './_components/WorkTimeline.client'
 
 export default function WorkPage() {
   return (
@@ -26,5 +26,5 @@ export default function WorkPage() {
         </div>
       </div>
     </section>
-  );
+  )
 }

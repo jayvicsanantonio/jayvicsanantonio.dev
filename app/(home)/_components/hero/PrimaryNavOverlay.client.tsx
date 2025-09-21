@@ -1,16 +1,16 @@
-'use client';
+'use client'
 
-import { Icon } from '@iconify/react';
-import { useEffect, useState } from 'react';
+import { Icon } from '@iconify/react'
+import { useEffect, useState } from 'react'
 
-import NavButton from '@/app/(home)/_components/NavButton';
+import NavButton from '@/app/(home)/_components/NavButton'
 
 export type PrimaryNavOverlayProps = {
-  centerTop: string;
-  leftOffsetsPx: { projects: number; linkedin: number };
-  rightOffsetsPx: { work: number; github: number };
-  buttonSize: { w: number; h: number };
-};
+  centerTop: string
+  leftOffsetsPx: { projects: number; linkedin: number }
+  rightOffsetsPx: { work: number; github: number }
+  buttonSize: { w: number; h: number }
+}
 
 export default function PrimaryNavOverlay({
   centerTop,
@@ -18,21 +18,21 @@ export default function PrimaryNavOverlay({
   rightOffsetsPx,
   buttonSize,
 }: PrimaryNavOverlayProps) {
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0)
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const startScroll = 1200;
-      const transitionLength = 800;
-      const progress = Math.max(0, Math.min(1, (scrollY - startScroll) / transitionLength));
-      setScrollProgress(progress);
-    };
+      const scrollY = window.scrollY
+      const startScroll = 1200
+      const transitionLength = 800
+      const progress = Math.max(0, Math.min(1, (scrollY - startScroll) / transitionLength))
+      setScrollProgress(progress)
+    }
 
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
     <div
@@ -150,5 +150,5 @@ export default function PrimaryNavOverlay({
         </ul>
       </nav>
     </div>
-  );
+  )
 }

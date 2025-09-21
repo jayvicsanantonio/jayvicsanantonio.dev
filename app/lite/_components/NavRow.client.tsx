@@ -1,7 +1,7 @@
-'use client';
+'use client'
 
-import { Icon } from '@iconify/react';
-import { GlassButton } from '@/components/ui/GlassButton';
+import { Icon } from '@iconify/react'
+import { GlassButton } from '@/components/ui/GlassButton'
 
 export default function NavRow() {
   return (
@@ -63,5 +63,5 @@ export default function NavRow() {
         />
       </GlassButton>
     </div>
-  );
+  )
 }

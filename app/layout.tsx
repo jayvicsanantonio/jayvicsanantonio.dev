@@ -1,9 +1,9 @@
-import localFont from 'next/font/local';
+import localFont from 'next/font/local'
 
-import Body from '@/components/shell/Body';
-import './globals.css';
+import Body from '@/components/shell/Body'
+import './globals.css'
 
-import type { Metadata } from 'next';
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Jayvic San Antonio | Software Engineer',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     ],
     apple: '/icons/apple-icon.png',
   },
-};
+}
 
 export const viewport = {
   themeColor: '#030712',
@@ -33,7 +33,7 @@ export const viewport = {
   maximumScale: 1,
   userScalable: false,
   viewportFit: 'cover',
-};
+}
 
 const sourceSansPro = localFont({
   src: [
@@ -55,7 +55,7 @@ const sourceSansPro = localFont({
   ],
   display: 'swap',
   variable: '--font-source-sans',
-});
+})
 
 // Use a local fallback mapped to the legacy --font-oswald variable so existing classes continue to work
 const oswaldLocal = localFont({
@@ -68,16 +68,16 @@ const oswaldLocal = localFont({
   ],
   display: 'swap',
   variable: '--font-oswald',
-});
+})
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
       <Body fontVars={`${sourceSansPro.variable} ${oswaldLocal.variable}`}>{children}</Body>
     </html>
-  );
+  )
 }
