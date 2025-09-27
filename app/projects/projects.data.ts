@@ -22,6 +22,47 @@ export type Project = {
 
 export const PROJECTS: Project[] = [
   {
+    slug: 'ai-temple-run',
+    title: 'AI Temple Run',
+    period: '2025',
+    blurb:
+      'Endless Babylon.js runner with procedurally generated temple paths, responsive lane-based controls, and lively coin/high-score feedback.',
+    image: {
+      src: '/images/projects/ai-temple-run.png',
+      alt: 'AI Temple Run game with 3D temple environment',
+      width: 1200,
+      height: 675,
+      ratio: '1200/675',
+    },
+    skills: ['Babylon.js', 'TypeScript', '3D Graphics', 'Game Development', 'Hobby'],
+    metrics: ['Procedural generation', 'Lane-based controls', 'High-score system'],
+    links: [
+      {
+        label: 'Github',
+        href: 'https://github.com/jayvicsanantonio/ai-temple-run',
+        icon: 'github',
+      },
+      { label: 'View', href: 'https://ai-temple-run.vercel.app/', icon: 'external' },
+    ],
+    sections: [
+      {
+        label: 'Context',
+        content:
+          'An endless runner game inspired by Temple Run, featuring 3D graphics and procedural path generation.',
+      },
+      {
+        label: 'Decisions',
+        content:
+          'Babylon.js for 3D rendering; responsive controls for mobile and desktop; procedural generation for endless gameplay.',
+      },
+      {
+        label: 'Results',
+        content:
+          'Engaging 3D runner with smooth controls, dynamic environments, and satisfying progression mechanics.',
+      },
+    ],
+  },
+  {
     slug: 'ai-pacman',
     title: 'Pac-Man',
     period: '2025',
