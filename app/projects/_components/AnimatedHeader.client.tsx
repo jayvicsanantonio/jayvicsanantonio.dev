@@ -8,7 +8,7 @@ export default function AnimatedHeader() {
   return (
     <h1 className="font-oswald text-3xl font-bold tracking-tight text-cyan-300/90 sm:text-4xl lg:text-6xl">
       <span className="sr-only">Projects</span>
-      <AnimatedText text="Crafted Artifacts" start={!prefersReducedMotion} perCharDelay={45} />
+      <AnimatedText text="Engineering Portfolio" start={!prefersReducedMotion} perCharDelay={45} />
     </h1>
   )
 }
