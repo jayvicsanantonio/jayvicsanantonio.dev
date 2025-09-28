@@ -26,7 +26,7 @@ export const PROJECTS: Project[] = [
     title: 'AI Temple Run',
     period: '2025',
     blurb:
-      'Endless Babylon.js runner with procedurally generated temple paths, responsive lane-based controls, and lively coin/high-score feedback.',
+      'A Babylon.js endless‑runner game built with TypeScript, with assets authored in Blender via MCP and Hyper3D. It features cohesive temple environments and modular path tiling.',
     image: {
       src: '/images/projects/ai-temple-run.png',
       alt: 'AI Temple Run game with 3D temple environment',
@@ -67,7 +67,7 @@ export const PROJECTS: Project[] = [
     title: 'Pac-Man',
     period: '2025',
     blurb:
-      'Engineered a high-performance Pac-Man implementation using React 19 and TypeScript, featuring advanced collision detection and stateful ghost AI.',
+      'A modern Pac‑Man remake built with React 19, TypeScript, Vite, and TailwindCSS that features stateful ghost AI and a clean gameplay architecture.',
     image: {
       src: '/images/projects/ai-pacman.png',
       alt: 'AI Pac-Man',
@@ -104,7 +104,7 @@ export const PROJECTS: Project[] = [
     title: 'The AI Timeline',
     period: '2025',
     blurb:
-      'Developed a visually engaging and performant AI timeline using Next.js 15 and Framer Motion, ensuring full accessibility compliance.',
+      'An interactive AI history timeline built with Next.js 15, React 19, TypeScript, and Framer Motion. The curation backend is a Node.js service that uses the OpenAI API and GitHub Actions to score news and propose updates.',
     image: {
       src: '/images/projects/ai-timeline.png',
       alt: 'AI Timeline',
@@ -112,10 +112,24 @@ export const PROJECTS: Project[] = [
       height: 675,
       ratio: '1200/675',
     },
-    skills: ['Next.js', 'TypeScript', 'Framer Motion', 'Hobby'],
-    metrics: ['Next.js 15', 'Framer Motion', 'Accessibility'],
+    skills: [
+      'Next.js',
+      'React',
+      'TypeScript',
+      'Framer Motion',
+      'Node',
+      'OpenAI',
+      'Automation',
+      'Hobby',
+    ],
+    metrics: ['1,465 events', 'WCAG AA', '~178kB bundle', 'Auto PRs (GitHub Actions)', '41% tests'],
     links: [
       { label: 'Github', href: 'https://github.com/jayvicsanantonio/ai-timeline', icon: 'github' },
+      {
+        label: 'Github (Automation)',
+        href: 'https://github.com/jayvicsanantonio/ai-timeline-automation',
+        icon: 'github',
+      },
       { label: 'View', href: 'https://ai-timeline-six.vercel.app/', icon: 'external' },
     ],
     sections: [
@@ -139,7 +153,7 @@ export const PROJECTS: Project[] = [
     title: 'Yahoo DSP',
     period: '2016–2023',
     blurb:
-      'Led frontend architecture for a programmatic advertising platform, enhancing audience tooling and real-time bidding systems; +1150% data throughput and $140M+ ad spend influenced.',
+      'An enterprise programmatic advertising platform interface built with Ember and React that focuses on audience tooling and real‑time bidding workflows.',
     image: {
       src: '/images/home/yahoo-dsp.webp',
       alt: 'Yahoo DSP',
@@ -188,7 +202,7 @@ export const PROJECTS: Project[] = [
     title: 'Humanity+ Passport',
     period: '2025',
     blurb:
-      'AI-powered evaluator that analyzes GitHub repositories and awards a Humanity+ badge for socially responsible software; built for the OpenAI Open Model Hackathon.',
+      'An LLM‑powered repository ethics analyzer built with Next.js 15, Groq, PostgreSQL, and Prisma that evaluates codebases and generates SVG badges.',
     image: {
       src: '/images/projects/ai-humanity.png',
       alt: 'Humanity+ Passport',
@@ -228,7 +242,7 @@ export const PROJECTS: Project[] = [
     title: 'Christmas Countdown',
     period: '2024',
     blurb:
-      'Festive countdown experiment leveraging the Popover and Anchor Positioning APIs for a unique, interactive UX.',
+      'A festive countdown microsite that demonstrates the Popover and Anchor Positioning web platform APIs using HTML, CSS, and JavaScript.',
     image: {
       src: '/images/projects/christmas-countdown.png',
       alt: 'Christmas Countdown experiment preview',
@@ -257,7 +271,7 @@ export const PROJECTS: Project[] = [
     title: 'Aurora Borealis',
     period: '2024',
     blurb:
-      'Visually stunning aurora borealis effect using only HTML and CSS; advanced animation and layered gradients.',
+      'This experiment recreates the aurora borealis using only HTML and CSS. It uses advanced animations and layered gradients.',
     image: {
       src: '/images/projects/aurora-borealis.png',
       alt: 'Aurora Borealis CSS animation',
@@ -286,7 +300,7 @@ export const PROJECTS: Project[] = [
     title: 'Total Solar Eclipse',
     period: '2024',
     blurb:
-      'Precise and captivating solar eclipse animation using pure CSS with radial gradients and keyframes.',
+      'A pure‑CSS animation that simulates a total solar eclipse using radial gradients and keyframes.',
     image: {
       src: '/images/projects/solar-eclipse.png',
       alt: 'Total Solar Eclipse CSS animation',
@@ -315,7 +329,7 @@ export const PROJECTS: Project[] = [
     title: 'Barbenheimer VS Code Theme',
     period: '2023',
     blurb:
-      'Popular VS Code theme with dual-light/dark modes focusing on contrast and legibility for improved DX.',
+      'A three‑variant VS Code theme built with the VS Code Extension API and JSON color tokens that balances Barbie and Oppenheimer palettes.',
     image: {
       src: '/images/home/barbenheimer.webp',
       alt: 'Barbenheimer VS Code Theme',
@@ -357,7 +371,7 @@ export const PROJECTS: Project[] = [
     title: 'Barbenheimer Zed Theme',
     period: '2024',
     blurb:
-      'Zed editor theme with cohesive design system, light/dark variants, and refined focus/selection states.',
+      'A production Zed editor theme implemented with JSON and TOML using the Zed Extensions API. It ships coordinated light, dark, and high‑contrast variants via automated releases.',
     image: {
       src: '/images/projects/barbenheimer-zed-theme.webp',
       alt: 'Barbenheimer Zed Theme',
@@ -399,7 +413,7 @@ export const PROJECTS: Project[] = [
     title: 'Malayang Mananampalataya Church',
     period: '2022',
     blurb:
-      'Responsive and accessible church website focusing on clear navigation and streamlined content architecture.',
+      'A responsive and accessible church website built with React and a content‑first information architecture.',
     image: {
       src: '/images/home/mm-church.webp',
       alt: 'Malayang Mananampalataya Church',
@@ -425,7 +439,7 @@ export const PROJECTS: Project[] = [
     title: 'SyncFlow',
     period: '2024',
     blurb:
-      'Low-latency, edge-deployed synchronization service bridging Apple Reminders and Google Tasks using OAuth, webhooks, and Redis.',
+      'A unified edge‑deployed synchronization service built with Hono on Vercel Edge that consolidates 19 Node functions into a single deployment. The system adds Redis‑backed rate limiting, email onboarding, and admin dashboards while reducing cold starts.',
     image: {
       src: '/images/projects/sync-flow.png',
       alt: 'SyncFlow',
@@ -462,7 +476,7 @@ export const PROJECTS: Project[] = [
     title: "Track N' Stick",
     period: '2024',
     blurb:
-      'Full-stack habit tracking app with streak visualization and goal management, showcasing robust, user-centric design.',
+      'A habit‑tracking progressive web app built with React 19, TypeScript, and Vite that uses modern PWA APIs. The backend is a Cloudflare Workers API built with Hono and secured with Clerk.',
     image: {
       src: '/images/projects/tracknstick.png',
       alt: "Track N' Stick",
@@ -470,12 +484,33 @@ export const PROJECTS: Project[] = [
       height: 675,
       ratio: '1200/675',
     },
-    skills: ['Hobby', 'React', 'TypeScript', 'Full Stack'],
-    metrics: ['Habit tracking', 'Streak visualization', 'Goal management'],
+    skills: [
+      'Hobby',
+      'React',
+      'TypeScript',
+      'Full Stack',
+      'Cloudflare Workers',
+      'Hono',
+      'Security',
+      'Clerk',
+    ],
+    metrics: [
+      '98/100 Lighthouse',
+      '~585KB gzipped',
+      'Offline‑first caching',
+      'Clerk JWT auth',
+      'Sliding‑window rate limiting',
+      '<50ms responses',
+    ],
     links: [
       {
         label: 'Github',
         href: 'https://github.com/jayvicsanantonio/tracknstick.com',
+        icon: 'github',
+      },
+      {
+        label: 'Github (API)',
+        href: 'https://github.com/jayvicsanantonio/tracknstick-api',
         icon: 'github',
       },
       { label: 'View', href: 'https://tracknstick.com/', icon: 'external' },
@@ -500,7 +535,7 @@ export const PROJECTS: Project[] = [
     title: 'Web Development Hub',
     period: '2023',
     blurb:
-      'Comprehensive resource library for developers featuring structured taxonomy and fast, intuitive search.',
+      'A curated developer resource hub built with Next.js 15, React 19, and Tailwind CSS v4 using @theme directives.',
     image: {
       src: '/images/home/webdevhub.png',
       alt: 'Web Development Hub',
@@ -538,7 +573,7 @@ export const PROJECTS: Project[] = [
     title: 'FINTQ — Lendr',
     period: '2016',
     blurb:
-      'Mobile-first digital lending marketplace connecting banks with borrowers via secure, streamlined onboarding.',
+      'A mobile‑first digital lending marketplace with secure onboarding, built on an API‑first Node.js backend and a responsive web frontend.',
     image: {
       src: '/images/projects/fintq-lendr.png',
       alt: 'FINTQ Lendr',
@@ -614,7 +649,7 @@ export const PROJECTS: Project[] = [
     title: 'Ember Upgrade Guide',
     period: '2020',
     blurb:
-      'Open-source tool for the Ember community, providing guidance for upgrading apps across framework versions.',
+      'An open‑source web tool for the Ember community built with React that guides upgrades across framework versions.',
     image: {
       src: '/images/projects/ember-upgrade-guide.png',
       alt: 'Ember Upgrade Guide',
@@ -681,7 +716,7 @@ export const PROJECTS: Project[] = [
     title: 'Pinoy Hoops',
     period: '2013–2015',
     blurb:
-      'High-traffic digital platform for basketball fans with real-time scores, news, and community features.',
+      'A high‑traffic basketball platform built with Node.js, Express, MongoDB, Redis, and jQuery that delivers real‑time scores, news, and community features.',
     image: {
       src: '/images/projects/pinoy-hoops.webp',
       alt: 'Pinoy Hoops',
