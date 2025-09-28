@@ -12,8 +12,8 @@ export default function ProjectsPage() {
           <AnimatedHeader />
 
           <p className="max-w-[720px] text-base text-gray-300/85 sm:text-lg">
-            A curated collection of platforms, tools, and experiments—built with care, tuned for
-            performance, and shaped by design.
+            Production-ready applications and systems showcasing full-stack development expertise,
+            scalable architecture design, and modern engineering practices.
           </p>
         </div>
 

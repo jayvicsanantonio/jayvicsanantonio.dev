@@ -11,12 +11,13 @@ export default function WorkPage() {
         {/* Intro */}
         <div className="animate-fade-in-up space-y-5">
           <h1 className="font-oswald text-3xl font-bold tracking-tight text-cyan-300/90 sm:text-4xl lg:text-6xl">
-            A Timeline of Crafting Impact
+            Professional Experience
           </h1>
           <p className="max-w-[720px] text-base text-gray-300/85 sm:text-lg">
-            A decade of building adtech platforms, real‑time systems, and scalable web
-            experiences—shipping performance wins, leading teams, and crafting thoughtful
-            interfaces.
+            Ten years architecting and building high-performance adtech platforms, real-time
+            systems, and scalable web applications built for enterprise-grade performance. Proven
+            track record of delivering mission-critical systems, optimizing performance bottlenecks,
+            and shipping solutions that drive measurable business impact.
           </p>
         </div>
 
