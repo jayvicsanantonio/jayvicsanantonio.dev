@@ -242,7 +242,7 @@ export const PROJECTS: Project[] = [
     title: 'Christmas Countdown',
     period: '2024',
     blurb:
-      'A festive countdown microsite that demonstrates the Popover and Anchor Positioning web platform APIs using HTML, CSS, and JavaScript.',
+      'A playful holiday snippet with a dynamic countdown and a “Santa’s Mail” popover built with the Popover API. It also demonstrates precise element placement with the CSS Anchor Positioning API (Chrome/Edge today; Firefox/Safari forthcoming) using plain HTML, CSS, and JavaScript.',
     image: {
       src: '/images/projects/christmas-countdown.png',
       alt: 'Christmas Countdown experiment preview',
@@ -271,7 +271,7 @@ export const PROJECTS: Project[] = [
     title: 'Aurora Borealis',
     period: '2024',
     blurb:
-      'This experiment recreates the aurora borealis using only HTML and CSS. It uses advanced animations and layered gradients.',
+      'A pure HTML and CSS animation that recreates the aurora borealis over a starry night sky using layered gradients, background images, and keyframe animations. Inspired by the May 2024 solar storm that made the northern lights visible across the Bay Area and as far south as San Diego.',
     image: {
       src: '/images/projects/aurora-borealis.png',
       alt: 'Aurora Borealis CSS animation',
@@ -300,7 +300,7 @@ export const PROJECTS: Project[] = [
     title: 'Total Solar Eclipse',
     period: '2024',
     blurb:
-      'A pure‑CSS animation that simulates a total solar eclipse using radial gradients and keyframes.',
+      'An HTML and CSS animation that simulates a total solar eclipse using a centered container with sun and moon layers, a radial-gradient sun, a solid-color moon, and keyframe motion. Inspired by the April 8, 2024 eclipse that crossed North America over Mexico, the United States, and Canada.',
     image: {
       src: '/images/projects/solar-eclipse.png',
       alt: 'Total Solar Eclipse CSS animation',
