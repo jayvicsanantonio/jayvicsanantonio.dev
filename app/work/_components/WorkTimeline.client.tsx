@@ -18,7 +18,40 @@ type Experience = {
 
 const EXPERIENCES: Experience[] = [
   {
-    title: 'Software Dev Engineer II',
+    title: 'Independent Builder and AI Upskilling',
+    company: 'Professional Sabbatical',
+    period: '2023 - Present',
+    bullets: [
+      'Built and shipped multiple production-grade React + TypeScript applications, using Next.js for server-rendered experiences and Vite for high-performance SPAs; structured my sabbatical to master modern, in-demand tools beyond my former team’s stack by delivering end-to-end projects with solid architecture, testing, and CI/CD. Projects included productivity tools, developer tooling, automation and orchestrators, data visualizations, PWAs, and API services.',
+      'Focused on AI upskilling and workflow integration, practicing generative AI and context engineering; built model selection intuition to choose the right LLM for analysis, coding, and refactoring; and developed agents with tool access via the Model Context Protocol. I rotate coding tools like Cursor, Claude Code, Codex, and Warp, and I use ChatGPT, Gemini, Anthropic, and Perplexity to draft project specs, engineering plans, and UX/UI design plans. I also alternate between Google Chrome and Perplexity’s AI browser called Comet and am adopting Chrome’s integrated Gemini. I am excited about AI and use it to ship faster with higher quality and reliability, while rigorously reviewing AI-generated outputs to ensure I fully understand and own the code.',
+      'Invited by Google to attend Google I/O 2025 and explored Gemini and AI integrations across the product suite; continued learning through online events including AI-Driven Development Day, O’Reilly’s AI Codecon: Coding for the Agentic World, and Coding with AI: The End of Software Development as We Know It, reinforcing a curiosity-driven approach to staying competitive and integrating AI into developer workflows.',
+      'Collaborated with my sibling (also a software engineer) to compete in AI hackathons including OpenAI Open Model Hackathon, AWS AI Agent Global Hackathon, and Google Chrome Built-in AI Challenge 2025; demonstrated competitive drive and hands-on experimentation by applying newly learned AI tools, agent frameworks, and workflows in real-world challenges.',
+    ],
+    tags: [
+      'React',
+      'JavaScript',
+      'TypeScript',
+      'NextJS',
+      'Tailwind CSS',
+      'Vite',
+      'NodeJS',
+      'Hono',
+      'Vercel Edge',
+      'Cloudflare Workers',
+      'PostgreSQL',
+      'SQLite',
+      'GitHub Actions',
+      'Redis',
+      'AI Agents',
+      'Large Language Models',
+      'Model Context Protocol',
+      'Generative AI',
+      'Context Engineering',
+      'AI Coding Tools',
+    ],
+  },
+  {
+    title: 'Senior Software Engineer',
     company: 'Yahoo Inc.',
     period: '2019 - 2023',
     bullets: [
@@ -43,7 +76,7 @@ const EXPERIENCES: Experience[] = [
     ],
   },
   {
-    title: 'Software Dev Engineer',
+    title: 'Software Engineer',
     company: 'Yahoo Inc.',
     period: '2016 - 2019',
     bullets: [
