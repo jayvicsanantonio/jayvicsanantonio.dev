@@ -15,7 +15,6 @@
 - `pnpm check`: Run Biome linting and Prettier content checks; CI expects this clean.
 - `pnpm type-check`: Execute `tsc --noEmit` to ensure TypeScript contracts hold.
 - `pnpm analyze`: Build with bundle analyzer enabled for performance profiling.
-- `pnpm lhci`: Run Lighthouse CI using `lighthouse-budgets.json` to gate regressions.
 
 ## Coding Style & Naming Conventions
 

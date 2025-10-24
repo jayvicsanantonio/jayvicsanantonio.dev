@@ -22,7 +22,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Analysis and Performance
 
 - `pnpm analyze` - Build with bundle analyzer (sets ANALYZE=true)
-- `pnpm lhci` - Run Lighthouse CI performance tests
 - `pnpm lh:all` - Run Lighthouse on all main pages (requires dev server running)
 
 ## Tech Stack and Architecture
@@ -33,8 +32,8 @@ This is a Next.js 15 personal website using App Router with the following key te
 - **Language**: TypeScript (strict mode with enhanced type safety)
 - **Styling**: Tailwind CSS v4
 - **UI**: React 19 with Framer Motion for animations
-- **Observability**: Sentry integration
-- **Quality**: Biome (linting/formatting), Prettier (CSS/Markdown), Lighthouse CI
+- **Observability**: Vercel Analytics, Speed Insights
+- **Quality**: Biome (linting/formatting), Prettier (CSS/Markdown)
 
 ### Project Structure Philosophy
 
@@ -67,12 +66,7 @@ The codebase follows App Router conventions with clear separation between server
 
 ## Environment Setup
 
-Required environment variables (see `env.ts` for schema):
-
-- `SENTRY_DSN`
-- `NEXT_PUBLIC_SENTRY_DSN`
-
-Create `.env.local` with these values for local development.
+Environment variables: none required by default. Create `.env.local` as needed for features you enable.
 
 ## Code Quality and CI
 
@@ -81,12 +75,11 @@ The project enforces strict quality standards:
 - TypeScript strict mode with additional safety flags
 - Biome for JS/TS/JSON linting and formatting (single quotes, 100 char line width)
 - Prettier for CSS and Markdown formatting
-- All changes must pass type-checking, linting, building, and Lighthouse CI
+- All changes must pass type-checking, linting, and building
 - GitHub Actions workflow runs full quality gates on PRs
 
 ## Performance Monitoring
 
 - Bundle analysis available with `ANALYZE=true pnpm build`
-- Lighthouse CI runs on all main pages in GitHub Actions
-- Sentry monitoring for errors and performance
+- Web Vitals tracking integrated
 - Web Vitals tracking integrated

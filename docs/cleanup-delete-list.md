@@ -9,7 +9,7 @@ Methodology
 - Tools: unimported (with app/ as entry points), ts-prune (excluding .next and reports), custom asset scan
 - Notes:
   - knip was not run due to an ESLint integration conflict; we can revisit if needed
-  - Next.js and Sentry special files may appear “unimported” but are auto-loaded by their frameworks
+  - Next.js special files may appear “unimported” but are auto-loaded by the framework
 
 Scope approved by owner
 
@@ -21,7 +21,8 @@ Proposed removals
 
 1. Dev-only or seasonal
 
-- app/api/sentry-example-api/route.ts (Sentry demo route that intentionally throws)
+<!-- Sentry demo route no longer applies -->
+
 - components/dev/VTDiagnostics.tsx (developer diagnostics)
 - components/pages/HolidayLights.tsx (seasonal UI, not imported)
 
@@ -75,11 +76,6 @@ Proposed removals
 
 Keep (flagged by analyzers but intentionally retained)
 
-- Sentry config & Next instrumentation (auto-loaded by frameworks):
-  - sentry.edge.config.ts
-  - sentry.server.config.ts
-  - instrumentation.ts
-  - instrumentation-client.ts
 - Next app-router by-convention files (default exports):
   - app/layout.tsx, app/not-found.tsx, app/global-error.tsx (ts-prune false positives)
 

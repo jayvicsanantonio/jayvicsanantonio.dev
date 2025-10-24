@@ -1,4 +1,3 @@
-import { withSentryConfig } from '@sentry/nextjs';
 import createBundleAnalyzer from '@next/bundle-analyzer';
 
 const withBundleAnalyzer = createBundleAnalyzer({
@@ -7,6 +6,10 @@ const withBundleAnalyzer = createBundleAnalyzer({
 
 const nextConfig = {
   reactStrictMode: true,
+  // Enable React Compiler (requires `babel-plugin-react-compiler`)
+  reactCompiler: true,
+  // Enable Partial Pre-Rendering via cache components
+  cacheComponents: true,
   experimental: {
     viewTransition: true,
     // Persist dev artifacts on disk to speed up restarts
@@ -27,23 +30,4 @@ const nextConfig = {
   },
 };
 
-export default withSentryConfig(withBundleAnalyzer(nextConfig), {
-  org: 'jayvic-san-antonio-hl',
-  project: 'jayvicsanantonio-dev',
-
-  silent: !process.env.CI,
-
-  widenClientFileUpload: true,
-
-  reactComponentAnnotation: {
-    enabled: true,
-  },
-
-  tunnelRoute: '/monitoring',
-
-  hideSourceMaps: true,
-
-  disableLogger: true,
-
-  automaticVercelMonitors: true,
-});
+export default withBundleAnalyzer(nextConfig);

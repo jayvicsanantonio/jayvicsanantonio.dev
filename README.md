@@ -7,8 +7,8 @@ This is the source for my personal site built with Next.js (App Router), React 1
 - Framework: Next.js 15 (App Router)
 - Language: TypeScript
 - UI: React 19, Tailwind CSS v4
-- Observability: Sentry
-- Performance: Lighthouse CI
+- Observability: Vercel Analytics, Speed Insights
+- Performance: Lighthouse (local audits)
 - Deploy: Vercel
 
 ## Getting Started
@@ -120,14 +120,11 @@ See CONTRIBUTING.md for more details.
 
 ## Environment
 
-Create a `.env.local` with the following variables (see env.ts for schema):
-
-- SENTRY_DSN
-- NEXT_PUBLIC_SENTRY_DSN
+Create a `.env.local` with any environment variables required by features you enable.
 
 ## CI
 
-A GitHub Actions workflow runs type-checks, linting, build, and Lighthouse CI.
+A GitHub Actions workflow runs type-checks, linting, and build.
 
 ## Contact
 
