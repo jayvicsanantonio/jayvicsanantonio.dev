@@ -1,6 +1,6 @@
-import type React from 'react'
+import type React from "react";
 
-import GlassHeaderBubble from '@/components/ui/GlassHeaderBubble'
+import GlassHeaderBubble from "@/components/ui/GlassHeaderBubble";
 
 export default function WorkLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -12,5 +12,5 @@ export default function WorkLayout({ children }: { children: React.ReactNode }) 
       </div>
       {children}
     </>
-  )
+  );
 }

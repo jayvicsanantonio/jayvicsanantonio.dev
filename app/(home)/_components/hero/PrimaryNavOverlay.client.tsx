@@ -1,16 +1,16 @@
-'use client'
+"use client";
 
-import { Icon } from '@iconify/react'
-import { useEffect, useState } from 'react'
+import { Icon } from "@iconify/react";
+import { useEffect, useState } from "react";
 
-import NavButton from '@/app/(home)/_components/NavButton'
+import NavButton from "@/app/(home)/_components/NavButton";
 
 export type PrimaryNavOverlayProps = {
-  centerTop: string
-  leftOffsetsPx: { projects: number; linkedin: number }
-  rightOffsetsPx: { work: number; github: number }
-  buttonSize: { w: number; h: number }
-}
+  centerTop: string;
+  leftOffsetsPx: { projects: number; linkedin: number };
+  rightOffsetsPx: { work: number; github: number };
+  buttonSize: { w: number; h: number };
+};
 
 export default function PrimaryNavOverlay({
   centerTop,
@@ -18,28 +18,28 @@ export default function PrimaryNavOverlay({
   rightOffsetsPx,
   buttonSize,
 }: PrimaryNavOverlayProps) {
-  const [scrollProgress, setScrollProgress] = useState(0)
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY
-      const startScroll = 1200
-      const transitionLength = 800
-      const progress = Math.max(0, Math.min(1, (scrollY - startScroll) / transitionLength))
-      setScrollProgress(progress)
-    }
+      const scrollY = window.scrollY;
+      const startScroll = 1200;
+      const transitionLength = 800;
+      const progress = Math.max(0, Math.min(1, (scrollY - startScroll) / transitionLength));
+      setScrollProgress(progress);
+    };
 
-    handleScroll()
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <div
       className="pointer-events-none fixed inset-0 z-[70] hidden sm:block will-change-transform"
       style={{
         transform: `translateY(${-scrollProgress * 100}vh)`,
-        transition: 'transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+        transition: "transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
       }}
     >
       <nav aria-label="Primary" className="hidden sm:block">
@@ -62,9 +62,9 @@ export default function PrimaryNavOverlay({
                 aria-hidden="true"
                 style={{
                   transform:
-                    'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
-                  transition: 'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
-                  willChange: 'transform',
+                    "translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))",
+                  transition: "transform 360ms cubic-bezier(0.22, 1, 0.36, 1)",
+                  willChange: "transform",
                 }}
               />
             </NavButton>
@@ -88,9 +88,9 @@ export default function PrimaryNavOverlay({
                 aria-hidden="true"
                 style={{
                   transform:
-                    'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
-                  transition: 'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
-                  willChange: 'transform',
+                    "translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))",
+                  transition: "transform 360ms cubic-bezier(0.22, 1, 0.36, 1)",
+                  willChange: "transform",
                 }}
               />
             </NavButton>
@@ -113,9 +113,9 @@ export default function PrimaryNavOverlay({
                 aria-hidden="true"
                 style={{
                   transform:
-                    'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
-                  transition: 'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
-                  willChange: 'transform',
+                    "translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))",
+                  transition: "transform 360ms cubic-bezier(0.22, 1, 0.36, 1)",
+                  willChange: "transform",
                 }}
               />
             </NavButton>
@@ -140,9 +140,9 @@ export default function PrimaryNavOverlay({
                 aria-hidden="true"
                 style={{
                   transform:
-                    'translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))',
-                  transition: 'transform 360ms cubic-bezier(0.22, 1, 0.36, 1)',
-                  willChange: 'transform',
+                    "translate(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 12px)) rotate(calc(var(--mx, 0) * -6deg))",
+                  transition: "transform 360ms cubic-bezier(0.22, 1, 0.36, 1)",
+                  willChange: "transform",
                 }}
               />
             </NavButton>
@@ -150,5 +150,5 @@ export default function PrimaryNavOverlay({
         </ul>
       </nav>
     </div>
-  )
+  );
 }

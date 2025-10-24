@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 export const CFG = {
   timings: {
@@ -18,18 +18,18 @@ export const CFG = {
     cyanStartT: 0.45,
     uiRevealStartT: 0.95,
   },
-  closeMaxY: '39vh',
-  closeMaxX: '38vw',
+  closeMaxY: "39vh",
+  closeMaxX: "38vw",
   overlayUpDampen: 0.35,
   video: {
     playbackRate: 0.75,
     scale: 1.05,
-    preload: 'metadata' as const,
+    preload: "metadata" as const,
   },
   nav: {
-    centerTop: '46%',
+    centerTop: "46%",
     buttonSize: { w: 84, h: 72 },
     leftOffsetsPx: { projects: 54, linkedin: 150 },
     rightOffsetsPx: { work: 54, github: 150 },
   },
-} as const
+} as const;

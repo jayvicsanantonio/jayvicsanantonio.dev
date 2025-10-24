@@ -1,103 +1,102 @@
-'use client'
+"use client";
 
 // About section component with cinematic scroll-triggered reveal
 // Ported from lite page to match design system
 
-import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
-import { Oswald } from 'next/font/google'
-const oswald = Oswald({ subsets: ['latin'] })
-
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import { Oswald } from "next/font/google";
+const oswald = Oswald({ subsets: ["latin"] });
 
 export default function AboutSection() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const aboutCardRef = useRef<HTMLDivElement>(null)
-  const skillsCardRef = useRef<HTMLDivElement>(null)
-  const expertiseCardRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLElement>(null);
+  const aboutCardRef = useRef<HTMLDivElement>(null);
+  const skillsCardRef = useRef<HTMLDivElement>(null);
+  const expertiseCardRef = useRef<HTMLDivElement>(null);
 
   const [cardTransforms, setCardTransforms] = useState({
     aboutCard: { scale: 0.5, opacity: 0 },
     skillsCard: { scale: 0.5, opacity: 0 },
     expertiseCard: { scale: 0.5, opacity: 0 },
-  })
+  });
 
   const [animationComplete, setAnimationComplete] = useState({
     aboutCard: false,
     skillsCard: false,
     expertiseCard: false,
-  })
+  });
 
   useEffect(() => {
     const observerOptions = {
       threshold: 0.3, // Trigger when 30% of card is visible
-      rootMargin: '0px 0px -20% 0px', // Start animation slightly before fully in view
-    }
+      rootMargin: "0px 0px -20% 0px", // Start animation slightly before fully in view
+    };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const target = entry.target
+          const target = entry.target;
 
           // Trigger animations with staggered delays - only once
           if (target === aboutCardRef.current && !animationComplete.aboutCard) {
             setCardTransforms((prev) => ({
               ...prev,
               aboutCard: { scale: 1, opacity: 1 },
-            }))
+            }));
             setAnimationComplete((prev) => ({
               ...prev,
               aboutCard: true,
-            }))
+            }));
 
             // Skills card appears after about card with delay
             setTimeout(() => {
               setCardTransforms((prev) => ({
                 ...prev,
                 skillsCard: { scale: 1, opacity: 1 },
-              }))
+              }));
               setAnimationComplete((prev) => ({
                 ...prev,
                 skillsCard: true,
-              }))
-            }, 300)
+              }));
+            }, 300);
 
             // Expertise card appears after skills card with delay
             setTimeout(() => {
               setCardTransforms((prev) => ({
                 ...prev,
                 expertiseCard: { scale: 1, opacity: 1 },
-              }))
+              }));
               setAnimationComplete((prev) => ({
                 ...prev,
                 expertiseCard: true,
-              }))
-            }, 600)
+              }));
+            }, 600);
 
             // Unobserve after triggering to prevent re-animation
-            observer.unobserve(target)
+            observer.unobserve(target);
           }
         }
-      })
-    }, observerOptions)
+      });
+    }, observerOptions);
 
     // Only observe the first card (About) to trigger the sequence
     if (aboutCardRef.current && !animationComplete.aboutCard) {
-      observer.observe(aboutCardRef.current)
+      observer.observe(aboutCardRef.current);
     }
 
     return () => {
-      observer.disconnect()
-    }
-  }, [animationComplete.aboutCard])
+      observer.disconnect();
+    };
+  }, [animationComplete.aboutCard]);
 
   return (
     <section
       ref={sectionRef}
       className="relative w-full px-10 2xl:px-40 overflow-hidden z-[250]"
       style={{
-        minHeight: '100vh',
+        minHeight: "100vh",
         background:
-          'linear-gradient(to bottom, rgba(8, 51, 68, 1) 0%, rgba(8, 51, 68, 0.1) 5%, rgba(0, 0, 0, 0.7) 70%)',
+          "linear-gradient(to bottom, rgba(8, 51, 68, 1) 0%, rgba(8, 51, 68, 0.1) 5%, rgba(0, 0, 0, 0.7) 70%)",
       }}
     >
       {/* Ambient background effects - similar to AmbientBackground.tsx */}
@@ -121,7 +120,7 @@ export default function AboutSection() {
             style={{
               opacity: cardTransforms.aboutCard.opacity,
               transform: `scale(${cardTransforms.aboutCard.scale})`,
-              transition: 'opacity 0.3s ease-out, transform 0.3s ease-out',
+              transition: "opacity 0.3s ease-out, transform 0.3s ease-out",
             }}
           >
             {/* Subtle halo */}
@@ -171,7 +170,7 @@ export default function AboutSection() {
                 </p>
                 <p>
                   If you're working on something ambitious and care about the details, I'd love to
-                  build with you. You can reach me at my{' '}
+                  build with you. You can reach me at my{" "}
                   <Link
                     href="mailto:hi@jayvicsanantonio.dev"
                     target="_blank"
@@ -180,7 +179,7 @@ export default function AboutSection() {
                   >
                     email
                   </Link>
-                  , find me on{' '}
+                  , find me on{" "}
                   <Link
                     href="https://www.linkedin.com/in/jayvicsanantonio"
                     target="_blank"
@@ -189,7 +188,7 @@ export default function AboutSection() {
                   >
                     LinkedIn
                   </Link>
-                  , and see more of my work{' '}
+                  , and see more of my work{" "}
                   <Link
                     href="/projects"
                     rel="noopener noreferrer"
@@ -210,7 +209,7 @@ export default function AboutSection() {
             style={{
               opacity: cardTransforms.skillsCard.opacity,
               transform: `scale(${cardTransforms.skillsCard.scale})`,
-              transition: 'opacity 0.3s ease-out, transform 0.3s ease-out',
+              transition: "opacity 0.3s ease-out, transform 0.3s ease-out",
             }}
           >
             {/* Subtle halo */}
@@ -235,23 +234,23 @@ export default function AboutSection() {
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {[
-                      'JavaScript',
-                      'TypeScript',
-                      'React',
-                      'NextJS',
-                      'Tailwind CSS',
-                      'Shadcn UI',
-                      'Framer Motion',
-                      'React Native',
-                      'Expo',
-                      'EmberJS',
-                      'HTML',
-                      'CSS',
-                      'Sass',
-                      'SVG',
-                      'Accessibility',
-                      'VS Code Extensions',
-                      'Zed Extensions',
+                      "JavaScript",
+                      "TypeScript",
+                      "React",
+                      "NextJS",
+                      "Tailwind CSS",
+                      "Shadcn UI",
+                      "Framer Motion",
+                      "React Native",
+                      "Expo",
+                      "EmberJS",
+                      "HTML",
+                      "CSS",
+                      "Sass",
+                      "SVG",
+                      "Accessibility",
+                      "VS Code Extensions",
+                      "Zed Extensions",
                     ].map((skill) => (
                       <span
                         key={skill}
@@ -270,19 +269,19 @@ export default function AboutSection() {
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {[
-                      'NodeJS',
-                      'Hono',
-                      'Express',
-                      'Cloudflare Workers',
-                      'Vercel Edge',
-                      'REST APIs',
-                      'SailsJS',
-                      'Socket.IO',
-                      'Rate Limiting',
-                      'Caching',
-                      'Session Management',
-                      'Authentication',
-                      'Authorization',
+                      "NodeJS",
+                      "Hono",
+                      "Express",
+                      "Cloudflare Workers",
+                      "Vercel Edge",
+                      "REST APIs",
+                      "SailsJS",
+                      "Socket.IO",
+                      "Rate Limiting",
+                      "Caching",
+                      "Session Management",
+                      "Authentication",
+                      "Authorization",
                     ].map((skill) => (
                       <span
                         key={skill}
@@ -301,14 +300,14 @@ export default function AboutSection() {
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {[
-                      'Prisma',
-                      'Drizzle',
-                      'PostgreSQL',
-                      'MySQL',
-                      'SQLite',
-                      'MongoDB',
-                      'Redis',
-                      'Firebase',
+                      "Prisma",
+                      "Drizzle",
+                      "PostgreSQL",
+                      "MySQL",
+                      "SQLite",
+                      "MongoDB",
+                      "Redis",
+                      "Firebase",
                     ].map((skill) => (
                       <span
                         key={skill}
@@ -327,15 +326,15 @@ export default function AboutSection() {
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {[
-                      'Zod',
-                      'Vitest',
-                      'React Testing Library',
-                      'Jest',
-                      'Playwright',
-                      'Cypress',
-                      'GitHub Actions',
-                      'Jenkins',
-                      'CI/CD',
+                      "Zod",
+                      "Vitest",
+                      "React Testing Library",
+                      "Jest",
+                      "Playwright",
+                      "Cypress",
+                      "GitHub Actions",
+                      "Jenkins",
+                      "CI/CD",
                     ].map((skill) => (
                       <span
                         key={skill}
@@ -354,12 +353,12 @@ export default function AboutSection() {
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {[
-                      'Amazon Web Services',
-                      'Vercel',
-                      'Cloudflare',
-                      'Netlify',
-                      'Docker',
-                      'Git',
+                      "Amazon Web Services",
+                      "Vercel",
+                      "Cloudflare",
+                      "Netlify",
+                      "Docker",
+                      "Git",
                     ].map((skill) => (
                       <span
                         key={skill}
@@ -378,28 +377,28 @@ export default function AboutSection() {
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {[
-                      'Cursor',
-                      'Warp.dev',
-                      'Claude Code',
-                      'Gemini CLI',
-                      'GitHub Copilot',
-                      'OpenRouter',
-                      'Windsurf',
-                      'Cline',
-                      'VS Code',
-                      'Zed',
-                      'Gemini',
-                      'ChatGPT',
-                      'Perplexity',
-                      'Comet',
-                      'LangChain',
-                      'v0',
-                      'Bolt.new',
-                      'Lovable',
-                      'Google AI Studio',
-                      'Google Workspace',
-                      'Linear',
-                      'Jira',
+                      "Cursor",
+                      "Warp.dev",
+                      "Claude Code",
+                      "Gemini CLI",
+                      "GitHub Copilot",
+                      "OpenRouter",
+                      "Windsurf",
+                      "Cline",
+                      "VS Code",
+                      "Zed",
+                      "Gemini",
+                      "ChatGPT",
+                      "Perplexity",
+                      "Comet",
+                      "LangChain",
+                      "v0",
+                      "Bolt.new",
+                      "Lovable",
+                      "Google AI Studio",
+                      "Google Workspace",
+                      "Linear",
+                      "Jira",
                     ].map((skill) => (
                       <span
                         key={skill}
@@ -422,7 +421,7 @@ export default function AboutSection() {
           style={{
             opacity: cardTransforms.expertiseCard.opacity,
             transform: `scale(${cardTransforms.expertiseCard.scale})`,
-            transition: 'opacity 0.3s ease-out, transform 0.3s ease-out',
+            transition: "opacity 0.3s ease-out, transform 0.3s ease-out",
           }}
         >
           {/* Subtle halo */}
@@ -440,49 +439,49 @@ export default function AboutSection() {
             <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {[
                 {
-                  title: 'Reliability as a feature',
+                  title: "Reliability as a feature",
                   description:
-                    'I design with clear contracts, structured outputs, and automated checks so changes ship confidently and stay healthy over time.',
+                    "I design with clear contracts, structured outputs, and automated checks so changes ship confidently and stay healthy over time.",
                 },
                 {
-                  title: 'Performance and accessibility',
+                  title: "Performance and accessibility",
                   description:
-                    'I sweat UX details and measure results, from Lighthouse wins to smoother motion and faster page loads on real networks and devices.',
+                    "I sweat UX details and measure results, from Lighthouse wins to smoother motion and faster page loads on real networks and devices.",
                 },
                 {
-                  title: 'Edge-first architecture',
+                  title: "Edge-first architecture",
                   description:
-                    'I simplify deployments and reduce latency by consolidating services, adding thoughtful rate limits and admin surfaces where they earn their keep.',
+                    "I simplify deployments and reduce latency by consolidating services, adding thoughtful rate limits and admin surfaces where they earn their keep.",
                 },
                 {
-                  title: 'Security and trust',
+                  title: "Security and trust",
                   description:
-                    'I harden APIs with authentication, headers, CORS discipline, and predictable error handling so teams can move quickly without surprises.',
+                    "I harden APIs with authentication, headers, CORS discipline, and predictable error handling so teams can move quickly without surprises.",
                 },
                 {
-                  title: 'AI as leverage with guardrails',
+                  title: "AI as leverage with guardrails",
                   description:
-                    'I integrate LLMs and coding assistants to boost velocity while keeping outputs structured, costs controlled, and reviews human-friendly.',
+                    "I integrate LLMs and coding assistants to boost velocity while keeping outputs structured, costs controlled, and reviews human-friendly.",
                 },
                 {
-                  title: 'Data and APIs that age well',
+                  title: "Data and APIs that age well",
                   description:
-                    'I design schemas and endpoints that are easy to read, paginate, cache, and evolve without breaking callers.',
+                    "I design schemas and endpoints that are easy to read, paginate, cache, and evolve without breaking callers.",
                 },
                 {
-                  title: 'Testing that protects momentum',
+                  title: "Testing that protects momentum",
                   description:
-                    'I balance unit, integration, and E2E coverage so the codebase remains fast to change and safe to deploy.',
+                    "I balance unit, integration, and E2E coverage so the codebase remains fast to change and safe to deploy.",
                 },
                 {
-                  title: 'Developer experience and documentation',
+                  title: "Developer experience and documentation",
                   description:
-                    'I write the docs I wish I had, improve onboarding paths, and shape tooling that keeps teams in flow.',
+                    "I write the docs I wish I had, improve onboarding paths, and shape tooling that keeps teams in flow.",
                 },
                 {
-                  title: 'Mentorship and collaboration',
+                  title: "Mentorship and collaboration",
                   description:
-                    'I help teammates level up through pairing, design reviews, and clear communication, keeping the team calm and productive.',
+                    "I help teammates level up through pairing, design reviews, and clear communication, keeping the team calm and productive.",
                 },
               ].map((expertise, index) => (
                 <div
@@ -491,7 +490,7 @@ export default function AboutSection() {
                   style={{
                     opacity: cardTransforms.expertiseCard.opacity,
                     transform: `translateY(${cardTransforms.expertiseCard.opacity > 0.5 ? 0 : 20}px)`,
-                    transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
+                    transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
                     transitionDelay: `${index * 0.08}s`,
                   }}
                 >
@@ -513,5 +512,5 @@ export default function AboutSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

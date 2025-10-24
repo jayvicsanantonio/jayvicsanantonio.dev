@@ -1,22 +1,22 @@
-'use client'
+"use client";
 
-import { Analytics } from '@vercel/analytics/react'
-import { SpeedInsights } from '@vercel/speed-insights/next'
-import { usePathname } from 'next/navigation'
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { usePathname } from "next/navigation";
 // ViewTransitions API is not exported in React 19 stable; avoid importing from 'react'
 
-import AmbientBackground from '@/components/shell/AmbientBackground'
-import CursorGlow from '@/components/shell/CursorGlow'
-import { Toaster } from '@/components/ui/Toaster'
-import { useWebVitalsLogger } from '@/hooks/useWebVitalsLogger'
-import { unstable_ViewTransition as ViewTransition } from 'react'
+import AmbientBackground from "@/components/shell/AmbientBackground";
+import CursorGlow from "@/components/shell/CursorGlow";
+import { Toaster } from "@/components/ui/Toaster";
+import { useWebVitalsLogger } from "@/hooks/useWebVitalsLogger";
+import { unstable_ViewTransition as ViewTransition } from "react";
 
 export default function ClientAppShell({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
-  useWebVitalsLogger()
+  useWebVitalsLogger();
 
-  const isHome = pathname === '/'
+  const isHome = pathname === "/";
 
   return (
     <>
@@ -24,7 +24,7 @@ export default function ClientAppShell({ children }: { children: React.ReactNode
       {/* React ViewTransition wrapper per Next.js docs; key by pathname to scope updates */}
       <ViewTransition>
         <div key={pathname}>
-          {pathname !== '/' && <AmbientBackground />}
+          {pathname !== "/" && <AmbientBackground />}
           {isHome ? children : <div className="container">{children}</div>}
         </div>
       </ViewTransition>
@@ -32,5 +32,5 @@ export default function ClientAppShell({ children }: { children: React.ReactNode
       <SpeedInsights />
       <Analytics />
     </>
-  )
+  );
 }

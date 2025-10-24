@@ -1,16 +1,16 @@
-'use client'
+"use client";
 
-import { Icon } from '@iconify/react'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { Icon } from "@iconify/react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-import { NavPill } from '@/components/ui/NavPill'
+import { NavPill } from "@/components/ui/NavPill";
 export type GlassHeaderBubbleProps = {
-  label: string
-  vtClassName?: string // e.g., vt-tag-projects, vt-tag-work
-  collapsedWidthPx?: number // defaults to 80 (w-20)
-  expandedWidthPx?: number // defaults to 200
-}
+  label: string;
+  vtClassName?: string; // e.g., vt-tag-projects, vt-tag-work
+  collapsedWidthPx?: number; // defaults to 80 (w-20)
+  expandedWidthPx?: number; // defaults to 200
+};
 
 export default function GlassHeaderBubble({
   label: _label,
@@ -18,10 +18,10 @@ export default function GlassHeaderBubble({
   collapsedWidthPx: _collapsedWidthPx = 80,
   expandedWidthPx: _expandedWidthPx = 200,
 }: GlassHeaderBubbleProps) {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
-  const isProjects = pathname?.startsWith('/projects')
-  const isWork = pathname?.startsWith('/work')
+  const isProjects = pathname?.startsWith("/projects");
+  const isWork = pathname?.startsWith("/work");
 
   // Only keep vtTag on the expanded nav button for current route.
   // If the parent passes vt-tag-... to this header bubble, suppress it
@@ -30,7 +30,7 @@ export default function GlassHeaderBubble({
   // Delay the active pill expansion slightly to echo the main bubble
 
   return (
-    <div className={`relative inline-flex items-center ${_vtClassName ?? ''}`}>
+    <div className={`relative inline-flex items-center ${_vtClassName ?? ""}`}>
       {/* Inline nav buttons - order: LinkedIn, Projects, Home, Work, GitHub */}
       {/* On small screens, the greeting pill sits on its own row above the icon row */}
       <nav
@@ -54,8 +54,8 @@ export default function GlassHeaderBubble({
               external
               tooltip="LinkedIn"
               tooltipPlacement="below"
-              collapsedPx={'clamp(56px,11vw,84px)'}
-              heightPx={'clamp(48px,9.5vw,72px)'}
+              collapsedPx={"clamp(56px,11vw,84px)"}
+              heightPx={"clamp(48px,9.5vw,72px)"}
               className="bg-white/10 backdrop-blur-[24px] backdrop-saturate-200 border-white/55 hover:border-white/60"
             />
           </span>
@@ -74,15 +74,15 @@ export default function GlassHeaderBubble({
               }
               label="Projects"
               active={isProjects}
-              {...(isProjects ? { vtTagName: 'projects' } : {})}
-              {...(!isProjects ? { tooltip: 'Projects', tooltipPlacement: 'below' as const } : {})}
-              collapsedPx={'clamp(56px,11vw,84px)'}
-              expandedPx={'clamp(120px,40vw,180px)'}
-              heightPx={'clamp(48px,9.5vw,72px)'}
+              {...(isProjects ? { vtTagName: "projects" } : {})}
+              {...(!isProjects ? { tooltip: "Projects", tooltipPlacement: "below" as const } : {})}
+              collapsedPx={"clamp(56px,11vw,84px)"}
+              expandedPx={"clamp(120px,40vw,180px)"}
+              heightPx={"clamp(48px,9.5vw,72px)"}
               className={[
-                'bg-white/20 backdrop-blur-[24px] backdrop-saturate-200',
-                !isProjects ? 'border-white/55 hover:border-white/60' : '',
-              ].join(' ')}
+                "bg-white/20 backdrop-blur-[24px] backdrop-saturate-200",
+                !isProjects ? "border-white/55 hover:border-white/60" : "",
+              ].join(" ")}
             />
           </span>
 
@@ -100,15 +100,15 @@ export default function GlassHeaderBubble({
               }
               label="Work"
               active={isWork}
-              {...(isWork ? { vtTagName: 'work' } : {})}
-              {...(!isWork ? { tooltip: 'Work', tooltipPlacement: 'below' as const } : {})}
-              collapsedPx={'clamp(56px,11vw,84px)'}
-              expandedPx={'clamp(104px,34vw,160px)'}
-              heightPx={'clamp(48px,9.5vw,72px)'}
+              {...(isWork ? { vtTagName: "work" } : {})}
+              {...(!isWork ? { tooltip: "Work", tooltipPlacement: "below" as const } : {})}
+              collapsedPx={"clamp(56px,11vw,84px)"}
+              expandedPx={"clamp(104px,34vw,160px)"}
+              heightPx={"clamp(48px,9.5vw,72px)"}
               className={[
-                'bg-white/20 backdrop-blur-[24px] backdrop-saturate-200',
-                !isWork ? 'border-white/55 hover:border-white/60' : '',
-              ].join(' ')}
+                "bg-white/20 backdrop-blur-[24px] backdrop-saturate-200",
+                !isWork ? "border-white/55 hover:border-white/60" : "",
+              ].join(" ")}
             />
           </span>
 
@@ -127,8 +127,8 @@ export default function GlassHeaderBubble({
               external
               tooltip="GitHub"
               tooltipPlacement="below"
-              collapsedPx={'clamp(56px,11vw,84px)'}
-              heightPx={'clamp(48px,9.5vw,72px)'}
+              collapsedPx={"clamp(56px,11vw,84px)"}
+              heightPx={"clamp(48px,9.5vw,72px)"}
               className="bg-white/20 backdrop-blur-[24px] backdrop-saturate-200 border-white/55 hover:border-white/60"
             />
           </span>
@@ -140,9 +140,9 @@ export default function GlassHeaderBubble({
           aria-label="Home"
           className="pointer-events-auto order-1 inline-flex h-[clamp(48px,9.5vw,72px)] items-center justify-center rounded-full border border-cyan-400/30 bg-cyan-900/40 px-5 font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_10px_30px_rgba(0,139,139,0.3)] backdrop-blur-[20px] backdrop-saturate-[180%] transition-all hover:bg-cyan-800/50 hover:border-cyan-400/40 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.15),0_12px_35px_rgba(0,139,139,0.4)] w-full sm:order-3 sm:w-auto sm:px-6 md:px-20 before:pointer-events-none before:absolute before:inset-0 before:rounded-full before:bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,255,255,0.13),rgba(0,255,255,0)_50%)] before:content-['']"
           onClick={(e) => {
-            e.preventDefault()
+            e.preventDefault();
             // Force a full reload to ensure the homepage remounts and animations restart
-            if (typeof window !== 'undefined') window.location.assign('/')
+            if (typeof window !== "undefined") window.location.assign("/");
           }}
         >
           <span className="relative text-[clamp(14px,2.2vw,22px)] text-cyan-50">
@@ -151,5 +151,5 @@ export default function GlassHeaderBubble({
         </Link>
       </nav>
     </div>
-  )
+  );
 }
