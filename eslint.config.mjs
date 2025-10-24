@@ -13,7 +13,6 @@ const config = [
     ignores: ['.next/**', 'node_modules/**', 'reports/**', 'artifacts/**', '.lighthouse/**', 'eslint.config.mjs', 'prettier.config.mjs', 'postcss.config.mjs', 'next.config.mjs'],
     rules: {
       'react/no-unescaped-entities': 'off',
-      'react-hooks/set-state-in-effect': 'off',
     },
     languageOptions: {
       parserOptions: {

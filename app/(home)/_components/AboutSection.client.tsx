@@ -26,6 +26,7 @@ export default function AboutSection() {
     expertiseCard: false,
   });
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional sequence of staged card animations
   useEffect(() => {
     const observerOptions = {
       threshold: 0.3, // Trigger when 30% of card is visible
