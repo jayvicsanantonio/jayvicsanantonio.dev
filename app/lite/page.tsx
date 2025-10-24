@@ -1,5 +1,3 @@
-export const runtime = "edge";
-
 import Image from "next/image";
 import { Oswald } from "next/font/google";
 import Link from "next/link";
