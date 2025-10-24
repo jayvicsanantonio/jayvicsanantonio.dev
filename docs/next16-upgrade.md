@@ -3,10 +3,11 @@
 This guide summarizes what’s new in Next.js 16 and how those changes affect this repo. It includes exact references to files in this project and ready-to-apply examples.
 
 ## TL;DR
+
 - Latest on npm: `next@16.0.0`
 - This project: `next` ^15.3.0, installed 15.3.5
 - Recommended migration steps (safe order):
-  1) Upgrade deps, 2) Run codemod, 3) Replace `middleware` with `proxy`, 4) Remove `eslint` config in `next.config`, 5) Opt-in features as needed, 6) Verify images + scroll behavior, 7) Lint/type-check/build.
+  1. Upgrade deps, 2) Run codemod, 3) Replace `middleware` with `proxy`, 4) Remove `eslint` config in `next.config`, 5) Opt-in features as needed, 6) Verify images + scroll behavior, 7) Lint/type-check/build.
 
 ## What’s new in Next.js 16
 
@@ -80,29 +81,29 @@ npx @next/codemod@canary upgrade latest
 
 ```ts
 // proxy.ts
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
-import { userAgent } from 'next/server'
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { userAgent } from "next/server";
 
 export function proxy(req: NextRequest) {
-  if (req.nextUrl.pathname !== '/') return NextResponse.next()
+  if (req.nextUrl.pathname !== "/") return NextResponse.next();
 
-  const ua = userAgent(req)
-  if (ua.isBot) return NextResponse.next()
+  const ua = userAgent(req);
+  if (ua.isBot) return NextResponse.next();
 
-  const isMobile = ua.device.type === 'mobile' || ua.device.type === 'tablet'
-  const isSafari = ua.browser.name === 'Safari'
+  const isMobile = ua.device.type === "mobile" || ua.device.type === "tablet";
+  const isSafari = ua.browser.name === "Safari";
 
   if (isMobile || isSafari) {
-    const url = req.nextUrl.clone()
-    url.pathname = '/lite'
-    return NextResponse.rewrite(url)
+    const url = req.nextUrl.clone();
+    url.pathname = "/lite";
+    return NextResponse.rewrite(url);
   }
 
-  return NextResponse.next()
+  return NextResponse.next();
 }
 
-export const config = { matcher: ['/'] }
+export const config = { matcher: ["/"] };
 ```
 
 - Optional config to preserve URL normalization behavior if needed:
@@ -112,7 +113,7 @@ export const config = { matcher: ['/'] }
 export default {
   // ...
   skipProxyUrlNormalize: true,
-}
+};
 ```
 
 - Remove the old `middleware.ts` once `proxy.ts` is in place.
@@ -143,7 +144,7 @@ const nextConfig = {
   //   // imageSizes: [16, 32, 48, 64, 96, 128, 256, 384], // re-add 16 if needed
   //   // qualities: [50, 75, 100],
   // },
-}
+};
 ```
 
 ### 3.1) Switch from Biome to ESLint + Prettier
@@ -220,7 +221,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" data-scroll-behavior="smooth">
       <body>{children}</body>
     </html>
-  )
+  );
 }
 ```
 

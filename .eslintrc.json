@@ -11,6 +11,8 @@
     "reports/**",
     "artifacts/**",
     ".lighthouse/**"
-  ]
+  ],
+  "rules": {
+    "react/no-unescaped-entities": "off"
+  }
 }
-

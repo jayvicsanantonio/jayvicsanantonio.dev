@@ -10,6 +10,9 @@ const nextConfig = {
   experimental: {
     viewTransition: true,
   },
+  // Enable Turbopack (Next.js 16 defaults to Turbopack).
+  // Adding an empty config silences the error when a plugin adds a webpack config.
+  turbopack: {},
   images: {
     remotePatterns: [
       {

@@ -3,12 +3,13 @@
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { usePathname } from 'next/navigation'
-import { unstable_ViewTransition as ViewTransition } from 'react'
+// ViewTransitions API is not exported in React 19 stable; avoid importing from 'react'
 
 import AmbientBackground from '@/components/shell/AmbientBackground'
 import CursorGlow from '@/components/shell/CursorGlow'
 import { Toaster } from '@/components/ui/Toaster'
 import { useWebVitalsLogger } from '@/hooks/useWebVitalsLogger'
+import { unstable_ViewTransition as ViewTransition } from 'react'
 
 export default function ClientAppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()

@@ -3,11 +3,11 @@
 // About section component with cinematic scroll-triggered reveal
 // Ported from lite page to match design system
 
-import { Oswald } from 'next/font/google'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
-
+import { Oswald } from 'next/font/google'
 const oswald = Oswald({ subsets: ['latin'] })
+
 
 export default function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null)

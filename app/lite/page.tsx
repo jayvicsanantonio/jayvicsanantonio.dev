@@ -1,12 +1,12 @@
 export const runtime = 'edge'
 
-import { Oswald } from 'next/font/google'
 import Image from 'next/image'
+import { Oswald } from 'next/font/google'
 import Link from 'next/link'
 import AnimatedText from '@/components/ui/AnimatedText'
 import GlassHeaderBubble from '@/components/ui/GlassHeaderBubble'
-
 const oswald = Oswald({ subsets: ['latin'] })
+
 
 export default function MobileHomePage() {
   return (
