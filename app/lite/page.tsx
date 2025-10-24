@@ -1,12 +1,9 @@
-export const runtime = 'edge'
-
-import { Oswald } from 'next/font/google'
-import Image from 'next/image'
-import Link from 'next/link'
-import AnimatedText from '@/components/ui/AnimatedText'
-import GlassHeaderBubble from '@/components/ui/GlassHeaderBubble'
-
-const oswald = Oswald({ subsets: ['latin'] })
+import Image from "next/image";
+import { Oswald } from "next/font/google";
+import Link from "next/link";
+import AnimatedText from "@/components/ui/AnimatedText";
+import GlassHeaderBubble from "@/components/ui/GlassHeaderBubble";
+const oswald = Oswald({ subsets: ["latin"] });
 
 export default function MobileHomePage() {
   return (
@@ -54,9 +51,9 @@ export default function MobileHomePage() {
           className="absolute inset-0 opacity-[0.14] mix-blend-screen"
           style={{
             backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.12) 1px, transparent 0), linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 0)',
-            backgroundSize: '64px 64px, 64px 64px',
-            backgroundPosition: '0 0, 0 0',
+              "linear-gradient(rgba(255,255,255,0.12) 1px, transparent 0), linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 0)",
+            backgroundSize: "64px 64px, 64px 64px",
+            backgroundPosition: "0 0, 0 0",
           }}
         />
 
@@ -79,7 +76,7 @@ export default function MobileHomePage() {
             className="h-auto w-full object-contain object-bottom"
             style={{
               filter:
-                'brightness(0.95) saturate(1.25) drop-shadow(0 0 60px rgba(0,139,139,0.30)) drop-shadow(0 10px 40px rgba(0,0,0,0.45))',
+                "brightness(0.95) saturate(1.25) drop-shadow(0 0 60px rgba(0,139,139,0.30)) drop-shadow(0 10px 40px rgba(0,0,0,0.45))",
             }}
           />
         </div>
@@ -166,7 +163,7 @@ export default function MobileHomePage() {
                   </p>
                   <p>
                     If you're working on something ambitious and care about the details, I'd love to
-                    build with you. You can reach me at my{' '}
+                    build with you. You can reach me at my{" "}
                     <Link
                       href="mailto:hi@jayvicsanantonio.dev"
                       target="_blank"
@@ -175,7 +172,7 @@ export default function MobileHomePage() {
                     >
                       email
                     </Link>
-                    , find me on{' '}
+                    , find me on{" "}
                     <Link
                       href="https://www.linkedin.com/in/jayvicsanantonio"
                       target="_blank"
@@ -184,7 +181,7 @@ export default function MobileHomePage() {
                     >
                       LinkedIn
                     </Link>
-                    , and see more of my work{' '}
+                    , and see more of my work{" "}
                     <Link
                       href="/projects"
                       rel="noopener noreferrer"
@@ -222,23 +219,23 @@ export default function MobileHomePage() {
                     </h3>
                     <div className="flex flex-wrap gap-2">
                       {[
-                        'JavaScript',
-                        'TypeScript',
-                        'React',
-                        'NextJS',
-                        'Tailwind CSS',
-                        'Shadcn UI',
-                        'Framer Motion',
-                        'React Native',
-                        'Expo',
-                        'EmberJS',
-                        'HTML',
-                        'CSS',
-                        'Sass',
-                        'SVG',
-                        'Accessibility',
-                        'VS Code Extensions',
-                        'Zed Extensions',
+                        "JavaScript",
+                        "TypeScript",
+                        "React",
+                        "NextJS",
+                        "Tailwind CSS",
+                        "Shadcn UI",
+                        "Framer Motion",
+                        "React Native",
+                        "Expo",
+                        "EmberJS",
+                        "HTML",
+                        "CSS",
+                        "Sass",
+                        "SVG",
+                        "Accessibility",
+                        "VS Code Extensions",
+                        "Zed Extensions",
                       ].map((skill) => (
                         <span
                           key={skill}
@@ -257,19 +254,19 @@ export default function MobileHomePage() {
                     </h3>
                     <div className="flex flex-wrap gap-2">
                       {[
-                        'NodeJS',
-                        'Hono',
-                        'Express',
-                        'Cloudflare Workers',
-                        'Vercel Edge',
-                        'REST APIs',
-                        'SailsJS',
-                        'Socket.IO',
-                        'Rate Limiting',
-                        'Caching',
-                        'Session Management',
-                        'Authentication',
-                        'Authorization',
+                        "NodeJS",
+                        "Hono",
+                        "Express",
+                        "Cloudflare Workers",
+                        "Vercel Edge",
+                        "REST APIs",
+                        "SailsJS",
+                        "Socket.IO",
+                        "Rate Limiting",
+                        "Caching",
+                        "Session Management",
+                        "Authentication",
+                        "Authorization",
                       ].map((skill) => (
                         <span
                           key={skill}
@@ -288,14 +285,14 @@ export default function MobileHomePage() {
                     </h3>
                     <div className="flex flex-wrap gap-2">
                       {[
-                        'Prisma',
-                        'Drizzle',
-                        'PostgreSQL',
-                        'MySQL',
-                        'SQLite',
-                        'MongoDB',
-                        'Redis',
-                        'Firebase',
+                        "Prisma",
+                        "Drizzle",
+                        "PostgreSQL",
+                        "MySQL",
+                        "SQLite",
+                        "MongoDB",
+                        "Redis",
+                        "Firebase",
                       ].map((skill) => (
                         <span
                           key={skill}
@@ -314,15 +311,15 @@ export default function MobileHomePage() {
                     </h3>
                     <div className="flex flex-wrap gap-2">
                       {[
-                        'Zod',
-                        'Vitest',
-                        'React Testing Library',
-                        'Jest',
-                        'Playwright',
-                        'Cypress',
-                        'GitHub Actions',
-                        'Jenkins',
-                        'CI/CD',
+                        "Zod",
+                        "Vitest",
+                        "React Testing Library",
+                        "Jest",
+                        "Playwright",
+                        "Cypress",
+                        "GitHub Actions",
+                        "Jenkins",
+                        "CI/CD",
                       ].map((skill) => (
                         <span
                           key={skill}
@@ -341,12 +338,12 @@ export default function MobileHomePage() {
                     </h3>
                     <div className="flex flex-wrap gap-2">
                       {[
-                        'Amazon Web Services',
-                        'Vercel',
-                        'Cloudflare',
-                        'Netlify',
-                        'Docker',
-                        'Git',
+                        "Amazon Web Services",
+                        "Vercel",
+                        "Cloudflare",
+                        "Netlify",
+                        "Docker",
+                        "Git",
                       ].map((skill) => (
                         <span
                           key={skill}
@@ -365,28 +362,28 @@ export default function MobileHomePage() {
                     </h3>
                     <div className="flex flex-wrap gap-2">
                       {[
-                        'Cursor',
-                        'Warp.dev',
-                        'Claude Code',
-                        'Gemini CLI',
-                        'GitHub Copilot',
-                        'OpenRouter',
-                        'Windsurf',
-                        'Cline',
-                        'VS Code',
-                        'Zed',
-                        'Gemini',
-                        'ChatGPT',
-                        'Perplexity',
-                        'Comet',
-                        'LangChain',
-                        'v0',
-                        'Bolt.new',
-                        'Lovable',
-                        'Google AI Studio',
-                        'Google Workspace',
-                        'Linear',
-                        'Jira',
+                        "Cursor",
+                        "Warp.dev",
+                        "Claude Code",
+                        "Gemini CLI",
+                        "GitHub Copilot",
+                        "OpenRouter",
+                        "Windsurf",
+                        "Cline",
+                        "VS Code",
+                        "Zed",
+                        "Gemini",
+                        "ChatGPT",
+                        "Perplexity",
+                        "Comet",
+                        "LangChain",
+                        "v0",
+                        "Bolt.new",
+                        "Lovable",
+                        "Google AI Studio",
+                        "Google Workspace",
+                        "Linear",
+                        "Jira",
                       ].map((skill) => (
                         <span
                           key={skill}
@@ -421,49 +418,49 @@ export default function MobileHomePage() {
               <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {[
                   {
-                    title: 'Reliability as a feature',
+                    title: "Reliability as a feature",
                     description:
-                      'I design with clear contracts, structured outputs, and automated checks so changes ship confidently and stay healthy over time.',
+                      "I design with clear contracts, structured outputs, and automated checks so changes ship confidently and stay healthy over time.",
                   },
                   {
-                    title: 'Performance and accessibility',
+                    title: "Performance and accessibility",
                     description:
-                      'I sweat UX details and measure results, from Lighthouse wins to smoother motion and faster page loads on real networks and devices.',
+                      "I sweat UX details and measure results, from Lighthouse wins to smoother motion and faster page loads on real networks and devices.",
                   },
                   {
-                    title: 'Edge-first architecture',
+                    title: "Edge-first architecture",
                     description:
-                      'I simplify deployments and reduce latency by consolidating services, adding thoughtful rate limits and admin surfaces where they earn their keep.',
+                      "I simplify deployments and reduce latency by consolidating services, adding thoughtful rate limits and admin surfaces where they earn their keep.",
                   },
                   {
-                    title: 'Security and trust',
+                    title: "Security and trust",
                     description:
-                      'I harden APIs with authentication, headers, CORS discipline, and predictable error handling so teams can move quickly without surprises.',
+                      "I harden APIs with authentication, headers, CORS discipline, and predictable error handling so teams can move quickly without surprises.",
                   },
                   {
-                    title: 'AI as leverage with guardrails',
+                    title: "AI as leverage with guardrails",
                     description:
-                      'I integrate LLMs and coding assistants to boost velocity while keeping outputs structured, costs controlled, and reviews human-friendly.',
+                      "I integrate LLMs and coding assistants to boost velocity while keeping outputs structured, costs controlled, and reviews human-friendly.",
                   },
                   {
-                    title: 'Data and APIs that age well',
+                    title: "Data and APIs that age well",
                     description:
-                      'I design schemas and endpoints that are easy to read, paginate, cache, and evolve without breaking callers.',
+                      "I design schemas and endpoints that are easy to read, paginate, cache, and evolve without breaking callers.",
                   },
                   {
-                    title: 'Testing that protects momentum',
+                    title: "Testing that protects momentum",
                     description:
-                      'I balance unit, integration, and E2E coverage so the codebase remains fast to change and safe to deploy.',
+                      "I balance unit, integration, and E2E coverage so the codebase remains fast to change and safe to deploy.",
                   },
                   {
-                    title: 'Developer experience and documentation',
+                    title: "Developer experience and documentation",
                     description:
-                      'I write the docs I wish I had, improve onboarding paths, and shape tooling that keeps teams in flow.',
+                      "I write the docs I wish I had, improve onboarding paths, and shape tooling that keeps teams in flow.",
                   },
                   {
-                    title: 'Mentorship and collaboration',
+                    title: "Mentorship and collaboration",
                     description:
-                      'I help teammates level up through pairing, design reviews, and clear communication, keeping the team calm and productive.',
+                      "I help teammates level up through pairing, design reviews, and clear communication, keeping the team calm and productive.",
                   },
                 ].map((expertise) => (
                   <div key={expertise.title} className="transition-all duration-300">
@@ -486,5 +483,5 @@ export default function MobileHomePage() {
         </div>
       </section>
     </main>
-  )
+  );
 }

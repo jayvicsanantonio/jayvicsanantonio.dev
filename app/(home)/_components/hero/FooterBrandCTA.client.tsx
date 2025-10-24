@@ -1,24 +1,24 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function FooterBrandCTA({
   showName,
   overlayUpDampen,
 }: {
-  showName: boolean
-  overlayUpDampen: number
+  showName: boolean;
+  overlayUpDampen: number;
 }) {
   return (
     <div
       className="pointer-events-none absolute inset-x-4 transition-opacity duration-300 px-[env(safe-area-inset-left)] sm:inset-x-16"
       style={{
-        bottom: 'max(env(safe-area-inset-bottom, 20px), 16px)',
-        paddingLeft: 'max(env(safe-area-inset-left), 1rem)',
-        paddingRight: 'max(env(safe-area-inset-right), 1rem)',
+        bottom: "max(env(safe-area-inset-bottom, 20px), 16px)",
+        paddingLeft: "max(env(safe-area-inset-left), 1rem)",
+        paddingRight: "max(env(safe-area-inset-right), 1rem)",
         opacity: showName ? `calc(1 - clamp(0, var(--overlay-up, 0) / ${overlayUpDampen}, 1))` : 0,
-        transform: 'translateY(calc(-1.2 * var(--scroll-y, 0) * var(--gate, 0) * 1px))',
-        willChange: 'opacity, transform',
+        transform: "translateY(calc(-1.2 * var(--scroll-y, 0) * var(--gate, 0) * 1px))",
+        willChange: "opacity, transform",
       }}
     >
       <div className="flex items-center justify-between gap-4 sm:gap-6">
@@ -36,5 +36,5 @@ export default function FooterBrandCTA({
         </Link>
       </div>
     </div>
-  )
+  );
 }

@@ -4,11 +4,11 @@ This file provides guidance to WARP (warp.dev) when working with code in this re
 
 Project overview
 
-- Framework: Next.js 15 (App Router, server-first)
-- Language: TypeScript (strict)
-- UI: React 19, Tailwind CSS v4
-- Tooling: pnpm, Biome (lint/format for code), Prettier (CSS/Markdown), Lighthouse CI
-- Observability: Sentry (with /monitoring tunnel), Vercel Analytics, Speed Insights
+- Framework: Next.js 16 (App Router, server-first)
+- Language: TypeScript 5.8 (strict)
+- UI: React 19.2, Tailwind CSS v4
+- Tooling: pnpm, ESLint (flat config) for code, Prettier for CSS/Markdown
+- Observability: Vercel Analytics, Speed Insights
 
 Core commands
 
@@ -28,13 +28,13 @@ pnpm dev
 
 ```bash path=null start=null
 pnpm type-check
-pnpm check         # runs Biome + Prettier checks
+pnpm check         # runs ESLint + Prettier checks
 ```
 
 - Auto-fix and format
 
 ```bash path=null start=null
-pnpm fix           # Biome (write) + Prettier (write)
+pnpm fix           # ESLint (write) + Prettier (write)
 pnpm format        # force full formatting on code + CSS/Markdown
 ```
 
@@ -51,13 +51,6 @@ pnpm start
 ANALYZE=true pnpm build
 ```
 
-- Lighthouse
-  - Full CI-style run (uses lhci):
-
-```bash path=null start=null
-pnpm lhci
-```
-
 - Local page audits (requires dev server running):
 
 ```bash path=null start=null
@@ -71,10 +64,7 @@ Testing
 
 Environment
 
-- Required variables (validated by env.ts via @t3-oss/env-nextjs):
-  - SENTRY_DSN
-  - NEXT_PUBLIC_SENTRY_DSN
-- For local development, create .env.local with the variables above. CI writes a minimal .env.production before building.
+- No required observability variables. Create `.env.local` as needed for your own features.
 
 Architecture and structure (big picture)
 
@@ -114,23 +104,21 @@ Architecture and structure (big picture)
   - Path alias @/\* maps to the repository root for shallow internal imports.
 
 - Linting/formatting
-  - Biome is the source of truth for JS/TS/JSON linting and code formatting (see biome.jsonc for rules: a11y hints, unused imports, exhaustive deps, single quotes, etc.).
+  - ESLint (configured via `eslint.config.mjs`) is the source of truth for JS/TS linting and code formatting fixes.
   - Prettier formats CSS and Markdown only (invoked by scripts).
-  - Next.js ESLint is disabled during builds to avoid duplicate noise (see next.config.mjs eslint.ignoreDuringBuilds: true).
+  - Next.js build skips inline linting; rely on `pnpm check` during CI and locally.
 
-- Sentry and performance
-  - next.config.mjs wraps Next with withSentryConfig and @next/bundle-analyzer.
-  - Sentry settings include a /monitoring tunnel, hidden source maps, react component annotation, and automatic Vercel monitors.
-  - Use ANALYZE=true to enable bundle analyzer during builds.
+Performance
+
+- Use ANALYZE=true to enable bundle analyzer during builds.
 
 CI
 
-- .github/workflows/lighthouse-ci.yml runs on pull_request to main:
+- CI runs on pull_request to main:
   - Node 20, pnpm 9
   - pnpm install --frozen-lockfile
   - pnpm check and pnpm type-check
-  - Writes a minimal .env.production with SENTRY_DSN and NEXT_PUBLIC_SENTRY_DSN (from repo secrets or placeholders)
-  - pnpm build then pnpm lhci (Lighthouse CI autorun)
+  - pnpm build
 
 Notes from existing assistant guidance (CLAUDE.md)
 

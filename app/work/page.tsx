@@ -1,4 +1,4 @@
-import WorkTimeline from './_components/WorkTimeline.client'
+import WorkTimeline from "./_components/WorkTimeline.client";
 
 export default function WorkPage() {
   return (
@@ -22,10 +22,10 @@ export default function WorkPage() {
         </div>
 
         {/* Timeline */}
-        <div className="animate-fade-in-up" style={{ animationDelay: '140ms' }}>
+        <div className="animate-fade-in-up" style={{ animationDelay: "140ms" }}>
           <WorkTimeline />
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -1,21 +1,21 @@
-'use client'
+"use client";
 
-import type React from 'react'
-import { useEffect, useRef, useState } from 'react'
+import type React from "react";
+import { useEffect, useRef, useState } from "react";
 
-import AnimatedText from '@/components/ui/AnimatedText'
+import AnimatedText from "@/components/ui/AnimatedText";
 
 export type MorphingVideoProps = {
-  centerTop: string
-  isIntro: boolean
-  initialPill: boolean
-  isExpanding: boolean
-  showTitleGroup: boolean
-  showDesc: boolean
-  shouldPlayVideo: boolean
-  containerRadius: string
-  video: { playbackRate: number; scale: number; preload: 'auto' | 'metadata' | 'none' }
-}
+  centerTop: string;
+  isIntro: boolean;
+  initialPill: boolean;
+  isExpanding: boolean;
+  showTitleGroup: boolean;
+  showDesc: boolean;
+  shouldPlayVideo: boolean;
+  containerRadius: string;
+  video: { playbackRate: number; scale: number; preload: "auto" | "metadata" | "none" };
+};
 
 export default function MorphingVideo({
   centerTop,
@@ -28,69 +28,69 @@ export default function MorphingVideo({
   containerRadius,
   video,
 }: MorphingVideoProps) {
-  const videoRef = useRef<HTMLVideoElement>(null)
-  const [hasVideo, setHasVideo] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [hasVideo, setHasVideo] = useState(false);
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.playbackRate = video.playbackRate
-      videoRef.current.muted = true
+      videoRef.current.playbackRate = video.playbackRate;
+      videoRef.current.muted = true;
     }
-  }, [video.playbackRate])
+  }, [video.playbackRate]);
 
   useEffect(() => {
-    let active = true
-    if (typeof window !== 'undefined') {
-      fetch('/matrix-horizontal.mp4', { method: 'HEAD' })
+    let active = true;
+    if (typeof window !== "undefined") {
+      fetch("/matrix-horizontal.mp4", { method: "HEAD" })
         .then((res) => {
-          if (!active) return
-          setHasVideo(res.ok)
+          if (!active) return;
+          setHasVideo(res.ok);
         })
         .catch(() => {
-          if (!active) return
-          setHasVideo(false)
-        })
+          if (!active) return;
+          setHasVideo(false);
+        });
     }
     return () => {
-      active = false
-    }
-  }, [])
+      active = false;
+    };
+  }, []);
 
   useEffect(() => {
     if (shouldPlayVideo && videoRef.current) {
-      videoRef.current.play().catch(() => {})
+      videoRef.current.play().catch(() => {});
     }
-  }, [shouldPlayVideo])
+  }, [shouldPlayVideo]);
 
-  type CSSVars = React.CSSProperties & Record<'--intro-scale' | '--bg-a' | '--shadow-a', string>
+  type CSSVars = React.CSSProperties & Record<"--intro-scale" | "--bg-a" | "--shadow-a", string>;
 
   const containerStyle: CSSVars = {
     top: centerTop,
-    left: '50%',
-    '--intro-scale': String(isIntro ? (initialPill ? 0.14 : 1) : 1),
-    transform: 'translate(-50%, -50%) scale(var(--intro-scale))',
-    width: 'min(96vw, 96svw)',
-    height: 'min(86svh, 86vh)',
+    left: "50%",
+    "--intro-scale": String(isIntro ? (initialPill ? 0.14 : 1) : 1),
+    transform: "translate(-50%, -50%) scale(var(--intro-scale))",
+    width: "min(96vw, 96svw)",
+    height: "min(86svh, 86vh)",
     borderRadius: containerRadius,
-    border: 'none',
-    willChange: isExpanding ? 'transform, opacity, filter, clip-path' : undefined,
-    transformOrigin: '50% 50%',
+    border: "none",
+    willChange: isExpanding ? "transform, opacity, filter, clip-path" : undefined,
+    transformOrigin: "50% 50%",
     transition: isExpanding
-      ? 'top 0.4s ease-out, transform 2s cubic-bezier(0.22, 1, 0.36, 1), border-radius 2s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.6s ease-out'
-      : 'top 0.4s ease-out, border-radius 0s, background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.3s ease-out',
-    '--bg-a': isIntro ? '0.95' : 'calc(max(0, (var(--p, 0) - 0.7) * 3) * 0.95)',
-    '--shadow-a': isIntro ? '0.25' : 'calc(max(0, (var(--p, 0) - 0.7) * 3) * 0.25)',
-    backgroundColor: initialPill ? 'transparent' : 'rgba(255, 255, 255, var(--bg-a))',
+      ? "top 0.4s ease-out, transform 2s cubic-bezier(0.22, 1, 0.36, 1), border-radius 2s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.6s ease-out"
+      : "top 0.4s ease-out, border-radius 0s, background-color 0.5s ease-out, backdrop-filter 0.5s ease-out, box-shadow 0.5s ease-out, clip-path 0.3s ease-out",
+    "--bg-a": isIntro ? "0.95" : "calc(max(0, (var(--p, 0) - 0.7) * 3) * 0.95)",
+    "--shadow-a": isIntro ? "0.25" : "calc(max(0, (var(--p, 0) - 0.7) * 3) * 0.25)",
+    backgroundColor: initialPill ? "transparent" : "rgba(255, 255, 255, var(--bg-a))",
     backdropFilter:
       isIntro && !initialPill
-        ? 'blur(20px)'
+        ? "blur(20px)"
         : isIntro
-          ? 'blur(0px)'
-          : 'blur(calc(max(0, (var(--p, 0) - 0.7) * 3) * 20px))',
-    boxShadow: initialPill ? 'none' : '0 25px 50px -12px rgba(0, 0, 0, var(--shadow-a))',
+          ? "blur(0px)"
+          : "blur(calc(max(0, (var(--p, 0) - 0.7) * 3) * 20px))",
+    boxShadow: initialPill ? "none" : "0 25px 50px -12px rgba(0, 0, 0, var(--shadow-a))",
     clipPath:
-      'inset(calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) round calc(24px + var(--sh, 0) * 360px))',
-  }
+      "inset(calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) calc(var(--sh, 0) * var(--closeMaxY, 0)) calc(var(--sh, 0) * var(--closeMaxX, 0)) round calc(24px + var(--sh, 0) * 360px))",
+  };
 
   return (
     <div
@@ -134,9 +134,9 @@ export default function MorphingVideo({
       <div
         className="relative h-full w-full overflow-hidden"
         style={{
-          borderRadius: 'calc(24px + 360px * var(--sh, 0))',
+          borderRadius: "calc(24px + 360px * var(--sh, 0))",
           opacity: isIntro ? 0 : 1,
-          transition: 'opacity 0.8s ease-out',
+          transition: "opacity 0.8s ease-out",
         }}
       >
         {hasVideo ? (
@@ -151,7 +151,7 @@ export default function MorphingVideo({
             onError={() => setHasVideo(false)}
             className="h-full w-full object-cover"
             style={{
-              willChange: 'opacity, transform',
+              willChange: "opacity, transform",
               transform: `scale(${video.scale})`,
             }}
           >
@@ -178,21 +178,21 @@ export default function MorphingVideo({
             className="relative flex h-12 w-[calc(100vw-3rem)] max-w-[20rem] items-center justify-center rounded-[384px] border border-white/30 backdrop-blur-[16px] backdrop-saturate-[160%] shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_8px_30px_rgba(0,0,0,0.22)] before:pointer-events-none before:absolute before:inset-0 before:bg-[radial-gradient(120%_60%_at_50%_0%,rgba(255,255,255,0.35),rgba(255,255,255,0)_60%)] before:content-[''] sm:h-14 sm:w-full sm:max-w-[var(--nav-row-w)] sm:h-full sm:w-full sm:max-w-none"
             style={{
               background:
-                'linear-gradient(180deg, rgba(24,204,193,0.28) 0%, rgba(0,166,158,0.20) 100%)',
-              opacity: 'var(--cyan, 0)',
-              transition: 'opacity 0.5s ease-out',
+                "linear-gradient(180deg, rgba(24,204,193,0.28) 0%, rgba(0,166,158,0.20) 100%)",
+              opacity: "var(--cyan, 0)",
+              transition: "opacity 0.5s ease-out",
             }}
           >
             <span
               className="font-semibold tracking-wide text-white px-3"
               style={{
-                fontSize: 'clamp(15px, 2.5vw, 22px)',
-                whiteSpace: 'nowrap',
-                maxWidth: '90%',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                opacity: 'var(--ui, 0)',
-                textShadow: '0 2px 8px rgba(0,0,0,0.6)',
+                fontSize: "clamp(15px, 2.5vw, 22px)",
+                whiteSpace: "nowrap",
+                maxWidth: "90%",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                opacity: "var(--ui, 0)",
+                textShadow: "0 2px 8px rgba(0,0,0,0.6)",
               }}
             >
               Hi, I'm Jayvic 👋
@@ -204,5 +204,5 @@ export default function MorphingVideo({
         <div className="absolute right-0 bottom-0 h-12 w-20 bg-gradient-to-tl from-black via-black/80 to-transparent" />
       </div>
     </div>
-  )
+  );
 }

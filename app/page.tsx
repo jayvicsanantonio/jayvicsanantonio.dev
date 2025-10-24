@@ -1,4 +1,4 @@
-import HeroMorph from '@/app/(home)/_components/HeroMorph.client'
+import HeroMorph from "@/app/(home)/_components/HeroMorph.client";
 
 export default function Page() {
   return (
@@ -6,5 +6,5 @@ export default function Page() {
       <h1 className="sr-only">Jayvic San Antonio — Software Engineer</h1>
       <HeroMorph />
     </main>
-  )
+  );
 }
