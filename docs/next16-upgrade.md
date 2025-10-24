@@ -76,7 +76,7 @@ pnpm add next@latest react@latest react-dom@latest
 npx @next/codemod@canary upgrade latest
 ```
 
-### 2) Replace middleware with proxy *(completed)*
+### 2) Replace middleware with proxy _(completed)_
 
 - `proxy.ts` at the repo root replaces the former `middleware.ts` to handle Safari/mobile rewrites:
 
@@ -117,16 +117,15 @@ export default {
 };
 ```
 
-
 ### 3) next.config.mjs after migration
 
 `next.config.mjs` now enables the core Next 16 features we care about:
 
 ```ts
-import createBundleAnalyzer from '@next/bundle-analyzer';
+import createBundleAnalyzer from "@next/bundle-analyzer";
 
 const withBundleAnalyzer = createBundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true',
+  enabled: process.env.ANALYZE === "true",
 });
 
 const nextConfig = {
@@ -141,10 +140,10 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'avatars.githubusercontent.com',
-        port: '',
-        pathname: '/**',
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+        port: "",
+        pathname: "/**",
       },
     ],
   },
