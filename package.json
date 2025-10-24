@@ -6,8 +6,8 @@
     "node": ">=20"
   },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build --webpack",
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
     "start": "next start",
     "prebuild": "pnpm check && pnpm type-check",
     "check": "pnpm run check:code && pnpm run check:content",

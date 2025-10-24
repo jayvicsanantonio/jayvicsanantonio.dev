@@ -9,6 +9,8 @@ const nextConfig = {
   reactStrictMode: true,
   experimental: {
     viewTransition: true,
+    // Persist dev artifacts on disk to speed up restarts
+    turbopackFileSystemCacheForDev: true,
   },
   // Enable Turbopack (Next.js 16 defaults to Turbopack).
   // Adding an empty config silences the error when a plugin adds a webpack config.
