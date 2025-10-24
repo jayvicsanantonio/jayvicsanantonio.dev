@@ -1,8 +1,8 @@
 # jayvicsanantonio.dev: Performance-First Personal Portfolio Migration
 
-**Stack:** Next.js 15, TypeScript, Tailwind CSS v4, Framer Motion • **Repo:** jayvicsanantonio.dev
+**Stack:** Next.js 16, TypeScript 5.8, Tailwind CSS v4, Framer Motion • **Repo:** jayvicsanantonio.dev
 
-> **Executive summary:** Migrated personal portfolio to Next.js 15 with App Router, implementing performance-first architecture with CSS variable-driven animations, comprehensive Lighthouse CI, and Safari compatibility fixes. Achieved sub-1s LCP on desktop through server-first components, dynamic imports, and GPU-optimized scroll effects while maintaining complex hero animations.
+> **Executive summary:** Migrated personal portfolio to Next.js 16 with App Router, implementing performance-first architecture with CSS variable-driven animations, comprehensive Lighthouse CI, and Safari compatibility fixes. Achieved sub-1s LCP on desktop through server-first components, dynamic imports, and GPU-optimized scroll effects while maintaining complex hero animations.
 
 ### Context
 
@@ -28,7 +28,7 @@ Previous implementation suffered from scroll-induced React re-renders causing la
 
 ### Implementation Highlights
 
-- **Server-first architecture**: Leveraged Next.js 15 App Router with explicit client boundaries marked by `.client.tsx` suffix, keeping animations isolated to specific components
+- **Server-first architecture**: Leveraged Next.js 16 App Router with explicit client boundaries marked by `.client.tsx` suffix, keeping animations isolated to specific components
 - **CSS variable performance optimization**: Replaced React state updates with `requestAnimationFrame`-driven CSS variable writes to avoid re-render cycles during scroll (HeroMorph.client.tsx:139-218)
 - **Dynamic imports for non-critical hero components**: Implemented code splitting to reduce initial bundle size while maintaining visual complexity (commit 4bfc0c7)
 - **Safari progressive enhancement**: Added container query fallbacks, backdrop-filter alternatives, and cross-browser animation compatibility (PR #208, #209)
@@ -38,7 +38,7 @@ Previous implementation suffered from scroll-induced React re-renders causing la
 ### Validation
 
 - **TypeScript strict mode** with enhanced safety flags including `noUncheckedIndexedAccess` and `exactOptionalPropertyTypes`
-- **Biome + Prettier dual linting** for code quality and consistent formatting across JS/TS and CSS/Markdown
+- **ESLint + Prettier** for code quality and consistent formatting across JS/TS and CSS/Markdown
 - **Lighthouse CI automation** running on all PRs with desktop preset testing home, projects, and work pages
 - **Local performance measurement** via pnpm scripts for developer workflow (docs/lighthouse.md)
 

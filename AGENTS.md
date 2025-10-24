@@ -12,16 +12,16 @@
 - `pnpm dev`: Launch the local Next.js server with hot reloading.
 - `pnpm build`: Produce an optimized production bundle.
 - `pnpm start`: Serve the compiled build (used for staging smoke tests).
-- `pnpm check`: Run Biome linting and Prettier content checks; CI expects this clean.
+- `pnpm check`: Run ESLint linting and Prettier content checks; CI expects this clean.
 - `pnpm type-check`: Execute `tsc --noEmit` to ensure TypeScript contracts hold.
 - `pnpm analyze`: Build with bundle analyzer enabled for performance profiling.
 
 ## Coding Style & Naming Conventions
 
-- TypeScript with 2-space indentation, single quotes, and trailing commas—Biome enforces these defaults.
+- TypeScript with 2-space indentation, single quotes, and trailing commas—ESLint enforces these defaults.
 - Prefer functional React components; name files `PascalCase.tsx` for components and `kebab-case.ts` for utilities.
 - Tailwind CSS is the primary styling tool; consolidate design tokens in `app/globals.css` before introducing ad-hoc classes.
-- Run `pnpm fix` for auto-fixes (`biome check --write`) and content formatting via Prettier.
+- Run `pnpm fix` for auto-fixes (`eslint . --fix`) and content formatting via Prettier.
 
 ## Testing Guidelines
 

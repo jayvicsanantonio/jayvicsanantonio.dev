@@ -102,7 +102,7 @@ Suggested file deletions (to run after approval)
 Post-removal verification
 
 - pnpm type-check
-- pnpm lint
+- pnpm check
 - pnpm build
 - Manual check: /, /projects, /work, email API (/api/send)
 

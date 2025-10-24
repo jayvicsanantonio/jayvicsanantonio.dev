@@ -4,10 +4,10 @@ This file provides guidance to WARP (warp.dev) when working with code in this re
 
 Project overview
 
-- Framework: Next.js 15 (App Router, server-first)
-- Language: TypeScript (strict)
-- UI: React 19, Tailwind CSS v4
-- Tooling: pnpm, Biome (lint/format for code), Prettier (CSS/Markdown)
+- Framework: Next.js 16 (App Router, server-first)
+- Language: TypeScript 5.8 (strict)
+- UI: React 19.2, Tailwind CSS v4
+- Tooling: pnpm, ESLint (flat config) for code, Prettier for CSS/Markdown
 - Observability: Vercel Analytics, Speed Insights
 
 Core commands
@@ -28,13 +28,13 @@ pnpm dev
 
 ```bash path=null start=null
 pnpm type-check
-pnpm check         # runs Biome + Prettier checks
+pnpm check         # runs ESLint + Prettier checks
 ```
 
 - Auto-fix and format
 
 ```bash path=null start=null
-pnpm fix           # Biome (write) + Prettier (write)
+pnpm fix           # ESLint (write) + Prettier (write)
 pnpm format        # force full formatting on code + CSS/Markdown
 ```
 
@@ -104,9 +104,9 @@ Architecture and structure (big picture)
   - Path alias @/\* maps to the repository root for shallow internal imports.
 
 - Linting/formatting
-  - Biome is the source of truth for JS/TS/JSON linting and code formatting (see biome.jsonc for rules: a11y hints, unused imports, exhaustive deps, single quotes, etc.).
+  - ESLint (configured via `eslint.config.mjs`) is the source of truth for JS/TS linting and code formatting fixes.
   - Prettier formats CSS and Markdown only (invoked by scripts).
-  - Next.js ESLint is disabled during builds to avoid duplicate noise (see next.config.mjs eslint.ignoreDuringBuilds: true).
+  - Next.js build skips inline linting; rely on `pnpm check` during CI and locally.
 
 Performance
 

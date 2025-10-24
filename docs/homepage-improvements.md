@@ -6,7 +6,7 @@ This document summarizes the architectural, accessibility, performance, and main
 
 Scope
 
-- Codebase: jayvicsanantonio.dev (Next.js 15, React 19, Tailwind CSS 4, TypeScript 5)
+- Codebase: jayvicsanantonio.dev (Next.js 16, React 19.2, Tailwind CSS 4, TypeScript 5.8)
 - Primary files touched:
   - app/page.tsx
   - components/home/HeroMorph.client.tsx (new)

@@ -13,10 +13,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Quality Assurance
 
 - `pnpm check` - Run all checks (code + content)
-- `pnpm check:code` - Biome linting and formatting check
+- `pnpm check:code` - ESLint flat-config linting for JS/TS
 - `pnpm check:content` - Prettier check for CSS/Markdown
 - `pnpm type-check` - TypeScript compilation check
-- `pnpm fix` - Auto-fix code and content formatting issues
+- `pnpm fix` - Auto-fix code issues via ESLint and format content via Prettier
 - `pnpm format` - Format all code and content
 
 ### Analysis and Performance
@@ -26,14 +26,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Tech Stack and Architecture
 
-This is a Next.js 15 personal website using App Router with the following key technologies:
+This is a Next.js 16 personal website using App Router with the following key technologies:
 
-- **Framework**: Next.js 15 (App Router, server-first)
-- **Language**: TypeScript (strict mode with enhanced type safety)
+- **Framework**: Next.js 16 (App Router, server-first)
+- **Language**: TypeScript 5.8 (strict mode with enhanced type safety)
 - **Styling**: Tailwind CSS v4
-- **UI**: React 19 with Framer Motion for animations
+- **UI**: React 19.2 with Framer Motion for animations
 - **Observability**: Vercel Analytics, Speed Insights
-- **Quality**: Biome (linting/formatting), Prettier (CSS/Markdown)
+- **Quality**: ESLint (flat config) for JS/TS linting, Prettier for CSS/Markdown
 
 ### Project Structure Philosophy
 
@@ -73,7 +73,7 @@ Environment variables: none required by default. Create `.env.local` as needed f
 The project enforces strict quality standards:
 
 - TypeScript strict mode with additional safety flags
-- Biome for JS/TS/JSON linting and formatting (single quotes, 100 char line width)
+- ESLint (flat config in `eslint.config.mjs`) for JS/TS linting and formatting hints
 - Prettier for CSS and Markdown formatting
 - All changes must pass type-checking, linting, and building
 - GitHub Actions workflow runs full quality gates on PRs
@@ -81,5 +81,4 @@ The project enforces strict quality standards:
 ## Performance Monitoring
 
 - Bundle analysis available with `ANALYZE=true pnpm build`
-- Web Vitals tracking integrated
 - Web Vitals tracking integrated
