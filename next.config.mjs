@@ -10,10 +10,6 @@ const nextConfig = {
   experimental: {
     viewTransition: true,
   },
-  eslint: {
-    // We use Biome for linting now; avoid Next's ESLint build step noise.
-    ignoreDuringBuilds: true,
-  },
   images: {
     remotePatterns: [
       {
