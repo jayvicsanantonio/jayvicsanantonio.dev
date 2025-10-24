@@ -1,0 +1,16 @@
+{
+  "root": true,
+  "extends": ["next/core-web-vitals"],
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "tsconfigRootDir": "."
+  },
+  "ignorePatterns": [
+    ".next/**",
+    "node_modules/**",
+    "reports/**",
+    "artifacts/**",
+    ".lighthouse/**"
+  ]
+}
+
