@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { userAgent } from 'next/server'
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   // Only handle the homepage
   if (req.nextUrl.pathname !== '/') return NextResponse.next()
 
@@ -23,7 +23,7 @@ export function middleware(req: NextRequest) {
   return NextResponse.next()
 }
 
-// Only run on the root path
 export const config = {
   matcher: ['/'],
 }
+
