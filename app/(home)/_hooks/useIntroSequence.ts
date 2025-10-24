@@ -21,7 +21,6 @@ export function useIntroSequence(cfg: { timings: IntroTimings }) {
     if (startedRef.current) return;
     startedRef.current = true;
 
-    setInitialPill(true);
     const timers: number[] = [];
 
     // Begin expansion
