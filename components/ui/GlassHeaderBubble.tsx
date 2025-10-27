@@ -22,6 +22,10 @@ export default function GlassHeaderBubble({
 
   const isProjects = pathname?.startsWith("/projects");
   const isWork = pathname?.startsWith("/work");
+  const projectsTooltipProps = isProjects
+    ? {}
+    : { tooltip: "Projects", tooltipPlacement: "below" as const };
+  const workTooltipProps = isWork ? {} : { tooltip: "Work", tooltipPlacement: "below" as const };
 
   // Only keep vtTag on the expanded nav button for current route.
   // If the parent passes vt-tag-... to this header bubble, suppress it
@@ -74,8 +78,7 @@ export default function GlassHeaderBubble({
               }
               label="Projects"
               active={isProjects}
-              tooltip={!isProjects ? "Projects" : undefined}
-              tooltipPlacement="below"
+              {...projectsTooltipProps}
               collapsedPx={"clamp(56px,11vw,84px)"}
               expandedPx={"clamp(120px,40vw,180px)"}
               heightPx={"clamp(48px,9.5vw,72px)"}
@@ -100,8 +103,7 @@ export default function GlassHeaderBubble({
               }
               label="Work"
               active={isWork}
-              tooltip={!isWork ? "Work" : undefined}
-              tooltipPlacement="below"
+              {...workTooltipProps}
               collapsedPx={"clamp(56px,11vw,84px)"}
               expandedPx={"clamp(104px,34vw,160px)"}
               heightPx={"clamp(48px,9.5vw,72px)"}

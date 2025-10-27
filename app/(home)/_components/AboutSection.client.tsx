@@ -6,7 +6,163 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Oswald } from "next/font/google";
+import { CARD_INNER_BASE, CARD_OUTER_BASE } from "@/components/ui/cardStyles";
 const oswald = Oswald({ subsets: ["latin"] });
+
+const SKILL_SECTIONS = [
+  {
+    title: "Frontend",
+    accentClass: "text-cyan-300",
+    items: [
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "NextJS",
+      "Tailwind CSS",
+      "Shadcn UI",
+      "Framer Motion",
+      "React Native",
+      "Expo",
+      "EmberJS",
+      "HTML",
+      "CSS",
+      "Sass",
+      "SVG",
+      "Accessibility",
+      "VS Code Extensions",
+      "Zed Extensions",
+    ],
+  },
+  {
+    title: "Backend and Edge",
+    accentClass: "text-purple-300",
+    items: [
+      "NodeJS",
+      "Hono",
+      "Express",
+      "Cloudflare Workers",
+      "Vercel Edge",
+      "REST APIs",
+      "SailsJS",
+      "Socket.IO",
+      "Rate Limiting",
+      "Caching",
+      "Session Management",
+      "Authentication",
+      "Authorization",
+    ],
+  },
+  {
+    title: "Data",
+    accentClass: "text-emerald-300",
+    items: [
+      "Prisma",
+      "Drizzle",
+      "PostgreSQL",
+      "MySQL",
+      "SQLite",
+      "MongoDB",
+      "Redis",
+      "Firebase",
+    ],
+  },
+  {
+    title: "Quality and Testing",
+    accentClass: "text-orange-300",
+    items: [
+      "Zod",
+      "Vitest",
+      "React Testing Library",
+      "Jest",
+      "Playwright",
+      "Cypress",
+      "GitHub Actions",
+      "Jenkins",
+      "CI/CD",
+    ],
+  },
+  {
+    title: "DevOps and Tooling",
+    accentClass: "text-rose-300",
+    items: ["Amazon Web Services", "Vercel", "Cloudflare", "Netlify", "Docker", "Git"],
+  },
+  {
+    title: "AI and Productivity",
+    accentClass: "text-indigo-300",
+    items: [
+      "Cursor",
+      "Warp.dev",
+      "Claude Code",
+      "Gemini CLI",
+      "GitHub Copilot",
+      "OpenRouter",
+      "Windsurf",
+      "Cline",
+      "VS Code",
+      "Zed",
+      "Gemini",
+      "ChatGPT",
+      "Perplexity",
+      "Comet",
+      "LangChain",
+      "v0",
+      "Bolt.new",
+      "Lovable",
+      "Google AI Studio",
+      "Google Workspace",
+      "Linear",
+      "Jira",
+    ],
+  },
+] as const;
+
+const EXPERTISE_ITEMS = [
+  {
+    title: "Reliability as a feature",
+    description:
+      "I design with clear contracts, structured outputs, and automated checks so changes ship confidently and stay healthy over time.",
+  },
+  {
+    title: "Performance and accessibility",
+    description:
+      "I sweat UX details and measure results, from Lighthouse wins to smoother motion and faster page loads on real networks and devices.",
+  },
+  {
+    title: "Edge-first architecture",
+    description:
+      "I simplify deployments and reduce latency by consolidating services, adding thoughtful rate limits and admin surfaces where they earn their keep.",
+  },
+  {
+    title: "Security and trust",
+    description:
+      "I harden APIs with authentication, headers, CORS discipline, and predictable error handling so teams can move quickly without surprises.",
+  },
+  {
+    title: "AI as leverage with guardrails",
+    description:
+      "I integrate LLMs and coding assistants to boost velocity while keeping outputs structured, costs controlled, and reviews human-friendly.",
+  },
+  {
+    title: "Data and APIs that age well",
+    description:
+      "I design schemas and endpoints that are easy to read, paginate, cache, and evolve without breaking callers.",
+  },
+  {
+    title: "Testing that protects momentum",
+    description:
+      "I balance unit, integration, and E2E coverage so the codebase remains fast to change and safe to deploy.",
+  },
+  {
+    title: "Developer experience and documentation",
+    description:
+      "I write the docs I wish I had, improve onboarding paths, and shape tooling that keeps teams in flow.",
+  },
+  {
+    title: "Mentorship and collaboration",
+    description:
+      "I help teammates level up through pairing, design reviews, and clear communication, keeping the team calm and productive.",
+  },
+] as const;
 
 export default function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -105,395 +261,154 @@ export default function AboutSection() {
         <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(8,51,68,0.6),transparent)]" />
 
         {/* Subtle grid */}
-        <div className="absolute inset-0 [background-image:linear-gradient(to_right,white_1px,transparent_1px),linear-gradient(to_bottom,white_1px,transparent_1px)] [background-size:64px_64px] opacity-[0.04] mix-blend-overlay" />
+        <div className="absolute inset-0 [background-image:linear-gradient(to_right,white_1px,transparent_1px),linear-gradient(to_bottom,white_1px,transparent_1px)] [background-size:64px_64px] opacity-[0.04]" />
 
         {/* Grain */}
-        <div className="absolute inset-0 [background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] [background-size:3px_3px] opacity-[0.06] mix-blend-soft-light" />
+        <div className="absolute inset-0 [background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] [background-size:3px_3px] opacity-[0.05]" />
       </div>
       <div className="container pt-32 pb-16 sm:pt-40 px-4 text-white">
         {/* Top Row - About Me and Skills */}
         <div className="grid gap-8 lg:grid-cols-2 lg:items-stretch mb-8">
           {/* About Me Card */}
-          <div
-            ref={aboutCardRef}
-            className="group relative w-full transform-gpu rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.25),rgba(255,255,255,0.08),rgba(34,211,238,0.20))] p-[1px] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_12px_32px_rgba(0,0,0,0.4)] ring-1 ring-white/10 backdrop-blur-[24px] backdrop-saturate-[140%] transition-all duration-700 after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl after:bg-[linear-gradient(120deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.12)_50%,rgba(255,255,255,0)_100%)] after:opacity-0 after:mix-blend-overlay after:transition-opacity after:duration-300 hover:bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(255,255,255,0.12),rgba(34,211,238,0.30))] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_16px_40px_rgba(0,0,0,0.5)] hover:ring-white/15 group-hover:after:opacity-100 focus-within:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)] focus-within:after:opacity-100 hover:-translate-y-0.5 sm:p-[1.2px] md:hover:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)]"
-            style={{
-              opacity: cardTransforms.aboutCard.opacity,
-              transform: `scale(${cardTransforms.aboutCard.scale})`,
-              transition: "opacity 0.3s ease-out, transform 0.3s ease-out",
-            }}
-          >
-            {/* Subtle halo */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -inset-4 -z-10 rounded-3xl bg-[radial-gradient(80%_60%_at_50%_40%,rgba(59,130,246,0.22),transparent_70%),radial-gradient(70%_60%_at_60%_60%,rgba(168,85,247,0.18),transparent_70%)] opacity-20 blur-xl"
-            />
-
-            {/* Inner frosted panel */}
-            <div className="relative h-full rounded-2xl border border-white/8 bg-gray-950/50 p-6 backdrop-blur-[20px] backdrop-saturate-[150%] sm:p-8 before:pointer-events-none before:absolute before:inset-0 before:rounded-2xl before:bg-[radial-gradient(100%_50%_at_50%_0%,rgba(255,255,255,0.05),rgba(255,255,255,0)_50%)] before:content-['']">
-              <h2
-                className={`${oswald.className} mb-6 text-2xl font-bold tracking-tight text-white`}
-              >
-                About Me
-              </h2>
-              <div className="mt-3 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-              <div className="mt-6 space-y-4 text-[0.95rem]/relaxed sm:text-[0.98rem]/relaxed text-gray-300/90">
-                <p>
-                  I'm Jayvic San Antonio, a full‑stack software engineer from the Philippines, now
-                  building in the San Francisco Bay Area. I've spent more than a decade turning
-                  ideas into products people can actually use. I care about craft and about people.
-                  I write code that is easy to read, I obsess over how things feel, and I treat
-                  reliability like a feature. Clear contracts, thoughtful design, and automated
-                  checks help me ship with confidence and keep things fast and accessible for
-                  everyone.
-                </p>
-                <p>
-                  My path has been a mix of startup scrappiness and big‑company scale. I co‑founded
-                  a company back home, won a few hackathons, and learned how to rally a team around
-                  a rough idea. In the Bay Area I helped rebuild revenue‑critical features in a
-                  large advertising platform, scaled systems that needed to work under pressure,
-                  mentored newer engineers, and built tools that made everyone a little faster.
-                </p>
-                <p>
-                  Lately, I've been building web applications with modern approaches to sharpen my
-                  craft and stay current. I've also been learning more about AI, especially
-                  generative AI, context engineering, large language models, and MCPs, and I'm using
-                  AI coding tools thoughtfully to become even more productive as an engineer. I'm
-                  actively mastering these capabilities so I can move faster, make better decisions,
-                  and keep a real competitive edge.
-                </p>
-                <p>
-                  When I'm not coding, I'm getting my steps in Pokemon Go, collecting Star Wars
-                  Black Series figures, catching up on MCU movies and shows, and listening to Ed
-                  Sheeran. I like early-morning coffee, long walks with good podcasts, and shipping
-                  work I'm proud to sign my name on.
-                </p>
-                <p>
-                  If you're working on something ambitious and care about the details, I'd love to
-                  build with you. You can reach me at my{" "}
-                  <Link
-                    href="mailto:hi@jayvicsanantonio.dev"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200"
-                  >
-                    email
-                  </Link>
-                  , find me on{" "}
-                  <Link
-                    href="https://www.linkedin.com/in/jayvicsanantonio"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200"
-                  >
-                    LinkedIn
-                  </Link>
-                  , and see more of my work{" "}
-                  <Link
-                    href="/projects"
-                    rel="noopener noreferrer"
-                    className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200"
-                  >
-                    here
-                  </Link>
-                  .
-                </p>
-              </div>
+        <div
+          ref={aboutCardRef}
+          className={`${CARD_OUTER_BASE}`}
+          style={{
+            opacity: cardTransforms.aboutCard.opacity,
+            transform: `scale(${cardTransforms.aboutCard.scale})`,
+            transition: "opacity 0.3s ease-out, transform 0.3s ease-out",
+          }}
+        >
+          <div className={`${CARD_INNER_BASE} h-full p-6 sm:p-8`}>
+            <h2
+              className={`${oswald.className} mb-6 text-2xl font-bold tracking-tight text-white`}
+            >
+              About Me
+            </h2>
+            <div className="mt-3 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+            <div className="mt-6 space-y-4 text-[0.95rem]/relaxed sm:text-[0.98rem]/relaxed text-gray-300/90">
+              <p>
+                I'm Jayvic San Antonio, a full‑stack software engineer from the Philippines, now
+                building in the San Francisco Bay Area. I've spent more than a decade turning
+                ideas into products people can actually use. I care about craft and about people.
+                I write code that is easy to read, I obsess over how things feel, and I treat
+                reliability like a feature. Clear contracts, thoughtful design, and automated
+                checks help me ship with confidence and keep things fast and accessible for
+                everyone.
+              </p>
+              <p>
+                My path has been a mix of startup scrappiness and big‑company scale. I co‑founded
+                a company back home, won a few hackathons, and learned how to rally a team around
+                a rough idea. In the Bay Area I helped rebuild revenue‑critical features in a
+                large advertising platform, scaled systems that needed to work under pressure,
+                mentored newer engineers, and built tools that made everyone a little faster.
+              </p>
+              <p>
+                Lately, I've been building web applications with modern approaches to sharpen my
+                craft and stay current. I've also been learning more about AI, especially
+                generative AI, context engineering, large language models, and MCPs, and I'm using
+                AI coding tools thoughtfully to become even more productive as an engineer. I'm
+                actively mastering these capabilities so I can move faster, make better decisions,
+                and keep a real competitive edge.
+              </p>
+              <p>
+                When I'm not coding, I'm getting my steps in Pokemon Go, collecting Star Wars
+                Black Series figures, catching up on MCU movies and shows, and listening to Ed
+                Sheeran. I like early-morning coffee, long walks with good podcasts, and shipping
+                work I'm proud to sign my name on.
+              </p>
+              <p>
+                If you're working on something ambitious and care about the details, I'd love to
+                build with you. You can reach me at my{' '}
+                <Link
+                  href="mailto:hi@jayvicsanantonio.dev"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200"
+                >
+                  email
+                </Link>
+                , find me on{' '}
+                <Link
+                  href="https://www.linkedin.com/in/jayvicsanantonio"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200"
+                >
+                  LinkedIn
+                </Link>
+                , and see more of my work{' '}
+                <Link
+                  href="/projects"
+                  rel="noopener noreferrer"
+                  className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200"
+                >
+                  here
+                </Link>
+                .
+              </p>
             </div>
           </div>
+        </div>
 
-          {/* Skills Card */}
-          <div
-            ref={skillsCardRef}
-            className="group relative w-full transform-gpu rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.25),rgba(255,255,255,0.08),rgba(34,211,238,0.20))] p-[1px] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_12px_32px_rgba(0,0,0,0.4)] ring-1 ring-white/10 backdrop-blur-[24px] backdrop-saturate-[140%] transition-all duration-700 after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl after:bg-[linear-gradient(120deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.12)_50%,rgba(255,255,255,0)_100%)] after:opacity-0 after:mix-blend-overlay after:transition-opacity after:duration-300 hover:bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(255,255,255,0.12),rgba(34,211,238,0.30))] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_16px_40px_rgba(0,0,0,0.5)] hover:ring-white/15 group-hover:after:opacity-100 focus-within:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)] focus-within:after:opacity-100 hover:-translate-y-0.5 sm:p-[1.2px] md:hover:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)]"
-            style={{
-              opacity: cardTransforms.skillsCard.opacity,
-              transform: `scale(${cardTransforms.skillsCard.scale})`,
-              transition: "opacity 0.3s ease-out, transform 0.3s ease-out",
-            }}
-          >
-            {/* Subtle halo */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -inset-4 -z-10 rounded-3xl bg-[radial-gradient(80%_60%_at_50%_40%,rgba(59,130,246,0.22),transparent_70%),radial-gradient(70%_60%_at_60%_60%,rgba(168,85,247,0.18),transparent_70%)] opacity-20 blur-xl"
-            />
-
-            {/* Inner frosted panel */}
-            <div className="relative rounded-2xl border border-white/8 bg-gray-950/50 p-6 backdrop-blur-[20px] backdrop-saturate-[150%] sm:p-8 before:pointer-events-none before:absolute before:inset-0 before:rounded-2xl before:bg-[radial-gradient(100%_50%_at_50%_0%,rgba(255,255,255,0.05),rgba(255,255,255,0)_50%)] before:content-['']">
-              <h2
-                className={`${oswald.className} mb-6 text-2xl font-bold tracking-tight text-white`}
-              >
-                Skills
-              </h2>
-              <div className="mt-3 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-              <div className="mt-6 space-y-6">
-                {/* Frontend */}
-                <div>
-                  <h3 className="mb-3 text-sm font-semibold tracking-wider text-cyan-300 uppercase">
-                    Frontend
+        {/* Skills Card */}
+        <div
+          ref={skillsCardRef}
+          className={`${CARD_OUTER_BASE}`}
+          style={{
+            opacity: cardTransforms.skillsCard.opacity,
+            transform: `scale(${cardTransforms.skillsCard.scale})`,
+            transition: "opacity 0.3s ease-out, transform 0.3s ease-out",
+          }}
+        >
+          <div className={`${CARD_INNER_BASE} p-6 sm:p-8`}>
+            <h2
+              className={`${oswald.className} mb-6 text-2xl font-bold tracking-tight text-white`}
+            >
+              Skills
+            </h2>
+            <div className="mt-3 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+            <div className="mt-6 space-y-6">
+              {SKILL_SECTIONS.map(({ title, accentClass, items }) => (
+                <div key={title}>
+                  <h3 className={`mb-3 text-sm font-semibold tracking-wider uppercase ${accentClass}`}>
+                    {title}
                   </h3>
                   <div className="flex flex-wrap gap-2">
-                    {[
-                      "JavaScript",
-                      "TypeScript",
-                      "React",
-                      "NextJS",
-                      "Tailwind CSS",
-                      "Shadcn UI",
-                      "Framer Motion",
-                      "React Native",
-                      "Expo",
-                      "EmberJS",
-                      "HTML",
-                      "CSS",
-                      "Sass",
-                      "SVG",
-                      "Accessibility",
-                      "VS Code Extensions",
-                      "Zed Extensions",
-                    ].map((skill) => (
+                    {items.map((skill) => (
                       <span
                         key={skill}
-                        className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium tracking-[0.12em] text-gray-300 uppercase transition-all duration-300"
+                        className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium tracking-[0.12em] text-gray-300 uppercase"
                       >
                         {skill}
                       </span>
                     ))}
                   </div>
                 </div>
-
-                {/* Backend and Edge */}
-                <div>
-                  <h3 className="mb-3 text-sm font-semibold tracking-wider text-purple-300 uppercase">
-                    Backend and Edge
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {[
-                      "NodeJS",
-                      "Hono",
-                      "Express",
-                      "Cloudflare Workers",
-                      "Vercel Edge",
-                      "REST APIs",
-                      "SailsJS",
-                      "Socket.IO",
-                      "Rate Limiting",
-                      "Caching",
-                      "Session Management",
-                      "Authentication",
-                      "Authorization",
-                    ].map((skill) => (
-                      <span
-                        key={skill}
-                        className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium tracking-[0.12em] text-gray-300 uppercase transition-all duration-300"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Data */}
-                <div>
-                  <h3 className="mb-3 text-sm font-semibold tracking-wider text-emerald-300 uppercase">
-                    Data
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {[
-                      "Prisma",
-                      "Drizzle",
-                      "PostgreSQL",
-                      "MySQL",
-                      "SQLite",
-                      "MongoDB",
-                      "Redis",
-                      "Firebase",
-                    ].map((skill) => (
-                      <span
-                        key={skill}
-                        className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium tracking-[0.12em] text-gray-300 uppercase transition-all duration-300"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Quality and Testing */}
-                <div>
-                  <h3 className="mb-3 text-sm font-semibold tracking-wider text-orange-300 uppercase">
-                    Quality and Testing
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {[
-                      "Zod",
-                      "Vitest",
-                      "React Testing Library",
-                      "Jest",
-                      "Playwright",
-                      "Cypress",
-                      "GitHub Actions",
-                      "Jenkins",
-                      "CI/CD",
-                    ].map((skill) => (
-                      <span
-                        key={skill}
-                        className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium tracking-[0.12em] text-gray-300 uppercase transition-all duration-300"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* DevOps and Tooling */}
-                <div>
-                  <h3 className="mb-3 text-sm font-semibold tracking-wider text-rose-300 uppercase">
-                    DevOps and Tooling
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {[
-                      "Amazon Web Services",
-                      "Vercel",
-                      "Cloudflare",
-                      "Netlify",
-                      "Docker",
-                      "Git",
-                    ].map((skill) => (
-                      <span
-                        key={skill}
-                        className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium tracking-[0.12em] text-gray-300 uppercase transition-all duration-300"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* AI and Productivity */}
-                <div>
-                  <h3 className="mb-3 text-sm font-semibold tracking-wider text-indigo-300 uppercase">
-                    AI and Productivity
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {[
-                      "Cursor",
-                      "Warp.dev",
-                      "Claude Code",
-                      "Gemini CLI",
-                      "GitHub Copilot",
-                      "OpenRouter",
-                      "Windsurf",
-                      "Cline",
-                      "VS Code",
-                      "Zed",
-                      "Gemini",
-                      "ChatGPT",
-                      "Perplexity",
-                      "Comet",
-                      "LangChain",
-                      "v0",
-                      "Bolt.new",
-                      "Lovable",
-                      "Google AI Studio",
-                      "Google Workspace",
-                      "Linear",
-                      "Jira",
-                    ].map((skill) => (
-                      <span
-                        key={skill}
-                        className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium tracking-[0.12em] text-gray-300 uppercase transition-all duration-300"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
+        </div>
         </div>
 
         {/* Bottom Row - Expertise Card (Full Width) */}
         <div
           ref={expertiseCardRef}
-          className="group relative w-full transform-gpu rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.25),rgba(255,255,255,0.08),rgba(34,211,238,0.20))] p-[1px] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_12px_32px_rgba(0,0,0,0.4)] ring-1 ring-white/10 backdrop-blur-[24px] backdrop-saturate-[140%] transition-all duration-700 after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl after:bg-[linear-gradient(120deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.12)_50%,rgba(255,255,255,0)_100%)] after:opacity-0 after:mix-blend-overlay after:transition-opacity after:duration-300 hover:bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(255,255,255,0.12),rgba(34,211,238,0.30))] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_16px_40px_rgba(0,0,0,0.5)] hover:ring-white/15 group-hover:after:opacity-100 focus-within:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)] focus-within:after:opacity-100 hover:-translate-y-0.5 sm:p-[1.2px] md:hover:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)]"
+          className={`${CARD_OUTER_BASE}`}
           style={{
             opacity: cardTransforms.expertiseCard.opacity,
             transform: `scale(${cardTransforms.expertiseCard.scale})`,
             transition: "opacity 0.3s ease-out, transform 0.3s ease-out",
           }}
         >
-          {/* Subtle halo */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -inset-4 -z-10 rounded-3xl bg-[radial-gradient(80%_60%_at_50%_40%,rgba(59,130,246,0.22),transparent_70%),radial-gradient(70%_60%_at_60%_60%,rgba(168,85,247,0.18),transparent_70%)] opacity-20 blur-xl"
-          />
-
-          {/* Inner frosted panel */}
-          <div className="relative rounded-2xl border border-white/8 bg-gray-950/50 p-6 backdrop-blur-[20px] backdrop-saturate-[150%] sm:p-8 before:pointer-events-none before:absolute before:inset-0 before:rounded-2xl before:bg-[radial-gradient(100%_50%_at_50%_0%,rgba(255,255,255,0.05),rgba(255,255,255,0)_50%)] before:content-['']">
+          <div className={`${CARD_INNER_BASE} p-6 sm:p-8`}>
             <h2 className={`${oswald.className} mb-6 text-2xl font-bold tracking-tight text-white`}>
               Expertise
             </h2>
             <div className="mt-3 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
             <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {[
-                {
-                  title: "Reliability as a feature",
-                  description:
-                    "I design with clear contracts, structured outputs, and automated checks so changes ship confidently and stay healthy over time.",
-                },
-                {
-                  title: "Performance and accessibility",
-                  description:
-                    "I sweat UX details and measure results, from Lighthouse wins to smoother motion and faster page loads on real networks and devices.",
-                },
-                {
-                  title: "Edge-first architecture",
-                  description:
-                    "I simplify deployments and reduce latency by consolidating services, adding thoughtful rate limits and admin surfaces where they earn their keep.",
-                },
-                {
-                  title: "Security and trust",
-                  description:
-                    "I harden APIs with authentication, headers, CORS discipline, and predictable error handling so teams can move quickly without surprises.",
-                },
-                {
-                  title: "AI as leverage with guardrails",
-                  description:
-                    "I integrate LLMs and coding assistants to boost velocity while keeping outputs structured, costs controlled, and reviews human-friendly.",
-                },
-                {
-                  title: "Data and APIs that age well",
-                  description:
-                    "I design schemas and endpoints that are easy to read, paginate, cache, and evolve without breaking callers.",
-                },
-                {
-                  title: "Testing that protects momentum",
-                  description:
-                    "I balance unit, integration, and E2E coverage so the codebase remains fast to change and safe to deploy.",
-                },
-                {
-                  title: "Developer experience and documentation",
-                  description:
-                    "I write the docs I wish I had, improve onboarding paths, and shape tooling that keeps teams in flow.",
-                },
-                {
-                  title: "Mentorship and collaboration",
-                  description:
-                    "I help teammates level up through pairing, design reviews, and clear communication, keeping the team calm and productive.",
-                },
-              ].map((expertise, index) => (
-                <div
-                  key={expertise.title}
-                  className="transition-all duration-300"
-                  style={{
-                    opacity: cardTransforms.expertiseCard.opacity,
-                    transform: `translateY(${cardTransforms.expertiseCard.opacity > 0.5 ? 0 : 20}px)`,
-                    transition: "opacity 0.5s ease-out, transform 0.5s ease-out",
-                    transitionDelay: `${index * 0.08}s`,
-                  }}
-                >
+              {EXPERTISE_ITEMS.map((expertise) => (
+                <div key={expertise.title}>
                   <div className="flex items-start gap-3">
                     <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-cyan-300/80" />
                     <div>
