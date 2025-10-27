@@ -6,6 +6,166 @@ import AnimatedText from "@/components/ui/AnimatedText";
 import GlassHeaderBubble from "@/components/ui/GlassHeaderBubble";
 const oswald = Oswald({ subsets: ["latin"] });
 
+const SKILL_SECTIONS = [
+  {
+    title: "Frontend",
+    accentClass: "text-cyan-300",
+    items: [
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "NextJS",
+      "Tailwind CSS",
+      "Shadcn UI",
+      "Framer Motion",
+      "React Native",
+      "Expo",
+      "EmberJS",
+      "HTML",
+      "CSS",
+      "Sass",
+      "SVG",
+      "Accessibility",
+      "VS Code Extensions",
+      "Zed Extensions",
+    ],
+  },
+  {
+    title: "Backend and Edge",
+    accentClass: "text-purple-300",
+    items: [
+      "NodeJS",
+      "Hono",
+      "Express",
+      "Cloudflare Workers",
+      "Vercel Edge",
+      "REST APIs",
+      "SailsJS",
+      "Socket.IO",
+      "Rate Limiting",
+      "Caching",
+      "Session Management",
+      "Authentication",
+      "Authorization",
+    ],
+  },
+  {
+    title: "Data",
+    accentClass: "text-emerald-300",
+    items: [
+      "Prisma",
+      "Drizzle",
+      "PostgreSQL",
+      "MySQL",
+      "SQLite",
+      "MongoDB",
+      "Redis",
+      "Firebase",
+    ],
+  },
+  {
+    title: "Quality and Testing",
+    accentClass: "text-orange-300",
+    items: [
+      "Zod",
+      "Vitest",
+      "React Testing Library",
+      "Jest",
+      "Playwright",
+      "Cypress",
+      "GitHub Actions",
+      "Jenkins",
+      "CI/CD",
+    ],
+  },
+  {
+    title: "DevOps and Tooling",
+    accentClass: "text-rose-300",
+    items: ["Amazon Web Services", "Vercel", "Cloudflare", "Netlify", "Docker", "Git"],
+  },
+  {
+    title: "AI and Productivity",
+    accentClass: "text-indigo-300",
+    items: [
+      "Cursor",
+      "Warp.dev",
+      "Claude Code",
+      "Gemini CLI",
+      "GitHub Copilot",
+      "OpenRouter",
+      "Windsurf",
+      "Cline",
+      "VS Code",
+      "Zed",
+      "Gemini",
+      "ChatGPT",
+      "Perplexity",
+      "Comet",
+      "LangChain",
+      "v0",
+      "Bolt.new",
+      "Lovable",
+      "Google AI Studio",
+      "Google Workspace",
+      "Linear",
+      "Jira",
+    ],
+  },
+] as const;
+
+const CARD_WRAPPER_CLASS =
+  "group relative w-full rounded-2xl bg-gradient-to-br from-slate-950/90 via-slate-950/70 to-slate-950/50 p-[1px] shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_28px_rgba(0,0,0,0.45)] ring-1 ring-white/10 transition-transform duration-200 hover:-translate-y-0.5 sm:p-[1.2px]";
+
+const CARD_BODY_CLASS = "relative h-full rounded-2xl border border-white/8 bg-gray-950/85 p-6 sm:p-8";
+
+const EXPERTISE_ITEMS = [
+  {
+    title: "Reliability as a feature",
+    description:
+      "I design with clear contracts, structured outputs, and automated checks so changes ship confidently and stay healthy over time.",
+  },
+  {
+    title: "Performance and accessibility",
+    description:
+      "I sweat UX details and measure results, from Lighthouse wins to smoother motion and faster page loads on real networks and devices.",
+  },
+  {
+    title: "Edge-first architecture",
+    description:
+      "I simplify deployments and reduce latency by consolidating services, adding thoughtful rate limits and admin surfaces where they earn their keep.",
+  },
+  {
+    title: "Security and trust",
+    description:
+      "I harden APIs with authentication, headers, CORS discipline, and predictable error handling so teams can move quickly without surprises.",
+  },
+  {
+    title: "AI as leverage with guardrails",
+    description:
+      "I integrate LLMs and coding assistants to boost velocity while keeping outputs structured, costs controlled, and reviews human-friendly.",
+  },
+  {
+    title: "Data and APIs that age well",
+    description:
+      "I design schemas and endpoints that are easy to read, paginate, cache, and evolve without breaking callers.",
+  },
+  {
+    title: "Testing that protects momentum",
+    description:
+      "I balance unit, integration, and E2E coverage so the codebase remains fast to change and safe to deploy.",
+  },
+  {
+    title: "Developer experience and documentation",
+    description:
+      "I write the docs I wish I had, improve onboarding paths, and shape tooling that keeps teams in flow.",
+  },
+  {
+    title: "Mentorship and collaboration",
+    description:
+      "I help teammates level up through pairing, design reviews, and clear communication, keeping the team calm and productive.",
+  },
+] as const;
+
 export const metadata: Metadata = {
   title: "Jayvic San Antonio | Senior Software Engineer",
   description:
@@ -28,10 +188,10 @@ export default function MobileHomePage() {
         <div className="absolute inset-0 bg-[radial-gradient(80%_60%_at_50%_0%,rgba(59,130,246,0.15),transparent_60%),radial-gradient(60%_50%_at_50%_100%,rgba(168,85,247,0.12),transparent_60%)]" />
 
         {/* Subtle grid */}
-        <div className="absolute inset-0 [background-image:linear-gradient(to_right,white_1px,transparent_1px),linear-gradient(to_bottom,white_1px,transparent_1px)] [background-size:64px_64px] opacity-[0.04] mix-blend-overlay" />
+        <div className="absolute inset-0 [background-image:linear-gradient(to_right,white_1px,transparent_1px),linear-gradient(to_bottom,white_1px,transparent_1px)] [background-size:64px_64px] opacity-[0.04]" />
 
         {/* Grain */}
-        <div className="absolute inset-0 [background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] [background-size:3px_3px] opacity-[0.06] mix-blend-soft-light" />
+        <div className="absolute inset-0 [background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] [background-size:3px_3px] opacity-[0.05]" />
 
         {/* Black gradient overlay - black at top (section 1) fading to transparent (section 2) */}
         <div className="absolute inset-0 bg-gradient-to-b from-black via-cyan-950/40 to-transparent" />
@@ -62,7 +222,7 @@ export default function MobileHomePage() {
 
         {/* Subtle grid overlay to match design */}
         <div
-          className="absolute inset-0 opacity-[0.14] mix-blend-screen"
+          className="absolute inset-0 opacity-10"
           style={{
             backgroundImage:
               "linear-gradient(rgba(255,255,255,0.12) 1px, transparent 0), linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 0)",
@@ -87,11 +247,7 @@ export default function MobileHomePage() {
             width={1400}
             height={1000}
             priority
-            className="h-auto w-full object-contain object-bottom"
-            style={{
-              filter:
-                "brightness(0.95) saturate(1.25) drop-shadow(0 0 60px rgba(0,139,139,0.30)) drop-shadow(0 10px 40px rgba(0,0,0,0.45))",
-            }}
+            className="h-auto w-full object-contain object-bottom shadow-[0_20px_45px_rgba(0,0,0,0.35)]"
           />
         </div>
 
@@ -127,15 +283,8 @@ export default function MobileHomePage() {
           {/* Top Row - About Me and Skills */}
           <div className="grid gap-8 lg:grid-cols-2 lg:items-stretch mb-8">
             {/* About Me Card */}
-            <div className="group relative w-full transform-gpu rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.25),rgba(255,255,255,0.08),rgba(34,211,238,0.20))] p-[1px] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_12px_32px_rgba(0,0,0,0.4)] ring-1 ring-white/10 backdrop-blur-[24px] backdrop-saturate-[140%] transition-all duration-300 after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl after:bg-[linear-gradient(120deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.12)_50%,rgba(255,255,255,0)_100%)] after:opacity-0 after:mix-blend-overlay after:transition-opacity after:duration-300 hover:bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(255,255,255,0.12),rgba(34,211,238,0.30))] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_16px_40px_rgba(0,0,0,0.5)] hover:ring-white/15 group-hover:after:opacity-100 focus-within:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)] focus-within:after:opacity-100 hover:-translate-y-0.5 sm:p-[1.2px] md:hover:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)]">
-              {/* Subtle halo */}
-              <div
-                aria-hidden
-                className="pointer-events-none absolute -inset-4 -z-10 rounded-3xl bg-[radial-gradient(80%_60%_at_50%_40%,rgba(59,130,246,0.22),transparent_70%),radial-gradient(70%_60%_at_60%_60%,rgba(168,85,247,0.18),transparent_70%)] opacity-20 blur-xl"
-              />
-
-              {/* Inner frosted panel */}
-              <div className="relative h-full rounded-2xl border border-white/8 bg-gray-950/50 p-6 backdrop-blur-[20px] backdrop-saturate-[150%] sm:p-8 before:pointer-events-none before:absolute before:inset-0 before:rounded-2xl before:bg-[radial-gradient(100%_50%_at_50%_0%,rgba(255,255,255,0.05),rgba(255,255,255,0)_50%)] before:content-['']">
+            <div className={CARD_WRAPPER_CLASS}>
+              <div className={CARD_BODY_CLASS}>
                 <h2
                   className={`${oswald.className} mb-6 text-2xl font-bold tracking-tight text-white`}
                 >
@@ -210,15 +359,8 @@ export default function MobileHomePage() {
             </div>
 
             {/* Skills Card */}
-            <div className="group relative w-full transform-gpu rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.25),rgba(255,255,255,0.08),rgba(34,211,238,0.20))] p-[1px] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_12px_32px_rgba(0,0,0,0.4)] ring-1 ring-white/10 backdrop-blur-[24px] backdrop-saturate-[140%] transition-all duration-300 after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl after:bg-[linear-gradient(120deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.12)_50%,rgba(255,255,255,0)_100%)] after:opacity-0 after:mix-blend-overlay after:transition-opacity after:duration-300 hover:bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(255,255,255,0.12),rgba(34,211,238,0.30))] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_16px_40px_rgba(0,0,0,0.5)] hover:ring-white/15 group-hover:after:opacity-100 focus-within:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)] focus-within:after:opacity-100 hover:-translate-y-0.5 sm:p-[1.2px] md:hover:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)]">
-              {/* Subtle halo */}
-              <div
-                aria-hidden
-                className="pointer-events-none absolute -inset-4 -z-10 rounded-3xl bg-[radial-gradient(80%_60%_at_50%_40%,rgba(59,130,246,0.22),transparent_70%),radial-gradient(70%_60%_at_60%_60%,rgba(168,85,247,0.18),transparent_70%)] opacity-20 blur-xl"
-              />
-
-              {/* Inner frosted panel */}
-              <div className="relative rounded-2xl border border-white/8 bg-gray-950/50 p-6 backdrop-blur-[20px] backdrop-saturate-[150%] sm:p-8 before:pointer-events-none before:absolute before:inset-0 before:rounded-2xl before:bg-[radial-gradient(100%_50%_at_50%_0%,rgba(255,255,255,0.05),rgba(255,255,255,0)_50%)] before:content-['']">
+            <div className={CARD_WRAPPER_CLASS}>
+              <div className={`${CARD_BODY_CLASS} space-y-6`}>
                 <h2
                   className={`${oswald.className} mb-6 text-2xl font-bold tracking-tight text-white`}
                 >
@@ -226,203 +368,33 @@ export default function MobileHomePage() {
                 </h2>
                 <div className="mt-3 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
                 <div className="mt-6 space-y-6">
-                  {/* Frontend */}
-                  <div>
-                    <h3 className="mb-3 text-sm font-semibold tracking-wider text-cyan-300 uppercase">
-                      Frontend
-                    </h3>
-                    <div className="flex flex-wrap gap-2">
-                      {[
-                        "JavaScript",
-                        "TypeScript",
-                        "React",
-                        "NextJS",
-                        "Tailwind CSS",
-                        "Shadcn UI",
-                        "Framer Motion",
-                        "React Native",
-                        "Expo",
-                        "EmberJS",
-                        "HTML",
-                        "CSS",
-                        "Sass",
-                        "SVG",
-                        "Accessibility",
-                        "VS Code Extensions",
-                        "Zed Extensions",
-                      ].map((skill) => (
-                        <span
-                          key={skill}
-                          className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium tracking-[0.12em] text-gray-300 uppercase"
-                        >
-                          {skill}
-                        </span>
-                      ))}
+                  {SKILL_SECTIONS.map(({ title, accentClass, items }) => (
+                    <div key={title}>
+                      <h3
+                        className={`mb-3 text-sm font-semibold tracking-wider uppercase ${accentClass}`}
+                      >
+                        {title}
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
+                        {items.map((skill) => (
+                          <span
+                            key={skill}
+                            className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium tracking-[0.12em] text-gray-300 uppercase"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-
-                  {/* Backend and Edge */}
-                  <div>
-                    <h3 className="mb-3 text-sm font-semibold tracking-wider text-purple-300 uppercase">
-                      Backend and Edge
-                    </h3>
-                    <div className="flex flex-wrap gap-2">
-                      {[
-                        "NodeJS",
-                        "Hono",
-                        "Express",
-                        "Cloudflare Workers",
-                        "Vercel Edge",
-                        "REST APIs",
-                        "SailsJS",
-                        "Socket.IO",
-                        "Rate Limiting",
-                        "Caching",
-                        "Session Management",
-                        "Authentication",
-                        "Authorization",
-                      ].map((skill) => (
-                        <span
-                          key={skill}
-                          className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium tracking-[0.12em] text-gray-300 uppercase"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Data */}
-                  <div>
-                    <h3 className="mb-3 text-sm font-semibold tracking-wider text-emerald-300 uppercase">
-                      Data
-                    </h3>
-                    <div className="flex flex-wrap gap-2">
-                      {[
-                        "Prisma",
-                        "Drizzle",
-                        "PostgreSQL",
-                        "MySQL",
-                        "SQLite",
-                        "MongoDB",
-                        "Redis",
-                        "Firebase",
-                      ].map((skill) => (
-                        <span
-                          key={skill}
-                          className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium tracking-[0.12em] text-gray-300 uppercase"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Quality and Testing */}
-                  <div>
-                    <h3 className="mb-3 text-sm font-semibold tracking-wider text-orange-300 uppercase">
-                      Quality and Testing
-                    </h3>
-                    <div className="flex flex-wrap gap-2">
-                      {[
-                        "Zod",
-                        "Vitest",
-                        "React Testing Library",
-                        "Jest",
-                        "Playwright",
-                        "Cypress",
-                        "GitHub Actions",
-                        "Jenkins",
-                        "CI/CD",
-                      ].map((skill) => (
-                        <span
-                          key={skill}
-                          className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium tracking-[0.12em] text-gray-300 uppercase"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* DevOps and Tooling */}
-                  <div>
-                    <h3 className="mb-3 text-sm font-semibold tracking-wider text-rose-300 uppercase">
-                      DevOps and Tooling
-                    </h3>
-                    <div className="flex flex-wrap gap-2">
-                      {[
-                        "Amazon Web Services",
-                        "Vercel",
-                        "Cloudflare",
-                        "Netlify",
-                        "Docker",
-                        "Git",
-                      ].map((skill) => (
-                        <span
-                          key={skill}
-                          className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium tracking-[0.12em] text-gray-300 uppercase"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* AI and Productivity */}
-                  <div>
-                    <h3 className="mb-3 text-sm font-semibold tracking-wider text-indigo-300 uppercase">
-                      AI and Productivity
-                    </h3>
-                    <div className="flex flex-wrap gap-2">
-                      {[
-                        "Cursor",
-                        "Warp.dev",
-                        "Claude Code",
-                        "Gemini CLI",
-                        "GitHub Copilot",
-                        "OpenRouter",
-                        "Windsurf",
-                        "Cline",
-                        "VS Code",
-                        "Zed",
-                        "Gemini",
-                        "ChatGPT",
-                        "Perplexity",
-                        "Comet",
-                        "LangChain",
-                        "v0",
-                        "Bolt.new",
-                        "Lovable",
-                        "Google AI Studio",
-                        "Google Workspace",
-                        "Linear",
-                        "Jira",
-                      ].map((skill) => (
-                        <span
-                          key={skill}
-                          className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium tracking-[0.12em] text-gray-300 uppercase"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
 
           {/* Bottom Row - Expertise Card (Full Width) */}
-          <div className="group relative w-full transform-gpu rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.25),rgba(255,255,255,0.08),rgba(34,211,238,0.20))] p-[1px] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_12px_32px_rgba(0,0,0,0.4)] ring-1 ring-white/10 backdrop-blur-[24px] backdrop-saturate-[140%] transition-all duration-300 after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl after:bg-[linear-gradient(120deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.12)_50%,rgba(255,255,255,0)_100%)] after:opacity-0 after:mix-blend-overlay after:transition-opacity after:duration-300 hover:bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(255,255,255,0.12),rgba(34,211,238,0.30))] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_16px_40px_rgba(0,0,0,0.5)] hover:ring-white/15 group-hover:after:opacity-100 focus-within:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)] focus-within:after:opacity-100 hover:-translate-y-0.5 sm:p-[1.2px] md:hover:[transform:perspective(1000px)_rotateX(0.6deg)_rotateY(-0.6deg)]">
-            {/* Subtle halo */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -inset-4 -z-10 rounded-3xl bg-[radial-gradient(80%_60%_at_50%_40%,rgba(59,130,246,0.22),transparent_70%),radial-gradient(70%_60%_at_60%_60%,rgba(168,85,247,0.18),transparent_70%)] opacity-20 blur-xl"
-            />
-
-            {/* Inner frosted panel */}
-            <div className="relative rounded-2xl border border-white/8 bg-gray-950/50 p-6 backdrop-blur-[20px] backdrop-saturate-[150%] sm:p-8 before:pointer-events-none before:absolute before:inset-0 before:rounded-2xl before:bg-[radial-gradient(100%_50%_at_50%_0%,rgba(255,255,255,0.05),rgba(255,255,255,0)_50%)] before:content-['']">
+          <div className={CARD_WRAPPER_CLASS}>
+            <div className={`${CARD_BODY_CLASS} space-y-6`}>
               <h2
                 className={`${oswald.className} mb-6 text-2xl font-bold tracking-tight text-white`}
               >
@@ -430,54 +402,8 @@ export default function MobileHomePage() {
               </h2>
               <div className="mt-3 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
               <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {[
-                  {
-                    title: "Reliability as a feature",
-                    description:
-                      "I design with clear contracts, structured outputs, and automated checks so changes ship confidently and stay healthy over time.",
-                  },
-                  {
-                    title: "Performance and accessibility",
-                    description:
-                      "I sweat UX details and measure results, from Lighthouse wins to smoother motion and faster page loads on real networks and devices.",
-                  },
-                  {
-                    title: "Edge-first architecture",
-                    description:
-                      "I simplify deployments and reduce latency by consolidating services, adding thoughtful rate limits and admin surfaces where they earn their keep.",
-                  },
-                  {
-                    title: "Security and trust",
-                    description:
-                      "I harden APIs with authentication, headers, CORS discipline, and predictable error handling so teams can move quickly without surprises.",
-                  },
-                  {
-                    title: "AI as leverage with guardrails",
-                    description:
-                      "I integrate LLMs and coding assistants to boost velocity while keeping outputs structured, costs controlled, and reviews human-friendly.",
-                  },
-                  {
-                    title: "Data and APIs that age well",
-                    description:
-                      "I design schemas and endpoints that are easy to read, paginate, cache, and evolve without breaking callers.",
-                  },
-                  {
-                    title: "Testing that protects momentum",
-                    description:
-                      "I balance unit, integration, and E2E coverage so the codebase remains fast to change and safe to deploy.",
-                  },
-                  {
-                    title: "Developer experience and documentation",
-                    description:
-                      "I write the docs I wish I had, improve onboarding paths, and shape tooling that keeps teams in flow.",
-                  },
-                  {
-                    title: "Mentorship and collaboration",
-                    description:
-                      "I help teammates level up through pairing, design reviews, and clear communication, keeping the team calm and productive.",
-                  },
-                ].map((expertise) => (
-                  <div key={expertise.title} className="transition-all duration-300">
+                {EXPERTISE_ITEMS.map((expertise) => (
+                  <div key={expertise.title} className="transition-colors duration-200">
                     <div className="flex items-start gap-3">
                       <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-cyan-300/80" />
                       <div>
