@@ -1,9 +1,23 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { Oswald } from "next/font/google";
 import Link from "next/link";
 import AnimatedText from "@/components/ui/AnimatedText";
 import GlassHeaderBubble from "@/components/ui/GlassHeaderBubble";
 const oswald = Oswald({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: "Jayvic San Antonio | Senior Software Engineer",
+  description:
+    "Accessibility-focused, low-motion version of Jayvic San Antonio's portfolio for slower devices or quick reference.",
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 export default function MobileHomePage() {
   return (
