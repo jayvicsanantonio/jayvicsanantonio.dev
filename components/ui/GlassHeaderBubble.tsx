@@ -74,8 +74,8 @@ export default function GlassHeaderBubble({
               }
               label="Projects"
               active={isProjects}
-              {...(isProjects ? { vtTagName: "projects" } : {})}
-              {...(!isProjects ? { tooltip: "Projects", tooltipPlacement: "below" as const } : {})}
+              tooltip={!isProjects ? "Projects" : undefined}
+              tooltipPlacement="below"
               collapsedPx={"clamp(56px,11vw,84px)"}
               expandedPx={"clamp(120px,40vw,180px)"}
               heightPx={"clamp(48px,9.5vw,72px)"}
@@ -100,8 +100,8 @@ export default function GlassHeaderBubble({
               }
               label="Work"
               active={isWork}
-              {...(isWork ? { vtTagName: "work" } : {})}
-              {...(!isWork ? { tooltip: "Work", tooltipPlacement: "below" as const } : {})}
+              tooltip={!isWork ? "Work" : undefined}
+              tooltipPlacement="below"
               collapsedPx={"clamp(56px,11vw,84px)"}
               expandedPx={"clamp(104px,34vw,160px)"}
               heightPx={"clamp(48px,9.5vw,72px)"}

@@ -18,7 +18,7 @@ export default function ProjectsPage() {
     <section className="relative w-full overflow-hidden">
       <div className="cq container pt-48 pb-16 sm:pt-52">
         {/* Header */}
-        <div className="animate-fade-in-up space-y-5">
+        <div className="space-y-5 motion-safe:animate-fade-in-up">
           <AnimatedHeader />
 
           <p className="max-w-[720px] text-base text-gray-300/85 sm:text-lg">
@@ -29,7 +29,7 @@ export default function ProjectsPage() {
 
         {/* Projects only */}
         <React.Suspense fallback={null}>
-          <div className="animate-fade-in-up" style={{ animationDelay: "160ms" }}>
+          <div className="motion-safe:animate-fade-in-up" style={{ animationDelay: "160ms" }}>
             <SkillsAndCases />
           </div>
         </React.Suspense>

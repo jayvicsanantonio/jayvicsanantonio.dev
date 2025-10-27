@@ -12,12 +12,9 @@ export default function ProjectLink({
     href.startsWith("http") || href.startsWith("mailto:") || href.startsWith("tel:");
 
   const cls = [
-    "inline-flex h-9 gap-2 px-3 text-sm items-center justify-center rounded-full isolate overflow-hidden",
-    // Pure Tailwind glass approximation
-    "border border-white/30 bg-white/15 backdrop-blur-lg backdrop-saturate-150 shadow-lg",
-    // Interaction states
-    "transition ease-out duration-200 hover:border-white/50 hover:shadow-xl",
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40",
+    "inline-flex h-9 gap-2 px-3 text-sm items-center justify-center rounded-full border",
+    "border-white/20 bg-slate-900/85 text-white/90 shadow-[0_8px_20px_rgba(0,0,0,0.35)] transition-colors duration-200",
+    "hover:border-white/35 hover:bg-slate-900/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
   ].join(" ");
 
   if (isExternal) {
