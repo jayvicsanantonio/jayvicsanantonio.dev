@@ -6,6 +6,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 import { Badge } from "@/components/ui/Badge";
+import { CARD_INNER_BASE, CARD_OUTER_BASE } from "@/components/ui/cardStyles";
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
 type Experience = {
@@ -271,18 +272,13 @@ export default function WorkTimeline() {
                       duration: 0.3,
                       ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
                     }}
-                    className={`group cq relative w-full rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.25),rgba(255,255,255,0.08),rgba(34,211,238,0.20))] p-[1px] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_12px_32px_rgba(0,0,0,0.4)] ring-1 ring-white/10 backdrop-blur-[24px] backdrop-saturate-[140%] after:pointer-events-none after:absolute after:inset-0 after:rounded-2xl after:bg-[linear-gradient(120deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.12)_50%,rgba(255,255,255,0)_100%)] after:opacity-0 after:mix-blend-overlay after:transition-opacity after:duration-300 hover:bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(255,255,255,0.12),rgba(34,211,238,0.30))] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_16px_40px_rgba(0,0,0,0.5)] hover:ring-white/15 group-hover:after:opacity-100 focus-within:after:opacity-100 sm:p-[1.2px] lg:w-[min(500px,50vw)] ${
+                    className={`${CARD_OUTER_BASE} mx-auto w-full lg:mx-0 lg:w-[min(500px,50vw)] ${
                       isRight ? "lg:mr-auto" : "lg:ml-auto"
-                    } mx-auto lg:mx-0`}
+                    }`}
                   >
-                    {/* Subtle halo */}
                     <div
-                      aria-hidden
-                      className="pointer-events-none absolute -inset-4 -z-10 rounded-3xl bg-[radial-gradient(80%_60%_at_50%_40%,rgba(59,130,246,0.22),transparent_70%),radial-gradient(70%_60%_at_60%_60%,rgba(168,85,247,0.18),transparent_70%)] opacity-20 blur-xl"
-                    />
-
-                    {/* Inner frosted panel */}
-                    <div className="relative rounded-2xl border border-white/8 bg-gray-950/50 p-5 backdrop-blur-[20px] backdrop-saturate-[150%] sm:p-6 [@container(min-width:36rem)]:p-6 before:pointer-events-none before:absolute before:inset-0 before:rounded-2xl before:bg-[radial-gradient(100%_50%_at_50%_0%,rgba(255,255,255,0.05),rgba(255,255,255,0)_50%)] before:content-['']">
+                      className={`${CARD_INNER_BASE} p-5 sm:p-6 [@container(min-width:36rem)]:p-6`}
+                    >
                       <div className="text-left">
                         <h3 className="font-oswald text-xl text-white [@container(min-width:28rem)]:text-2xl">
                           {item.title}

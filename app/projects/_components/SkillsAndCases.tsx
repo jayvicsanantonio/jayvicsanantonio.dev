@@ -8,6 +8,7 @@ import React from "react";
 import { PROJECTS } from "@/app/projects/projects.data";
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
+import { CARD_INNER_BASE, CARD_OUTER_BASE } from "@/components/ui/cardStyles";
 import ProjectLink from "./ProjectLink";
 
 const SKILL_FILTERS = [
@@ -30,6 +31,15 @@ const PRIORITY_ORDER = [
   "barbenheimer-zed-theme",
   "ember-upgrade-guide",
 ];
+
+const FILTER_BUTTON_CLASS =
+  "relative inline-flex min-h-11 items-center rounded-full border px-3 py-2 text-xs sm:text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950";
+
+const FILTER_BUTTON_ACTIVE =
+  "border-cyan-400/60 bg-cyan-950/85 text-white shadow-[0_8px_24px_rgba(0,0,0,0.35)]";
+
+const FILTER_BUTTON_IDLE =
+  "border-white/20 bg-slate-900/80 text-white/80 hover:border-white/35 hover:bg-slate-900/90";
 
 export default function SkillsAndCases() {
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -101,11 +111,9 @@ export default function SkillsAndCases() {
               type="button"
               key={s}
               onClick={() => setActive(s)}
-              className={`relative inline-flex min-h-11 items-center rounded-full border px-3 py-2 text-xs backdrop-blur-md backdrop-saturate-[140%] transition-colors sm:text-sm ${
-                active === s
-                  ? "border-cyan-400/60 bg-cyan-900/70 text-white shadow-[0_8px_28px_rgba(0,0,0,0.35)]"
-                  : "border-white/30 bg-[linear-gradient(180deg,rgba(255,255,255,0.10),rgba(255,255,255,0.06))] text-white/90 hover:border-white/50"
-              } focus-visible:ring-offset-background focus-visible:ring-2 focus-visible:ring-cyan-400/60 focus-visible:ring-offset-2`}
+              className={`${FILTER_BUTTON_CLASS} ${
+                active === s ? FILTER_BUTTON_ACTIVE : FILTER_BUTTON_IDLE
+              }`}
               aria-pressed={active === s}
             >
               {s}
@@ -115,23 +123,30 @@ export default function SkillsAndCases() {
       </div>
 
       {/* Projects grid */}
-      <div key={active} className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {visible.map((c, i) => (
           <article
             key={c.slug}
-            className={`group cq relative min-h-[360px] rounded-2xl bg-[linear-gradient(135deg,rgba(59,130,246,0.25),rgba(255,255,255,0.08),rgba(34,211,238,0.20))] p-[1px] shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_12px_32px_rgba(0,0,0,0.4)] ring-1 ring-white/10 backdrop-blur-[24px] backdrop-saturate-[140%] transition-all duration-300 hover:bg-[linear-gradient(135deg,rgba(59,130,246,0.35),rgba(255,255,255,0.12),rgba(34,211,238,0.30))] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_16px_40px_rgba(0,0,0,0.5)] hover:ring-white/15 md:min-h-[430px] ${!prefersReducedMotion ? "animate-fade-in-up" : ""}`}
+            className={`${CARD_OUTER_BASE} min-h-[360px] md:min-h-[430px] ${
+              !prefersReducedMotion ? "motion-safe:animate-fade-in-up" : ""
+            }`}
             style={{ animationDelay: !prefersReducedMotion ? `${80 * i}ms` : undefined }}
           >
-            <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-white/8 bg-gray-950/50 backdrop-blur-[20px] backdrop-saturate-[150%] [@container(min-width:36rem)]:grid [@container(min-width:36rem)]:grid-cols-[1fr,1.5fr] before:pointer-events-none before:absolute before:inset-0 before:rounded-2xl before:bg-[radial-gradient(100%_50%_at_50%_0%,rgba(255,255,255,0.05),rgba(255,255,255,0)_50%)] before:content-['']">
-              <Image
-                src={c.image.src}
-                alt={c.image.alt}
-                width={c.image.width}
-                height={c.image.height}
-                style={{ aspectRatio: c.image.ratio }}
-                className="h-36 w-full object-cover md:h-44 [@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-full"
-              />
-              <div className="flex flex-1 flex-col gap-3 p-5 [@container(min-width:36rem)]:p-6">
+            <div
+              className={`${CARD_INNER_BASE} [@container(min-width:36rem)]:grid [@container(min-width:36rem)]:grid-cols-[minmax(0,1fr),1.5fr] [@container(min-width:36rem)]:gap-0`}
+            >
+              <div className="relative h-36 w-full overflow-hidden md:h-44 [@container(min-width:28rem)]:h-48 [@container(min-width:36rem)]:h-full">
+                <Image
+                  src={c.image.src}
+                  alt={c.image.alt}
+                  width={c.image.width}
+                  height={c.image.height}
+                  style={{ aspectRatio: c.image.ratio }}
+                  className="h-full w-full object-cover"
+                  priority={i < 3}
+                />
+              </div>
+              <div className="flex flex-1 flex-col gap-3 p-6 sm:p-8">
                 <div className="flex items-center justify-between gap-4">
                   <h3 className="font-oswald text-xl text-white">{c.title}</h3>
                   <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] font-medium tracking-[0.12em] whitespace-nowrap text-gray-300 uppercase">
