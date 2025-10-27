@@ -16,11 +16,11 @@ export default function WorkPage() {
     <section className="relative w-full overflow-hidden">
       {/* Ambient background */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div className="motion-safe-only scroll-element animate-spin-slow absolute top-1/2 left-1/2 h-[120vw] w-[120vw] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.08] blur-3xl [animation-duration:22s] [background:conic-gradient(from_0deg_at_50%_50%,rgba(168,85,247,0.45),rgba(59,130,246,0.35),rgba(34,211,238,0.30),rgba(168,85,247,0.45))]" />
+        <div className="motion-safe:block hidden absolute top-1/2 left-1/2 h-[120vw] w-[120vw] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-5 blur-3xl [animation:spin_22s_linear_infinite] [background:conic-gradient(from_0deg_at_50%_50%,rgba(168,85,247,0.35),rgba(59,130,246,0.28),rgba(34,211,238,0.24),rgba(168,85,247,0.35))]" />
       </div>
       <div className="cq container pt-48 pb-16 sm:pt-52">
         {/* Intro */}
-        <div className="animate-fade-in-up space-y-5">
+        <div className="space-y-5 motion-safe:animate-fade-in-up">
           <h1 className="font-oswald text-3xl font-bold tracking-tight text-cyan-300/90 sm:text-4xl lg:text-6xl">
             Professional Experience
           </h1>
@@ -33,7 +33,7 @@ export default function WorkPage() {
         </div>
 
         {/* Timeline */}
-        <div className="animate-fade-in-up" style={{ animationDelay: "140ms" }}>
+        <div className="motion-safe:animate-fade-in-up" style={{ animationDelay: "140ms" }}>
           <WorkTimeline />
         </div>
       </div>

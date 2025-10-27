@@ -8,6 +8,7 @@ import React from "react";
 import { PROJECTS } from "@/app/projects/projects.data";
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
+import { CARD_INNER_BASE, CARD_OUTER_BASE } from "@/components/ui/cardStyles";
 import ProjectLink from "./ProjectLink";
 
 const SKILL_FILTERS = [
@@ -39,12 +40,6 @@ const FILTER_BUTTON_ACTIVE =
 
 const FILTER_BUTTON_IDLE =
   "border-white/20 bg-slate-900/80 text-white/80 hover:border-white/35 hover:bg-slate-900/90";
-
-const CARD_OUTER_CLASS =
-  "group cq relative min-h-[360px] rounded-2xl bg-gradient-to-br from-slate-950 via-slate-950/95 to-slate-950/75 p-[1px] shadow-[0_10px_28px_rgba(0,0,0,0.45)] ring-1 ring-white/10 transition-transform duration-200 hover:-translate-y-0.5 md:min-h-[430px]";
-
-const CARD_INNER_CLASS =
-  "flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#0b1220] [@container(min-width:36rem)]:grid [@container(min-width:36rem)]:grid-cols-[1fr,1.5fr]";
 
 export default function SkillsAndCases() {
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -132,21 +127,26 @@ export default function SkillsAndCases() {
         {visible.map((c, i) => (
           <article
             key={c.slug}
-            className={`${CARD_OUTER_CLASS} ${
+            className={`${CARD_OUTER_BASE} min-h-[360px] md:min-h-[430px] ${
               !prefersReducedMotion ? "motion-safe:animate-fade-in-up" : ""
             }`}
             style={{ animationDelay: !prefersReducedMotion ? `${80 * i}ms` : undefined }}
           >
-            <div className={CARD_INNER_CLASS}>
-              <Image
-                src={c.image.src}
-                alt={c.image.alt}
-                width={c.image.width}
-                height={c.image.height}
-                style={{ aspectRatio: c.image.ratio }}
-                className="h-36 w-full object-cover md:h-44 [@container(min-width:28rem)]:h-44 [@container(min-width:36rem)]:h-full"
-              />
-              <div className="flex flex-1 flex-col gap-3 p-5 [@container(min-width:36rem)]:p-6">
+            <div
+              className={`${CARD_INNER_BASE} [@container(min-width:36rem)]:grid [@container(min-width:36rem)]:grid-cols-[minmax(0,1fr),1.5fr] [@container(min-width:36rem)]:gap-0`}
+            >
+              <div className="relative h-36 w-full overflow-hidden md:h-44 [@container(min-width:28rem)]:h-48 [@container(min-width:36rem)]:h-full">
+                <Image
+                  src={c.image.src}
+                  alt={c.image.alt}
+                  width={c.image.width}
+                  height={c.image.height}
+                  style={{ aspectRatio: c.image.ratio }}
+                  className="h-full w-full object-cover"
+                  priority={i < 3}
+                />
+              </div>
+              <div className="flex flex-1 flex-col gap-3 p-6 sm:p-8">
                 <div className="flex items-center justify-between gap-4">
                   <h3 className="font-oswald text-xl text-white">{c.title}</h3>
                   <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] font-medium tracking-[0.12em] whitespace-nowrap text-gray-300 uppercase">
