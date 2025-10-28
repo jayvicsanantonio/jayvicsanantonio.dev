@@ -1,6 +1,8 @@
-export default function AmbientBackground() {
+"use cache";
+
+export default async function AmbientBackground() {
   return (
-    <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+    <div className="ambient-background pointer-events-none fixed inset-0 -z-10 overflow-hidden">
       {/* Radial vignette */}
       <div className="absolute inset-0 bg-[radial-gradient(80%_60%_at_50%_0%,rgba(59,130,246,0.15),transparent_60%),radial-gradient(60%_50%_at_50%_100%,rgba(168,85,247,0.12),transparent_60%)]" />
 

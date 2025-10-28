@@ -1,122 +1,18 @@
+"use cache";
+
 import type { Metadata } from "next";
+
 import Image from "next/image";
-import { Oswald } from "next/font/google";
 import Link from "next/link";
 import AnimatedText from "@/components/ui/AnimatedText";
 import GlassHeaderBubble from "@/components/ui/GlassHeaderBubble";
-const oswald = Oswald({ subsets: ["latin"] });
-
-const SKILL_SECTIONS = [
-  {
-    title: "Frontend",
-    accentClass: "text-cyan-300",
-    items: [
-      "JavaScript",
-      "TypeScript",
-      "React",
-      "NextJS",
-      "Tailwind CSS",
-      "Shadcn UI",
-      "Framer Motion",
-      "React Native",
-      "Expo",
-      "EmberJS",
-      "HTML",
-      "CSS",
-      "Sass",
-      "SVG",
-      "Accessibility",
-      "VS Code Extensions",
-      "Zed Extensions",
-    ],
-  },
-  {
-    title: "Backend and Edge",
-    accentClass: "text-purple-300",
-    items: [
-      "NodeJS",
-      "Hono",
-      "Express",
-      "Cloudflare Workers",
-      "Vercel Edge",
-      "REST APIs",
-      "SailsJS",
-      "Socket.IO",
-      "Rate Limiting",
-      "Caching",
-      "Session Management",
-      "Authentication",
-      "Authorization",
-    ],
-  },
-  {
-    title: "Data",
-    accentClass: "text-emerald-300",
-    items: [
-      "Prisma",
-      "Drizzle",
-      "PostgreSQL",
-      "MySQL",
-      "SQLite",
-      "MongoDB",
-      "Redis",
-      "Firebase",
-    ],
-  },
-  {
-    title: "Quality and Testing",
-    accentClass: "text-orange-300",
-    items: [
-      "Zod",
-      "Vitest",
-      "React Testing Library",
-      "Jest",
-      "Playwright",
-      "Cypress",
-      "GitHub Actions",
-      "Jenkins",
-      "CI/CD",
-    ],
-  },
-  {
-    title: "DevOps and Tooling",
-    accentClass: "text-rose-300",
-    items: ["Amazon Web Services", "Vercel", "Cloudflare", "Netlify", "Docker", "Git"],
-  },
-  {
-    title: "AI and Productivity",
-    accentClass: "text-indigo-300",
-    items: [
-      "Cursor",
-      "Warp.dev",
-      "Claude Code",
-      "Gemini CLI",
-      "GitHub Copilot",
-      "OpenRouter",
-      "Windsurf",
-      "Cline",
-      "VS Code",
-      "Zed",
-      "Gemini",
-      "ChatGPT",
-      "Perplexity",
-      "Comet",
-      "LangChain",
-      "v0",
-      "Bolt.new",
-      "Lovable",
-      "Google AI Studio",
-      "Google Workspace",
-      "Linear",
-      "Jira",
-    ],
-  },
-] as const;
+import { getSkillSections } from "@/lib/content/skills";
 
 const CARD_WRAPPER_CLASS =
   "group relative w-full rounded-2xl bg-gradient-to-br from-slate-950/90 via-slate-950/70 to-slate-950/50 p-[1px] shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_28px_rgba(0,0,0,0.45)] ring-1 ring-white/10 transition-transform duration-200 hover:-translate-y-0.5 sm:p-[1.2px]";
 
-const CARD_BODY_CLASS = "relative h-full rounded-2xl border border-white/8 bg-gray-950/85 p-6 sm:p-8";
+const CARD_BODY_CLASS =
+  "relative h-full rounded-2xl border border-white/8 bg-gray-950/85 p-6 sm:p-8";
 
 const EXPERTISE_ITEMS = [
   {
@@ -179,7 +75,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function MobileHomePage() {
+export default async function MobileHomePage() {
+  const skillSections = await getSkillSections();
   return (
     <main className="text-white overflow-x-hidden min-h-screen">
       {/* Custom Ambient Background with black gradient overlay */}
@@ -202,7 +99,7 @@ export default function MobileHomePage() {
       {/* Top-centered header bubble */}
       <div className="pointer-events-none fixed left-0 right-0 top-[max(env(safe-area-inset-top),16px)] z-[70] py-6 sm:py-10">
         <div className="pointer-events-auto flex justify-center">
-          <GlassHeaderBubble label="Hi, I'm Jayvic 👋" />
+          <GlassHeaderBubble label="Hi, I'm Jayvic 👋" activeRoute="lite" />
         </div>
       </div>
 
@@ -253,9 +150,7 @@ export default function MobileHomePage() {
 
         {/* Title at bottom */}
         <div className="pointer-events-none absolute left-1/2 bottom-8 w-[17.625rem] -translate-x-1/2 text-center z-10">
-          <h2
-            className={`font-bold tracking-wide text-white drop-shadow-[0_4px_20px_rgba(0,139,139,0.4),_0_2px_10px_rgba(0,0,0,0.6)] ${oswald.className}`}
-          >
+          <h2 className="font-oswald font-bold tracking-wide text-white drop-shadow-[0_4px_20px_rgba(0,139,139,0.4),_0_2px_10px_rgba(0,0,0,0.6)]">
             <div className="text-[36px] leading-none">
               <AnimatedText text="FULL-STACK" start={true} perCharDelay={80} baseDelay={120} />
             </div>
@@ -285,9 +180,7 @@ export default function MobileHomePage() {
             {/* About Me Card */}
             <div className={CARD_WRAPPER_CLASS}>
               <div className={CARD_BODY_CLASS}>
-                <h2
-                  className={`${oswald.className} mb-6 text-2xl font-bold tracking-tight text-white`}
-                >
+                <h2 className="font-oswald mb-6 text-2xl font-bold tracking-tight text-white">
                   About Me
                 </h2>
                 <div className="mt-3 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
@@ -361,14 +254,12 @@ export default function MobileHomePage() {
             {/* Skills Card */}
             <div className={CARD_WRAPPER_CLASS}>
               <div className={`${CARD_BODY_CLASS} space-y-6`}>
-                <h2
-                  className={`${oswald.className} mb-6 text-2xl font-bold tracking-tight text-white`}
-                >
+                <h2 className="font-oswald mb-6 text-2xl font-bold tracking-tight text-white">
                   Skills
                 </h2>
                 <div className="mt-3 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
                 <div className="mt-6 space-y-6">
-                  {SKILL_SECTIONS.map(({ title, accentClass, items }) => (
+                  {skillSections.map(({ title, accentClass, items }) => (
                     <div key={title}>
                       <h3
                         className={`mb-3 text-sm font-semibold tracking-wider uppercase ${accentClass}`}
@@ -395,9 +286,7 @@ export default function MobileHomePage() {
           {/* Bottom Row - Expertise Card (Full Width) */}
           <div className={CARD_WRAPPER_CLASS}>
             <div className={`${CARD_BODY_CLASS} space-y-6`}>
-              <h2
-                className={`${oswald.className} mb-6 text-2xl font-bold tracking-tight text-white`}
-              >
+              <h2 className="font-oswald mb-6 text-2xl font-bold tracking-tight text-white">
                 Expertise
               </h2>
               <div className="mt-3 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />

@@ -1,8 +1,14 @@
+"use cache";
+
 import type { Metadata } from "next";
-import React from "react";
+
+import { PPR_ENABLED } from "@/lib/config/ppr";
+import { Suspense } from "react";
+
+import { ProjectsGridSkeleton } from "@/components/fallbacks";
 
 import AnimatedHeader from "./_components/AnimatedHeader.client";
-import SkillsAndCases from "./_components/SkillsAndCases";
+import ProjectsGrid from "./_components/ProjectsGrid";
 
 export const metadata: Metadata = {
   title: "Projects | Jayvic San Antonio",
@@ -13,7 +19,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
+  const grid = (
+    <div className="motion-safe:animate-fade-in-up" style={{ animationDelay: "160ms" }}>
+      <ProjectsGrid />
+    </div>
+  );
+  const projectsContent = PPR_ENABLED ? (
+    <Suspense fallback={<ProjectsGridSkeleton />}>{grid}</Suspense>
+  ) : (
+    grid
+  );
+
   return (
     <section className="relative w-full overflow-hidden">
       <div className="cq container pt-48 pb-16 sm:pt-52">
@@ -28,11 +45,7 @@ export default function ProjectsPage() {
         </div>
 
         {/* Projects only */}
-        <React.Suspense fallback={null}>
-          <div className="motion-safe:animate-fade-in-up" style={{ animationDelay: "160ms" }}>
-            <SkillsAndCases />
-          </div>
-        </React.Suspense>
+        {projectsContent}
       </div>
     </section>
   );

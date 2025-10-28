@@ -1,6 +1,9 @@
-"use client";
+import { cacheLife, cacheTag } from "next/cache";
+import { cache } from "react";
 
-export const CFG = {
+import type { HeroConfig } from "./types";
+
+const HERO_CONFIG: HeroConfig = {
   timings: {
     introStartDelay: 800,
     introExpansionDuration: 2000,
@@ -24,7 +27,7 @@ export const CFG = {
   video: {
     playbackRate: 0.75,
     scale: 1.05,
-    preload: "metadata" as const,
+    preload: "metadata",
   },
   nav: {
     centerTop: "46%",
@@ -32,4 +35,14 @@ export const CFG = {
     leftOffsetsPx: { projects: 54, linkedin: 150 },
     rightOffsetsPx: { work: 54, github: 150 },
   },
-} as const;
+};
+
+export { HERO_CONFIG };
+
+const loadHeroConfig = cache(async (): Promise<HeroConfig> => {
+  cacheTag("hero-config");
+  cacheLife("days");
+  return HERO_CONFIG;
+});
+
+export const getHeroConfig = loadHeroConfig;

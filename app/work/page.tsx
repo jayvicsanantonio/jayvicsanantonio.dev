@@ -1,6 +1,13 @@
+"use cache";
+
 import type { Metadata } from "next";
 
-import WorkTimeline from "./_components/WorkTimeline.client";
+import { PPR_ENABLED } from "@/lib/config/ppr";
+import { Suspense } from "react";
+
+import { WorkTimelineSkeleton } from "@/components/fallbacks";
+
+import WorkTimelineSection from "./_components/WorkTimelineSection";
 
 export const metadata: Metadata = {
   title: "Experience | Jayvic San Antonio",
@@ -11,7 +18,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function WorkPage() {
+export default async function WorkPage() {
+  const timeline = (
+    <div className="motion-safe:animate-fade-in-up" style={{ animationDelay: "140ms" }}>
+      <WorkTimelineSection />
+    </div>
+  );
+  const timelineContent = PPR_ENABLED ? (
+    <Suspense fallback={<WorkTimelineSkeleton />}>{timeline}</Suspense>
+  ) : (
+    timeline
+  );
+
   return (
     <section className="relative w-full overflow-hidden">
       {/* Ambient background */}
@@ -33,9 +51,7 @@ export default function WorkPage() {
         </div>
 
         {/* Timeline */}
-        <div className="motion-safe:animate-fade-in-up" style={{ animationDelay: "140ms" }}>
-          <WorkTimeline />
-        </div>
+        {timelineContent}
       </div>
     </section>
   );

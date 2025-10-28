@@ -1,6 +1,11 @@
+"use cache";
+
+import { Suspense } from "react";
+
+import AmbientBackground from "@/components/shell/AmbientBackground";
 import ClientAppShell from "@/components/shell/ClientAppShell.client";
 
-export default function Body({
+export default async function Body({
   children,
   fontVars,
 }: {
@@ -11,7 +16,10 @@ export default function Body({
     <body
       className={`dark ${fontVars ?? ""} flex min-h-screen flex-col text-gray-200 dark:bg-gray-950 touch-manipulation overscroll-y-contain`}
     >
-      <ClientAppShell>{children}</ClientAppShell>
+      <AmbientBackground />
+      <Suspense fallback={null}>
+        <ClientAppShell>{children}</ClientAppShell>
+      </Suspense>
     </body>
   );
 }
