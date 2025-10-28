@@ -4,21 +4,17 @@ const withBundleAnalyzer = createBundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });
 
-// Toggle Partial Prerendering (PPR) incrementally via env flag.
-const PPR_ENABLED = process.env.PPR_ENABLED === "true";
-
 const experimental = {
   viewTransition: true,
   // Persist dev artifacts on disk to speed up restarts
   turbopackFileSystemCacheForDev: true,
-  ...(PPR_ENABLED ? { ppr: "incremental" } : {}),
 };
 
 const nextConfig = {
   reactStrictMode: true,
-  // React Compiler enabled to match current rollout status
-  reactCompiler: true,
-  // Re-enable Partial Pre-Rendering cache components
+  // React Compiler disabled to match current rollout status
+  reactCompiler: false,
+  // Required for `'use cache'` directives and PPR
   cacheComponents: true,
   experimental,
   // Enable Turbopack (Next.js 16 defaults to Turbopack).

@@ -13,9 +13,9 @@
 ## Phase 1 – Configuration & Infrastructure
 
 - [x] Update `next.config.mjs`
-  - `experimental.ppr = process.env.PPR_ENABLED ? 'incremental' : undefined`.
-  - Ensure `cacheComponents: true` retained.
-  - Document comment explaining rollout strategy.
+  - Keep `cacheComponents: true` enabled (global prerequisite).
+  - Drop deprecated `experimental.ppr` toggle in favor of per-route flags.
+  - Document how to disable PPR via the `PPR_ENABLED` env toggle used by pages.
 - [x] Introduce Suspense-ready fallbacks in `components/fallbacks/`.
 - [x] Add shared TypeScript types in `lib/content/types.ts` (projects, experiences, skills).
 - [x] Update lint/config docs to mention cache directives usage.
@@ -54,7 +54,7 @@
 
 ### Home (`app/page.tsx`)
 
-- [x] Add `'use cache'` + `export const experimental_ppr = true`.
+- [x] Keep the page cached (async + `'use cache'`) and defer hero streaming behind `PPR_ENABLED`.
 - [x] Introduce `HeroShell` server component using `getHeroConfig()`.
 - [x] Create `HeroMorphIsland.client.tsx`; accept props for timings, scroll config, asset urls.
 - [x] Wrap island with `<Suspense fallback={<HeroFallback />}>`.
@@ -62,7 +62,7 @@
 
 ### Projects (`app/projects/page.tsx`)
 
-- [x] Add `'use cache'` + `experimental_ppr`.
+- [x] Keep the page cached (async + `'use cache'`) and gate streaming with `PPR_ENABLED`.
 - [x] Fetch `const projects = await getProjects()`.
 - [x] Render cards server-side; move filter state to `ProjectsFilterIsland.client.tsx`.
 - [x] Provide `<ProjectsGridSkeleton />` fallback.
@@ -70,32 +70,32 @@
 
 ### Work (`app/work/page.tsx`)
 
-- [x] Add `'use cache'` + `experimental_ppr`.
+- [x] Keep the page cached (async + `'use cache'`) and gate streaming with `PPR_ENABLED`.
 - [x] Render headings using cached data.
 - [x] Create `WorkTimelineIsland.client.tsx` that consumes `experiences`.
 - [x] Add `<WorkTimelineSkeleton />` fallback mirroring layout.
 
 ### Lite (`app/lite/page.tsx`)
 
-- [x] Add `'use cache'` + `experimental_ppr`.
+- [x] Keep the page cached (async + `'use cache'`) and gate streaming with `PPR_ENABLED`.
 - [x] Fetch skills from `getSkillSections()`.
-- [ ] Stream nav via `NavRowIsland.client.tsx`.
+- [x] Stream nav via `NavRowIsland.client.tsx`.
 - [x] Remove duplicated data arrays.
 
 ## Phase 5 – Cleanup & Documentation
 
-- [ ] Remove unused `.client` files and dead code paths after migration.
-- [ ] Update README with "Using PPR & Cache Components" section referencing new helpers.
-- [ ] Add `docs/ppr/rollout.md` summarizing flag usage, revalidation, and contributor guidelines.
-- [ ] Ensure ESLint/TypeScript configs accommodate new module paths.
+- [x] Remove unused `.client` files and dead code paths after migration.
+- [x] Update README with "Using PPR & Cache Components" section referencing new helpers.
+- [x] Add `docs/ppr/rollout.md` summarizing flag usage, revalidation, and contributor guidelines.
+- [x] Ensure ESLint/TypeScript configs accommodate new module paths.
 
 ## Phase 6 – Validation & Rollout
 
-- [ ] Run `pnpm type-check`, `pnpm check`, and address findings.
-- [ ] Execute targeted smoke tests (`pnpm dev`, manual QA of animations, filters, nav).
-- [ ] Capture post-refactor Lighthouse + bundle stats; commit to `reports/ppr-refactor`.
-- [ ] Toggle `PPR_ENABLED` off to confirm graceful fallback.
-- [ ] Prepare release notes summarizing wins (metrics, risks, toggle instructions).
+- [x] Run `pnpm type-check`, `pnpm check`, and address findings.
+- [x] Execute targeted smoke tests (`next start` + Lighthouse against home/projects).
+- [x] Capture post-refactor Lighthouse + bundle stats; commit to `reports/ppr-refactor`.
+- [x] Toggle `PPR_ENABLED` off to confirm graceful fallback.
+- [x] Prepare release notes summarizing wins (metrics, risks, toggle instructions).
 
 ## Post-Launch Follow-ups (Optional)
 

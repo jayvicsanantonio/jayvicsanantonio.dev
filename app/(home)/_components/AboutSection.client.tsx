@@ -6,7 +6,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { CARD_INNER_BASE, CARD_OUTER_BASE } from "@/components/ui/cardStyles";
-import { SKILL_SECTIONS } from "@/lib/content/skills";
+import { SKILL_SECTIONS } from "@/lib/content/skills-data";
 
 const EXPERTISE_ITEMS = [
   {

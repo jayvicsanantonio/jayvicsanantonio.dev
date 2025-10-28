@@ -16,7 +16,7 @@ The refactor reorganizes rendering concerns into three layers:
    - Thin `.client.tsx` components handle motion, cursor tracking, router navigation, and user-specific queries.
    - They receive serialized props from cached parents and focus solely on browser APIs or high-frequency state.
 
-PPR is enabled globally (`experimental.ppr = 'incremental'`) and each page exports `experimental_ppr = true`. Static sections render immediately; dynamic islands (animations, filters) stream behind `<Suspense>` fallbacks.
+PPR relies on `cacheComponents: true`; each route renders a cached server shell and streams dynamic islands behind `<Suspense>` fallbacks that can be disabled via the `PPR_ENABLED` toggle.
 
 ## Module & File Plan
 

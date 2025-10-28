@@ -1,6 +1,8 @@
 "use cache";
 
 import type { Metadata } from "next";
+
+import { PPR_ENABLED } from "@/lib/config/ppr";
 import { Suspense } from "react";
 
 import { ProjectsGridSkeleton } from "@/components/fallbacks";
@@ -17,9 +19,18 @@ export const metadata: Metadata = {
   },
 };
 
-export const experimental_ppr = true;
+export default async function ProjectsPage() {
+  const grid = (
+    <div className="motion-safe:animate-fade-in-up" style={{ animationDelay: "160ms" }}>
+      <ProjectsGrid />
+    </div>
+  );
+  const projectsContent = PPR_ENABLED ? (
+    <Suspense fallback={<ProjectsGridSkeleton />}>{grid}</Suspense>
+  ) : (
+    grid
+  );
 
-export default function ProjectsPage() {
   return (
     <section className="relative w-full overflow-hidden">
       <div className="cq container pt-48 pb-16 sm:pt-52">
@@ -34,11 +45,7 @@ export default function ProjectsPage() {
         </div>
 
         {/* Projects only */}
-        <Suspense fallback={<ProjectsGridSkeleton />}>
-          <div className="motion-safe:animate-fade-in-up" style={{ animationDelay: "160ms" }}>
-            <ProjectsGrid />
-          </div>
-        </Suspense>
+        {projectsContent}
       </div>
     </section>
   );

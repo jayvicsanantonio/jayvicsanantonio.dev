@@ -4,7 +4,7 @@
 
 - The portfolio app relies heavily on Client Components (`"use client"`), eliminating most opportunities for server-side caching.
 - Static datasets (projects, work history, skills) are duplicated between routes (`/`, `/projects`, `/work`, `/lite`) and rehydrated on the client, increasing bundle size and delaying first paint.
-- Partial prerendering (PPR) is not enabled (`experimental.ppr` unset) and no routes export `experimental_ppr`, so the app cannot stream static shells while deferring dynamic islands.
+- Partial prerendering (PPR) is effectively disabled; pages are fully client-driven so static shells cannot stream while dynamic islands hydrate.
 - The team wants to adopt Next.js v16 cache components and PPR to deliver faster TTFB, smaller hydration payloads, and consistent data sourcing.
 
 ## Goals & Success Criteria
@@ -54,10 +54,10 @@
 
 ## Acceptance Checklist
 
-- [ ] `experimental.ppr = 'incremental'` enabled behind a configurable flag.
-- [ ] Each route exports `experimental_ppr = true` and wraps dynamic sections in `<Suspense>`.
-- [ ] Cached data loaders exist for projects, work timeline, and skill sections, referenced by all routes.
-- [ ] Root layout and shell components use `'use cache'` (public) or `'use cache: private'` where appropriate.
-- [ ] Updated docs outlining cache usage patterns and rollout steps committed alongside code.
-- [ ] Bundle analyzer and Lighthouse comparisons captured under `reports/`.
-- [ ] `pnpm check` and `pnpm type-check` pass on the final branch.
+- [x] `cacheComponents: true` enabled globally with documentation on the rollout toggle.
+- [x] Each route wraps dynamic sections in `<Suspense>` with cached server shells, controlled by the `PPR_ENABLED` toggle.
+- [x] Cached data loaders exist for projects, work timeline, and skill sections, referenced by all routes.
+- [x] Root layout and shell components use `'use cache'` (public) or `'use cache: private'` where appropriate.
+- [x] Updated docs outlining cache usage patterns and rollout steps committed alongside code.
+- [x] Bundle analyzer and Lighthouse comparisons captured under `reports/`.
+- [x] `pnpm check` and `pnpm type-check` pass on the final branch.

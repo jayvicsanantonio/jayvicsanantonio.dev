@@ -13,9 +13,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const experimental_ppr = true;
-
-export default function Page() {
+export default async function Page() {
   return (
     <main>
       <h1 className="sr-only">Jayvic San Antonio — Software Engineer</h1>

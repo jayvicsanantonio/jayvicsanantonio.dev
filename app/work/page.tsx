@@ -1,6 +1,8 @@
 "use cache";
 
 import type { Metadata } from "next";
+
+import { PPR_ENABLED } from "@/lib/config/ppr";
 import { Suspense } from "react";
 
 import { WorkTimelineSkeleton } from "@/components/fallbacks";
@@ -16,9 +18,18 @@ export const metadata: Metadata = {
   },
 };
 
-export const experimental_ppr = true;
+export default async function WorkPage() {
+  const timeline = (
+    <div className="motion-safe:animate-fade-in-up" style={{ animationDelay: "140ms" }}>
+      <WorkTimelineSection />
+    </div>
+  );
+  const timelineContent = PPR_ENABLED ? (
+    <Suspense fallback={<WorkTimelineSkeleton />}>{timeline}</Suspense>
+  ) : (
+    timeline
+  );
 
-export default function WorkPage() {
   return (
     <section className="relative w-full overflow-hidden">
       {/* Ambient background */}
@@ -40,11 +51,7 @@ export default function WorkPage() {
         </div>
 
         {/* Timeline */}
-        <div className="motion-safe:animate-fade-in-up" style={{ animationDelay: "140ms" }}>
-          <Suspense fallback={<WorkTimelineSkeleton />}>
-            <WorkTimelineSection />
-          </Suspense>
-        </div>
+        {timelineContent}
       </div>
     </section>
   );

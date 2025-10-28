@@ -1,6 +1,7 @@
 "use cache";
 
 import type { Metadata } from "next";
+
 import Image from "next/image";
 import Link from "next/link";
 import AnimatedText from "@/components/ui/AnimatedText";
@@ -75,8 +76,6 @@ export const metadata: Metadata = {
     follow: true,
   },
 };
-
-export const experimental_ppr = true;
 
 export default async function MobileHomePage() {
   const skillSections = await getSkillSections();
