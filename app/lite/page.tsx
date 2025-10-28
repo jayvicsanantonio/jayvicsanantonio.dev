@@ -6,8 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 import AnimatedText from "@/components/ui/AnimatedText";
 import GlassHeaderBubble from "@/components/ui/GlassHeaderBubble";
-
-import NavRowSection from "./_components/NavRowSection";
 import { getSkillSections } from "@/lib/content/skills";
 
 const CARD_WRAPPER_CLASS =
@@ -103,11 +101,6 @@ export default async function MobileHomePage() {
         <div className="pointer-events-auto flex justify-center">
           <GlassHeaderBubble label="Hi, I'm Jayvic 👋" activeRoute="lite" />
         </div>
-      </div>
-
-      {/* Quick nav row */}
-      <div className="relative z-[60] mt-36 flex justify-center sm:mt-40">
-        <NavRowSection />
       </div>
 
       {/* Section 1: Hero with video */}
