@@ -16,6 +16,6 @@
 
 ## Risks & Follow-ups
 
-- Home hero still relies on `next/dynamic`; consider replacing with Suspense islands to remove the remaining TODO in `tasks.md`.
+- Remaining TODO: hero animation still leans on complex client state; consider simplifying once streaming proves stable.
 - Desktop Lighthouse saw small regressions (~0.02) likely due to streaming boundaries; monitor after deploying with real traffic.
 - Optional: add monitoring for streaming latency and automate bundle analysis once Turbopack support lands.

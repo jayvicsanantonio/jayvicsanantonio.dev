@@ -58,7 +58,7 @@
 - [x] Introduce `HeroShell` server component using `getHeroConfig()`.
 - [x] Create `HeroMorphIsland.client.tsx`; accept props for timings, scroll config, asset urls.
 - [x] Wrap island with `<Suspense fallback={<HeroFallback />}>`.
-- [ ] Replace ad-hoc `dynamic()` imports with explicit islands.
+- [x] Replace ad-hoc `dynamic()` imports with explicit islands.
 
 ### Projects (`app/projects/page.tsx`)
 
