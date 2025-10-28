@@ -1,8 +1,6 @@
-"use cache";
-
 import type { Metadata } from "next";
 
-import HeroSection from "@/app/(home)/_components/HeroSection";
+import HeroMorph from "@/app/(home)/_components/HeroMorph.client";
 
 export const metadata: Metadata = {
   title: "Jayvic San Antonio | Senior Software Engineer",
@@ -13,11 +11,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function Page() {
+export default function Page() {
   return (
     <main>
       <h1 className="sr-only">Jayvic San Antonio — Software Engineer</h1>
-      <HeroSection />
+      <HeroMorph />
     </main>
   );
 }

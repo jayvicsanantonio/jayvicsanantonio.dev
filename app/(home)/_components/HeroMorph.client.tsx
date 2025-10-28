@@ -1,40 +1,52 @@
 "use client";
 
-import { Suspense, lazy, useRef } from "react";
+import dynamic from "next/dynamic";
+import { useRef } from "react";
 
+import { CFG } from "@/app/(home)/_components/hero/config";
 import InitialPillOverlay from "@/app/(home)/_components/hero/InitialPillOverlay.client";
 import MorphingVideo from "@/app/(home)/_components/hero/MorphingVideo.client";
 import ProfileImage from "@/app/(home)/_components/hero/ProfileImage.client";
 import { useIntroSequence } from "@/app/(home)/_hooks/useIntroSequence";
 import { useScrollCssVariables } from "@/app/(home)/_hooks/useScrollCssVariables";
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
-import type { HeroConfig } from "@/lib/content/types";
 
-const PrimaryNavOverlay = lazy(
+// Lazy-load non-critical UI islands to reduce initial JS
+const PrimaryNavOverlay = dynamic(
   () => import("@/app/(home)/_components/hero/PrimaryNavOverlay.client"),
+  {
+    ssr: false,
+  },
 );
-const MobileNavRow = lazy(() => import("@/app/(home)/_components/hero/MobileNavRow.client"));
-const FooterBrandCTA = lazy(() => import("@/app/(home)/_components/hero/FooterBrandCTA.client"));
-const AboutSection = lazy(() => import("@/app/(home)/_components/AboutSection.client"));
-const BlackTransitionOverlay = lazy(
+const MobileNavRow = dynamic(() => import("@/app/(home)/_components/hero/MobileNavRow.client"), {
+  ssr: false,
+});
+const FooterBrandCTA = dynamic(
+  () => import("@/app/(home)/_components/hero/FooterBrandCTA.client"),
+  {
+    ssr: false,
+  },
+);
+const AboutSection = dynamic(() => import("@/app/(home)/_components/AboutSection.client"), {
+  ssr: false,
+});
+const BlackTransitionOverlay = dynamic(
   () => import("@/app/(home)/_components/BlackTransitionOverlay.client"),
+  {
+    ssr: false,
+  },
 );
-
-type HeroMorphIslandProps = {
-  config: HeroConfig;
-};
-
-export default function HeroMorphIsland({ config }: HeroMorphIslandProps) {
+export default function HeroMorph() {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const reduceMotion = usePrefersReducedMotion();
   const { initialPill, showTitleGroup, showDesc, showName, isExpanding, shouldPlayVideo } =
-    useIntroSequence(config, reduceMotion);
+    useIntroSequence(CFG);
+  const reduceMotion = usePrefersReducedMotion();
 
   useScrollCssVariables(
     containerRef,
     {
-      scroll: config.scroll,
+      scroll: CFG.scroll,
       closeMaxX: "calc((96vw - var(--nav-row-w, 20vw)) / 2)",
       closeMaxY: "calc((min(86svh, 86vh) - var(--pill-h, 8vh)) / 2)",
     },
@@ -50,7 +62,7 @@ export default function HeroMorphIsland({ config }: HeroMorphIslandProps) {
       className="relative overflow-hidden  bg-black [--nav-row-w:calc(3.5rem*4+0.75rem*3)] [--pill-h:54px] sm:[--nav-row-w:20vw] sm:[--pill-h:8vh] md:[--nav-row-w:24vw]"
     >
       <MorphingVideo
-        centerTop={config.nav.centerTop}
+        centerTop={CFG.nav.centerTop}
         isIntro={isIntro}
         initialPill={initialPill}
         isExpanding={isExpanding}
@@ -58,7 +70,7 @@ export default function HeroMorphIsland({ config }: HeroMorphIslandProps) {
         showDesc={showDesc}
         shouldPlayVideo={shouldPlayVideo}
         containerRadius={containerRadius}
-        video={config.video}
+        video={CFG.video}
       />
 
       {initialPill && <InitialPillOverlay />}
@@ -66,21 +78,19 @@ export default function HeroMorphIsland({ config }: HeroMorphIslandProps) {
       <ProfileImage initialPill={initialPill} />
 
       <div className="pointer-events-none fixed inset-0 z-50">
-        <Suspense fallback={null}>
-          <PrimaryNavOverlay
-            centerTop={config.nav.centerTop}
-            leftOffsetsPx={config.nav.leftOffsetsPx}
-            rightOffsetsPx={config.nav.rightOffsetsPx}
-            buttonSize={config.nav.buttonSize}
-          />
-          <MobileNavRow />
-          <FooterBrandCTA showName={showName} overlayUpDampen={config.overlayUpDampen} />
-        </Suspense>
+        <PrimaryNavOverlay
+          centerTop={CFG.nav.centerTop}
+          leftOffsetsPx={CFG.nav.leftOffsetsPx}
+          rightOffsetsPx={CFG.nav.rightOffsetsPx}
+          buttonSize={CFG.nav.buttonSize}
+        />
+
+        <MobileNavRow />
+
+        <FooterBrandCTA showName={showName} overlayUpDampen={CFG.overlayUpDampen} />
       </div>
 
-      <Suspense fallback={null}>
-        <BlackTransitionOverlay />
-      </Suspense>
+      <BlackTransitionOverlay />
 
       <div className="relative z-10 w-full">
         <div className="absolute inset-0 h-[220svh] bg-gradient-to-b from-black via-gray-800 to-gray-200 will-change-transform md:h-[180svh] lg:h-[154rem]"></div>
@@ -96,9 +106,8 @@ export default function HeroMorphIsland({ config }: HeroMorphIslandProps) {
 
         <section className="flex min-h-[220svh] flex-col items-center justify-center px-4 py-20 md:min-h-[180svh] lg:min-h-[154rem]"></section>
       </div>
-      <Suspense fallback={null}>
-        <AboutSection />
-      </Suspense>
+
+      <AboutSection />
     </div>
   );
 }

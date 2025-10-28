@@ -1,73 +1,64 @@
-import React, { useId } from "react";
+"use client";
+
+import React from "react";
 
 import { GlassButton } from "@/components/ui/GlassButton";
-
-import NavPillMotion from "./NavPill.client";
-
-const sanitizeId = (value: string) => value.replace(/[^a-zA-Z0-9_-]/g, "");
 
 export type NavPillProps = {
   href: string;
   ariaLabel: string;
   icon: React.ReactNode;
-  label?: string;
-  active?: boolean;
-  vtTagName?: string;
-  cyanAccent?: boolean;
-  external?: boolean;
-  collapsedPx?: number | string;
-  expandedPx?: number | string;
-  heightPx?: number | string;
-  tooltip?: string;
-  tooltipPlacement?: "above" | "below";
+  label?: string; // Text shown when active
+  active?: boolean; // Controls expansion + letter reveal
+  vtTagName?: string; // e.g., 'projects' | 'work' — always applied when provided
+  cyanAccent?: boolean; // Optional cyan border tint (Home)
+  external?: boolean; // Open in new tab
+  collapsedPx?: number | string; // Default 48; can be CSS strings like 'clamp(...)'
+  expandedPx?: number | string; // Default 140; CSS strings allowed
+  heightPx?: number | string; // Default 48; CSS strings allowed
+  tooltip?: string; // Tooltip text when non-active
+  tooltipPlacement?: "above" | "below"; // Default: 'above'
   className?: string;
-  interactive?: boolean;
 };
 
-function renderIcon(icon: React.ReactNode, active: boolean) {
-  if (React.isValidElement(icon)) {
-    type IconProps = {
-      className?: string;
-      color?: string;
-      style?: React.CSSProperties;
-    };
-    const element = icon as React.ReactElement<IconProps>;
-    const prevClass = element.props.className ?? "";
-    return React.cloneElement(element, {
-      className: [prevClass, active ? "text-cyan-300" : ""].filter(Boolean).join(" "),
-      style: {
-        ...(element.props.style ?? {}),
-        color: active ? "#22d3ee" : element.props.style?.color,
-      },
-    });
-  }
-  return icon;
-}
-
-function NavPill({
+export function NavPill({
   href,
   ariaLabel,
   icon,
+  label: _label,
   active = false,
   vtTagName,
   cyanAccent = false,
   external = false,
   collapsedPx = 48,
-  expandedPx: _expandedPx = 140, // reserved for future expansion animation
+  expandedPx: _expandedPx = 140,
   heightPx = 48,
   tooltip,
   tooltipPlacement = "above",
   className,
-  interactive = true,
 }: NavPillProps) {
-  const reactId = useId();
-  const elementId = `nav-pill-${sanitizeId(reactId)}`;
-
+  // View-transition tag (optional)
   const vtClass = vtTagName ? `vt-tag-${vtTagName}` : "";
+
   const linkProps = external ? { target: "_blank", rel: "noopener noreferrer" as const } : {};
 
   return (
-    <fieldset id={elementId} className="group relative inline-block">
+    <fieldset
+      className="group relative inline-block"
+      onMouseMove={(e) => {
+        const t = e.currentTarget as HTMLElement;
+        const r = t.getBoundingClientRect();
+        const mx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+        const my = ((e.clientY - r.top) / r.height - 0.5) * 2;
+        t.style.setProperty("--mx", String(mx));
+        t.style.setProperty("--my", String(my));
+      }}
+      onMouseLeave={(e) => {
+        const t = e.currentTarget as HTMLElement;
+        t.style.setProperty("--mx", "0");
+        t.style.setProperty("--my", "0");
+      }}
+    >
       <GlassButton
         href={href}
         aria-label={ariaLabel}
@@ -89,6 +80,7 @@ function NavPill({
         {...linkProps}
       >
         <span className="inline-flex items-center gap-2">
+          {/* Icon with cursor-follow transform */}
           <span
             aria-hidden
             className="inline-flex"
@@ -100,15 +92,36 @@ function NavPill({
               color: active ? "#22d3ee" : undefined,
             }}
           >
-            {renderIcon(icon, active)}
+            {/* Force icon cyan when active */}
+            {(() => {
+              if (React.isValidElement(icon)) {
+                type IconProps = {
+                  className?: string;
+                  color?: string;
+                  style?: React.CSSProperties;
+                };
+                const el = icon as React.ReactElement<IconProps>;
+                const prevClass = el.props.className ?? "";
+                return React.cloneElement(el, {
+                  className: [prevClass, active ? "text-cyan-300" : ""].filter(Boolean).join(" "),
+                  style: {
+                    ...(el.props.style ?? {}),
+                    color: active ? "#22d3ee" : el.props.style?.color,
+                  },
+                });
+              }
+              return icon;
+            })()}
           </span>
+          {/* icon-only; no expanding pill text */}
         </span>
       </GlassButton>
 
+      {/* Tooltip only when non-active and tooltip prop provided */}
       {!active && tooltip ? (
         <span
           className={[
-            "pointer-events-none absolute left-1/2 -translate-x-1/2 rounded-md bg-black/80 px-2 py-1 text-[11px] whitespace-nowrap text-white opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100 md:text-xs",
+            "pointer-events-none absolute left-1/2 z-50 -translate-x-1/2 rounded-md bg-black/80 px-2 py-1 text-[11px] whitespace-nowrap text-white opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100 md:text-xs",
             tooltipPlacement === "above" ? "-top-2 -translate-y-full" : "",
           ].join(" ")}
           style={tooltipPlacement === "below" ? { top: "calc(100% + 10px)" } : undefined}
@@ -117,17 +130,13 @@ function NavPill({
         </span>
       ) : null}
 
+      {/* Active route indicator dot */}
       {active ? (
         <span
           aria-hidden
           className="pointer-events-none absolute top-[calc(100%+6px)] left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-cyan-300 shadow-[0_0_8px_rgba(34,211,238,0.65)]"
         />
       ) : null}
-
-      {interactive ? <NavPillMotion targetId={elementId} /> : null}
     </fieldset>
   );
 }
-
-export { NavPill };
-export default NavPill;
