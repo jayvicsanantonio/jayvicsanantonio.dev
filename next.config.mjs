@@ -8,8 +8,8 @@ const nextConfig = {
   reactStrictMode: true,
   // React Compiler disabled to match current rollout status
   reactCompiler: false,
-  // Disable Partial Pre-Rendering cache components for now
-  cacheComponents: false,
+  // Re-enable Partial Pre-Rendering cache components
+  cacheComponents: true,
   experimental: {
     viewTransition: true,
     // Persist dev artifacts on disk to speed up restarts
