@@ -1,15 +1,15 @@
-import createBundleAnalyzer from '@next/bundle-analyzer';
+import createBundleAnalyzer from "@next/bundle-analyzer";
 
 const withBundleAnalyzer = createBundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true',
+  enabled: process.env.ANALYZE === "true",
 });
 
 const nextConfig = {
   reactStrictMode: true,
   // React Compiler disabled to match current rollout status
   reactCompiler: false,
-  // Re-enable Partial Pre-Rendering cache components
-  cacheComponents: true,
+  // Disable Partial Pre-Rendering cache components
+  cacheComponents: false,
   experimental: {
     viewTransition: true,
     // Persist dev artifacts on disk to speed up restarts
@@ -21,10 +21,10 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'avatars.githubusercontent.com',
-        port: '',
-        pathname: '/**',
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+        port: "",
+        pathname: "/**",
       },
     ],
   },
