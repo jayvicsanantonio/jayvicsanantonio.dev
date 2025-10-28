@@ -79,7 +79,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <Body fontVars={`${sourceSansPro.variable} ${oswaldLocal.variable}`}>{children}</Body>
     </html>
   );

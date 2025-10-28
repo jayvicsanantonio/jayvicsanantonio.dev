@@ -1,8 +1,10 @@
+"use cache";
+
 import type React from "react";
 
 import GlassHeaderBubble from "@/components/ui/GlassHeaderBubble";
 
-export default function ProjectsLayout({ children }: { children: React.ReactNode }) {
+export default async function ProjectsLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       {/* Top-centered header bubble shared across all /projects routes */}

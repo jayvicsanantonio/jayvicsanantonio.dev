@@ -1,4 +1,5 @@
-import { cacheLife } from "next/cache";
+import { cacheLife, cacheTag } from "next/cache";
+import { cache } from "react";
 
 import type { HeroConfig } from "./types";
 
@@ -38,8 +39,10 @@ const HERO_CONFIG: HeroConfig = {
 
 export { HERO_CONFIG };
 
-export async function getHeroConfig(): Promise<HeroConfig> {
-  "use cache";
+const loadHeroConfig = cache(async (): Promise<HeroConfig> => {
+  cacheTag("hero-config");
   cacheLife("days");
   return HERO_CONFIG;
-}
+});
+
+export const getHeroConfig = loadHeroConfig;

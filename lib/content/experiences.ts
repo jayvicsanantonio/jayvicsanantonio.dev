@@ -1,4 +1,5 @@
 import { cacheLife, cacheTag } from "next/cache";
+import { cache } from "react";
 
 import type { Experience } from "./types";
 
@@ -134,12 +135,13 @@ const EXPERIENCES_DATA = [
 
 export const EXPERIENCES: readonly Experience[] = EXPERIENCES_DATA;
 
-export async function getExperiences(): Promise<readonly Experience[]> {
-  "use cache";
+const loadExperiences = cache(async (): Promise<readonly Experience[]> => {
   cacheTag("experiences");
   cacheLife("hours");
   return EXPERIENCES_DATA;
-}
+});
+
+export const getExperiences = loadExperiences;
 
 export function findExperience(title: string): Experience | undefined {
   return EXPERIENCES_DATA.find((experience) => experience.title === title);

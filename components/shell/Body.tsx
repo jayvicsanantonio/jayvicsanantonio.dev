@@ -1,9 +1,11 @@
+"use cache";
+
 import { Suspense } from "react";
 
 import AmbientBackground from "@/components/shell/AmbientBackground";
 import ClientAppShell from "@/components/shell/ClientAppShell.client";
 
-export default function Body({
+export default async function Body({
   children,
   fontVars,
 }: {

@@ -12,10 +12,12 @@ const experimental = {
 
 const nextConfig = {
   reactStrictMode: true,
-  // React Compiler disabled to match current rollout status
+  // Enable the stable React Compiler to auto-memoize pure components
   reactCompiler: true,
   // Required for `'use cache'` directives and PPR
   cacheComponents: true,
+  // Preserve incoming URLs when proxying requests (Next.js 16 proxy runtime)
+  skipProxyUrlNormalize: true,
   experimental,
   // Enable Turbopack (Next.js 16 defaults to Turbopack).
   // Adding an empty config silences the error when a plugin adds a webpack config.

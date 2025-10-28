@@ -7,3 +7,5 @@ export {
   sortProjects,
   getProjects,
 } from "@/lib/content/projects";
+
+export { revalidateProjects } from "@/lib/content/revalidate";

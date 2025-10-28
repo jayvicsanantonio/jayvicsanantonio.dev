@@ -1,4 +1,5 @@
 import { cacheLife, cacheTag } from "next/cache";
+import { cache } from "react";
 
 import type { Project } from "./types";
 
@@ -745,12 +746,13 @@ const PROJECTS_DATA = [
 
 export const PROJECTS: readonly Project[] = PROJECTS_DATA;
 
-export async function getProjects(): Promise<readonly Project[]> {
-  "use cache";
+const loadProjects = cache(async (): Promise<readonly Project[]> => {
   cacheTag("projects");
   cacheLife("hours");
   return PROJECTS_DATA;
-}
+});
+
+export const getProjects = loadProjects;
 
 export function sortProjects(projects: readonly Project[] = PROJECTS_DATA): Project[] {
   const order = PROJECT_PRIORITY_ORDER;

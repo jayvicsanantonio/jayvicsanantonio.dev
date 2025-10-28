@@ -11,18 +11,25 @@ export function useIntroSequence(cfg: { timings: IntroTimings }, reduceMotion: b
   const [elapsed, setElapsed] = useState(0);
   const startRef = useRef<number | null>(null);
   const elapsedRef = useRef(0);
+  const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (reduceMotion) {
+      if (rafRef.current != null) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
       startRef.current = null;
-      setElapsed(Number.POSITIVE_INFINITY);
       elapsedRef.current = Number.POSITIVE_INFINITY;
       return;
     }
 
-    let raf = 0;
-    elapsedRef.current = 0;
-    setElapsed(0);
+    if (rafRef.current != null) {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
+
+    elapsedRef.current = Number.NEGATIVE_INFINITY;
     startRef.current = null;
     const maxTime = Math.max(
       cfg.timings.reveal.desc,
@@ -38,13 +45,16 @@ export function useIntroSequence(cfg: { timings: IntroTimings }, reduceMotion: b
         setElapsed(next);
       }
       if (next < maxTime) {
-        raf = requestAnimationFrame(loop);
+        rafRef.current = requestAnimationFrame(loop);
       }
     };
 
-    raf = requestAnimationFrame(loop);
+    rafRef.current = requestAnimationFrame(loop);
     return () => {
-      cancelAnimationFrame(raf);
+      if (rafRef.current != null) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
       startRef.current = null;
     };
   }, [cfg.timings, reduceMotion]);
@@ -61,15 +71,16 @@ export function useIntroSequence(cfg: { timings: IntroTimings }, reduceMotion: b
   }
 
   const { timings } = cfg;
-  const initialPill = elapsed < timings.introStartDelay;
+  const effectiveElapsed = reduceMotion ? Number.POSITIVE_INFINITY : elapsed;
+  const initialPill = effectiveElapsed < timings.introStartDelay;
   const isExpanding =
-    elapsed >= timings.introStartDelay &&
-    elapsed < timings.introStartDelay + timings.introExpansionDuration;
-  const showName = elapsed >= timings.reveal.name;
-  const showTitleGroup = elapsed >= timings.reveal.title;
-  const showDesc = elapsed >= timings.reveal.desc;
+    effectiveElapsed >= timings.introStartDelay &&
+    effectiveElapsed < timings.introStartDelay + timings.introExpansionDuration;
+  const showName = effectiveElapsed >= timings.reveal.name;
+  const showTitleGroup = effectiveElapsed >= timings.reveal.title;
+  const showDesc = effectiveElapsed >= timings.reveal.desc;
   const shouldPlayVideo =
-    elapsed >=
+    effectiveElapsed >=
     timings.introStartDelay + timings.introExpansionDuration + timings.graceAfterExpandMs;
 
   return {
