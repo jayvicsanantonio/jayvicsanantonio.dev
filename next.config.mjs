@@ -13,7 +13,7 @@ const experimental = {
 const nextConfig = {
   reactStrictMode: true,
   // React Compiler disabled to match current rollout status
-  reactCompiler: false,
+  reactCompiler: true,
   // Required for `'use cache'` directives and PPR
   cacheComponents: true,
   experimental,
