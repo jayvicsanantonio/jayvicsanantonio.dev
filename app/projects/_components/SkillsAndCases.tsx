@@ -5,10 +5,10 @@ import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 
-import { PROJECTS, PROJECT_PRIORITY_ORDER } from "@/app/projects/projects.data";
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
 import { CARD_INNER_BASE, CARD_OUTER_BASE } from "@/components/ui/cardStyles";
+import type { Project } from "@/lib/content/types";
 import ProjectLink from "./ProjectLink";
 
 const SKILL_FILTERS = [
@@ -30,7 +30,12 @@ const FILTER_BUTTON_ACTIVE =
 const FILTER_BUTTON_IDLE =
   "border-white/20 bg-slate-900/80 text-white/80 hover:border-white/35 hover:bg-slate-900/90";
 
-export default function SkillsAndCases() {
+type SkillsAndCasesProps = {
+  projects: readonly Project[];
+  priorityOrder: readonly string[];
+};
+
+export default function SkillsAndCases({ projects, priorityOrder }: SkillsAndCasesProps) {
   const prefersReducedMotion = usePrefersReducedMotion();
   const router = useRouter();
   const pathname = usePathname();
@@ -74,10 +79,10 @@ export default function SkillsAndCases() {
   // Card animation handled via CSS keyframes (animate-fade-in-up)
 
   const visible = React.useMemo(() => {
-    const filtered = PROJECTS.filter((c) => active === "All" || c.skills.includes(active));
+    const filtered = projects.filter((c) => active === "All" || c.skills.includes(active));
     return filtered.slice().sort((a, b) => {
-      const ai = PROJECT_PRIORITY_ORDER.indexOf(a.slug as (typeof PROJECT_PRIORITY_ORDER)[number]);
-      const bi = PROJECT_PRIORITY_ORDER.indexOf(b.slug as (typeof PROJECT_PRIORITY_ORDER)[number]);
+      const ai = priorityOrder.indexOf(a.slug);
+      const bi = priorityOrder.indexOf(b.slug);
       if (ai !== -1 || bi !== -1) {
         if (ai === -1) return 1;
         if (bi === -1) return -1;
@@ -85,7 +90,7 @@ export default function SkillsAndCases() {
       }
       return 0;
     });
-  }, [active]);
+  }, [active, projects, priorityOrder]);
 
   return (
     <div className="mt-12">

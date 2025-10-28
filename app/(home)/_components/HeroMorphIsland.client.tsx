@@ -3,13 +3,13 @@
 import dynamic from "next/dynamic";
 import { useRef } from "react";
 
-import { CFG } from "@/app/(home)/_components/hero/config";
 import InitialPillOverlay from "@/app/(home)/_components/hero/InitialPillOverlay.client";
 import MorphingVideo from "@/app/(home)/_components/hero/MorphingVideo.client";
 import ProfileImage from "@/app/(home)/_components/hero/ProfileImage.client";
 import { useIntroSequence } from "@/app/(home)/_hooks/useIntroSequence";
 import { useScrollCssVariables } from "@/app/(home)/_hooks/useScrollCssVariables";
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
+import type { HeroConfig } from "@/lib/content/types";
 
 // Lazy-load non-critical UI islands to reduce initial JS
 const PrimaryNavOverlay = dynamic(
@@ -36,17 +36,22 @@ const BlackTransitionOverlay = dynamic(
     ssr: false,
   },
 );
-export default function HeroMorph() {
+
+type HeroMorphIslandProps = {
+  config: HeroConfig;
+};
+
+export default function HeroMorphIsland({ config }: HeroMorphIslandProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const { initialPill, showTitleGroup, showDesc, showName, isExpanding, shouldPlayVideo } =
-    useIntroSequence(CFG);
+    useIntroSequence(config);
   const reduceMotion = usePrefersReducedMotion();
 
   useScrollCssVariables(
     containerRef,
     {
-      scroll: CFG.scroll,
+      scroll: config.scroll,
       closeMaxX: "calc((96vw - var(--nav-row-w, 20vw)) / 2)",
       closeMaxY: "calc((min(86svh, 86vh) - var(--pill-h, 8vh)) / 2)",
     },
@@ -62,7 +67,7 @@ export default function HeroMorph() {
       className="relative overflow-hidden  bg-black [--nav-row-w:calc(3.5rem*4+0.75rem*3)] [--pill-h:54px] sm:[--nav-row-w:20vw] sm:[--pill-h:8vh] md:[--nav-row-w:24vw]"
     >
       <MorphingVideo
-        centerTop={CFG.nav.centerTop}
+        centerTop={config.nav.centerTop}
         isIntro={isIntro}
         initialPill={initialPill}
         isExpanding={isExpanding}
@@ -70,7 +75,7 @@ export default function HeroMorph() {
         showDesc={showDesc}
         shouldPlayVideo={shouldPlayVideo}
         containerRadius={containerRadius}
-        video={CFG.video}
+        video={config.video}
       />
 
       {initialPill && <InitialPillOverlay />}
@@ -79,15 +84,15 @@ export default function HeroMorph() {
 
       <div className="pointer-events-none fixed inset-0 z-50">
         <PrimaryNavOverlay
-          centerTop={CFG.nav.centerTop}
-          leftOffsetsPx={CFG.nav.leftOffsetsPx}
-          rightOffsetsPx={CFG.nav.rightOffsetsPx}
-          buttonSize={CFG.nav.buttonSize}
+          centerTop={config.nav.centerTop}
+          leftOffsetsPx={config.nav.leftOffsetsPx}
+          rightOffsetsPx={config.nav.rightOffsetsPx}
+          buttonSize={config.nav.buttonSize}
         />
 
         <MobileNavRow />
 
-        <FooterBrandCTA showName={showName} overlayUpDampen={CFG.overlayUpDampen} />
+        <FooterBrandCTA showName={showName} overlayUpDampen={config.overlayUpDampen} />
       </div>
 
       <BlackTransitionOverlay />

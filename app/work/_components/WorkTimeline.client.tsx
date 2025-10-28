@@ -8,9 +8,13 @@ import { useRef } from "react";
 import { Badge } from "@/components/ui/Badge";
 import { CARD_INNER_BASE, CARD_OUTER_BASE } from "@/components/ui/cardStyles";
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
-import { EXPERIENCES } from "@/lib/content/experiences";
+import type { Experience } from "@/lib/content/types";
 
-export default function WorkTimeline() {
+export type WorkTimelineProps = {
+  experiences: readonly Experience[];
+};
+
+export default function WorkTimeline({ experiences }: WorkTimelineProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
   const { scrollYProgress } = useScroll({
@@ -82,7 +86,7 @@ export default function WorkTimeline() {
           </div>
         </div>
         <ul className="relative space-y-8 pt-10 pl-0 sm:space-y-12 sm:pt-16 lg:space-y-28 lg:pt-24">
-          {EXPERIENCES.map((item, index) => {
+          {experiences.map((item, index) => {
             const isRight = index % 2 === 0;
             return (
               <li key={`${item.title}-${item.period}`} className="relative">

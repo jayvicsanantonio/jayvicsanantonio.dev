@@ -1,8 +1,12 @@
+"use cache";
+
 import type { Metadata } from "next";
-import React from "react";
+import { Suspense } from "react";
+
+import { ProjectsGridSkeleton } from "@/components/fallbacks";
 
 import AnimatedHeader from "./_components/AnimatedHeader.client";
-import SkillsAndCases from "./_components/SkillsAndCases";
+import ProjectsGrid from "./_components/ProjectsGrid";
 
 export const metadata: Metadata = {
   title: "Projects | Jayvic San Antonio",
@@ -12,6 +16,8 @@ export const metadata: Metadata = {
     canonical: "/projects",
   },
 };
+
+export const experimental_ppr = true;
 
 export default function ProjectsPage() {
   return (
@@ -28,11 +34,11 @@ export default function ProjectsPage() {
         </div>
 
         {/* Projects only */}
-        <React.Suspense fallback={null}>
+        <Suspense fallback={<ProjectsGridSkeleton />}>
           <div className="motion-safe:animate-fade-in-up" style={{ animationDelay: "160ms" }}>
-            <SkillsAndCases />
+            <ProjectsGrid />
           </div>
-        </React.Suspense>
+        </Suspense>
       </div>
     </section>
   );

@@ -1,9 +1,13 @@
+"use cache";
+
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import AnimatedText from "@/components/ui/AnimatedText";
 import GlassHeaderBubble from "@/components/ui/GlassHeaderBubble";
-import { SKILL_SECTIONS } from "@/lib/content/skills";
+
+import NavRowSection from "./_components/NavRowSection";
+import { getSkillSections } from "@/lib/content/skills";
 
 const CARD_WRAPPER_CLASS =
   "group relative w-full rounded-2xl bg-gradient-to-br from-slate-950/90 via-slate-950/70 to-slate-950/50 p-[1px] shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_28px_rgba(0,0,0,0.45)] ring-1 ring-white/10 transition-transform duration-200 hover:-translate-y-0.5 sm:p-[1.2px]";
@@ -72,7 +76,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function MobileHomePage() {
+export const experimental_ppr = true;
+
+export default async function MobileHomePage() {
+  const skillSections = await getSkillSections();
   return (
     <main className="text-white overflow-x-hidden min-h-screen">
       {/* Custom Ambient Background with black gradient overlay */}
@@ -97,6 +104,11 @@ export default function MobileHomePage() {
         <div className="pointer-events-auto flex justify-center">
           <GlassHeaderBubble label="Hi, I'm Jayvic 👋" activeRoute="lite" />
         </div>
+      </div>
+
+      {/* Quick nav row */}
+      <div className="relative z-[60] mt-36 flex justify-center sm:mt-40">
+        <NavRowSection />
       </div>
 
       {/* Section 1: Hero with video */}
@@ -255,7 +267,7 @@ export default function MobileHomePage() {
                 </h2>
                 <div className="mt-3 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
                 <div className="mt-6 space-y-6">
-                  {SKILL_SECTIONS.map(({ title, accentClass, items }) => (
+                  {skillSections.map(({ title, accentClass, items }) => (
                     <div key={title}>
                       <h3
                         className={`mb-3 text-sm font-semibold tracking-wider uppercase ${accentClass}`}

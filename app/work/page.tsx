@@ -1,6 +1,11 @@
-import type { Metadata } from "next";
+"use cache";
 
-import WorkTimeline from "./_components/WorkTimeline.client";
+import type { Metadata } from "next";
+import { Suspense } from "react";
+
+import { WorkTimelineSkeleton } from "@/components/fallbacks";
+
+import WorkTimelineSection from "./_components/WorkTimelineSection";
 
 export const metadata: Metadata = {
   title: "Experience | Jayvic San Antonio",
@@ -10,6 +15,8 @@ export const metadata: Metadata = {
     canonical: "/work",
   },
 };
+
+export const experimental_ppr = true;
 
 export default function WorkPage() {
   return (
@@ -34,7 +41,9 @@ export default function WorkPage() {
 
         {/* Timeline */}
         <div className="motion-safe:animate-fade-in-up" style={{ animationDelay: "140ms" }}>
-          <WorkTimeline />
+          <Suspense fallback={<WorkTimelineSkeleton />}>
+            <WorkTimelineSection />
+          </Suspense>
         </div>
       </div>
     </section>

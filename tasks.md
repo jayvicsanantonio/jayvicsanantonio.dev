@@ -54,33 +54,33 @@
 
 ### Home (`app/page.tsx`)
 
-- [ ] Add `'use cache'` + `export const experimental_ppr = true`.
-- [ ] Introduce `HeroShell` server component using `getHeroConfig()`.
-- [ ] Create `HeroMorphIsland.client.tsx`; accept props for timings, scroll config, asset urls.
-- [ ] Wrap island with `<Suspense fallback={<HeroFallback />}>`.
+- [x] Add `'use cache'` + `export const experimental_ppr = true`.
+- [x] Introduce `HeroShell` server component using `getHeroConfig()`.
+- [x] Create `HeroMorphIsland.client.tsx`; accept props for timings, scroll config, asset urls.
+- [x] Wrap island with `<Suspense fallback={<HeroFallback />}>`.
 - [ ] Replace ad-hoc `dynamic()` imports with explicit islands.
 
 ### Projects (`app/projects/page.tsx`)
 
-- [ ] Add `'use cache'` + `experimental_ppr`.
-- [ ] Fetch `const projects = await getProjects()`.
-- [ ] Render cards server-side; move filter state to `ProjectsFilterIsland.client.tsx`.
-- [ ] Provide `<ProjectsGridSkeleton />` fallback.
-- [ ] Delete direct `React.Suspense` usage in client file.
+- [x] Add `'use cache'` + `experimental_ppr`.
+- [x] Fetch `const projects = await getProjects()`.
+- [x] Render cards server-side; move filter state to `ProjectsFilterIsland.client.tsx`.
+- [x] Provide `<ProjectsGridSkeleton />` fallback.
+- [x] Delete direct `React.Suspense` usage in client file.
 
 ### Work (`app/work/page.tsx`)
 
-- [ ] Add `'use cache'` + `experimental_ppr`.
-- [ ] Render headings using cached data.
-- [ ] Create `WorkTimelineIsland.client.tsx` that consumes `experiences`.
-- [ ] Add `<WorkTimelineSkeleton />` fallback mirroring layout.
+- [x] Add `'use cache'` + `experimental_ppr`.
+- [x] Render headings using cached data.
+- [x] Create `WorkTimelineIsland.client.tsx` that consumes `experiences`.
+- [x] Add `<WorkTimelineSkeleton />` fallback mirroring layout.
 
 ### Lite (`app/lite/page.tsx`)
 
-- [ ] Add `'use cache'` + `experimental_ppr`.
-- [ ] Fetch skills from `getSkillSections()`.
+- [x] Add `'use cache'` + `experimental_ppr`.
+- [x] Fetch skills from `getSkillSections()`.
 - [ ] Stream nav via `NavRowIsland.client.tsx`.
-- [ ] Remove duplicated data arrays.
+- [x] Remove duplicated data arrays.
 
 ## Phase 5 – Cleanup & Documentation
 
