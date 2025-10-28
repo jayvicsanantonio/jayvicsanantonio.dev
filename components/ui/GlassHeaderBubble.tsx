@@ -4,16 +4,9 @@ import { useId } from "react";
 import NavPill from "@/components/ui/NavPill";
 
 import GlassHeaderBubbleClient from "./GlassHeaderBubble.client";
+import NavPillIcon from "./NavPillIcon.client";
 
 const sanitizeId = (value: string) => value.replace(/[^a-zA-Z0-9_-]/g, "");
-const iconClass =
-  "grid h-[clamp(24px,6vw,36px)] w-[clamp(24px,6vw,36px)] place-items-center text-[clamp(16px,4.8vw,24px)] font-semibold uppercase text-white";
-
-const glyphIcon = (glyph: string) => (
-  <span aria-hidden className={iconClass}>
-    <span className="-translate-y-[1px]">{glyph}</span>
-  </span>
-);
 
 export type GlassHeaderBubbleProps = {
   label?: string;
@@ -57,7 +50,7 @@ export default function GlassHeaderBubble({
             <NavPill
               href="https://www.linkedin.com/in/jayvicsanantonio/"
               ariaLabel="LinkedIn"
-              icon={glyphIcon("in")}
+              icon={<NavPillIcon name="mdi:linkedin" />}
               external
               tooltip="LinkedIn"
               tooltipPlacement="below"
@@ -72,7 +65,7 @@ export default function GlassHeaderBubble({
             <NavPill
               href="/projects"
               ariaLabel="Projects"
-              icon={glyphIcon("<>")}
+              icon={<NavPillIcon name="mdi:application-brackets" />}
               label="Projects"
               active={isProjects}
               collapsedPx={"clamp(56px,11vw,84px)"}
@@ -91,7 +84,7 @@ export default function GlassHeaderBubble({
             <NavPill
               href="/work"
               ariaLabel="Work"
-              icon={glyphIcon("≡")}
+              icon={<NavPillIcon name="mdi:timeline-text" />}
               label="Work"
               active={isWork}
               collapsedPx={"clamp(56px,11vw,84px)"}
@@ -110,7 +103,7 @@ export default function GlassHeaderBubble({
             <NavPill
               href="https://github.com/jayvicsanantonio"
               ariaLabel="GitHub"
-              icon={glyphIcon("gh")}
+              icon={<NavPillIcon name="mdi:github" />}
               external
               tooltip="GitHub"
               tooltipPlacement="below"
@@ -129,7 +122,9 @@ export default function GlassHeaderBubble({
           className="pointer-events-auto order-1 inline-flex h-[clamp(48px,9.5vw,72px)] items-center justify-center rounded-full border border-cyan-400/30 bg-cyan-900/40 px-5 font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_10px_30px_rgba(0,139,139,0.3)] backdrop-blur-[20px] backdrop-saturate-[180%] transition-all hover:bg-cyan-800/50 hover:border-cyan-400/40 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.15),0_12px_35px_rgba(0,139,139,0.4)] w-full sm:order-3 sm:w-auto sm:px-6 md:px-20 before:pointer-events-none before:absolute before:inset-0 before:rounded-full before:bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,255,255,0.13),rgba(0,255,255,0)_50%)] before:content-['']"
           style={{ minWidth: resolvedExpandedWidth }}
         >
-          <span className="relative text-[clamp(14px,2.2vw,22px)] text-cyan-50">{label}</span>
+          <span className="relative text-[clamp(14px,2.2vw,22px)] text-cyan-50">
+            Hi, I'm Jayvic 👋
+          </span>
         </Link>
       </nav>
       {forceHomeReload ? <GlassHeaderBubbleClient homeLinkId={homeLinkId} /> : null}

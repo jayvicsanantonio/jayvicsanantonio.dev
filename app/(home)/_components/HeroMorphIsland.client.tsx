@@ -27,9 +27,9 @@ type HeroMorphIslandProps = {
 export default function HeroMorphIsland({ config }: HeroMorphIslandProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const { initialPill, showTitleGroup, showDesc, showName, isExpanding, shouldPlayVideo } =
-    useIntroSequence(config);
   const reduceMotion = usePrefersReducedMotion();
+  const { initialPill, showTitleGroup, showDesc, showName, isExpanding, shouldPlayVideo } =
+    useIntroSequence(config, reduceMotion);
 
   useScrollCssVariables(
     containerRef,

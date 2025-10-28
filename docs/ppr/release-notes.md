@@ -3,7 +3,7 @@
 ## Summary
 
 - Adopted cache components across pages with env-controlled Suspense gating (`PPR_ENABLED`).
-- Split client-server responsibilities (HeroSection, ProjectsGrid, WorkTimeline, Lite Nav) to stream dynamic islands only when enabled.
+- Split client-server responsibilities (HeroSection, ProjectsGrid, WorkTimeline, Lite Nav) to stream dynamic islands only when enabled, now using Suspense/lazy instead of dynamic imports.
 - Replaced shared data constants with cached loaders in `lib/content/` and isolated client-safe copies in `skills-data.ts`.
 - Simplified navigation glyphs so server components avoid client-only icon packages.
 
