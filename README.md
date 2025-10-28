@@ -113,6 +113,7 @@ Conventions (summary)
 
 - One React component per file (ESLint enforces JS/TS rules; Prettier formats CSS/Markdown)
 - Client-only components must start with "use client"
+- Server components that should prerender must opt in with `'use cache'` (and `'use cache: private'` when data is user-specific); Suspense fallbacks belong in `components/fallbacks/`
 - UI/library components: prefer named exports; Next.js page/layout files use default export
 - Use the path alias `@/` for internal imports instead of deep relative paths when possible
 - Props: export reusable prop types/interfaces alongside components

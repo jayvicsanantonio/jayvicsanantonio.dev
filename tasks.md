@@ -2,23 +2,23 @@
 
 ## Phase 0 – Preparation
 
-- [ ] Capture current metrics
+- [x] Capture current metrics
   - `pnpm build && pnpm analyze` → export bundle stats snapshot.
   - Run Lighthouse (desktop + mobile) for `/`, `/projects`; save to `reports/ppr-baseline/*.json`.
-- [ ] Enable feature flag plumbing
+- [x] Enable feature flag plumbing
   - Add `PPR_ENABLED` env toggle in `.env.example` (commented).
   - Update `next.config.mjs` to read flag (no behavioral change yet).
-- [ ] Create `docs/ppr/` with README stub referencing requirements/design/tasks.
+- [x] Create `docs/ppr/` with README stub referencing requirements/design/tasks.
 
 ## Phase 1 – Configuration & Infrastructure
 
-- [ ] Update `next.config.mjs`
+- [x] Update `next.config.mjs`
   - `experimental.ppr = process.env.PPR_ENABLED ? 'incremental' : undefined`.
   - Ensure `cacheComponents: true` retained.
   - Document comment explaining rollout strategy.
-- [ ] Introduce Suspense-ready fallbacks in `components/fallbacks/`.
-- [ ] Add shared TypeScript types in `lib/content/types.ts` (projects, experiences, skills).
-- [ ] Update lint/config docs to mention cache directives usage.
+- [x] Introduce Suspense-ready fallbacks in `components/fallbacks/`.
+- [x] Add shared TypeScript types in `lib/content/types.ts` (projects, experiences, skills).
+- [x] Update lint/config docs to mention cache directives usage.
 
 ## Phase 2 – Data Providers
 
