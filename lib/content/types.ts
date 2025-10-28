@@ -63,8 +63,14 @@ export type HeroScrollConfig = {
 export type HeroNavConfig = {
   centerTop: string;
   buttonSize: { w: number; h: number };
-  leftOffsetsPx: Record<string, number>;
-  rightOffsetsPx: Record<string, number>;
+  leftOffsetsPx: {
+    projects: number;
+    linkedin: number;
+  };
+  rightOffsetsPx: {
+    work: number;
+    github: number;
+  };
 };
 
 export type HeroVideoConfig = {

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 
-import { PROJECTS } from "@/app/projects/projects.data";
+import { PROJECTS, PROJECT_PRIORITY_ORDER } from "@/app/projects/projects.data";
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
 import { CARD_INNER_BASE, CARD_OUTER_BASE } from "@/components/ui/cardStyles";
@@ -20,17 +20,6 @@ const SKILL_FILTERS = [
   "Open Source",
   "Sandboxes",
 ] as const;
-
-const PRIORITY_ORDER = [
-  "yahoo-dsp",
-  "ai-humanity-passport",
-  "tracknstick",
-  "webdevhub",
-  "sync-flow",
-  "barbenheimer-vscode-theme",
-  "barbenheimer-zed-theme",
-  "ember-upgrade-guide",
-];
 
 const FILTER_BUTTON_CLASS =
   "relative inline-flex min-h-11 items-center rounded-full border px-3 py-2 text-xs sm:text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950";
@@ -87,8 +76,8 @@ export default function SkillsAndCases() {
   const visible = React.useMemo(() => {
     const filtered = PROJECTS.filter((c) => active === "All" || c.skills.includes(active));
     return filtered.slice().sort((a, b) => {
-      const ai = PRIORITY_ORDER.indexOf(a.slug);
-      const bi = PRIORITY_ORDER.indexOf(b.slug);
+      const ai = PROJECT_PRIORITY_ORDER.indexOf(a.slug as (typeof PROJECT_PRIORITY_ORDER)[number]);
+      const bi = PROJECT_PRIORITY_ORDER.indexOf(b.slug as (typeof PROJECT_PRIORITY_ORDER)[number]);
       if (ai !== -1 || bi !== -1) {
         if (ai === -1) return 1;
         if (bi === -1) return -1;

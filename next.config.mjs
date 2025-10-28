@@ -1,23 +1,23 @@
-import createBundleAnalyzer from '@next/bundle-analyzer';
+import createBundleAnalyzer from "@next/bundle-analyzer";
 
 const withBundleAnalyzer = createBundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true',
+  enabled: process.env.ANALYZE === "true",
 });
 
 // Toggle Partial Prerendering (PPR) incrementally via env flag.
-const PPR_ENABLED = process.env.PPR_ENABLED === 'true';
+const PPR_ENABLED = process.env.PPR_ENABLED === "true";
 
 const experimental = {
   viewTransition: true,
   // Persist dev artifacts on disk to speed up restarts
   turbopackFileSystemCacheForDev: true,
-  ...(PPR_ENABLED ? { ppr: 'incremental' } : {}),
+  ...(PPR_ENABLED ? { ppr: "incremental" } : {}),
 };
 
 const nextConfig = {
   reactStrictMode: true,
-  // React Compiler disabled to match current rollout status
-  reactCompiler: false,
+  // React Compiler enabled to match current rollout status
+  reactCompiler: true,
   // Re-enable Partial Pre-Rendering cache components
   cacheComponents: true,
   experimental,
@@ -27,10 +27,10 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'avatars.githubusercontent.com',
-        port: '',
-        pathname: '/**',
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+        port: "",
+        pathname: "/**",
       },
     ],
   },

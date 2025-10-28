@@ -22,21 +22,21 @@
 
 ## Phase 2 – Data Providers
 
-- [ ] Create `lib/content/projects.ts`
+- [x] Create `lib/content/projects.ts`
   - Port data from `app/projects/projects.data.ts`.
   - Export `getProjects()` (`'use cache'`, `cacheTag('projects')`, `cacheLife('hours')`).
   - Include helper for priority ordering.
-- [ ] Create `lib/content/experiences.ts`
+- [x] Create `lib/content/experiences.ts`
   - Port experiences array from `WorkTimeline.client.tsx`.
   - Expose `getExperiences()` with caching + section metadata.
-- [ ] Create `lib/content/skills.ts`
+- [x] Create `lib/content/skills.ts`
   - Consolidate skill sections shared by home/lite pages.
   - Export `getSkillSections()` with `cacheLife('days')`.
-- [ ] Create `lib/content/hero.ts`
+- [x] Create `lib/content/hero.ts`
   - Centralize hero config (timings, video).
   - Precompute preload asset descriptors.
-- [ ] Replace original data files with re-exports or delete once consumers updated.
-- [ ] Add unit-like guards (TypeScript `satisfies`) to ensure data conforms to types.
+- [x] Replace original data files with re-exports or delete once consumers updated.
+- [x] Add unit-like guards (TypeScript `satisfies`) to ensure data conforms to types.
 
 ## Phase 3 – Layout & Shell Refactor
 
