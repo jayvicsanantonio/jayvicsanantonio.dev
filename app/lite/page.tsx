@@ -95,7 +95,7 @@ export default function MobileHomePage() {
       {/* Top-centered header bubble */}
       <div className="pointer-events-none fixed left-0 right-0 top-[max(env(safe-area-inset-top),16px)] z-[70] py-6 sm:py-10">
         <div className="pointer-events-auto flex justify-center">
-          <GlassHeaderBubble label="Hi, I'm Jayvic 👋" />
+          <GlassHeaderBubble label="Hi, I'm Jayvic 👋" activeRoute="lite" />
         </div>
       </div>
 

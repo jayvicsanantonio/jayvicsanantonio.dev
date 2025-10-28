@@ -40,15 +40,15 @@
 
 ## Phase 3 – Layout & Shell Refactor
 
-- [ ] Mark `app/layout.tsx` with `'use cache'`.
-- [ ] Extract cached `AppShell` + `ClientHydration` pattern.
+- [x] Mark `app/layout.tsx` with `'use cache'`.
+- [x] Extract cached `AppShell` + `ClientHydration` pattern.
   - `Body.tsx` returns `<body>` with cached ambient background.
   - Wrap `ClientAppShell` in `<Suspense fallback={null}>`.
-- [ ] Convert navigation components
+- [x] Convert navigation components
   - `GlassHeaderBubble` default export becomes server component.
   - Create `GlassHeaderBubble.client.tsx` (optional) for pointer-follow effect.
   - `NavPill` exposes server markup + optional `NavPill.client.tsx`.
-- [ ] Ensure font loading and metadata remain static; add `'use cache'` to helpers if needed.
+- [x] Ensure font loading and metadata remain static; add `'use cache'` to helpers if needed.
 
 ## Phase 4 – Page Refactors
 

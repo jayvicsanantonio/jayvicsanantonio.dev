@@ -70,6 +70,10 @@
   }
 }
 
+body[data-route="home"] .ambient-background {
+  display: none;
+}
+
 @utility container {
   margin-inline: auto;
   padding-inline: clamp(1rem, 5vw, 2rem);

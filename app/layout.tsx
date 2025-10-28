@@ -1,3 +1,5 @@
+"use cache";
+
 import localFont from "next/font/local";
 
 import Body from "@/components/shell/Body";
