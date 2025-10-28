@@ -6,10 +6,10 @@ const withBundleAnalyzer = createBundleAnalyzer({
 
 const nextConfig = {
   reactStrictMode: true,
-  // Enable React Compiler (requires `babel-plugin-react-compiler`)
-  reactCompiler: true,
-  // Enable Partial Pre-Rendering via cache components
-  cacheComponents: true,
+  // React Compiler disabled to match current rollout status
+  reactCompiler: false,
+  // Disable Partial Pre-Rendering cache components for now
+  cacheComponents: false,
   experimental: {
     viewTransition: true,
     // Persist dev artifacts on disk to speed up restarts
