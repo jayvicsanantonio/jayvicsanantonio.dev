@@ -5,9 +5,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { Oswald } from "next/font/google";
 import { CARD_INNER_BASE, CARD_OUTER_BASE } from "@/components/ui/cardStyles";
-const oswald = Oswald({ subsets: ["latin"] });
 
 const SKILL_SECTIONS = [
   {
@@ -281,7 +279,7 @@ export default function AboutSection() {
         >
           <div className={`${CARD_INNER_BASE} h-full p-6 sm:p-8`}>
             <h2
-              className={`${oswald.className} mb-6 text-2xl font-bold tracking-tight text-white`}
+              className="font-oswald mb-6 text-2xl font-bold tracking-tight text-white"
             >
               About Me
             </h2>
@@ -363,7 +361,7 @@ export default function AboutSection() {
         >
           <div className={`${CARD_INNER_BASE} p-6 sm:p-8`}>
             <h2
-              className={`${oswald.className} mb-6 text-2xl font-bold tracking-tight text-white`}
+              className="font-oswald mb-6 text-2xl font-bold tracking-tight text-white"
             >
               Skills
             </h2>
@@ -402,7 +400,7 @@ export default function AboutSection() {
           }}
         >
           <div className={`${CARD_INNER_BASE} p-6 sm:p-8`}>
-            <h2 className={`${oswald.className} mb-6 text-2xl font-bold tracking-tight text-white`}>
+            <h2 className="font-oswald mb-6 text-2xl font-bold tracking-tight text-white">
               Expertise
             </h2>
             <div className="mt-3 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
