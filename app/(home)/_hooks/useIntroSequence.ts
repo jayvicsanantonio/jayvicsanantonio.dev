@@ -7,81 +7,52 @@ export type IntroTimings = {
   graceAfterExpandMs: number;
 };
 
-export function useIntroSequence(cfg: { timings: IntroTimings }, reduceMotion: boolean) {
-  const [elapsed, setElapsed] = useState(0);
-  const startRef = useRef<number | null>(null);
-  const elapsedRef = useRef(0);
-  const rafRef = useRef<number | null>(null);
+export function useIntroSequence(cfg: { timings: IntroTimings }) {
+  const [initialPill, setInitialPill] = useState(true);
+  const [showTitleGroup, setShowTitleGroup] = useState(false);
+  const [showDesc, setShowDesc] = useState(false);
+  const [showName, setShowName] = useState(false);
+  const [isExpanding, setIsExpanding] = useState(false);
+  const [shouldPlayVideo, setShouldPlayVideo] = useState(false);
+  const startedRef = useRef(false);
 
+  // Orchestrate intro sequencing
   useEffect(() => {
-    if (reduceMotion) {
-      if (rafRef.current != null) {
-        cancelAnimationFrame(rafRef.current);
-        rafRef.current = null;
-      }
-      startRef.current = null;
-      elapsedRef.current = Number.POSITIVE_INFINITY;
-      return;
-    }
+    if (startedRef.current) return;
+    startedRef.current = true;
 
-    if (rafRef.current != null) {
-      cancelAnimationFrame(rafRef.current);
-      rafRef.current = null;
-    }
+    const timers: number[] = [];
 
-    elapsedRef.current = Number.NEGATIVE_INFINITY;
-    startRef.current = null;
-    const maxTime = Math.max(
-      cfg.timings.reveal.desc,
-      cfg.timings.introStartDelay + cfg.timings.introExpansionDuration + cfg.timings.graceAfterExpandMs,
+    // Begin expansion
+    timers.push(
+      window.setTimeout(() => {
+        setInitialPill(false);
+        setIsExpanding(true);
+        timers.push(
+          window.setTimeout(() => setIsExpanding(false), cfg.timings.introExpansionDuration),
+        );
+      }, cfg.timings.introStartDelay),
     );
 
-    const loop: FrameRequestCallback = (ts) => {
-      if (startRef.current === null) startRef.current = ts;
-      const baseline = startRef.current ?? ts;
-      const next = Math.min(ts - baseline, maxTime);
-      if (Math.abs(next - elapsedRef.current) >= 16) {
-        elapsedRef.current = next;
-        setElapsed(next);
-      }
-      if (next < maxTime) {
-        rafRef.current = requestAnimationFrame(loop);
-      }
-    };
+    // Staggered reveals
+    timers.push(window.setTimeout(() => setShowName(true), cfg.timings.reveal.name));
+    timers.push(window.setTimeout(() => setShowTitleGroup(true), cfg.timings.reveal.title));
+    timers.push(window.setTimeout(() => setShowDesc(true), cfg.timings.reveal.desc));
 
-    rafRef.current = requestAnimationFrame(loop);
     return () => {
-      if (rafRef.current != null) {
-        cancelAnimationFrame(rafRef.current);
-        rafRef.current = null;
-      }
-      startRef.current = null;
+      timers.forEach((t) => {
+        window.clearTimeout(t);
+      });
     };
-  }, [cfg.timings, reduceMotion]);
+  }, [cfg.timings]);
 
-  if (reduceMotion) {
-    return {
-      initialPill: false,
-      showTitleGroup: true,
-      showDesc: true,
-      showName: true,
-      isExpanding: false,
-      shouldPlayVideo: true,
-    } as const;
-  }
-
-  const { timings } = cfg;
-  const effectiveElapsed = reduceMotion ? Number.POSITIVE_INFINITY : elapsed;
-  const initialPill = effectiveElapsed < timings.introStartDelay;
-  const isExpanding =
-    effectiveElapsed >= timings.introStartDelay &&
-    effectiveElapsed < timings.introStartDelay + timings.introExpansionDuration;
-  const showName = effectiveElapsed >= timings.reveal.name;
-  const showTitleGroup = effectiveElapsed >= timings.reveal.title;
-  const showDesc = effectiveElapsed >= timings.reveal.desc;
-  const shouldPlayVideo =
-    effectiveElapsed >=
-    timings.introStartDelay + timings.introExpansionDuration + timings.graceAfterExpandMs;
+  // Allow video play a little after expansion finishes
+  useEffect(() => {
+    if (!initialPill && !isExpanding) {
+      const t = window.setTimeout(() => setShouldPlayVideo(true), cfg.timings.graceAfterExpandMs);
+      return () => window.clearTimeout(t);
+    }
+  }, [initialPill, isExpanding, cfg.timings.graceAfterExpandMs]);
 
   return {
     initialPill,

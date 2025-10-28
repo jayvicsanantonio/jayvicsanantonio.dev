@@ -59,8 +59,7 @@ app/                                 # Route segments (server-first by default)
   page.tsx                           # Home page (mounts co-located client hero)
   (home)/                            # Group segment (not in URL)
     _components/                     # Home-only components
-      HeroSection.tsx (server)
-      HeroMorphIsland.client.tsx
+      HeroMorph.client.tsx
       NavButton.tsx
       hero/                          # Home hero sub-islands
         config.ts
@@ -88,32 +87,23 @@ app/                                 # Route segments (server-first by default)
 
 components/                          # Shared components
   shell/                             # App shell (shared across routes)
-    AmbientBackground.tsx
     Body.tsx
     ClientAppShell.client.tsx
+    AmbientBackground.tsx
     CursorGlow.tsx
   ui/                                # Reusable UI primitives
     AnimatedText.tsx
     Badge.tsx
     GlassButton.tsx
     GlassHeaderBubble.tsx
-    GlassHeaderBubble.client.tsx
     NavPill.tsx
-    NavPill.client.tsx
     Toaster.tsx
 
 hooks/                               # Shared React hooks
   usePrefersReducedMotion.ts
   useWebVitalsLogger.ts
 
-lib/                                 # Shared utilities and data loaders
-  config/ppr.ts
-  content/
-    hero.ts
-    projects.ts
-    experiences.ts
-    skills.ts
-    skills-data.ts
+lib/                                 # Shared utilities
   utils.ts
 
 public/                              # Static assets
@@ -123,8 +113,6 @@ Conventions (summary)
 
 - One React component per file (ESLint enforces JS/TS rules; Prettier formats CSS/Markdown)
 - Client-only components must start with "use client"
-- Server components that should prerender must opt in with `'use cache'` (and `'use cache: private'` when data is user-specific); Suspense fallbacks belong in `components/fallbacks/`
-- Favor splitting interactive islands: export a server/default component and colocated `.client.tsx` wrapper for motion or browser APIs
 - UI/library components: prefer named exports; Next.js page/layout files use default export
 - Use the path alias `@/` for internal imports instead of deep relative paths when possible
 - Props: export reusable prop types/interfaces alongside components

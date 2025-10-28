@@ -5,10 +5,10 @@ import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 
+import { PROJECTS } from "@/app/projects/projects.data";
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
 import { CARD_INNER_BASE, CARD_OUTER_BASE } from "@/components/ui/cardStyles";
-import type { Project } from "@/lib/content/types";
 import ProjectLink from "./ProjectLink";
 
 const SKILL_FILTERS = [
@@ -21,6 +21,17 @@ const SKILL_FILTERS = [
   "Sandboxes",
 ] as const;
 
+const PRIORITY_ORDER = [
+  "yahoo-dsp",
+  "ai-humanity-passport",
+  "tracknstick",
+  "webdevhub",
+  "sync-flow",
+  "barbenheimer-vscode-theme",
+  "barbenheimer-zed-theme",
+  "ember-upgrade-guide",
+];
+
 const FILTER_BUTTON_CLASS =
   "relative inline-flex min-h-11 items-center rounded-full border px-3 py-2 text-xs sm:text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950";
 
@@ -30,12 +41,7 @@ const FILTER_BUTTON_ACTIVE =
 const FILTER_BUTTON_IDLE =
   "border-white/20 bg-slate-900/80 text-white/80 hover:border-white/35 hover:bg-slate-900/90";
 
-type SkillsAndCasesProps = {
-  projects: readonly Project[];
-  priorityOrder: readonly string[];
-};
-
-export default function SkillsAndCases({ projects, priorityOrder }: SkillsAndCasesProps) {
+export default function SkillsAndCases() {
   const prefersReducedMotion = usePrefersReducedMotion();
   const router = useRouter();
   const pathname = usePathname();
@@ -79,10 +85,10 @@ export default function SkillsAndCases({ projects, priorityOrder }: SkillsAndCas
   // Card animation handled via CSS keyframes (animate-fade-in-up)
 
   const visible = React.useMemo(() => {
-    const filtered = projects.filter((c) => active === "All" || c.skills.includes(active));
+    const filtered = PROJECTS.filter((c) => active === "All" || c.skills.includes(active));
     return filtered.slice().sort((a, b) => {
-      const ai = priorityOrder.indexOf(a.slug);
-      const bi = priorityOrder.indexOf(b.slug);
+      const ai = PRIORITY_ORDER.indexOf(a.slug);
+      const bi = PRIORITY_ORDER.indexOf(b.slug);
       if (ai !== -1 || bi !== -1) {
         if (ai === -1) return 1;
         if (bi === -1) return -1;
@@ -90,7 +96,7 @@ export default function SkillsAndCases({ projects, priorityOrder }: SkillsAndCas
       }
       return 0;
     });
-  }, [active, projects, priorityOrder]);
+  }, [active]);
 
   return (
     <div className="mt-12">

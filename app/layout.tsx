@@ -1,5 +1,3 @@
-"use cache";
-
 import localFont from "next/font/local";
 
 import Body from "@/components/shell/Body";
@@ -73,13 +71,13 @@ const oswaldLocal = localFont({
   variable: "--font-oswald",
 });
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
+    <html lang="en">
       <Body fontVars={`${sourceSansPro.variable} ${oswaldLocal.variable}`}>{children}</Body>
     </html>
   );
