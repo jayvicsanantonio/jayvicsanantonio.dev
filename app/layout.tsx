@@ -7,9 +7,29 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://jayvicsanantonio.dev"),
-  title: "Jayvic San Antonio | Senior Software Engineer",
+  title: "Jayvic San Antonio | Full-Stack Software Engineer",
   description:
-    "Highly skilled senior web developer with a proven track record of delivering successful web projects. Experienced in JavaScript and passionate about building innovative solutions. Contact me to learn more about my expertise.",
+    "Highly skilled full-stack software engineer with a proven track record of delivering successful web projects. Experienced in JavaScript and passionate about building innovative solutions. Contact me to learn more about my expertise.",
+  openGraph: {
+    type: "website",
+    url: "https://jayvicsanantonio.dev",
+    siteName: "Jayvic San Antonio",
+    title: "Jayvic San Antonio | Full-Stack Software Engineer",
+    description:
+      "Highly skilled full-stack software engineer with a proven track record of delivering successful web projects. Experienced in JavaScript and passionate about building innovative solutions.",
+    images: [
+      {
+        url: "/opengraph-image",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Jayvic San Antonio | Full-Stack Software Engineer",
+    description:
+      "Highly skilled full-stack software engineer with a proven track record of delivering successful web projects.",
+    images: ["/opengraph-image"],
+  },
   icons: {
     icon: [
       {
@@ -99,7 +119,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
-      <Body fontVars={`${sourceSansPro.variable} ${sourceSansProLight.variable} ${sourceSansProBold.variable} ${oswaldLocal.variable}`}>{children}</Body>
+      <Body
+        fontVars={`${sourceSansPro.variable} ${sourceSansProLight.variable} ${sourceSansProBold.variable} ${oswaldLocal.variable}`}
+      >
+        {children}
+      </Body>
     </html>
   );
 }
