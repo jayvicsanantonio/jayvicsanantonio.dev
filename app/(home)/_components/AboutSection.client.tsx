@@ -73,7 +73,7 @@ const SKILL_SECTIONS = [
   {
     title: "DevOps and Tooling",
     accentClass: "text-rose-300",
-    items: ["Amazon Web Services", "Vercel", "Cloudflare", "Netlify", "Git"],
+    items: ["Amazon Web Services", "Vercel", "Google Cloud", "Cloudflare", "Netlify", "Git"],
   },
   {
     title: "AI and Productivity",
@@ -83,18 +83,26 @@ const SKILL_SECTIONS = [
       "Warp.dev",
       "Claude Code",
       "Gemini CLI",
+      "Windsurf",
       "GitHub Copilot",
       "OpenRouter",
-      "Windsurf",
       "Cline",
       "VS Code",
       "Zed",
-      "Gemini",
+      "AI SDK",
+      "OpenAI SDK",
       "ChatGPT",
       "Perplexity",
       "Comet",
       "LangChain",
+      "Amazon Bedrock",
+      "Amazon Rekognition",
       "Google AI Studio",
+      "Chrome Builti-in AI API",
+      "Groq API",
+      "AI Agents",
+      "Multi-Agent Orchestration",
+      "Google GenAI SDK",
     ],
   },
 ] as const;
@@ -263,9 +271,7 @@ export default function AboutSection() {
             }}
           >
             <div className={`${CARD_INNER_BASE} h-full p-6 sm:p-8`}>
-              <h2
-                className={"font-oswald mb-6 text-2xl font-bold tracking-tight text-white"}
-              >
+              <h2 className={"font-oswald mb-6 text-2xl font-bold tracking-tight text-white"}>
                 About Me
               </h2>
               <div className="mt-3 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
@@ -345,9 +351,7 @@ export default function AboutSection() {
             }}
           >
             <div className={`${CARD_INNER_BASE} p-6 sm:p-8`}>
-              <h2
-                className={"font-oswald mb-6 text-2xl font-bold tracking-tight text-white"}
-              >
+              <h2 className={"font-oswald mb-6 text-2xl font-bold tracking-tight text-white"}>
                 Skills
               </h2>
               <div className="mt-3 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
