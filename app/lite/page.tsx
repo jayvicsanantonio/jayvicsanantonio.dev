@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Oswald } from "next/font/google";
 import Link from "next/link";
 import AnimatedText from "@/components/ui/AnimatedText";
 import GlassHeaderBubble from "@/components/ui/GlassHeaderBubble";
-const oswald = Oswald({ subsets: ["latin"] });
 
 const SKILL_SECTIONS = [
   {
@@ -254,7 +252,7 @@ export default function MobileHomePage() {
         {/* Title at bottom */}
         <div className="pointer-events-none absolute left-1/2 bottom-8 w-[17.625rem] -translate-x-1/2 text-center z-10">
           <h2
-            className={`font-bold tracking-wide text-white drop-shadow-[0_4px_20px_rgba(0,139,139,0.4),_0_2px_10px_rgba(0,0,0,0.6)] ${oswald.className}`}
+            className={"font-oswald font-bold tracking-wide text-white drop-shadow-[0_4px_20px_rgba(0,139,139,0.4),_0_2px_10px_rgba(0,0,0,0.6)]"}
           >
             <div className="text-[36px] leading-none">
               <AnimatedText text="FULL-STACK" start={true} perCharDelay={80} baseDelay={120} />
@@ -286,7 +284,7 @@ export default function MobileHomePage() {
             <div className={CARD_WRAPPER_CLASS}>
               <div className={CARD_BODY_CLASS}>
                 <h2
-                  className={`${oswald.className} mb-6 text-2xl font-bold tracking-tight text-white`}
+                  className={"font-oswald mb-6 text-2xl font-bold tracking-tight text-white"}
                 >
                   About Me
                 </h2>
@@ -361,9 +359,9 @@ export default function MobileHomePage() {
             {/* Skills Card */}
             <div className={CARD_WRAPPER_CLASS}>
               <div className={`${CARD_BODY_CLASS} space-y-6`}>
-                <h2
-                  className={`${oswald.className} mb-6 text-2xl font-bold tracking-tight text-white`}
-                >
+              <h2
+                className={"font-oswald mb-6 text-2xl font-bold tracking-tight text-white"}
+              >
                   Skills
                 </h2>
                 <div className="mt-3 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
@@ -396,7 +394,7 @@ export default function MobileHomePage() {
           <div className={CARD_WRAPPER_CLASS}>
             <div className={`${CARD_BODY_CLASS} space-y-6`}>
               <h2
-                className={`${oswald.className} mb-6 text-2xl font-bold tracking-tight text-white`}
+                className={"font-oswald mb-6 text-2xl font-bold tracking-tight text-white"}
               >
                 Expertise
               </h2>

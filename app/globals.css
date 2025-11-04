@@ -301,6 +301,7 @@
 
   /* Smooth scrolling and performance optimizations */
   html {
+    position: relative;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     overflow-x: hidden;

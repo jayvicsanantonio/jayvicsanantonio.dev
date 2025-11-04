@@ -98,7 +98,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <Body fontVars={`${sourceSansPro.variable} ${sourceSansProLight.variable} ${sourceSansProBold.variable} ${oswaldLocal.variable}`}>{children}</Body>
     </html>
   );

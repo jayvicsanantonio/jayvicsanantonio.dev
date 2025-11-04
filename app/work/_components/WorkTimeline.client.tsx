@@ -23,32 +23,49 @@ const EXPERIENCES: Experience[] = [
     company: "Professional Sabbatical",
     period: "2023 - Present",
     bullets: [
-      "Built and shipped multiple production-grade React + TypeScript applications, using Next.js for server-rendered experiences and Vite for high-performance SPAs; structured my sabbatical to master modern, in-demand tools beyond my former team’s stack by delivering end-to-end projects with solid architecture, testing, and CI/CD. Projects included productivity tools, developer tooling, automation and orchestrators, data visualizations, PWAs, and API services.",
-      "Focused on AI upskilling and workflow integration, practicing generative AI and context engineering; built model selection intuition to choose the right LLM for analysis, coding, and refactoring; and developed agents with tool access via the Model Context Protocol. I rotate coding tools like Cursor, Claude Code, Codex, and Warp, and I use ChatGPT, Gemini, Anthropic, and Perplexity to draft project specs, engineering plans, and UX/UI design plans. I also alternate between Google Chrome and Perplexity’s AI browser called Comet and am adopting Chrome’s integrated Gemini. I am excited about AI and use it to ship faster with higher quality and reliability, while rigorously reviewing AI-generated outputs to ensure I fully understand and own the code.",
-      "Invited by Google to attend Google I/O 2025 and explored Gemini and AI integrations across the product suite; continued learning through online events including AI-Driven Development Day, O’Reilly’s AI Codecon: Coding for the Agentic World, and Coding with AI: The End of Software Development as We Know It, reinforcing a curiosity-driven approach to staying competitive and integrating AI into developer workflows.",
-      "Collaborated with my sibling (also a software engineer) to compete in AI hackathons including OpenAI Open Model Hackathon, AWS AI Agent Global Hackathon, and Google Chrome Built-in AI Challenge 2025; demonstrated competitive drive and hands-on experimentation by applying newly learned AI tools, agent frameworks, and workflows in real-world challenges.",
+      "Rebuilt my personal website with Next.js, React, TypeScript, and Tailwind CSS, modernizing its architecture for performance, accessibility, and visual consistency. Benchmarked and refactored the frontend to improve mobile LCP by 0.52 seconds, introduced Partial Pre-Rendering experiments, and ensured Safari/mobile parity through dedicated proxy and CSS fallback systems. The site also showcases multiple production-grade React + TypeScript applications I built, including productivity tools, games, and utilities.",
+      "Incorporated AI tools such as Claude Code, Cursor, Codex, and Kiro to accelerate implementation while keeping code structured, maintainable, and production-ready. I follow a spec-driven approach rather than “vibe-coding,” defining clear system requirements first, then using AI to automate repetitive work and generate high-quality code snippets. For ideation, learning, and consolidating new concepts, I regularly use ChatGPT and Gemini to refine my understanding and improve my decision-making as an engineer. This disciplined workflow enables me to build fully functional web app MVPs in under 24 hours without compromising clarity or craftsmanship.",
+      "Invited by Google to attend Google I/O 2025, where I explored Gemini and Google’s AI ecosystem. Joined the first class of Google’s Startup School: GenAI Media training series to deepen my understanding of AI applications in creative and technical workflows. Actively participate in AI meetups and conferences both online and in person across the Bay Area, including AI-Driven Development Day, O’Reilly’s AI Codecon, Ship AI 2025 by Vercel, and the upcoming Google’s DevFest in Silicon Valley 2025 to stay current with emerging tools, trends, and expert discussions in AI development.",
+      "Built and deployed CollectIQ from concept to production in under 2 weeks for the AWS AI Agent Global Hackathon, leading a team of three engineers to develop a serverless multi-agent AI system that authenticates and values Pokémon trading cards using AWS Bedrock (Claude Sonnet 4), Rekognition, and Step Functions. Leveraged Lambda, DynamoDB, S3, Cognito, CloudWatch, and X-Ray for scalable orchestration, storage, and observability. Designed specialized agents for OCR correction, authenticity detection, and pricing aggregation across eBay and Pokémon TCG APIs. Delivered explainable AI outputs, sub-minute analysis, and cost-efficient scalability ($0.01 per analysis at 50k runs/month) with full infrastructure-as-code via Terraform.",
+      "Built Humanity Passport for the OpenAI Open Model Hackathon, leading a two-person team to create an AI-powered recognition platform that identifies and celebrates open-source projects contributing positively to humanity. Developed with Next.js 14, React, and TypeScript, integrating OpenAI gpt-oss-20b via Groq API, LangChain, and GitHub Octokit for repository analysis. Leveraged Prisma and Postgres for data persistence, and built a performant, responsive frontend with TailwindCSS, shadcn/ui, and Radix UI, deployed on Vercel. Delivered sub-10-second AI evaluations, dynamic SVG badges, and detailed public project pages that showcase AI-driven reasoning for each recognized repository.",
+      "Built Reflexa AI for the Google Chrome Built-in AI Challenge 2025, a wellness-centered Chrome extension that transforms everyday reading into calm, reflective micro-sessions powered by Gemini Nano. Engineered with TypeScript, React, and Vite, and tested with Vitest, integrating all 7 Chrome Built-in AI APIs for summarization, rewriting, translation, and tone guidance with complete on-device privacy.",
     ],
     tags: [
+      "Next.js",
       "React",
-      "JavaScript",
       "TypeScript",
-      "NextJS",
-      "Tailwind CSS",
+      "TailwindCSS",
       "Vite",
-      "NodeJS",
-      "Hono",
-      "Vercel Edge",
-      "Cloudflare Workers",
-      "PostgreSQL",
-      "SQLite",
-      "GitHub Actions",
-      "Redis",
+      "shadcn/ui",
+      "Radix UI",
+      "Vitest",
+      "Prisma",
+      "Postgres",
+      "AWS Bedrock",
+      "LLM",
+      "AWS Lambda",
+      "Step Functions",
+      "Rekognition",
+      "DynamoDB",
+      "S3",
+      "Cognito",
+      "Terraform",
+      "Vercel",
+      "Gemini Nano",
+      "Groq API",
+      "LangChain",
+      "GitHub Octokit",
+      "Chrome Built-in AI APIs",
       "AI Agents",
-      "Large Language Models",
-      "Model Context Protocol",
+      "Multi-Agent Systems",
       "Generative AI",
       "Context Engineering",
-      "AI Coding Tools",
+      "Spec-Driven Development",
+      "Performance Optimization",
+      "Accessibility",
+      "Serverless Architecture",
+      "Hackathons",
+      "Open Source",
     ],
   },
   {
@@ -67,17 +84,23 @@ const EXPERIENCES: Experience[] = [
       "Contributed to upgrading Yahoo DSP’s Ember framework, enhancing performance, security, and developer experience, unlocking new capabilities and ecosystem of add-ons, ensuring compatibility with future updates, and resulting in a better product and increased customer satisfaction, as a key maintenance contributor",
     ],
     tags: [
-      "React",
-      "Ember",
-      "Express",
-      "Node",
-      "JS",
-      "HTML",
-      "CSS",
-      "AWS",
+      "Ember.js",
+      "React.js",
       "Java",
       "MySQL",
-      "AdTech",
+      "Cypress.io",
+      "Agile",
+      "Selenium",
+      "UI Performance Optimization",
+      "Reusable Components",
+      "Full-Stack Development",
+      "End-to-End Testing",
+      "Collaboration",
+      "Real-Time Bidding Systems",
+      "Data Management Platform (DMP)",
+      "Ad Tech",
+      "Mentorship",
+      "Open Source",
     ],
   },
   {
@@ -85,28 +108,57 @@ const EXPERIENCES: Experience[] = [
     company: "Saffron Technologies Inc.",
     period: "2015 - 2016",
     bullets: [
-      "Represented the company and pitched at local and international events, including the RISE Conference 2015 in Hong Kong and National Science and Technology Week 2015 in the Philippines, resulting in potential business partnerships and increased brand awareness.",
-      "Achieved recognition in the Philippine tech industry, having been featured in a number of top tech blogs and news websites such as Deal Street Asia, Enterprise Innovation, KabayanTech, The Philippine Star and BusinessMirror for winning the IdeaSpace 2015 Startup Competition, which resulted in increased media coverage and brand visibility.",
-      "Supported our CEO for the research, design and implementation of Bluetooth Low Energy technology in a wearable device (Croo), resulting in significant cost savings and improved product reliability.",
-      "Collaborated with our COO and CTO in architecting and implementing a scalable and reliable AWS infrastructure to support the Croo Android application that complements our IoT Croo wearable, delivering a seamless user experience.",
-      "Created and configured automated deployment processes using Puppet, resulting in streamlined and efficient updates and reduced deployment errors.",
+      "Selected as one of the Top 10 startups (out of 1,028 entries across 15 countries) in the 2015 IdeaSpace Foundation Accelerator Program, the Philippines’ premier technology incubator, recognized for innovation in wearable technology.",
+      "Featured in five of the Philippines’ top tech and business outlets, including Deal Street Asia, Enterprise Innovation, KabayanTech, The Philippine Star, and BusinessMirror, after winning the 2015 IdeaSpace Startup Competition, gaining national recognition and credibility in the local startup ecosystem",
+      "Represented the company as one of 350 startups worldwide selected for the RISE Conference 2015 (Hong Kong) under the ALPHA Program, showcasing our wearable technology to investors, and strengthening brand presence at the National Science and Technology Week 2015 (Philippines)",
+      "Co-led the research, design, and implementation of Bluetooth Low Energy (BLE) technology for the wearable device Croo, enhancing connection stability and cutting hardware costs",
+      "ollaborated on designing and scaling AWS infrastructure for the Android companion app of our IoT wearable device, ensuring reliable performance and seamless data sync between the app and device",
     ],
-    tags: ["AWS", "Express", "Node", "Internet of Things"],
+    tags: [
+      "Bluetooth Low Energy (BLE)",
+      "IoT",
+      "AWS",
+      "Cloud Infrastructure",
+      "Data Sync",
+      "Innovation",
+      "Hardware Integration",
+      "Prototyping",
+      "Product Design",
+      "Wearable Technology",
+      "Startup Leadership",
+    ],
   },
   {
     title: "Software Engineer",
     company: "Voyager Innovations Inc.",
     period: "2013 - 2016",
     bullets: [
-      "Demonstrated technical expertise and ability to thrive under pressure by leading my team to victory in several hackathons, including 1st Place finishes at Hack the Climate 2015 and HERE Hackathon Manila 2014, as well as a Semi-finalist ranking in the Google Cloud Developer Challenge 2013",
-      'Authored an editorial titled "All I really need to know, I learned from Pinoy Hackathons," featured on GMA News Online, a highly regarded platform among the top news websites in the Philippines.',
-      "Developed and delivered the back-end of Lendr, the Philippines’ first fully digital, end-to-end consumer loan platform, using Node and Express, collaborating with the team to ensure seamless project execution and timely delivery",
-      "Implemented a scalable back-end system for a digital-media mobile application, Eat Bulaga! Mobile, leading a team of 3 junior engineers and utilizing Sails.js, MongoDB, and Redis to handle multiple thousands of concurrent requests from 700K+ active users",
-      "Pioneered a culture of active participation in programming competitions and hackathons among Voyager engineers, resulting in increased creativity, knowledge and awareness of new tools and technologies",
-      "Developed the redesign of the existing stand-alone application, SmartNet, by participating in planning and initiation stages, implementing object-oriented design and JavaScript best practices, taking ownership of specific tasks, and delivering work with tight deadlines using Node, Sails.js, HTML, CSS, MongoDB, and Redis",
-      "Refactored and optimized the codebase of Pinoy Hoops, a digital sports platform, using Express, jQuery, CSS, Pug, MongoDB and Redis",
+      "Built and delivered the back end of Lendr, the Philippines’ first fully digital end-to-end consumer loan platform (now part of Maya, Philippines’ #1 digital bank), using Node.js and Express, enabling seamless loan processing for thousands of users.",
+      "Delivered a highly scalable back-end system for Eat Bulaga! Mobile, the official app of the Philippines’ longest-running TV show, supporting 700K+ active users through Sails.js, MongoDB, and Redis, while managing and mentoring three junior engineers; the app earned a 4.5 star rating from over 22K users on Google Play",
+      "Led a cross-functional team to multiple victories in national hackathons, including 1st Place in Hack the Climate 2015 and HERE Hackathon Manila 2014, and reached the semifinals of the Google Cloud Developer Challenge 2013.",
+      "Authored a featured editorial titled “All I Really Need to Know, I Learned from Pinoy Hackathons”, published on GMA News Online, one of the Philippines’ top news platforms, showcasing thought leadership in the local tech community.",
+      "Redesigned and rebuilt SmartNet, a mobile suite used by 320K+ prepaid subscribers for free internet access, using Node.js, Sails.js, HTML, CSS, MongoDB, and Redis to improve performance and reliability.",
+      "Refactored and optimized Pinoy Hoops, the go-to digital hub for PBA, NCAA, and FIBA fans, enhancing real-time responsiveness with Express.js, Socket.io, MongoDB, and Redis, ensuring reliable coverage during live games.",
     ],
-    tags: ["AWS", "Express", "Node", "SailsJS", "Redis", "MongoDB", "FinTech"],
+    tags: [
+      "Node.js",
+      "Express.js",
+      "Sails.js",
+      "Socket.io",
+      "MongoDB",
+      "Redis",
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "REST API",
+      "Agile",
+      "Scalable Systems",
+      "Backend Development",
+      "Microservices",
+      "Performance Optimization",
+      "Mentorship",
+      "Hackathons",
+    ],
   },
   {
     title: "Intern",
@@ -132,17 +184,29 @@ export default function WorkTimeline() {
   });
   const spineScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
-  const reveal: MotionProps = prefersReducedMotion
-    ? { initial: {}, whileInView: {}, viewport: {}, transition: {} }
-    : {
-        initial: { opacity: 0, y: 20 },
+  const getRevealProps = (index: number): MotionProps => {
+    if (prefersReducedMotion) {
+      return { initial: {}, whileInView: {}, viewport: {}, transition: {} };
+    }
+    // First card shows immediately without animation
+    if (index === 0) {
+      return {
+        initial: { opacity: 1, y: 0 },
         whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true, amount: 0.2, margin: "0px 0px -100px 0px" },
-        transition: {
-          duration: 0.8,
-          ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
-        },
+        viewport: { once: true },
+        transition: {},
       };
+    }
+    return {
+      initial: { opacity: 0, y: 20 },
+      whileInView: { opacity: 1, y: 0 },
+      viewport: { once: true, amount: 0.2, margin: "0px 0px -100px 0px" },
+      transition: {
+        duration: 0.8,
+        ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
+      },
+    };
+  };
 
   return (
     <div ref={containerRef} className="relative mt-8 sm:mt-12 lg:mt-16">
@@ -242,12 +306,18 @@ export default function WorkTimeline() {
                 >
                   {/* Card */}
                   <motion.article
-                    {...reveal}
-                    whileHover={prefersReducedMotion ? {} : { y: -4 }}
-                    transition={{
-                      duration: 0.3,
-                      ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
-                    }}
+                    {...getRevealProps(index)}
+                    whileHover={
+                      prefersReducedMotion
+                        ? {}
+                        : {
+                            y: -4,
+                            transition: {
+                              duration: 0.3,
+                              ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
+                            },
+                          }
+                    }
                     className={`${CARD_OUTER_BASE} mx-auto w-full lg:mx-0 lg:w-[min(500px,50vw)] ${
                       isRight ? "lg:mr-auto" : "lg:ml-auto"
                     }`}
