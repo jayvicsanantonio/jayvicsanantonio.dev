@@ -36,6 +36,7 @@ export const viewport = {
   viewportFit: "cover",
 };
 
+// Regular weight preloaded for LCP-critical body text
 const sourceSansPro = localFont({
   src: [
     {
@@ -43,11 +44,28 @@ const sourceSansPro = localFont({
       weight: "400",
       style: "normal",
     },
+  ],
+  display: "swap",
+  variable: "--font-source-sans",
+});
+
+// Light weight - not needed for LCP, disable preload
+const sourceSansProLight = localFont({
+  src: [
     {
       path: "../public/fonts/SourceSansPro-Light.woff2",
       weight: "300",
       style: "normal",
     },
+  ],
+  display: "swap",
+  variable: "--font-source-sans",
+  preload: false,
+});
+
+// Bold weight - not needed for LCP, disable preload
+const sourceSansProBold = localFont({
+  src: [
     {
       path: "../public/fonts/SourceSansPro-Bold.woff2",
       weight: "700",
@@ -56,9 +74,11 @@ const sourceSansPro = localFont({
   ],
   display: "swap",
   variable: "--font-source-sans",
+  preload: false,
 });
 
 // Use a local fallback mapped to the legacy --font-oswald variable so existing classes continue to work
+// Disable preload since headings aren't typically the LCP element
 const oswaldLocal = localFont({
   src: [
     {
@@ -69,6 +89,7 @@ const oswaldLocal = localFont({
   ],
   display: "swap",
   variable: "--font-oswald",
+  preload: false,
 });
 
 export default function RootLayout({
@@ -78,7 +99,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Body fontVars={`${sourceSansPro.variable} ${oswaldLocal.variable}`}>{children}</Body>
+      <Body fontVars={`${sourceSansPro.variable} ${sourceSansProLight.variable} ${sourceSansProBold.variable} ${oswaldLocal.variable}`}>{children}</Body>
     </html>
   );
 }
