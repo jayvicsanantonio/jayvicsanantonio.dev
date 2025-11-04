@@ -80,7 +80,7 @@ Architecture and structure (big picture)
     - keys content by pathname and wraps it in React ViewTransition for smooth transitions
     - applies a container layout on non-home pages
     - wires Vercel Speed Insights and Analytics
-    - logs Web Vitals to the console in development via hooks/useWebVitalsLogger.ts
+    - includes a Web Vitals hook (hooks/useWebVitalsLogger.ts) currently disabled from logging to keep the console clean
 
 - Home page “islands”
   - app/page.tsx mounts a single interactive hero: (home)/\_components/HeroMorph.client.tsx.

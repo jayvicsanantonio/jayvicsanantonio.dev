@@ -11,8 +11,11 @@ export function useWebVitalsLogger() {
       .then(({ onLCP, onINP, onCLS }) => {
         const log = (name: string, value: number, rating?: string, id?: string) => {
           if (!active) return;
-          const rounded = Math.round(value * 100) / 100;
-          console.log(`[WebVitals] ${name}: ${rounded}`, { rating, id });
+          // Intentionally no-op to avoid console noise in development
+          void name;
+          void value;
+          void rating;
+          void id;
         };
         onLCP(({ value, rating, id }) => log("LCP", value, rating, id));
         onINP(({ value, rating, id }) => log("INP", value, rating, id));

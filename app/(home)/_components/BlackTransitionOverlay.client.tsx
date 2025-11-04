@@ -20,8 +20,7 @@ export default function BlackTransitionOverlay() {
       const progress = Math.max(0, Math.min(1, (scrollY - startScroll) / transitionLength));
       setScrollProgress(progress);
 
-      // Debug logging
-      console.log("BlackTransition:", { scrollY, progress, transformY: 100 - progress * 100 });
+      // Debug logging removed to keep console clean
     };
 
     // Check initial state
