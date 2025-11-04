@@ -184,30 +184,6 @@ export default function WorkTimeline() {
   });
   const spineScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
-  const getRevealProps = (index: number): MotionProps => {
-    if (prefersReducedMotion) {
-      return { initial: {}, whileInView: {}, viewport: {}, transition: {} };
-    }
-    // First card shows immediately without animation
-    if (index === 0) {
-      return {
-        initial: { opacity: 1, y: 0 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true },
-        transition: {},
-      };
-    }
-    return {
-      initial: { opacity: 0, y: 20 },
-      whileInView: { opacity: 1, y: 0 },
-      viewport: { once: true, amount: 0.2, margin: "0px 0px -100px 0px" },
-      transition: {
-        duration: 0.8,
-        ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
-      },
-    };
-  };
-
   return (
     <div ref={containerRef} className="relative mt-8 sm:mt-12 lg:mt-16">
       {/* Flow wrapper: center 100vw wrapper so spine aligns at viewport center */}
@@ -305,19 +281,7 @@ export default function WorkTimeline() {
                   }`}
                 >
                   {/* Card */}
-                  <motion.article
-                    {...getRevealProps(index)}
-                    whileHover={
-                      prefersReducedMotion
-                        ? {}
-                        : {
-                            y: -4,
-                            transition: {
-                              duration: 0.3,
-                              ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
-                            },
-                          }
-                    }
+                  <article
                     className={`${CARD_OUTER_BASE} mx-auto w-full lg:mx-0 lg:w-[min(500px,50vw)] ${
                       isRight ? "lg:mr-auto" : "lg:ml-auto"
                     }`}
@@ -362,7 +326,7 @@ export default function WorkTimeline() {
                         ))}
                       </div>
                     </div>
-                  </motion.article>
+                  </article>
                 </div>
               </li>
             );
