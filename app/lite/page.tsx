@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useRef, useEffect } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,6 +6,7 @@ import AnimatedText from "@/components/ui/AnimatedText";
 import KeywordsBackground, { type KeywordItem } from "@/components/ui/KeywordsBackground.client";
 import { KEYWORD_HIGHLIGHT_LARGE, KEYWORD_HIGHLIGHT_MEDIUM } from "@/lib/keywordHighlight";
 import GlassHeaderBubble from "@/components/ui/GlassHeaderBubble";
+import AnimatedSection from "@/app/(home)/_components/AnimatedSection.client";
 
 const SKILL_SECTIONS = [
   {
@@ -114,11 +115,6 @@ const SKILL_SECTIONS = [
   },
 ] as const;
 
-const CARD_WRAPPER_CLASS =
-  "group relative w-full rounded-2xl bg-gradient-to-br from-slate-950/90 via-slate-950/70 to-slate-950/50 p-[1px] shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_28px_rgba(0,0,0,0.45)] ring-1 ring-white/10 transition-transform duration-200 hover:-translate-y-0.5 sm:p-[1.2px]";
-
-const CARD_BODY_CLASS = "relative h-full rounded-2xl border border-white/8 bg-gray-950/85 p-6 sm:p-8";
-
 // (Expertise items are displayed as curated keywords; detailed list removed for the lite page.)
 
 export const metadata: Metadata = {
@@ -135,13 +131,12 @@ export const metadata: Metadata = {
 };
 
 export default function MobileHomePage() {
-  const [keywordProgress, setKeywordProgress] = React.useState(0);
-  const [aboutVisible, setAboutVisible] = React.useState(false);
-  const pinRef = React.useRef<HTMLDivElement>(null);
+  const [keywordProgress, setKeywordProgress] = useState(0);
+  const pinRef = useRef<HTMLDivElement>(null);
   // No global scroll-lock on the lite page to avoid interfering with hero/nav animations.
 
   // Pinned scrubbing without body lock (prevents interference with hero/nav)
-  React.useEffect(() => {
+  useEffect(() => {
     const el = pinRef.current;
     if (!el) return;
     let startY = 0;
@@ -157,7 +152,6 @@ export default function MobileHomePage() {
       const pRaw = Math.max(0, Math.min(1, y / Math.max(total, 1)));
       const pEase = 1 - Math.pow(1 - pRaw, 3);
       setKeywordProgress(pEase);
-      if (pRaw >= 0.98) setAboutVisible(true);
     };
     recalcStart();
     onScroll();
@@ -167,7 +161,7 @@ export default function MobileHomePage() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", recalcStart);
     };
-  }, []);
+  }, [setKeywordProgress]);
 
   return (
     <main className="text-white overflow-x-hidden min-h-screen">
@@ -294,87 +288,94 @@ export default function MobileHomePage() {
             controlledProgress={keywordProgress}
           />
         </div>
-        <div className="container px-4 pt-16 pb-20">
-          <div
-            className={CARD_WRAPPER_CLASS + " max-w-2xl w-full mx-auto"}
-            style={{
-              opacity: aboutVisible ? 1 : 0,
-              transform: aboutVisible ? "translateY(0) scale(1)" : "translateY(16px) scale(0.96)",
-              transition: "opacity 500ms ease, transform 600ms cubic-bezier(0.22,1,0.36,1)",
-            }}
-          >
-            <div className={CARD_BODY_CLASS}>
-              <h2 className={"font-oswald mb-6 text-2xl font-bold tracking-tight text-white"}>
-                About Me
-              </h2>
-              <div className="mt-3 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-              <div className="mt-6 space-y-4 text-[0.95rem]/relaxed sm:text-[0.98rem]/relaxed text-gray-300/90">
-                <p>
-                  I'm Jayvic San Antonio, a full‑stack software engineer from the Philippines, now
-                  building in the San Francisco Bay Area. I've spent more than a decade turning
-                  ideas into products people can actually use. I care about craft and about
-                  people. I write code that is easy to read, I obsess over how things feel, and I
-                  treat reliability like a feature. Clear contracts, thoughtful design, and
-                  automated checks help me ship with confidence and keep things fast and
-                  accessible for everyone.
-                </p>
-                <p>
-                  My path has been a mix of startup scrappiness and big‑company scale. I
-                  co‑founded a company back home, won a few hackathons, and learned how to rally a
-                  team around a rough idea. In the Bay Area I helped rebuild revenue‑critical
-                  features in a large advertising platform, scaled systems that needed to work
-                  under pressure, mentored newer engineers, and built tools that made everyone a
-                  little faster.
-                </p>
-                <p>
-                  Lately, I've been building web applications with modern approaches to sharpen my
-                  craft and stay current. I've also been learning more about AI, especially
-                  generative AI, context engineering, large language models, and MCPs, and I'm using
-                  AI coding tools thoughtfully to become even more productive as an engineer. I'm
-                  actively mastering these capabilities so I can move faster, make better decisions,
-                  and keep a real competitive edge.
-                </p>
-                <p>
-                  When I'm not coding, I'm getting my steps in Pokemon Go, collecting Star Wars
-                  Black Series figures, catching up on MCU movies and shows, and listening to Ed
-                  Sheeran. I like early-morning coffee, long walks with good podcasts, and shipping
-                  work I'm proud to sign my name on.
-                </p>
-                <p>
-                  If you're working on something ambitious and care about the details, I'd love to
-                  build with you. You can reach me at my{" "}
-                  <Link
-                    href="mailto:hi@jayvicsanantonio.dev"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200"
-                  >
-                    email
-                  </Link>
-                  , find me on{" "}
-                  <Link
-                    href="https://www.linkedin.com/in/jayvicsanantonio"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200"
-                  >
-                    LinkedIn
-                  </Link>
-                  , and see more of my work{" "}
-                  <Link
-                    href="/projects"
-                    rel="noopener noreferrer"
-                    className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200"
-                  >
-                    here
-                  </Link>
-                  .
-                </p>
-              </div>
-            </div>
+        <div className="container px-4 pt-16 pb-20"></div>
+      </section>
+      <AnimatedSection largeText="ABOUT">
+        <div className="space-y-4 text-lg text-gray-300">
+          <p>
+            I&apos;m Jayvic San Antonio, a full‑stack software engineer from the Philippines, now
+            building in the San Francisco Bay Area. I&apos;ve spent more than a decade turning ideas
+            into products people can actually use. I care about craft and about people. I write
+            code that is easy to read, I obsess over how things feel, and I treat reliability like a
+            feature. Clear contracts, thoughtful design, and automated checks help me ship with
+            confidence and keep things fast and accessible for everyone.
+          </p>
+          <p>
+            My path has been a mix of startup scrappiness and big‑company scale. I co‑founded a
+            company back home, won a few hackathons, and learned how to rally a team around a rough
+            idea. In the Bay Area I helped rebuild revenue‑critical features in a large advertising
+            platform, scaled systems that needed to work under pressure, mentored newer engineers,
+            and built tools that made everyone a little faster.
+          </p>
+          <p>
+            Lately, I&apos;ve been building web applications with modern approaches to sharpen my
+            craft and stay current. I&apos;ve also been learning more about AI, especially
+            generative AI, context engineering, large language models, and MCPs, and I&apos;m using
+            AI coding tools thoughtfully to become even more productive as an engineer. I&apos;m
+            actively mastering these capabilities so I can move faster, make better decisions, and
+            keep a real competitive edge.
+          </p>
+          <p>
+            When I&apos;m not coding, I&apos;m getting my steps in Pokemon Go, collecting Star Wars
+            Black Series figures, catching up on MCU movies and shows, and listening to Ed Sheeran.
+            I like early-morning coffee, long walks with good podcasts, and shipping work I&apos;m
+            proud to sign my name on.
+          </p>
+          <p>
+            If you&apos;re working on something ambitious and care about the details, I&apos;d love
+            to build with you. You can reach me at my{" "}
+            <Link
+              href="mailto:hi@jayvicsanantonio.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200"
+            >
+              email
+            </Link>
+            , find me on{" "}
+            <Link
+              href="https://www.linkedin.com/in/jayvicsanantonio"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200"
+            >
+              LinkedIn
+            </Link>
+            , and see more of my work{" "}
+            <Link
+              href="/projects"
+              rel="noopener noreferrer"
+              className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200"
+            >
+              here
+            </Link>
+            .
+          </p>
+        </div>
+      </AnimatedSection>
+      <AnimatedSection largeText="CONTACT">
+        <div className="space-y-4 text-lg text-gray-300">
+          <p>Feel free to say hello:</p>
+          <p>
+            <Link
+              href="mailto:hi@jayvicsanantonio.dev"
+              className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200"
+            >
+              hi@jayvicsanantonio.dev
+            </Link>
+          </p>
+          <div className="flex justify-center space-x-4">
+            <Link
+              href="https://www.linkedin.com/in/jayvicsanantonio"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200"
+            >
+              LinkedIn
+            </Link>
           </div>
         </div>
-      </section>
+      </AnimatedSection>
     </main>
   );
 }
