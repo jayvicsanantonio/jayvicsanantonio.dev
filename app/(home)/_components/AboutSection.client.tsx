@@ -4,8 +4,9 @@
 // Ported from lite page to match design system
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { CARD_INNER_BASE, CARD_OUTER_BASE } from "@/components/ui/cardStyles";
+import KeywordsBackground, { type KeywordItem } from "@/components/ui/KeywordsBackground.client";
 
 const SKILL_SECTIONS = [
   {
@@ -157,84 +158,109 @@ const EXPERTISE_ITEMS = [
 
 export default function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const keywordsContainerRef = useRef<HTMLDivElement>(null);
   const aboutCardRef = useRef<HTMLDivElement>(null);
-  const skillsCardRef = useRef<HTMLDivElement>(null);
-  const expertiseCardRef = useRef<HTMLDivElement>(null);
+  const keywordsSectionStartRef = useRef<number>(0);
+  const isTrackingKeywordsRef = useRef(false);
+  const lastScrollYRef = useRef(0);
+  
+  // Progress: 0-1 (0-0.5 appear, 0.5-1 disappear)
+  const [keywordProgress, setKeywordProgress] = useState(0);
+  const [keywordsComplete, setKeywordsComplete] = useState(false);
+  const [aboutCardVisible, setAboutCardVisible] = useState(false);
 
-  const [cardTransforms, setCardTransforms] = useState({
-    aboutCard: { scale: 0.5, opacity: 0 },
-    skillsCard: { scale: 0.5, opacity: 0 },
-    expertiseCard: { scale: 0.5, opacity: 0 },
-  });
-
-  const [animationComplete, setAnimationComplete] = useState({
-    aboutCard: false,
-    skillsCard: false,
-    expertiseCard: false,
-  });
-
+  // Track scroll position relative to keywords section
   useEffect(() => {
+    const keywordsContainer = keywordsContainerRef.current;
+    if (!keywordsContainer) return;
+
+    const updateProgress = () => {
+      if (!isTrackingKeywordsRef.current || keywordsComplete) return;
+
+      const currentScrollY = window.scrollY;
+      const scrollDelta = currentScrollY - keywordsSectionStartRef.current;
+      
+      // Map scroll delta to progress (1000px scroll = full progress)
+      // Adjust this value to control how much scroll is needed for full animation
+      const maxScrollDistance = 1000;
+      const progress = Math.max(0, Math.min(1, scrollDelta / maxScrollDistance));
+      
+      setKeywordProgress(progress);
+    };
+
     const observerOptions = {
-      threshold: 0.3, // Trigger when 30% of card is visible
-      rootMargin: "0px 0px -20% 0px", // Start animation slightly before fully in view
+      threshold: 0.1,
+      rootMargin: "0px",
     };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const target = entry.target;
-
-          // Trigger animations with staggered delays - only once
-          if (target === aboutCardRef.current && !animationComplete.aboutCard) {
-            setCardTransforms((prev) => ({
-              ...prev,
-              aboutCard: { scale: 1, opacity: 1 },
-            }));
-            setAnimationComplete((prev) => ({
-              ...prev,
-              aboutCard: true,
-            }));
-
-            // Skills card appears after about card with delay
-            setTimeout(() => {
-              setCardTransforms((prev) => ({
-                ...prev,
-                skillsCard: { scale: 1, opacity: 1 },
-              }));
-              setAnimationComplete((prev) => ({
-                ...prev,
-                skillsCard: true,
-              }));
-            }, 300);
-
-            // Expertise card appears after skills card with delay
-            setTimeout(() => {
-              setCardTransforms((prev) => ({
-                ...prev,
-                expertiseCard: { scale: 1, opacity: 1 },
-              }));
-              setAnimationComplete((prev) => ({
-                ...prev,
-                expertiseCard: true,
-              }));
-            }, 600);
-
-            // Unobserve after triggering to prevent re-animation
-            observer.unobserve(target);
-          }
+        if (entry.isIntersecting && !isTrackingKeywordsRef.current) {
+          // Start tracking when keywords section enters viewport
+          isTrackingKeywordsRef.current = true;
+          keywordsSectionStartRef.current = window.scrollY;
+          lastScrollYRef.current = window.scrollY;
+        } else if (!entry.isIntersecting && isTrackingKeywordsRef.current) {
+          // Stop tracking when section exits
+          isTrackingKeywordsRef.current = false;
         }
       });
     }, observerOptions);
 
-    // Only observe the first card (About) to trigger the sequence
-    if (aboutCardRef.current && !animationComplete.aboutCard) {
-      observer.observe(aboutCardRef.current);
-    }
+    observer.observe(keywordsContainer);
+
+    // Track scroll to update progress
+    const handleScroll = () => {
+      if (isTrackingKeywordsRef.current && !keywordsComplete) {
+        updateProgress();
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       observer.disconnect();
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, [animationComplete.aboutCard]);
+  }, [keywordsComplete]);
+
+  // Track scroll naturally - no prevention, just map scroll to progress
+  // This allows smooth, natural scrolling while driving keywords animation
+
+  // Handle keywords completion
+  const handleKeywordsComplete = () => {
+    setKeywordsComplete(true);
+    isTrackingKeywordsRef.current = false;
+    // Animate About card on top
+    setTimeout(() => {
+      setAboutCardVisible(true);
+    }, 300);
+  };
+
+  // Flatten arrays for background keyword overlays
+  const skillKeywords: KeywordItem[] = useMemo(
+    () =>
+      SKILL_SECTIONS.flatMap((s) =>
+        s.items.map((label) => ({ label, accentClass: s.accentClass })),
+      ),
+    [],
+  );
+  // Selected expertise items optimized for hiring managers
+  const HIGHLIGHT_EXPERTISE_TITLES = [
+    "Reliability as a feature",
+    "Performance and accessibility",
+    "Edge-first architecture",
+    "Security and trust",
+    "AI as leverage with guardrails",
+    "Data and APIs that age well",
+  ] as const;
+  const expertiseKeywords: KeywordItem[] = useMemo(
+    () =>
+      EXPERTISE_ITEMS.filter((e) =>
+        (HIGHLIGHT_EXPERTISE_TITLES as readonly string[]).includes(e.title),
+      ).map((e) => ({ label: e.title })),
+    [],
+  );
 
   return (
     <section
@@ -257,162 +283,106 @@ export default function AboutSection() {
         {/* Grain */}
         <div className="absolute inset-0 [background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] [background-size:3px_3px] opacity-[0.05]" />
       </div>
-      <div className="container pt-32 pb-16 sm:pt-40 px-4 text-white">
-        {/* Top Row - About Me and Skills */}
-        <div className="grid gap-8 lg:grid-cols-2 lg:items-stretch mb-8">
-          {/* About Me Card */}
-          <div
-            ref={aboutCardRef}
-            className={`${CARD_OUTER_BASE}`}
-            style={{
-              opacity: cardTransforms.aboutCard.opacity,
-              transform: `scale(${cardTransforms.aboutCard.scale})`,
-              transition: "opacity 0.3s ease-out, transform 0.3s ease-out",
-            }}
-          >
-            <div className={`${CARD_INNER_BASE} h-full p-6 sm:p-8`}>
-              <h2 className={"font-oswald mb-6 text-2xl font-bold tracking-tight text-white"}>
-                About Me
-              </h2>
-              <div className="mt-3 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-              <div className="mt-6 space-y-4 text-[0.95rem]/relaxed sm:text-[0.98rem]/relaxed text-gray-300/90">
-                <p>
-                  I'm Jayvic San Antonio, a full‑stack software engineer from the Philippines, now
-                  building in the San Francisco Bay Area. I've spent more than a decade turning
-                  ideas into products people can actually use. I care about craft and about people.
-                  I write code that is easy to read, I obsess over how things feel, and I treat
-                  reliability like a feature. Clear contracts, thoughtful design, and automated
-                  checks help me ship with confidence and keep things fast and accessible for
-                  everyone.
-                </p>
-                <p>
-                  My path has been a mix of startup scrappiness and big‑company scale. I co‑founded
-                  a company back home, won a few hackathons, and learned how to rally a team around
-                  a rough idea. In the Bay Area I helped rebuild revenue‑critical features in a
-                  large advertising platform, scaled systems that needed to work under pressure,
-                  mentored newer engineers, and built tools that made everyone a little faster.
-                </p>
-                <p>
-                  Lately, I've been building web applications with modern approaches to sharpen my
-                  craft and stay current. I've also been learning more about AI, especially
-                  generative AI, context engineering, large language models, and MCPs, and I'm using
-                  AI coding tools thoughtfully to become even more productive as an engineer. I'm
-                  actively mastering these capabilities so I can move faster, make better decisions,
-                  and keep a real competitive edge.
-                </p>
-                <p>
-                  When I'm not coding, I'm getting my steps in Pokemon Go, collecting Star Wars
-                  Black Series figures, catching up on MCU movies and shows, and listening to Ed
-                  Sheeran. I like early-morning coffee, long walks with good podcasts, and shipping
-                  work I'm proud to sign my name on.
-                </p>
-                <p>
-                  If you're working on something ambitious and care about the details, I'd love to
-                  build with you. You can reach me at my{" "}
-                  <Link
-                    href="mailto:hi@jayvicsanantonio.dev"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200"
-                  >
-                    email
-                  </Link>
-                  , find me on{" "}
-                  <Link
-                    href="https://www.linkedin.com/in/jayvicsanantonio"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200"
-                  >
-                    LinkedIn
-                  </Link>
-                  , and see more of my work{" "}
-                  <Link
-                    href="/projects"
-                    rel="noopener noreferrer"
-                    className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200"
-                  >
-                    here
-                  </Link>
-                  .
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Skills Card */}
-          <div
-            ref={skillsCardRef}
-            className={`${CARD_OUTER_BASE}`}
-            style={{
-              opacity: cardTransforms.skillsCard.opacity,
-              transform: `scale(${cardTransforms.skillsCard.scale})`,
-              transition: "opacity 0.3s ease-out, transform 0.3s ease-out",
-            }}
-          >
-            <div className={`${CARD_INNER_BASE} p-6 sm:p-8`}>
-              <h2 className={"font-oswald mb-6 text-2xl font-bold tracking-tight text-white"}>
-                Skills
-              </h2>
-              <div className="mt-3 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-              <div className="mt-6 space-y-6">
-                {SKILL_SECTIONS.map(({ title, accentClass, items }) => (
-                  <div key={title}>
-                    <h3
-                      className={`mb-3 text-sm font-semibold tracking-wider uppercase ${accentClass}`}
-                    >
-                      {title}
-                    </h3>
-                    <div className="flex flex-wrap gap-2">
-                      {items.map((skill) => (
-                        <span
-                          key={skill}
-                          className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs font-medium tracking-[0.12em] text-gray-300 uppercase"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom Row - Expertise Card (Full Width) */}
-        <div
-          ref={expertiseCardRef}
-          className={`${CARD_OUTER_BASE}`}
-          style={{
-            opacity: cardTransforms.expertiseCard.opacity,
-            transform: `scale(${cardTransforms.expertiseCard.scale})`,
-            transition: "opacity 0.3s ease-out, transform 0.3s ease-out",
-          }}
-        >
-          <div className={`${CARD_INNER_BASE} p-6 sm:p-8`}>
-            <h2 className={"font-oswald mb-6 text-2xl font-bold tracking-tight text-white"}>
-              Expertise
-            </h2>
-            <div className="mt-3 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-            <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {EXPERTISE_ITEMS.map((expertise) => (
-                <div key={expertise.title}>
-                  <div className="flex items-start gap-3">
-                    <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-cyan-300/80" />
-                    <div>
-                      <h4 className="font-semibold text-[0.95rem]/relaxed text-white mb-1">
-                        {expertise.title}:
-                      </h4>
-                      <p className="text-[0.85rem]/relaxed text-gray-300/90">
-                        {expertise.description}
-                      </p>
-                    </div>
+      <div className="relative text-white">
+        {/* Phase 1: keywords fill the viewport */}
+        <div ref={keywordsContainerRef} className="relative h-[110svh] sm:h-[110vh]">
+          <KeywordsBackground
+            items={[...skillKeywords, ...expertiseKeywords]}
+            count={112}
+            className="absolute inset-0"
+            controlledProgress={keywordProgress}
+            onComplete={handleKeywordsComplete}
+          />
+          
+          {/* Phase 2: About card appears on top after keywords complete */}
+          {aboutCardVisible && (
+            <div
+              className="container px-4 absolute inset-0 flex items-center justify-center z-10"
+              style={{ pointerEvents: "none" }}
+            >
+              <div
+                ref={aboutCardRef}
+                className={`${CARD_OUTER_BASE} w-full max-w-2xl`}
+                style={{
+                  opacity: aboutCardVisible ? 1 : 0,
+                  transform: aboutCardVisible
+                    ? "translateY(0) scale(1)"
+                    : `translateY(${16}px) scale(0.94)`,
+                  transition: "opacity 800ms cubic-bezier(0.22,1,0.36,1), transform 900ms cubic-bezier(0.22,1,0.36,1)",
+                  pointerEvents: "auto",
+                }}
+              >
+                <div className={`${CARD_INNER_BASE} h-full p-6 sm:p-8`}>
+                  <h2 className={"font-oswald mb-6 text-2xl font-bold tracking-tight text-white"}>
+                    About Me
+                  </h2>
+                  <div className="mt-3 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+                  <div className="mt-6 space-y-4 text-[0.95rem]/relaxed sm:text-[0.98rem]/relaxed text-gray-300/90">
+                    <p>
+                      I'm Jayvic San Antonio, a full‑stack software engineer from the Philippines, now
+                      building in the San Francisco Bay Area. I've spent more than a decade turning
+                      ideas into products people can actually use. I care about craft and about people.
+                      I write code that is easy to read, I obsess over how things feel, and I treat
+                      reliability like a feature. Clear contracts, thoughtful design, and automated
+                      checks help me ship with confidence and keep things fast and accessible for
+                      everyone.
+                    </p>
+                    <p>
+                      My path has been a mix of startup scrappiness and big‑company scale. I co‑founded
+                      a company back home, won a few hackathons, and learned how to rally a team around
+                      a rough idea. In the Bay Area I helped rebuild revenue‑critical features in a
+                      large advertising platform, scaled systems that needed to work under pressure,
+                      mentored newer engineers, and built tools that made everyone a little faster.
+                    </p>
+                    <p>
+                      Lately, I've been building web applications with modern approaches to sharpen my
+                      craft and stay current. I've also been learning more about AI, especially
+                      generative AI, context engineering, large language models, and MCPs, and I'm using
+                      AI coding tools thoughtfully to become even more productive as an engineer. I'm
+                      actively mastering these capabilities so I can move faster, make better decisions,
+                      and keep a real competitive edge.
+                    </p>
+                    <p>
+                      When I'm not coding, I'm getting my steps in Pokemon Go, collecting Star Wars
+                      Black Series figures, catching up on MCU movies and shows, and listening to Ed
+                      Sheeran. I like early-morning coffee, long walks with good podcasts, and shipping
+                      work I'm proud to sign my name on.
+                    </p>
+                    <p>
+                      If you're working on something ambitious and care about the details, I'd love to
+                      build with you. You can reach me at my{" "}
+                      <Link
+                        href="mailto:hi@jayvicsanantonio.dev"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200"
+                      >
+                        email
+                      </Link>
+                      , find me on{" "}
+                      <Link
+                        href="https://www.linkedin.com/in/jayvicsanantonio"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200"
+                      >
+                        LinkedIn
+                      </Link>
+                      , and see more of my work{" "}
+                      <Link
+                        href="/projects"
+                        rel="noopener noreferrer"
+                        className="relative text-cyan-300 hover:text-cyan-200 transition-colors duration-200"
+                      >
+                        here
+                      </Link>
+                      .
+                    </p>
                   </div>
                 </div>
-              ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </section>

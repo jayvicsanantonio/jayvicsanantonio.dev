@@ -1,7 +1,6 @@
 "use client";
 
 import { Icon } from "@iconify/react";
-import type { MotionProps } from "framer-motion";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
