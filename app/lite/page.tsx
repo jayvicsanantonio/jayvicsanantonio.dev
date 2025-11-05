@@ -1,8 +1,10 @@
+import React from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import AnimatedText from "@/components/ui/AnimatedText";
 import KeywordsBackground, { type KeywordItem } from "@/components/ui/KeywordsBackground.client";
+import { KEYWORD_HIGHLIGHT_LARGE, KEYWORD_HIGHLIGHT_MEDIUM } from "@/lib/keywordHighlight";
 import GlassHeaderBubble from "@/components/ui/GlassHeaderBubble";
 
 const SKILL_SECTIONS = [
@@ -133,6 +135,40 @@ export const metadata: Metadata = {
 };
 
 export default function MobileHomePage() {
+  const [keywordProgress, setKeywordProgress] = React.useState(0);
+  const [aboutVisible, setAboutVisible] = React.useState(false);
+  const pinRef = React.useRef<HTMLDivElement>(null);
+  // No global scroll-lock on the lite page to avoid interfering with hero/nav animations.
+
+  // Pinned scrubbing without body lock (prevents interference with hero/nav)
+  React.useEffect(() => {
+    const el = pinRef.current;
+    if (!el) return;
+    let startY = 0;
+    const recalcStart = () => {
+      let y = 0;
+      let n: HTMLElement | null = el;
+      while (n) { y += n.offsetTop; n = n.offsetParent as HTMLElement | null; }
+      startY = y;
+    };
+    const onScroll = () => {
+      const total = el.offsetHeight - window.innerHeight;
+      const y = Math.min(Math.max(window.scrollY - startY, 0), Math.max(total, 1));
+      const pRaw = Math.max(0, Math.min(1, y / Math.max(total, 1)));
+      const pEase = 1 - Math.pow(1 - pRaw, 3);
+      setKeywordProgress(pEase);
+      if (pRaw >= 0.98) setAboutVisible(true);
+    };
+    recalcStart();
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", recalcStart, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", recalcStart);
+    };
+  }, []);
+
   return (
     <main className="text-white overflow-x-hidden min-h-screen">
       {/* Custom Ambient Background with black gradient overlay */}
@@ -230,13 +266,22 @@ export default function MobileHomePage() {
         <div className="pointer-events-none absolute inset-0 rounded-[28px] ring-1 ring-white/5 sm:rounded-[36px]" />
       </section>
 
-      {/* Section 2: Keywords first, then About */}
+      {/* Section 2: Keywords first across a tall region; About appears at the bottom */}
       <section className="relative w-full overflow-hidden">
-        {/* Phase 1: Full-bleed animated keywords */}
-        <div className="relative h-[110svh] sm:h-[110vh]">
+        <div ref={pinRef} className="relative min-h-[220svh]">
           <KeywordsBackground
             items={[
-              ...SKILL_SECTIONS.flatMap((s) => s.items.map((label) => ({ label, accentClass: s.accentClass })) as KeywordItem[]),
+              ...SKILL_SECTIONS.flatMap((s) =>
+                s.items.map((label) => ({
+                  label,
+                  accentClass: s.accentClass,
+                  emphasis: KEYWORD_HIGHLIGHT_LARGE.has(label)
+                    ? 1.35
+                    : KEYWORD_HIGHLIGHT_MEDIUM.has(label)
+                      ? 1.18
+                      : 1,
+                })) as KeywordItem[],
+              ),
               { label: "Reliability as a feature" },
               { label: "Performance and accessibility" },
               { label: "Edge-first architecture" },
@@ -244,17 +289,22 @@ export default function MobileHomePage() {
               { label: "AI as leverage with guardrails" },
               { label: "Data and APIs that age well" },
             ]}
-            count={112}
+            count={128}
             className="absolute inset-0"
+            controlledProgress={keywordProgress}
           />
         </div>
-        {/* Phase 2: About card */}
         <div className="container px-4 pt-16 pb-20">
-          <div className={CARD_WRAPPER_CLASS}>
+          <div
+            className={CARD_WRAPPER_CLASS + " max-w-2xl w-full mx-auto"}
+            style={{
+              opacity: aboutVisible ? 1 : 0,
+              transform: aboutVisible ? "translateY(0) scale(1)" : "translateY(16px) scale(0.96)",
+              transition: "opacity 500ms ease, transform 600ms cubic-bezier(0.22,1,0.36,1)",
+            }}
+          >
             <div className={CARD_BODY_CLASS}>
-              <h2
-                className={"font-oswald mb-6 text-2xl font-bold tracking-tight text-white"}
-              >
+              <h2 className={"font-oswald mb-6 text-2xl font-bold tracking-tight text-white"}>
                 About Me
               </h2>
               <div className="mt-3 h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
@@ -268,7 +318,6 @@ export default function MobileHomePage() {
                   automated checks help me ship with confidence and keep things fast and
                   accessible for everyone.
                 </p>
-
                 <p>
                   My path has been a mix of startup scrappiness and big‑company scale. I
                   co‑founded a company back home, won a few hackathons, and learned how to rally a

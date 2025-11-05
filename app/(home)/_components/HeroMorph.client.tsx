@@ -104,7 +104,7 @@ export default function HeroMorph() {
           }}
         />
 
-        <section className="flex min-h-[220svh] flex-col items-center justify-center px-4 py-20 md:min-h-[180svh] lg:min-h-[154rem]"></section>
+        <section className="flex min-h-[220svh] flex-col items-center justify-center px-4 py-20 md:min-h-[180svh] lg:min-h-[250svh]"></section>
       </div>
 
       <AboutSection />
