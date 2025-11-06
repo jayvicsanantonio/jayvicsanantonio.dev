@@ -1,4 +1,7 @@
 import { useEffect } from "react";
+import gsap from "gsap";
+import type { Scrollbar as SmoothScrollbar } from "smooth-scrollbar/interfaces/scrollbar";
+import type { ScrollStatus } from "smooth-scrollbar/interfaces";
 
 export type ScrollCfg = {
   scroll: {
@@ -16,6 +19,9 @@ export function useScrollCssVariables<T extends HTMLElement>(
   rootRef: React.RefObject<T | null>,
   cfg: ScrollCfg,
   reduceMotion: boolean,
+  options?: {
+    scrollbar?: SmoothScrollbar | null;
+  },
 ) {
   useEffect(() => {
     const root = rootRef.current;
@@ -24,9 +30,7 @@ export function useScrollCssVariables<T extends HTMLElement>(
     let raf = 0;
     let lastY = -1;
 
-    const update = () => {
-      const y = window.scrollY || window.pageYOffset || 0;
-
+    const compute = (y: number) => {
       // Skip if scroll position hasn't changed
       if (y === lastY) return;
       lastY = y;
@@ -45,56 +49,77 @@ export function useScrollCssVariables<T extends HTMLElement>(
       if (reduceMotion) gate = 0;
 
       // Batch DOM writes
-      const props: Record<string, string> = {
-        "--scroll-y": String(y),
-        "--p": String(p),
-        "--vh": String(vh),
-        "--sh": String(sh),
-        "--gate": String(gate),
-        "--overlay-up": String(overlayUp),
+      const props: Record<string, number | string> = {
+        "--scroll-y": y,
+        "--p": p,
+        "--vh": vh,
+        "--sh": sh,
+        "--gate": gate,
+        "--overlay-up": overlayUp,
       };
 
       const CYAN_START = cfg.scroll.cyanStartT;
       const CYAN_DEN = 1 - CYAN_START;
       const cyan = Math.min(Math.max((sh - CYAN_START) / CYAN_DEN, 0), 1);
-      props["--cyan"] = String(cyan);
+      props["--cyan"] = cyan;
 
       const UI_START = cfg.scroll.uiRevealStartT;
       const UI_DEN = 1 - UI_START;
       const ui = Math.min(Math.max((sh - UI_START) / UI_DEN, 0), 1);
-      props["--ui"] = String(ui);
+      props["--ui"] = ui;
 
       props["--closeMaxY"] = cfg.closeMaxY;
       props["--closeMaxX"] = cfg.closeMaxX;
 
-      // Apply all properties at once
-      Object.entries(props).forEach(([key, value]) => {
-        root.style.setProperty(key, value);
+      // Apply all properties via GSAP for consistent animation timing
+      gsap.set(root, {
+        css: props,
       });
-    };
-
-    const onScroll = () => {
-      if (raf) cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(update);
     };
 
     let resizeTimer: number;
     const onResize = () => {
       clearTimeout(resizeTimer);
-      resizeTimer = window.setTimeout(update, 150);
+      const currentY = options?.scrollbar ? options.scrollbar.offset.y : window.scrollY || 0;
+      resizeTimer = window.setTimeout(() => compute(currentY), 150);
     };
 
-    window.addEventListener("scroll", onScroll, { passive: true });
+    const scrollbar = options?.scrollbar ?? null;
+    let removeScrollListener: (() => void) | null = null;
+
+    if (scrollbar) {
+      const handleScroll = ({ offset }: ScrollStatus) => {
+        if (raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => compute(offset.y));
+      };
+
+      scrollbar.addListener(handleScroll);
+      compute(scrollbar.offset.y);
+
+      removeScrollListener = () => {
+        scrollbar.removeListener(handleScroll);
+      };
+    } else {
+      const onScroll = () => {
+        if (raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => compute(window.scrollY || 0));
+      };
+      window.addEventListener("scroll", onScroll, { passive: true });
+      compute(window.scrollY || 0);
+
+      removeScrollListener = () => {
+        window.removeEventListener("scroll", onScroll);
+      };
+    }
+
     window.addEventListener("resize", onResize, { passive: true });
     window.addEventListener("orientationchange", onResize, { passive: true });
 
-    // Initial update
-    update();
 
     return () => {
       if (raf) cancelAnimationFrame(raf);
       clearTimeout(resizeTimer);
-      window.removeEventListener("scroll", onScroll);
+      removeScrollListener?.();
       window.removeEventListener("resize", onResize);
       window.removeEventListener("orientationchange", onResize);
     };
@@ -108,5 +133,6 @@ export function useScrollCssVariables<T extends HTMLElement>(
     cfg.closeMaxX,
     cfg.closeMaxY,
     reduceMotion,
+    options?.scrollbar,
   ]);
 }

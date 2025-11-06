@@ -139,31 +139,38 @@ export default function MorphingVideo({
           transition: "opacity 0.8s ease-out",
         }}
       >
-        {hasVideo ? (
-          <video
-            ref={videoRef}
-            muted
-            loop
-            playsInline
-            preload={video.preload}
-            aria-hidden
-            tabIndex={-1}
-            onError={() => setHasVideo(false)}
-            className="h-full w-full object-cover"
-            style={{
-              willChange: "opacity, transform",
-              transform: `scale(${video.scale})`,
-            }}
-          >
-            <source src="/matrix-horizontal.mp4" type="video/mp4" />
-          </video>
-        ) : (
-          <div
-            aria-hidden
-            className="h-full w-full bg-[radial-gradient(80%_60%_at_50%_0%,rgba(59,130,246,0.20),transparent_60%),radial-gradient(60%_50%_at_50%_100%,rgba(168,85,247,0.16),transparent_60%)]"
-            style={{ transform: `scale(${video.scale})` }}
-          />
-        )}
+        <video
+          ref={videoRef}
+          muted
+          loop
+          playsInline
+          preload={video.preload}
+          aria-hidden
+          tabIndex={-1}
+          onError={() => setHasVideo(false)}
+          className="absolute inset-0 h-full w-full object-cover"
+          style={{
+            willChange: "opacity, transform",
+            transform: `scale(${video.scale})`,
+            opacity: hasVideo ? 1 : 0,
+            pointerEvents: hasVideo ? "auto" : "none",
+            transition: "opacity 0.6s ease",
+            visibility: hasVideo ? "visible" : "hidden",
+          }}
+        >
+          <source src="/matrix-horizontal.mp4" type="video/mp4" />
+        </video>
+        <div
+          aria-hidden
+          className="absolute inset-0 h-full w-full bg-[radial-gradient(80%_60%_at_50%_0%,rgba(59,130,246,0.20),transparent_60%),radial-gradient(60%_50%_at_50%_100%,rgba(168,85,247,0.16),transparent_60%)]"
+          style={{
+            transform: `scale(${video.scale})`,
+            opacity: hasVideo ? 0 : 1,
+            transition: "opacity 0.6s ease",
+            visibility: hasVideo ? "hidden" : "visible",
+            pointerEvents: "none",
+          }}
+        />
         <div
           className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30"
           style={{ opacity: isIntro ? 0 : 1 }}

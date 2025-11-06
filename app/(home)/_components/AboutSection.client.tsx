@@ -8,7 +8,7 @@ import { CARD_INNER_BASE, CARD_OUTER_BASE } from "@/components/ui/cardStyles";
 // Elegant + minimal About section with subtle motion
 
 type InViewOptions = { rootMargin?: string; threshold?: number };
-function useInViewOnce<T extends Element>(ref: React.RefObject<T>, opts: InViewOptions = {}) {
+function useInViewOnce<T extends Element>(ref: React.RefObject<T | null>, opts: InViewOptions = {}) {
   const [seen, setSeen] = useState(false);
   useEffect(() => {
     if (seen) return;
@@ -16,7 +16,7 @@ function useInViewOnce<T extends Element>(ref: React.RefObject<T>, opts: InViewO
     if (!el) return;
     const obs = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry?.isIntersecting) {
           setSeen(true);
           obs.disconnect();
         }

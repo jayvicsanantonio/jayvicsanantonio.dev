@@ -3,6 +3,7 @@ import type { NextRequest } from "next/server";
 import { userAgent } from "next/server";
 
 export function proxy(req: NextRequest) {
+  return NextResponse.next();
   // Only handle the homepage
   if (req.nextUrl.pathname !== "/") return NextResponse.next();
 

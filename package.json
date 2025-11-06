@@ -35,9 +35,13 @@
     "next": "^16.0.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "gsap": "^3.12.5",
     "sonner": "^2.0.3",
     "tailwind-merge": "^2.3.0",
-    "web-vitals": "^4.2.0"
+    "web-vitals": "^4.2.0",
+    "pixi.js": "^7.4.0",
+    "smooth-scrollbar": "^8.8.4",
+    "webfontloader": "^1.6.28"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^16.0.0",
@@ -45,6 +49,7 @@
     "@types/node": "^20",
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.9",
+    "@types/webfontloader": "^1.6.36",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
     "autoprefixer": "^10.4.21",
