@@ -128,6 +128,15 @@ export default function Hero() {
             },
           },
           "-=0.2",
+        )
+        .to(
+          videoOverlayRef.current,
+          {
+            autoAlpha: 0.35,
+            duration: 0.6,
+            ease: "power1.out",
+          },
+          ">-0.1",
         );
     },
     { scope: containerRef, dependencies: [prefersReducedMotion] },
@@ -210,8 +219,11 @@ export default function Hero() {
           },
           0.1,
         )
-        .to(
+        .fromTo(
           video,
+          {
+            filter: "brightness(1)",
+          },
           {
             filter: "brightness(0.9)",
             duration: 0.4,
@@ -221,11 +233,16 @@ export default function Hero() {
         );
 
       if (overlay) {
-        videoShrinkTimeline.to(
+        videoShrinkTimeline.fromTo(
           overlay,
           {
-            autoAlpha: 0.3,
+            autoAlpha: 0.35,
+          },
+          {
+            autoAlpha: 0.25,
+            duration: 0.4,
             ease: "none",
+            immediateRender: false,
           },
           0,
         );
