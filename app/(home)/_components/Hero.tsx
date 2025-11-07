@@ -168,7 +168,7 @@ export default function Hero() {
 
       <div
         ref={profileRef}
-        className="pointer-events-none absolute bottom-0 left-1/2 z-20 w-[56vw] max-w-[880px] min-w-[320px] -translate-x-1/2 opacity-0"
+        className="pointer-events-none absolute bottom-0 left-1/2 z-20 w-[55vw] max-w-[880px] min-w-[320px] -translate-x-1/2 opacity-0"
       >
         <div className="relative w-full">
           <Image
