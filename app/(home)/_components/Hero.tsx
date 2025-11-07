@@ -143,8 +143,13 @@ export default function Hero() {
       const content = smoothContentRef.current;
       const heroSection = heroSectionRef.current;
       const profile = profileRef.current;
+      const container = containerRef.current;
+      const pill = pillRef.current;
+      const pillContent = pillContentRef.current;
+      const video = videoRef.current;
+      const overlay = videoOverlayRef.current;
 
-      if (!wrapper || !content || !heroSection || !profile) {
+      if (!wrapper || !content || !heroSection || !profile || !container || !pill || !pillContent || !video) {
         return;
       }
 
@@ -172,12 +177,77 @@ export default function Hero() {
         },
       });
 
+      const targetPillWidth = "clamp(320px, var(--nav-row-w, 20vw), 560px)";
+      const targetPillHeight = "clamp(54px, var(--pill-h, 8vh), 96px)";
+
+      const videoShrinkTimeline = gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: heroSection,
+            start: "top top",
+            end: () => "+=" + window.innerHeight,
+            scrub: true,
+          },
+        })
+        .to(
+          pill,
+          {
+            width: targetPillWidth,
+            height: targetPillHeight,
+            borderRadius: "384px",
+            backgroundColor: "rgba(255,255,255,0.95)",
+            boxShadow: "0 18px 40px rgba(15,23,42,0.18)",
+            ease: "none",
+          },
+          0,
+        )
+        .to(
+          pillContent,
+          {
+            autoAlpha: 1,
+            duration: 0.4,
+            ease: "power1.out",
+          },
+          0.1,
+        )
+        .to(
+          video,
+          {
+            filter: "brightness(0.9)",
+            duration: 0.4,
+            ease: "none",
+          },
+          0,
+        );
+
+      if (overlay) {
+        videoShrinkTimeline.to(
+          overlay,
+          {
+            autoAlpha: 0.3,
+            ease: "none",
+          },
+          0,
+        );
+      }
+
+      const heroPin = ScrollTrigger.create({
+        trigger: heroSection,
+        start: "top top",
+        end: () => "+=" + window.innerHeight,
+        pin: true,
+        anticipatePin: 1,
+      });
+
       ScrollTrigger.refresh();
 
       return () => {
         scrollTween.scrollTrigger?.kill();
         scrollTween.kill();
         smoother.kill();
+        videoShrinkTimeline.scrollTrigger?.kill();
+        videoShrinkTimeline.kill();
+        heroPin.kill();
       };
     },
     { dependencies: [prefersReducedMotion] },
