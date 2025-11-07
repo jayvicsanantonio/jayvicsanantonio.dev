@@ -4,14 +4,19 @@ import Image from "next/image";
 import { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollSmoother } from "gsap/ScrollSmoother";
 
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
 const PANEL_BORDER_RADIUS = "32px";
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP, ScrollTrigger, ScrollSmoother);
 
 export default function Hero() {
+  const smoothWrapperRef = useRef<HTMLDivElement>(null);
+  const smoothContentRef = useRef<HTMLDivElement>(null);
+  const heroSectionRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const videoOverlayRef = useRef<HTMLDivElement>(null);
@@ -20,6 +25,7 @@ export default function Hero() {
   const profileRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
+  // ScrollTrigger + ScrollSmoother drive the profile scale-down on scroll.
   useGSAP(
     () => {
       if (!pillRef.current || !pillContentRef.current || !videoRef.current) {
@@ -127,48 +133,105 @@ export default function Hero() {
     { scope: containerRef, dependencies: [prefersReducedMotion] },
   );
 
+  useGSAP(
+    () => {
+      if (prefersReducedMotion) {
+        return;
+      }
+
+      const wrapper = smoothWrapperRef.current;
+      const content = smoothContentRef.current;
+      const heroSection = heroSectionRef.current;
+      const profile = profileRef.current;
+
+      if (!wrapper || !content || !heroSection || !profile) {
+        return;
+      }
+
+      ScrollSmoother.get()?.kill();
+
+      const smoother = ScrollSmoother.create({
+        wrapper,
+        content,
+        smooth: 1.1,
+        effects: true,
+        normalizeScroll: true,
+        ignoreMobileResize: true,
+      });
+
+      const scrollTween = gsap.to(profile, {
+        scale: 0.65,
+        yPercent: 12,
+        transformOrigin: "50% 100%",
+        ease: "none",
+        scrollTrigger: {
+          trigger: heroSection,
+          start: "top top",
+          end: () => "+=" + window.innerHeight * 1.2,
+          scrub: true,
+        },
+      });
+
+      ScrollTrigger.refresh();
+
+      return () => {
+        scrollTween.scrollTrigger?.kill();
+        scrollTween.kill();
+        smoother.kill();
+      };
+    },
+    { dependencies: [prefersReducedMotion] },
+  );
+
   return (
-    <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-black from-70% via-gray-800 via-100% to-gray-200 to-100% text-white">
-      <div
-        ref={containerRef}
-        className="absolute inset-0 px-7 pt-7 pb-[120px] [--nav-row-w:calc(3.5rem*4+0.75rem*3)] [--pill-h:54px] sm:[--nav-row-w:20vw] sm:[--pill-h:8vh] md:[--nav-row-w:24vw]"
-      >
-        <div className="relative h-full w-full">
+    <div ref={smoothWrapperRef} id="smooth-wrapper" className="relative w-full text-white">
+      <div ref={smoothContentRef} id="smooth-content" className="w-full ">
+        <section ref={heroSectionRef} className="relative min-h-screen overflow-hidden">
           <div
-            ref={pillRef}
-            className="absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full text-lg font-semibold text-slate-900 shadow-[0_18px_40px_rgba(15,23,42,0.18)]"
-            style={{ backgroundColor: "#ffffff" }}
+            ref={containerRef}
+            className="absolute inset-0 px-7 pt-7 pb-[120px] [--nav-row-w:calc(3.5rem*4+0.75rem*3)] [--pill-h:54px] sm:[--nav-row-w:20vw] sm:[--pill-h:8vh] md:[--nav-row-w:24vw]"
           >
-            <div
-              ref={pillContentRef}
-              className="relative z-10 flex items-center justify-center px-12 py-4 font-semibold tracking-wide text-black text-base lg:text-2xl"
-            >
-              Hi, I&apos;m Jayvic 👋
+            <div className="relative h-full w-full">
+              <div
+                ref={pillRef}
+                className="absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full text-lg font-semibold text-slate-900 shadow-[0_18px_40px_rgba(15,23,42,0.18)]"
+                style={{ backgroundColor: "#ffffff" }}
+              >
+                <div
+                  ref={pillContentRef}
+                  className="relative z-10 flex items-center justify-center px-12 py-4 font-semibold tracking-wide text-black text-base lg:text-2xl"
+                >
+                  Hi, I&apos;m Jayvic 👋
+                </div>
+                <video
+                  ref={videoRef}
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  aria-hidden
+                  tabIndex={-1}
+                  className="absolute inset-0 z-0 h-full w-full rounded-[inherit] object-cover opacity-0"
+                >
+                  <source src="/matrix-horizontal.mp4" type="video/mp4" />
+                </video>
+                <div
+                  ref={videoOverlayRef}
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/100"
+                  style={{ opacity: 0 }}
+                />
+              </div>
             </div>
-            <video
-              ref={videoRef}
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              aria-hidden
-              tabIndex={-1}
-              className="absolute inset-0 z-0 h-full w-full rounded-[inherit] object-cover opacity-0"
-            >
-              <source src="/matrix-horizontal.mp4" type="video/mp4" />
-            </video>
-            <div
-              ref={videoOverlayRef}
-              className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/100"
-              style={{ opacity: 0 }}
-            />
           </div>
-        </div>
+        </section>
+
+        {/* Decorative spacer so ScrollTrigger has distance to scrub against; replace with real content later */}
+        <section aria-hidden className="h-[140vh] " />
       </div>
 
       <div
         ref={profileRef}
-        className="pointer-events-none absolute bottom-0 left-1/2 z-20 w-[55vw] max-w-[880px] min-w-[320px] -translate-x-1/2 opacity-0"
+        className="pointer-events-none fixed bottom-0 left-1/2 z-40 w-[55vw] max-w-[880px] min-w-[320px] -translate-x-1/2 opacity-0"
       >
         <div className="relative w-full">
           <Image
