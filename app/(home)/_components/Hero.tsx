@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -16,6 +17,7 @@ export default function Hero() {
   const videoOverlayRef = useRef<HTMLDivElement>(null);
   const pillRef = useRef<HTMLDivElement>(null);
   const pillContentRef = useRef<HTMLDivElement>(null);
+  const profileRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
   useGSAP(
@@ -48,6 +50,9 @@ export default function Hero() {
         if (videoOverlayRef.current) {
           gsap.set(videoOverlayRef.current, { autoAlpha: 1 });
         }
+        if (profileRef.current) {
+          gsap.set(profileRef.current, { autoAlpha: 1 });
+        }
         videoRef.current.play().catch(() => {});
         return;
       }
@@ -57,6 +62,7 @@ export default function Hero() {
       timeline
         .set(videoRef.current, { autoAlpha: 0 })
         .set(videoOverlayRef.current, { autoAlpha: 0 })
+        .set(profileRef.current, { autoAlpha: 0 })
         .set(pillRef.current, { backgroundColor: "#ffffff" })
         .to(
           pillRef.current,
@@ -64,10 +70,10 @@ export default function Hero() {
             delay: 1,
             keyframes: [
               {
-                duration: 1.2,
+                duration: 2,
                 ...finalGeometryState,
                 borderRadius: "160px",
-                ease: "power4.in",
+                ease: "power3.in",
               },
               {
                 duration: 0.8,
@@ -79,19 +85,28 @@ export default function Hero() {
           0,
         )
         .to(
+          pillContentRef.current,
+          {
+            autoAlpha: 0,
+            duration: 0.45,
+            ease: "power2.out",
+          },
+          "<+=0.6",
+        )
+        .to(
+          profileRef.current,
+          {
+            autoAlpha: 1,
+            duration: 0.6,
+            ease: "power2.out",
+          },
+          ">",
+        )
+        .to(
           pillRef.current,
           {
             backgroundColor: "rgba(255,255,255,0)",
             duration: 0.8,
-            ease: "power2.out",
-          },
-          "-=0.6",
-        )
-        .to(
-          pillContentRef.current,
-          {
-            autoAlpha: 0,
-            duration: 0.4,
             ease: "power2.out",
           },
           "-=0.6",
@@ -113,11 +128,11 @@ export default function Hero() {
   );
 
   return (
-    <div
-      ref={containerRef}
-      className="relative min-h-screen overflow-hidden bg-gradient-to-b from-black from-70% via-gray-800 via-100% to-gray-200 to-100% text-white [--nav-row-w:calc(3.5rem*4+0.75rem*3)] [--pill-h:54px] sm:[--nav-row-w:20vw] sm:[--pill-h:8vh] md:[--nav-row-w:24vw]"
-    >
-      <div className="absolute inset-0 px-7 pt-7 pb-[120px]">
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-b from-black from-70% via-gray-800 via-100% to-gray-200 to-100% text-white">
+      <div
+        ref={containerRef}
+        className="absolute inset-0 px-7 pt-7 pb-[120px] [--nav-row-w:calc(3.5rem*4+0.75rem*3)] [--pill-h:54px] sm:[--nav-row-w:20vw] sm:[--pill-h:8vh] md:[--nav-row-w:24vw]"
+      >
         <div className="relative h-full w-full">
           <div
             ref={pillRef}
@@ -148,6 +163,26 @@ export default function Hero() {
               style={{ opacity: 0 }}
             />
           </div>
+        </div>
+      </div>
+
+      <div
+        ref={profileRef}
+        className="pointer-events-none absolute bottom-0 left-1/2 z-20 w-[56vw] max-w-[880px] min-w-[320px] -translate-x-1/2 opacity-0"
+      >
+        <div className="relative w-full">
+          <Image
+            src="/images/me.png"
+            alt="Jayvic San Antonio"
+            width={1280}
+            height={720}
+            priority
+            className="block w-full object-contain"
+            style={{
+              filter:
+                "drop-shadow(0 24px 36px rgba(0,0,0,0.55)) drop-shadow(0 0 20px rgba(34,211,238,0.45))",
+            }}
+          />
         </div>
       </div>
     </div>
