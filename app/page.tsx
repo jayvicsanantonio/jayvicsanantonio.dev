@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
-import HeroMorph from "@/app/(home)/_components/HeroMorph.client";
+// import HeroMorph from "@/app/(home)/_components/HeroMorph.client";
+import Hero from "@/app/(home)/_components/Hero";
 
 export const metadata: Metadata = {
   title: "Jayvic San Antonio | Senior Software Engineer",
@@ -14,8 +15,9 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <main>
-      <h1 className="sr-only">Jayvic San Antonio — Software Engineer</h1>
-      <HeroMorph />
+      <h1 className="sr-only">Jayvic San Antonio — Full-Stack Software Engineer</h1>
+      <Hero />
+      {/* <HeroMorph /> */}
     </main>
   );
 }
