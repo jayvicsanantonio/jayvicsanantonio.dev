@@ -6,6 +6,8 @@ import { useGSAP } from "@gsap/react";
 
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
+const PANEL_BORDER_RADIUS = "32px";
+
 gsap.registerPlugin(useGSAP);
 
 export default function Hero() {
@@ -22,14 +24,18 @@ export default function Hero() {
         return;
       }
 
-      const finalPanelState = {
+      const finalGeometryState = {
         width: "100%",
         height: "100%",
-        borderRadius: "32px",
         left: "50%",
         top: "50%",
         xPercent: -50,
         yPercent: -50,
+      };
+
+      const finalPanelState = {
+        ...finalGeometryState,
+        borderRadius: PANEL_BORDER_RADIUS,
       };
 
       if (prefersReducedMotion) {
@@ -54,9 +60,19 @@ export default function Hero() {
           pillRef.current,
           {
             delay: 1,
-            duration: 1.5,
-            ...finalPanelState,
-            ease: "power1.inOut",
+            keyframes: [
+              {
+                duration: 1.2,
+                ...finalGeometryState,
+                borderRadius: "160px",
+                ease: "power4.in",
+              },
+              {
+                duration: 0.8,
+                borderRadius: PANEL_BORDER_RADIUS,
+                ease: "power1.inOut",
+              },
+            ],
           },
           0,
         )
