@@ -41,6 +41,7 @@ export default function Hero() {
       if (prefersReducedMotion) {
         gsap.set(pillRef.current, {
           ...finalPanelState,
+          backgroundColor: "transparent",
         });
         gsap.set(pillContentRef.current, { autoAlpha: 0 });
         gsap.set(videoRef.current, { autoAlpha: 1 });
@@ -56,6 +57,7 @@ export default function Hero() {
       timeline
         .set(videoRef.current, { autoAlpha: 0 })
         .set(videoOverlayRef.current, { autoAlpha: 0 })
+        .set(pillRef.current, { backgroundColor: "#ffffff" })
         .to(
           pillRef.current,
           {
@@ -75,6 +77,15 @@ export default function Hero() {
             ],
           },
           0,
+        )
+        .to(
+          pillRef.current,
+          {
+            backgroundColor: "rgba(255,255,255,0)",
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          "-=0.6",
         )
         .to(
           pillContentRef.current,
@@ -110,14 +121,15 @@ export default function Hero() {
         <div className="relative h-full w-full">
           <div
             ref={pillRef}
-            className="absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full bg-white px-8 py-4 text-lg font-semibold text-slate-900 shadow-[0_18px_40px_rgba(15,23,42,0.18)]"
+            className="absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full text-lg font-semibold text-slate-900 shadow-[0_18px_40px_rgba(15,23,42,0.18)]"
+            style={{ backgroundColor: "#ffffff" }}
           >
-            <span
+            <div
               ref={pillContentRef}
-              className="font-semibold tracking-wide text-black text-base lg:text-2xl"
+              className="relative z-10 flex items-center justify-center px-12 py-4 font-semibold tracking-wide text-black text-base lg:text-2xl"
             >
               Hi, I&apos;m Jayvic 👋
-            </span>
+            </div>
             <video
               ref={videoRef}
               muted

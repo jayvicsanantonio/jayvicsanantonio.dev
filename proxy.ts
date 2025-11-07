@@ -12,9 +12,8 @@ export function proxy(req: NextRequest) {
   if (ua.isBot) return NextResponse.next();
 
   const isMobile = ua.device.type === "mobile" || ua.device.type === "tablet";
-  const isSafari = ua.browser.name === "Safari";
 
-  if (isMobile || isSafari) {
+  if (isMobile) {
     const url = req.nextUrl.clone();
     url.pathname = "/lite";
     return NextResponse.rewrite(url);
