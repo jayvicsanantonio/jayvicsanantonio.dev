@@ -1,12 +1,16 @@
 "use client";
 
 import { Icon } from "@iconify/react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
 
 import { Badge } from "@/components/ui/Badge";
 import { CARD_INNER_BASE, CARD_OUTER_BASE } from "@/components/ui/cardStyles";
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
+
+gsap.registerPlugin(ScrollTrigger);
 
 type Experience = {
   title: string;
@@ -176,12 +180,125 @@ const EXPERIENCES: Experience[] = [
 
 export default function WorkTimeline() {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const spineRef = useRef<HTMLDivElement | null>(null);
+  const capPulseRef = useRef<HTMLSpanElement | null>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 0.9", "end 0.6"],
-  });
-  const spineScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
+
+  useGSAP(
+    (context) => {
+      if (!context || !containerRef.current) {
+        return;
+      }
+
+      if (prefersReducedMotion) {
+        if (spineRef.current) {
+          gsap.set(spineRef.current, { scaleY: 1, transformOrigin: "top center" });
+        }
+        return;
+      }
+
+      const select = context.selector;
+
+      if (spineRef.current) {
+        gsap.set(spineRef.current, { scaleY: 0, transformOrigin: "top center" });
+        gsap.to(spineRef.current, {
+          scaleY: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 80%",
+            end: "bottom center",
+            scrub: true,
+          },
+        });
+      }
+
+      const cards = (select?.("[data-timeline-card]") as HTMLElement[]) ?? [];
+
+      cards.forEach((card, index) => {
+        gsap.fromTo(
+          card,
+          { y: 72, opacity: 0, rotateX: 3, filter: "blur(8px)" },
+          {
+            y: 0,
+            opacity: 1,
+            rotateX: 0,
+            filter: "blur(0px)",
+            duration: 1.1,
+            ease: "power3.out",
+            delay: index * 0.015,
+            scrollTrigger: {
+              trigger: card,
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+      });
+
+      const tagClouds = (select?.("[data-tag-cloud]") as HTMLElement[]) ?? [];
+      tagClouds.forEach((cloud) => {
+        const tags = Array.from(cloud.querySelectorAll<HTMLElement>("[data-tag-item]"));
+        gsap.from(tags, {
+          opacity: 0,
+          y: 16,
+          stagger: { amount: 0.35, from: "random" },
+          duration: 0.6,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: cloud,
+            start: "top 90%",
+            toggleActions: "play none none reverse",
+          },
+        });
+      });
+
+      const nodes = (select?.("[data-timeline-node]") as HTMLElement[]) ?? [];
+      nodes.forEach((node) => {
+        const rings = Array.from(node.querySelectorAll<HTMLElement>("[data-node-ring]"));
+        if (!rings.length) {
+          return;
+        }
+
+        ScrollTrigger.create({
+          trigger: node,
+          start: "top 82%",
+          once: true,
+          onEnter: () => {
+            const ripple = gsap.timeline();
+            rings.forEach((ring, idx) => {
+              ripple.fromTo(
+                ring,
+                { opacity: 0.5 - idx * 0.12, scale: 1 },
+                {
+                  opacity: 0,
+                  scale: 3 + idx * 0.45,
+                  duration: 1.6,
+                  ease: "power2.out",
+                },
+                idx * 0.1
+              );
+            });
+          },
+        });
+      });
+
+      if (capPulseRef.current) {
+        gsap.fromTo(
+          capPulseRef.current,
+          { scale: 1, opacity: 0.65 },
+          {
+            scale: 1.55,
+            opacity: 0,
+            duration: 2.2,
+            ease: "sine.out",
+            repeat: -1,
+          }
+        );
+      }
+    },
+    { scope: containerRef, dependencies: [prefersReducedMotion] }
+  );
 
   return (
     <div ref={containerRef} className="relative mt-8 sm:mt-12 lg:mt-16">
@@ -193,11 +310,9 @@ export default function WorkTimeline() {
           className="hidden h-full w-px bg-white/5 lg:absolute lg:top-0 lg:left-1/2 lg:block lg:-translate-x-1/2"
         />
         {/* Spine fill that grows with scroll */}
-        <motion.div
+        <div
           aria-hidden
-          style={{
-            scaleY: prefersReducedMotion ? 1 : spineScale,
-          }}
+          ref={spineRef}
           className="pointer-events-none hidden h-full w-1 origin-top [transform:translateZ(0)] bg-[linear-gradient(to_bottom,rgba(59,130,246,0.75),rgba(168,85,247,0.55),rgba(34,211,238,0.35),transparent)] shadow-[0_0_14px_rgba(59,130,246,0.25)] lg:absolute lg:top-0 lg:left-1/2 lg:block lg:-translate-x-1/2"
         />
         {/* Elegant cap at the start of the spine */}
@@ -211,16 +326,10 @@ export default function WorkTimeline() {
               className="pointer-events-none absolute -inset-3 rounded-full bg-[radial-gradient(closest-side,rgba(59,130,246,0.35),rgba(168,85,247,0.25),transparent_70%)] opacity-25 blur-md"
             />
             {/* Gentle pulse */}
-            <motion.span
+            <span
               aria-hidden
+              ref={capPulseRef}
               className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-cyan-300/50"
-              initial={{ scale: 1, opacity: 0.6 }}
-              animate={{ scale: 1.45, opacity: 0 }}
-              transition={{
-                duration: 2.2,
-                repeat: Infinity,
-                ease: "easeOut",
-              }}
             />
             {/* Intro rays */}
             <span
@@ -239,38 +348,22 @@ export default function WorkTimeline() {
             return (
               <li key={`${item.title}-${item.period}`} className="relative">
                 {/* Node on spine */}
-                <div className="absolute top-6 hidden lg:left-1/2 lg:block lg:-translate-x-1/2">
+                <div
+                  className="absolute top-6 hidden lg:left-1/2 lg:block lg:-translate-x-1/2"
+                  data-timeline-node
+                >
                   <span className="relative z-10 block h-2.5 w-2.5 rounded-full bg-cyan-300 shadow-[0_0_10px_3px_rgba(34,211,238,0.35)] ring-1 ring-cyan-400/60" />
-                  {!prefersReducedMotion ? (
-                    <>
-                      {/* Primary, brighter ripple */}
-                      <motion.span
-                        aria-hidden
-                        initial={{ scale: 1, opacity: 0.5 }}
-                        whileInView={{ scale: 2.8, opacity: 0 }}
-                        viewport={{ once: true, amount: 0.4, margin: "0px 0px -50px 0px" }}
-                        transition={{
-                          duration: 2.2,
-                          ease: [0.25, 0.46, 0.45, 0.94],
-                          delay: index * 0.08,
-                        }}
-                        className="pointer-events-none absolute top-1/2 left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full shadow-[0_0_20px_1px_rgba(34,211,238,0.25)] ring-2 ring-cyan-300/50"
-                      />
-                      {/* Secondary ripple for depth */}
-                      <motion.span
-                        aria-hidden
-                        initial={{ scale: 1, opacity: 0.35 }}
-                        whileInView={{ scale: 2.2, opacity: 0 }}
-                        viewport={{ once: true, amount: 0.4, margin: "0px 0px -50px 0px" }}
-                        transition={{
-                          duration: 2.0,
-                          ease: [0.25, 0.46, 0.45, 0.94],
-                          delay: index * 0.08 + 0.1,
-                        }}
-                        className="pointer-events-none absolute top-1/2 left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full ring-2 ring-purple-400/30"
-                      />
-                    </>
-                  ) : null}
+
+                  <span
+                    aria-hidden
+                    data-node-ring
+                    className="pointer-events-none absolute top-1/2 left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full shadow-[0_0_20px_1px_rgba(34,211,238,0.25)] ring-2 ring-cyan-300/50"
+                  />
+                  <span
+                    aria-hidden
+                    data-node-ring
+                    className="pointer-events-none absolute top-1/2 left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full ring-2 ring-purple-400/30"
+                  />
                 </div>
 
                 <div
@@ -281,6 +374,7 @@ export default function WorkTimeline() {
                 >
                   {/* Card */}
                   <article
+                    data-timeline-card
                     className={`${CARD_OUTER_BASE} mx-auto w-full lg:mx-0 lg:w-[min(500px,50vw)] ${
                       isRight ? "lg:mr-auto" : "lg:ml-auto"
                     }`}
@@ -317,9 +411,9 @@ export default function WorkTimeline() {
                         ))}
                       </ul>
 
-                      <div className="mt-6 flex flex-wrap gap-2">
+                      <div className="mt-6 flex flex-wrap gap-2" data-tag-cloud>
                         {item.tags.map((t) => (
-                          <Badge key={t} className="text-xs" variant="secondary">
+                          <Badge key={t} className="text-xs" data-tag-item variant="secondary">
                             {t}
                           </Badge>
                         ))}
