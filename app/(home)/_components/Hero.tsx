@@ -247,18 +247,6 @@ export default function Hero() {
             ease: "power1.out",
           },
           0.1,
-        )
-        .fromTo(
-          video,
-          {
-            filter: "brightness(1) saturate(1.05)",
-          },
-          {
-            filter: "brightness(0.95) saturate(1.2) contrast(1.05)",
-            duration: 0.4,
-            ease: "none",
-          },
-          0,
         );
 
       if (pillSkin) {
