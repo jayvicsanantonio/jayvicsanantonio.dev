@@ -10,6 +10,9 @@ import { ScrollSmoother } from "gsap/ScrollSmoother";
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
 const PANEL_BORDER_RADIUS = "32px";
+const PILL_SHRINK_BOX_SHADOW = "0 24px 45px rgba(1,11,26,0.65), 0 0 45px rgba(34,211,238,0.35)";
+const PILL_SHRINK_BACKGROUND = "rgba(4,15,32,0.95)";
+const PILL_SHRINK_BORDER = "rgba(34,211,238,0.75)";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, ScrollSmoother);
 
@@ -22,6 +25,7 @@ export default function Hero() {
   const videoOverlayRef = useRef<HTMLDivElement>(null);
   const pillRef = useRef<HTMLDivElement>(null);
   const pillContentRef = useRef<HTMLDivElement>(null);
+  const pillSkinRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -54,7 +58,10 @@ export default function Hero() {
         gsap.set(pillContentRef.current, { autoAlpha: 0 });
         gsap.set(videoRef.current, { autoAlpha: 1 });
         if (videoOverlayRef.current) {
-          gsap.set(videoOverlayRef.current, { autoAlpha: 1 });
+          gsap.set(videoOverlayRef.current, { autoAlpha: 0.55 });
+        }
+        if (pillSkinRef.current) {
+          gsap.set(pillSkinRef.current, { autoAlpha: 0 });
         }
         if (profileRef.current) {
           gsap.set(profileRef.current, { autoAlpha: 1 });
@@ -69,6 +76,7 @@ export default function Hero() {
         .set(videoRef.current, { autoAlpha: 0 })
         .set(videoOverlayRef.current, { autoAlpha: 0 })
         .set(profileRef.current, { autoAlpha: 0 })
+        .set(pillSkinRef.current, { autoAlpha: 0 })
         .set(pillRef.current, { backgroundColor: "#ffffff" })
         .to(
           pillRef.current,
@@ -132,7 +140,7 @@ export default function Hero() {
         .to(
           videoOverlayRef.current,
           {
-            autoAlpha: 0.35,
+            autoAlpha: 0.55,
             duration: 0.6,
             ease: "power1.out",
           },
@@ -157,8 +165,18 @@ export default function Hero() {
       const pillContent = pillContentRef.current;
       const video = videoRef.current;
       const overlay = videoOverlayRef.current;
+      const pillSkin = pillSkinRef.current;
 
-      if (!wrapper || !content || !heroSection || !profile || !container || !pill || !pillContent || !video) {
+      if (
+        !wrapper ||
+        !content ||
+        !heroSection ||
+        !profile ||
+        !container ||
+        !pill ||
+        !pillContent ||
+        !video
+      ) {
         return;
       }
 
@@ -204,11 +222,22 @@ export default function Hero() {
             width: targetPillWidth,
             height: targetPillHeight,
             borderRadius: "384px",
-            backgroundColor: "rgba(255,255,255,0.95)",
-            boxShadow: "0 18px 40px rgba(15,23,42,0.18)",
+            backgroundColor: PILL_SHRINK_BACKGROUND,
+            borderColor: PILL_SHRINK_BORDER,
+            boxShadow: PILL_SHRINK_BOX_SHADOW,
             ease: "none",
           },
           0,
+        )
+        .to(
+          pillContent,
+          {
+            color: "#ffffff",
+            textShadow: "0 6px 18px rgba(0,0,0,0.55)",
+            duration: 0.35,
+            ease: "power1.out",
+          },
+          0.05,
         )
         .to(
           pillContent,
@@ -222,24 +251,36 @@ export default function Hero() {
         .fromTo(
           video,
           {
-            filter: "brightness(1)",
+            filter: "brightness(1) saturate(1.05)",
           },
           {
-            filter: "brightness(0.9)",
+            filter: "brightness(0.95) saturate(1.2) contrast(1.05)",
             duration: 0.4,
             ease: "none",
           },
           0,
         );
 
+      if (pillSkin) {
+        videoShrinkTimeline.to(
+          pillSkin,
+          {
+            autoAlpha: 1,
+            duration: 0.4,
+            ease: "power1.out",
+          },
+          0.05,
+        );
+      }
+
       if (overlay) {
         videoShrinkTimeline.fromTo(
           overlay,
           {
-            autoAlpha: 0.35,
+            autoAlpha: 0.55,
           },
           {
-            autoAlpha: 0.25,
+            autoAlpha: 0.85,
             duration: 0.4,
             ease: "none",
             immediateRender: false,
@@ -281,15 +322,9 @@ export default function Hero() {
             <div className="relative h-full w-full">
               <div
                 ref={pillRef}
-                className="absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full text-lg font-semibold text-slate-900 shadow-[0_18px_40px_rgba(15,23,42,0.18)]"
+                className="absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full border border-transparent text-lg font-semibold text-slate-900 shadow-[0_18px_40px_rgba(15,23,42,0.18)]"
                 style={{ backgroundColor: "#ffffff" }}
               >
-                <div
-                  ref={pillContentRef}
-                  className="relative z-10 flex items-center justify-center px-12 py-4 font-semibold tracking-wide text-black text-base lg:text-2xl"
-                >
-                  Hi, I&apos;m Jayvic 👋
-                </div>
                 <video
                   ref={videoRef}
                   muted
@@ -303,10 +338,29 @@ export default function Hero() {
                   <source src="/matrix-horizontal.mp4" type="video/mp4" />
                 </video>
                 <div
+                  ref={pillSkinRef}
+                  className="pointer-events-none absolute inset-[1px] z-[1] rounded-[inherit] opacity-0"
+                  aria-hidden
+                >
+                  <div className="absolute inset-0 rounded-[inherit] bg-gradient-to-b from-[#071f3a] via-[#051328] to-[#030a16]" />
+                  <div className="absolute inset-0 rounded-[inherit] border border-cyan-300/60 shadow-[0_0_35px_rgba(34,211,238,0.35)_inset]" />
+                  <div className="absolute inset-0 rounded-[inherit] ring-1 ring-cyan-300/20" />
+                </div>
+                <div
                   ref={videoOverlayRef}
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/100"
-                  style={{ opacity: 0 }}
+                  className="pointer-events-none absolute inset-0 z-[2]"
+                  style={{
+                    opacity: 0,
+                    background:
+                      "radial-gradient(circle at 20% 20%, rgba(56,189,248,0.45), transparent 45%), radial-gradient(circle at 80% 30%, rgba(59,130,246,0.35), transparent 40%), linear-gradient(180deg, rgba(6,16,35,0.25), rgba(1,5,11,0.75))",
+                  }}
                 />
+                <div
+                  ref={pillContentRef}
+                  className="relative z-10 flex items-center justify-center px-12 py-4 font-semibold tracking-wide text-black text-base lg:text-2xl"
+                >
+                  Hi, I&apos;m Jayvic 👋
+                </div>
               </div>
             </div>
           </div>
