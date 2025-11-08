@@ -192,8 +192,8 @@ export default function Hero() {
       });
 
       const scrollTween = gsap.to(profile, {
-        scale: 0.65,
-        yPercent: 12,
+        scale: 0.45,
+        yPercent: 0,
         transformOrigin: "50% 100%",
         ease: "none",
         scrollTrigger: {
