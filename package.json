@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "prebuild": "pnpm check && pnpm type-check",
     "check": "pnpm run check:code && pnpm run check:content",
