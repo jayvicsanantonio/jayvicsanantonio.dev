@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, type CSSProperties } from "react";
+import { useRef, type CSSProperties, type ReactNode } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -17,9 +17,13 @@ const PILL_SHRINK_BORDER = "rgba(34,211,238,0.75)";
 const TARGET_PILL_WIDTH = HERO_NAV_PILL_WIDTH;
 const TARGET_PILL_HEIGHT = HERO_NAV_PILL_HEIGHT;
 
+type HeroProps = {
+  children?: ReactNode;
+};
+
 gsap.registerPlugin(useGSAP, ScrollTrigger, ScrollSmoother);
 
-export default function Hero() {
+export default function Hero({ children }: HeroProps) {
   const smoothWrapperRef = useRef<HTMLDivElement>(null);
   const smoothContentRef = useRef<HTMLDivElement>(null);
   const heroSectionRef = useRef<HTMLDivElement>(null);
@@ -203,7 +207,8 @@ export default function Hero() {
       const smoother = ScrollSmoother.create({
         wrapper,
         content,
-        smooth: 1.1,
+        smooth: 1.2,
+        smoothTouch: 0.12,
         effects: true,
         normalizeScroll: true,
         ignoreMobileResize: true,
@@ -341,9 +346,17 @@ export default function Hero() {
     { dependencies: [prefersReducedMotion] },
   );
 
+  // Downstream sections render inside the same smoother so the entire page benefits from the eased scroll surface.
   return (
     <div ref={smoothWrapperRef} id="smooth-wrapper" className="relative w-full text-white">
-      <div ref={smoothContentRef} id="smooth-content" className="w-full ">
+      <div
+        ref={smoothContentRef}
+        id="smooth-content"
+        className="w-full"
+        style={{
+          willChange: prefersReducedMotion ? undefined : "transform",
+        }}
+      >
         <section ref={heroSectionRef} className="relative min-h-screen overflow-hidden">
           <div
             ref={containerRef}
@@ -407,13 +420,18 @@ export default function Hero() {
           </div>
         </section>
 
-        {/* Decorative spacer so ScrollTrigger has distance to scrub against; replace with real content later */}
-        <section aria-hidden className="h-[140vh] " />
+        <>
+          {children}
+          <section aria-hidden className="h-[140vh]" />
+        </>
       </div>
 
       <div
         ref={profileRef}
         className="pointer-events-none fixed bottom-0 left-1/2 z-40 w-[55vw] max-w-[880px] min-w-[320px] -translate-x-1/2 opacity-0"
+        style={{
+          willChange: prefersReducedMotion ? undefined : "transform, opacity",
+        }}
       >
         <div className="relative w-full">
           <Image
