@@ -198,6 +198,8 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         },
       });
 
+      const pillShrinkCompleteLabel = "pillShrinkComplete";
+
       const videoShrinkTimeline = gsap
         .timeline({
           scrollTrigger: {
@@ -220,6 +222,7 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
           },
           0,
         )
+        .addLabel(pillShrinkCompleteLabel)
         .to(
           pillContent,
           {
@@ -228,7 +231,7 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
             duration: 0.35,
             ease: "power1.out",
           },
-          0.05,
+          pillShrinkCompleteLabel,
         )
         .to(
           pillContent,
@@ -237,7 +240,7 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
             duration: 0.4,
             ease: "power1.out",
           },
-          0.1,
+          pillShrinkCompleteLabel,
         );
 
       if (pillSkin) {

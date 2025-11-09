@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import Hero from "@/app/(home)/_components";
 import { MarqueeRow } from "@/app/(home)/_components/MarqueeRow";
+import SkillsHeading from "@/app/(home)/_components/SkillsHeading";
 import { useMemo } from "react";
 
 const PAGE_TITLE = "Jayvic San Antonio | Senior Software Engineer";
@@ -54,7 +55,8 @@ export default function Page() {
     <main>
       <h1 className="sr-only">{SR_HEADING}</h1>
       <Hero>
-        <section aria-hidden className="h-[52vh] mx-auto mt-4 w-full max-w-6xl space-y-2">
+        <SkillsHeading />
+        <section aria-hidden className="mx-auto mt-4 w-full max-w-6xl space-y-2">
           <MarqueeRow items={row0} duration={36} direction="left" />
           <MarqueeRow items={row1} duration={42} direction="right" />
           <MarqueeRow items={row2} duration={48} direction="left" />
