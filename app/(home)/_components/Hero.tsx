@@ -67,10 +67,7 @@ export default function Hero({ children }: HeroProps) {
           />
         </section>
 
-        <>
-          {children}
-          <section aria-hidden className="h-[140vh]" />
-        </>
+        <>{children}</>
       </div>
 
       <HeroProfile profileRef={profileRef} prefersReducedMotion={prefersReducedMotion} />

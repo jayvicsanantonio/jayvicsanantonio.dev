@@ -1,19 +1,23 @@
 "use client";
 
 import Link from "next/link";
-import type React from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
+import type { RefObject } from "react";
+
 import { CARD_INNER_BASE, CARD_OUTER_BASE } from "@/components/ui/cardStyles";
 
-// Elegant + minimal About section with subtle motion
+import { MarqueeRow } from "./MarqueeRow";
 
 type InViewOptions = { rootMargin?: string; threshold?: number };
-function useInViewOnce<T extends Element>(ref: React.RefObject<T | null>, opts: InViewOptions = {}) {
+function useInViewOnce<T extends Element>(ref: RefObject<T | null>, opts: InViewOptions = {}) {
   const [seen, setSeen] = useState(false);
+
   useEffect(() => {
     if (seen) return;
+
     const el = ref.current;
     if (!el) return;
+
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry?.isIntersecting) {
@@ -23,9 +27,11 @@ function useInViewOnce<T extends Element>(ref: React.RefObject<T | null>, opts: 
       },
       { root: null, rootMargin: opts.rootMargin ?? "0px", threshold: opts.threshold ?? 0.2 },
     );
+
     obs.observe(el);
     return () => obs.disconnect();
   }, [ref, opts.rootMargin, opts.threshold, seen]);
+
   return seen;
 }
 
@@ -38,10 +44,10 @@ function usePrefersReducedMotion() {
   });
 
   useEffect(() => {
-    const m = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const onChange = () => setReduced(m.matches);
-    m.addEventListener("change", onChange);
-    return () => m.removeEventListener("change", onChange);
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const onChange = () => setReduced(mediaQuery.matches);
+    mediaQuery.addEventListener("change", onChange);
+    return () => mediaQuery.removeEventListener("change", onChange);
   }, []);
 
   return reduced;
@@ -81,82 +87,15 @@ const SKILLS: string[] = [
   "Copilot",
 ];
 
-function MarqueeRow({
-  items,
-  direction = "left",
-  duration = 45,
-  pauseOnHover = true,
-  reducedMotion,
-}: {
-  items: string[];
-  direction?: "left" | "right";
-  duration?: number; // seconds
-  pauseOnHover?: boolean;
-  reducedMotion: boolean;
-}) {
-  const playStateClass = pauseOnHover ? "group-hover:[animation-play-state:paused]" : "";
-  const dirClass = direction === "right" ? "[animation-direction:reverse]" : "";
-  return (
-    <div className="relative overflow-hidden">
-      <div className="group relative block select-none text-white/80 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
-        <div
-          className={`marquee-runner flex w-max items-center ${playStateClass} ${dirClass}`}
-          style={{
-            animationDuration: `${duration}s`,
-            animationPlayState: reducedMotion ? ("paused" as const) : ("running" as const),
-          }}
-        >
-          <div className="marquee-track flex w-max flex-none items-center gap-4 pr-4">
-            {items.map((label, i) => (
-              <span
-                key={`${label}-${i}`}
-                className="whitespace-nowrap rounded-full border border-white/10 bg-white/5 px-5 py-2 text-[15px] sm:text-[16px] leading-7 text-white/90 shadow-[0_1px_8px_rgba(0,0,0,0.15)] transition-colors hover:border-white/20 hover:text-white"
-              >
-                {label}
-              </span>
-            ))}
-          </div>
-          {/* clone for seamless loop */}
-          <div aria-hidden className="marquee-track flex w-max flex-none items-center gap-4 pr-4">
-            {items.map((label, i) => (
-              <span
-                key={`clone-${label}-${i}`}
-                className="whitespace-nowrap rounded-full border border-white/10 bg-white/5 px-5 py-2 text-[15px] sm:text-[16px] leading-7 text-white/90 shadow-[0_1px_8px_rgba(0,0,0,0.15)] transition-colors hover:border-white/20 hover:text-white"
-              >
-                {label}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-      <style jsx>{`
-        @keyframes marquee-left {
-          from {
-            transform: translateX(0);
-          }
-          to {
-            transform: translateX(-50%);
-          }
-        }
-        .marquee-runner {
-          animation-name: marquee-left;
-          animation-timing-function: linear;
-          animation-iteration-count: infinite;
-        }
-      `}</style>
-    </div>
-  );
-}
-
 export default function AboutSection() {
   const cardRef = useRef<HTMLDivElement>(null);
   const inView = useInViewOnce(cardRef, { rootMargin: "-10% 0px -10% 0px", threshold: 0.15 });
   const reducedMotion = usePrefersReducedMotion();
 
-  const row0 = useMemo(() => SKILLS.filter((_, i) => i % 4 === 0), []);
-  const row1 = useMemo(() => SKILLS.filter((_, i) => i % 4 === 1), []);
-  const row2 = useMemo(() => SKILLS.filter((_, i) => i % 4 === 2), []);
-  const row3 = useMemo(() => SKILLS.filter((_, i) => i % 4 === 3), []);
+  const row0 = useMemo(() => SKILLS.filter((_, index) => index % 4 === 0), []);
+  const row1 = useMemo(() => SKILLS.filter((_, index) => index % 4 === 1), []);
+  const row2 = useMemo(() => SKILLS.filter((_, index) => index % 4 === 2), []);
+  const row3 = useMemo(() => SKILLS.filter((_, index) => index % 4 === 3), []);
 
   return (
     <section
@@ -166,21 +105,18 @@ export default function AboutSection() {
         minHeight: "100vh",
       }}
     >
-      {/* Subtle skill marquees */}
       <div className="mx-auto mt-4 w-full max-w-6xl space-y-2">
         <MarqueeRow items={row0} duration={36} direction="left" reducedMotion={reducedMotion} />
         <MarqueeRow items={row1} duration={42} direction="right" reducedMotion={reducedMotion} />
         <MarqueeRow items={row2} duration={48} direction="left" reducedMotion={reducedMotion} />
         <MarqueeRow items={row3} duration={54} direction="right" reducedMotion={reducedMotion} />
       </div>
-      {/* Ambient, very subtle background */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[radial-gradient(600px_300px_at_50%_0%,rgba(255,255,255,0.06),transparent_60%)]" />
         <div className="absolute inset-0 [background-image:linear-gradient(to_right,white_1px,transparent_1px),linear-gradient(to_bottom,white_1px,transparent_1px)] [background-size:72px_72px] opacity-[0.03]" />
       </div>
 
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-10 py-20 text-white sm:py-24">
-        {/* Primary card */}
         <article
           ref={cardRef}
           data-testid="AboutCard"
@@ -199,7 +135,7 @@ export default function AboutSection() {
               </h2>
               <div className="mt-3 h-px bg-linear-to-r from-transparent via-white/5 to-transparent" />
             </div>
-            <div className="mt-4 space-y-3 text-[0.95rem]/relaxed text-gray-300/90 sm:text-[0.98rem]/relaxed [@container(min-width:34rem)]:space-y-4">
+            <div className="mt-4 space-y-3 text-[0.95rem]/relaxed text-gray-300/90 [@container(min-width:34rem)]:space-y-4 sm:text-[0.98rem]/relaxed">
               <p>
                 I'm Jayvic San Antonio, a full‑stack software engineer from the Philippines, now
                 building in the San Francisco Bay Area. I've spent more than a decade turning ideas

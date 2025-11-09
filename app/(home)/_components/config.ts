@@ -28,7 +28,7 @@ export const CFG = {
   },
   nav: {
     centerTop: "46%",
-    buttonSize: { w: 84, h: 76 },
+    buttonSize: { w: 84, h: 72 },
     leftOffsetsPx: { projects: 54, linkedin: 150 },
     rightOffsetsPx: { work: 54, github: 150 },
   },
