@@ -4,9 +4,9 @@ import { useRef, type ReactNode } from "react";
 
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
-import HeroProfile from "./components/HeroProfile";
-import HeroStage from "./components/HeroStage";
-import useHeroAnimations from "./hooks/use-hero-animations";
+import HeroProfile from "./HeroProfile";
+import HeroStage from "./HeroStage";
+import useHeroAnimations from "../hooks/use-hero-animations";
 import { INITIAL_NAV_ROW_STYLE } from "./hero.constants";
 import type { HeroAnimationRefs } from "./hero.types";
 

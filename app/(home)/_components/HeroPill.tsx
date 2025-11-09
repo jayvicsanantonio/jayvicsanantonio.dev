@@ -1,7 +1,13 @@
-import { VIDEO_OVERLAY_BACKGROUND } from "../hero.constants";
-import type { HeroPillProps } from "../hero.types";
+import { VIDEO_OVERLAY_BACKGROUND } from "./hero.constants";
+import type { HeroPillProps } from "./hero.types";
 
-export default function HeroPill({ pillRef, videoRef, videoOverlayRef, pillContentRef, pillSkinRef }: HeroPillProps) {
+export default function HeroPill({
+  pillRef,
+  videoRef,
+  videoOverlayRef,
+  pillContentRef,
+  pillSkinRef,
+}: HeroPillProps) {
   return (
     <div
       ref={pillRef}

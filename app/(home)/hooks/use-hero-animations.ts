@@ -15,8 +15,8 @@ import {
   SCROLL_SMOOTHER_CONFIG,
   TARGET_PILL_HEIGHT,
   TARGET_PILL_WIDTH,
-} from "../hero.constants";
-import type { HeroAnimationRefs } from "../hero.types";
+} from "../_components/hero.constants";
+import type { HeroAnimationRefs } from "../_components/hero.types";
 
 export type UseHeroAnimationArgs = {
   refs: HeroAnimationRefs;
@@ -167,7 +167,16 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
       const pillSkin = refs.pillSkinRef.current;
       const navRow = refs.navRowRef.current;
 
-      if (!wrapper || !content || !heroSection || !profile || !pill || !pillContent || !video || !navRow) {
+      if (
+        !wrapper ||
+        !content ||
+        !heroSection ||
+        !profile ||
+        !pill ||
+        !pillContent ||
+        !video ||
+        !navRow
+      ) {
         return;
       }
 

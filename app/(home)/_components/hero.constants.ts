@@ -1,9 +1,10 @@
 import type { CSSProperties } from "react";
 
-import { HERO_NAV_PILL_HEIGHT, HERO_NAV_PILL_WIDTH } from "../NavRow.client";
+import { HERO_NAV_PILL_HEIGHT, HERO_NAV_PILL_WIDTH } from "./NavRow.client";
 
 export const PANEL_BORDER_RADIUS = "32px";
-export const PILL_SHRINK_BOX_SHADOW = "0 24px 45px rgba(1,11,26,0.65), 0 0 45px rgba(34,211,238,0.35)";
+export const PILL_SHRINK_BOX_SHADOW =
+  "0 24px 45px rgba(1,11,26,0.65), 0 0 45px rgba(34,211,238,0.35)";
 export const PILL_SHRINK_BACKGROUND = "rgba(4,15,32,0.95)";
 export const PILL_SHRINK_BORDER = "rgba(34,211,238,0.75)";
 export const TARGET_PILL_WIDTH = HERO_NAV_PILL_WIDTH;

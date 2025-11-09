@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import Hero from "@/app/(home)/_components/Hero";
+import Hero from "@/app/(home)/_components";
 import AboutSection from "@/app/(home)/_components/AboutSection.client";
 
 const PAGE_TITLE = "Jayvic San Antonio | Senior Software Engineer";

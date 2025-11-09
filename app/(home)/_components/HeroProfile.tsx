@@ -1,7 +1,7 @@
 import Image from "next/image";
 
-import { PROFILE_DROP_SHADOW } from "../hero.constants";
-import type { HeroProfileProps } from "../hero.types";
+import { PROFILE_DROP_SHADOW } from "./hero.constants";
+import type { HeroProfileProps } from "./hero.types";
 
 export default function HeroProfile({ profileRef, prefersReducedMotion }: HeroProfileProps) {
   return (
