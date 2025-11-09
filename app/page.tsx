@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 
-// import HeroMorph from "@/app/(home)/_components/HeroMorph.client";
 import Hero from "@/app/(home)/_components/Hero";
 import AboutSection from "@/app/(home)/_components/AboutSection.client";
 
@@ -20,7 +19,6 @@ export default function Page() {
       <Hero>
         <AboutSection />
       </Hero>
-      {/* <HeroMorph /> */}
     </main>
   );
 }
