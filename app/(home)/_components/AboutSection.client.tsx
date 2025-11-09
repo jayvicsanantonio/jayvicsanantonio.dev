@@ -30,14 +30,20 @@ function useInViewOnce<T extends Element>(ref: React.RefObject<T | null>, opts: 
 }
 
 function usePrefersReducedMotion() {
-  const [reduced, setReduced] = useState(false);
+  const [reduced, setReduced] = useState(() => {
+    if (typeof window === "undefined") {
+      return false;
+    }
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  });
+
   useEffect(() => {
     const m = window.matchMedia("(prefers-reduced-motion: reduce)");
     const onChange = () => setReduced(m.matches);
-    setReduced(m.matches);
     m.addEventListener("change", onChange);
     return () => m.removeEventListener("change", onChange);
   }, []);
+
   return reduced;
 }
 

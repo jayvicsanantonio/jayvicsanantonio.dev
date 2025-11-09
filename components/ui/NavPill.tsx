@@ -44,7 +44,7 @@ export function NavPill({
 
   return (
     <fieldset
-      className="group relative inline-block"
+      className="group relative inline-block m-0 border-0 p-0"
       onMouseMove={(e) => {
         const t = e.currentTarget as HTMLElement;
         const r = t.getBoundingClientRect();

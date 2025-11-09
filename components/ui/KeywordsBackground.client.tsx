@@ -250,7 +250,7 @@ export default function KeywordsBackground({
       out.push(t);
     }
     return out.sort((a, b) => a.delay - b.delay);
-  }, [items, count, seed, minDistancePct, padPct]);
+  }, [items, count, seed, minDistancePct, padPct, tetrisHoleRect, tetrisCols]);
 
   // Use controlled progress if provided, otherwise track scroll
   const effectiveProgress = controlledProgress !== undefined ? controlledProgress : progress;
