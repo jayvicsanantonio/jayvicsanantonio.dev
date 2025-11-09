@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 
 import Hero from "@/app/(home)/_components";
-import { MarqueeRow } from "@/app/(home)/_components/MarqueeRow";
-import SkillsHeading from "@/app/(home)/_components/SkillsHeading";
+import SkillsHeading, { SkillsMarqueeRowConfig } from "@/app/(home)/_components/SkillsHeading";
 import { useMemo } from "react";
 
 const PAGE_TITLE = "Jayvic San Antonio | Senior Software Engineer";
@@ -50,18 +49,30 @@ export default function Page() {
   const row1 = useMemo(() => SKILLS.filter((_, index) => index % 4 === 1), []);
   const row2 = useMemo(() => SKILLS.filter((_, index) => index % 4 === 2), []);
   const row3 = useMemo(() => SKILLS.filter((_, index) => index % 4 === 3), []);
+  const marqueeRowsAbove = useMemo<SkillsMarqueeRowConfig[]>(
+    () => [
+      { items: row0, duration: 32, direction: "left" },
+      { items: row1, duration: 38, direction: "right" },
+      { items: row2, duration: 44, direction: "left" },
+      { items: row3, duration: 50, direction: "right" },
+    ],
+    [row0, row1, row2, row3],
+  );
+  const marqueeRowsBelow = useMemo<SkillsMarqueeRowConfig[]>(
+    () => [
+      { items: row0, duration: 56, direction: "left" },
+      { items: row1, duration: 62, direction: "right" },
+      { items: row2, direction: "left", duration: 68 },
+      { items: row3, direction: "right", duration: 74 },
+    ],
+    [row0, row1, row2, row3],
+  );
 
   return (
     <main>
       <h1 className="sr-only">{SR_HEADING}</h1>
       <Hero>
-        <SkillsHeading />
-        <section aria-hidden className="mx-auto mt-4 w-full max-w-6xl space-y-2">
-          <MarqueeRow items={row0} duration={36} direction="left" />
-          <MarqueeRow items={row1} duration={42} direction="right" />
-          <MarqueeRow items={row2} duration={48} direction="left" />
-          <MarqueeRow items={row3} duration={54} direction="right" />
-        </section>
+        <SkillsHeading rowsAbove={marqueeRowsAbove} rowsBelow={marqueeRowsBelow} />
       </Hero>
     </main>
   );
