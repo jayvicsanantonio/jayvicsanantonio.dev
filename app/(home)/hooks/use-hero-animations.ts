@@ -152,13 +152,19 @@ function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroAnimationA
 function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimationArgs) {
   useGSAP(
     () => {
+      const coverFill = refs.coverFillRef.current;
+
       if (prefersReducedMotion) {
+        if (coverFill) {
+          gsap.set(coverFill, { scaleY: 1 });
+        }
         return;
       }
 
       const wrapper = refs.smoothWrapperRef.current;
       const content = refs.smoothContentRef.current;
       const heroSection = refs.heroSectionRef.current;
+      const coverSection = refs.coverSectionRef.current;
       const profile = refs.profileRef.current;
       const pill = refs.pillRef.current;
       const pillContent = refs.pillContentRef.current;
@@ -285,6 +291,27 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         0.55,
       );
 
+      let coverTimeline: gsap.core.Tween | null = null;
+
+      if (coverSection && coverFill) {
+        gsap.set(coverFill, { transformOrigin: "50% 100%" });
+
+        coverTimeline = gsap.fromTo(
+          coverFill,
+          { scaleY: 0 },
+          {
+            scaleY: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: coverSection,
+              start: "top bottom",
+              end: "top top",
+              scrub: true,
+            },
+          },
+        );
+      }
+
       const heroPin = ScrollTrigger.create({
         trigger: heroSection,
         start: "top top",
@@ -301,6 +328,8 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         smoother.kill();
         videoShrinkTimeline.scrollTrigger?.kill();
         videoShrinkTimeline.kill();
+        coverTimeline?.scrollTrigger?.kill();
+        coverTimeline?.kill();
         heroPin.kill();
       };
     },

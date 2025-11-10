@@ -19,6 +19,8 @@ export default function Hero({ children }: HeroProps) {
   const smoothContentRef = useRef<HTMLDivElement>(null);
   const heroSectionRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const coverSectionRef = useRef<HTMLDivElement>(null);
+  const coverFillRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const videoOverlayRef = useRef<HTMLDivElement>(null);
   const pillRef = useRef<HTMLDivElement>(null);
@@ -33,6 +35,8 @@ export default function Hero({ children }: HeroProps) {
     smoothContentRef,
     heroSectionRef,
     containerRef,
+    coverSectionRef,
+    coverFillRef,
     videoRef,
     videoOverlayRef,
     pillRef,
@@ -67,7 +71,28 @@ export default function Hero({ children }: HeroProps) {
           />
         </section>
 
-        <>{children}</>
+        <>
+          {children}
+          <section
+            ref={coverSectionRef}
+            className="relative isolate flex min-h-screen w-full items-center justify-center overflow-hidden px-6 py-16"
+            aria-label="Closing call to action"
+          >
+            <div
+              ref={coverFillRef}
+              className="absolute inset-0 origin-bottom scale-y-0 bg-cyan-950"
+              aria-hidden="true"
+            />
+            <div className="relative z-10 max-w-3xl text-center text-white">
+              <p className="text-sm font-semibold uppercase tracking-[0.36em] text-cyan-200 sm:text-base">
+                Thanks for scrolling
+              </p>
+              <p className="mt-6 text-3xl font-semibold leading-tight sm:text-4xl">
+                Let&apos;s build the next standout experience together.
+              </p>
+            </div>
+          </section>
+        </>
       </div>
 
       <HeroProfile profileRef={profileRef} prefersReducedMotion={prefersReducedMotion} />
