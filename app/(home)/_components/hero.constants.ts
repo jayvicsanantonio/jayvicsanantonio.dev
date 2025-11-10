@@ -42,7 +42,7 @@ export const SCROLL_SMOOTHER_CONFIG = {
 };
 
 export const PROFILE_SCROLL_CONFIG = {
-  scale: 0.45,
+  scale: 0.55,
   yPercent: 0,
   transformOrigin: "50% 100%",
   ease: "none" as const,

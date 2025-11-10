@@ -18,7 +18,7 @@ const About: AboutComponent = ({ sectionRef, labelRef, bodyRef }) => {
   return (
     <section
       ref={sectionRef}
-      className="relative isolate z-[70] flex min-h-screen w-full items-center justify-center overflow-hidden bg-transparent px-6 py-16 text-white sm:py-20"
+      className="relative isolate z-[70] flex min-h-screen w-full items-center justify-center overflow-hidden bg-[#022b37] px-6 py-16 text-white sm:py-20"
       aria-label="About Jayvic San Antonio"
     >
       <div className="relative z-[80] mx-auto flex w-full max-w-6xl flex-col items-center gap-10 md:flex-row md:items-stretch">
