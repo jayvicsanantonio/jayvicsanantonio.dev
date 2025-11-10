@@ -164,10 +164,18 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
       const overlay = refs.videoOverlayRef.current;
       const pillSkin = refs.pillSkinRef.current;
       const navRow = refs.navRowRef.current;
+      const coverLabel = refs.coverLabelRef.current;
+      const coverBody = refs.coverBodyRef.current;
 
       if (prefersReducedMotion) {
         if (coverFill) {
           gsap.set(coverFill, { scaleY: 1 });
+        }
+        if (coverLabel) {
+          gsap.set(coverLabel, { yPercent: 0 });
+        }
+        if (coverBody) {
+          gsap.set(coverBody, { yPercent: 0 });
         }
         return;
       }
@@ -291,6 +299,7 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
       );
 
       let coverTimeline: gsap.core.Tween | null = null;
+      let coverContentTimeline: gsap.core.Timeline | null = null;
 
       if (coverSection && coverFill) {
         gsap.set(coverFill, { transformOrigin: "50% 100%" });
@@ -311,6 +320,32 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         );
       }
 
+      if (coverSection && coverLabel && coverBody) {
+        coverContentTimeline = gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: coverSection,
+              start: "top top",
+              end: () => "+=" + window.innerHeight * 0.9,
+              scrub: true,
+              pin: true,
+              pinSpacing: true,
+            },
+          })
+          .fromTo(
+            coverLabel,
+            { yPercent: -12 },
+            { yPercent: 12, ease: "none" },
+            0,
+          )
+          .fromTo(
+            coverBody,
+            { yPercent: 12 },
+            { yPercent: -12, ease: "none" },
+            0,
+          );
+      }
+
       const heroPin = ScrollTrigger.create({
         trigger: heroSection,
         start: "top top",
@@ -329,6 +364,8 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         videoShrinkTimeline.kill();
         coverTimeline?.scrollTrigger?.kill();
         coverTimeline?.kill();
+        coverContentTimeline?.scrollTrigger?.kill();
+        coverContentTimeline?.kill();
         heroPin.kill();
       };
     },

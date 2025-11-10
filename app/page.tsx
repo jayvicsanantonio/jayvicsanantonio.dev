@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import Hero from "@/app/(home)/_components";
+import About from "@/app/(home)/_components/About";
 import SkillsHeading, { SkillsMarqueeRowConfig } from "@/app/(home)/_components/SkillsHeading";
 import { useMemo } from "react";
 
@@ -73,6 +74,7 @@ export default function Page() {
       <h1 className="sr-only">{SR_HEADING}</h1>
       <Hero>
         <SkillsHeading rowsAbove={marqueeRowsAbove} rowsBelow={marqueeRowsBelow} />
+        <About />
       </Hero>
     </main>
   );

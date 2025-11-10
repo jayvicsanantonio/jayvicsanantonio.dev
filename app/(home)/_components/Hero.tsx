@@ -1,11 +1,12 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
+import { Children, cloneElement, isValidElement, useRef, type ReactNode } from "react";
 
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
 import HeroProfile from "./HeroProfile";
 import HeroStage from "./HeroStage";
+import { HERO_ABOUT_SECTION_ID } from "./About";
 import useHeroAnimations from "../hooks/use-hero-animations";
 import { INITIAL_NAV_ROW_STYLE } from "./hero.constants";
 import type { HeroAnimationRefs } from "./hero.types";
@@ -21,6 +22,8 @@ export default function Hero({ children }: HeroProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const coverSectionRef = useRef<HTMLDivElement>(null);
   const coverFillRef = useRef<HTMLDivElement>(null);
+  const coverLabelRef = useRef<HTMLDivElement>(null);
+  const coverBodyRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const videoOverlayRef = useRef<HTMLDivElement>(null);
   const pillRef = useRef<HTMLDivElement>(null);
@@ -37,6 +40,8 @@ export default function Hero({ children }: HeroProps) {
     containerRef,
     coverSectionRef,
     coverFillRef,
+    coverLabelRef,
+    coverBodyRef,
     videoRef,
     videoOverlayRef,
     pillRef,
@@ -71,23 +76,22 @@ export default function Hero({ children }: HeroProps) {
           />
         </section>
 
-        <>
-          {children}
-          <section
-            ref={coverSectionRef}
-            className="relative isolate z-[70] flex min-h-screen w-full items-center justify-center overflow-hidden px-6 py-16"
-            aria-label="Closing call to action"
-          >
-            <div className="relative z-[80] max-w-3xl text-center text-white">
-              <p className="text-sm font-semibold uppercase tracking-[0.36em] text-cyan-200 sm:text-base">
-                Thanks for scrolling
-              </p>
-              <p className="mt-6 text-3xl font-semibold leading-tight sm:text-4xl">
-                Let&apos;s build the next standout experience together.
-              </p>
-            </div>
-          </section>
-        </>
+        {Children.map(children, (child) => {
+          if (!isValidElement(child)) {
+            return child;
+          }
+
+          const childType = child.type as { heroSectionId?: string };
+          if (childType?.heroSectionId === HERO_ABOUT_SECTION_ID) {
+            return cloneElement(child, {
+              sectionRef: coverSectionRef,
+              labelRef: coverLabelRef,
+              bodyRef: coverBodyRef,
+            } as Record<string, unknown>);
+          }
+
+          return child;
+        })}
       </div>
 
       <HeroProfile profileRef={profileRef} prefersReducedMotion={prefersReducedMotion} />
