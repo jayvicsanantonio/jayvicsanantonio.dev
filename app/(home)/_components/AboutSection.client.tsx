@@ -35,24 +35,6 @@ function useInViewOnce<T extends Element>(ref: RefObject<T | null>, opts: InView
   return seen;
 }
 
-function usePrefersReducedMotion() {
-  const [reduced, setReduced] = useState(() => {
-    if (typeof window === "undefined") {
-      return false;
-    }
-    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  });
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const onChange = () => setReduced(mediaQuery.matches);
-    mediaQuery.addEventListener("change", onChange);
-    return () => mediaQuery.removeEventListener("change", onChange);
-  }, []);
-
-  return reduced;
-}
-
 const SKILLS: string[] = [
   "TypeScript",
   "React",
@@ -90,7 +72,6 @@ const SKILLS: string[] = [
 export default function AboutSection() {
   const cardRef = useRef<HTMLDivElement>(null);
   const inView = useInViewOnce(cardRef, { rootMargin: "-10% 0px -10% 0px", threshold: 0.15 });
-  const reducedMotion = usePrefersReducedMotion();
 
   const row0 = useMemo(() => SKILLS.filter((_, index) => index % 4 === 0), []);
   const row1 = useMemo(() => SKILLS.filter((_, index) => index % 4 === 1), []);
@@ -106,10 +87,10 @@ export default function AboutSection() {
       }}
     >
       <div className="mx-auto mt-4 w-full max-w-6xl space-y-2">
-        <MarqueeRow items={row0} duration={36} direction="left" reducedMotion={reducedMotion} />
-        <MarqueeRow items={row1} duration={42} direction="right" reducedMotion={reducedMotion} />
-        <MarqueeRow items={row2} duration={48} direction="left" reducedMotion={reducedMotion} />
-        <MarqueeRow items={row3} duration={54} direction="right" reducedMotion={reducedMotion} />
+        <MarqueeRow items={row0} duration={36} direction="left" />
+        <MarqueeRow items={row1} duration={42} direction="right" />
+        <MarqueeRow items={row2} duration={48} direction="left" />
+        <MarqueeRow items={row3} duration={54} direction="right" />
       </div>
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[radial-gradient(600px_300px_at_50%_0%,rgba(255,255,255,0.06),transparent_60%)]" />

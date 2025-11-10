@@ -75,15 +75,10 @@ export default function Hero({ children }: HeroProps) {
           {children}
           <section
             ref={coverSectionRef}
-            className="relative isolate flex min-h-screen w-full items-center justify-center overflow-hidden px-6 py-16"
+            className="relative isolate z-[70] flex min-h-screen w-full items-center justify-center overflow-hidden px-6 py-16"
             aria-label="Closing call to action"
           >
-            <div
-              ref={coverFillRef}
-              className="absolute inset-0 origin-bottom scale-y-0 bg-cyan-950"
-              aria-hidden="true"
-            />
-            <div className="relative z-10 max-w-3xl text-center text-white">
+            <div className="relative z-[80] max-w-3xl text-center text-white">
               <p className="text-sm font-semibold uppercase tracking-[0.36em] text-cyan-200 sm:text-base">
                 Thanks for scrolling
               </p>
@@ -96,6 +91,11 @@ export default function Hero({ children }: HeroProps) {
       </div>
 
       <HeroProfile profileRef={profileRef} prefersReducedMotion={prefersReducedMotion} />
+      <div
+        ref={coverFillRef}
+        className="pointer-events-none fixed inset-0 z-[60] origin-bottom scale-y-0 bg-cyan-950"
+        aria-hidden="true"
+      />
     </div>
   );
 }

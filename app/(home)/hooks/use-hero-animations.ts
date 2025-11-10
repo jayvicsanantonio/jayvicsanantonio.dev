@@ -153,14 +153,6 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
   useGSAP(
     () => {
       const coverFill = refs.coverFillRef.current;
-
-      if (prefersReducedMotion) {
-        if (coverFill) {
-          gsap.set(coverFill, { scaleY: 1 });
-        }
-        return;
-      }
-
       const wrapper = refs.smoothWrapperRef.current;
       const content = refs.smoothContentRef.current;
       const heroSection = refs.heroSectionRef.current;
@@ -172,6 +164,13 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
       const overlay = refs.videoOverlayRef.current;
       const pillSkin = refs.pillSkinRef.current;
       const navRow = refs.navRowRef.current;
+
+      if (prefersReducedMotion) {
+        if (coverFill) {
+          gsap.set(coverFill, { scaleY: 1 });
+        }
+        return;
+      }
 
       if (
         !wrapper ||
