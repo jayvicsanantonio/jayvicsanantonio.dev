@@ -65,14 +65,21 @@ export default function SkillsHeading({ rowsAbove, rowsBelow }: SkillsHeadingPro
 
       gsap.set(section, { autoAlpha: 0 });
 
+      let hasRevealedSection = false;
+      const revealSection = () => {
+        if (hasRevealedSection) return;
+        hasRevealedSection = true;
+        gsap.set(section, { autoAlpha: 1 });
+      };
+
       const timeline = gsap.timeline({
         scrollTrigger: {
           trigger: heading,
-          start: "top 55%",
-          once: true,
-          onEnter: () => {
-            gsap.set(section, { autoAlpha: 1 });
-          },
+          start: "top 70%",
+          end: "top 30%",
+          scrub: true,
+          onEnter: revealSection,
+          onEnterBack: revealSection,
         },
       });
 
