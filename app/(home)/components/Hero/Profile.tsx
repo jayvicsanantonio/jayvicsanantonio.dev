@@ -1,14 +1,17 @@
 import Image from "next/image";
 
-import { PROFILE_DROP_SHADOW } from "./hero.constants";
+import { PROFILE_BASE_Z_INDEX, PROFILE_DROP_SHADOW } from "./hero.constants";
 import type { ProfileProps } from "./hero.types";
 
 export default function Profile({ profileRef, prefersReducedMotion }: ProfileProps) {
   return (
     <div
       ref={profileRef}
-      className="pointer-events-none fixed bottom-0 left-1/2 z-30 w-[55vw] max-w-[880px] min-w-[320px] -translate-x-1/2 opacity-0 z-0"
-      style={{ willChange: prefersReducedMotion ? undefined : "transform, opacity" }}
+      className="pointer-events-none fixed bottom-0 left-1/2 w-[55vw] max-w-[880px] min-w-[320px] -translate-x-1/2 opacity-0"
+      style={{
+        willChange: prefersReducedMotion ? undefined : "transform, opacity",
+        zIndex: PROFILE_BASE_Z_INDEX,
+      }}
     >
       <div className="relative w-full">
         <Image

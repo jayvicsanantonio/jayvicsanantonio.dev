@@ -14,6 +14,8 @@ export const VIDEO_OVERLAY_BACKGROUND =
 export const PROFILE_DROP_SHADOW =
   "drop-shadow(0 24px 36px rgba(0,0,0,0.55)) drop-shadow(0 0 20px rgba(34,211,238,0.45))";
 export const HERO_SCROLL_DISTANCE = 0.2;
+export const PROFILE_BASE_Z_INDEX = 30;
+export const PROFILE_COVER_Z_INDEX = -5;
 
 export const FINAL_GEOMETRY_STATE = {
   width: "100%",

@@ -11,6 +11,8 @@ import {
   PILL_SHRINK_BACKGROUND,
   PILL_SHRINK_BORDER,
   PILL_SHRINK_BOX_SHADOW,
+  PROFILE_BASE_Z_INDEX,
+  PROFILE_COVER_Z_INDEX,
   PROFILE_SCROLL_CONFIG,
   SCROLL_SMOOTHER_CONFIG,
   TARGET_PILL_HEIGHT,
@@ -302,35 +304,28 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
 
       let coverTimeline: gsap.core.Tween | null = null;
       let coverContentTimeline: gsap.core.Timeline | null = null;
-      let profileCoverTween: gsap.core.Tween | null = null;
+      let profileCoverTrigger: ScrollTrigger | null = null;
 
-      const profileCoverTrigger = skillsSection && aboutSection
-        ? {
-            trigger: skillsSection,
-            start: "bottom bottom",
-            endTrigger: aboutSection,
-            end: "top 60%",
-            scrub: true,
-          }
-        : aboutSection
-          ? {
-              trigger: aboutSection,
-              start: "top bottom",
-              end: "top 60%",
-              scrub: true,
-            }
-          : null;
+      const coverStartTrigger = skillsSection ?? aboutSection;
+      const coverEndTrigger = aboutSection ?? coverStartTrigger;
 
-      if (profileCoverTrigger) {
-        profileCoverTween = gsap.to(
-          profile,
-          {
-            autoAlpha: 0,
-            ease: "power1.out",
-            immediateRender: false,
-            scrollTrigger: profileCoverTrigger,
-          },
-        );
+      if (profile && coverStartTrigger && coverEndTrigger) {
+        const setProfileCoverage = (covered: boolean) => {
+          gsap.set(profile, {
+            zIndex: covered ? PROFILE_COVER_Z_INDEX : PROFILE_BASE_Z_INDEX,
+          });
+        };
+
+        profileCoverTrigger = ScrollTrigger.create({
+          trigger: coverStartTrigger,
+          start: skillsSection ? "bottom bottom" : "top bottom",
+          endTrigger: coverEndTrigger,
+          end: aboutSection ? "bottom top" : "bottom top",
+          onEnter: () => setProfileCoverage(true),
+          onEnterBack: () => setProfileCoverage(true),
+          onLeave: () => setProfileCoverage(false),
+          onLeaveBack: () => setProfileCoverage(false),
+        });
       }
 
       if (coverSection && coverFill) {
@@ -388,8 +383,10 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         coverTimeline?.kill();
         coverContentTimeline?.scrollTrigger?.kill();
         coverContentTimeline?.kill();
-        profileCoverTween?.scrollTrigger?.kill();
-        profileCoverTween?.kill();
+        profileCoverTrigger?.kill();
+        if (profile) {
+          gsap.set(profile, { zIndex: PROFILE_BASE_Z_INDEX });
+        }
         heroPin.kill();
       };
     },
