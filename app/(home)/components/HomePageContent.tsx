@@ -55,11 +55,11 @@ export default function HomePageContent({ children }: { children: React.ReactNod
       <div
         ref={smoothContentRef}
         id="smooth-content"
-        className="w-full"
+        className="w-full z-10"
         style={{ willChange: prefersReducedMotion ? undefined : "transform" }}
       >
         <Hero {...(heroRefs as unknown as HeroProps)} />
-        <Skills />
+        <Skills sectionRef={skillsSectionRef} />
         <About aboutRef={aboutSectionRef as RefObject<HTMLDivElement>} />
       </div>
       <Profile profileRef={profileRef} prefersReducedMotion={prefersReducedMotion} />

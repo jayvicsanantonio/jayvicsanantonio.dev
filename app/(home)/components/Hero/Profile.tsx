@@ -7,7 +7,7 @@ export default function Profile({ profileRef, prefersReducedMotion }: ProfilePro
   return (
     <div
       ref={profileRef}
-      className="pointer-events-none fixed bottom-0 left-1/2 z-30 w-[55vw] max-w-[880px] min-w-[320px] -translate-x-1/2 opacity-0"
+      className="pointer-events-none fixed bottom-0 left-1/2 z-30 w-[55vw] max-w-[880px] min-w-[320px] -translate-x-1/2 opacity-0 z-0"
       style={{ willChange: prefersReducedMotion ? undefined : "transform, opacity" }}
     >
       <div className="relative w-full">

@@ -166,6 +166,8 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
       const navRow = refs.navRowRef.current;
       const coverLabel = refs.coverLabelRef.current;
       const coverBody = refs.coverBodyRef.current;
+      const aboutSection = refs.aboutSectionRef.current;
+      const skillsSection = refs.skillsSectionRef.current;
 
       if (prefersReducedMotion) {
         if (coverFill) {
@@ -300,6 +302,36 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
 
       let coverTimeline: gsap.core.Tween | null = null;
       let coverContentTimeline: gsap.core.Timeline | null = null;
+      let profileCoverTween: gsap.core.Tween | null = null;
+
+      const profileCoverTrigger = skillsSection && aboutSection
+        ? {
+            trigger: skillsSection,
+            start: "bottom bottom",
+            endTrigger: aboutSection,
+            end: "top 60%",
+            scrub: true,
+          }
+        : aboutSection
+          ? {
+              trigger: aboutSection,
+              start: "top bottom",
+              end: "top 60%",
+              scrub: true,
+            }
+          : null;
+
+      if (profileCoverTrigger) {
+        profileCoverTween = gsap.to(
+          profile,
+          {
+            autoAlpha: 0,
+            ease: "power1.out",
+            immediateRender: false,
+            scrollTrigger: profileCoverTrigger,
+          },
+        );
+      }
 
       if (coverSection && coverFill) {
         gsap.set(coverFill, { transformOrigin: "50% 100%" });
@@ -356,6 +388,8 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         coverTimeline?.kill();
         coverContentTimeline?.scrollTrigger?.kill();
         coverContentTimeline?.kill();
+        profileCoverTween?.scrollTrigger?.kill();
+        profileCoverTween?.kill();
         heroPin.kill();
       };
     },

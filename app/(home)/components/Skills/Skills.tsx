@@ -1,6 +1,7 @@
 "use client";
 
-import { RefObject, useMemo, useRef } from "react";
+import { useMemo, useRef } from "react";
+import type { MutableRefObject, RefObject } from "react";
 
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
@@ -49,8 +50,13 @@ const SKILLS: string[] = [
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-export default function Skills() {
-  const sectionRef = useRef<HTMLElement>(null);
+type SkillsProps = {
+  sectionRef?: MutableRefObject<HTMLElement | null>;
+};
+
+export default function Skills({ sectionRef: externalSectionRef }: SkillsProps = {}) {
+  const fallbackSectionRef = useRef<HTMLElement>(null);
+  const sectionRef = externalSectionRef ?? fallbackSectionRef;
   const headingRef = useRef<HTMLHeadingElement>(null);
   const rowsAboveRef = useRef<HTMLDivElement>(null);
   const rowsBelowRef = useRef<HTMLDivElement>(null);
