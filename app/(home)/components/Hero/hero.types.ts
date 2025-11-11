@@ -16,20 +16,28 @@ export type HeroAnimationRefs = {
   pillSkinRef: MutableRefObject<HTMLDivElement | null>;
   profileRef: MutableRefObject<HTMLDivElement | null>;
   navRowRef: MutableRefObject<HTMLDivElement | null>;
+  aboutSectionRef: MutableRefObject<HTMLDivElement | null>;
+  skillsSectionRef: MutableRefObject<HTMLDivElement | null>;
 };
 
-export type HeroStageProps = Pick<
+export type StageProps = Pick<
   HeroAnimationRefs,
-  "containerRef" | "navRowRef" | "pillRef" | "videoRef" | "videoOverlayRef" | "pillContentRef" | "pillSkinRef"
+  | "containerRef"
+  | "navRowRef"
+  | "pillRef"
+  | "videoRef"
+  | "videoOverlayRef"
+  | "pillContentRef"
+  | "pillSkinRef"
 > & {
   navRowBaseStyle: CSSProperties;
 };
 
-export type HeroPillProps = Pick<
+export type PillProps = Pick<
   HeroAnimationRefs,
   "pillRef" | "videoRef" | "videoOverlayRef" | "pillContentRef" | "pillSkinRef"
 >;
 
-export type HeroProfileProps = Pick<HeroAnimationRefs, "profileRef"> & {
+export type ProfileProps = Pick<HeroAnimationRefs, "profileRef"> & {
   prefersReducedMotion: boolean;
 };

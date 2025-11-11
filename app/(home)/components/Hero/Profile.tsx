@@ -1,9 +1,9 @@
 import Image from "next/image";
 
 import { PROFILE_DROP_SHADOW } from "./hero.constants";
-import type { HeroProfileProps } from "./hero.types";
+import type { ProfileProps } from "./hero.types";
 
-export default function HeroProfile({ profileRef, prefersReducedMotion }: HeroProfileProps) {
+export default function Profile({ profileRef, prefersReducedMotion }: ProfileProps) {
   return (
     <div
       ref={profileRef}

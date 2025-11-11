@@ -4,7 +4,7 @@ import { Icon } from "@iconify/react";
 import type { CSSProperties } from "react";
 
 import { NavPill } from "@/components/ui/NavPill";
-import { CFG } from "@/app/(home)/_components/config";
+import { CFG } from "@/app/(home)/components/config";
 
 export const HERO_NAV_PILL_WIDTH = "clamp(320px, var(--nav-row-w, 20vw), 560px)";
 export const HERO_NAV_PILL_HEIGHT = "clamp(54px, var(--pill-h, 8vh), 96px)";
@@ -59,7 +59,7 @@ const NAV_ITEMS: NavItem[] = [
 const BUTTON_CLASSES =
   "text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80 bg-white/20 backdrop-blur-[24px] backdrop-saturate-200 border-white/55 hover:border-white/60";
 
-export default function NavRow() {
+export default function Navigation() {
   return (
     <nav aria-label="Hero quick links" className="w-full">
       <div className="mx-auto flex w-fit items-center gap-3.5">

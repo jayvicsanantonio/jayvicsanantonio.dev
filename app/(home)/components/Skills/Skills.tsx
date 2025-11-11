@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { RefObject, useMemo, useRef } from "react";
 
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
@@ -8,30 +8,76 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
-import { MarqueeRow } from "./MarqueeRow";
+import MarqueeRow from "./MarqueeRow";
 
 const SKILLS_HEADING = "SKILLS";
 const ROW_REVEAL_OFFSET = 0.15;
 
-export type SkillsMarqueeRowConfig = {
+export type MarqueeRowConfig = {
   items: string[];
   duration?: number;
   direction?: "left" | "right";
 };
 
-type SkillsHeadingProps = {
-  rowsAbove: SkillsMarqueeRowConfig[];
-  rowsBelow: SkillsMarqueeRowConfig[];
-};
+const SKILLS: string[] = [
+  "TypeScript",
+  "React",
+  "Next.js",
+  "Node.js",
+  "Hono",
+  "Cloudflare Workers",
+  "Vercel Edge",
+  "Tailwind CSS",
+  "Framer Motion",
+  "Zod",
+  "Prisma",
+  "PostgreSQL",
+  "Redis",
+  "MySQL",
+  "SQLite",
+  "REST APIs",
+  "Playwright",
+  "Vitest",
+  "Cypress",
+  "GitHub Actions",
+  "Amazon Web Services",
+  "Google Cloud Platform",
+  "Vercel",
+  "Docker",
+];
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-export default function SkillsHeading({ rowsAbove, rowsBelow }: SkillsHeadingProps) {
+export default function Skills() {
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const rowsAboveRef = useRef<HTMLDivElement>(null);
   const rowsBelowRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
+
+  const row0 = useMemo(() => SKILLS.filter((_, index) => index % 4 === 0), []);
+  const row1 = useMemo(() => SKILLS.filter((_, index) => index % 4 === 1), []);
+  const row2 = useMemo(() => SKILLS.filter((_, index) => index % 4 === 2), []);
+  const row3 = useMemo(() => SKILLS.filter((_, index) => index % 4 === 3), []);
+
+  const rowsAbove = useMemo<MarqueeRowConfig[]>(
+    () => [
+      { items: row0, duration: 32, direction: "left" },
+      { items: row1, duration: 38, direction: "right" },
+      { items: row2, duration: 44, direction: "left" },
+      { items: row3, duration: 50, direction: "right" },
+    ],
+    [row0, row1, row2, row3],
+  );
+  const rowsBelow = useMemo<MarqueeRowConfig[]>(
+    () => [
+      { items: row0, duration: 56, direction: "left" },
+      { items: row1, duration: 62, direction: "right" },
+      { items: row2, direction: "left", duration: 68 },
+      { items: row3, direction: "right", duration: 74 },
+    ],
+    [row0, row1, row2, row3],
+  );
 
   useGSAP(
     () => {
@@ -128,7 +174,13 @@ export default function SkillsHeading({ rowsAbove, rowsBelow }: SkillsHeadingPro
         style={{ opacity: prefersReducedMotion ? 1 : 0 }}
       >
         {rowsAbove.map((config, index) => (
-          <MarqueeRow key={`skills-top-${index}`} {...config} />
+          <MarqueeRow
+            marqueeRowRef={rowsAboveRef as unknown as RefObject<HTMLDivElement>}
+            items={config.items}
+            duration={config.duration ?? 32}
+            direction={config.direction as "left" | "right"}
+            key={`skills-top-${index}`}
+          />
         ))}
       </div>
       <div className="relative flex justify-center py-10 sm:py-14">
@@ -155,7 +207,13 @@ export default function SkillsHeading({ rowsAbove, rowsBelow }: SkillsHeadingPro
         style={{ opacity: prefersReducedMotion ? 1 : 0 }}
       >
         {rowsBelow.map((config, index) => (
-          <MarqueeRow key={`skills-bottom-${index}`} {...config} />
+          <MarqueeRow
+            marqueeRowRef={rowsBelowRef as unknown as RefObject<HTMLDivElement>}
+            items={config.items}
+            duration={config.duration ?? 56}
+            direction={config.direction as "left" | "right"}
+            key={`skills-bottom-${index}`}
+          />
         ))}
       </div>
     </section>

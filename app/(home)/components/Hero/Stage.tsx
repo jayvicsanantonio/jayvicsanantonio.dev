@@ -1,9 +1,9 @@
-import NavRow from "./NavRow.client";
-import HeroPill from "./HeroPill";
+import Navigation from "./Navigation";
+import Pill from "./Pill";
 
-import type { HeroStageProps } from "./hero.types";
+import type { StageProps } from "./hero.types";
 
-export default function HeroStage({
+export default function Stage({
   containerRef,
   navRowRef,
   navRowBaseStyle,
@@ -12,7 +12,7 @@ export default function HeroStage({
   videoOverlayRef,
   pillContentRef,
   pillSkinRef,
-}: HeroStageProps) {
+}: StageProps) {
   return (
     <div
       ref={containerRef}
@@ -26,10 +26,10 @@ export default function HeroStage({
             className="opacity-0"
             style={navRowBaseStyle}
           >
-            <NavRow />
+            <Navigation />
           </div>
         </div>
-        <HeroPill
+        <Pill
           {...{
             pillRef,
             videoRef,

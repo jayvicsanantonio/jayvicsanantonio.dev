@@ -15,8 +15,8 @@ import {
   SCROLL_SMOOTHER_CONFIG,
   TARGET_PILL_HEIGHT,
   TARGET_PILL_WIDTH,
-} from "../_components/hero.constants";
-import type { HeroAnimationRefs } from "../_components/hero.types";
+} from "../components/Hero/hero.constants";
+import type { HeroAnimationRefs } from "../components/Hero/hero.types";
 
 export type UseHeroAnimationArgs = {
   refs: HeroAnimationRefs;
@@ -332,18 +332,8 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
               pinSpacing: true,
             },
           })
-          .fromTo(
-            coverLabel,
-            { yPercent: -12 },
-            { yPercent: 12, ease: "none" },
-            0,
-          )
-          .fromTo(
-            coverBody,
-            { yPercent: 12 },
-            { yPercent: -12, ease: "none" },
-            0,
-          );
+          .fromTo(coverLabel, { yPercent: -12 }, { yPercent: 12, ease: "none" }, 0)
+          .fromTo(coverBody, { yPercent: 12 }, { yPercent: -12, ease: "none" }, 0);
       }
 
       const heroPin = ScrollTrigger.create({

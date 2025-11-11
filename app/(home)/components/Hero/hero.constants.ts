@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 
-import { HERO_NAV_PILL_HEIGHT, HERO_NAV_PILL_WIDTH } from "./NavRow.client";
+import { HERO_NAV_PILL_HEIGHT, HERO_NAV_PILL_WIDTH } from "./Navigation";
 
 export const PANEL_BORDER_RADIUS = "32px";
 export const PILL_SHRINK_BOX_SHADOW =
