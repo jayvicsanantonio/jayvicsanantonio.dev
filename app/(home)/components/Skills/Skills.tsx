@@ -12,6 +12,7 @@ import MarqueeRow from "./MarqueeRow";
 
 const SKILLS_HEADING = "SKILLS";
 const ROW_REVEAL_OFFSET = 0.15;
+const REVEAL_SCROLL_DISTANCE_FACTOR = 0.35;
 
 export type MarqueeRowConfig = {
   items: string[];
@@ -121,8 +122,8 @@ export default function Skills() {
       const timeline = gsap.timeline({
         scrollTrigger: {
           trigger: heading,
-          start: "top 70%",
-          end: "top 30%",
+          start: "center 75%",
+          end: () => "+=" + window.innerHeight * REVEAL_SCROLL_DISTANCE_FACTOR,
           scrub: true,
           onEnter: revealSection,
           onEnterBack: revealSection,
@@ -165,7 +166,7 @@ export default function Skills() {
   return (
     <section
       ref={sectionRef}
-      className="mx-auto w-full max-w-6xl px-4 py-12 sm:py-16 lg:py-20"
+      className="mx-auto w-full max-w-6xl px-4 py-12 sm:py-16 lg:py-20 h-[120vh]"
       aria-labelledby="skills-heading"
     >
       <div
