@@ -13,7 +13,7 @@ import MarqueeRow from "./MarqueeRow";
 
 const SKILLS_HEADING = "SKILLS";
 const ROW_REVEAL_OFFSET = 0.15;
-const REVEAL_SCROLL_DISTANCE_FACTOR = 0.45;
+const REVEAL_SCROLL_DISTANCE_FACTOR = 0.75;
 
 export type MarqueeRowConfig = {
   items: string[];
@@ -22,30 +22,81 @@ export type MarqueeRowConfig = {
 };
 
 const SKILLS: string[] = [
+  "JavaScript",
   "TypeScript",
   "React",
-  "Next.js",
-  "Node.js",
+  "NextJS",
+  "Tailwind CSS",
+  "Shadcn UI",
+  "Framer Motion",
+  "React Native",
+  "Expo",
+  "EmberJS",
+  "HTML",
+  "CSS",
+  "Sass",
+  "SVG",
+  "Accessibility",
+  "VS Code Extensions",
+  "Zed Extensions",
+  "NodeJS",
   "Hono",
+  "Express",
   "Cloudflare Workers",
   "Vercel Edge",
-  "Tailwind CSS",
-  "Framer Motion",
-  "Zod",
+  "REST APIs",
+  "SailsJS",
+  "Socket.IO",
+  "Rate Limiting",
+  "Caching",
+  "Session Management",
+  "Authentication",
+  "Authorization",
   "Prisma",
   "PostgreSQL",
-  "Redis",
   "MySQL",
   "SQLite",
-  "REST APIs",
-  "Playwright",
+  "MongoDB",
+  "Redis",
+  "Zod",
   "Vitest",
+  "React Testing Library",
+  "Jest",
+  "Playwright",
   "Cypress",
   "GitHub Actions",
+  "Jenkins",
+  "CI/CD",
   "Amazon Web Services",
-  "Google Cloud Platform",
   "Vercel",
-  "Docker",
+  "Google Cloud",
+  "Cloudflare",
+  "Netlify",
+  "Git",
+  "Cursor",
+  "Warp.dev",
+  "Claude Code",
+  "Gemini CLI",
+  "Windsurf",
+  "GitHub Copilot",
+  "OpenRouter",
+  "Cline",
+  "VS Code",
+  "Zed",
+  "AI SDK",
+  "OpenAI SDK",
+  "ChatGPT",
+  "Perplexity",
+  "Comet",
+  "LangChain",
+  "Amazon Bedrock",
+  "Amazon Rekognition",
+  "Google AI Studio",
+  "Chrome Builti-in AI API",
+  "Groq API",
+  "AI Agents",
+  "Multi-Agent Orchestration",
+  "Google GenAI SDK",
 ];
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
@@ -65,10 +116,12 @@ export default function Skills({
   const rowsBelowRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  const row0 = useMemo(() => SKILLS.filter((_, index) => index % 4 === 0), []);
-  const row1 = useMemo(() => SKILLS.filter((_, index) => index % 4 === 1), []);
-  const row2 = useMemo(() => SKILLS.filter((_, index) => index % 4 === 2), []);
-  const row3 = useMemo(() => SKILLS.filter((_, index) => index % 4 === 3), []);
+  const row0 = useMemo(() => SKILLS.filter((_, index) => index % 6 === 0), []);
+  const row1 = useMemo(() => SKILLS.filter((_, index) => index % 6 === 1), []);
+  const row2 = useMemo(() => SKILLS.filter((_, index) => index % 6 === 2), []);
+  const row3 = useMemo(() => SKILLS.filter((_, index) => index % 6 === 3), []);
+  const row4 = useMemo(() => SKILLS.filter((_, index) => index % 6 === 4), []);
+  const row5 = useMemo(() => SKILLS.filter((_, index) => index % 6 === 5), []);
 
   const rowsBelow = useMemo<MarqueeRowConfig[]>(
     () => [
@@ -76,8 +129,10 @@ export default function Skills({
       { items: row1, duration: 62, direction: "right" },
       { items: row2, direction: "left", duration: 68 },
       { items: row3, direction: "right", duration: 74 },
+      { items: row4, direction: "left", duration: 80 },
+      { items: row5, direction: "right", duration: 86 },
     ],
-    [row0, row1, row2, row3],
+    [row0, row1, row2, row3, row4, row5],
   );
 
   useGSAP(
@@ -118,7 +173,7 @@ export default function Skills({
       const timeline = gsap.timeline({
         scrollTrigger: {
           trigger: heading,
-          start: "center 65%",
+          start: "center 90%",
           end: () => "+=" + window.innerHeight * REVEAL_SCROLL_DISTANCE_FACTOR,
           scrub: true,
           onEnter: revealSection,
@@ -160,7 +215,7 @@ export default function Skills({
   return (
     <section
       ref={sectionRef}
-      className="w-full py-12 sm:py-16 lg:py-20 h-[120vh]"
+      className="w-full py-12 sm:py-16 lg:py-20 h-[130vh]"
       aria-labelledby="skills-heading"
     >
       <div className="relative flex overflow-hidden py-10 sm:py-14">
