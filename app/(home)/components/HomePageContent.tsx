@@ -59,7 +59,7 @@ export default function HomePageContent({ children }: { children: React.ReactNod
         style={{ willChange: prefersReducedMotion ? undefined : "transform" }}
       >
         <Hero {...(heroRefs as unknown as HeroProps)} />
-        <Skills sectionRef={skillsSectionRef} />
+        <Skills sectionRef={skillsSectionRef} aboutSectionRef={aboutSectionRef} />
         <About aboutRef={aboutSectionRef as RefObject<HTMLDivElement>} />
       </div>
       <Profile profileRef={profileRef} prefersReducedMotion={prefersReducedMotion} />

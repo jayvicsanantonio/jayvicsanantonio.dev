@@ -13,7 +13,7 @@ import MarqueeRow from "./MarqueeRow";
 
 const SKILLS_HEADING = "SKILLS";
 const ROW_REVEAL_OFFSET = 0.15;
-const REVEAL_SCROLL_DISTANCE_FACTOR = 0.35;
+const REVEAL_SCROLL_DISTANCE_FACTOR = 0.45;
 
 export type MarqueeRowConfig = {
   items: string[];
@@ -52,13 +52,16 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 type SkillsProps = {
   sectionRef?: MutableRefObject<HTMLElement | null>;
+  aboutSectionRef?: MutableRefObject<HTMLDivElement | null>;
 };
 
-export default function Skills({ sectionRef: externalSectionRef }: SkillsProps = {}) {
+export default function Skills({
+  sectionRef: externalSectionRef,
+  aboutSectionRef,
+}: SkillsProps = {}) {
   const fallbackSectionRef = useRef<HTMLElement>(null);
   const sectionRef = externalSectionRef ?? fallbackSectionRef;
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const rowsAboveRef = useRef<HTMLDivElement>(null);
   const rowsBelowRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -67,15 +70,6 @@ export default function Skills({ sectionRef: externalSectionRef }: SkillsProps =
   const row2 = useMemo(() => SKILLS.filter((_, index) => index % 4 === 2), []);
   const row3 = useMemo(() => SKILLS.filter((_, index) => index % 4 === 3), []);
 
-  const rowsAbove = useMemo<MarqueeRowConfig[]>(
-    () => [
-      { items: row0, duration: 32, direction: "left" },
-      { items: row1, duration: 38, direction: "right" },
-      { items: row2, duration: 44, direction: "left" },
-      { items: row3, duration: 50, direction: "right" },
-    ],
-    [row0, row1, row2, row3],
-  );
   const rowsBelow = useMemo<MarqueeRowConfig[]>(
     () => [
       { items: row0, duration: 56, direction: "left" },
@@ -90,33 +84,29 @@ export default function Skills({ sectionRef: externalSectionRef }: SkillsProps =
     () => {
       const section = sectionRef.current;
       const heading = headingRef.current;
-      const topRows = rowsAboveRef.current;
       const bottomRows = rowsBelowRef.current;
+      const aboutSection = aboutSectionRef?.current ?? null;
 
       if (!heading || !section) {
         return;
       }
 
-      const letters = heading.querySelectorAll<HTMLElement>("[data-letter]");
-      const marqueeGroups = [topRows, bottomRows].filter(Boolean) as HTMLDivElement[];
-
-      if (!letters.length) {
-        if (marqueeGroups.length) {
-          gsap.set(marqueeGroups, { autoAlpha: 1, y: 0 });
-        }
-        return;
-      }
+      const marqueeGroups = [bottomRows].filter(Boolean) as HTMLDivElement[];
 
       if (prefersReducedMotion) {
         gsap.set(section, { autoAlpha: 1 });
-        gsap.set(letters, { autoAlpha: 1, x: 0 });
-        if (marqueeGroups.length) {
-          gsap.set(marqueeGroups, { autoAlpha: 1, y: 0 });
+        gsap.set(heading, { autoAlpha: 1, xPercent: 0 });
+        if (aboutSection) {
+          gsap.set(aboutSection, { autoAlpha: 1 });
         }
         return;
       }
 
       gsap.set(section, { autoAlpha: 0 });
+      gsap.set(heading, { xPercent: 100, autoAlpha: 1 });
+      if (aboutSection) {
+        gsap.set(aboutSection, { autoAlpha: 0 });
+      }
 
       let hasRevealedSection = false;
       const revealSection = () => {
@@ -137,33 +127,31 @@ export default function Skills({ sectionRef: externalSectionRef }: SkillsProps =
       });
 
       timeline
-        .set(letters, {
-          autoAlpha: 0,
-          x: () => window.innerWidth * 0.6,
+        .to(heading, {
+          xPercent: -100,
+          duration: 1,
+          ease: "none",
         })
-        .set(marqueeGroups, { autoAlpha: 0, y: 30 }, 0)
-        .to(letters, {
-          autoAlpha: 1,
-          x: 0,
-          duration: 0.45,
-          ease: "power3.out",
-          stagger: 0.13,
-        })
-        .to(
-          marqueeGroups,
+        .to(marqueeGroups, { autoAlpha: 1, duration: 0.55, ease: "power3.out" }, ROW_REVEAL_OFFSET);
+
+      if (aboutSection) {
+        timeline.to(
+          aboutSection,
           {
             autoAlpha: 1,
-            y: 0,
-            duration: 0.55,
-            ease: "power3.out",
-            stagger: 0.08,
+            duration: 0.65,
+            ease: "power2.out",
           },
-          ROW_REVEAL_OFFSET,
+          ">-0.15",
         );
+      }
 
       return () => {
         timeline.scrollTrigger?.kill();
         timeline.kill();
+        if (aboutSection) {
+          gsap.set(aboutSection, { autoAlpha: 1 });
+        }
       };
     },
     { scope: sectionRef, dependencies: [prefersReducedMotion] },
@@ -172,40 +160,18 @@ export default function Skills({ sectionRef: externalSectionRef }: SkillsProps =
   return (
     <section
       ref={sectionRef}
-      className="mx-auto w-full max-w-6xl px-4 py-12 sm:py-16 lg:py-20 h-[120vh]"
+      className="w-full py-12 sm:py-16 lg:py-20 h-[120vh]"
       aria-labelledby="skills-heading"
     >
-      <div
-        ref={rowsAboveRef}
-        className="space-y-2 sm:space-y-3"
-        style={{ opacity: prefersReducedMotion ? 1 : 0 }}
-      >
-        {rowsAbove.map((config, index) => (
-          <MarqueeRow
-            marqueeRowRef={rowsAboveRef as unknown as RefObject<HTMLDivElement>}
-            items={config.items}
-            duration={config.duration ?? 32}
-            direction={config.direction as "left" | "right"}
-            key={`skills-top-${index}`}
-          />
-        ))}
-      </div>
-      <div className="relative flex justify-center py-10 sm:py-14">
+      <div className="relative flex overflow-hidden py-10 sm:py-14">
         <h2
           id="skills-heading"
           ref={headingRef}
           data-testid="SkillsHeading"
-          className="flex w-full items-center justify-center gap-[0.08em] text-[clamp(4rem,16vw,12rem)] font-black uppercase leading-[0.85] tracking-[0.22em] text-white/70"
+          className="whitespace-nowrap text-center text-[clamp(8rem,32vw,40rem)] font-black uppercase leading-[0.75] tracking-widest text-white/80 "
+          style={{ willChange: prefersReducedMotion ? undefined : "transform" }}
         >
-          {Array.from(SKILLS_HEADING).map((letter, index) => (
-            <span
-              key={`${letter}-${index}`}
-              data-letter
-              className="inline-block text-white drop-shadow-[0_10px_35px_rgba(2,6,23,0.65)]"
-            >
-              {letter}
-            </span>
-          ))}
+          {SKILLS_HEADING}
         </h2>
       </div>
       <div
