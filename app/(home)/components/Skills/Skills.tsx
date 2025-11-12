@@ -14,6 +14,19 @@ import MarqueeRow from "./MarqueeRow";
 const SKILLS_HEADING = "SKILLS";
 const ROW_REVEAL_OFFSET = 0.15;
 const REVEAL_SCROLL_DISTANCE_FACTOR = 0.75;
+const SKILLS_PIN_SCROLL_DISTANCE = 0.9;
+const SKILLS_PIN_START = "center 55%";
+const ABOUT_OVERLAY_INITIAL = {
+  yPercent: 5,
+  scale: 0.82,
+  autoAlpha: 0,
+  clipPath: "inset(22% 14% 18% 14% round 72px)",
+};
+const ABOUT_OVERLAY_TARGET = {
+  yPercent: -18,
+  scale: 1,
+  clipPath: "inset(0% 0% 0% 0%)",
+};
 
 export type MarqueeRowConfig = {
   items: string[];
@@ -152,7 +165,7 @@ export default function Skills({
         gsap.set(section, { autoAlpha: 1 });
         gsap.set(heading, { autoAlpha: 1, xPercent: 0 });
         if (aboutSection) {
-          gsap.set(aboutSection, { autoAlpha: 1 });
+          gsap.set(aboutSection, { autoAlpha: 1, yPercent: 0, scale: 1, clipPath: "none" });
         }
         return;
       }
@@ -160,7 +173,7 @@ export default function Skills({
       gsap.set(section, { autoAlpha: 0 });
       gsap.set(heading, { xPercent: 100, autoAlpha: 1 });
       if (aboutSection) {
-        gsap.set(aboutSection, { autoAlpha: 0 });
+        gsap.set(aboutSection, { ...ABOUT_OVERLAY_INITIAL });
       }
 
       let hasRevealedSection = false;
@@ -181,6 +194,17 @@ export default function Skills({
         },
       });
 
+      let skillsPin: ScrollTrigger | null = null;
+
+      skillsPin = ScrollTrigger.create({
+        trigger: section,
+        start: SKILLS_PIN_START,
+        end: () => "+=" + window.innerHeight * SKILLS_PIN_SCROLL_DISTANCE,
+        pin: true,
+        pinSpacing: false,
+        anticipatePin: 1,
+      });
+
       timeline
         .to(heading, {
           xPercent: -100,
@@ -189,27 +213,51 @@ export default function Skills({
         })
         .to(marqueeGroups, { autoAlpha: 1, duration: 0.55, ease: "power3.out" }, ROW_REVEAL_OFFSET);
 
+      let aboutReleaseTween: gsap.core.Tween | null = null;
+
       if (aboutSection) {
         timeline.to(
           aboutSection,
           {
+            ...ABOUT_OVERLAY_TARGET,
             autoAlpha: 1,
-            duration: 0.65,
-            ease: "power2.out",
+            duration: 1.15,
+            ease: "power4.out",
+            boxShadow: "0 35px 120px rgba(0,0,0,0.55)",
           },
           ">-0.15",
         );
+
+        aboutReleaseTween = gsap.to(aboutSection, {
+          yPercent: 0,
+          scale: 1,
+          clipPath: "none",
+          boxShadow: "none",
+          ease: "power1.out",
+          scrollTrigger: {
+            trigger: aboutSection,
+            start: "top 80%",
+            end: "top top",
+            scrub: true,
+          },
+        });
       }
 
       return () => {
         timeline.scrollTrigger?.kill();
         timeline.kill();
         if (aboutSection) {
-          gsap.set(aboutSection, { autoAlpha: 1 });
+          gsap.set(aboutSection, { autoAlpha: 1, yPercent: 0, scale: 1, clipPath: "none" });
         }
+        aboutReleaseTween?.scrollTrigger?.kill();
+        aboutReleaseTween?.kill();
+        skillsPin?.kill();
       };
     },
-    { scope: sectionRef, dependencies: [prefersReducedMotion] },
+    {
+      scope: sectionRef,
+      dependencies: [prefersReducedMotion, aboutSectionRef?.current],
+    },
   );
 
   return (
