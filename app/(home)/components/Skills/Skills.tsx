@@ -256,7 +256,7 @@ export default function Skills({
     },
     {
       scope: sectionRef,
-      dependencies: [prefersReducedMotion, aboutSectionRef?.current],
+      dependencies: [prefersReducedMotion, aboutSectionRef],
     },
   );
 
