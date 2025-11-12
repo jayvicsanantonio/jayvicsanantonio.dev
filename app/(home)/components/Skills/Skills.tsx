@@ -13,7 +13,9 @@ import MarqueeRow from "./MarqueeRow";
 
 const SKILLS_HEADING = "SKILLS";
 const ROW_REVEAL_OFFSET = 0.15;
-const SKILLS_PIN_SCROLL_DISTANCE = 0.1;
+const MARQUEE_ENTRY_OFFSET = 14;
+const REVEAL_SCROLL_DISTANCE_FACTOR = 0.6;
+const SKILLS_PIN_SCROLL_DISTANCE = 0.95;
 const SKILLS_PIN_START = "center center";
 const ABOUT_OVERLAY_INITIAL = {
   yPercent: 5,
@@ -170,9 +172,9 @@ export default function Skills({
 
       if (prefersReducedMotion) {
         gsap.set(section, { autoAlpha: 1 });
-        gsap.set(heading, { autoAlpha: 1 });
+        gsap.set(heading, { autoAlpha: 1, yPercent: 0, scale: 1 });
         marqueeGroups.forEach((group) => {
-          gsap.set(group, { autoAlpha: 1 });
+          gsap.set(group, { autoAlpha: 1, xPercent: 0 });
         });
         if (aboutSection) {
           gsap.set(aboutSection, { autoAlpha: 1, yPercent: 0, scale: 1, clipPath: "none" });
@@ -181,9 +183,13 @@ export default function Skills({
       }
 
       gsap.set(section, { autoAlpha: 0 });
-      gsap.set(heading, { autoAlpha: 0 });
+      gsap.set(heading, { autoAlpha: 0, yPercent: 12, scale: 0.9 });
       marqueeGroups.forEach((group) => {
-        gsap.set(group, { autoAlpha: 0 });
+        const isTopGroup = group === topRows;
+        gsap.set(group, {
+          autoAlpha: 0,
+          xPercent: isTopGroup ? MARQUEE_ENTRY_OFFSET : -MARQUEE_ENTRY_OFFSET,
+        });
       });
       if (aboutSection) {
         gsap.set(aboutSection, { ...ABOUT_OVERLAY_INITIAL });
@@ -199,8 +205,9 @@ export default function Skills({
       const timeline = gsap.timeline({
         scrollTrigger: {
           trigger: heading,
-          start: "top 80%",
-          toggleActions: "play none none reverse",
+          start: "top 75%",
+          end: () => "+=" + window.innerHeight * REVEAL_SCROLL_DISTANCE_FACTOR,
+          scrub: true,
           onEnter: revealSection,
           onEnterBack: revealSection,
         },
@@ -217,21 +224,39 @@ export default function Skills({
         anticipatePin: 1,
       });
 
-      timeline
-        .to(heading, {
-          autoAlpha: 1,
-          duration: 0.6,
-          ease: "power2.out",
-        })
-        .to(
-          marqueeGroups,
+      timeline.to(heading, {
+        autoAlpha: 1,
+        yPercent: 0,
+        scale: 1,
+        duration: 0.85,
+        ease: "power3.out",
+      });
+
+      if (topRows) {
+        timeline.to(
+          topRows,
           {
             autoAlpha: 1,
-            duration: 0.75,
-            ease: "power2.out",
+            xPercent: 0,
+            duration: 0.85,
+            ease: "power3.out",
           },
           ROW_REVEAL_OFFSET,
         );
+      }
+
+      if (bottomRows) {
+        timeline.to(
+          bottomRows,
+          {
+            autoAlpha: 1,
+            xPercent: 0,
+            duration: 0.85,
+            ease: "power3.out",
+          },
+          ROW_REVEAL_OFFSET + 0.1,
+        );
+      }
 
       let aboutReleaseTween: gsap.core.Tween | null = null;
 
