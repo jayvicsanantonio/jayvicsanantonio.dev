@@ -15,7 +15,7 @@ export default function About({ aboutRef }: { aboutRef: RefObject<HTMLDivElement
             About
           </span>
         </div>
-        <div className="w-full space-y-28 text-4xl leading-relaxed text-white/80 md:w-3/5 md:pl-12">
+        <div className="w-full space-y-28 text-4xl leading-relaxed text-white/80 md:w-3/5 md:pl-12 mt-[28rem]">
           <p>
             I&apos;m Jayvic San Antonio, a Filipino full-stack software engineer building in the San
             Francisco Bay Area, and I care deeply about craft, clarity, and shipping work people
