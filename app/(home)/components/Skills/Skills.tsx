@@ -205,7 +205,7 @@ export default function Skills({
       const timeline = gsap.timeline({
         scrollTrigger: {
           trigger: heading,
-          start: "top 75%",
+          start: "top 85%",
           end: () => "+=" + window.innerHeight * REVEAL_SCROLL_DISTANCE_FACTOR,
           scrub: true,
           onEnter: revealSection,
