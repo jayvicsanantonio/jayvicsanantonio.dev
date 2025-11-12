@@ -69,14 +69,12 @@ export default function About({ aboutRef }: { aboutRef: RefObject<HTMLDivElement
           {
             y: 0,
             autoAlpha: 1,
-            duration: 0.9,
             ease: "power2.out",
             scrollTrigger: {
               trigger: paragraph,
-              start: "top 85%",
-              end: "top 65%",
-              toggleActions: "play none none none",
-              once: true,
+              start: "top 90%",
+              end: "top 60%",
+              scrub: true,
             },
           },
         ),
@@ -120,7 +118,7 @@ export default function About({ aboutRef }: { aboutRef: RefObject<HTMLDivElement
           style={{ willChange: prefersReducedMotion ? undefined : "transform" }}
         >
           <p>
-            I&apos;m Jayvic San Antonio, a Filipino full-stack software engineer building in the San
+            I&apos;m Jayvic San Antonio, a Filipino Full-Stack Software Engineer building in the San
             Francisco Bay Area, and I care deeply about craft, clarity, and shipping work people
             actually enjoy using.
           </p>
