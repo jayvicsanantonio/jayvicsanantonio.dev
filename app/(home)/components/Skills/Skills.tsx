@@ -15,7 +15,7 @@ const SKILLS_HEADING = "SKILLS";
 const ROW_REVEAL_OFFSET = 0.15;
 const REVEAL_SCROLL_DISTANCE_FACTOR = 0.75;
 const SKILLS_PIN_SCROLL_DISTANCE = 0.9;
-const SKILLS_PIN_START = "center 55%";
+const SKILLS_PIN_START = "center 35%";
 const ABOUT_OVERLAY_INITIAL = {
   yPercent: 5,
   scale: 0.82,
