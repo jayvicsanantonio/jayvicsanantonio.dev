@@ -19,12 +19,15 @@ export default function About({ aboutRef }: { aboutRef: RefObject<HTMLDivElement
       const section = aboutRef.current;
       const label = labelRef.current;
       const content = contentRef.current;
+      const paragraphNodes = content?.querySelectorAll("p");
+      const [, ...animatedParagraphs] = paragraphNodes ? Array.from(paragraphNodes) : [];
 
       if (!section || !label || !content) return;
 
       if (prefersReducedMotion) {
         gsap.set(label, { y: 0, autoAlpha: 1 });
         gsap.set(content, { yPercent: 0 });
+        animatedParagraphs.forEach((paragraph) => gsap.set(paragraph, { y: 0, autoAlpha: 1 }));
         return;
       }
 
@@ -59,11 +62,35 @@ export default function About({ aboutRef }: { aboutRef: RefObject<HTMLDivElement
         },
       );
 
+      const paragraphTweens = animatedParagraphs.map((paragraph) =>
+        gsap.fromTo(
+          paragraph,
+          { y: 32, autoAlpha: 0 },
+          {
+            y: 0,
+            autoAlpha: 1,
+            duration: 0.9,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: paragraph,
+              start: "top 85%",
+              end: "top 65%",
+              toggleActions: "play none none none",
+              once: true,
+            },
+          },
+        ),
+      );
+
       return () => {
         labelTween.scrollTrigger?.kill();
         labelTween.kill();
         contentTween.scrollTrigger?.kill();
         contentTween.kill();
+        paragraphTweens.forEach((tween) => {
+          tween.scrollTrigger?.kill();
+          tween.kill();
+        });
       };
     },
     { scope: aboutRef, dependencies: [prefersReducedMotion] },
