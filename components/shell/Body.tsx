@@ -9,7 +9,7 @@ export default function Body({
 }) {
   return (
     <body
-      className={`dark ${fontVars ?? ""} relative flex min-h-screen flex-col text-gray-200 bg-gradient-to-b from-black  via-gray-800 to-gray-200 touch-manipulation overscroll-y-contain`}
+      className={`dark ${fontVars ?? ""} relative flex min-h-screen flex-col text-gray-200  touch-manipulation overscroll-y-contain`}
     >
       <ClientAppShell>{children}</ClientAppShell>
     </body>
