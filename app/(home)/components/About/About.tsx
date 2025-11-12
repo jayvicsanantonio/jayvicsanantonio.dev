@@ -1,21 +1,69 @@
 "use client";
 
-import type { RefObject } from "react";
+import { useRef, type RefObject } from "react";
+import { useGSAP } from "@gsap/react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function About({ aboutRef }: { aboutRef: RefObject<HTMLDivElement> }) {
+  const labelRef = useRef<HTMLSpanElement>(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  useGSAP(
+    () => {
+      const section = aboutRef.current;
+      const label = labelRef.current;
+
+      if (!section || !label) return;
+
+      if (prefersReducedMotion) {
+        gsap.set(label, { yPercent: 0, autoAlpha: 1 });
+        return;
+      }
+
+      const tween = gsap.to(label, {
+        yPercent: -100,
+        autoAlpha: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: "bottom 85%",
+          scrub: true,
+        },
+      });
+
+      return () => {
+        tween.scrollTrigger?.kill();
+        tween.kill();
+      };
+    },
+    { scope: aboutRef, dependencies: [prefersReducedMotion] },
+  );
+
   return (
     <section
       ref={aboutRef}
       className="relative isolate z-[70] flex min-h-screen w-full items-center justify-center overflow-hidden bg-[#022b37] px-20 py-16 text-white sm:py-20"
       aria-label="About Jayvic San Antonio"
     >
-      <div className="relative z-[80] flex w-full  flex-col items-center gap-12 md:flex-row md:items-center">
-        <div className="flex w-full flex-shrink-0 items-center justify-center md:w-2/5">
-          <span className="inline-block -rotate-90 whitespace-nowrap text-center text-[clamp(8rem,32vw,40rem)] font-black uppercase leading-[0.75] tracking-widest text-white/80">
-            About
-          </span>
+      <div className="relative z-[80] mx-auto flex w-full max-w-6xl flex-col items-center gap-12 md:flex-row md:items-center">
+        <div className="flex w-full flex-shrink-0 justify-center md:w-2/5">
+          <div className="relative flex h-full min-h-[200vh] w-full items-center justify-center overflow-hidden">
+            <span
+              ref={labelRef}
+              className="absolute top-0 left-1/2 -translate-x-1/2 -rotate-90 whitespace-nowrap text-center text-[clamp(8rem,32vw,40rem)] font-black uppercase leading-[0.75] tracking-widest text-white/80"
+              style={{ willChange: prefersReducedMotion ? undefined : "transform" }}
+            >
+              About
+            </span>
+          </div>
         </div>
-        <div className="w-full space-y-28 text-4xl leading-relaxed text-white/80 md:w-3/5 md:pl-12 mt-[28rem]">
+        <div className="mt-[28rem] w-full space-y-28 text-4xl leading-relaxed text-white/80 md:mt-0 md:w-3/5 md:pl-12">
           <p>
             I&apos;m Jayvic San Antonio, a Filipino full-stack software engineer building in the San
             Francisco Bay Area, and I care deeply about craft, clarity, and shipping work people
