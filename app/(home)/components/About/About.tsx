@@ -6,46 +6,54 @@ export default function About({ aboutRef }: { aboutRef: RefObject<HTMLDivElement
   return (
     <section
       ref={aboutRef}
-      className="relative isolate z-[70] flex min-h-screen w-full items-center justify-center overflow-hidden bg-[#022b37] px-6 py-16 text-white sm:py-20"
+      className="relative isolate z-[70] flex min-h-screen w-full items-center justify-center overflow-hidden bg-[#022b37] px-20 py-16 text-white sm:py-20"
       aria-label="About Jayvic San Antonio"
     >
-      <div className="relative z-[80] mx-auto flex w-full max-w-6xl flex-col items-center gap-10 md:flex-row md:items-stretch">
-        <div className="space-y-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.5em] text-cyan-200">Profile</p>
-          <h3 className="text-3xl font-semibold leading-tight text-white sm:text-4xl">
-            Hi, I&apos;m Jayvic — an engineer obsessed with expressive interfaces, performant
-            systems, and principled collaboration.
-          </h3>
+      <div className="relative z-[80] flex w-full  flex-col items-center gap-12 md:flex-row md:items-center">
+        <div className="flex w-full flex-shrink-0 items-center justify-center md:w-2/5">
+          <span className="inline-block -rotate-90 whitespace-nowrap text-center text-[clamp(8rem,32vw,40rem)] font-black uppercase leading-[0.75] tracking-widest text-white/80">
+            About
+          </span>
         </div>
-        <div className="space-y-5 text-lg leading-relaxed text-white/80">
+        <div className="w-full space-y-28 text-4xl leading-relaxed text-white/80 md:w-3/5 md:pl-12">
           <p>
-            I&apos;ve spent the last decade translating ambitious ideas into dependable products:
-            building scrappy MVPs, scaling revenue-critical features, and guiding teams through
-            complex launches.
+            I&apos;m Jayvic San Antonio, a Filipino full-stack software engineer building in the San
+            Francisco Bay Area, and I care deeply about craft, clarity, and shipping work people
+            actually enjoy using.
           </p>
           <p>
-            Today I pair design instincts with systems thinking to craft web experiences that feel
-            alive, stay accessible, and remain fast under pressure.
+            I&apos;ve worn many hats, from co-founding a scrappy startup and winning hackathons to
+            rebuilding revenue-critical systems at scale, and I stay grounded in reliability,
+            accessibility, and thoughtful design.
           </p>
-        </div>
-        <div className="space-y-4 border-t border-white/15 pt-6">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.4em] text-cyan-200">
-              Currently
-            </p>
-            <p className="mt-2 text-xl font-semibold leading-tight text-white">
-              Shipping high-touch experiences from the San Francisco Bay Area.
-            </p>
-          </div>
-          <div className="flex flex-col gap-3 text-base text-white/80 sm:flex-row sm:items-center sm:justify-between">
-            <span>Open to collaborations & leadership roles.</span>
+          <p className="text-white">
+            These days I&apos;m sharpening my web and AI toolkit while sneaking in Pokemon Go walks,
+            Star Wars collecting, and early coffee. If you&apos;re building something ambitious and
+            care about the details, reach me at{" "}
             <a
               href="mailto:hi@jayvicsanantonio.dev"
               className="text-cyan-200 underline-offset-4 transition-colors hover:text-cyan-100"
             >
               hi@jayvicsanantonio.dev
             </a>
-          </div>
+            , on{" "}
+            <a
+              href="https://www.linkedin.com/in/jayvicsanantonio/"
+              className="text-cyan-200 underline-offset-4 transition-colors hover:text-cyan-100"
+              target="_blank"
+              rel="noreferrer"
+            >
+              LinkedIn
+            </a>
+            , or through my{" "}
+            <a
+              href="/projects"
+              className="text-cyan-200 underline-offset-4 transition-colors hover:text-cyan-100"
+            >
+              projects
+            </a>
+            .
+          </p>
         </div>
       </div>
     </section>
