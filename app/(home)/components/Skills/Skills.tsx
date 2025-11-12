@@ -263,7 +263,7 @@ export default function Skills({
   return (
     <section
       ref={sectionRef}
-      className="w-full py-12 sm:py-16 lg:py-20 h-[140vh]"
+      className="w-full py-12 sm:py-16 lg:py-20 h-[150vh]"
       aria-labelledby="skills-heading"
     >
       <div className="relative flex overflow-hidden py-10 sm:py-14">
