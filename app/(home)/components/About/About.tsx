@@ -11,35 +11,56 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function About({ aboutRef }: { aboutRef: RefObject<HTMLDivElement> }) {
   const labelRef = useRef<HTMLSpanElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
   useGSAP(
     () => {
       const section = aboutRef.current;
       const label = labelRef.current;
+      const content = contentRef.current;
 
-      if (!section || !label) return;
+      if (!section || !label || !content) return;
 
       if (prefersReducedMotion) {
-        gsap.set(label, { yPercent: 0, autoAlpha: 1 });
+        gsap.set(label, { y: 0, autoAlpha: 1 });
+        gsap.set(content, { yPercent: 0 });
         return;
       }
 
-      const tween = gsap.to(label, {
-        yPercent: -100,
-        autoAlpha: 1,
-        ease: "none",
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: "bottom 85%",
-          scrub: true,
-        },
+      const scrollTriggerConfig = () => ({
+        trigger: section,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+        invalidateOnRefresh: true,
       });
 
+      const labelTween = gsap.fromTo(
+        label,
+        { y: 0, autoAlpha: 1 },
+        {
+          y: () => Math.max(section.offsetHeight - label.offsetHeight, 0),
+          ease: "none",
+          scrollTrigger: scrollTriggerConfig(),
+        },
+      );
+
+      const contentTween = gsap.fromTo(
+        content,
+        { yPercent: 8 },
+        {
+          yPercent: -8,
+          ease: "none",
+          scrollTrigger: scrollTriggerConfig(),
+        },
+      );
+
       return () => {
-        tween.scrollTrigger?.kill();
-        tween.kill();
+        labelTween.scrollTrigger?.kill();
+        labelTween.kill();
+        contentTween.scrollTrigger?.kill();
+        contentTween.kill();
       };
     },
     { scope: aboutRef, dependencies: [prefersReducedMotion] },
@@ -63,7 +84,11 @@ export default function About({ aboutRef }: { aboutRef: RefObject<HTMLDivElement
             </span>
           </div>
         </div>
-        <div className="mt-[28rem] w-full space-y-28 text-4xl leading-relaxed text-white/80 md:mt-0 md:w-3/5 md:pl-12">
+        <div
+          ref={contentRef}
+          className="mt-[28rem] w-full space-y-28 text-4xl leading-relaxed text-white/80 md:mt-0 md:w-3/5 md:pl-12"
+          style={{ willChange: prefersReducedMotion ? undefined : "transform" }}
+        >
           <p>
             I&apos;m Jayvic San Antonio, a Filipino full-stack software engineer building in the San
             Francisco Bay Area, and I care deeply about craft, clarity, and shipping work people
