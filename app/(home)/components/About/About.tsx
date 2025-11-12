@@ -38,9 +38,12 @@ export default function About({ aboutRef }: { aboutRef: RefObject<HTMLDivElement
 
       const labelTween = gsap.fromTo(
         label,
-        { y: 0, autoAlpha: 1 },
         {
-          y: () => Math.max(section.offsetHeight - label.offsetHeight, 0),
+          y: () => -label.getBoundingClientRect().height,
+          autoAlpha: 1,
+        },
+        {
+          y: () => section.offsetHeight,
           ease: "none",
           scrollTrigger: scrollTriggerConfig(),
         },
@@ -72,7 +75,7 @@ export default function About({ aboutRef }: { aboutRef: RefObject<HTMLDivElement
       className="relative isolate z-[70] flex min-h-screen w-full items-center justify-center overflow-hidden bg-[#022b37] px-20 py-16 text-white sm:py-20"
       aria-label="About Jayvic San Antonio"
     >
-      <div className="relative z-[80] mx-auto flex w-full max-w-6xl flex-col items-center gap-12 md:flex-row md:items-center">
+      <div className="relative z-[80] mx-auto flex w-full max-w-[92rem] flex-col items-center gap-12 md:flex-row md:items-center">
         <div className="flex w-full flex-shrink-0 justify-center md:w-2/5">
           <div className="relative flex h-full min-h-[200vh] w-full items-center justify-center overflow-hidden">
             <span
