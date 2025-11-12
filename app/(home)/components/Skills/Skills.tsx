@@ -13,9 +13,8 @@ import MarqueeRow from "./MarqueeRow";
 
 const SKILLS_HEADING = "SKILLS";
 const ROW_REVEAL_OFFSET = 0.15;
-const REVEAL_SCROLL_DISTANCE_FACTOR = 0.75;
-const SKILLS_PIN_SCROLL_DISTANCE = 0.9;
-const SKILLS_PIN_START = "center 35%";
+const SKILLS_PIN_SCROLL_DISTANCE = 0.1;
+const SKILLS_PIN_START = "center center";
 const ABOUT_OVERLAY_INITIAL = {
   yPercent: 5,
   scale: 0.82,
@@ -126,6 +125,7 @@ export default function Skills({
   const fallbackSectionRef = useRef<HTMLElement>(null);
   const sectionRef = externalSectionRef ?? fallbackSectionRef;
   const headingRef = useRef<HTMLHeadingElement>(null);
+  const rowsAboveRef = useRef<HTMLDivElement>(null);
   const rowsBelowRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -136,22 +136,29 @@ export default function Skills({
   const row4 = useMemo(() => SKILLS.filter((_, index) => index % 6 === 4), []);
   const row5 = useMemo(() => SKILLS.filter((_, index) => index % 6 === 5), []);
 
-  const rowsBelow = useMemo<MarqueeRowConfig[]>(
+  const rowsAbove = useMemo<MarqueeRowConfig[]>(
     () => [
       { items: row0, duration: 56, direction: "left" },
       { items: row1, duration: 62, direction: "right" },
-      { items: row2, direction: "left", duration: 68 },
-      { items: row3, direction: "right", duration: 74 },
-      { items: row4, direction: "left", duration: 80 },
-      { items: row5, direction: "right", duration: 86 },
+      { items: row2, duration: 68, direction: "left" },
     ],
-    [row0, row1, row2, row3, row4, row5],
+    [row0, row1, row2],
+  );
+
+  const rowsBelow = useMemo<MarqueeRowConfig[]>(
+    () => [
+      { items: row3, duration: 74, direction: "right" },
+      { items: row4, duration: 80, direction: "left" },
+      { items: row5, duration: 86, direction: "right" },
+    ],
+    [row3, row4, row5],
   );
 
   useGSAP(
     () => {
       const section = sectionRef.current;
       const heading = headingRef.current;
+      const topRows = rowsAboveRef.current;
       const bottomRows = rowsBelowRef.current;
       const aboutSection = aboutSectionRef?.current ?? null;
 
@@ -159,11 +166,14 @@ export default function Skills({
         return;
       }
 
-      const marqueeGroups = [bottomRows].filter(Boolean) as HTMLDivElement[];
+      const marqueeGroups = [topRows, bottomRows].filter(Boolean) as HTMLDivElement[];
 
       if (prefersReducedMotion) {
         gsap.set(section, { autoAlpha: 1 });
-        gsap.set(heading, { autoAlpha: 1, xPercent: 0 });
+        gsap.set(heading, { autoAlpha: 1 });
+        marqueeGroups.forEach((group) => {
+          gsap.set(group, { autoAlpha: 1 });
+        });
         if (aboutSection) {
           gsap.set(aboutSection, { autoAlpha: 1, yPercent: 0, scale: 1, clipPath: "none" });
         }
@@ -171,7 +181,10 @@ export default function Skills({
       }
 
       gsap.set(section, { autoAlpha: 0 });
-      gsap.set(heading, { xPercent: 100, autoAlpha: 1 });
+      gsap.set(heading, { autoAlpha: 0 });
+      marqueeGroups.forEach((group) => {
+        gsap.set(group, { autoAlpha: 0 });
+      });
       if (aboutSection) {
         gsap.set(aboutSection, { ...ABOUT_OVERLAY_INITIAL });
       }
@@ -186,9 +199,8 @@ export default function Skills({
       const timeline = gsap.timeline({
         scrollTrigger: {
           trigger: heading,
-          start: "center 90%",
-          end: () => "+=" + window.innerHeight * REVEAL_SCROLL_DISTANCE_FACTOR,
-          scrub: true,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
           onEnter: revealSection,
           onEnterBack: revealSection,
         },
@@ -207,11 +219,19 @@ export default function Skills({
 
       timeline
         .to(heading, {
-          xPercent: -100,
-          duration: 1,
-          ease: "none",
+          autoAlpha: 1,
+          duration: 0.6,
+          ease: "power2.out",
         })
-        .to(marqueeGroups, { autoAlpha: 1, duration: 0.55, ease: "power3.out" }, ROW_REVEAL_OFFSET);
+        .to(
+          marqueeGroups,
+          {
+            autoAlpha: 1,
+            duration: 0.75,
+            ease: "power2.out",
+          },
+          ROW_REVEAL_OFFSET,
+        );
 
       let aboutReleaseTween: gsap.core.Tween | null = null;
 
@@ -263,16 +283,30 @@ export default function Skills({
   return (
     <section
       ref={sectionRef}
-      className="w-full py-12 sm:py-16 lg:py-20 h-[160vh]"
+      className="flex w-full min-h-[110vh] flex-col gap-6 py-12 sm:gap-8 sm:py-16 lg:py-20"
       aria-labelledby="skills-heading"
     >
-      <div className="relative flex overflow-hidden py-10 sm:py-14">
+      <div
+        ref={rowsAboveRef}
+        className="space-y-2 sm:space-y-3"
+        style={{ opacity: prefersReducedMotion ? 1 : 0 }}
+      >
+        {rowsAbove.map((config, index) => (
+          <MarqueeRow
+            marqueeRowRef={rowsAboveRef as unknown as RefObject<HTMLDivElement>}
+            items={config.items}
+            duration={config.duration ?? 56}
+            direction={config.direction as "left" | "right"}
+            key={`skills-top-${index}`}
+          />
+        ))}
+      </div>
+      <div className="relative mx-auto flex w-full max-w-7xl items-center justify-center overflow-hidden ">
         <h2
           id="skills-heading"
           ref={headingRef}
           data-testid="SkillsHeading"
-          className="whitespace-nowrap text-center text-[clamp(8rem,32vw,40rem)] font-black uppercase leading-[0.75] tracking-widest text-white/80 "
-          style={{ willChange: prefersReducedMotion ? undefined : "transform" }}
+          className="whitespace-nowrap text-center text-[clamp(4rem,18vw,18rem)] font-black uppercase leading-[0.85] tracking-[0.15em] text-white/80"
         >
           {SKILLS_HEADING}
         </h2>
