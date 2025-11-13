@@ -7,7 +7,7 @@ import {
   FINAL_GEOMETRY_STATE,
   FINAL_PANEL_STATE,
   HERO_SCROLL_DISTANCE,
-  LABEL_EXIT_DELAY,
+  LABEL_EXIT_SCROLL_DISTANCE,
   LABEL_EXIT_Y_PERCENT,
   PANEL_BORDER_RADIUS,
   PILL_SHRINK_BACKGROUND,
@@ -32,7 +32,6 @@ gsap.registerPlugin(useGSAP, ScrollTrigger, ScrollSmoother);
 const PROFILE_PIN_HIDE_START = "top bottom";
 const PROFILE_PIN_HIDE_END = "top 45%";
 const PROFILE_PIN_HIDE_Y = 18;
-let heroScrollLockActive = false;
 
 export default function useHeroAnimations(args: UseHeroAnimationArgs) {
   useHeroIntroAnimation(args);
@@ -73,15 +72,7 @@ function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroAnimationA
         return;
       }
 
-      let releaseScrollLock: (() => void) | null = lockScroll();
-      const unlockScroll = () => {
-        releaseScrollLock?.();
-        releaseScrollLock = null;
-      };
-
-      const timeline = gsap.timeline({
-        onComplete: unlockScroll,
-      });
+      const timeline = gsap.timeline();
 
       if (navRow) {
         timeline.set(navRow, { autoAlpha: 0 });
@@ -134,7 +125,6 @@ function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroAnimationA
             autoAlpha: 1,
             duration: 0.6,
             ease: "power2.out",
-            onComplete: unlockScroll,
           },
           ">",
         )
@@ -197,7 +187,6 @@ function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroAnimationA
       }
 
       return () => {
-        unlockScroll();
         timeline.kill();
       };
     },
@@ -260,7 +249,6 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         content,
         ...SCROLL_SMOOTHER_CONFIG,
       });
-      syncScrollLockWithSmoother(smoother);
 
       const scrollTween = gsap.to(profile, {
         ...PROFILE_SCROLL_CONFIG,
@@ -381,20 +369,16 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
           scrollTrigger: {
             trigger: heroSection,
             start: "top top",
-            end: () => "+=" + window.innerHeight * HERO_SCROLL_DISTANCE,
+            end: () => "+=" + window.innerHeight * LABEL_EXIT_SCROLL_DISTANCE,
             scrub: true,
           },
         });
 
-        labelExitTimeline.to(
-          labelTargets,
-          {
-            autoAlpha: 0,
-            yPercent: LABEL_EXIT_Y_PERCENT,
-            ease: "power2.inOut",
-          },
-          LABEL_EXIT_DELAY,
-        );
+        labelExitTimeline.to(labelTargets, {
+          autoAlpha: 0,
+          yPercent: LABEL_EXIT_Y_PERCENT,
+          ease: "power2.inOut",
+        });
       }
 
       let coverTimeline: gsap.core.Tween | null = null;
@@ -578,66 +562,4 @@ function calculateNavYOffset(navRow: HTMLDivElement, pill: HTMLDivElement) {
   const pillHeight = pill.getBoundingClientRect().height || pill.offsetHeight || 0;
   const navHeight = navRow.getBoundingClientRect().height || navRow.offsetHeight || 0;
   return -(navHeight - pillHeight) / 2;
-}
-
-function syncScrollLockWithSmoother(smoother?: ScrollSmoother | null) {
-  const instance = smoother ?? ScrollSmoother.get();
-  if (instance) {
-    instance.paused(heroScrollLockActive);
-  }
-}
-
-function lockScroll() {
-  if (typeof document === "undefined" || typeof window === "undefined") {
-    heroScrollLockActive = true;
-    syncScrollLockWithSmoother();
-    return () => {
-      heroScrollLockActive = false;
-      syncScrollLockWithSmoother();
-    };
-  }
-
-  const { documentElement, body } = document;
-  const prevDocOverflow = documentElement.style.overflow;
-  const prevBodyOverflow = body.style.overflow;
-  heroScrollLockActive = true;
-  syncScrollLockWithSmoother();
-  documentElement.style.overflow = "hidden";
-  body.style.overflow = "hidden";
-
-  const preventScroll = (event: Event) => {
-    event.preventDefault();
-  };
-
-  const preventKeyScroll = (event: KeyboardEvent) => {
-    const blockedKeys = [
-      "Space",
-      "PageUp",
-      "PageDown",
-      "End",
-      "Home",
-      "ArrowUp",
-      "ArrowDown",
-    ];
-    if (blockedKeys.includes(event.code) || blockedKeys.includes(event.key)) {
-      event.preventDefault();
-    }
-  };
-
-  window.addEventListener("wheel", preventScroll, { passive: false });
-  window.addEventListener("touchmove", preventScroll, { passive: false });
-  window.addEventListener("keydown", preventKeyScroll, { passive: false });
-
-  return () => {
-    if (!heroScrollLockActive) {
-      return;
-    }
-    heroScrollLockActive = false;
-    documentElement.style.overflow = prevDocOverflow;
-    body.style.overflow = prevBodyOverflow;
-    window.removeEventListener("wheel", preventScroll);
-    window.removeEventListener("touchmove", preventScroll);
-    window.removeEventListener("keydown", preventKeyScroll);
-    syncScrollLockWithSmoother();
-  };
 }
