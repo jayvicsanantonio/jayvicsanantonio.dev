@@ -8,7 +8,7 @@ import { CFG } from "@/app/(home)/components/config";
 
 export const HERO_NAV_PILL_WIDTH = "clamp(320px, var(--nav-row-w, 20vw), 560px)";
 export const HERO_NAV_PILL_HEIGHT = "clamp(54px, var(--pill-h, 8vh), 96px)";
-export const HERO_NAV_BUTTON_HEIGHT = `${CFG.nav.buttonSize.h}px`;
+export const HERO_NAV_BUTTON_HEIGHT = HERO_NAV_PILL_HEIGHT;
 export const HERO_NAV_ROW_GAP = `calc(${HERO_NAV_PILL_WIDTH} + min(2rem, 4vw))`;
 
 type NavItem = {
@@ -27,7 +27,7 @@ const NAV_ITEMS: NavItem[] = [
     ariaLabel: "LinkedIn",
     tooltip: "LinkedIn",
     icon: "mdi:linkedin",
-    iconSize: 40,
+    iconSize: 36,
     external: true,
   },
   {
@@ -35,7 +35,7 @@ const NAV_ITEMS: NavItem[] = [
     ariaLabel: "Projects",
     tooltip: "Projects",
     icon: "mdi:application-brackets",
-    iconSize: 36,
+    iconSize: 32,
     vtTagName: "projects",
   },
   {
@@ -43,7 +43,7 @@ const NAV_ITEMS: NavItem[] = [
     ariaLabel: "Work Experience",
     tooltip: "Work Experience",
     icon: "mdi:timeline-text",
-    iconSize: 36,
+    iconSize: 32,
     vtTagName: "work",
   },
   {
@@ -51,7 +51,7 @@ const NAV_ITEMS: NavItem[] = [
     ariaLabel: "GitHub",
     tooltip: "GitHub",
     icon: "mdi:github",
-    iconSize: 40,
+    iconSize: 36,
     external: true,
   },
 ];
@@ -77,7 +77,7 @@ export default function Navigation() {
                 icon={<Icon icon={item.icon} width={item.iconSize} height={item.iconSize} />}
                 tooltip={item.tooltip}
                 collapsedPx={CFG.nav.buttonSize.w}
-                heightPx={CFG.nav.buttonSize.h}
+                heightPx={HERO_NAV_BUTTON_HEIGHT}
                 className={BUTTON_CLASSES}
                 {...navPillProps}
               />
@@ -106,7 +106,7 @@ export default function Navigation() {
                 icon={<Icon icon={item.icon} width={item.iconSize} height={item.iconSize} />}
                 tooltip={item.tooltip}
                 collapsedPx={CFG.nav.buttonSize.w}
-                heightPx={CFG.nav.buttonSize.h}
+                heightPx={HERO_NAV_BUTTON_HEIGHT}
                 className={BUTTON_CLASSES}
                 {...navPillProps}
               />
