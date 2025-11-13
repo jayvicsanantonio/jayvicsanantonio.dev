@@ -14,6 +14,7 @@ export default function HomePageContent({ children }: { children: React.ReactNod
   const smoothContentRef = useRef<HTMLDivElement>(null);
   const heroSectionRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const nameplateRef = useRef<HTMLDivElement>(null);
   const coverSectionRef = useRef<HTMLDivElement>(null);
   const coverFillRef = useRef<HTMLDivElement>(null);
   const coverLabelRef = useRef<HTMLDivElement>(null);
@@ -33,6 +34,7 @@ export default function HomePageContent({ children }: { children: React.ReactNod
     smoothContentRef,
     heroSectionRef,
     containerRef,
+    nameplateRef,
     coverSectionRef,
     coverFillRef,
     coverLabelRef,

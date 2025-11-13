@@ -1,4 +1,5 @@
 import HeroStage from "./Stage";
+import Nameplate from "./Nameplate";
 import { INITIAL_NAV_ROW_STYLE } from "./hero.constants";
 import type { HeroAnimationRefs } from "./hero.types";
 
@@ -6,6 +7,7 @@ export type HeroProps = {
   heroSectionRef: HeroAnimationRefs["heroSectionRef"];
   containerRef: HeroAnimationRefs["containerRef"];
   navRowRef: HeroAnimationRefs["navRowRef"];
+  nameplateRef: HeroAnimationRefs["nameplateRef"];
   pillRef: HeroAnimationRefs["pillRef"];
   videoRef: HeroAnimationRefs["videoRef"];
   videoOverlayRef: HeroAnimationRefs["videoOverlayRef"];
@@ -17,6 +19,7 @@ export default function Hero({
   heroSectionRef,
   containerRef,
   navRowRef,
+  nameplateRef,
   pillRef,
   videoRef,
   videoOverlayRef,
@@ -37,6 +40,7 @@ export default function Hero({
           pillSkinRef,
         }}
       />
+      <Nameplate nameplateRef={nameplateRef} />
     </section>
   );
 }

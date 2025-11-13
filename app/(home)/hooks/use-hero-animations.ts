@@ -52,6 +52,7 @@ function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroAnimationA
       const overlay = refs.videoOverlayRef.current;
       const pillSkin = refs.pillSkinRef.current;
       const profile = refs.profileRef.current;
+      const nameplate = refs.nameplateRef.current;
 
       if (prefersReducedMotion) {
         applyReducedMotionState({
@@ -62,12 +63,13 @@ function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroAnimationA
           pillSkin,
           profile,
           navRow,
+          nameplate,
         });
         video.play().catch(() => {});
         return;
       }
 
-      let releaseScrollLock = lockScroll();
+      let releaseScrollLock: (() => void) | null = lockScroll();
       const unlockScroll = () => {
         releaseScrollLock?.();
         releaseScrollLock = null;
@@ -79,6 +81,9 @@ function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroAnimationA
 
       if (navRow) {
         timeline.set(navRow, { autoAlpha: 0 });
+      }
+      if (nameplate) {
+        timeline.set(nameplate, { autoAlpha: 0, yPercent: 35 });
       }
 
       timeline
@@ -156,6 +161,18 @@ function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroAnimationA
           },
           ">-0.1",
         );
+      if (nameplate) {
+        timeline.to(
+          nameplate,
+          {
+            autoAlpha: 1,
+            yPercent: 0,
+            duration: 0.6,
+            ease: "power2.out",
+          },
+          ">-0.1",
+        );
+      }
 
       return () => {
         unlockScroll();
@@ -443,6 +460,7 @@ type ReducedMotionArgs = {
   pillSkin: HTMLDivElement | null;
   profile: HTMLDivElement | null;
   navRow: HTMLDivElement | null;
+  nameplate: HTMLDivElement | null;
 };
 
 function applyReducedMotionState({
@@ -453,6 +471,7 @@ function applyReducedMotionState({
   pillSkin,
   profile,
   navRow,
+  nameplate,
 }: ReducedMotionArgs) {
   gsap.set(pill, { ...FINAL_PANEL_STATE, backgroundColor: "transparent" });
   gsap.set(pillContent, { autoAlpha: 0 });
@@ -472,6 +491,10 @@ function applyReducedMotionState({
 
   if (navRow) {
     gsap.set(navRow, { autoAlpha: 1 });
+  }
+
+  if (nameplate) {
+    gsap.set(nameplate, { autoAlpha: 1, yPercent: 0 });
   }
 }
 
