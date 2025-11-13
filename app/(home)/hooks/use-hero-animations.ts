@@ -136,6 +136,7 @@ function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroAnimationA
           },
           ">",
         )
+        .addLabel("labelReveal")
         .to(
           pill,
           {
@@ -166,28 +167,30 @@ function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroAnimationA
           },
           ">-0.1",
         );
+
       if (nameplate) {
         timeline.to(
           nameplate,
           {
             autoAlpha: 1,
             yPercent: 0,
-            duration: 0.6,
+            duration: 0.65,
             ease: "power2.out",
           },
-          ">-0.1",
+          "labelReveal+=0.05",
         );
       }
+
       if (designation) {
         timeline.to(
           designation,
           {
             autoAlpha: 1,
             yPercent: 0,
-            duration: 0.6,
+            duration: 0.65,
             ease: "power2.out",
           },
-          "<",
+          nameplate ? "<0.08" : "labelReveal+=0.08",
         );
       }
 
