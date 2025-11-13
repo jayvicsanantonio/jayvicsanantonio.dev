@@ -6,12 +6,12 @@ export default function Nameplate({ nameplateRef }: NameplateProps) {
   return (
     <div
       ref={nameplateRef}
-      className="pointer-events-none absolute bottom-0 left-0 z-30 flex flex-col gap-0 px-7 pb-6 text-white/90 opacity-0 sm:px-12 sm:pb-8 lg:pb-10"
+      className="pointer-events-none absolute bottom-0 left-0 z-30 flex flex-col gap-0 px-7 pb-6 text-white/80 opacity-0 sm:px-12 sm:pb-8 lg:pb-10"
     >
-      <span className="text-2xl font-semibold tracking-[0.05em] leading-tight text-white sm:text-[2.3rem] lg:text-[2.8rem]">
+      <span className="text-xl font-semibold uppercase tracking-[0.15em] leading-tight text-white sm:text-[2.1rem] lg:text-[2.5rem]">
         Jayvic
       </span>
-      <span className="text-[1.45rem] font-semibold uppercase tracking-[0.18em] leading-tight text-white sm:text-[1.8rem] lg:text-[2.25rem]">
+      <span className="text-base font-semibold uppercase tracking-[0.4em] leading-tight text-white/70 sm:text-lg lg:text-xl">
         San Antonio
       </span>
     </div>

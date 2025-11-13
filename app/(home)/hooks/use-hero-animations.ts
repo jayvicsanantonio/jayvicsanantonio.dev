@@ -7,6 +7,8 @@ import {
   FINAL_GEOMETRY_STATE,
   FINAL_PANEL_STATE,
   HERO_SCROLL_DISTANCE,
+  LABEL_EXIT_DELAY,
+  LABEL_EXIT_Y_PERCENT,
   PANEL_BORDER_RADIUS,
   PILL_SHRINK_BACKGROUND,
   PILL_SHRINK_BORDER,
@@ -272,6 +274,8 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
 
       const pillShrinkCompleteLabel = "pillShrinkComplete";
 
+      gsap.set(pill, { borderWidth: 0, borderColor: "transparent" });
+
       const videoShrinkTimeline = gsap
         .timeline({
           scrollTrigger: {
@@ -288,13 +292,22 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
             height: TARGET_PILL_HEIGHT,
             borderRadius: "384px",
             backgroundColor: PILL_SHRINK_BACKGROUND,
-            borderColor: PILL_SHRINK_BORDER,
-            boxShadow: PILL_SHRINK_BOX_SHADOW,
             ease: "none",
           },
           0,
         )
         .addLabel(pillShrinkCompleteLabel)
+        .to(
+          pill,
+          {
+            borderWidth: 1,
+            borderColor: PILL_SHRINK_BORDER,
+            boxShadow: PILL_SHRINK_BOX_SHADOW,
+            duration: 0.25,
+            ease: "power1.out",
+          },
+          pillShrinkCompleteLabel,
+        )
         .to(
           pillContent,
           {
@@ -323,7 +336,7 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
             duration: 0.4,
             ease: "power1.out",
           },
-          0.05,
+          pillShrinkCompleteLabel,
         );
       }
 
@@ -360,6 +373,10 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
       let labelExitTimeline: gsap.core.Timeline | null = null;
 
       if ((nameplate || designation) && heroSection) {
+        const labelTargets = [nameplate, designation].filter(
+          (node): node is HTMLDivElement => Boolean(node),
+        );
+
         labelExitTimeline = gsap.timeline({
           scrollTrigger: {
             trigger: heroSection,
@@ -369,29 +386,15 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
           },
         });
 
-        if (nameplate) {
-          labelExitTimeline.to(
-            nameplate,
-            {
-              autoAlpha: 0,
-              yPercent: -80,
-              ease: "power2.inOut",
-            },
-            0,
-          );
-        }
-
-        if (designation) {
-          labelExitTimeline.to(
-            designation,
-            {
-              autoAlpha: 0,
-              yPercent: -80,
-              ease: "power2.inOut",
-            },
-            nameplate ? 0.05 : 0,
-          );
-        }
+        labelExitTimeline.to(
+          labelTargets,
+          {
+            autoAlpha: 0,
+            yPercent: LABEL_EXIT_Y_PERCENT,
+            ease: "power2.inOut",
+          },
+          LABEL_EXIT_DELAY,
+        );
       }
 
       let coverTimeline: gsap.core.Tween | null = null;
@@ -536,7 +539,13 @@ function applyReducedMotionState({
   nameplate,
   designation,
 }: ReducedMotionArgs) {
-  gsap.set(pill, { ...FINAL_PANEL_STATE, backgroundColor: "transparent" });
+  gsap.set(pill, {
+    ...FINAL_PANEL_STATE,
+    backgroundColor: "transparent",
+    borderWidth: 1,
+    borderColor: PILL_SHRINK_BORDER,
+    boxShadow: PILL_SHRINK_BOX_SHADOW,
+  });
   gsap.set(pillContent, { autoAlpha: 0 });
   gsap.set(video, { autoAlpha: 1 });
 
