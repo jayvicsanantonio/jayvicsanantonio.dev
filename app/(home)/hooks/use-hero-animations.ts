@@ -218,6 +218,8 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
       const overlay = refs.videoOverlayRef.current;
       const pillSkin = refs.pillSkinRef.current;
       const navRow = refs.navRowRef.current;
+      const nameplate = refs.nameplateRef.current;
+      const designation = refs.designationRef.current;
       const coverLabel = refs.coverLabelRef.current;
       const coverBody = refs.coverBodyRef.current;
       const aboutSection = refs.aboutSectionRef.current;
@@ -355,6 +357,43 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         0.55,
       );
 
+      let labelExitTimeline: gsap.core.Timeline | null = null;
+
+      if ((nameplate || designation) && heroSection) {
+        labelExitTimeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: heroSection,
+            start: "top top",
+            end: () => "+=" + window.innerHeight * HERO_SCROLL_DISTANCE,
+            scrub: true,
+          },
+        });
+
+        if (nameplate) {
+          labelExitTimeline.to(
+            nameplate,
+            {
+              autoAlpha: 0,
+              yPercent: -80,
+              ease: "power2.inOut",
+            },
+            0,
+          );
+        }
+
+        if (designation) {
+          labelExitTimeline.to(
+            designation,
+            {
+              autoAlpha: 0,
+              yPercent: -80,
+              ease: "power2.inOut",
+            },
+            nameplate ? 0.05 : 0,
+          );
+        }
+      }
+
       let coverTimeline: gsap.core.Tween | null = null;
       let coverContentTimeline: gsap.core.Timeline | null = null;
       let profileCoverTrigger: ScrollTrigger | null = null;
@@ -459,6 +498,8 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         coverTimeline?.kill();
         coverContentTimeline?.scrollTrigger?.kill();
         coverContentTimeline?.kill();
+        labelExitTimeline?.scrollTrigger?.kill();
+        labelExitTimeline?.kill();
         profileCoverTrigger?.kill();
         profileHideTimeline?.scrollTrigger?.kill();
         profileHideTimeline?.kill();
