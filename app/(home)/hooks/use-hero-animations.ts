@@ -53,6 +53,7 @@ function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroAnimationA
       const pillSkin = refs.pillSkinRef.current;
       const profile = refs.profileRef.current;
       const nameplate = refs.nameplateRef.current;
+      const designation = refs.designationRef.current;
 
       if (prefersReducedMotion) {
         applyReducedMotionState({
@@ -64,6 +65,7 @@ function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroAnimationA
           profile,
           navRow,
           nameplate,
+          designation,
         });
         video.play().catch(() => {});
         return;
@@ -84,6 +86,9 @@ function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroAnimationA
       }
       if (nameplate) {
         timeline.set(nameplate, { autoAlpha: 0, yPercent: 35 });
+      }
+      if (designation) {
+        timeline.set(designation, { autoAlpha: 0, yPercent: 35 });
       }
 
       timeline
@@ -171,6 +176,18 @@ function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroAnimationA
             ease: "power2.out",
           },
           ">-0.1",
+        );
+      }
+      if (designation) {
+        timeline.to(
+          designation,
+          {
+            autoAlpha: 1,
+            yPercent: 0,
+            duration: 0.6,
+            ease: "power2.out",
+          },
+          "<",
         );
       }
 
@@ -461,6 +478,7 @@ type ReducedMotionArgs = {
   profile: HTMLDivElement | null;
   navRow: HTMLDivElement | null;
   nameplate: HTMLDivElement | null;
+  designation: HTMLDivElement | null;
 };
 
 function applyReducedMotionState({
@@ -472,6 +490,7 @@ function applyReducedMotionState({
   profile,
   navRow,
   nameplate,
+  designation,
 }: ReducedMotionArgs) {
   gsap.set(pill, { ...FINAL_PANEL_STATE, backgroundColor: "transparent" });
   gsap.set(pillContent, { autoAlpha: 0 });
@@ -495,6 +514,10 @@ function applyReducedMotionState({
 
   if (nameplate) {
     gsap.set(nameplate, { autoAlpha: 1, yPercent: 0 });
+  }
+
+  if (designation) {
+    gsap.set(designation, { autoAlpha: 1, yPercent: 0 });
   }
 }
 

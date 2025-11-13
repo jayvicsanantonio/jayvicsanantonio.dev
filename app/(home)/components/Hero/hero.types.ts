@@ -6,6 +6,7 @@ export type HeroAnimationRefs = {
   heroSectionRef: MutableRefObject<HTMLDivElement | null>;
   containerRef: MutableRefObject<HTMLDivElement | null>;
   nameplateRef: MutableRefObject<HTMLDivElement | null>;
+  designationRef: MutableRefObject<HTMLDivElement | null>;
   coverSectionRef: MutableRefObject<HTMLDivElement | null>;
   coverFillRef: MutableRefObject<HTMLDivElement | null>;
   coverLabelRef: MutableRefObject<HTMLDivElement | null>;

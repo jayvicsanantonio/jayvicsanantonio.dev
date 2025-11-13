@@ -1,5 +1,6 @@
 import HeroStage from "./Stage";
 import Nameplate from "./Nameplate";
+import Designation from "./Designation";
 import { INITIAL_NAV_ROW_STYLE } from "./hero.constants";
 import type { HeroAnimationRefs } from "./hero.types";
 
@@ -8,6 +9,7 @@ export type HeroProps = {
   containerRef: HeroAnimationRefs["containerRef"];
   navRowRef: HeroAnimationRefs["navRowRef"];
   nameplateRef: HeroAnimationRefs["nameplateRef"];
+  designationRef: HeroAnimationRefs["designationRef"];
   pillRef: HeroAnimationRefs["pillRef"];
   videoRef: HeroAnimationRefs["videoRef"];
   videoOverlayRef: HeroAnimationRefs["videoOverlayRef"];
@@ -20,6 +22,7 @@ export default function Hero({
   containerRef,
   navRowRef,
   nameplateRef,
+  designationRef,
   pillRef,
   videoRef,
   videoOverlayRef,
@@ -41,6 +44,7 @@ export default function Hero({
         }}
       />
       <Nameplate nameplateRef={nameplateRef} />
+      <Designation designationRef={designationRef} />
     </section>
   );
 }
