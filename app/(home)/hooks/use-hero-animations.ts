@@ -27,6 +27,10 @@ export type UseHeroAnimationArgs = {
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, ScrollSmoother);
 
+const PROFILE_PIN_HIDE_START = "top bottom";
+const PROFILE_PIN_HIDE_END = "top 45%";
+const PROFILE_PIN_HIDE_Y = 18;
+
 export default function useHeroAnimations(args: UseHeroAnimationArgs) {
   useHeroIntroAnimation(args);
   useHeroScrollAnimation(args);
@@ -305,6 +309,7 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
       let coverTimeline: gsap.core.Tween | null = null;
       let coverContentTimeline: gsap.core.Timeline | null = null;
       let profileCoverTrigger: ScrollTrigger | null = null;
+      let profileHideTimeline: gsap.core.Timeline | null = null;
 
       const coverStartTrigger = aboutSection ?? skillsSection;
       const coverEndTrigger = aboutSection ?? coverStartTrigger;
@@ -347,6 +352,28 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         );
       }
 
+      const profileHideTrigger = aboutSection ?? skillsSection;
+
+      if (profile && profileHideTrigger) {
+        profileHideTimeline = gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: profileHideTrigger,
+              start: PROFILE_PIN_HIDE_START,
+              end: PROFILE_PIN_HIDE_END,
+              scrub: true,
+            },
+          })
+          .fromTo(
+            profile,
+            { autoAlpha: 1, yPercent: 0 },
+            {
+              yPercent: PROFILE_PIN_HIDE_Y,
+              ease: "power2.out",
+            },
+          );
+      }
+
       if (coverSection && coverLabel && coverBody) {
         coverContentTimeline = gsap
           .timeline({
@@ -384,6 +411,8 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         coverContentTimeline?.scrollTrigger?.kill();
         coverContentTimeline?.kill();
         profileCoverTrigger?.kill();
+        profileHideTimeline?.scrollTrigger?.kill();
+        profileHideTimeline?.kill();
         if (profile) {
           gsap.set(profile, { zIndex: PROFILE_BASE_Z_INDEX });
         }
@@ -426,7 +455,7 @@ function applyReducedMotionState({
   }
 
   if (profile) {
-    gsap.set(profile, { autoAlpha: 1 });
+    gsap.set(profile, { autoAlpha: 1, yPercent: 0 });
   }
 
   if (navRow) {
