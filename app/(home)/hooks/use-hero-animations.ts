@@ -258,17 +258,54 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
             trigger: heroSection,
             start: "top top",
             end: () => "+=" + window.innerHeight,
-            scrub: true,
+            // apply slight smoothing for more elegant motion
+            scrub: 0.6,
+            onEnter: () => {
+              gsap.set([pill, video], { transformOrigin: "50% 50%" });
+            },
+            onEnterBack: () => {
+              gsap.set([pill, video], { transformOrigin: "50% 50%" });
+            },
           },
         })
         .to(
           pill,
           {
-            width: TARGET_PILL_WIDTH,
-            height: TARGET_PILL_HEIGHT,
+            // transform-only scaling for buttery performance
+            // compute non-uniform scale based on parent overlay size at runtime
+            // use a function-based value to read current dimensions once at start
+            scaleX: () => {
+              const parent = (pill.parentElement as HTMLElement) ?? pill;
+              const w = parent.clientWidth || parent.getBoundingClientRect().width || 1;
+              return TARGET_PILL_WIDTH / w;
+            },
+            scaleY: () => {
+              const parent = (pill.parentElement as HTMLElement) ?? pill;
+              const h = parent.clientHeight || parent.getBoundingClientRect().height || 1;
+              return TARGET_PILL_HEIGHT / h;
+            },
             borderRadius: "384px",
             backgroundColor: PILL_SHRINK_BACKGROUND,
             ease: "none",
+            force3D: true,
+          },
+          0,
+        )
+        // glide the pill's center toward the nav row center as it shrinks
+        .to(
+          pill,
+          {
+            x: () => {
+              const pr = pill.getBoundingClientRect();
+              const nr = navRow.getBoundingClientRect();
+              return nr.left + nr.width / 2 - (pr.left + pr.width / 2);
+            },
+            y: () => {
+              const pr = pill.getBoundingClientRect();
+              const nr = navRow.getBoundingClientRect();
+              return nr.top + nr.height / 2 - (pr.top + pr.height / 2);
+            },
+            ease: "power2.out",
           },
           0,
         )
@@ -458,6 +495,8 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         start: "top top",
         end: () => "+=" + window.innerHeight,
         pin: true,
+        pinType: "fixed",
+        pinReparent: true,
         anticipatePin: 1,
       });
 

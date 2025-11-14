@@ -369,6 +369,25 @@
   }
 }
 
+/* Smooth Scrollbar branding (visible in smooth mode) */
+@layer base {
+  .scrollbar-track {
+    z-index: 60; /* above most content */
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .scrollbar-track-y {
+    right: 0;
+    width: 8px; /* match typical OS thickness */
+    top: 0;
+    height: 100%;
+  }
+  .scrollbar-thumb {
+    border-radius: 4px;
+    background: linear-gradient(to bottom, rgba(34, 211, 238, 0.75), rgba(59, 130, 246, 0.6));
+    box-shadow: 0 0 10px rgba(34, 211, 238, 0.35);
+  }
+}
+
 /* View Transitions tags: map vt-tag-* classes to view-transition-name */
 @layer base {
   .vt-tag-projects {

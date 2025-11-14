@@ -132,16 +132,16 @@ export default function ScrollProvider({ children }: Props) {
         // Native fallback: no fixed-height container; allow normal document scrolling
         <div>{children}</div>
       )}
-      {/* Vertical progress bar at right edge (non-interactive) */}
-      <div
-        aria-hidden
-        className="pointer-events-none fixed right-0 top-0 bottom-0 z-[999] w-2 bg-white/10"
-      >
-        <div
-          className="absolute top-0 left-0 right-0 origin-top bg-cyan-300/70 shadow-[0_0_10px_rgba(34,211,238,0.35)]"
-          style={{ height: `${Math.max(0, Math.min(1, progress)) * 100}%` }}
-        />
-      </div>
+
+      {mode === "native" && (
+        // Native fallback progress bar at the right edge
+        <div aria-hidden className="fixed right-0 top-0 bottom-0 z-[999] w-2 bg-white/10">
+          <div
+            className="absolute top-0 left-0 right-0 origin-top bg-cyan-300/70 shadow-[0_0_10px_rgba(34,211,238,0.35)]"
+            style={{ height: `${Math.max(0, Math.min(1, progress)) * 100}%` }}
+          />
+        </div>
+      )}
     </>
   );
 }
