@@ -15,9 +15,8 @@ import {
   PROFILE_BASE_Z_INDEX,
   PROFILE_COVER_Z_INDEX,
   PROFILE_SCROLL_CONFIG,
-  TARGET_PILL_HEIGHT,
-  TARGET_PILL_WIDTH,
 } from "../components/Hero/hero.constants";
+import { CFG } from "../components/config";
 import type { HeroAnimationRefs } from "../components/Hero/hero.types";
 
 export type UseHeroAnimationArgs = {
@@ -236,6 +235,27 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         return;
       }
 
+      const navSpacerEl = navRow.querySelector<HTMLDivElement>("[data-nav-spacer]");
+      const firstNavButton = navRow.querySelector<HTMLAnchorElement>("a,button");
+
+      const getTargetPillWidth = () => {
+        const spacerWidth = navSpacerEl?.getBoundingClientRect().width ?? 0;
+        if (spacerWidth > 0) {
+          return spacerWidth;
+        }
+        const navWidth = navRow.getBoundingClientRect().width;
+        return Math.max(navWidth * 0.35, CFG.nav.buttonSize.w * 3);
+      };
+
+      const getTargetPillHeight = () => {
+        const candidate =
+          firstNavButton?.getBoundingClientRect().height ?? navRow.getBoundingClientRect().height;
+        if (candidate && candidate > 0) {
+          return candidate;
+        }
+        return CFG.nav.buttonSize.h;
+      };
+
       // Smooth Scrollbar will proxy ScrollTrigger globally via ScrollProvider.
 
       const scrollTween = gsap.to(profile, {
@@ -266,24 +286,14 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
             onEnterBack: () => {
               gsap.set([pill, video], { transformOrigin: "50% 50%" });
             },
+            invalidateOnRefresh: true,
           },
         })
         .to(
           pill,
           {
-            // transform-only scaling for buttery performance
-            // compute non-uniform scale based on parent overlay size at runtime
-            // use a function-based value to read current dimensions once at start
-            scaleX: () => {
-              const parent = (pill.parentElement as HTMLElement) ?? pill;
-              const w = parent.clientWidth || parent.getBoundingClientRect().width || 1;
-              return TARGET_PILL_WIDTH / w;
-            },
-            scaleY: () => {
-              const parent = (pill.parentElement as HTMLElement) ?? pill;
-              const h = parent.clientHeight || parent.getBoundingClientRect().height || 1;
-              return TARGET_PILL_HEIGHT / h;
-            },
+            width: () => `${getTargetPillWidth()}px`,
+            height: () => `${getTargetPillHeight()}px`,
             borderRadius: "384px",
             backgroundColor: PILL_SHRINK_BACKGROUND,
             ease: "none",
@@ -365,7 +375,26 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
           },
           0,
         );
+        videoShrinkTimeline.to(
+          overlay,
+          {
+            autoAlpha: 0,
+            duration: 0.35,
+            ease: "power1.out",
+          },
+          pillShrinkCompleteLabel,
+        );
       }
+
+      videoShrinkTimeline.to(
+        video,
+        {
+          autoAlpha: 0,
+          duration: 0.35,
+          ease: "power1.out",
+        },
+        pillShrinkCompleteLabel,
+      );
 
       videoShrinkTimeline.fromTo(
         navRow,
@@ -495,7 +524,6 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         start: "top top",
         end: () => "+=" + window.innerHeight,
         pin: true,
-        pinType: "fixed",
         pinReparent: true,
         anticipatePin: 1,
       });

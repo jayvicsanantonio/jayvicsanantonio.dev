@@ -1,14 +1,10 @@
 import type { CSSProperties } from "react";
 
-import { HERO_NAV_PILL_HEIGHT, HERO_NAV_PILL_WIDTH } from "./Navigation";
-
 export const PANEL_BORDER_RADIUS = "32px";
 export const PILL_SHRINK_BOX_SHADOW =
   "0 24px 45px rgba(1,11,26,0.65), 0 0 45px rgba(34,211,238,0.35)";
 export const PILL_SHRINK_BACKGROUND = "rgba(4,15,32,0.95)";
 export const PILL_SHRINK_BORDER = "rgba(34,211,238,0.75)";
-export const TARGET_PILL_WIDTH = HERO_NAV_PILL_WIDTH;
-export const TARGET_PILL_HEIGHT = HERO_NAV_PILL_HEIGHT;
 export const VIDEO_OVERLAY_BACKGROUND =
   "radial-gradient(circle at 20% 20%, rgba(56,189,248,0.45), transparent 45%), radial-gradient(circle at 80% 30%, rgba(59,130,246,0.35), transparent 40%), linear-gradient(180deg, rgba(6,16,35,0.25), rgba(1,5,11,0.75))";
 export const PROFILE_DROP_SHADOW =
