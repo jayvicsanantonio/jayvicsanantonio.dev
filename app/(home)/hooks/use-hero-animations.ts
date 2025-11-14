@@ -256,6 +256,28 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         return CFG.nav.buttonSize.h;
       };
 
+      const getTargetCenter = () => {
+        const spacerRect = navSpacerEl?.getBoundingClientRect();
+        const buttonRect = firstNavButton?.getBoundingClientRect();
+        const navRect = navRow.getBoundingClientRect();
+        const xCenter = spacerRect
+          ? spacerRect.left + spacerRect.width / 2
+          : navRect.left + navRect.width / 2;
+        const yCenter = buttonRect
+          ? buttonRect.top + buttonRect.height / 2
+          : navRect.top + navRect.height / 2;
+        return { x: xCenter, y: yCenter };
+      };
+
+      const getPillCenterOffset = () => {
+        const pr = pill.getBoundingClientRect();
+        const target = getTargetCenter();
+        return {
+          x: target.x - (pr.left + pr.width / 2),
+          y: target.y - (pr.top + pr.height / 2),
+        };
+      };
+
       // Smooth Scrollbar will proxy ScrollTrigger globally via ScrollProvider.
 
       const scrollTween = gsap.to(profile, {
@@ -298,24 +320,6 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
             backgroundColor: PILL_SHRINK_BACKGROUND,
             ease: "none",
             force3D: true,
-          },
-          0,
-        )
-        // glide the pill's center toward the nav row center as it shrinks
-        .to(
-          pill,
-          {
-            x: () => {
-              const pr = pill.getBoundingClientRect();
-              const nr = navRow.getBoundingClientRect();
-              return nr.left + nr.width / 2 - (pr.left + pr.width / 2);
-            },
-            y: () => {
-              const pr = pill.getBoundingClientRect();
-              const nr = navRow.getBoundingClientRect();
-              return nr.top + nr.height / 2 - (pr.top + pr.height / 2);
-            },
-            ease: "power2.out",
           },
           0,
         )
@@ -394,6 +398,21 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
           ease: "power1.out",
         },
         pillShrinkCompleteLabel,
+      );
+
+      let pillSnapTween: gsap.core.Tween | null = null;
+      videoShrinkTimeline.add(
+        () => {
+          pillSnapTween?.kill();
+          const offset = getPillCenterOffset();
+          pillSnapTween = gsap.to(pill, {
+            x: offset.x,
+            y: offset.y,
+            duration: 0.35,
+            ease: "back.out(1.4)",
+          });
+        },
+        `${pillShrinkCompleteLabel}+=0.12`,
       );
 
       videoShrinkTimeline.fromTo(
@@ -536,6 +555,7 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         // Smooth Scrollbar lifecycle handled by ScrollProvider
         videoShrinkTimeline.scrollTrigger?.kill();
         videoShrinkTimeline.kill();
+        pillSnapTween?.kill();
         coverTimeline?.scrollTrigger?.kill();
         coverTimeline?.kill();
         coverContentTimeline?.scrollTrigger?.kill();
@@ -616,5 +636,6 @@ function applyReducedMotionState({
 function calculateNavYOffset(navRow: HTMLDivElement, pill: HTMLDivElement) {
   const pillHeight = pill.getBoundingClientRect().height || pill.offsetHeight || 0;
   const navHeight = navRow.getBoundingClientRect().height || navRow.offsetHeight || 0;
-  return -(navHeight - pillHeight) / 2;
+  const effectivePillHeight = Math.min(pillHeight || 0, navHeight || 0);
+  return -(navHeight - effectivePillHeight) / 2;
 }
