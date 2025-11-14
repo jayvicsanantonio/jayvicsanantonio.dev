@@ -12,7 +12,8 @@ import { useWebVitalsLogger } from "@/hooks/useWebVitalsLogger";
 // Fallback to a no-op wrapper (React.Fragment) when not available.
 const ViewTransition: React.ComponentType<{ children: React.ReactNode }> =
   // Using `as any` since ViewTransition may not exist on some React versions
-  ((React as any).ViewTransition as React.ComponentType<{ children: React.ReactNode }>) || React.Fragment;
+  ((React as any).ViewTransition as React.ComponentType<{ children: React.ReactNode }>) ||
+  React.Fragment;
 
 export default function ClientAppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -23,7 +24,7 @@ export default function ClientAppShell({ children }: { children: React.ReactNode
 
   return (
     <>
-      <CursorGlow />
+      {/* <CursorGlow /> */}
       {/* React ViewTransition wrapper per Next.js docs; key by pathname to scope updates */}
       <ViewTransition>
         <div key={pathname} suppressHydrationWarning>
