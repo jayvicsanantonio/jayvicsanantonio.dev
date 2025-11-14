@@ -1,7 +1,6 @@
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollSmoother } from "gsap/ScrollSmoother";
 
 import {
   FINAL_GEOMETRY_STATE,
@@ -16,7 +15,6 @@ import {
   PROFILE_BASE_Z_INDEX,
   PROFILE_COVER_Z_INDEX,
   PROFILE_SCROLL_CONFIG,
-  SCROLL_SMOOTHER_CONFIG,
   TARGET_PILL_HEIGHT,
   TARGET_PILL_WIDTH,
 } from "../components/Hero/hero.constants";
@@ -27,7 +25,7 @@ export type UseHeroAnimationArgs = {
   prefersReducedMotion: boolean;
 };
 
-gsap.registerPlugin(useGSAP, ScrollTrigger, ScrollSmoother);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const PROFILE_PIN_HIDE_START = "top bottom";
 const PROFILE_PIN_HIDE_END = "top 45%";
@@ -198,8 +196,6 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
   useGSAP(
     () => {
       const coverFill = refs.coverFillRef.current;
-      const wrapper = refs.smoothWrapperRef.current;
-      const content = refs.smoothContentRef.current;
       const heroSection = refs.heroSectionRef.current;
       const coverSection = refs.coverSectionRef.current;
       const profile = refs.profileRef.current;
@@ -230,8 +226,6 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
       }
 
       if (
-        !wrapper ||
-        !content ||
         !heroSection ||
         !profile ||
         !pill ||
@@ -242,13 +236,7 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         return;
       }
 
-      ScrollSmoother.get()?.kill();
-
-      const smoother = ScrollSmoother.create({
-        wrapper,
-        content,
-        ...SCROLL_SMOOTHER_CONFIG,
-      });
+      // Smooth Scrollbar will proxy ScrollTrigger globally via ScrollProvider.
 
       const scrollTween = gsap.to(profile, {
         ...PROFILE_SCROLL_CONFIG,
@@ -478,7 +466,7 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
       return () => {
         scrollTween.scrollTrigger?.kill();
         scrollTween.kill();
-        smoother.kill();
+        // Smooth Scrollbar lifecycle handled by ScrollProvider
         videoShrinkTimeline.scrollTrigger?.kill();
         videoShrinkTimeline.kill();
         coverTimeline?.scrollTrigger?.kill();

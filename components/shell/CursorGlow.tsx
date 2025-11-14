@@ -13,14 +13,12 @@ const CONIC_GLOW =
 export default function CursorGlow() {
   const dotRef = useRef<HTMLDivElement | null>(null);
   const glowRef = useRef<HTMLDivElement | null>(null);
-  const [glowBackground, setGlowBackground] = useState(FALLBACK_GLOW);
-
-  useEffect(() => {
-    if (typeof window === "undefined" || !window.CSS?.supports) return;
-    if (window.CSS.supports("background: conic-gradient(red, blue)")) {
-      setGlowBackground(CONIC_GLOW);
+  const [glowBackground] = useState(() => {
+    if (typeof window !== "undefined" && window.CSS?.supports?.("background: conic-gradient(red, blue)")) {
+      return CONIC_GLOW;
     }
-  }, []);
+    return FALLBACK_GLOW;
+  });
 
   useEffect(() => {
     const dot = dotRef.current;

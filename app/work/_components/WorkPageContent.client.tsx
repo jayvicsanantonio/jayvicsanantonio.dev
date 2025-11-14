@@ -3,14 +3,13 @@
 import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { useGSAP } from "@gsap/react";
 
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
 import WorkTimeline from "./WorkTimeline.client";
 
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+gsap.registerPlugin(ScrollTrigger);
 
 export default function WorkPageContent() {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -19,31 +18,8 @@ export default function WorkPageContent() {
   const backgroundRef = useRef<HTMLDivElement | null>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  useGSAP(
-    () => {
-      if (prefersReducedMotion) {
-        ScrollSmoother.get()?.kill();
-        return;
-      }
-
-      if (!wrapperRef.current || !contentRef.current) {
-        return;
-      }
-
-      ScrollSmoother.get()?.kill();
-
-      const smoother = ScrollSmoother.create({
-        wrapper: wrapperRef.current,
-        content: contentRef.current,
-        smooth: 1.05,
-        smoothTouch: 0.2,
-        effects: true,
-      });
-
-      return () => smoother.kill();
-    },
-    { scope: wrapperRef, dependencies: [prefersReducedMotion] }
-  );
+  // Smooth Scrollbar lifecycle is managed globally by ScrollProvider.
+  // Keep wrapper/content refs to preserve DOM structure, but no smoother init here.
 
   useGSAP(
     () => {

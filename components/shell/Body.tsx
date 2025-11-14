@@ -1,4 +1,5 @@
 import ClientAppShell from "@/components/shell/ClientAppShell.client";
+import ScrollProvider from "@/components/shell/ScrollProvider.client";
 
 export default function Body({
   children,
@@ -9,9 +10,13 @@ export default function Body({
 }) {
   return (
     <body
-      className={`dark ${fontVars ?? ""} relative flex min-h-screen flex-col text-gray-200 bg-black touch-manipulation overscroll-y-contain`}
+      className={`dark ${
+        fontVars ?? ""
+      } relative flex min-h-screen flex-col text-gray-200 bg-black touch-manipulation overscroll-y-contain`}
     >
-      <ClientAppShell>{children}</ClientAppShell>
+      <ScrollProvider>
+        <ClientAppShell>{children}</ClientAppShell>
+      </ScrollProvider>
     </body>
   );
 }
