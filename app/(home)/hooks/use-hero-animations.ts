@@ -1,3 +1,4 @@
+import { lockScroll } from "@/lib/scroll-lock";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -41,6 +42,7 @@ function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroAnimationA
       const pill = refs.pillRef.current;
       const pillContent = refs.pillContentRef.current;
       const video = refs.videoRef.current;
+      let releaseScrollLock: (() => void) | null = null;
 
       if (!pill || !pillContent || !video) {
         return;
@@ -69,6 +71,7 @@ function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroAnimationA
         return;
       }
 
+      releaseScrollLock = lockScroll();
       const timeline = gsap.timeline();
 
       if (navRow) {
@@ -183,7 +186,13 @@ function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroAnimationA
         );
       }
 
+      timeline.add(() => {
+        releaseScrollLock?.();
+        releaseScrollLock = null;
+      });
+
       return () => {
+        releaseScrollLock?.();
         timeline.kill();
       };
     },
