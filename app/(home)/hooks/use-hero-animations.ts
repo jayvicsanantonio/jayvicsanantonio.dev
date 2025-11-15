@@ -244,6 +244,11 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         return;
       }
 
+      // Ensure nav row is measurable before we calculate target dimensions.
+      if (navRow && window.getComputedStyle(navRow).visibility === "hidden") {
+        gsap.set(navRow, { visibility: "visible" });
+      }
+
       const navSpacerEl = navRow.querySelector<HTMLDivElement>("[data-nav-spacer]");
       const firstNavButton = navRow.querySelector<HTMLAnchorElement>("a,button");
 
@@ -278,12 +283,14 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         return { x: xCenter, y: yCenter };
       };
 
+      const getNavRowYOffset = () => calculateNavYOffset(navRow, pill, getTargetPillHeight());
+
       const getPillCenterOffset = () => {
         const pr = pill.getBoundingClientRect();
         const target = getTargetCenter();
         return {
           x: target.x - (pr.left + pr.width / 2),
-          y: target.y - (pr.top + pr.height / 2),
+          y: target.y + getNavRowYOffset() - (pr.top + pr.height / 2),
         };
       };
 
@@ -303,7 +310,42 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
 
       gsap.set(pill, { borderWidth: 0, borderColor: "transparent" });
 
-      const videoShrinkTimeline = gsap
+      let pillSnapTween: gsap.core.Tween | null = null;
+      let videoShrinkTimeline: gsap.core.Timeline;
+      let lastTargetOffset: { x: number; y: number } | null = null;
+
+      const syncPillToNavRow = ({ force = false } = {}) => {
+        if (!videoShrinkTimeline) {
+          return;
+        }
+        const trigger = videoShrinkTimeline.scrollTrigger;
+        if (!trigger) {
+          return;
+        }
+        if (!force && trigger.progress < 0.9) {
+          lastTargetOffset = null;
+          return;
+        }
+        const offset = getPillCenterOffset();
+        if (
+          !force &&
+          lastTargetOffset &&
+          Math.abs(offset.x - lastTargetOffset.x) < 0.5 &&
+          Math.abs(offset.y - lastTargetOffset.y) < 0.5
+        ) {
+          return;
+        }
+        lastTargetOffset = offset;
+        pillSnapTween?.kill();
+        pillSnapTween = gsap.to(pill, {
+          x: offset.x,
+          y: offset.y,
+          duration: force ? 0 : 0.3,
+          ease: "power2.out",
+        });
+      };
+
+      videoShrinkTimeline = gsap
         .timeline({
           scrollTrigger: {
             trigger: heroSection,
@@ -318,6 +360,8 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
               gsap.set([pill, video], { transformOrigin: "50% 50%" });
             },
             invalidateOnRefresh: true,
+            onUpdate: () => syncPillToNavRow(),
+            onRefresh: () => syncPillToNavRow({ force: true }),
           },
         })
         .to(
@@ -325,6 +369,8 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
           {
             width: () => `${getTargetPillWidth()}px`,
             height: () => `${getTargetPillHeight()}px`,
+            x: () => getPillCenterOffset().x,
+            y: () => getPillCenterOffset().y,
             borderRadius: "384px",
             backgroundColor: PILL_SHRINK_BACKGROUND,
             ease: "none",
@@ -409,34 +455,19 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         pillShrinkCompleteLabel,
       );
 
-      let pillSnapTween: gsap.core.Tween | null = null;
-      videoShrinkTimeline.add(
-        () => {
-          pillSnapTween?.kill();
-          const offset = getPillCenterOffset();
-          pillSnapTween = gsap.to(pill, {
-            x: offset.x,
-            y: offset.y,
-            duration: 0.35,
-            ease: "back.out(1.4)",
-          });
-        },
-        `${pillShrinkCompleteLabel}+=0.12`,
-      );
-
       videoShrinkTimeline.fromTo(
         navRow,
         {
           autoAlpha: 0,
           yPercent: 18,
         },
-        {
-          autoAlpha: 1,
-          yPercent: 0,
-          y: () => calculateNavYOffset(navRow, pill),
-          duration: 0.45,
-          ease: "power2.out",
-        },
+          {
+            autoAlpha: 1,
+            yPercent: 0,
+            y: () => getNavRowYOffset(),
+            duration: 0.45,
+            ease: "power2.out",
+          },
         0.55,
       );
 
@@ -642,9 +673,16 @@ function applyReducedMotionState({
   }
 }
 
-function calculateNavYOffset(navRow: HTMLDivElement, pill: HTMLDivElement) {
-  const pillHeight = pill.getBoundingClientRect().height || pill.offsetHeight || 0;
+function calculateNavYOffset(
+  navRow: HTMLDivElement,
+  pill: HTMLDivElement,
+  targetPillHeight?: number,
+) {
+  const measuredPillHeight = pill.getBoundingClientRect().height || pill.offsetHeight || 0;
+  const pillHeight = typeof targetPillHeight === "number" ? targetPillHeight : measuredPillHeight;
   const navHeight = navRow.getBoundingClientRect().height || navRow.offsetHeight || 0;
-  const effectivePillHeight = Math.min(pillHeight || 0, navHeight || 0);
-  return -(navHeight - effectivePillHeight) / 2;
+  if (!navHeight || !pillHeight) {
+    return 0;
+  }
+  return (pillHeight - navHeight) / 2;
 }
