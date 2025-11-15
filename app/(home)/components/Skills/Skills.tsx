@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useRef } from "react";
-import type { MutableRefObject, RefObject } from "react";
+import type { MutableRefObject } from "react";
 
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
@@ -318,7 +318,6 @@ export default function Skills({
       >
         {rowsAbove.map((config, index) => (
           <MarqueeRow
-            marqueeRowRef={rowsAboveRef as unknown as RefObject<HTMLDivElement>}
             items={config.items}
             duration={config.duration ?? 56}
             direction={config.direction as "left" | "right"}
@@ -343,7 +342,6 @@ export default function Skills({
       >
         {rowsBelow.map((config, index) => (
           <MarqueeRow
-            marqueeRowRef={rowsBelowRef as unknown as RefObject<HTMLDivElement>}
             items={config.items}
             duration={config.duration ?? 56}
             direction={config.direction as "left" | "right"}

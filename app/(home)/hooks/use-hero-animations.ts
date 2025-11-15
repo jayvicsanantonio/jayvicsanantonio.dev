@@ -540,7 +540,7 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         );
       }
 
-      const profileHideTrigger = aboutSection ?? skillsSection;
+      const profileHideTrigger = aboutSection ?? null;
 
       if (profile && profileHideTrigger) {
         profileHideTimeline = gsap

@@ -1,9 +1,7 @@
 "use client";
 
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
-import { RefObject } from "react";
 type MarqueeRowProps = {
-  marqueeRowRef: RefObject<HTMLDivElement>;
   items: string[];
   direction?: "left" | "right";
   duration?: number; // seconds
@@ -11,7 +9,6 @@ type MarqueeRowProps = {
 };
 
 export default function MarqueeRow({
-  marqueeRowRef,
   items,
   direction = "left",
   duration = 45,
@@ -23,7 +20,7 @@ export default function MarqueeRow({
   const dirClass = direction === "right" ? "[animation-direction:reverse]" : "";
 
   return (
-    <div ref={marqueeRowRef} className="relative overflow-hidden mx-auto w-full max-w-7xl">
+    <div className="relative overflow-hidden mx-auto w-full max-w-7xl">
       <div className="group relative block select-none text-white/80 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
         <div
           className={`marquee-runner flex w-max items-center ${playStateClass} ${dirClass}`}
