@@ -10,8 +10,76 @@ type Props = { children: React.ReactNode };
 
 export default function ScrollProvider({ children }: Props) {
   const scrollerRef = React.useRef<HTMLDivElement | null>(null);
+  const scrollbarRef = React.useRef<any>(null);
+  const modeRef = React.useRef<"native" | "smooth">("native");
   const [progress, setProgress] = React.useState(0);
   const [mode, setMode] = React.useState<"native" | "smooth">("native");
+
+  const resetScrollPosition = React.useCallback(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    if (modeRef.current === "smooth" && scrollbarRef.current) {
+      try {
+        scrollbarRef.current.setMomentum?.(0, 0);
+        scrollbarRef.current.scrollTo(0, 0, 0);
+        return;
+      } catch (_err) {
+        // fall through to native reset if the instance is unavailable
+      }
+    }
+
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    if (typeof document !== "undefined") {
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }
+  }, []);
+
+  React.useEffect(() => {
+    modeRef.current = mode;
+  }, [mode]);
+
+  React.useLayoutEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const supportsScrollRestoration = "scrollRestoration" in window.history;
+    let previousRestoration: History["scrollRestoration"] | undefined;
+
+    if (supportsScrollRestoration) {
+      previousRestoration = window.history.scrollRestoration;
+      window.history.scrollRestoration = "manual";
+    }
+
+    const handleBeforeUnload = () => {
+      resetScrollPosition();
+    };
+
+    const handlePageShow = (event: PageTransitionEvent) => {
+      if (event.persisted) {
+        resetScrollPosition();
+      }
+    };
+
+    resetScrollPosition();
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener("pageshow", handlePageShow);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("pageshow", handlePageShow);
+      if (supportsScrollRestoration && typeof previousRestoration !== "undefined") {
+        window.history.scrollRestoration = previousRestoration;
+      }
+    };
+  }, [resetScrollPosition]);
+
+  React.useEffect(() => {
+    resetScrollPosition();
+  }, [mode, resetScrollPosition]);
 
   React.useEffect(() => {
     const prefersReduced = typeof window !== "undefined"
@@ -51,6 +119,9 @@ export default function ScrollProvider({ children }: Props) {
           alwaysShowTracks: true,
           continuousScrolling: false,
         });
+
+        scrollbarRef.current = scrollbar;
+        scrollbar.scrollTo(0, 0, 0);
 
         setMode("smooth");
 
@@ -93,6 +164,7 @@ export default function ScrollProvider({ children }: Props) {
           scrollbar.destroy();
         }
       } catch {}
+      scrollbarRef.current = null;
       document.documentElement.style.overflow = prevHtmlOverflow;
       document.body.style.overflow = prevBodyOverflow;
     };
