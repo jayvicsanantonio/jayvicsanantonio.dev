@@ -17,6 +17,8 @@ const MARQUEE_ENTRY_OFFSET = 14;
 const REVEAL_SCROLL_DISTANCE_FACTOR = 0.6;
 const SKILLS_PIN_SCROLL_DISTANCE = 0.95;
 const SKILLS_PIN_START = "center center";
+const ABOUT_STACK_BELOW_SKILLS = -10;
+const ABOUT_STACK_OVERLAY = 80;
 const ABOUT_OVERLAY_INITIAL = {
   yPercent: 5,
   scale: 0.82,
@@ -177,7 +179,13 @@ export default function Skills({
           gsap.set(group, { autoAlpha: 1, xPercent: 0 });
         });
         if (aboutSection) {
-          gsap.set(aboutSection, { autoAlpha: 1, yPercent: 0, scale: 1, clipPath: "none" });
+          gsap.set(aboutSection, {
+            autoAlpha: 1,
+            yPercent: 0,
+            scale: 1,
+            clipPath: "none",
+            zIndex: "",
+          });
         }
         return;
       }
@@ -192,7 +200,10 @@ export default function Skills({
         });
       });
       if (aboutSection) {
-        gsap.set(aboutSection, { ...ABOUT_OVERLAY_INITIAL });
+        gsap.set(aboutSection, {
+          ...ABOUT_OVERLAY_INITIAL,
+          zIndex: ABOUT_STACK_BELOW_SKILLS,
+        });
       }
 
       let hasRevealedSection = false;
@@ -220,7 +231,7 @@ export default function Skills({
         start: SKILLS_PIN_START,
         end: () => "+=" + window.innerHeight * SKILLS_PIN_SCROLL_DISTANCE,
         pin: true,
-        pinSpacing: false,
+        pinSpacing: true,
         anticipatePin: 1,
       });
 
@@ -269,6 +280,9 @@ export default function Skills({
             duration: 1.15,
             ease: "power4.out",
             boxShadow: "0 35px 120px rgba(0,0,0,0.55)",
+            onStart: () => {
+              gsap.set(aboutSection, { zIndex: ABOUT_STACK_OVERLAY });
+            },
           },
           ">-0.15",
         );
@@ -292,7 +306,13 @@ export default function Skills({
         timeline.scrollTrigger?.kill();
         timeline.kill();
         if (aboutSection) {
-          gsap.set(aboutSection, { autoAlpha: 1, yPercent: 0, scale: 1, clipPath: "none" });
+          gsap.set(aboutSection, {
+            autoAlpha: 1,
+            yPercent: 0,
+            scale: 1,
+            clipPath: "none",
+            zIndex: "",
+          });
         }
         aboutReleaseTween?.scrollTrigger?.kill();
         aboutReleaseTween?.kill();

@@ -499,8 +499,12 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
       let profileCoverTrigger: ScrollTrigger | null = null;
       let profileHideTimeline: gsap.core.Timeline | null = null;
 
-      const coverStartTrigger = aboutSection ?? skillsSection;
+      const hasSkillsSection = Boolean(skillsSection);
+      const hasAboutSection = Boolean(aboutSection);
+      const coverStartTrigger = skillsSection ?? aboutSection;
       const coverEndTrigger = aboutSection ?? coverStartTrigger;
+      const coverStartPosition = hasSkillsSection || hasAboutSection ? "top bottom" : "bottom bottom";
+      const coverEndPosition = hasAboutSection ? "bottom top" : "bottom top";
 
       if (profile && coverStartTrigger && coverEndTrigger) {
         const setProfileCoverage = (covered: boolean) => {
@@ -511,9 +515,9 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
 
         profileCoverTrigger = ScrollTrigger.create({
           trigger: coverStartTrigger,
-          start: aboutSection ? "top bottom" : "bottom bottom",
+          start: coverStartPosition,
           endTrigger: coverEndTrigger,
-          end: aboutSection ? "bottom top" : "bottom top",
+          end: coverEndPosition,
           onEnter: () => setProfileCoverage(true),
           onEnterBack: () => setProfileCoverage(true),
           onLeave: () => setProfileCoverage(false),
@@ -540,7 +544,7 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         );
       }
 
-      const profileHideTrigger = aboutSection ?? null;
+      const profileHideTrigger = skillsSection ?? aboutSection ?? null;
 
       if (profile && profileHideTrigger) {
         profileHideTimeline = gsap
