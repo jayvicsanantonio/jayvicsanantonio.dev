@@ -13,7 +13,8 @@ export const HERO_SCROLL_DISTANCE = 0.2;
 export const LABEL_EXIT_Y_PERCENT = -185;
 export const LABEL_EXIT_SCROLL_DISTANCE = 0.5;
 export const PROFILE_BASE_Z_INDEX = 30;
-export const PROFILE_COVER_Z_INDEX = -5;
+// Keep positive so the fixed profile stays above the smooth-scroll container even when covered.
+export const PROFILE_COVER_Z_INDEX = 10;
 
 export const FINAL_GEOMETRY_STATE = {
   width: "100%",
@@ -41,9 +42,11 @@ export const SCROLL_SMOOTHER_CONFIG = {
   ignoreMobileResize: true,
 };
 
+export const PROFILE_SCROLL_TARGET_Y = 0;
+
 export const PROFILE_SCROLL_CONFIG = {
   scale: 0.55,
-  yPercent: 0,
+  yPercent: PROFILE_SCROLL_TARGET_Y,
   transformOrigin: "50% 100%",
   ease: "none" as const,
 };

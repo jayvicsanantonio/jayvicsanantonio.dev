@@ -27,9 +27,8 @@ export type UseHeroAnimationArgs = {
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-const PROFILE_PIN_HIDE_START = "top bottom";
+const PROFILE_PIN_HIDE_START = "top 90%";
 const PROFILE_PIN_HIDE_END = "top 45%";
-const PROFILE_PIN_HIDE_Y = 18;
 
 export default function useHeroAnimations(args: UseHeroAnimationArgs) {
   useHeroIntroAnimation(args);
@@ -544,7 +543,7 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         );
       }
 
-      const profileHideTrigger = skillsSection ?? aboutSection ?? null;
+      const profileHideTrigger = aboutSection ?? null;
 
       if (profile && profileHideTrigger) {
         profileHideTimeline = gsap
@@ -556,14 +555,10 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
               scrub: true,
             },
           })
-          .fromTo(
-            profile,
-            { autoAlpha: 1, yPercent: 0 },
-            {
-              yPercent: PROFILE_PIN_HIDE_Y,
-              ease: "power2.out",
-            },
-          );
+          .to(profile, {
+            autoAlpha: 0,
+            ease: "power2.out",
+          });
       }
 
       if (coverSection && coverLabel && coverBody) {
