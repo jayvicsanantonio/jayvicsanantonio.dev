@@ -72,6 +72,11 @@ function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroAnimationA
 
       releaseScrollLock = lockScroll();
       const timeline = gsap.timeline();
+      const releaseScrollLockIfNeeded = () => {
+        if (!releaseScrollLock) return;
+        releaseScrollLock();
+        releaseScrollLock = null;
+      };
 
       if (navRow) {
         timeline.set(navRow, { autoAlpha: 0 });
@@ -149,6 +154,7 @@ function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroAnimationA
           },
           "-=0.2",
         )
+        .add(releaseScrollLockIfNeeded, ">-0.25")
         .to(
           overlay,
           {
@@ -185,13 +191,10 @@ function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroAnimationA
         );
       }
 
-      timeline.add(() => {
-        releaseScrollLock?.();
-        releaseScrollLock = null;
-      });
+      timeline.add(releaseScrollLockIfNeeded);
 
       return () => {
-        releaseScrollLock?.();
+        releaseScrollLockIfNeeded();
         timeline.kill();
       };
     },

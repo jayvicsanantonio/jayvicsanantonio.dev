@@ -4,6 +4,9 @@ import React from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+// Toggle smooth-scrollbar while debugging other client effects (e.g., view transitions)
+const ENABLE_SMOOTH_SCROLLBAR = false;
+
 gsap.registerPlugin(ScrollTrigger);
 
 type Props = { children: React.ReactNode };
@@ -86,7 +89,7 @@ export default function ScrollProvider({ children }: Props) {
       ? window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches === true
       : false;
 
-    if (prefersReduced) {
+    if (!ENABLE_SMOOTH_SCROLLBAR || prefersReduced) {
       setMode("native");
       return;
     }
@@ -196,14 +199,14 @@ export default function ScrollProvider({ children }: Props) {
 
   return (
     <>
-      {mode === "smooth" ? (
-        <div id="scroller" ref={scrollerRef} data-scrollbar className="h-[100dvh] overflow-hidden">
-          <div>{children}</div>
-        </div>
-      ) : (
-        // Native fallback: no fixed-height container; allow normal document scrolling
+      <div
+        id="scroller"
+        ref={scrollerRef}
+        data-scrollbar={mode === "smooth" ? "" : undefined}
+        className={mode === "smooth" ? "h-[100dvh] overflow-hidden" : undefined}
+      >
         <div>{children}</div>
-      )}
+      </div>
 
       {mode === "native" && (
         // Native fallback progress bar at the right edge

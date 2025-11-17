@@ -11,7 +11,8 @@ const nextConfig = {
   // Disable Partial Pre-Rendering cache components
   cacheComponents: false,
   experimental: {
-    viewTransition: true,
+    // Temporarily disable React ViewTransitions to avoid invalid state errors during dev
+    viewTransition: false,
     // Persist dev artifacts on disk to speed up restarts
     turbopackFileSystemCacheForDev: true,
   },
