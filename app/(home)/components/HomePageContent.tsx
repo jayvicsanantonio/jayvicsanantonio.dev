@@ -28,7 +28,6 @@ export default function HomePageContent({ children }: { children: React.ReactNod
   const navRowRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
   const aboutSectionRef = useRef<HTMLDivElement>(null);
-  const skillsSectionRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
   const heroRefs: HeroAnimationRefs = {
     smoothWrapperRef,
@@ -49,7 +48,6 @@ export default function HomePageContent({ children }: { children: React.ReactNod
     profileRef,
     navRowRef,
     aboutSectionRef,
-    skillsSectionRef,
   };
   useHeroAnimations({ refs: heroRefs, prefersReducedMotion });
 
@@ -63,7 +61,7 @@ export default function HomePageContent({ children }: { children: React.ReactNod
         style={{ willChange: prefersReducedMotion ? undefined : "transform" }}
       >
         <Hero {...(heroRefs as unknown as HeroProps)} />
-        <Skills sectionRef={skillsSectionRef} aboutSectionRef={aboutSectionRef} />
+        <Skills />
         <About aboutRef={aboutSectionRef as RefObject<HTMLDivElement>} />
       </div>
       <Profile profileRef={profileRef} prefersReducedMotion={prefersReducedMotion} />

@@ -220,7 +220,6 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
       const coverLabel = refs.coverLabelRef.current;
       const coverBody = refs.coverBodyRef.current;
       const aboutSection = refs.aboutSectionRef.current;
-      const skillsSection = refs.skillsSectionRef.current;
 
       if (prefersReducedMotion) {
         if (coverFill) {
@@ -295,7 +294,6 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         coverLabel,
         coverBody,
         aboutSection,
-        skillsSection,
       });
       cleanupFns.push(coverCleanup);
 
@@ -696,7 +694,6 @@ type CoverAnimationArgs = {
   coverLabel: HTMLDivElement | null;
   coverBody: HTMLDivElement | null;
   aboutSection: HTMLDivElement | null;
-  skillsSection: HTMLDivElement | null;
 };
 
 function createCoverAnimations({
@@ -706,15 +703,13 @@ function createCoverAnimations({
   coverLabel,
   coverBody,
   aboutSection,
-  skillsSection,
 }: CoverAnimationArgs) {
   const cleanupFns: Array<() => void> = [];
 
-  const hasSkillsSection = Boolean(skillsSection);
   const hasAboutSection = Boolean(aboutSection);
-  const coverStartTrigger = skillsSection ?? aboutSection;
-  const coverEndTrigger = aboutSection ?? coverStartTrigger;
-  const coverStartPosition = hasSkillsSection || hasAboutSection ? "top bottom" : "bottom bottom";
+  const coverStartTrigger = aboutSection ?? coverSection;
+  const coverEndTrigger = aboutSection ?? coverSection;
+  const coverStartPosition = hasAboutSection ? "top bottom" : "bottom bottom";
   const coverEndPosition = hasAboutSection ? "bottom top" : "bottom bottom";
 
   if (profile && coverStartTrigger && coverEndTrigger) {
