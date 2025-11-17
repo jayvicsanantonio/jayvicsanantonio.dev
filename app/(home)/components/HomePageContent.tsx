@@ -1,7 +1,7 @@
 "use client";
 
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
-import { RefObject, useRef } from "react";
+import { useRef } from "react";
 import Profile from "./Hero/Profile";
 import Hero, { HeroProps } from "./Hero";
 import type { HeroAnimationRefs } from "./Hero/hero.types";
@@ -27,7 +27,6 @@ export default function HomePageContent({ children }: { children: React.ReactNod
   const pillSkinRef = useRef<HTMLDivElement>(null);
   const navRowRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
-  const aboutSectionRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
   const heroRefs: HeroAnimationRefs = {
     smoothWrapperRef,
@@ -47,7 +46,6 @@ export default function HomePageContent({ children }: { children: React.ReactNod
     pillSkinRef,
     profileRef,
     navRowRef,
-    aboutSectionRef,
   };
   useHeroAnimations({ refs: heroRefs, prefersReducedMotion });
 
@@ -62,7 +60,7 @@ export default function HomePageContent({ children }: { children: React.ReactNod
       >
         <Hero {...(heroRefs as unknown as HeroProps)} />
         <Skills />
-        <About aboutRef={aboutSectionRef as RefObject<HTMLDivElement>} />
+        <About />
       </div>
       <Profile profileRef={profileRef} prefersReducedMotion={prefersReducedMotion} />
     </main>
