@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import HomePageContent from "./(home)/components/HomePageContent";
 
+const siteUrl = new URL("https://jayvicsanantonio.dev");
+
 export const metadata: Metadata = {
+  metadataBase: siteUrl,
   title: "Jayvic San Antonio | Full-Stack Software Engineer",
   description:
     "Bay Area-based full-stack engineer building high-performance web experiences and reliable systems.",

@@ -316,7 +316,8 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
       let videoShrinkTimeline: gsap.core.Timeline;
       let lastTargetOffset: { x: number; y: number } | null = null;
 
-      const syncPillToNavRow = ({ force = false } = {}) => {
+      const MIN_SCROLL_PROGRESS_FOR_ALIGNMENT = 0.05;
+      const syncPillToNavRow = () => {
         if (!videoShrinkTimeline) {
           return;
         }
@@ -324,13 +325,12 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         if (!trigger) {
           return;
         }
-        if (!force && trigger.progress < 0.9) {
+        if (trigger.progress < MIN_SCROLL_PROGRESS_FOR_ALIGNMENT && !trigger.isActive) {
           lastTargetOffset = null;
           return;
         }
         const offset = getPillCenterOffset();
         if (
-          !force &&
           lastTargetOffset &&
           Math.abs(offset.x - lastTargetOffset.x) < 0.5 &&
           Math.abs(offset.y - lastTargetOffset.y) < 0.5
@@ -342,7 +342,7 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         pillSnapTween = gsap.to(pill, {
           x: offset.x,
           y: offset.y,
-          duration: force ? 0 : 0.3,
+          duration: trigger.isActive ? 0.3 : 0,
           ease: "power2.out",
         });
       };
@@ -363,7 +363,7 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
             },
             invalidateOnRefresh: true,
             onUpdate: () => syncPillToNavRow(),
-            onRefresh: () => syncPillToNavRow({ force: true }),
+            onRefresh: () => syncPillToNavRow(),
           },
         })
         .to(

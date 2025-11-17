@@ -19,7 +19,7 @@ export const metadata: Metadata = {
       "Highly skilled full-stack software engineer with a proven track record of delivering successful web projects. Experienced in JavaScript and passionate about building innovative solutions.",
     images: [
       {
-        url: "/opengraph-image",
+        url: "/images/home/profile-image.jpg",
       },
     ],
   },
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: "Jayvic San Antonio | Full-Stack Software Engineer",
     description:
       "Highly skilled full-stack software engineer with a proven track record of delivering successful web projects.",
-    images: ["/opengraph-image"],
+    images: ["/images/home/profile-image.jpg"],
   },
   icons: {
     icon: [
@@ -65,7 +65,7 @@ const sourceSansPro = localFont({
       style: "normal",
     },
   ],
-  display: "swap",
+  display: "block",
   variable: "--font-source-sans",
 });
 
@@ -78,7 +78,7 @@ const sourceSansProLight = localFont({
       style: "normal",
     },
   ],
-  display: "swap",
+  display: "block",
   variable: "--font-source-sans",
   preload: false,
 });
@@ -92,7 +92,7 @@ const sourceSansProBold = localFont({
       style: "normal",
     },
   ],
-  display: "swap",
+  display: "block",
   variable: "--font-source-sans",
   preload: false,
 });
@@ -107,7 +107,7 @@ const oswaldLocal = localFont({
       style: "normal",
     },
   ],
-  display: "swap",
+  display: "block",
   variable: "--font-oswald",
   preload: false,
 });
