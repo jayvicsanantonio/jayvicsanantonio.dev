@@ -65,7 +65,7 @@ const sourceSansPro = localFont({
       style: "normal",
     },
   ],
-  display: "block",
+  display: "swap",
   variable: "--font-source-sans",
 });
 
@@ -78,7 +78,7 @@ const sourceSansProLight = localFont({
       style: "normal",
     },
   ],
-  display: "block",
+  display: "swap",
   variable: "--font-source-sans",
   preload: false,
 });
@@ -92,7 +92,7 @@ const sourceSansProBold = localFont({
       style: "normal",
     },
   ],
-  display: "block",
+  display: "swap",
   variable: "--font-source-sans",
   preload: false,
 });
@@ -107,7 +107,7 @@ const oswaldLocal = localFont({
       style: "normal",
     },
   ],
-  display: "block",
+  display: "swap",
   variable: "--font-oswald",
   preload: false,
 });
