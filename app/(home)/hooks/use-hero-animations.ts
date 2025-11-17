@@ -246,371 +246,64 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         return;
       }
 
-      // Ensure nav row is measurable before we calculate target dimensions.
-      if (navRow && window.getComputedStyle(navRow).visibility === "hidden") {
+      if (window.getComputedStyle(navRow).visibility === "hidden") {
         gsap.set(navRow, { visibility: "visible" });
       }
 
       const navSpacerEl = navRow.querySelector<HTMLDivElement>("[data-nav-spacer]");
-      const firstNavButton = navRow.querySelector<HTMLAnchorElement>("a,button");
-
-      const getTargetPillWidth = () => {
-        const spacerWidth = navSpacerEl?.getBoundingClientRect().width ?? 0;
-        if (spacerWidth > 0) {
-          return spacerWidth;
-        }
-        const navWidth = navRow.getBoundingClientRect().width;
-        return Math.max(navWidth * 0.35, CFG.nav.buttonSize.w * 3);
-      };
-
-      const getTargetPillHeight = () => {
-        const candidate =
-          firstNavButton?.getBoundingClientRect().height ?? navRow.getBoundingClientRect().height;
-        if (candidate && candidate > 0) {
-          return candidate;
-        }
-        return CFG.nav.buttonSize.h;
-      };
-
-      const getTargetCenter = () => {
-        const spacerRect = navSpacerEl?.getBoundingClientRect();
-        const buttonRect = firstNavButton?.getBoundingClientRect();
-        const navRect = navRow.getBoundingClientRect();
-        const xCenter = spacerRect
-          ? spacerRect.left + spacerRect.width / 2
-          : navRect.left + navRect.width / 2;
-        const yCenter = buttonRect
-          ? buttonRect.top + buttonRect.height / 2
-          : navRect.top + navRect.height / 2;
-        return { x: xCenter, y: yCenter };
-      };
-
-      const getNavRowYOffset = () => calculateNavYOffset(navRow, pill, getTargetPillHeight());
-
-      const getPillCenterOffset = () => {
-        const pr = pill.getBoundingClientRect();
-        const target = getTargetCenter();
-        return {
-          x: target.x - (pr.left + pr.width / 2),
-          y: target.y + getNavRowYOffset() - (pr.top + pr.height / 2),
-        };
-      };
-
-      // Smooth Scrollbar will proxy ScrollTrigger globally via ScrollProvider.
-
-      const scrollTween = gsap.to(profile, {
-        ...PROFILE_SCROLL_CONFIG,
-        scrollTrigger: {
-          trigger: heroSection,
-          start: "top top",
-          end: () => "+=" + window.innerHeight * HERO_SCROLL_DISTANCE,
-          scrub: true,
-        },
-      });
-
-      const pillShrinkCompleteLabel = "pillShrinkComplete";
-
-      gsap.set(pill, { borderWidth: 0, borderColor: "transparent" });
-
-      let pillSnapTween: gsap.core.Tween | null = null;
-      let videoShrinkTimeline: gsap.core.Timeline;
-      let lastTargetOffset: { x: number; y: number } | null = null;
-
-      const MIN_SCROLL_PROGRESS_FOR_ALIGNMENT = 0.05;
-      const syncPillToNavRow = () => {
-        if (!videoShrinkTimeline) {
-          return;
-        }
-        const trigger = videoShrinkTimeline.scrollTrigger;
-        if (!trigger) {
-          return;
-        }
-        if (trigger.progress < MIN_SCROLL_PROGRESS_FOR_ALIGNMENT && !trigger.isActive) {
-          lastTargetOffset = null;
-          return;
-        }
-        const offset = getPillCenterOffset();
-        if (
-          lastTargetOffset &&
-          Math.abs(offset.x - lastTargetOffset.x) < 0.5 &&
-          Math.abs(offset.y - lastTargetOffset.y) < 0.5
-        ) {
-          return;
-        }
-        lastTargetOffset = offset;
-        pillSnapTween?.kill();
-        pillSnapTween = gsap.to(pill, {
-          x: offset.x,
-          y: offset.y,
-          duration: trigger.isActive ? 0.3 : 0,
-          ease: "power2.out",
-        });
-      };
-
-      videoShrinkTimeline = gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: heroSection,
-            start: "top top",
-            end: () => "+=" + window.innerHeight,
-            // apply slight smoothing for more elegant motion
-            scrub: 0.6,
-            onEnter: () => {
-              gsap.set([pill, video], { transformOrigin: "50% 50%" });
-            },
-            onEnterBack: () => {
-              gsap.set([pill, video], { transformOrigin: "50% 50%" });
-            },
-            invalidateOnRefresh: true,
-            onUpdate: () => syncPillToNavRow(),
-            onRefresh: () => syncPillToNavRow(),
-          },
-        })
-        .to(
-          pill,
-          {
-            width: () => `${getTargetPillWidth()}px`,
-            height: () => `${getTargetPillHeight()}px`,
-            x: () => getPillCenterOffset().x,
-            y: () => getPillCenterOffset().y,
-            borderRadius: "384px",
-            backgroundColor: PILL_SHRINK_BACKGROUND,
-            ease: "none",
-            force3D: true,
-          },
-          0,
-        )
-        .addLabel(pillShrinkCompleteLabel)
-        .to(
-          pill,
-          {
-            borderWidth: 1,
-            borderColor: PILL_SHRINK_BORDER,
-            boxShadow: PILL_SHRINK_BOX_SHADOW,
-            duration: 0.25,
-            ease: "power1.out",
-          },
-          pillShrinkCompleteLabel,
-        )
-        .to(
-          pillContent,
-          {
-            color: "#ffffff",
-            textShadow: "0 6px 18px rgba(0,0,0,0.55)",
-            duration: 0.35,
-            ease: "power1.out",
-          },
-          pillShrinkCompleteLabel,
-        )
-        .to(
-          pillContent,
-          {
-            autoAlpha: 1,
-            duration: 0.4,
-            ease: "power1.out",
-          },
-          pillShrinkCompleteLabel,
-        );
-
-      if (pillSkin) {
-        videoShrinkTimeline.to(
-          pillSkin,
-          {
-            autoAlpha: 1,
-            duration: 0.4,
-            ease: "power1.out",
-          },
-          pillShrinkCompleteLabel,
-        );
-      }
-
-      if (overlay) {
-        videoShrinkTimeline.fromTo(
-          overlay,
-          { autoAlpha: 0.55 },
-          {
-            autoAlpha: 0.85,
-            duration: 0.4,
-            ease: "none",
-            immediateRender: false,
-          },
-          0,
-        );
-        videoShrinkTimeline.to(
-          overlay,
-          {
-            autoAlpha: 0,
-            duration: 0.35,
-            ease: "power1.out",
-          },
-          pillShrinkCompleteLabel,
-        );
-      }
-
-      videoShrinkTimeline.to(
-        video,
-        {
-          autoAlpha: 0,
-          duration: 0.35,
-          ease: "power1.out",
-        },
-        pillShrinkCompleteLabel,
-      );
-
-      videoShrinkTimeline.fromTo(
+      const firstNavButton = navRow.querySelector<HTMLElement>("a,button");
+      const navMeasurements = createNavMeasurementHelpers({
         navRow,
-        {
-          autoAlpha: 0,
-          yPercent: 18,
-        },
-          {
-            autoAlpha: 1,
-            yPercent: 0,
-            y: () => getNavRowYOffset(),
-            duration: 0.45,
-            ease: "power2.out",
-          },
-        0.55,
-      );
-
-      let labelExitTimeline: gsap.core.Timeline | null = null;
-
-      if ((nameplate || designation) && heroSection) {
-        const labelTargets = [nameplate, designation].filter(
-          (node): node is HTMLDivElement => Boolean(node),
-        );
-
-        labelExitTimeline = gsap.timeline({
-          scrollTrigger: {
-            trigger: heroSection,
-            start: "top top",
-            end: () => "+=" + window.innerHeight * LABEL_EXIT_SCROLL_DISTANCE,
-            scrub: true,
-          },
-        });
-
-        labelExitTimeline.to(labelTargets, {
-          autoAlpha: 0,
-          yPercent: LABEL_EXIT_Y_PERCENT,
-          ease: "power2.inOut",
-        });
-      }
-
-      let coverTimeline: gsap.core.Tween | null = null;
-      let coverContentTimeline: gsap.core.Timeline | null = null;
-      let profileCoverTrigger: ScrollTrigger | null = null;
-      let profileHideTimeline: gsap.core.Timeline | null = null;
-
-      const hasSkillsSection = Boolean(skillsSection);
-      const hasAboutSection = Boolean(aboutSection);
-      const coverStartTrigger = skillsSection ?? aboutSection;
-      const coverEndTrigger = aboutSection ?? coverStartTrigger;
-      const coverStartPosition = hasSkillsSection || hasAboutSection ? "top bottom" : "bottom bottom";
-      const coverEndPosition = hasAboutSection ? "bottom top" : "bottom top";
-
-      if (profile && coverStartTrigger && coverEndTrigger) {
-        const setProfileCoverage = (covered: boolean) => {
-          gsap.set(profile, {
-            zIndex: covered ? PROFILE_COVER_Z_INDEX : PROFILE_BASE_Z_INDEX,
-          });
-        };
-
-        profileCoverTrigger = ScrollTrigger.create({
-          trigger: coverStartTrigger,
-          start: coverStartPosition,
-          endTrigger: coverEndTrigger,
-          end: coverEndPosition,
-          onEnter: () => setProfileCoverage(true),
-          onEnterBack: () => setProfileCoverage(true),
-          onLeave: () => setProfileCoverage(false),
-          onLeaveBack: () => setProfileCoverage(false),
-        });
-      }
-
-      if (coverSection && coverFill) {
-        gsap.set(coverFill, { transformOrigin: "50% 100%" });
-
-        coverTimeline = gsap.fromTo(
-          coverFill,
-          { scaleY: 0 },
-          {
-            scaleY: 1,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: coverSection,
-              start: "top bottom",
-              end: "top top",
-              scrub: true,
-            },
-          },
-        );
-      }
-
-      const profileHideTrigger = aboutSection ?? null;
-
-      if (profile && profileHideTrigger) {
-        profileHideTimeline = gsap
-          .timeline({
-            scrollTrigger: {
-              trigger: profileHideTrigger,
-              start: PROFILE_PIN_HIDE_START,
-              end: PROFILE_PIN_HIDE_END,
-              scrub: true,
-            },
-          })
-          .to(profile, {
-            autoAlpha: 0,
-            ease: "power2.out",
-          });
-      }
-
-      if (coverSection && coverLabel && coverBody) {
-        coverContentTimeline = gsap
-          .timeline({
-            scrollTrigger: {
-              trigger: coverSection,
-              start: "top top",
-              end: () => "+=" + window.innerHeight * 0.9,
-              scrub: true,
-              pin: true,
-              pinSpacing: true,
-            },
-          })
-          .fromTo(coverLabel, { yPercent: -12 }, { yPercent: 12, ease: "none" }, 0)
-          .fromTo(coverBody, { yPercent: 12 }, { yPercent: -12, ease: "none" }, 0);
-      }
-
-      const heroPin = ScrollTrigger.create({
-        trigger: heroSection,
-        start: "top top",
-        end: () => "+=" + window.innerHeight,
-        pin: true,
-        pinReparent: true,
-        anticipatePin: 1,
+        pill,
+        navSpacerEl,
+        firstNavButton,
       });
 
-      ScrollTrigger.refresh();
+      const cleanupFns: Array<() => void> = [];
+
+      const scrollTween = createProfileScrollTween(heroSection, profile);
+      cleanupFns.push(() => killTween(scrollTween));
+
+      const { cleanup: pillCleanup } = createPillShrinkTimeline({
+        heroSection,
+        navRow,
+        pill,
+        pillContent,
+        pillSkin,
+        video,
+        overlay,
+        getTargetPillWidth: navMeasurements.getTargetPillWidth,
+        getTargetPillHeight: navMeasurements.getTargetPillHeight,
+        getNavRowYOffset: navMeasurements.getNavRowYOffset,
+        getPillCenterOffset: navMeasurements.getPillCenterOffset,
+      });
+      cleanupFns.push(pillCleanup);
+
+      const labelExitTimeline = createLabelExitTimeline({
+        heroSection,
+        nameplate,
+        designation,
+      });
+      if (labelExitTimeline) {
+        cleanupFns.push(() => killTimeline(labelExitTimeline));
+      }
+
+      const coverCleanup = createCoverAnimations({
+        profile,
+        coverSection,
+        coverFill,
+        coverLabel,
+        coverBody,
+        aboutSection,
+        skillsSection,
+      });
+      cleanupFns.push(coverCleanup);
+
+      const heroPin = createHeroPin(heroSection);
+      cleanupFns.push(() => heroPin.kill());
 
       return () => {
-        scrollTween.scrollTrigger?.kill();
-        scrollTween.kill();
-        // Smooth Scrollbar lifecycle handled by ScrollProvider
-        videoShrinkTimeline.scrollTrigger?.kill();
-        videoShrinkTimeline.kill();
-        pillSnapTween?.kill();
-        coverTimeline?.scrollTrigger?.kill();
-        coverTimeline?.kill();
-        coverContentTimeline?.scrollTrigger?.kill();
-        coverContentTimeline?.kill();
-        labelExitTimeline?.scrollTrigger?.kill();
-        labelExitTimeline?.kill();
-        profileCoverTrigger?.kill();
-        profileHideTimeline?.scrollTrigger?.kill();
-        profileHideTimeline?.kill();
-        if (profile) {
-          gsap.set(profile, { zIndex: PROFILE_BASE_Z_INDEX });
-        }
-        heroPin.kill();
+        cleanupFns.forEach((cleanup) => cleanup());
       };
     },
     { dependencies: [prefersReducedMotion] },
@@ -687,4 +380,460 @@ function calculateNavYOffset(
     return 0;
   }
   return (pillHeight - navHeight) / 2;
+}
+
+type NavMeasurementArgs = {
+  navRow: HTMLDivElement;
+  pill: HTMLDivElement;
+  navSpacerEl: HTMLDivElement | null;
+  firstNavButton: HTMLElement | null;
+};
+
+type NavMeasurementHelpers = {
+  getTargetPillWidth: () => number;
+  getTargetPillHeight: () => number;
+  getNavRowYOffset: () => number;
+  getPillCenterOffset: () => { x: number; y: number };
+};
+
+function createNavMeasurementHelpers({
+  navRow,
+  pill,
+  navSpacerEl,
+  firstNavButton,
+}: NavMeasurementArgs): NavMeasurementHelpers {
+  const getTargetPillWidth = () => {
+    const spacerWidth = navSpacerEl?.getBoundingClientRect().width ?? 0;
+    if (spacerWidth > 0) {
+      return spacerWidth;
+    }
+    const navWidth = navRow.getBoundingClientRect().width;
+    return Math.max(navWidth * 0.35, CFG.nav.buttonSize.w * 3);
+  };
+
+  const getTargetPillHeight = () => {
+    const candidate =
+      firstNavButton?.getBoundingClientRect().height ?? navRow.getBoundingClientRect().height;
+    if (candidate && candidate > 0) {
+      return candidate;
+    }
+    return CFG.nav.buttonSize.h;
+  };
+
+  const getTargetCenter = () => {
+    const spacerRect = navSpacerEl?.getBoundingClientRect();
+    const buttonRect = firstNavButton?.getBoundingClientRect();
+    const navRect = navRow.getBoundingClientRect();
+    const xCenter = spacerRect
+      ? spacerRect.left + spacerRect.width / 2
+      : navRect.left + navRect.width / 2;
+    const yCenter = buttonRect
+      ? buttonRect.top + buttonRect.height / 2
+      : navRect.top + navRect.height / 2;
+    return { x: xCenter, y: yCenter };
+  };
+
+  const getNavRowYOffset = () => calculateNavYOffset(navRow, pill, getTargetPillHeight());
+
+  const getPillCenterOffset = () => {
+    const pr = pill.getBoundingClientRect();
+    const target = getTargetCenter();
+    return {
+      x: target.x - (pr.left + pr.width / 2),
+      y: target.y + getNavRowYOffset() - (pr.top + pr.height / 2),
+    };
+  };
+
+  return {
+    getTargetPillWidth,
+    getTargetPillHeight,
+    getNavRowYOffset,
+    getPillCenterOffset,
+  };
+}
+
+type PillShrinkTimelineArgs = NavMeasurementHelpers & {
+  heroSection: HTMLDivElement;
+  navRow: HTMLDivElement;
+  pill: HTMLDivElement;
+  pillContent: HTMLDivElement;
+  pillSkin: HTMLDivElement | null;
+  video: HTMLVideoElement;
+  overlay: HTMLDivElement | null;
+};
+
+type PillShrinkTimelineResult = {
+  timeline: gsap.core.Timeline;
+  cleanup: () => void;
+};
+
+function createPillShrinkTimeline({
+  heroSection,
+  navRow,
+  pill,
+  pillContent,
+  pillSkin,
+  video,
+  overlay,
+  getTargetPillWidth,
+  getTargetPillHeight,
+  getNavRowYOffset,
+  getPillCenterOffset,
+}: PillShrinkTimelineArgs): PillShrinkTimelineResult {
+  const pillShrinkCompleteLabel = "pillShrinkComplete";
+  gsap.set(pill, { borderWidth: 0, borderColor: "transparent" });
+
+  let pillSnapTween: gsap.core.Tween | null = null;
+  let videoShrinkTimeline: gsap.core.Timeline;
+  let lastTargetOffset: { x: number; y: number } | null = null;
+
+  const MIN_SCROLL_PROGRESS_FOR_ALIGNMENT = 0.05;
+  const syncPillToNavRow = () => {
+    if (!videoShrinkTimeline) {
+      return;
+    }
+    const trigger = videoShrinkTimeline.scrollTrigger;
+    if (!trigger) {
+      return;
+    }
+    if (trigger.progress < MIN_SCROLL_PROGRESS_FOR_ALIGNMENT && !trigger.isActive) {
+      lastTargetOffset = null;
+      return;
+    }
+    const offset = getPillCenterOffset();
+    if (
+      lastTargetOffset &&
+      Math.abs(offset.x - lastTargetOffset.x) < 0.5 &&
+      Math.abs(offset.y - lastTargetOffset.y) < 0.5
+    ) {
+      return;
+    }
+    lastTargetOffset = offset;
+    pillSnapTween?.kill();
+    pillSnapTween = gsap.to(pill, {
+      x: offset.x,
+      y: offset.y,
+      duration: trigger.isActive ? 0.3 : 0,
+      ease: "power2.out",
+    });
+  };
+
+  videoShrinkTimeline = gsap
+    .timeline({
+      scrollTrigger: {
+        trigger: heroSection,
+        start: "top top",
+        end: () => "+=" + window.innerHeight,
+        // apply slight smoothing for more elegant motion
+        scrub: 0.6,
+        onEnter: () => {
+          gsap.set([pill, video], { transformOrigin: "50% 50%" });
+        },
+        onEnterBack: () => {
+          gsap.set([pill, video], { transformOrigin: "50% 50%" });
+        },
+        invalidateOnRefresh: true,
+        onUpdate: () => syncPillToNavRow(),
+        onRefresh: () => syncPillToNavRow(),
+      },
+    })
+    .to(
+      pill,
+      {
+        width: () => `${getTargetPillWidth()}px`,
+        height: () => `${getTargetPillHeight()}px`,
+        x: () => getPillCenterOffset().x,
+        y: () => getPillCenterOffset().y,
+        borderRadius: "384px",
+        backgroundColor: PILL_SHRINK_BACKGROUND,
+        ease: "none",
+        force3D: true,
+      },
+      0,
+    )
+    .addLabel(pillShrinkCompleteLabel)
+    .to(
+      pill,
+      {
+        borderWidth: 1,
+        borderColor: PILL_SHRINK_BORDER,
+        boxShadow: PILL_SHRINK_BOX_SHADOW,
+        duration: 0.25,
+        ease: "power1.out",
+      },
+      pillShrinkCompleteLabel,
+    )
+    .to(
+      pillContent,
+      {
+        color: "#ffffff",
+        textShadow: "0 6px 18px rgba(0,0,0,0.55)",
+        duration: 0.35,
+        ease: "power1.out",
+      },
+      pillShrinkCompleteLabel,
+    )
+    .to(
+      pillContent,
+      {
+        autoAlpha: 1,
+        duration: 0.4,
+        ease: "power1.out",
+      },
+      pillShrinkCompleteLabel,
+    );
+
+  if (pillSkin) {
+    videoShrinkTimeline.to(
+      pillSkin,
+      {
+        autoAlpha: 1,
+        duration: 0.4,
+        ease: "power1.out",
+      },
+      pillShrinkCompleteLabel,
+    );
+  }
+
+  if (overlay) {
+    videoShrinkTimeline.fromTo(
+      overlay,
+      { autoAlpha: 0.55 },
+      {
+        autoAlpha: 0.85,
+        duration: 0.4,
+        ease: "none",
+        immediateRender: false,
+      },
+      0,
+    );
+    videoShrinkTimeline.to(
+      overlay,
+      {
+        autoAlpha: 0,
+        duration: 0.35,
+        ease: "power1.out",
+      },
+      pillShrinkCompleteLabel,
+    );
+  }
+
+  videoShrinkTimeline.to(
+    video,
+    {
+      autoAlpha: 0,
+      duration: 0.35,
+      ease: "power1.out",
+    },
+    pillShrinkCompleteLabel,
+  );
+
+  videoShrinkTimeline.fromTo(
+    navRow,
+    {
+      autoAlpha: 0,
+      yPercent: 18,
+    },
+      {
+        autoAlpha: 1,
+        yPercent: 0,
+        y: () => getNavRowYOffset(),
+        duration: 0.45,
+        ease: "power2.out",
+      },
+    0.55,
+  );
+
+  return {
+    timeline: videoShrinkTimeline,
+    cleanup: () => {
+      videoShrinkTimeline.scrollTrigger?.kill();
+      videoShrinkTimeline.kill();
+      pillSnapTween?.kill();
+    },
+  };
+}
+
+type LabelExitTimelineArgs = {
+  heroSection: HTMLDivElement;
+  nameplate: HTMLDivElement | null;
+  designation: HTMLDivElement | null;
+};
+
+function createLabelExitTimeline({
+  heroSection,
+  nameplate,
+  designation,
+}: LabelExitTimelineArgs) {
+  const labelTargets = [nameplate, designation].filter(
+    (node): node is HTMLDivElement => Boolean(node),
+  );
+
+  if (!labelTargets.length) {
+    return null;
+  }
+
+  return gsap
+    .timeline({
+      scrollTrigger: {
+        trigger: heroSection,
+        start: "top top",
+        end: () => "+=" + window.innerHeight * LABEL_EXIT_SCROLL_DISTANCE,
+        scrub: true,
+      },
+    })
+    .to(labelTargets, {
+      autoAlpha: 0,
+      yPercent: LABEL_EXIT_Y_PERCENT,
+      ease: "power2.inOut",
+    });
+}
+
+type CoverAnimationArgs = {
+  profile: HTMLDivElement | null;
+  coverSection: HTMLDivElement | null;
+  coverFill: HTMLDivElement | null;
+  coverLabel: HTMLDivElement | null;
+  coverBody: HTMLDivElement | null;
+  aboutSection: HTMLDivElement | null;
+  skillsSection: HTMLDivElement | null;
+};
+
+function createCoverAnimations({
+  profile,
+  coverSection,
+  coverFill,
+  coverLabel,
+  coverBody,
+  aboutSection,
+  skillsSection,
+}: CoverAnimationArgs) {
+  const cleanupFns: Array<() => void> = [];
+
+  const hasSkillsSection = Boolean(skillsSection);
+  const hasAboutSection = Boolean(aboutSection);
+  const coverStartTrigger = skillsSection ?? aboutSection;
+  const coverEndTrigger = aboutSection ?? coverStartTrigger;
+  const coverStartPosition = hasSkillsSection || hasAboutSection ? "top bottom" : "bottom bottom";
+  const coverEndPosition = hasAboutSection ? "bottom top" : "bottom bottom";
+
+  if (profile && coverStartTrigger && coverEndTrigger) {
+    const setProfileCoverage = (covered: boolean) => {
+      gsap.set(profile, {
+        zIndex: covered ? PROFILE_COVER_Z_INDEX : PROFILE_BASE_Z_INDEX,
+      });
+    };
+
+    const profileCoverTrigger = ScrollTrigger.create({
+      trigger: coverStartTrigger,
+      start: coverStartPosition,
+      endTrigger: coverEndTrigger,
+      end: coverEndPosition,
+      onEnter: () => setProfileCoverage(true),
+      onEnterBack: () => setProfileCoverage(true),
+      onLeave: () => setProfileCoverage(false),
+      onLeaveBack: () => setProfileCoverage(false),
+    });
+
+    cleanupFns.push(() => profileCoverTrigger.kill());
+  }
+
+  if (coverSection && coverFill) {
+    gsap.set(coverFill, { transformOrigin: "50% 100%" });
+
+    const coverTimeline = gsap.fromTo(
+      coverFill,
+      { scaleY: 0 },
+      {
+        scaleY: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: coverSection,
+          start: "top bottom",
+          end: "top top",
+          scrub: true,
+        },
+      },
+    );
+
+    cleanupFns.push(() => killTween(coverTimeline));
+  }
+
+  const profileHideTrigger = aboutSection ?? null;
+
+  if (profile && profileHideTrigger) {
+    const profileHideTimeline = gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: profileHideTrigger,
+          start: PROFILE_PIN_HIDE_START,
+          end: PROFILE_PIN_HIDE_END,
+          scrub: true,
+        },
+      })
+      .to(profile, {
+        autoAlpha: 0,
+        ease: "power2.out",
+      });
+
+    cleanupFns.push(() => killTimeline(profileHideTimeline));
+  }
+
+  if (coverSection && coverLabel && coverBody) {
+    const coverContentTimeline = gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: coverSection,
+          start: "top top",
+          end: () => "+=" + window.innerHeight * 0.9,
+          scrub: true,
+          pin: true,
+          pinSpacing: true,
+        },
+      })
+      .fromTo(coverLabel, { yPercent: -12 }, { yPercent: 12, ease: "none" }, 0)
+      .fromTo(coverBody, { yPercent: 12 }, { yPercent: -12, ease: "none" }, 0);
+
+    cleanupFns.push(() => killTimeline(coverContentTimeline));
+  }
+
+  return () => {
+    cleanupFns.forEach((cleanup) => cleanup());
+    if (profile) {
+      gsap.set(profile, { zIndex: PROFILE_BASE_Z_INDEX });
+    }
+  };
+}
+
+function createHeroPin(heroSection: HTMLDivElement) {
+  return ScrollTrigger.create({
+    trigger: heroSection,
+    start: "top top",
+    end: () => "+=" + window.innerHeight,
+    pin: true,
+    pinReparent: true,
+    anticipatePin: 1,
+  });
+}
+
+function createProfileScrollTween(heroSection: HTMLDivElement, profile: HTMLDivElement) {
+  return gsap.to(profile, {
+    ...PROFILE_SCROLL_CONFIG,
+    scrollTrigger: {
+      trigger: heroSection,
+      start: "top top",
+      end: () => "+=" + window.innerHeight * HERO_SCROLL_DISTANCE,
+      scrub: true,
+    },
+  });
+}
+
+function killTween(tween: gsap.core.Tween | null | undefined) {
+  tween?.scrollTrigger?.kill();
+  tween?.kill();
+}
+
+function killTimeline(timeline: gsap.core.Timeline | null | undefined) {
+  timeline?.scrollTrigger?.kill();
+  timeline?.kill();
 }
