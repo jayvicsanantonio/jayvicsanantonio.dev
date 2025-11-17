@@ -3,6 +3,7 @@
 import React from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { usePathname } from "next/navigation";
 
 // Toggle smooth-scrollbar while debugging other client effects (e.g., view transitions)
 const ENABLE_SMOOTH_SCROLLBAR = false;
@@ -17,6 +18,7 @@ export default function ScrollProvider({ children }: Props) {
   const modeRef = React.useRef<"native" | "smooth">("native");
   const [progress, setProgress] = React.useState(0);
   const [mode, setMode] = React.useState<"native" | "smooth">("native");
+  const pathname = usePathname();
 
   const resetScrollPosition = React.useCallback(() => {
     if (typeof window === "undefined") {
@@ -83,6 +85,17 @@ export default function ScrollProvider({ children }: Props) {
   React.useEffect(() => {
     resetScrollPosition();
   }, [mode, resetScrollPosition]);
+
+  React.useEffect(() => {
+    if (pathname !== "/") {
+      return;
+    }
+
+    const raf = requestAnimationFrame(() => {
+      resetScrollPosition();
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [pathname, resetScrollPosition]);
 
   React.useEffect(() => {
     const prefersReduced = typeof window !== "undefined"
