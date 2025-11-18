@@ -18,6 +18,9 @@ export type HeroAnimationRefs = {
   pillSkinRef: MutableRefObject<HTMLDivElement | null>;
   profileRef: MutableRefObject<HTMLDivElement | null>;
   navRowRef: MutableRefObject<HTMLDivElement | null>;
+  skillsSectionRef: MutableRefObject<HTMLElement | null>;
+  skillsRowsAboveRefs: MutableRefObject<Array<HTMLDivElement | null>>;
+  skillsRowsBelowRefs: MutableRefObject<Array<HTMLDivElement | null>>;
 };
 
 export type StageProps = Pick<

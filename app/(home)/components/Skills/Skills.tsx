@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useRef, type MutableRefObject } from "react";
 
 import MarqueeRow from "./MarqueeRow";
 
@@ -90,7 +90,20 @@ const SKILLS: string[] = [
   "Google GenAI SDK",
 ];
 
-export default function Skills() {
+type SkillsRefs = {
+  sectionRef?: MutableRefObject<HTMLElement | null> | null;
+  rowsAboveRefs?: MutableRefObject<Array<HTMLDivElement | null>> | null;
+  rowsBelowRefs?: MutableRefObject<Array<HTMLDivElement | null>> | null;
+};
+
+export default function Skills(props: SkillsRefs = {}) {
+  const { sectionRef, rowsAboveRefs, rowsBelowRefs } = props;
+  const fallbackSectionRef = useRef<HTMLElement>(null);
+  const fallbackRowsAboveRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const fallbackRowsBelowRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const sectionElementRef = sectionRef ?? fallbackSectionRef;
+  const rowsAboveStore = rowsAboveRefs ?? fallbackRowsAboveRefs;
+  const rowsBelowStore = rowsBelowRefs ?? fallbackRowsBelowRefs;
   const row0 = useMemo(() => SKILLS.filter((_, index) => index % 6 === 0), []);
   const row1 = useMemo(() => SKILLS.filter((_, index) => index % 6 === 1), []);
   const row2 = useMemo(() => SKILLS.filter((_, index) => index % 6 === 2), []);
@@ -118,6 +131,7 @@ export default function Skills() {
 
   return (
     <section
+      ref={sectionElementRef}
       className="flex w-full min-h-[110vh] flex-col gap-6 py-12 sm:gap-8 sm:py-16 lg:py-20"
       aria-labelledby="skills-heading"
     >
@@ -128,6 +142,9 @@ export default function Skills() {
             duration={config.duration ?? 56}
             direction={config.direction as "left" | "right"}
             key={`skills-top-${index}`}
+            ref={(el) => {
+              rowsAboveStore.current[index] = el;
+            }}
           />
         ))}
       </div>
@@ -147,6 +164,9 @@ export default function Skills() {
             duration={config.duration ?? 56}
             direction={config.direction as "left" | "right"}
             key={`skills-bottom-${index}`}
+            ref={(el) => {
+              rowsBelowStore.current[index] = el;
+            }}
           />
         ))}
       </div>

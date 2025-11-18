@@ -1,5 +1,7 @@
 "use client";
 
+import { forwardRef } from "react";
+
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 type MarqueeRowProps = {
   items: string[];
@@ -8,19 +10,17 @@ type MarqueeRowProps = {
   pauseOnHover?: boolean;
 };
 
-export default function MarqueeRow({
-  items,
-  direction = "left",
-  duration = 45,
-  pauseOnHover = true,
-}: MarqueeRowProps) {
+const MarqueeRow = forwardRef<HTMLDivElement, MarqueeRowProps>(function MarqueeRow(
+  { items, direction = "left", duration = 45, pauseOnHover = true },
+  ref,
+) {
   const reducedMotion = usePrefersReducedMotion();
 
   const playStateClass = pauseOnHover ? "group-hover:[animation-play-state:paused]" : "";
   const dirClass = direction === "right" ? "[animation-direction:reverse]" : "";
 
   return (
-    <div className="relative overflow-hidden mx-auto w-full max-w-7xl">
+    <div ref={ref} className="relative overflow-hidden mx-auto w-full max-w-7xl">
       <div className="group relative block select-none text-white/80 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
         <div
           className={`marquee-runner flex w-max items-center ${playStateClass} ${dirClass}`}
@@ -68,4 +68,6 @@ export default function MarqueeRow({
       `}</style>
     </div>
   );
-}
+});
+
+export default MarqueeRow;

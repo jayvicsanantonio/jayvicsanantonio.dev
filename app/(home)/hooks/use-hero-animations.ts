@@ -216,6 +216,9 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
       const designation = refs.designationRef.current;
       const coverLabel = refs.coverLabelRef.current;
       const coverBody = refs.coverBodyRef.current;
+      const skillsSection = refs.skillsSectionRef.current;
+      const skillsRowsAbove = refs.skillsRowsAboveRefs.current;
+      const skillsRowsBelow = refs.skillsRowsBelowRefs.current;
 
       if (prefersReducedMotion) {
         if (coverFill) {
@@ -294,6 +297,13 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
 
       const heroPin = createHeroPin(heroSection);
       cleanupFns.push(() => heroPin.kill());
+
+      const skillsCleanup = createSkillsEntranceAnimation({
+        section: skillsSection,
+        rowsAbove: skillsRowsAbove,
+        rowsBelow: skillsRowsBelow,
+      });
+      cleanupFns.push(skillsCleanup);
 
       return () => {
         cleanupFns.forEach((cleanup) => cleanup());
@@ -442,6 +452,62 @@ function createNavMeasurementHelpers({
     getTargetPillHeight,
     getNavRowYOffset,
     getPillCenterOffset,
+  };
+}
+
+type SkillsEntranceArgs = {
+  section: HTMLElement | null;
+  rowsAbove?: Array<HTMLDivElement | null>;
+  rowsBelow?: Array<HTMLDivElement | null>;
+};
+
+function createSkillsEntranceAnimation({
+  section,
+  rowsAbove = [],
+  rowsBelow = [],
+}: SkillsEntranceArgs) {
+  if (!section) {
+    return () => {};
+  }
+
+  const aboveEls = rowsAbove.filter((row): row is HTMLDivElement => Boolean(row));
+  const belowEls = rowsBelow.filter((row): row is HTMLDivElement => Boolean(row));
+
+  if (!aboveEls.length && !belowEls.length) {
+    return () => {};
+  }
+
+  const timeline = gsap.timeline({
+    defaults: { ease: "power2.out" },
+    scrollTrigger: {
+      trigger: section,
+      start: "top 80%",
+      end: "bottom center",
+      scrub: true,
+    },
+  });
+
+  if (aboveEls.length) {
+    timeline.fromTo(
+      aboveEls,
+      { autoAlpha: 0, xPercent: 18 },
+      { autoAlpha: 1, xPercent: 0, stagger: 0.12 },
+      0,
+    );
+  }
+
+  if (belowEls.length) {
+    timeline.fromTo(
+      belowEls,
+      { autoAlpha: 0, xPercent: -18 },
+      { autoAlpha: 1, xPercent: 0, stagger: 0.12 },
+      aboveEls.length ? 0.25 : 0,
+    );
+  }
+
+  return () => {
+    timeline.scrollTrigger?.kill();
+    timeline.kill();
   };
 }
 
