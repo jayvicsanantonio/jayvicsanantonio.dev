@@ -94,16 +94,19 @@ type SkillsRefs = {
   sectionRef?: MutableRefObject<HTMLElement | null> | null;
   rowsAboveRefs?: MutableRefObject<Array<HTMLDivElement | null>> | null;
   rowsBelowRefs?: MutableRefObject<Array<HTMLDivElement | null>> | null;
+  headingRef?: MutableRefObject<HTMLHeadingElement | null> | null;
 };
 
 export default function Skills(props: SkillsRefs = {}) {
-  const { sectionRef, rowsAboveRefs, rowsBelowRefs } = props;
+  const { sectionRef, rowsAboveRefs, rowsBelowRefs, headingRef } = props;
   const fallbackSectionRef = useRef<HTMLElement>(null);
   const fallbackRowsAboveRefs = useRef<Array<HTMLDivElement | null>>([]);
   const fallbackRowsBelowRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const fallbackHeadingRef = useRef<HTMLHeadingElement>(null);
   const sectionElementRef = sectionRef ?? fallbackSectionRef;
   const rowsAboveStore = rowsAboveRefs ?? fallbackRowsAboveRefs;
   const rowsBelowStore = rowsBelowRefs ?? fallbackRowsBelowRefs;
+  const headingElementRef = headingRef ?? fallbackHeadingRef;
   const row0 = useMemo(() => SKILLS.filter((_, index) => index % 6 === 0), []);
   const row1 = useMemo(() => SKILLS.filter((_, index) => index % 6 === 1), []);
   const row2 = useMemo(() => SKILLS.filter((_, index) => index % 6 === 2), []);
@@ -150,6 +153,7 @@ export default function Skills(props: SkillsRefs = {}) {
       </div>
       <div className="relative mx-auto flex w-full max-w-7xl items-center justify-center overflow-hidden ">
         <h2
+          ref={headingElementRef}
           id="skills-heading"
           data-testid="SkillsHeading"
           className="whitespace-nowrap text-center text-[clamp(4rem,18vw,18rem)] font-black uppercase leading-[0.85] tracking-[0.15em] text-white/80"

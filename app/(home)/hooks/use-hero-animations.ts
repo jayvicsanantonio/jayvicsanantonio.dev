@@ -219,6 +219,7 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
       const skillsSection = refs.skillsSectionRef.current;
       const skillsRowsAbove = refs.skillsRowsAboveRefs.current;
       const skillsRowsBelow = refs.skillsRowsBelowRefs.current;
+      const skillsHeading = refs.skillsHeadingRef.current;
 
       if (prefersReducedMotion) {
         if (coverFill) {
@@ -302,6 +303,7 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         section: skillsSection,
         rowsAbove: skillsRowsAbove,
         rowsBelow: skillsRowsBelow,
+        heading: skillsHeading,
       });
       cleanupFns.push(skillsCleanup);
 
@@ -459,12 +461,14 @@ type SkillsEntranceArgs = {
   section: HTMLElement | null;
   rowsAbove?: Array<HTMLDivElement | null>;
   rowsBelow?: Array<HTMLDivElement | null>;
+  heading?: HTMLHeadingElement | null;
 };
 
 function createSkillsEntranceAnimation({
   section,
   rowsAbove = [],
   rowsBelow = [],
+  heading,
 }: SkillsEntranceArgs) {
   if (!section) {
     return () => {};
@@ -472,8 +476,9 @@ function createSkillsEntranceAnimation({
 
   const aboveEls = rowsAbove.filter((row): row is HTMLDivElement => Boolean(row));
   const belowEls = rowsBelow.filter((row): row is HTMLDivElement => Boolean(row));
+  const headingEl = heading ?? null;
 
-  if (!aboveEls.length && !belowEls.length) {
+  if (!aboveEls.length && !belowEls.length && !headingEl) {
     return () => {};
   }
 
@@ -486,6 +491,16 @@ function createSkillsEntranceAnimation({
       scrub: true,
     },
   });
+
+  if (headingEl) {
+    gsap.set(headingEl, { transformOrigin: "50% 50%" });
+    timeline.fromTo(
+      headingEl,
+      { autoAlpha: 0, yPercent: 12, scale: 0.88 },
+      { autoAlpha: 1, yPercent: 0, scale: 1, duration: 0.6 },
+      0.12,
+    );
+  }
 
   if (aboveEls.length) {
     timeline.fromTo(
