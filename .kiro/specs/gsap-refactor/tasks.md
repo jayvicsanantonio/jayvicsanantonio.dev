@@ -366,11 +366,11 @@
 
 **Subtasks:**
 
-- [ ] Test intro animation scroll blocking
-- [ ] Test wheel events blocked
-- [ ] Test touch events blocked
-- [ ] Test keyboard scroll keys blocked
-- [ ] Test scroll unlocks after intro
+- [x] Test intro animation scroll blocking
+- [x] Test wheel events blocked
+- [x] Test touch events blocked
+- [x] Test keyboard scroll keys blocked
+- [x] Test scroll unlocks after intro
 - [ ] Verify no console errors
 
 **Acceptance Criteria:**
