@@ -3,22 +3,20 @@ import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import {
-  FINAL_GEOMETRY_STATE,
-  FINAL_PANEL_STATE,
-  HERO_SCROLL_DISTANCE,
-  LABEL_EXIT_SCROLL_DISTANCE,
-  LABEL_EXIT_Y_PERCENT,
-  PANEL_BORDER_RADIUS,
-  PILL_SHRINK_BACKGROUND,
-  PILL_SHRINK_BORDER,
-  PILL_SHRINK_BOX_SHADOW,
-  PROFILE_BASE_Z_INDEX,
-  PROFILE_COVER_Z_INDEX,
-  PROFILE_SCROLL_CONFIG,
-} from "../components/Hero/hero.constants";
-import { CFG } from "../components/config";
+import { FINAL_GEOMETRY_STATE, PANEL_BORDER_RADIUS } from "../components/Hero/hero.constants";
 import type { HeroAnimationRefs } from "../components/Hero/hero.types";
+import {
+  applyReducedMotionState,
+  createNavMeasurementHelpers,
+  createSkillsEntranceAnimation,
+  createPillShrinkTimeline,
+  createLabelExitTimeline,
+  createCoverAnimations,
+  createHeroPin,
+  createProfileScrollTween,
+  killTween,
+  killTimeline,
+} from "./hero-animation-helpers";
 
 export type UseHeroAnimationArgs = {
   refs: HeroAnimationRefs;
@@ -27,11 +25,48 @@ export type UseHeroAnimationArgs = {
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
+/**
+ * Orchestrates all hero section animations including intro sequence and scroll-driven effects.
+ *
+ * This hook manages two main animation phases:
+ * 1. Intro animation: Page load sequence with scroll locking
+ * 2. Scroll animation: Parallax and morphing effects triggered by scroll
+ *
+ * Automatically respects user's motion preferences and handles cleanup on unmount.
+ *
+ * @param args - Animation configuration
+ * @param args.refs - Collection of React refs to animated elements
+ * @param args.prefersReducedMotion - Whether user prefers reduced motion
+ *
+ * @example
+ * function HeroSection() {
+ *   const refs = useHeroRefs();
+ *   const prefersReducedMotion = usePrefersReducedMotion();
+ *
+ *   useHeroAnimations({ refs, prefersReducedMotion });
+ *
+ *   return <div ref={refs.containerRef}>...</div>;
+ * }
+ */
 export default function useHeroAnimations(args: UseHeroAnimationArgs) {
   useHeroIntroAnimation(args);
   useHeroScrollAnimation(args);
 }
 
+/**
+ * Manages the hero intro animation sequence that plays on page load.
+ *
+ * Creates a choreographed timeline that:
+ * 1. Locks scroll to prevent user interaction
+ * 2. Expands the pill from small to full size
+ * 3. Rounds the corners
+ * 4. Fades in profile, video, and text labels
+ * 5. Unlocks scroll when complete
+ *
+ * Respects reduced motion preferences by skipping to final state.
+ *
+ * @param args - Animation configuration with refs and motion preferences
+ */
 function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroAnimationArgs) {
   useGSAP(
     () => {
@@ -199,6 +234,22 @@ function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroAnimationA
   );
 }
 
+/**
+ * Manages all scroll-driven animations for the hero section.
+ *
+ * Orchestrates multiple coordinated scroll effects:
+ * - Profile image scaling
+ * - Pill shrinking and morphing into nav button
+ * - Label fade-out
+ * - Cover section reveal and parallax
+ * - Skills section entrance
+ * - Hero section pinning
+ *
+ * All animations are scroll-scrubbed for smooth, controlled playback.
+ * Respects reduced motion preferences by applying final states immediately.
+ *
+ * @param args - Animation configuration with refs and motion preferences
+ */
 function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimationArgs) {
   useGSAP(
     () => {
@@ -234,14 +285,7 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
         return;
       }
 
-      if (
-        !heroSection ||
-        !profile ||
-        !pill ||
-        !pillContent ||
-        !video ||
-        !navRow
-      ) {
+      if (!heroSection || !profile || !pill || !pillContent || !video || !navRow) {
         return;
       }
 
@@ -313,575 +357,4 @@ function useHeroScrollAnimation({ refs, prefersReducedMotion }: UseHeroAnimation
     },
     { dependencies: [prefersReducedMotion] },
   );
-}
-
-type ReducedMotionArgs = {
-  pill: HTMLDivElement;
-  pillContent: HTMLDivElement;
-  video: HTMLVideoElement;
-  overlay: HTMLDivElement | null;
-  pillSkin: HTMLDivElement | null;
-  profile: HTMLDivElement | null;
-  navRow: HTMLDivElement | null;
-  nameplate: HTMLDivElement | null;
-  designation: HTMLDivElement | null;
-};
-
-function applyReducedMotionState({
-  pill,
-  pillContent,
-  video,
-  overlay,
-  pillSkin,
-  profile,
-  navRow,
-  nameplate,
-  designation,
-}: ReducedMotionArgs) {
-  gsap.set(pill, {
-    ...FINAL_PANEL_STATE,
-    backgroundColor: "transparent",
-    borderWidth: 1,
-    borderColor: PILL_SHRINK_BORDER,
-    boxShadow: PILL_SHRINK_BOX_SHADOW,
-  });
-  gsap.set(pillContent, { autoAlpha: 0 });
-  gsap.set(video, { autoAlpha: 1 });
-
-  if (overlay) {
-    gsap.set(overlay, { autoAlpha: 0.55 });
-  }
-
-  if (pillSkin) {
-    gsap.set(pillSkin, { autoAlpha: 0 });
-  }
-
-  if (profile) {
-    gsap.set(profile, { autoAlpha: 1, yPercent: 0 });
-  }
-
-  if (navRow) {
-    gsap.set(navRow, { autoAlpha: 1 });
-  }
-
-  if (nameplate) {
-    gsap.set(nameplate, { autoAlpha: 1, yPercent: 0 });
-  }
-
-  if (designation) {
-    gsap.set(designation, { autoAlpha: 1, yPercent: 0 });
-  }
-}
-
-function calculateNavYOffset(
-  navRow: HTMLDivElement,
-  pill: HTMLDivElement,
-  targetPillHeight?: number,
-) {
-  const measuredPillHeight = pill.getBoundingClientRect().height || pill.offsetHeight || 0;
-  const pillHeight = typeof targetPillHeight === "number" ? targetPillHeight : measuredPillHeight;
-  const navHeight = navRow.getBoundingClientRect().height || navRow.offsetHeight || 0;
-  if (!navHeight || !pillHeight) {
-    return 0;
-  }
-  return (pillHeight - navHeight) / 2;
-}
-
-type NavMeasurementArgs = {
-  navRow: HTMLDivElement;
-  pill: HTMLDivElement;
-  navSpacerEl: HTMLDivElement | null;
-  firstNavButton: HTMLElement | null;
-};
-
-type NavMeasurementHelpers = {
-  getTargetPillWidth: () => number;
-  getTargetPillHeight: () => number;
-  getNavRowYOffset: () => number;
-  getPillCenterOffset: () => { x: number; y: number };
-};
-
-function createNavMeasurementHelpers({
-  navRow,
-  pill,
-  navSpacerEl,
-  firstNavButton,
-}: NavMeasurementArgs): NavMeasurementHelpers {
-  const getTargetPillWidth = () => {
-    const spacerWidth = navSpacerEl?.getBoundingClientRect().width ?? 0;
-    if (spacerWidth > 0) {
-      return spacerWidth;
-    }
-    const navWidth = navRow.getBoundingClientRect().width;
-    return Math.max(navWidth * 0.35, CFG.nav.buttonSize.w * 3);
-  };
-
-  const getTargetPillHeight = () => {
-    const candidate =
-      firstNavButton?.getBoundingClientRect().height ?? navRow.getBoundingClientRect().height;
-    if (candidate && candidate > 0) {
-      return candidate;
-    }
-    return CFG.nav.buttonSize.h;
-  };
-
-  const getTargetCenter = () => {
-    const spacerRect = navSpacerEl?.getBoundingClientRect();
-    const buttonRect = firstNavButton?.getBoundingClientRect();
-    const navRect = navRow.getBoundingClientRect();
-    const xCenter = spacerRect
-      ? spacerRect.left + spacerRect.width / 2
-      : navRect.left + navRect.width / 2;
-    const yCenter = buttonRect
-      ? buttonRect.top + buttonRect.height / 2
-      : navRect.top + navRect.height / 2;
-    return { x: xCenter, y: yCenter };
-  };
-
-  const getNavRowYOffset = () => calculateNavYOffset(navRow, pill, getTargetPillHeight());
-
-  const getPillCenterOffset = () => {
-    const pr = pill.getBoundingClientRect();
-    const target = getTargetCenter();
-    return {
-      x: target.x - (pr.left + pr.width / 2),
-      y: target.y + getNavRowYOffset() - (pr.top + pr.height / 2),
-    };
-  };
-
-  return {
-    getTargetPillWidth,
-    getTargetPillHeight,
-    getNavRowYOffset,
-    getPillCenterOffset,
-  };
-}
-
-type SkillsEntranceArgs = {
-  section: HTMLElement | null;
-  rowsAbove?: Array<HTMLDivElement | null>;
-  rowsBelow?: Array<HTMLDivElement | null>;
-  heading?: HTMLHeadingElement | null;
-};
-
-function createSkillsEntranceAnimation({
-  section,
-  rowsAbove = [],
-  rowsBelow = [],
-  heading,
-}: SkillsEntranceArgs) {
-  if (!section) {
-    return () => {};
-  }
-
-  const aboveEls = rowsAbove.filter((row): row is HTMLDivElement => Boolean(row));
-  const belowEls = rowsBelow.filter((row): row is HTMLDivElement => Boolean(row));
-  const headingEl = heading ?? null;
-
-  if (!aboveEls.length && !belowEls.length && !headingEl) {
-    return () => {};
-  }
-
-  const timeline = gsap.timeline({
-    defaults: { ease: "power2.out" },
-    scrollTrigger: {
-      trigger: section,
-      start: "top 80%",
-      end: "bottom center",
-      scrub: true,
-    },
-  });
-
-  if (headingEl) {
-    gsap.set(headingEl, { transformOrigin: "50% 50%" });
-    timeline.fromTo(
-      headingEl,
-      { autoAlpha: 0, yPercent: 12, scale: 0.88 },
-      { autoAlpha: 1, yPercent: 0, scale: 1, duration: 0.6 },
-      0.12,
-    );
-  }
-
-  if (aboveEls.length) {
-    timeline.fromTo(
-      aboveEls,
-      { autoAlpha: 0, xPercent: 18 },
-      { autoAlpha: 1, xPercent: 0, stagger: 0.12 },
-      0,
-    );
-  }
-
-  if (belowEls.length) {
-    timeline.fromTo(
-      belowEls,
-      { autoAlpha: 0, xPercent: -18 },
-      { autoAlpha: 1, xPercent: 0, stagger: 0.12 },
-      aboveEls.length ? 0.25 : 0,
-    );
-  }
-
-  return () => {
-    timeline.scrollTrigger?.kill();
-    timeline.kill();
-  };
-}
-
-type PillShrinkTimelineArgs = NavMeasurementHelpers & {
-  heroSection: HTMLDivElement;
-  navRow: HTMLDivElement;
-  pill: HTMLDivElement;
-  pillContent: HTMLDivElement;
-  pillSkin: HTMLDivElement | null;
-  video: HTMLVideoElement;
-  overlay: HTMLDivElement | null;
-};
-
-type PillShrinkTimelineResult = {
-  timeline: gsap.core.Timeline;
-  cleanup: () => void;
-};
-
-function createPillShrinkTimeline({
-  heroSection,
-  navRow,
-  pill,
-  pillContent,
-  pillSkin,
-  video,
-  overlay,
-  getTargetPillWidth,
-  getTargetPillHeight,
-  getNavRowYOffset,
-  getPillCenterOffset,
-}: PillShrinkTimelineArgs): PillShrinkTimelineResult {
-  const pillShrinkCompleteLabel = "pillShrinkComplete";
-  gsap.set(pill, { borderWidth: 0, borderColor: "transparent" });
-
-  let pillSnapTween: gsap.core.Tween | null = null;
-  let videoShrinkTimeline: gsap.core.Timeline;
-  let lastTargetOffset: { x: number; y: number } | null = null;
-
-  const MIN_SCROLL_PROGRESS_FOR_ALIGNMENT = 0.05;
-  const syncPillToNavRow = () => {
-    if (!videoShrinkTimeline) {
-      return;
-    }
-    const trigger = videoShrinkTimeline.scrollTrigger;
-    if (!trigger) {
-      return;
-    }
-    if (trigger.progress < MIN_SCROLL_PROGRESS_FOR_ALIGNMENT && !trigger.isActive) {
-      lastTargetOffset = null;
-      return;
-    }
-    const offset = getPillCenterOffset();
-    if (
-      lastTargetOffset &&
-      Math.abs(offset.x - lastTargetOffset.x) < 0.5 &&
-      Math.abs(offset.y - lastTargetOffset.y) < 0.5
-    ) {
-      return;
-    }
-    lastTargetOffset = offset;
-    pillSnapTween?.kill();
-    pillSnapTween = gsap.to(pill, {
-      x: offset.x,
-      y: offset.y,
-      duration: trigger.isActive ? 0.3 : 0,
-      ease: "power2.out",
-    });
-  };
-
-  videoShrinkTimeline = gsap
-    .timeline({
-      scrollTrigger: {
-        trigger: heroSection,
-        start: "top top",
-        end: () => "+=" + window.innerHeight,
-        // apply slight smoothing for more elegant motion
-        scrub: 0.6,
-        onEnter: () => {
-          gsap.set([pill, video], { transformOrigin: "50% 50%" });
-        },
-        onEnterBack: () => {
-          gsap.set([pill, video], { transformOrigin: "50% 50%" });
-        },
-        invalidateOnRefresh: true,
-        onUpdate: () => syncPillToNavRow(),
-        onRefresh: () => syncPillToNavRow(),
-      },
-    })
-    .to(
-      pill,
-      {
-        width: () => `${getTargetPillWidth()}px`,
-        height: () => `${getTargetPillHeight()}px`,
-        x: () => getPillCenterOffset().x,
-        y: () => getPillCenterOffset().y,
-        borderRadius: "384px",
-        backgroundColor: PILL_SHRINK_BACKGROUND,
-        ease: "none",
-        force3D: true,
-      },
-      0,
-    )
-    .addLabel(pillShrinkCompleteLabel)
-    .to(
-      pill,
-      {
-        borderWidth: 1,
-        borderColor: PILL_SHRINK_BORDER,
-        boxShadow: PILL_SHRINK_BOX_SHADOW,
-        duration: 0.25,
-        ease: "power1.out",
-      },
-      pillShrinkCompleteLabel,
-    )
-    .to(
-      pillContent,
-      {
-        color: "#ffffff",
-        textShadow: "0 6px 18px rgba(0,0,0,0.55)",
-        duration: 0.35,
-        ease: "power1.out",
-      },
-      pillShrinkCompleteLabel,
-    )
-    .to(
-      pillContent,
-      {
-        autoAlpha: 1,
-        duration: 0.4,
-        ease: "power1.out",
-      },
-      pillShrinkCompleteLabel,
-    );
-
-  if (pillSkin) {
-    videoShrinkTimeline.to(
-      pillSkin,
-      {
-        autoAlpha: 1,
-        duration: 0.4,
-        ease: "power1.out",
-      },
-      pillShrinkCompleteLabel,
-    );
-  }
-
-  if (overlay) {
-    videoShrinkTimeline.fromTo(
-      overlay,
-      { autoAlpha: 0.55 },
-      {
-        autoAlpha: 0.85,
-        duration: 0.4,
-        ease: "none",
-        immediateRender: false,
-      },
-      0,
-    );
-    videoShrinkTimeline.to(
-      overlay,
-      {
-        autoAlpha: 0,
-        duration: 0.35,
-        ease: "power1.out",
-      },
-      pillShrinkCompleteLabel,
-    );
-  }
-
-  videoShrinkTimeline.to(
-    video,
-    {
-      autoAlpha: 0,
-      duration: 0.35,
-      ease: "power1.out",
-    },
-    pillShrinkCompleteLabel,
-  );
-
-  videoShrinkTimeline.fromTo(
-    navRow,
-    {
-      autoAlpha: 0,
-      yPercent: 18,
-    },
-      {
-        autoAlpha: 1,
-        yPercent: 0,
-        y: () => getNavRowYOffset(),
-        duration: 0.45,
-        ease: "power2.out",
-      },
-    0.55,
-  );
-
-  return {
-    timeline: videoShrinkTimeline,
-    cleanup: () => {
-      videoShrinkTimeline.scrollTrigger?.kill();
-      videoShrinkTimeline.kill();
-      pillSnapTween?.kill();
-    },
-  };
-}
-
-type LabelExitTimelineArgs = {
-  heroSection: HTMLDivElement;
-  nameplate: HTMLDivElement | null;
-  designation: HTMLDivElement | null;
-};
-
-function createLabelExitTimeline({
-  heroSection,
-  nameplate,
-  designation,
-}: LabelExitTimelineArgs) {
-  const labelTargets = [nameplate, designation].filter(
-    (node): node is HTMLDivElement => Boolean(node),
-  );
-
-  if (!labelTargets.length) {
-    return null;
-  }
-
-  return gsap
-    .timeline({
-      scrollTrigger: {
-        trigger: heroSection,
-        start: "top top",
-        end: () => "+=" + window.innerHeight * LABEL_EXIT_SCROLL_DISTANCE,
-        scrub: true,
-      },
-    })
-    .to(labelTargets, {
-      autoAlpha: 0,
-      yPercent: LABEL_EXIT_Y_PERCENT,
-      ease: "power2.inOut",
-    });
-}
-
-type CoverAnimationArgs = {
-  profile: HTMLDivElement | null;
-  coverSection: HTMLDivElement | null;
-  coverFill: HTMLDivElement | null;
-  coverLabel: HTMLDivElement | null;
-  coverBody: HTMLDivElement | null;
-};
-
-function createCoverAnimations({
-  profile,
-  coverSection,
-  coverFill,
-  coverLabel,
-  coverBody,
-}: CoverAnimationArgs) {
-  const cleanupFns: Array<() => void> = [];
-
-  const coverStartTrigger = coverSection;
-  const coverEndTrigger = coverSection;
-  const coverStartPosition = "bottom bottom";
-  const coverEndPosition = "bottom bottom";
-
-  if (profile && coverStartTrigger && coverEndTrigger) {
-    const setProfileCoverage = (covered: boolean) => {
-      gsap.set(profile, {
-        zIndex: covered ? PROFILE_COVER_Z_INDEX : PROFILE_BASE_Z_INDEX,
-      });
-    };
-
-    const profileCoverTrigger = ScrollTrigger.create({
-      trigger: coverStartTrigger,
-      start: coverStartPosition,
-      endTrigger: coverEndTrigger,
-      end: coverEndPosition,
-      onEnter: () => setProfileCoverage(true),
-      onEnterBack: () => setProfileCoverage(true),
-      onLeave: () => setProfileCoverage(false),
-      onLeaveBack: () => setProfileCoverage(false),
-    });
-
-    cleanupFns.push(() => profileCoverTrigger.kill());
-  }
-
-  if (coverSection && coverFill) {
-    gsap.set(coverFill, { transformOrigin: "50% 100%" });
-
-    const coverTimeline = gsap.fromTo(
-      coverFill,
-      { scaleY: 0 },
-      {
-        scaleY: 1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: coverSection,
-          start: "top bottom",
-          end: "top top",
-          scrub: true,
-        },
-      },
-    );
-
-    cleanupFns.push(() => killTween(coverTimeline));
-  }
-
-  if (coverSection && coverLabel && coverBody) {
-    const coverContentTimeline = gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: coverSection,
-          start: "top top",
-          end: () => "+=" + window.innerHeight * 0.9,
-          scrub: true,
-          pin: true,
-          pinSpacing: true,
-        },
-      })
-      .fromTo(coverLabel, { yPercent: -12 }, { yPercent: 12, ease: "none" }, 0)
-      .fromTo(coverBody, { yPercent: 12 }, { yPercent: -12, ease: "none" }, 0);
-
-    cleanupFns.push(() => killTimeline(coverContentTimeline));
-  }
-
-  return () => {
-    cleanupFns.forEach((cleanup) => cleanup());
-    if (profile) {
-      gsap.set(profile, { zIndex: PROFILE_BASE_Z_INDEX });
-    }
-  };
-}
-
-function createHeroPin(heroSection: HTMLDivElement) {
-  return ScrollTrigger.create({
-    trigger: heroSection,
-    start: "top top",
-    end: () => "+=" + window.innerHeight,
-    pin: true,
-    pinReparent: true,
-    anticipatePin: 1,
-  });
-}
-
-function createProfileScrollTween(heroSection: HTMLDivElement, profile: HTMLDivElement) {
-  return gsap.to(profile, {
-    ...PROFILE_SCROLL_CONFIG,
-    scrollTrigger: {
-      trigger: heroSection,
-      start: "top top",
-      end: () => "+=" + window.innerHeight * HERO_SCROLL_DISTANCE,
-      scrub: true,
-    },
-  });
-}
-
-function killTween(tween: gsap.core.Tween | null | undefined) {
-  tween?.scrollTrigger?.kill();
-  tween?.kill();
-}
-
-function killTimeline(timeline: gsap.core.Timeline | null | undefined) {
-  timeline?.scrollTrigger?.kill();
-  timeline?.kill();
 }
