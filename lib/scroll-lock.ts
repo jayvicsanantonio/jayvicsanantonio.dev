@@ -15,7 +15,6 @@ const SCROLL_KEYS = new Set([
 type UnlockFn = () => void;
 
 let lockCount = 0;
-let touchActionBackup = "";
 let isLocked = false;
 
 const wheelListener = (event: WheelEvent) => {
@@ -43,6 +42,9 @@ const keydownListener = (event: KeyboardEvent) => {
 
 const isBrowser = () => typeof window !== "undefined" && typeof document !== "undefined";
 
+/**
+ * Applies scroll lock by preventing wheel, touch, and keyboard scroll events.
+ */
 function applyLock() {
   if (!isBrowser() || isLocked) {
     return;
@@ -52,15 +54,12 @@ function applyLock() {
   document.addEventListener("touchmove", touchMoveListener, { passive: false, capture: true });
   document.addEventListener("keydown", keydownListener, { passive: false });
 
-  const scroller = document.querySelector<HTMLElement>("[data-scrollbar]");
-  if (scroller) {
-    touchActionBackup = scroller.style.touchAction;
-    scroller.style.touchAction = "none";
-  }
-
   isLocked = true;
 }
 
+/**
+ * Removes scroll lock by cleaning up event listeners.
+ */
 function clearLock() {
   if (!isBrowser() || !isLocked) {
     return;
@@ -70,15 +69,20 @@ function clearLock() {
   document.removeEventListener("touchmove", touchMoveListener, true);
   document.removeEventListener("keydown", keydownListener);
 
-  const scroller = document.querySelector<HTMLElement>("[data-scrollbar]");
-  if (scroller) {
-    scroller.style.touchAction = touchActionBackup;
-  }
-
-  touchActionBackup = "";
   isLocked = false;
 }
 
+/**
+ * Locks scrolling by preventing wheel, touch, and keyboard scroll events.
+ * Uses reference counting to support nested locks.
+ *
+ * @returns A function to release the scroll lock
+ *
+ * @example
+ * const unlock = lockScroll();
+ * // ... do something while scroll is locked
+ * unlock(); // Release the lock
+ */
 export function lockScroll(): UnlockFn {
   if (!isBrowser()) {
     return () => {};

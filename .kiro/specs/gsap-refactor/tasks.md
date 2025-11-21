@@ -337,13 +337,13 @@
 
 **Subtasks:**
 
-- [ ] Open `lib/scroll-lock.ts`
-- [ ] Remove `[data-scrollbar]` query in `applyLock`
-- [ ] Remove `touchActionBackup` variable
-- [ ] Remove `touchAction` manipulation
-- [ ] Remove `[data-scrollbar]` query in `clearLock`
-- [ ] Update comments
-- [ ] Test compilation
+- [x] Open `lib/scroll-lock.ts`
+- [x] Remove `[data-scrollbar]` query in `applyLock`
+- [x] Remove `touchActionBackup` variable
+- [x] Remove `touchAction` manipulation
+- [x] Remove `[data-scrollbar]` query in `clearLock`
+- [x] Update comments
+- [x] Test compilation
 
 **Acceptance Criteria:**
 
