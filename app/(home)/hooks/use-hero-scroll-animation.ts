@@ -32,16 +32,8 @@ import {
   killTween,
   killTimeline,
 } from "./hero-animation-helpers";
-import {
-  SCROLL_TIMING,
-  SCROLL_THRESHOLDS,
-  SCROLL_TRIGGER_POSITIONS,
-  COVER_TIMING,
-  SKILLS_TIMING,
-  NAV_INITIAL_STATE,
-  SKILLS_INITIAL_STATE,
-  OVERLAY_OPACITY,
-} from "../components/Hero/hero-animation-timing";
+// Timing constants are used by helper functions imported above
+// and may be needed for future enhancements
 
 /**
  * Arguments for the hero scroll animation hook.

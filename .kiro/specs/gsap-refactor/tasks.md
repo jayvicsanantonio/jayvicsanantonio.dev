@@ -43,7 +43,7 @@
 - [x] Add beforeunload handler
 - [x] Add pageshow handler (bfcache)
 - [x] Add pathname-based reset
-- [ ] Add proper cleanup
+- [x] Add proper cleanup
 - [x] Test navigation scenarios
 
 **Acceptance Criteria:**
@@ -221,10 +221,10 @@
 - [x] Create `app/(home)/hooks/use-hero-intro-animation.ts`
 - [x] Move `useHeroIntroAnimation` function
 - [x] Import helper functions
-- [ ] Import timing constants
+- [x] Import timing constants
 - [x] Update constant references
-- [ ] Add JSDoc comments
-- [ ] Test compilation
+- [x] Add JSDoc comments
+- [x] Test compilation
 
 **Acceptance Criteria:**
 
@@ -249,11 +249,11 @@
 
 - [x] Create `app/(home)/hooks/use-hero-scroll-animation.ts`
 - [x] Move `useHeroScrollAnimation` function
-- [ ] Import helper functions
-- [ ] Import timing constants
-- [ ] Update constant references
-- [ ] Add JSDoc comments
-- [ ] Test compilation
+- [x] Import helper functions
+- [x] Import timing constants
+- [x] Update constant references
+- [x] Add JSDoc comments
+- [x] Test compilation
 
 **Acceptance Criteria:**
 
@@ -276,10 +276,10 @@
 
 **Subtasks:**
 
-- [ ] Update `app/(home)/hooks/use-hero-animations.ts`
-- [ ] Import intro and scroll hooks
-- [ ] Remove old implementation
-- [ ] Keep orchestration logic only
+- [x] Update `app/(home)/hooks/use-hero-animations.ts`
+- [x] Import intro and scroll hooks
+- [x] Remove old implementation
+- [x] Keep orchestration logic only
 - [ ] Test compilation
 
 **Acceptance Criteria:**
@@ -303,16 +303,16 @@
 
 **Subtasks:**
 
-- [ ] Test intro animation sequence
-- [ ] Test scroll lock/unlock
-- [ ] Test pill shrink animation
-- [ ] Test profile scale animation
-- [ ] Test label exit animation
-- [ ] Test cover section animation
-- [ ] Test skills entrance animation
-- [ ] Test with reduced motion
-- [ ] Test on mobile viewport
-- [ ] Verify no console errors
+- [x] Test intro animation sequence
+- [x] Test scroll lock/unlock
+- [x] Test pill shrink animation
+- [x] Test profile scale animation
+- [x] Test label exit animation
+- [x] Test cover section animation
+- [x] Test skills entrance animation
+- [x] Test with reduced motion
+- [x] Test on mobile viewport
+- [x] Verify no console errors
 
 **Acceptance Criteria:**
 
