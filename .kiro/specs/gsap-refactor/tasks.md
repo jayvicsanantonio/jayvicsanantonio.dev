@@ -425,12 +425,12 @@
 
 **Subtasks:**
 
-- [ ] Check home page appearance
-- [ ] Check work page appearance
-- [ ] Check progress bar styling
-- [ ] Check on mobile viewport
-- [ ] Check on desktop viewport
-- [ ] Take screenshots for comparison
+- [x] Check home page appearance
+- [x] Check work page appearance
+- [x] Check progress bar styling
+- [x] Check on mobile viewport
+- [x] Check on desktop viewport
+- [x] Take screenshots for comparison
 
 **Acceptance Criteria:**
 
@@ -454,11 +454,11 @@
 
 **Subtasks:**
 
-- [ ] Create `docs/archive/` directory
-- [ ] Move `docs/SCROLL.md` to archive
-- [ ] Move `docs/SCROLL_PLAN.md` to archive
-- [ ] Add README in archive explaining context
-- [ ] Commit changes
+- [x] Create `docs/archive/` directory
+- [x] Move `docs/SCROLL.md` to archive
+- [x] Move `docs/SCROLL_PLAN.md` to archive
+- [x] Add README in archive explaining context
+- [-] Commit changes
 
 **Acceptance Criteria:**
 
