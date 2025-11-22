@@ -396,12 +396,12 @@
 
 **Subtasks:**
 
-- [ ] Open `app/globals.css`
-- [ ] Locate smooth-scrollbar section (around line 370)
-- [ ] Remove `.scrollbar-track` styles
-- [ ] Remove `.scrollbar-track-y` styles
-- [ ] Remove `.scrollbar-thumb` styles
-- [ ] Keep native scrollbar hiding styles
+- [x] Open `app/globals.css`
+- [x] Locate smooth-scrollbar section (around line 370)
+- [x] Remove `.scrollbar-track` styles
+- [x] Remove `.scrollbar-track-y` styles
+- [x] Remove `.scrollbar-thumb` styles
+- [x] Keep native scrollbar hiding styles
 - [ ] Test visual appearance
 
 **Acceptance Criteria:**
