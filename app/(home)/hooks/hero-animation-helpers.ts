@@ -207,6 +207,8 @@ export function calculateNavYOffset(
   if (!navHeight || !pillHeight) {
     return 0;
   }
+  // Calculate vertical centering: (container_height - content_height) / 2.
+  // This positions the nav row exactly in the middle of the pill container.
   return (pillHeight - navHeight) / 2;
 }
 
@@ -250,6 +252,9 @@ export function createNavMeasurementHelpers({
     if (spacerWidth > 0) {
       return spacerWidth;
     }
+    // Fallback calculation when spacer element is missing or has no width:
+    // Use 35% of nav width OR minimum of 3 button widths, whichever is larger.
+    // This ensures the pill is wide enough to contain nav buttons gracefully.
     const navWidth = navRow.getBoundingClientRect().width;
     return Math.max(navWidth * 0.35, CFG.nav.buttonSize.w * 3);
   };
@@ -281,6 +286,11 @@ export function createNavMeasurementHelpers({
   const getPillCenterOffset = () => {
     const pr = pill.getBoundingClientRect();
     const target = getTargetCenter();
+    // Calculate offset needed to move pill center to target position.
+    // Formula: target_position - current_center_position.
+    // For X: target.x - (pill.left + pill.width/2).
+    // For Y: target.y + nav_offset - (pill.top + pill.height/2).
+    // The nav offset accounts for vertical centering of nav within the pill.
     return {
       x: target.x - (pr.left + pr.width / 2),
       y: target.y + getNavRowYOffset() - (pr.top + pr.height / 2),
@@ -351,6 +361,8 @@ export function createSkillsEntranceAnimation({
   });
 
   if (headingEl) {
+    // Set transform origin to center (50% horizontal, 50% vertical).
+    // This makes the scale animation expand from the center point.
     gsap.set(headingEl, { transformOrigin: "50% 50%" });
     timeline.fromTo(
       headingEl,
@@ -460,11 +472,15 @@ export function createPillShrinkTimeline({
     if (!trigger) {
       return;
     }
+    // Skip alignment if animation hasn't started (progress < 5%) and isn't currently active.
+    // This prevents unnecessary calculations before the scroll animation begins.
     if (trigger.progress < SCROLL_THRESHOLDS.MIN_ALIGNMENT_PROGRESS && !trigger.isActive) {
       lastTargetOffset = null;
       return;
     }
     const offset = getPillCenterOffset();
+    // Optimization: skip re-alignment if position change is negligible (< 0.5px).
+    // This prevents excessive tweens during minor layout shifts or rounding errors.
     if (
       lastTargetOffset &&
       Math.abs(offset.x - lastTargetOffset.x) < SCROLL_THRESHOLDS.PILL_POSITION_TOLERANCE &&
@@ -474,6 +490,7 @@ export function createPillShrinkTimeline({
     }
     lastTargetOffset = offset;
     pillSnapTween?.kill();
+    // Animate pill position to match nav row (instant if not actively scrolling).
     pillSnapTween = gsap.to(pill, {
       x: offset.x,
       y: offset.y,
@@ -487,12 +504,18 @@ export function createPillShrinkTimeline({
       scrollTrigger: {
         trigger: heroSection,
         start: "top top",
+        // End position: exactly one viewport height of scrolling.
+        // This gives the pill shrink animation a full viewport to complete.
         end: () => "+=" + window.innerHeight,
         scrub: SCROLL_TIMING.SCRUB_SMOOTHING,
         onEnter: () => {
+          // Set transform origin to center for both pill and video.
+          // This ensures scale/position animations transform from the center point.
+          // Must be set on both enter and enterBack to handle bidirectional scrolling.
           gsap.set([pill, video], { transformOrigin: "50% 50%" });
         },
         onEnterBack: () => {
+          // Re-apply transform origin when scrolling back up.
           gsap.set([pill, video], { transformOrigin: "50% 50%" });
         },
         invalidateOnRefresh: true,
@@ -663,6 +686,8 @@ export function createLabelExitTimeline({
       scrollTrigger: {
         trigger: heroSection,
         start: "top top",
+        // End position: 50% of viewport height (0.5 * window.innerHeight)
+        // Labels fade out during the first half of the hero scroll animation
         end: () => "+=" + window.innerHeight * LABEL_EXIT_SCROLL_DISTANCE,
         scrub: SCROLL_TIMING.LABEL_EXIT_SCRUB,
       },
@@ -740,6 +765,8 @@ export function createCoverAnimations({
   }
 
   if (coverSection && coverFill) {
+    // Set transform origin to bottom center (50% horizontal, 100% vertical).
+    // This makes the scaleY animation expand upward from the bottom edge.
     gsap.set(coverFill, { transformOrigin: "50% 100%" });
 
     const coverTimeline = gsap.fromTo(
@@ -766,6 +793,8 @@ export function createCoverAnimations({
         scrollTrigger: {
           trigger: coverSection,
           start: SCROLL_TRIGGER_POSITIONS.COVER_CONTENT_START,
+          // End position: 90% of viewport height (0.9 * window.innerHeight).
+          // This creates a parallax effect over nearly a full viewport scroll.
           end: () => "+=" + window.innerHeight * COVER_TIMING.PARALLAX_DISTANCE,
           scrub: SCROLL_TIMING.COVER_CONTENT_SCRUB,
           pin: true,
@@ -821,6 +850,8 @@ export function createHeroPin(heroSection: HTMLDivElement): ScrollTrigger {
   return ScrollTrigger.create({
     trigger: heroSection,
     start: "top top",
+    // Pin duration: one full viewport height of scrolling.
+    // Keeps hero section fixed while scroll animations play.
     end: () => "+=" + window.innerHeight,
     pin: true,
     pinReparent: true,
@@ -863,6 +894,8 @@ export function createProfileScrollTween(
     scrollTrigger: {
       trigger: heroSection,
       start: "top top",
+      // End position: 20% of viewport height (0.2 * window.innerHeight).
+      // Profile scales down quickly during the initial scroll phase.
       end: () => "+=" + window.innerHeight * HERO_SCROLL_DISTANCE,
       scrub: true,
     },

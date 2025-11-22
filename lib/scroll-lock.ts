@@ -28,6 +28,8 @@ const touchMoveListener = (event: TouchEvent) => {
 };
 
 const keydownListener = (event: KeyboardEvent) => {
+  // Allow keyboard shortcuts and non-scroll keys to pass through.
+  // Skip if: already prevented, modifier key pressed, or not a scroll key.
   if (
     event.defaultPrevented ||
     event.altKey ||
@@ -88,7 +90,12 @@ export function lockScroll(): UnlockFn {
     return () => {};
   }
 
+  // Reference counting pattern: allows multiple components to lock scroll simultaneously.
+  // Each call to lockScroll() increments the count, each unlock() decrements it.
+  // The actual lock is only applied when count goes from 0→1.
+  // The actual lock is only removed when count goes from 1→0.
   lockCount += 1;
+  // Only apply lock on first call (when count goes from 0 to 1).
   if (lockCount === 1) {
     applyLock();
   }
@@ -96,12 +103,16 @@ export function lockScroll(): UnlockFn {
   let released = false;
 
   return () => {
+    // Prevent double-release (makes unlock function idempotent).
+    // This is important because React effects can run multiple times.
     if (released) {
       return;
     }
     released = true;
 
+    // Decrement reference count, ensuring it never goes negative.
     lockCount = Math.max(0, lockCount - 1);
+    // Only clear lock when all references are released (count reaches 0).
     if (lockCount === 0) {
       clearLock();
     }

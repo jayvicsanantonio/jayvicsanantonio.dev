@@ -79,7 +79,7 @@ export function useHeroScrollAnimation({
 }: UseHeroScrollAnimationArgs): void {
   useGSAP(
     () => {
-      // Extract all required refs
+      // Extract all required refs.
       const coverFill = refs.coverFillRef.current;
       const heroSection = refs.heroSectionRef.current;
       const coverSection = refs.coverSectionRef.current;
@@ -99,7 +99,7 @@ export function useHeroScrollAnimation({
       const skillsRowsBelow = refs.skillsRowsBelowRefs.current;
       const skillsHeading = refs.skillsHeadingRef.current;
 
-      // Handle reduced motion: apply final states immediately
+      // Handle reduced motion: apply final states immediately.
       if (prefersReducedMotion) {
         if (coverFill) {
           gsap.set(coverFill, { scaleY: 1 });
@@ -113,21 +113,21 @@ export function useHeroScrollAnimation({
         return;
       }
 
-      // Early return if required refs are missing
+      // Early return if required refs are missing.
       if (!heroSection || !profile || !pill || !pillContent || !video || !navRow) {
         return;
       }
 
-      // Ensure nav row is visible for measurements
+      // Ensure nav row is visible for measurements.
       if (window.getComputedStyle(navRow).visibility === "hidden") {
         gsap.set(navRow, { visibility: "visible" });
       }
 
-      // Get navigation measurement elements
+      // Get navigation measurement elements.
       const navSpacerEl = navRow.querySelector<HTMLDivElement>("[data-nav-spacer]");
       const firstNavButton = navRow.querySelector<HTMLElement>("a,button");
 
-      // Create navigation measurement helpers
+      // Create navigation measurement helpers.
       const navMeasurements = createNavMeasurementHelpers({
         navRow,
         pill,
@@ -135,14 +135,14 @@ export function useHeroScrollAnimation({
         firstNavButton,
       });
 
-      // Collect cleanup functions for all animations
+      // Collect cleanup functions for all animations.
       const cleanupFns: Array<() => void> = [];
 
-      // Create profile scroll tween (scales down as user scrolls)
+      // Create profile scroll tween (scales down as user scrolls).
       const scrollTween = createProfileScrollTween(heroSection, profile);
       cleanupFns.push(() => killTween(scrollTween));
 
-      // Create pill shrink timeline (morphs pill into nav button)
+      // Create pill shrink timeline (morphs pill into nav button).
       const { cleanup: pillCleanup } = createPillShrinkTimeline({
         heroSection,
         navRow,
@@ -158,7 +158,7 @@ export function useHeroScrollAnimation({
       });
       cleanupFns.push(pillCleanup);
 
-      // Create label exit timeline (fades out nameplate and designation)
+      // Create label exit timeline (fades out nameplate and designation).
       const labelExitTimeline = createLabelExitTimeline({
         heroSection,
         nameplate,
@@ -168,7 +168,7 @@ export function useHeroScrollAnimation({
         cleanupFns.push(() => killTimeline(labelExitTimeline));
       }
 
-      // Create cover animations (reveal and parallax effects)
+      // Create cover animations (reveal and parallax effects).
       const coverCleanup = createCoverAnimations({
         profile,
         coverSection,
@@ -178,11 +178,11 @@ export function useHeroScrollAnimation({
       });
       cleanupFns.push(coverCleanup);
 
-      // Create hero pin (keeps hero section in view during scroll)
+      // Create hero pin (keeps hero section in view during scroll).
       const heroPin = createHeroPin(heroSection);
       cleanupFns.push(() => heroPin.kill());
 
-      // Create skills entrance animation (staggered reveal of skills)
+      // Create skills entrance animation (staggered reveal of skills).
       const skillsCleanup = createSkillsEntranceAnimation({
         section: skillsSection,
         rowsAbove: skillsRowsAbove,
@@ -191,7 +191,7 @@ export function useHeroScrollAnimation({
       });
       cleanupFns.push(skillsCleanup);
 
-      // Return cleanup function to kill all animations on unmount
+      // Return cleanup function to kill all animations on unmount.
       return () => {
         cleanupFns.forEach((cleanup) => cleanup());
       };

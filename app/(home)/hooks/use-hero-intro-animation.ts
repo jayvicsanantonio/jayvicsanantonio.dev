@@ -53,18 +53,18 @@ export type UseHeroIntroAnimationArgs = {
 export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroIntroAnimationArgs) {
   useGSAP(
     () => {
-      // Extract required refs
+      // Extract required refs.
       const pill = refs.pillRef.current;
       const pillContent = refs.pillContentRef.current;
       const video = refs.videoRef.current;
       let releaseScrollLock: (() => void) | null = null;
 
-      // Early return if critical elements are missing
+      // Early return if critical elements are missing.
       if (!pill || !pillContent || !video) {
         return;
       }
 
-      // Extract optional refs
+      // Extract optional refs.
       const navRow = refs.navRowRef.current;
       const overlay = refs.videoOverlayRef.current;
       const pillSkin = refs.pillSkinRef.current;
@@ -72,7 +72,7 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
       const nameplate = refs.nameplateRef.current;
       const designation = refs.designationRef.current;
 
-      // Handle reduced motion preference
+      // Handle reduced motion preference.
       if (prefersReducedMotion) {
         applyReducedMotionState({
           pill,
@@ -85,27 +85,27 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
           nameplate,
           designation,
         });
-        // Start video playback immediately
+        // Start video playback immediately.
         video.play().catch(() => {
-          // Silently handle autoplay restrictions
+          // Silently handle autoplay restrictions.
         });
         return;
       }
 
-      // Lock scroll during intro animation
+      // Lock scroll during intro animation.
       releaseScrollLock = lockScroll();
 
-      // Create main intro timeline
+      // Create main intro timeline.
       const timeline = gsap.timeline();
 
-      // Helper to safely release scroll lock
+      // Helper to safely release scroll lock.
       const releaseScrollLockIfNeeded = () => {
         if (!releaseScrollLock) return;
         releaseScrollLock();
         releaseScrollLock = null;
       };
 
-      // Set initial states for elements that will animate in
+      // Set initial states for elements that will animate in.
       if (navRow) {
         timeline.set(navRow, { autoAlpha: 0 });
       }
@@ -122,15 +122,15 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
         });
       }
 
-      // Build the intro animation sequence
+      // Build the intro animation sequence.
       timeline
-        // Set initial hidden states
+        // Set initial hidden states.
         .set(video, { autoAlpha: 0 })
         .set(overlay, { autoAlpha: 0 })
         .set(profile, { autoAlpha: 0 })
         .set(pillSkin, { autoAlpha: 0 })
         .set(pill, { backgroundColor: "#ffffff" })
-        // Animate pill expansion and rounding
+        // Animate pill expansion and rounding.
         .to(
           pill,
           {
@@ -151,7 +151,7 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
           },
           0,
         )
-        // Fade out pill content (loading indicator)
+        // Fade out pill content (loading indicator).
         .to(
           pillContent,
           {
@@ -161,7 +161,7 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
           },
           "<+=0.6",
         )
-        // Fade in profile image
+        // Fade in profile image.
         .to(
           profile,
           {
@@ -171,9 +171,9 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
           },
           ">",
         )
-        // Add label for label reveal timing
+        // Add label for label reveal timing.
         .addLabel("labelReveal")
-        // Fade out pill background to reveal video
+        // Fade out pill background to reveal video.
         .to(
           pill,
           {
@@ -183,7 +183,7 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
           },
           "-=0.6",
         )
-        // Fade in video and overlay
+        // Fade in video and overlay.
         .to(
           [video, overlay],
           {
@@ -191,17 +191,17 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
             duration: INTRO_TIMING.VIDEO_FADE_DURATION,
             ease: "power2.out",
             onStart: () => {
-              // Start video playback when it becomes visible
+              // Start video playback when it becomes visible.
               video.play().catch(() => {
-                // Silently handle autoplay restrictions
+                // Silently handle autoplay restrictions.
               });
             },
           },
           "-=0.2",
         )
-        // Release scroll lock slightly before animation completes for smoother UX
+        // Release scroll lock slightly before animation completes for smoother UX.
         .add(releaseScrollLockIfNeeded, ">-0.25")
-        // Adjust overlay opacity to final state
+        // Adjust overlay opacity to final state.
         .to(
           overlay,
           {
@@ -212,7 +212,7 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
           ">-0.1",
         );
 
-      // Animate nameplate label if present
+      // Animate nameplate label if present.
       if (nameplate) {
         timeline.to(
           nameplate,
@@ -222,11 +222,12 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
             duration: INTRO_TIMING.LABEL_FADE_DURATION,
             ease: "power2.out",
           },
+          // Position syntax: "labelReveal+=" means start at the "labelReveal" label plus offset.
           `labelReveal+=${INTRO_TIMING.LABEL_REVEAL_OFFSET}`,
         );
       }
 
-      // Animate designation label if present (staggered after nameplate)
+      // Animate designation label if present (staggered after nameplate).
       if (designation) {
         timeline.to(
           designation,
@@ -236,16 +237,19 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
             duration: INTRO_TIMING.LABEL_FADE_DURATION,
             ease: "power2.out",
           },
+          // Position syntax: "<" means start at end of previous animation.
+          // If nameplate exists, use "<" (relative to nameplate end) with stagger offset.
+          // Otherwise, use absolute position relative to "labelReveal" label.
           nameplate
             ? `<${INTRO_TIMING.LABEL_STAGGER}`
             : `labelReveal+=${INTRO_TIMING.LABEL_STAGGER}`,
         );
       }
 
-      // Ensure scroll lock is released at the end
+      // Ensure scroll lock is released at the end.
       timeline.add(releaseScrollLockIfNeeded);
 
-      // Cleanup function
+      // Cleanup function.
       return () => {
         releaseScrollLockIfNeeded();
         timeline.kill();

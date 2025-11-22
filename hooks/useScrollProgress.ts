@@ -24,19 +24,24 @@ export function useScrollProgress(): number {
   useEffect(() => {
     let raf = 0;
 
-    // RAF-based scroll sampling for smooth updates
+    // RAF-based scroll sampling for smooth updates.
+    // Using requestAnimationFrame ensures updates sync with browser repaints (60fps).
     const sample = () => {
       const doc = document.documentElement;
+      // Calculate maximum scrollable distance (total height - viewport height).
+      // Minimum of 1 prevents division by zero on non-scrollable pages.
       const max = Math.max(1, doc.scrollHeight - doc.clientHeight);
+      // Normalize scroll position to 0-1 range.
+      // Formula: current_scroll / max_scroll, clamped between 0 and 1.
       const p = Math.min(1, Math.max(0, doc.scrollTop / max));
       setProgress(p);
       raf = requestAnimationFrame(sample);
     };
 
-    // Start sampling
+    // Start sampling.
     sample();
 
-    // Force a sample soon after resize
+    // Force a sample soon after resize.
     const onResize = () => {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(sample);
@@ -44,7 +49,7 @@ export function useScrollProgress(): number {
 
     window.addEventListener("resize", onResize);
 
-    // Cleanup
+    // Cleanup.
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", onResize);
