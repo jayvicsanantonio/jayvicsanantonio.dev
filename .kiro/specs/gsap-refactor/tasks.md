@@ -458,7 +458,7 @@
 - [x] Move `docs/SCROLL.md` to archive
 - [x] Move `docs/SCROLL_PLAN.md` to archive
 - [x] Add README in archive explaining context
-- [-] Commit changes
+- [x] Commit changes
 
 **Acceptance Criteria:**
 
