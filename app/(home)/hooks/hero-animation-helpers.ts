@@ -952,17 +952,20 @@ export function createProfileHideOnSection({
     onUpdate: () => {
       const rect = section.getBoundingClientRect();
       const viewHeight = window.innerHeight || 1;
-      const visiblePx = Math.min(viewHeight, Math.max(0, viewHeight - rect.top));
-      // Wait until ~20% of the section is visible, then complete the slide by ~60% visibility.
-      const adjusted = visiblePx - viewHeight * 0.2;
-      const progress = clamp01(adjusted / (viewHeight * 0.4));
-      gsap.set(profile, { yPercent: 140 * progress });
+      const intersection = Math.max(0, Math.min(rect.bottom, viewHeight) - Math.max(rect.top, 0));
+      const visibleRatio = rect.height ? intersection / rect.height : 0;
+      // Start moving when 80% of the section is visible; finish by full visibility.
+      const progress = clamp01((visibleRatio - 0.8) / 0.2);
+      gsap.set(profile, {
+        yPercent: 140 * progress,
+        zIndex: progress > 0 ? PROFILE_COVER_Z_INDEX : PROFILE_BASE_Z_INDEX,
+      });
     },
   });
 
   return () => {
     trigger.kill();
-    gsap.set(profile, { yPercent: 0 });
+    gsap.set(profile, { yPercent: 0, zIndex: PROFILE_BASE_Z_INDEX });
   };
 }
 

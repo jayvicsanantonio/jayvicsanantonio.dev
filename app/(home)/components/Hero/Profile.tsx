@@ -1,38 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useLayoutEffect } from "react";
 
 import { PROFILE_BASE_Z_INDEX, PROFILE_DROP_SHADOW } from "./hero.constants";
 import type { ProfileProps } from "./hero.types";
 
 export default function Profile({ profileRef, prefersReducedMotion }: ProfileProps) {
-  useLayoutEffect(() => {
-    const node = profileRef.current;
-    if (!node || typeof document === "undefined") {
-      return;
-    }
-
-    const parent = node.parentNode;
-    if (!parent) {
-      document.body.appendChild(node);
-      return;
-    }
-
-    const placeholder = document.createComment("profile-placeholder");
-    parent.insertBefore(placeholder, node);
-    document.body.appendChild(node);
-
-    return () => {
-      if (!placeholder.parentNode) {
-        parent.appendChild(node);
-      } else {
-        placeholder.parentNode.insertBefore(node, placeholder);
-        placeholder.remove();
-      }
-    };
-  }, [profileRef]);
-
   return (
     <div
       ref={profileRef}

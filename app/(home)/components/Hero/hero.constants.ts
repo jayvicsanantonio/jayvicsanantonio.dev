@@ -12,9 +12,10 @@ export const PROFILE_DROP_SHADOW =
 export const HERO_SCROLL_DISTANCE = 0.2;
 export const LABEL_EXIT_Y_PERCENT = -185;
 export const LABEL_EXIT_SCROLL_DISTANCE = 0.5;
-export const PROFILE_BASE_Z_INDEX = 30;
-// Keep positive so the fixed profile stays above the smooth-scroll container even when covered.
-export const PROFILE_COVER_Z_INDEX = 10;
+// Keep the floating profile low in the stack so content sections can cover it.
+export const PROFILE_BASE_Z_INDEX = 1;
+// When covered (e.g., by pinned sections), drop it slightly further.
+export const PROFILE_COVER_Z_INDEX = 0;
 
 export const FINAL_GEOMETRY_STATE = {
   width: "100%",

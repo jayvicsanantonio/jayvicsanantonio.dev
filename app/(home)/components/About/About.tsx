@@ -10,7 +10,7 @@ export default function About({ sectionRef }: AboutProps) {
   return (
     <section
       ref={sectionRef ?? undefined}
-      className="relative isolate z-[70] flex min-h-screen w-full items-center justify-center overflow-hidden bg-[#022b37] px-20 text-white"
+      className="relative isolate z-[2000] flex min-h-screen w-full items-center justify-center overflow-hidden bg-[#022b37] px-20 text-white"
       aria-label="About Jayvic San Antonio"
     >
       <div className="relative z-[80] mx-auto flex w-full max-w-[92rem] flex-col items-center gap-12 md:flex-row md:items-center">

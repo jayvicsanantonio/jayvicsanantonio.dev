@@ -95,18 +95,17 @@ export function useHeroScrollAnimation({
       const designation = refs.designationRef.current;
       const coverLabel = refs.coverLabelRef.current;
       const coverBody = refs.coverBodyRef.current;
-      const aboutSection = refs.aboutSectionRef.current;
       const skillsSection = refs.skillsSectionRef.current;
       const skillsRowsAbove = refs.skillsRowsAboveRefs.current;
       const skillsRowsBelow = refs.skillsRowsBelowRefs.current;
       const skillsHeading = refs.skillsHeadingRef.current;
       const cleanupFns: Array<() => void> = [];
 
-      if (profile && aboutSection) {
+      if (profile && skillsSection) {
         cleanupFns.push(
           createProfileHideOnSection({
             profile,
-            section: aboutSection,
+            section: skillsSection,
           }),
         );
       }
