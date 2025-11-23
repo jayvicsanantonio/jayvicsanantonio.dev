@@ -280,7 +280,7 @@
 - [x] Import intro and scroll hooks
 - [x] Remove old implementation
 - [x] Keep orchestration logic only
-- [ ] Test compilation
+- [x] Test compilation
 
 **Acceptance Criteria:**
 
@@ -371,7 +371,7 @@
 - [x] Test touch events blocked
 - [x] Test keyboard scroll keys blocked
 - [x] Test scroll unlocks after intro
-- [ ] Verify no console errors
+- [x] Verify no console errors
 
 **Acceptance Criteria:**
 
@@ -402,7 +402,7 @@
 - [x] Remove `.scrollbar-track-y` styles
 - [x] Remove `.scrollbar-thumb` styles
 - [x] Keep native scrollbar hiding styles
-- [ ] Test visual appearance
+- [x] Test visual appearance
 
 **Acceptance Criteria:**
 
