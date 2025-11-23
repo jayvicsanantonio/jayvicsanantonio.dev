@@ -5,8 +5,12 @@ export const PILL_SHRINK_BOX_SHADOW =
   "0 24px 45px rgba(1,11,26,0.65), 0 0 45px rgba(34,211,238,0.35)";
 export const PILL_SHRINK_BACKGROUND = "rgba(4,15,32,0.95)";
 export const PILL_SHRINK_BORDER = "rgba(34,211,238,0.75)";
-export const VIDEO_OVERLAY_BACKGROUND =
-  "radial-gradient(circle at 20% 20%, rgba(56,189,248,0.45), transparent 45%), radial-gradient(circle at 80% 30%, rgba(59,130,246,0.35), transparent 40%), linear-gradient(180deg, rgba(6,16,35,0.25), rgba(1,5,11,0.75))";
+export const VIDEO_OVERLAY_BACKGROUND = [
+  "radial-gradient(ellipse at 50% 50%, rgba(1,4,12,0) 46%, rgba(1,4,12,0.55) 76%, rgba(1,4,12,0.78) 100%)",
+  "radial-gradient(circle at 20% 20%, rgba(56,189,248,0.45), transparent 45%)",
+  "radial-gradient(circle at 80% 30%, rgba(59,130,246,0.35), transparent 40%)",
+  "linear-gradient(180deg, rgba(6,16,35,0.25), rgba(1,5,11,0.75))",
+].join(",");
 export const PROFILE_DROP_SHADOW =
   "drop-shadow(0 24px 36px rgba(0,0,0,0.55)) drop-shadow(0 0 20px rgba(34,211,238,0.45))";
 // Match the pill shrink scroll distance (one viewport) so profile shrink stays in sync.
