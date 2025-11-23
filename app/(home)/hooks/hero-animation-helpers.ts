@@ -638,14 +638,13 @@ export function createPillShrinkTimeline({
   }
 
   if (watermarkMask) {
-    videoShrinkTimeline.fromTo(
+    // Keep the watermark mask visible throughout scroll until the video fades out.
+    videoShrinkTimeline.to(
       watermarkMask,
-      { autoAlpha: 0 },
       {
         autoAlpha: 1,
         duration: SCROLL_TIMING.OVERLAY_FADE_DURATION,
         ease: "none",
-        immediateRender: false,
       },
       0,
     );

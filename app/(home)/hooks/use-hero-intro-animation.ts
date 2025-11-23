@@ -67,7 +67,7 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
       // Extract optional refs.
       const navRow = refs.navRowRef.current;
       const overlay = refs.videoOverlayRef.current;
-       const watermarkMask = refs.videoWatermarkMaskRef.current;
+      const watermarkMask = refs.videoWatermarkMaskRef.current;
       const pillSkin = refs.pillSkinRef.current;
       const profile = refs.profileRef.current;
       const nameplate = refs.nameplateRef.current;
