@@ -42,11 +42,8 @@ export const SCROLL_SMOOTHER_CONFIG = {
   ignoreMobileResize: true,
 };
 
-export const PROFILE_SCROLL_TARGET_Y = 0;
-
 export const PROFILE_SCROLL_CONFIG = {
   scale: 0.55,
-  yPercent: PROFILE_SCROLL_TARGET_Y,
   transformOrigin: "50% 100%",
   ease: "none" as const,
 };

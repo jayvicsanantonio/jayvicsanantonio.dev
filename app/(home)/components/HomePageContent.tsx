@@ -27,6 +27,7 @@ export default function HomePageContent({ children }: { children: React.ReactNod
   const pillSkinRef = useRef<HTMLDivElement>(null);
   const navRowRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
+  const aboutSectionRef = useRef<HTMLElement>(null);
   const skillsSectionRef = useRef<HTMLElement>(null);
   const skillsRowsAboveRefs = useRef<Array<HTMLDivElement | null>>([]);
   const skillsRowsBelowRefs = useRef<Array<HTMLDivElement | null>>([]);
@@ -50,6 +51,7 @@ export default function HomePageContent({ children }: { children: React.ReactNod
     pillSkinRef,
     profileRef,
     navRowRef,
+    aboutSectionRef,
     skillsSectionRef,
     skillsRowsAboveRefs,
     skillsRowsBelowRefs,
@@ -73,7 +75,7 @@ export default function HomePageContent({ children }: { children: React.ReactNod
           rowsBelowRefs={skillsRowsBelowRefs}
           headingRef={skillsHeadingRef}
         />
-        <About />
+        <About sectionRef={aboutSectionRef} />
       </div>
       <Profile profileRef={profileRef} prefersReducedMotion={prefersReducedMotion} />
     </main>

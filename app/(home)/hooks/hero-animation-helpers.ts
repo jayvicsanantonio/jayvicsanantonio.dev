@@ -102,6 +102,11 @@ export type CoverAnimationArgs = {
   coverBody: HTMLDivElement | null;
 };
 
+export type ProfileSectionVisibilityArgs = {
+  profile: HTMLDivElement | null;
+  section: HTMLElement | null;
+};
+
 // ============================================================================
 // Reduced Motion Helpers
 // ============================================================================
@@ -907,7 +912,9 @@ export function createProfileScrollTween(
   profile: HTMLDivElement,
 ): gsap.core.Tween {
   return gsap.to(profile, {
-    ...PROFILE_SCROLL_CONFIG,
+    scale: PROFILE_SCROLL_CONFIG.scale,
+    transformOrigin: PROFILE_SCROLL_CONFIG.transformOrigin,
+    ease: PROFILE_SCROLL_CONFIG.ease,
     scrollTrigger: {
       trigger: heroSection,
       start: "top top",
@@ -917,6 +924,46 @@ export function createProfileScrollTween(
       scrub: true,
     },
   });
+}
+
+// ============================================================================
+// Profile Visibility Around About Section
+// ============================================================================
+
+/**
+ * Slides the fixed profile downward as a target section enters the viewport.
+ *
+ * This keeps the floating profile from overlapping the next section while
+ * preserving its visibility (no fade out) when scrolling back up.
+ */
+export function createProfileHideOnSection({
+  profile,
+  section,
+}: ProfileSectionVisibilityArgs): () => void {
+  if (!profile || !section) {
+    return () => {};
+  }
+
+  const clamp01 = gsap.utils.clamp(0, 1);
+  const trigger = ScrollTrigger.create({
+    trigger: section,
+    start: "top bottom",
+    end: "bottom top",
+    onUpdate: () => {
+      const rect = section.getBoundingClientRect();
+      const viewHeight = window.innerHeight || 1;
+      const visiblePx = Math.min(viewHeight, Math.max(0, viewHeight - rect.top));
+      // Wait until ~20% of the section is visible, then complete the slide by ~60% visibility.
+      const adjusted = visiblePx - viewHeight * 0.2;
+      const progress = clamp01(adjusted / (viewHeight * 0.4));
+      gsap.set(profile, { yPercent: 140 * progress });
+    },
+  });
+
+  return () => {
+    trigger.kill();
+    gsap.set(profile, { yPercent: 0 });
+  };
 }
 
 // ============================================================================

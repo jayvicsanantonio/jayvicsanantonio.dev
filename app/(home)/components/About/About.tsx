@@ -1,8 +1,15 @@
 "use client";
 
-export default function About() {
+import type { MutableRefObject } from "react";
+
+type AboutProps = {
+  sectionRef?: MutableRefObject<HTMLElement | null> | null;
+};
+
+export default function About({ sectionRef }: AboutProps) {
   return (
     <section
+      ref={sectionRef ?? undefined}
       className="relative isolate z-[70] flex min-h-screen w-full items-center justify-center overflow-hidden bg-[#022b37] px-20 text-white"
       aria-label="About Jayvic San Antonio"
     >

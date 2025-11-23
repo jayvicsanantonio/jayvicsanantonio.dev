@@ -29,6 +29,7 @@ import {
   createCoverAnimations,
   createHeroPin,
   createSkillsEntranceAnimation,
+  createProfileHideOnSection,
   killTween,
   killTimeline,
 } from "./hero-animation-helpers";
@@ -94,10 +95,21 @@ export function useHeroScrollAnimation({
       const designation = refs.designationRef.current;
       const coverLabel = refs.coverLabelRef.current;
       const coverBody = refs.coverBodyRef.current;
+      const aboutSection = refs.aboutSectionRef.current;
       const skillsSection = refs.skillsSectionRef.current;
       const skillsRowsAbove = refs.skillsRowsAboveRefs.current;
       const skillsRowsBelow = refs.skillsRowsBelowRefs.current;
       const skillsHeading = refs.skillsHeadingRef.current;
+      const cleanupFns: Array<() => void> = [];
+
+      if (profile && aboutSection) {
+        cleanupFns.push(
+          createProfileHideOnSection({
+            profile,
+            section: aboutSection,
+          }),
+        );
+      }
 
       // Handle reduced motion: apply final states immediately.
       if (prefersReducedMotion) {
@@ -110,12 +122,16 @@ export function useHeroScrollAnimation({
         if (coverBody) {
           gsap.set(coverBody, { yPercent: 0 });
         }
-        return;
+        return () => {
+          cleanupFns.forEach((cleanup) => cleanup());
+        };
       }
 
       // Early return if required refs are missing.
       if (!heroSection || !profile || !pill || !pillContent || !video || !navRow) {
-        return;
+        return () => {
+          cleanupFns.forEach((cleanup) => cleanup());
+        };
       }
 
       // Ensure nav row is visible for measurements.
@@ -134,9 +150,6 @@ export function useHeroScrollAnimation({
         navSpacerEl,
         firstNavButton,
       });
-
-      // Collect cleanup functions for all animations.
-      const cleanupFns: Array<() => void> = [];
 
       // Create profile scroll tween (scales down as user scrolls).
       const scrollTween = createProfileScrollTween(heroSection, profile);
