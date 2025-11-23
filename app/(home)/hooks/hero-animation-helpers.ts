@@ -14,7 +14,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import {
   FINAL_PANEL_STATE,
-  HERO_SCROLL_DISTANCE,
   LABEL_EXIT_SCROLL_DISTANCE,
   LABEL_EXIT_Y_PERCENT,
   PILL_SHRINK_BACKGROUND,
@@ -81,6 +80,7 @@ export type PillShrinkTimelineArgs = NavMeasurementHelpers & {
   pillSkin: HTMLDivElement | null;
   video: HTMLVideoElement;
   overlay: HTMLDivElement | null;
+  profile: HTMLDivElement;
 };
 
 export type PillShrinkTimelineResult = {
@@ -474,6 +474,7 @@ export function createPillShrinkTimeline({
   pillSkin,
   video,
   overlay,
+  profile,
   getTargetPillWidth,
   getTargetPillHeight,
   getNavRowYOffset,
@@ -535,10 +536,12 @@ export function createPillShrinkTimeline({
           // This ensures scale/position animations transform from the center point.
           // Must be set on both enter and enterBack to handle bidirectional scrolling.
           gsap.set([pill, video], { transformOrigin: "50% 50%" });
+          gsap.set(profile, { transformOrigin: PROFILE_SCROLL_CONFIG.transformOrigin });
         },
         onEnterBack: () => {
           // Re-apply transform origin when scrolling back up.
           gsap.set([pill, video], { transformOrigin: "50% 50%" });
+          gsap.set(profile, { transformOrigin: PROFILE_SCROLL_CONFIG.transformOrigin });
         },
         invalidateOnRefresh: true,
         onUpdate: () => syncPillToNavRow(),
@@ -650,6 +653,21 @@ export function createPillShrinkTimeline({
       ease: "power2.out",
     },
     SCROLL_TIMING.NAV_ROW_START_OFFSET,
+  );
+
+  // Keep the profile scale progression locked to the pill/video shrink timeline.
+  // Finish slightly earlier than the full timeline so the profile is fully shrunk by the time
+  // the pill/video morph completes.
+  const profileTweenDuration = videoShrinkTimeline.duration() * 0.5;
+  videoShrinkTimeline.to(
+    profile,
+    {
+      scale: PROFILE_SCROLL_CONFIG.scale,
+      transformOrigin: PROFILE_SCROLL_CONFIG.transformOrigin,
+      ease: PROFILE_SCROLL_CONFIG.ease,
+      duration: profileTweenDuration,
+    },
+    0,
   );
 
   return {
@@ -878,51 +896,6 @@ export function createHeroPin(heroSection: HTMLDivElement): ScrollTrigger {
     pin: true,
     pinReparent: true,
     anticipatePin: 1,
-  });
-}
-
-// ============================================================================
-// Profile Scroll Animation
-// ============================================================================
-
-/**
- * Creates a scroll-driven tween that scales down the profile image.
- *
- * As the user scrolls, the profile image smoothly scales down and adjusts
- * its vertical position, coordinating with the pill shrink animation.
- *
- * @param heroSection - The hero section trigger element
- * @param profile - The profile image element to animate
- * @returns GSAP tween instance
- *
- * @example
- * ```typescript
- * const scrollTween = createProfileScrollTween(
- *   heroSectionRef.current,
- *   profileRef.current
- * );
- *
- * // Later, on cleanup
- * scrollTween.scrollTrigger?.kill();
- * scrollTween.kill();
- * ```
- */
-export function createProfileScrollTween(
-  heroSection: HTMLDivElement,
-  profile: HTMLDivElement,
-): gsap.core.Tween {
-  return gsap.to(profile, {
-    scale: PROFILE_SCROLL_CONFIG.scale,
-    transformOrigin: PROFILE_SCROLL_CONFIG.transformOrigin,
-    ease: PROFILE_SCROLL_CONFIG.ease,
-    scrollTrigger: {
-      trigger: heroSection,
-      start: "top top",
-      // End position: 20% of viewport height (0.2 * window.innerHeight).
-      // Profile scales down quickly during the initial scroll phase.
-      end: () => "+=" + window.innerHeight * HERO_SCROLL_DISTANCE,
-      scrub: true,
-    },
   });
 }
 

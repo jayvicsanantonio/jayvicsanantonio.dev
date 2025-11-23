@@ -9,7 +9,8 @@ export const VIDEO_OVERLAY_BACKGROUND =
   "radial-gradient(circle at 20% 20%, rgba(56,189,248,0.45), transparent 45%), radial-gradient(circle at 80% 30%, rgba(59,130,246,0.35), transparent 40%), linear-gradient(180deg, rgba(6,16,35,0.25), rgba(1,5,11,0.75))";
 export const PROFILE_DROP_SHADOW =
   "drop-shadow(0 24px 36px rgba(0,0,0,0.55)) drop-shadow(0 0 20px rgba(34,211,238,0.45))";
-export const HERO_SCROLL_DISTANCE = 0.2;
+// Match the pill shrink scroll distance (one viewport) so profile shrink stays in sync.
+export const HERO_SCROLL_DISTANCE = 1;
 export const LABEL_EXIT_Y_PERCENT = -185;
 export const LABEL_EXIT_SCROLL_DISTANCE = 0.5;
 // Keep the floating profile low in the stack so content sections can cover it.

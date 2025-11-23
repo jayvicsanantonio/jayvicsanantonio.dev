@@ -23,14 +23,12 @@ import { gsap } from "gsap";
 import type { HeroAnimationRefs } from "../components/Hero/hero.types";
 import {
   createNavMeasurementHelpers,
-  createProfileScrollTween,
   createPillShrinkTimeline,
   createLabelExitTimeline,
   createCoverAnimations,
   createHeroPin,
   createSkillsEntranceAnimation,
   createProfileHideOnSection,
-  killTween,
   killTimeline,
 } from "./hero-animation-helpers";
 // Timing constants are used by helper functions imported above
@@ -150,10 +148,6 @@ export function useHeroScrollAnimation({
         firstNavButton,
       });
 
-      // Create profile scroll tween (scales down as user scrolls).
-      const scrollTween = createProfileScrollTween(heroSection, profile);
-      cleanupFns.push(() => killTween(scrollTween));
-
       // Create pill shrink timeline (morphs pill into nav button).
       const { cleanup: pillCleanup } = createPillShrinkTimeline({
         heroSection,
@@ -163,6 +157,7 @@ export function useHeroScrollAnimation({
         pillSkin,
         video,
         overlay,
+        profile,
         getTargetPillWidth: navMeasurements.getTargetPillWidth,
         getTargetPillHeight: navMeasurements.getTargetPillHeight,
         getNavRowYOffset: navMeasurements.getNavRowYOffset,
