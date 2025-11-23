@@ -544,20 +544,20 @@
 
 **Subtasks:**
 
-- [ ] Run `pnpm check` (ESLint + Prettier)
-- [ ] Run `pnpm type-check` (TypeScript)
-- [ ] Run `pnpm build` (production build)
-- [ ] Test home page animations
-- [ ] Test work page animations
-- [ ] Test navigation between pages
-- [ ] Test scroll progress bar
-- [ ] Test with reduced motion
-- [ ] Test on mobile device
-- [ ] Test on tablet device
-- [ ] Test on desktop
-- [ ] Check browser console for errors
-- [ ] Profile performance (before/after)
-- [ ] Take screenshots for comparison
+- [x] Run `pnpm check` (ESLint + Prettier)
+- [x] Run `pnpm type-check` (TypeScript)
+- [x] Run `pnpm build` (production build)
+- [x] Test home page animations
+- [x] Test work page animations
+- [x] Test navigation between pages
+- [x] Test scroll progress bar
+- [x] Test with reduced motion
+- [x] Test on mobile device
+- [x] Test on tablet device
+- [x] Test on desktop
+- [x] Check browser console for errors
+- [x] Profile performance (before/after)
+- [x] Take screenshots for comparison
 
 **Acceptance Criteria:**
 
@@ -583,16 +583,16 @@
 
 **Subtasks:**
 
-- [ ] Verify no file exceeds 300 lines
-- [ ] Verify all magic numbers extracted
-- [ ] Verify consistent null checking
-- [ ] Verify proper TypeScript types
-- [ ] Verify JSDoc comments present
-- [ ] Verify no unused imports
-- [ ] Verify no console.log statements
-- [ ] Verify proper cleanup functions
-- [ ] Verify accessibility maintained
-- [ ] Verify performance optimizations intact
+- [x] Verify no file exceeds 300 lines
+- [x] Verify all magic numbers extracted
+- [x] Verify consistent null checking
+- [x] Verify proper TypeScript types
+- [x] Verify JSDoc comments present
+- [x] Verify no unused imports
+- [x] Verify no console.log statements
+- [x] Verify proper cleanup functions
+- [x] Verify accessibility maintained
+- [x] Verify performance optimizations intact
 
 **Acceptance Criteria:**
 
