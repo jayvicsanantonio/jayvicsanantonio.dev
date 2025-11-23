@@ -121,18 +121,18 @@ export const OVERLAY_OPACITY = {
 /**
  * Timing values for skills section entrance animation.
  *
- * The skills section animates in as the user scrolls, with staggered reveals
- * for heading and skill rows.
+ * The skills section animates in as the user scrolls, with synchronized group reveals.
+ * All rows above the heading fade in together, followed by all rows below the heading.
  */
 export const SKILLS_TIMING = {
   /** Duration of skills heading fade/scale animation (seconds) */
   HEADING_DURATION: 0.6,
 
-  /** Stagger delay between skill row animations (seconds) */
-  ROW_STAGGER: 0.12,
+  /** Duration of skill rows fade in animation (seconds) */
+  ROWS_FADE_DURATION: 0.8,
 
-  /** Delay before "below" rows start animating (seconds) */
-  BELOW_DELAY: 0.25,
+  /** Delay before "below" rows start animating after "above" rows (seconds) */
+  BELOW_DELAY: 0.3,
 
   /** Delay offset for heading animation (seconds) */
   HEADING_DELAY: 0.12,

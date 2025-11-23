@@ -312,9 +312,10 @@ export function createNavMeasurementHelpers({
 /**
  * Creates a scroll-triggered entrance animation for the skills section.
  *
- * Animates skill rows with staggered reveals from left and right,
- * along with a heading fade-in and scale effect. The animation is
- * scroll-scrubbed for smooth, controlled playback.
+ * Animates skill rows with synchronized group reveals - all rows above the heading
+ * fade in together, followed by all rows below the heading fading in together.
+ * The heading also fades in with a scale effect. The animation is scroll-scrubbed
+ * for smooth, controlled playback.
  *
  * @param args - Skills section elements to animate
  * @returns Cleanup function to kill the animation timeline
@@ -381,21 +382,37 @@ export function createSkillsEntranceAnimation({
     );
   }
 
+  // Animate all "above" rows simultaneously entering from right to left
   if (aboveEls.length) {
-    timeline.fromTo(
+    // Set initial state: invisible and offset to the right
+    gsap.set(aboveEls, { autoAlpha: 0, xPercent: SKILLS_INITIAL_STATE.ABOVE_X_PERCENT });
+
+    timeline.to(
       aboveEls,
-      { autoAlpha: 0, xPercent: SKILLS_INITIAL_STATE.ABOVE_X_PERCENT },
-      { autoAlpha: 1, xPercent: 0, stagger: SKILLS_TIMING.ROW_STAGGER },
-      0,
+      {
+        autoAlpha: 1,
+        xPercent: 0,
+        duration: SKILLS_TIMING.ROWS_FADE_DURATION,
+        ease: "power2.out",
+      },
+      0, // Start at the beginning of the timeline
     );
   }
 
+  // Animate all "below" rows simultaneously entering from left to right
   if (belowEls.length) {
-    timeline.fromTo(
+    // Set initial state: invisible and offset to the left
+    gsap.set(belowEls, { autoAlpha: 0, xPercent: SKILLS_INITIAL_STATE.BELOW_X_PERCENT });
+
+    timeline.to(
       belowEls,
-      { autoAlpha: 0, xPercent: SKILLS_INITIAL_STATE.BELOW_X_PERCENT },
-      { autoAlpha: 1, xPercent: 0, stagger: SKILLS_TIMING.ROW_STAGGER },
-      aboveEls.length ? SKILLS_TIMING.BELOW_DELAY : 0,
+      {
+        autoAlpha: 1,
+        xPercent: 0,
+        duration: SKILLS_TIMING.ROWS_FADE_DURATION,
+        ease: "power2.out",
+      },
+      aboveEls.length ? SKILLS_TIMING.BELOW_DELAY : 0, // Delay after above rows complete
     );
   }
 

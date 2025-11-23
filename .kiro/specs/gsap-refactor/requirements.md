@@ -80,7 +80,14 @@ Refactor the existing GSAP scroll-driven animation implementation to improve mai
    - Native scrollbar hiding styles retained
    - No visual regressions
 
-6. **Documentation Updated**
+6. **Skills Marquee Animations Enhanced**
+   - All marquee rows above the heading fade in simultaneously
+   - All marquee rows below the heading fade in simultaneously
+   - Below rows have slight delay after above rows
+   - Animations respect `prefers-reduced-motion`
+   - Smooth opacity transition from 0 to 1
+
+7. **Documentation Updated**
    - Remove or archive `docs/SCROLL.md` and `docs/SCROLL_PLAN.md`
    - Update inline comments where logic changed
    - Add JSDoc comments to new hooks

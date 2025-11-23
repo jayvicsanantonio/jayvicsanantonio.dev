@@ -534,6 +534,70 @@
 
 ---
 
+## Phase 6: Skills Marquee Animation Enhancement
+
+### Task 6.1: Update Skills Entrance Animation
+
+**Priority**: Medium  
+**Estimated Time**: 45 minutes  
+**Dependencies**: Phase 2 completion
+
+**Subtasks:**
+
+- [x] Open `app/(home)/hooks/hero-animation-helpers.ts`
+- [x] Locate `createSkillsEntranceAnimation` function
+- [x] Update animation to fade in all "above" rows simultaneously
+- [x] Update animation to fade in all "below" rows simultaneously
+- [x] Add slight delay between above and below groups
+- [x] Use `SKILLS_ROWS_FADE_DURATION` and `SKILLS_BELOW_DELAY` constants
+- [x] Ensure reduced motion support
+- [x] Test visual appearance
+
+**Acceptance Criteria:**
+
+- All rows above heading fade in together (opacity 0 → 1)
+- All rows below heading fade in together (opacity 0 → 1)
+- Below rows start after above rows complete
+- Smooth, elegant transition
+- Respects `prefers-reduced-motion`
+- No layout shift during animation
+
+**Files Changed:**
+
+- `app/(home)/hooks/hero-animation-helpers.ts` (modified)
+- `app/(home)/components/Hero/hero-animation-timing.ts` (modified)
+
+---
+
+### Task 6.2: Test Skills Marquee Animations
+
+**Priority**: Medium  
+**Estimated Time**: 20 minutes  
+**Dependencies**: Task 6.1
+
+**Subtasks:**
+
+- [x] Test on home page scroll to skills section
+- [x] Verify above rows fade in simultaneously
+- [x] Verify below rows fade in simultaneously
+- [x] Verify timing feels natural
+- [x] Test with reduced motion enabled
+- [x] Test on mobile viewport
+- [x] Verify no console errors
+
+**Acceptance Criteria:**
+
+- Animation feels smooth and synchronized
+- No visual glitches
+- Reduced motion shows final state immediately
+- Works across all viewport sizes
+
+**Files Changed:**
+
+- None (testing only)
+
+---
+
 ## Final Verification
 
 ### Task 6.1: Comprehensive Testing
@@ -609,9 +673,9 @@
 
 ## Summary
 
-**Total Tasks**: 23  
-**Estimated Total Time**: 8-10 hours  
-**Critical Path**: Phase 1 → Phase 2 → Final Verification
+**Total Tasks**: 25  
+**Estimated Total Time**: 9-11 hours  
+**Critical Path**: Phase 1 → Phase 2 → Phase 6 → Final Verification
 
 **Risk Level by Phase:**
 
@@ -629,8 +693,9 @@
 
 **Success Criteria:**
 
-- ✅ All 23 tasks completed
+- ✅ All 25 tasks completed
 - ✅ All acceptance criteria met
 - ✅ Zero breaking changes
 - ✅ Improved maintainability
 - ✅ Complete documentation
+- ✅ Enhanced skills marquee animations

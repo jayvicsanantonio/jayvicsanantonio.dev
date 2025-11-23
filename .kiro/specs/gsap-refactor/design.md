@@ -136,8 +136,8 @@ export const ANIMATION_TIMING = {
 
   // Skills animation
   SKILLS_HEADING_DURATION: 0.6,
-  SKILLS_ROW_STAGGER: 0.12,
-  SKILLS_BELOW_DELAY: 0.25,
+  SKILLS_ROWS_FADE_DURATION: 0.8,
+  SKILLS_BELOW_DELAY: 0.3,
 } as const;
 
 export const SCROLL_THRESHOLDS = {
@@ -245,7 +245,8 @@ export function createPillShrinkTimeline(args: PillShrinkTimelineArgs): PillShri
 export function createCoverAnimations(args: CoverAnimationArgs): CleanupFn;
 
 /**
- * Creates skills section entrance animation with staggered reveals.
+ * Creates skills section entrance animation with synchronized group reveals.
+ * Rows above the heading fade in together, followed by rows below the heading.
  */
 export function createSkillsEntranceAnimation(args: SkillsEntranceArgs): CleanupFn;
 ```
