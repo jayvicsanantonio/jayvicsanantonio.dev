@@ -87,6 +87,7 @@ export function useHeroScrollAnimation({
       const pillContent = refs.pillContentRef.current;
       const video = refs.videoRef.current;
       const overlay = refs.videoOverlayRef.current;
+      const watermarkMask = refs.videoWatermarkMaskRef.current;
       const pillSkin = refs.pillSkinRef.current;
       const navRow = refs.navRowRef.current;
       const nameplate = refs.nameplateRef.current;
@@ -157,6 +158,7 @@ export function useHeroScrollAnimation({
         pillSkin,
         video,
         overlay,
+        watermarkMask,
         profile,
         getTargetPillWidth: navMeasurements.getTargetPillWidth,
         getTargetPillHeight: navMeasurements.getTargetPillHeight,

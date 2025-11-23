@@ -13,6 +13,7 @@ export type HeroAnimationRefs = {
   coverBodyRef: MutableRefObject<HTMLDivElement | null>;
   videoRef: MutableRefObject<HTMLVideoElement | null>;
   videoOverlayRef: MutableRefObject<HTMLDivElement | null>;
+  videoWatermarkMaskRef: MutableRefObject<HTMLDivElement | null>;
   pillRef: MutableRefObject<HTMLDivElement | null>;
   pillContentRef: MutableRefObject<HTMLDivElement | null>;
   pillSkinRef: MutableRefObject<HTMLDivElement | null>;
@@ -32,6 +33,7 @@ export type StageProps = Pick<
   | "pillRef"
   | "videoRef"
   | "videoOverlayRef"
+  | "videoWatermarkMaskRef"
   | "pillContentRef"
   | "pillSkinRef"
 > & {
@@ -40,7 +42,12 @@ export type StageProps = Pick<
 
 export type PillProps = Pick<
   HeroAnimationRefs,
-  "pillRef" | "videoRef" | "videoOverlayRef" | "pillContentRef" | "pillSkinRef"
+  | "pillRef"
+  | "videoRef"
+  | "videoOverlayRef"
+  | "videoWatermarkMaskRef"
+  | "pillContentRef"
+  | "pillSkinRef"
 >;
 
 export type ProfileProps = Pick<HeroAnimationRefs, "profileRef"> & {

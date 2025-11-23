@@ -5,7 +5,11 @@ export const PILL_SHRINK_BOX_SHADOW =
   "0 24px 45px rgba(1,11,26,0.65), 0 0 45px rgba(34,211,238,0.35)";
 export const PILL_SHRINK_BACKGROUND = "rgba(4,15,32,0.95)";
 export const PILL_SHRINK_BORDER = "rgba(34,211,238,0.75)";
+export const VIDEO_WATERMARK_MASK =
+  "radial-gradient(ellipse at 94% 88%, rgba(1,5,11,0.92) 0%, rgba(1,5,11,0.86) 18%, rgba(1,5,11,0.72) 34%, rgba(1,5,11,0.52) 52%, rgba(1,5,11,0.16) 70%, rgba(1,5,11,0) 86%)";
 export const VIDEO_OVERLAY_BACKGROUND = [
+  // Darken bottom-right to fully mask the watermark.
+  "radial-gradient(ellipse at 92% 88%, rgba(1,4,12,0.88) 0%, rgba(1,4,12,0.82) 22%, rgba(1,4,12,0.68) 38%, rgba(1,4,12,0.48) 55%, rgba(1,4,12,0) 78%)",
   "radial-gradient(ellipse at 50% 50%, rgba(1,4,12,0) 46%, rgba(1,4,12,0.55) 76%, rgba(1,4,12,0.78) 100%)",
   "radial-gradient(circle at 20% 20%, rgba(56,189,248,0.45), transparent 45%)",
   "radial-gradient(circle at 80% 30%, rgba(59,130,246,0.35), transparent 40%)",

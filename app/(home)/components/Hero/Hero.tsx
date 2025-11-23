@@ -13,6 +13,7 @@ export type HeroProps = {
   pillRef: HeroAnimationRefs["pillRef"];
   videoRef: HeroAnimationRefs["videoRef"];
   videoOverlayRef: HeroAnimationRefs["videoOverlayRef"];
+  videoWatermarkMaskRef: HeroAnimationRefs["videoWatermarkMaskRef"];
   pillContentRef: HeroAnimationRefs["pillContentRef"];
   pillSkinRef: HeroAnimationRefs["pillSkinRef"];
 };
@@ -26,6 +27,7 @@ export default function Hero({
   pillRef,
   videoRef,
   videoOverlayRef,
+  videoWatermarkMaskRef,
   pillContentRef,
   pillSkinRef,
 }: HeroProps) {
@@ -39,6 +41,7 @@ export default function Hero({
           pillRef,
           videoRef,
           videoOverlayRef,
+          videoWatermarkMaskRef,
           pillContentRef,
           pillSkinRef,
         }}

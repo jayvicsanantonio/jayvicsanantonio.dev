@@ -44,6 +44,7 @@ export type ReducedMotionArgs = {
   pillContent: HTMLDivElement;
   video: HTMLVideoElement;
   overlay: HTMLDivElement | null;
+  watermarkMask: HTMLDivElement | null;
   pillSkin: HTMLDivElement | null;
   profile: HTMLDivElement | null;
   navRow: HTMLDivElement | null;
@@ -80,6 +81,7 @@ export type PillShrinkTimelineArgs = NavMeasurementHelpers & {
   pillSkin: HTMLDivElement | null;
   video: HTMLVideoElement;
   overlay: HTMLDivElement | null;
+  watermarkMask: HTMLDivElement | null;
   profile: HTMLDivElement;
 };
 
@@ -139,6 +141,7 @@ export function applyReducedMotionState({
   pillContent,
   video,
   overlay,
+  watermarkMask,
   pillSkin,
   profile,
   navRow,
@@ -157,6 +160,10 @@ export function applyReducedMotionState({
 
   if (overlay) {
     gsap.set(overlay, { autoAlpha: OVERLAY_OPACITY.INITIAL });
+  }
+
+  if (watermarkMask) {
+    gsap.set(watermarkMask, { autoAlpha: 1 });
   }
 
   if (pillSkin) {
@@ -474,6 +481,7 @@ export function createPillShrinkTimeline({
   pillSkin,
   video,
   overlay,
+  watermarkMask,
   profile,
   getTargetPillWidth,
   getTargetPillHeight,
@@ -620,6 +628,29 @@ export function createPillShrinkTimeline({
     );
     videoShrinkTimeline.to(
       overlay,
+      {
+        autoAlpha: 0,
+        duration: SCROLL_TIMING.VIDEO_FADE_OUT_DURATION,
+        ease: "power1.out",
+      },
+      pillShrinkCompleteLabel,
+    );
+  }
+
+  if (watermarkMask) {
+    videoShrinkTimeline.fromTo(
+      watermarkMask,
+      { autoAlpha: 0 },
+      {
+        autoAlpha: 1,
+        duration: SCROLL_TIMING.OVERLAY_FADE_DURATION,
+        ease: "none",
+        immediateRender: false,
+      },
+      0,
+    );
+    videoShrinkTimeline.to(
+      watermarkMask,
       {
         autoAlpha: 0,
         duration: SCROLL_TIMING.VIDEO_FADE_OUT_DURATION,

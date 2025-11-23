@@ -10,6 +10,7 @@ export default function Stage({
   pillRef,
   videoRef,
   videoOverlayRef,
+  videoWatermarkMaskRef,
   pillContentRef,
   pillSkinRef,
 }: StageProps) {
@@ -22,6 +23,7 @@ export default function Stage({
             pillRef,
             videoRef,
             videoOverlayRef,
+            videoWatermarkMaskRef,
             pillContentRef,
             pillSkinRef,
           }}

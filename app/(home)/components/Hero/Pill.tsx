@@ -1,10 +1,11 @@
-import { VIDEO_OVERLAY_BACKGROUND } from "./hero.constants";
+import { VIDEO_OVERLAY_BACKGROUND, VIDEO_WATERMARK_MASK } from "./hero.constants";
 import type { PillProps } from "./hero.types";
 
 export default function Pill({
   pillRef,
   videoRef,
   videoOverlayRef,
+  videoWatermarkMaskRef,
   pillContentRef,
   pillSkinRef,
 }: PillProps) {
@@ -40,6 +41,12 @@ export default function Pill({
         ref={videoOverlayRef}
         className="pointer-events-none absolute inset-0 z-[2]"
         style={{ opacity: 0, background: VIDEO_OVERLAY_BACKGROUND }}
+      />
+      <div
+        ref={videoWatermarkMaskRef}
+        className="pointer-events-none absolute inset-0 z-[3]"
+        aria-hidden
+        style={{ opacity: 0, background: VIDEO_WATERMARK_MASK }}
       />
       <div
         ref={pillContentRef}

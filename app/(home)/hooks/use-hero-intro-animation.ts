@@ -67,6 +67,7 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
       // Extract optional refs.
       const navRow = refs.navRowRef.current;
       const overlay = refs.videoOverlayRef.current;
+       const watermarkMask = refs.videoWatermarkMaskRef.current;
       const pillSkin = refs.pillSkinRef.current;
       const profile = refs.profileRef.current;
       const nameplate = refs.nameplateRef.current;
@@ -79,6 +80,7 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
           pillContent,
           video,
           overlay,
+          watermarkMask,
           pillSkin,
           profile,
           navRow,
@@ -127,6 +129,7 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
         // Set initial hidden states.
         .set(video, { autoAlpha: 0 })
         .set(overlay, { autoAlpha: 0 })
+        .set(watermarkMask, { autoAlpha: 0 })
         .set(profile, { autoAlpha: 0 })
         .set(pillSkin, { autoAlpha: 0 })
         .set(pill, { backgroundColor: "#ffffff" })
@@ -183,9 +186,9 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
           },
           "-=0.6",
         )
-        // Fade in video and overlay.
+        // Fade in video, overlay, and watermark mask.
         .to(
-          [video, overlay],
+          [video, overlay, watermarkMask],
           {
             autoAlpha: 1,
             duration: INTRO_TIMING.VIDEO_FADE_DURATION,

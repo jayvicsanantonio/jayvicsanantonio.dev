@@ -22,6 +22,7 @@ export default function HomePageContent({ children }: { children: React.ReactNod
   const coverBodyRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const videoOverlayRef = useRef<HTMLDivElement>(null);
+  const videoWatermarkMaskRef = useRef<HTMLDivElement>(null);
   const pillRef = useRef<HTMLDivElement>(null);
   const pillContentRef = useRef<HTMLDivElement>(null);
   const pillSkinRef = useRef<HTMLDivElement>(null);
@@ -46,6 +47,7 @@ export default function HomePageContent({ children }: { children: React.ReactNod
     coverBodyRef,
     videoRef,
     videoOverlayRef,
+    videoWatermarkMaskRef,
     pillRef,
     pillContentRef,
     pillSkinRef,
