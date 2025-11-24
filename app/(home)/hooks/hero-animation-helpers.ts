@@ -1023,7 +1023,6 @@ export function createSkillsPin(skillsSection: HTMLElement): ScrollTrigger {
     end: () => "+=" + window.innerHeight,
     pin: true,
     pinSpacing: false,
-    pinReparent: true,
     anticipatePin: 1,
   });
 }

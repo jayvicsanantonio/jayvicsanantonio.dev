@@ -68,7 +68,6 @@ export default function HomePageContent({ children }: { children: React.ReactNod
         ref={smoothContentRef}
         id="smooth-content"
         className="w-full z-10"
-        style={{ willChange: prefersReducedMotion ? undefined : "transform" }}
       >
         <Hero {...(heroRefs as unknown as HeroProps)} />
         <Skills
