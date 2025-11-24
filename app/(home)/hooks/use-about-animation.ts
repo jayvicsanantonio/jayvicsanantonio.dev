@@ -47,11 +47,11 @@ export function useAboutAnimation({
       
       // Ensure letters are initially hidden/positioned (relying on overflow-hidden for mask)
       gsap.set(letters, { 
-        xPercent: 500, // Start visually "above" (positive X in -90deg rotated space)
+        x: "150vh", // Start visually "above" (positive X in -90deg rotated space)
       });
 
       gsap.to(letters, {
-        xPercent: 0, // Move to natural position
+        x: 0, // Move to natural position
         ease: "none", // Linear movement for direct scroll linkage
         scrollTrigger: {
           trigger: section,
