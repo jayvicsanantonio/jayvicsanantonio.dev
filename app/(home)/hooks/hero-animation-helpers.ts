@@ -436,18 +436,22 @@ export function createSkillsEntranceAnimation({
     trigger: section,
     start: SCROLL_TRIGGER_POSITIONS.SKILLS_START,
     end: SCROLL_TRIGGER_POSITIONS.SKILLS_END,
-    toggleActions: "play none reverse reverse",
-    animation: timeline,
-    onEnter: () => {
+    scrub: SCROLL_TIMING.SKILLS_ENTRANCE_SCRUB,
+    onUpdate: (self) => {
+      const progress = self.progress;
+      if (progress <= 0) {
+        timeline.pause(0);
+        setInitialState();
+        return;
+      }
       gsap.set(section, { autoAlpha: 1, pointerEvents: "auto" });
-      timeline.play(0);
+      timeline.progress(progress);
     },
-    onEnterBack: () => {
-      gsap.set(section, { autoAlpha: 1, pointerEvents: "auto" });
-      timeline.play(0);
+    onLeaveBack: () => {
+      timeline.pause(0);
+      setInitialState();
     },
   });
-  timeline.eventCallback("onReverseComplete", () => setInitialState());
 
   return () => {
     skillsTrigger?.kill();
