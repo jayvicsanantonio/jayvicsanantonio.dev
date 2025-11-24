@@ -30,7 +30,7 @@ export function useAboutAnimation({
       // 1. Parallax "ABOUT" Label Container
       // The container moves slower than the scroll, creating a sticky/parallax feel.
       gsap.to(label, {
-        yPercent: 50, // Move down by 50% of its height over the course of the section scroll
+        yPercent: 250, // Move down significantly to ensure continuous movement
         ease: "none",
         scrollTrigger: {
           trigger: section,
