@@ -983,8 +983,14 @@ export function createProfileHideOnSection({
       const viewHeight = window.innerHeight || 1;
       const intersection = Math.max(0, Math.min(rect.bottom, viewHeight) - Math.max(rect.top, 0));
       const visibleRatio = rect.height ? intersection / rect.height : 0;
-      // Start moving when 80% of the section is visible; finish by full visibility.
-      const progress = clamp01((visibleRatio - 0.8) / 0.2);
+      
+      // Start moving when 10% of the About section is visible.
+      // We want it to hide relatively quickly as the About section comes up.
+      // Let's finish hiding by 25% visibility to ensure it's gone before it overlaps content.
+      const startThreshold = 0.1;
+      const endThreshold = 0.25;
+      const progress = clamp01((visibleRatio - startThreshold) / (endThreshold - startThreshold));
+      
       gsap.set(profile, {
         yPercent: 140 * progress,
         zIndex: progress > 0 ? PROFILE_COVER_Z_INDEX : PROFILE_BASE_Z_INDEX,
