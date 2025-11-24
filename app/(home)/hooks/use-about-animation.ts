@@ -53,7 +53,6 @@ export function useAboutAnimation({
       gsap.to(letters, {
         xPercent: 0, // Move to natural position
         ease: "none", // Linear movement for direct scroll linkage
-        stagger: 0.1, // Stagger the start of each letter's animation
         scrollTrigger: {
           trigger: section,
           start: "top 25%", // Start revealing when top of section is 25% from top of viewport (75% visible)
