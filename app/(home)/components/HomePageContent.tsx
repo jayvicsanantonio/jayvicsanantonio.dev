@@ -62,7 +62,7 @@ export default function HomePageContent({ children }: { children: React.ReactNod
   useHeroAnimations({ refs: heroRefs, prefersReducedMotion });
 
   return (
-    <main ref={smoothWrapperRef} id="smooth-wrapper" className="relative w-full text-white  ">
+    <main ref={smoothWrapperRef} id="smooth-wrapper" className="relative z-10 w-full text-white  ">
       {children}
       <div
         ref={smoothContentRef}

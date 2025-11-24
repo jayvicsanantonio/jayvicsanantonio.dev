@@ -29,6 +29,7 @@ import {
   createHeroPin,
   createSkillsEntranceAnimation,
   createProfileHideOnSection,
+  createSkillsPin,
   killTimeline,
 } from "./hero-animation-helpers";
 // Timing constants are used by helper functions imported above
@@ -200,6 +201,12 @@ export function useHeroScrollAnimation({
         heroSection,
       });
       cleanupFns.push(skillsCleanup);
+
+      // Create skills pin (keeps skills section in place while about section slides over).
+      if (skillsSection) {
+        const skillsPin = createSkillsPin(skillsSection);
+        cleanupFns.push(() => skillsPin.kill());
+      }
 
       // Return cleanup function to kill all animations on unmount.
       return () => {

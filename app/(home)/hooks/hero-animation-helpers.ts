@@ -999,6 +999,30 @@ export function createProfileHideOnSection({
 }
 
 // ============================================================================
+// Skills Pin
+// ============================================================================
+
+/**
+ * Creates a ScrollTrigger that pins the skills section when it reaches the bottom.
+ *
+ * This allows the About section to slide up over the Skills section.
+ *
+ * @param skillsSection - The skills section element to pin
+ * @returns ScrollTrigger instance
+ */
+export function createSkillsPin(skillsSection: HTMLElement): ScrollTrigger {
+  return ScrollTrigger.create({
+    trigger: skillsSection,
+    start: "bottom bottom",
+    end: () => "+=" + window.innerHeight,
+    pin: true,
+    pinSpacing: false,
+    pinReparent: true,
+    anticipatePin: 1,
+  });
+}
+
+// ============================================================================
 // Cleanup Utilities
 // ============================================================================
 
