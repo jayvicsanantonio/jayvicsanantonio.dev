@@ -71,6 +71,7 @@ export type SkillsEntranceArgs = {
   rowsAbove?: Array<HTMLDivElement | null>;
   rowsBelow?: Array<HTMLDivElement | null>;
   heading?: HTMLHeadingElement | null;
+  heroSection?: HTMLDivElement | null;
 };
 
 export type PillShrinkTimelineArgs = NavMeasurementHelpers & {
@@ -326,8 +327,9 @@ export function createNavMeasurementHelpers({
  *
  * Animates skill rows with synchronized group reveals - all rows above the heading
  * fade in together, followed by all rows below the heading fading in together.
- * The heading also fades in with a scale effect. The animation is scroll-scrubbed
- * for smooth, controlled playback.
+ * The heading also fades in with a scale effect. The animation plays once the
+ * section enters the viewport and (if provided) the hero section has fully
+ * left the viewport; it rewinds when scrolling back above the start.
  *
  * @param args - Skills section elements to animate
  * @returns Cleanup function to kill the animation timeline
@@ -350,6 +352,7 @@ export function createSkillsEntranceAnimation({
   rowsAbove = [],
   rowsBelow = [],
   heading,
+  heroSection,
 }: SkillsEntranceArgs): () => void {
   if (!section) {
     return () => {};
@@ -363,27 +366,37 @@ export function createSkillsEntranceAnimation({
     return () => {};
   }
 
-  const timeline = gsap.timeline({
-    defaults: { ease: "power2.out" },
-    scrollTrigger: {
-      trigger: section,
-      start: SCROLL_TRIGGER_POSITIONS.SKILLS_START,
-      end: SCROLL_TRIGGER_POSITIONS.SKILLS_END,
-      scrub: SCROLL_TIMING.SKILLS_ENTRANCE_SCRUB,
-    },
-  });
+  const timeline = gsap.timeline({ paused: true, defaults: { ease: "power2.out" } });
+  let skillsTrigger: ScrollTrigger | null = null;
 
-  if (headingEl) {
-    // Set transform origin to center (50% horizontal, 50% vertical).
-    // This makes the scale animation expand from the center point.
-    gsap.set(headingEl, { transformOrigin: "50% 50%" });
-    timeline.fromTo(
-      headingEl,
-      {
+  const setInitialState = () => {
+    gsap.set(section, { autoAlpha: 0, pointerEvents: "none" });
+
+    if (headingEl) {
+      gsap.set(headingEl, {
         autoAlpha: 0,
         yPercent: SKILLS_INITIAL_STATE.HEADING_Y_PERCENT,
         scale: SKILLS_INITIAL_STATE.HEADING_SCALE,
-      },
+        transformOrigin: "50% 50%",
+      });
+    }
+
+    if (aboveEls.length) {
+      gsap.set(aboveEls, { autoAlpha: 0, xPercent: SKILLS_INITIAL_STATE.ABOVE_X_PERCENT });
+    }
+
+    if (belowEls.length) {
+      gsap.set(belowEls, { autoAlpha: 0, xPercent: SKILLS_INITIAL_STATE.BELOW_X_PERCENT });
+    }
+
+    timeline.progress(0);
+  };
+
+  setInitialState();
+
+  if (headingEl) {
+    timeline.to(
+      headingEl,
       {
         autoAlpha: 1,
         yPercent: 0,
@@ -394,43 +407,52 @@ export function createSkillsEntranceAnimation({
     );
   }
 
-  // Animate all "above" rows simultaneously entering from right to left
   if (aboveEls.length) {
-    // Set initial state: invisible and offset to the right
-    gsap.set(aboveEls, { autoAlpha: 0, xPercent: SKILLS_INITIAL_STATE.ABOVE_X_PERCENT });
-
     timeline.to(
       aboveEls,
       {
         autoAlpha: 1,
         xPercent: 0,
         duration: SKILLS_TIMING.ROWS_FADE_DURATION,
-        ease: "power2.out",
       },
-      0, // Start at the beginning of the timeline
+      0,
     );
   }
 
-  // Animate all "below" rows simultaneously entering from left to right
   if (belowEls.length) {
-    // Set initial state: invisible and offset to the left
-    gsap.set(belowEls, { autoAlpha: 0, xPercent: SKILLS_INITIAL_STATE.BELOW_X_PERCENT });
-
     timeline.to(
       belowEls,
       {
         autoAlpha: 1,
         xPercent: 0,
         duration: SKILLS_TIMING.ROWS_FADE_DURATION,
-        ease: "power2.out",
       },
-      aboveEls.length ? SKILLS_TIMING.BELOW_DELAY : 0, // Delay after above rows complete
+      aboveEls.length ? SKILLS_TIMING.BELOW_DELAY : 0,
     );
   }
 
+  skillsTrigger = ScrollTrigger.create({
+    id: "skillsEntrance",
+    trigger: section,
+    start: SCROLL_TRIGGER_POSITIONS.SKILLS_START,
+    end: SCROLL_TRIGGER_POSITIONS.SKILLS_END,
+    toggleActions: "play none reverse reverse",
+    animation: timeline,
+    onEnter: () => {
+      gsap.set(section, { autoAlpha: 1, pointerEvents: "auto" });
+      timeline.play(0);
+    },
+    onEnterBack: () => {
+      gsap.set(section, { autoAlpha: 1, pointerEvents: "auto" });
+      timeline.play(0);
+    },
+  });
+  timeline.eventCallback("onReverseComplete", () => setInitialState());
+
   return () => {
-    timeline.scrollTrigger?.kill();
-    timeline.kill();
+    skillsTrigger?.kill();
+    gsap.set(section, { autoAlpha: 1, pointerEvents: "auto" });
+    killTimeline(timeline);
   };
 }
 

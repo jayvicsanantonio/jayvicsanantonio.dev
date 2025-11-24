@@ -135,7 +135,7 @@ export default function Skills(props: SkillsRefs = {}) {
   return (
     <section
       ref={sectionElementRef}
-      className="flex w-full min-h-[110vh] flex-col gap-6 py-12 sm:gap-8 sm:py-16 lg:py-20"
+      className="flex w-full min-h-[150vh] flex-col gap-6 py-12 sm:gap-8 sm:py-16 lg:py-20"
       aria-labelledby="skills-heading"
     >
       <div className="space-y-2 sm:space-y-3">

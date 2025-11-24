@@ -197,6 +197,7 @@ export function useHeroScrollAnimation({
         rowsAbove: skillsRowsAbove,
         rowsBelow: skillsRowsBelow,
         heading: skillsHeading,
+        heroSection,
       });
       cleanupFns.push(skillsCleanup);
 
