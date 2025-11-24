@@ -159,11 +159,11 @@ export const SCROLL_THRESHOLDS = {
  * relative to the viewport and trigger elements.
  */
 export const SCROLL_TRIGGER_POSITIONS = {
-  /** Skills section animation trigger start position (when ~10% visible) */
-  SKILLS_START: "top 90%",
+  /** Skills section animation trigger start position (delayed to wait for nav exit) */
+  SKILLS_START: "top 40%",
 
   /** Skills section animation trigger end position */
-  SKILLS_END: "bottom center",
+  SKILLS_END: "center center",
 
   /** Cover section fill animation start position */
   COVER_FILL_START: "top bottom",
