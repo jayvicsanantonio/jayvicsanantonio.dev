@@ -1,38 +1,73 @@
 "use client";
 
-import type { MutableRefObject } from "react";
+import { useRef, type MutableRefObject } from "react";
+import { useAboutAnimation } from "../../hooks/use-about-animation";
 
 type AboutProps = {
   sectionRef?: MutableRefObject<HTMLElement | null> | null;
 };
 
 export default function About({ sectionRef }: AboutProps) {
+  const localSectionRef = useRef<HTMLElement | null>(null);
+  const labelRef = useRef<HTMLSpanElement>(null);
+  const letterRefs = useRef<Array<HTMLSpanElement | null>>([]);
+  const paragraphRefs = useRef<Array<HTMLParagraphElement | null>>([]);
+
+  // Use the passed ref if available, otherwise use local ref
+  const finalSectionRef = (sectionRef || localSectionRef) as MutableRefObject<HTMLElement | null>;
+
+  useAboutAnimation({
+    sectionRef: finalSectionRef,
+    labelRef,
+    letterRefs,
+    paragraphRefs,
+  });
+
+  const addToParagraphRefs = (el: HTMLParagraphElement | null) => {
+    if (el && !paragraphRefs.current.includes(el)) {
+      paragraphRefs.current.push(el);
+    }
+  };
+
+  const addToLetterRefs = (el: HTMLSpanElement | null) => {
+    if (el && !letterRefs.current.includes(el)) {
+      letterRefs.current.push(el);
+    }
+  };
+
   return (
     <section
-      ref={sectionRef ?? undefined}
+      ref={finalSectionRef}
       className="relative isolate z-[2000] flex min-h-screen w-full items-center justify-center overflow-hidden bg-[#022b37] px-20 text-white"
       aria-label="About Jayvic San Antonio"
     >
       <div className="relative z-[80] mx-auto flex w-full max-w-[92rem] flex-col items-center gap-12 md:flex-row md:items-center">
         <div className="flex w-full flex-shrink-0 justify-center md:w-2/5">
-          <div className="relative flex h-full min-h-[200vh] w-full items-center justify-center overflow-hidden">
-            <span className="absolute top-0 left-1/2 -translate-x-1/2 -rotate-90 whitespace-nowrap text-center text-[clamp(8rem,32vw,40rem)] font-black uppercase leading-[0.75] tracking-widest text-white/80">
-              About
+          <div className="relative flex h-full min-h-[200vh] w-full items-center justify-center overflow-visible">
+            <span
+              ref={labelRef}
+              className="absolute top-0 left-1/2 flex -translate-x-1/2 -rotate-90 whitespace-nowrap text-center text-[clamp(8rem,32vw,40rem)] font-black uppercase leading-[0.75] tracking-widest text-white/80 will-change-transform"
+            >
+              {"ABOUT".split("").map((letter, i) => (
+                <span key={i} ref={addToLetterRefs} className="inline-block">
+                  {letter}
+                </span>
+              ))}
             </span>
           </div>
         </div>
         <div className="mt-[28rem] w-full space-y-28 text-4xl leading-relaxed text-white/80 md:mt-0 md:w-3/5 md:pl-12">
-          <p>
+          <p ref={addToParagraphRefs} className="will-change-transform">
             I&apos;m Jayvic San Antonio, a Filipino Full-Stack Software Engineer building in the San
             Francisco Bay Area, and I care deeply about craft, clarity, and shipping work people
             actually enjoy using.
           </p>
-          <p>
+          <p ref={addToParagraphRefs} className="will-change-transform">
             I&apos;ve worn many hats, from co-founding a scrappy startup and winning hackathons to
             rebuilding revenue-critical systems at scale, and I stay grounded in reliability,
             accessibility, and thoughtful design.
           </p>
-          <p className="text-white">
+          <p ref={addToParagraphRefs} className="text-white will-change-transform">
             These days I&apos;m sharpening my web and AI toolkit while sneaking in Pokemon Go walks,
             Star Wars collecting, and early coffee. If you&apos;re building something ambitious and
             care about the details, reach me at{" "}
