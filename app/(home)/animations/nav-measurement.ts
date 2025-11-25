@@ -4,8 +4,6 @@ import { CFG } from "../components/config";
 export type NavMeasurementArgs = {
   navRow: HTMLDivElement;
   pill: HTMLDivElement;
-  navSpacerEl: HTMLDivElement | null;
-  firstNavButton: HTMLElement | null;
 };
 
 export type NavMeasurementHelpers = {
@@ -58,10 +56,9 @@ export function calculateNavYOffset(
 export function createNavMeasurementHelpers({
   navRow,
   pill,
-  navSpacerEl,
-  firstNavButton,
 }: NavMeasurementArgs): NavMeasurementHelpers {
   const getTargetPillWidth = () => {
+    const navSpacerEl = navRow.querySelector<HTMLDivElement>("[data-nav-spacer]");
     const spacerWidth = navSpacerEl?.getBoundingClientRect().width ?? 0;
     if (spacerWidth > 0) {
       return spacerWidth;
@@ -74,6 +71,7 @@ export function createNavMeasurementHelpers({
   };
 
   const getTargetPillHeight = () => {
+    const firstNavButton = navRow.querySelector<HTMLElement>("a,button");
     const candidate =
       firstNavButton?.getBoundingClientRect().height ?? navRow.getBoundingClientRect().height;
     if (candidate && candidate > 0) {
@@ -83,10 +81,16 @@ export function createNavMeasurementHelpers({
   };
 
   const getTargetCenter = () => {
+    const navSpacerEl = navRow.querySelector<HTMLDivElement>("[data-nav-spacer]");
+    const firstNavButton = navRow.querySelector<HTMLElement>("a,button");
     const spacerRect = navSpacerEl?.getBoundingClientRect();
     const buttonRect = firstNavButton?.getBoundingClientRect();
     const navRect = navRow.getBoundingClientRect();
-    const xCenter = spacerRect
+
+    // Check if spacer is visible and has width (it's hidden on mobile)
+    const hasVisibleSpacer = spacerRect && spacerRect.width > 0;
+
+    const xCenter = hasVisibleSpacer
       ? spacerRect.left + spacerRect.width / 2
       : navRect.left + navRect.width / 2;
     const yCenter = buttonRect

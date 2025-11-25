@@ -136,16 +136,10 @@ export function useHeroScrollAnimation({
         gsap.set(navRow, { visibility: "visible" });
       }
 
-      // Get navigation measurement elements.
-      const navSpacerEl = navRow.querySelector<HTMLDivElement>("[data-nav-spacer]");
-      const firstNavButton = navRow.querySelector<HTMLElement>("a,button");
-
       // Create navigation measurement helpers.
       const navMeasurements = createNavMeasurementHelpers({
         navRow,
         pill,
-        navSpacerEl,
-        firstNavButton,
       });
 
       // Create pill shrink timeline (morphs pill into nav button).

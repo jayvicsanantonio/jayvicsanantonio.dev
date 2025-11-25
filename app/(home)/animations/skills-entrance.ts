@@ -118,6 +118,7 @@ export function createSkillsEntranceAnimation({
     start: SCROLL_TRIGGER_POSITIONS.SKILLS_START,
     end: SCROLL_TRIGGER_POSITIONS.SKILLS_END,
     scrub: SCROLL_TIMING.SKILLS_ENTRANCE_SCRUB,
+    invalidateOnRefresh: true,
     onUpdate: (self) => {
       const progress = self.progress;
       if (progress <= 0) {

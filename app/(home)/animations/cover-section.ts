@@ -99,6 +99,7 @@ export function createCoverAnimations({
           scrub: SCROLL_TIMING.COVER_CONTENT_SCRUB,
           pin: true,
           pinSpacing: true,
+          invalidateOnRefresh: true,
         },
       })
       .fromTo(

@@ -87,7 +87,7 @@ export default function Navigation() {
 
         <div
           aria-hidden
-          className="h-px"
+          className="hidden h-px md:block"
           style={{ width: HERO_NAV_PILL_WIDTH } as CSSProperties}
           data-nav-spacer
         />
