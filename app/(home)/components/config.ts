@@ -28,7 +28,7 @@ export const CFG = {
   },
   nav: {
     centerTop: "46%",
-    buttonSize: { w: 88, h: 72 },
+    buttonSize: { w: 82, h: 64 },
     leftOffsetsPx: { projects: 54, linkedin: 150 },
     rightOffsetsPx: { work: 54, github: 150 },
   },
@@ -149,9 +149,10 @@ import type { CSSProperties } from "react";
 
 export const PANEL_BORDER_RADIUS = "32px";
 export const PILL_SHRINK_BOX_SHADOW =
-  "0 24px 45px rgba(1,11,26,0.65), 0 0 45px rgba(34,211,238,0.35)";
-export const PILL_SHRINK_BACKGROUND = "rgba(4,15,32,0.95)";
-export const PILL_SHRINK_BORDER = "rgba(34,211,238,0.75)";
+  "0 18px 36px rgba(1,11,26,0.62), 0 0 26px rgba(34,211,238,0.38), 0 0 0 1px rgba(34,211,238,0.35)";
+export const PILL_SHRINK_BACKGROUND =
+  "linear-gradient(145deg, rgba(7,24,45,0.96), rgba(3,11,24,0.94))";
+export const PILL_SHRINK_BORDER = "rgba(59,201,255,0.78)";
 export const VIDEO_WATERMARK_MASK =
   "radial-gradient(ellipse at 94% 88%, rgba(1,5,11,0.92) 0%, rgba(1,5,11,0.86) 18%, rgba(1,5,11,0.72) 34%, rgba(1,5,11,0.52) 52%, rgba(1,5,11,0.16) 70%, rgba(1,5,11,0) 86%)";
 export const VIDEO_OVERLAY_BACKGROUND = [

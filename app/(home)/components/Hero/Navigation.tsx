@@ -4,12 +4,12 @@ import { Icon } from "@iconify/react";
 import type { CSSProperties } from "react";
 
 import { NavPill } from "@/components/ui/NavPill";
-import { CFG } from "@/app/(home)/components/config";
 
-export const HERO_NAV_PILL_WIDTH = "clamp(320px, var(--nav-row-w, 20vw), 560px)";
-export const HERO_NAV_PILL_HEIGHT = "clamp(54px, var(--pill-h, 8vh), 96px)";
+export const HERO_NAV_PILL_WIDTH = "clamp(280px, var(--nav-row-w, 22vw), 520px)";
+export const HERO_NAV_PILL_HEIGHT = "clamp(48px, var(--pill-h, 10vh), 72px)";
 export const HERO_NAV_BUTTON_HEIGHT = HERO_NAV_PILL_HEIGHT;
 export const HERO_NAV_ROW_GAP = `calc(${HERO_NAV_PILL_WIDTH} + min(2rem, 4vw))`;
+const HERO_NAV_BUTTON_WIDTH = "clamp(60px, 17vw, 84px)";
 
 type NavItem = {
   href: string;
@@ -57,13 +57,13 @@ const NAV_ITEMS: NavItem[] = [
 ];
 
 const BUTTON_CLASSES =
-  "text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80 bg-white/20 backdrop-blur-[24px] backdrop-saturate-200 border-white/55 hover:border-white/60";
+  "text-white/95 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200/80 focus-visible:ring-offset-0 bg-white/10 backdrop-blur-[24px] backdrop-saturate-[180%] border-white/30 shadow-[0_12px_28px_rgba(0,0,0,0.34),0_0_18px_rgba(34,211,238,0.32)] hover:border-cyan-200/60 hover:bg-white/14 hover:shadow-[0_14px_32px_rgba(0,0,0,0.36),0_0_22px_rgba(34,211,238,0.45)]";
 
 export default function Navigation() {
   return (
     <nav aria-label="Hero quick links" className="w-full">
-      <div className="mx-auto flex w-fit items-center gap-3.5">
-        <div className="flex items-center gap-3.5">
+      <div className="mx-auto flex w-fit items-center gap-2.5 sm:gap-3 md:gap-3.5">
+        <div className="flex items-center gap-2.5 sm:gap-3 md:gap-3.5">
           {NAV_ITEMS.slice(0, 2).map((item) => {
             const navPillProps = {
               ...(item.vtTagName ? { vtTagName: item.vtTagName } : {}),
@@ -76,7 +76,7 @@ export default function Navigation() {
                 ariaLabel={item.ariaLabel}
                 icon={<Icon icon={item.icon} width={item.iconSize} height={item.iconSize} />}
                 tooltip={item.tooltip}
-                collapsedPx={CFG.nav.buttonSize.w}
+                collapsedPx={HERO_NAV_BUTTON_WIDTH}
                 heightPx={HERO_NAV_BUTTON_HEIGHT}
                 className={BUTTON_CLASSES}
                 {...navPillProps}
@@ -92,7 +92,7 @@ export default function Navigation() {
           data-nav-spacer
         />
 
-        <div className="flex items-center gap-3.5">
+        <div className="flex items-center gap-2.5 sm:gap-3 md:gap-3.5">
           {NAV_ITEMS.slice(2).map((item) => {
             const navPillProps = {
               ...(item.vtTagName ? { vtTagName: item.vtTagName } : {}),
@@ -105,7 +105,7 @@ export default function Navigation() {
                 ariaLabel={item.ariaLabel}
                 icon={<Icon icon={item.icon} width={item.iconSize} height={item.iconSize} />}
                 tooltip={item.tooltip}
-                collapsedPx={CFG.nav.buttonSize.w}
+                collapsedPx={HERO_NAV_BUTTON_WIDTH}
                 heightPx={HERO_NAV_BUTTON_HEIGHT}
                 className={BUTTON_CLASSES}
                 {...navPillProps}
