@@ -3,9 +3,11 @@
 import Image from "next/image";
 
 import { PROFILE_BASE_Z_INDEX, PROFILE_DROP_SHADOW } from "./hero.constants";
-import type { ProfileProps } from "./hero.types";
+import { useHeroContext } from "../../context/HeroContext";
 
-export default function Profile({ profileRef, prefersReducedMotion }: ProfileProps) {
+export default function Profile({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
+  const { profileRef } = useHeroContext();
+
   return (
     <div
       ref={profileRef}

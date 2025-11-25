@@ -1,14 +1,15 @@
 import { VIDEO_OVERLAY_BACKGROUND, VIDEO_WATERMARK_MASK } from "./hero.constants";
-import type { PillProps } from "./hero.types";
+import { useHeroContext } from "../../context/HeroContext";
 
-export default function Pill({
-  pillRef,
-  videoRef,
-  videoOverlayRef,
-  videoWatermarkMaskRef,
-  pillContentRef,
-  pillSkinRef,
-}: PillProps) {
+export default function Pill() {
+  const {
+    pillRef,
+    videoRef,
+    videoOverlayRef,
+    videoWatermarkMaskRef,
+    pillContentRef,
+    pillSkinRef,
+  } = useHeroContext();
   return (
     <div
       ref={pillRef}

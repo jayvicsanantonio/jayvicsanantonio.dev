@@ -1,8 +1,8 @@
-import type { HeroAnimationRefs } from "./hero.types";
+import { useHeroContext } from "../../context/HeroContext";
 
-type DesignationProps = Pick<HeroAnimationRefs, "designationRef">;
+export default function Designation() {
+  const { designationRef } = useHeroContext();
 
-export default function Designation({ designationRef }: DesignationProps) {
   return (
     <div
       ref={designationRef}

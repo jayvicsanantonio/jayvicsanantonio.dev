@@ -1,24 +1,18 @@
 "use client";
 
-import { useRef, type MutableRefObject } from "react";
+import { useRef } from "react";
 import { useAboutAnimation } from "../../hooks/use-about-animation";
+import { useHeroContext } from "../../context/HeroContext";
 
-type AboutProps = {
-  sectionRef?: MutableRefObject<HTMLElement | null> | null;
-};
-
-export default function About({ sectionRef }: AboutProps) {
-  const localSectionRef = useRef<HTMLElement | null>(null);
+export default function About() {
+  const { aboutSectionRef: sectionRef } = useHeroContext();
   const labelRef = useRef<HTMLSpanElement>(null);
   const letterRefs = useRef<Array<HTMLSpanElement | null>>([]);
   const paragraph1Ref = useRef<HTMLParagraphElement>(null);
   const paragraph2Ref = useRef<HTMLParagraphElement>(null);
 
-  // Use the passed ref if available, otherwise use local ref
-  const finalSectionRef = (sectionRef || localSectionRef) as MutableRefObject<HTMLElement | null>;
-
   useAboutAnimation({
-    sectionRef: finalSectionRef,
+    sectionRef,
     labelRef,
     letterRefs,
     paragraph1Ref,
@@ -33,7 +27,7 @@ export default function About({ sectionRef }: AboutProps) {
 
   return (
     <section
-      ref={finalSectionRef}
+      ref={sectionRef}
       className="relative isolate z-[2000] flex min-h-screen w-full items-center justify-center overflow-hidden bg-[#022b37] px-20 text-white"
       aria-label="About Jayvic San Antonio"
     >

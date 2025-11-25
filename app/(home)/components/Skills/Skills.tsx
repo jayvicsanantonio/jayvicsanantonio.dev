@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, type MutableRefObject } from "react";
+import { useMemo } from "react";
 
 import MarqueeRow from "./MarqueeRow";
 
@@ -90,23 +90,16 @@ const SKILLS: string[] = [
   "Google GenAI SDK",
 ];
 
-type SkillsRefs = {
-  sectionRef?: MutableRefObject<HTMLElement | null> | null;
-  rowsAboveRefs?: MutableRefObject<Array<HTMLDivElement | null>> | null;
-  rowsBelowRefs?: MutableRefObject<Array<HTMLDivElement | null>> | null;
-  headingRef?: MutableRefObject<HTMLHeadingElement | null> | null;
-};
+import { useHeroContext } from "../../context/HeroContext";
 
-export default function Skills(props: SkillsRefs = {}) {
-  const { sectionRef, rowsAboveRefs, rowsBelowRefs, headingRef } = props;
-  const fallbackSectionRef = useRef<HTMLElement>(null);
-  const fallbackRowsAboveRefs = useRef<Array<HTMLDivElement | null>>([]);
-  const fallbackRowsBelowRefs = useRef<Array<HTMLDivElement | null>>([]);
-  const fallbackHeadingRef = useRef<HTMLHeadingElement>(null);
-  const sectionElementRef = sectionRef ?? fallbackSectionRef;
-  const rowsAboveStore = rowsAboveRefs ?? fallbackRowsAboveRefs;
-  const rowsBelowStore = rowsBelowRefs ?? fallbackRowsBelowRefs;
-  const headingElementRef = headingRef ?? fallbackHeadingRef;
+export default function Skills() {
+  const {
+    skillsSectionRef: sectionRef,
+    skillsRowsAboveRefs: rowsAboveRefs,
+    skillsRowsBelowRefs: rowsBelowRefs,
+    skillsHeadingRef: headingRef,
+  } = useHeroContext();
+
   const row0 = useMemo(() => SKILLS.filter((_, index) => index % 6 === 0), []);
   const row1 = useMemo(() => SKILLS.filter((_, index) => index % 6 === 1), []);
   const row2 = useMemo(() => SKILLS.filter((_, index) => index % 6 === 2), []);
@@ -134,7 +127,7 @@ export default function Skills(props: SkillsRefs = {}) {
 
   return (
     <section
-      ref={sectionElementRef}
+      ref={sectionRef}
       className="relative z-0 flex w-full min-h-screen flex-col gap-6 py-12 sm:gap-8 sm:py-16 lg:py-20"
       aria-labelledby="skills-heading"
     >
@@ -146,14 +139,16 @@ export default function Skills(props: SkillsRefs = {}) {
             direction={config.direction as "left" | "right"}
             key={`skills-top-${index}`}
             ref={(el) => {
-              rowsAboveStore.current[index] = el;
+              if (rowsAboveRefs.current) {
+                rowsAboveRefs.current[index] = el;
+              }
             }}
           />
         ))}
       </div>
       <div className="relative mx-auto flex w-full max-w-7xl items-center justify-center overflow-hidden ">
         <h2
-          ref={headingElementRef}
+          ref={headingRef}
           id="skills-heading"
           data-testid="SkillsHeading"
           className="whitespace-nowrap text-center text-[clamp(4rem,18vw,18rem)] font-black uppercase leading-[0.85] tracking-[0.15em] text-white/80"
@@ -169,7 +164,9 @@ export default function Skills(props: SkillsRefs = {}) {
             direction={config.direction as "left" | "right"}
             key={`skills-bottom-${index}`}
             ref={(el) => {
-              rowsBelowStore.current[index] = el;
+              if (rowsBelowRefs.current) {
+                rowsBelowRefs.current[index] = el;
+              }
             }}
           />
         ))}

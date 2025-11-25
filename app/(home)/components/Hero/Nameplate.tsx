@@ -1,8 +1,8 @@
-import type { HeroAnimationRefs } from "./hero.types";
+import { useHeroContext } from "../../context/HeroContext";
 
-type NameplateProps = Pick<HeroAnimationRefs, "nameplateRef">;
+export default function Nameplate() {
+  const { nameplateRef } = useHeroContext();
 
-export default function Nameplate({ nameplateRef }: NameplateProps) {
   return (
     <div
       ref={nameplateRef}
