@@ -47,15 +47,17 @@ export function useAboutAnimation({
       
       // Ensure letters are initially hidden/positioned (relying on overflow-hidden for mask)
       gsap.set(letters, { 
-        x: "150vh", // Start visually "above" (positive X in -90deg rotated space)
+        x: "500vh", // Start visually "above" (positive X in -90deg rotated space)
+        opacity: 0,
       });
 
       gsap.to(letters, {
         x: 0, // Move to natural position
+        opacity: 1,
         ease: "none", // Linear movement for direct scroll linkage
         scrollTrigger: {
           trigger: section,
-          start: "top 25%", // Start revealing when top of section is 25% from top of viewport (75% visible)
+          start: "top 50%", // Start revealing when top of section is 50% from top of viewport (50% visible)
           end: "bottom bottom", // Finish revealing when bottom of section hits bottom of viewport
           scrub: 1, // Smooth scrubbing linked to scroll
         },
