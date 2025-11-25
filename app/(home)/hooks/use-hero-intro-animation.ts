@@ -2,13 +2,14 @@ import { lockScroll } from "@/lib/scroll-lock";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 
-import { FINAL_GEOMETRY_STATE, PANEL_BORDER_RADIUS } from "../components/Hero/hero.constants";
-import type { HeroAnimationRefs } from "../components/Hero/hero.types";
 import {
+  FINAL_GEOMETRY_STATE,
+  PANEL_BORDER_RADIUS,
   INTRO_TIMING,
   LABEL_INITIAL_STATE,
   OVERLAY_OPACITY,
-} from "../components/Hero/hero-animation-timing";
+} from "../components/config";
+import type { HeroAnimationRefs } from "../components/Hero/hero.types";
 import { applyReducedMotionState } from "./animations/reduced-motion";
 
 export type UseHeroIntroAnimationArgs = {

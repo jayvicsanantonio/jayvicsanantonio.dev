@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 
-import { PROFILE_BASE_Z_INDEX, PROFILE_DROP_SHADOW } from "./hero.constants";
+import { PROFILE_BASE_Z_INDEX, PROFILE_DROP_SHADOW } from "../config";
 import { useHeroContext } from "../../context/HeroContext";
 
 export default function Profile({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {

@@ -1,4 +1,4 @@
-import { VIDEO_OVERLAY_BACKGROUND, VIDEO_WATERMARK_MASK } from "./hero.constants";
+import { VIDEO_OVERLAY_BACKGROUND, VIDEO_WATERMARK_MASK } from "../config";
 import { useHeroContext } from "../../context/HeroContext";
 
 export default function Pill() {

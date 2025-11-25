@@ -4,13 +4,11 @@ import {
   PILL_SHRINK_BORDER,
   PILL_SHRINK_BOX_SHADOW,
   PROFILE_SCROLL_CONFIG,
-} from "../../components/Hero/hero.constants";
-import {
   SCROLL_THRESHOLDS,
   SCROLL_TIMING,
   NAV_INITIAL_STATE,
   OVERLAY_OPACITY,
-} from "../../components/Hero/hero-animation-timing";
+} from "../../components/config";
 import { NavMeasurementHelpers } from "./nav-measurement";
 
 export type PillShrinkTimelineArgs = NavMeasurementHelpers & {

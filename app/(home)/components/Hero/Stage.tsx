@@ -1,7 +1,7 @@
 import Navigation from "./Navigation";
 import Pill from "./Pill";
 import { useHeroContext } from "../../context/HeroContext";
-import { INITIAL_NAV_ROW_STYLE } from "./hero.constants";
+import { INITIAL_NAV_ROW_STYLE } from "../config";
 
 export default function Stage() {
   const { containerRef, navRowRef } = useHeroContext();

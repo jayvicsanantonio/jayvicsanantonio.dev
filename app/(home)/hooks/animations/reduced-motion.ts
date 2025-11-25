@@ -3,8 +3,8 @@ import {
   FINAL_PANEL_STATE,
   PILL_SHRINK_BORDER,
   PILL_SHRINK_BOX_SHADOW,
-} from "../../components/Hero/hero.constants";
-import { OVERLAY_OPACITY } from "../../components/Hero/hero-animation-timing";
+  OVERLAY_OPACITY,
+} from "../../components/config";
 
 export type ReducedMotionArgs = {
   pill: HTMLDivElement;

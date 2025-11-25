@@ -3,12 +3,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   PROFILE_BASE_Z_INDEX,
   PROFILE_COVER_Z_INDEX,
-} from "../../components/Hero/hero.constants";
-import {
   SCROLL_TRIGGER_POSITIONS,
   SCROLL_TIMING,
   COVER_TIMING,
-} from "../../components/Hero/hero-animation-timing";
+} from "../../components/config";
 import { killTween, killTimeline } from "./cleanup";
 
 export type CoverAnimationArgs = {

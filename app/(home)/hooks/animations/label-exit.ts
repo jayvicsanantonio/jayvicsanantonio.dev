@@ -2,8 +2,8 @@ import { gsap } from "gsap";
 import {
   LABEL_EXIT_SCROLL_DISTANCE,
   LABEL_EXIT_Y_PERCENT,
-} from "../../components/Hero/hero.constants";
-import { SCROLL_TIMING } from "../../components/Hero/hero-animation-timing";
+  SCROLL_TIMING,
+} from "../../components/config";
 
 export type LabelExitTimelineArgs = {
   heroSection: HTMLDivElement;
