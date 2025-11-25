@@ -74,6 +74,7 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
       const nameplate = refs.nameplateRef.current;
       const designation = refs.designationRef.current;
       const mobileHeroText = refs.mobileHeroTextRef.current;
+      const isSmallScreen = typeof window !== "undefined" && window.matchMedia("(max-width: 1023px)").matches;
 
       // Handle reduced motion preference.
       if (prefersReducedMotion) {
@@ -129,7 +130,7 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
       if (mobileHeroText) {
         timeline.set(mobileHeroText, {
           autoAlpha: 0,
-          yPercent: LABEL_INITIAL_STATE.Y_PERCENT,
+          yPercent: isSmallScreen ? 0 : LABEL_INITIAL_STATE.Y_PERCENT,
         });
       }
 
@@ -264,7 +265,7 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
           mobileHeroText,
           {
             autoAlpha: 1,
-            yPercent: 0,
+            yPercent: isSmallScreen ? 0 : 0,
             duration: INTRO_TIMING.LABEL_FADE_DURATION,
             ease: "power2.out",
           },

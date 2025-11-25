@@ -27,6 +27,7 @@ export function createLabelExitTimeline({
   designation,
   mobileHeroText,
 }: LabelExitTimelineArgs): gsap.core.Timeline | null {
+  const isSmallScreen = typeof window !== "undefined" && window.matchMedia("(max-width: 1023px)").matches;
   const labelTargets = [nameplate, designation, mobileHeroText].filter((node): node is HTMLDivElement =>
     Boolean(node),
   );
@@ -35,20 +36,41 @@ export function createLabelExitTimeline({
     return null;
   }
 
-  return gsap
-    .timeline({
-      scrollTrigger: {
-        trigger: heroSection,
-        start: "top top",
-        // End position: 50% of viewport height (0.5 * window.innerHeight)
-        // Labels fade out during the first half of the hero scroll animation
-        end: () => "+=" + window.innerHeight * LABEL_EXIT_SCROLL_DISTANCE,
-        scrub: SCROLL_TIMING.LABEL_EXIT_SCRUB,
-      },
-    })
-    .to(labelTargets, {
+  const mobileLabel = isSmallScreen && mobileHeroText ? mobileHeroText : null;
+  const nonMobileTargets = mobileLabel
+    ? labelTargets.filter((node) => node !== mobileLabel)
+    : labelTargets;
+
+  const timeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: heroSection,
+      start: "top top",
+      // End position: 50% of viewport height (0.5 * window.innerHeight)
+      // Labels fade out during the first half of the hero scroll animation
+      end: () => "+=" + window.innerHeight * LABEL_EXIT_SCROLL_DISTANCE,
+      scrub: SCROLL_TIMING.LABEL_EXIT_SCRUB,
+    },
+  });
+
+  if (nonMobileTargets.length) {
+    timeline.to(nonMobileTargets, {
       autoAlpha: 0,
       yPercent: LABEL_EXIT_Y_PERCENT,
       ease: "power2.inOut",
     });
+  }
+
+  if (mobileLabel) {
+    timeline.to(
+      mobileLabel,
+      {
+        autoAlpha: 0,
+        yPercent: 0,
+        ease: "power2.inOut",
+      },
+      0,
+    );
+  }
+
+  return timeline;
 }
