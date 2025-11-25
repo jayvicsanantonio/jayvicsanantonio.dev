@@ -28,7 +28,7 @@ export default function About() {
   return (
     <section
       ref={sectionRef}
-      className="relative isolate z-[2000] flex min-h-screen w-full items-center justify-center overflow-hidden bg-[#022b37] px-20 text-white"
+      className="relative isolate z-[2000] flex min-h-screen w-full items-center justify-center overflow-hidden bg-[#022b37] px-10 lg:px-20 text-white"
       aria-label="About Jayvic San Antonio"
     >
       <div className="relative z-[80] mx-auto flex w-full max-w-[92rem] flex-col items-center gap-12 md:flex-row md:items-center">
@@ -46,7 +46,7 @@ export default function About() {
             </span>
           </div>
         </div>
-        <div className="mt-10 w-full space-y-28 text-4xl leading-relaxed text-white/80 lg:mt-0 lg:w-3/5 lg:pl-12 py-10">
+        <div className="mt-10 w-full space-y-16 lg:space-y-28 text-2xl lg:text-4xl leading-relaxed text-white/80 lg:mt-0 lg:w-3/5 lg:pl-12 py-10 lg:py-0">
           <p className="">
             I&apos;m Jayvic San Antonio, a Filipino Full-Stack Software Engineer building in the San
             Francisco Bay Area, and I care deeply about craft, clarity, and shipping work people
