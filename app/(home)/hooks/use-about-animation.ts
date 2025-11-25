@@ -9,19 +9,24 @@ export type UseAboutAnimationArgs = {
   sectionRef: MutableRefObject<HTMLElement | null>;
   labelRef: MutableRefObject<HTMLElement | null>;
   letterRefs: MutableRefObject<Array<HTMLSpanElement | null>>;
+  paragraph1Ref: MutableRefObject<HTMLParagraphElement | null>;
+  paragraph2Ref: MutableRefObject<HTMLParagraphElement | null>;
 };
 
 export function useAboutAnimation({
   sectionRef,
   labelRef,
   letterRefs,
+  paragraph1Ref,
+  paragraph2Ref,
 }: UseAboutAnimationArgs) {
   useGSAP(
     () => {
       const section = sectionRef.current;
       const label = labelRef.current;
       const letters = letterRefs.current;
-
+      const p1 = paragraph1Ref.current;
+      const p2 = paragraph2Ref.current;
 
       if (!section || !label) return;
 
@@ -61,7 +66,31 @@ export function useAboutAnimation({
         },
       });
 
+      // 3. Paragraph Animations
+      // Animate 2nd and 3rd paragraphs upwards smoothly when they become visible
+      const paragraphs = [p1, p2].filter((p): p is HTMLParagraphElement => p !== null);
 
+      paragraphs.forEach((p) => {
+        gsap.fromTo(
+          p,
+          {
+            y: 720, // Start 720px below
+            opacity: 0.2,
+          },
+          {
+            y: 0, // Move to natural position
+            opacity: 1,
+            duration: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: p,
+              start: "top bottom", // Start when top of paragraph enters viewport
+              end: "center center", // End when center of paragraph is in center of viewport
+              scrub: 1, // Smooth scrubbing
+            },
+          }
+        );
+      });
     },
     { scope: sectionRef }
   );

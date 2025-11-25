@@ -11,6 +11,8 @@ export default function About({ sectionRef }: AboutProps) {
   const localSectionRef = useRef<HTMLElement | null>(null);
   const labelRef = useRef<HTMLSpanElement>(null);
   const letterRefs = useRef<Array<HTMLSpanElement | null>>([]);
+  const paragraph1Ref = useRef<HTMLParagraphElement>(null);
+  const paragraph2Ref = useRef<HTMLParagraphElement>(null);
 
   // Use the passed ref if available, otherwise use local ref
   const finalSectionRef = (sectionRef || localSectionRef) as MutableRefObject<HTMLElement | null>;
@@ -19,9 +21,9 @@ export default function About({ sectionRef }: AboutProps) {
     sectionRef: finalSectionRef,
     labelRef,
     letterRefs,
+    paragraph1Ref,
+    paragraph2Ref,
   });
-
-
 
   const addToLetterRefs = (el: HTMLSpanElement | null) => {
     if (el && !letterRefs.current.includes(el)) {
@@ -56,12 +58,12 @@ export default function About({ sectionRef }: AboutProps) {
             Francisco Bay Area, and I care deeply about craft, clarity, and shipping work people
             actually enjoy using.
           </p>
-          <p className="">
+          <p ref={paragraph1Ref} className="will-change-transform">
             I&apos;ve worn many hats, from co-founding a scrappy startup and winning hackathons to
             rebuilding revenue-critical systems at scale, and I stay grounded in reliability,
             accessibility, and thoughtful design.
           </p>
-          <p className="text-white">
+          <p ref={paragraph2Ref} className="text-white will-change-transform">
             These days I&apos;m sharpening my web and AI toolkit while sneaking in Pokemon Go walks,
             Star Wars collecting, and early coffee. If you&apos;re building something ambitious and
             care about the details, reach me at{" "}
