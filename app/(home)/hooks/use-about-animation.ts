@@ -28,42 +28,51 @@ export function useAboutAnimation({
       const p1 = paragraph1Ref.current;
       const p2 = paragraph2Ref.current;
 
-      if (!section || !label) return;
+      if (!section) return;
 
-      // 1. Parallax "ABOUT" Label Container
-      // The container moves slower than the scroll, creating a sticky/parallax feel.
-      gsap.to(label, {
-        yPercent: 350, // Move down significantly to ensure continuous movement
-        ease: "none",
-        scrollTrigger: {
-          trigger: section,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
+      const mm = gsap.matchMedia();
 
-      // 2. Letter-by-Letter Reveal
-      // Letters appear one by one from the top edge as user scrolls down.
-      // With -90deg rotation (counter-clockwise), the local X axis points visually UP.
-      // To appear from the "top edge", they need to start from a positive X value (visually above) and move down to 0.
-      
-      // Ensure letters are initially hidden/positioned (relying on overflow-hidden for mask)
-      gsap.set(letters, { 
-        x: "500vh", // Start visually "above" (positive X in -90deg rotated space)
-        opacity: 0,
-      });
+      // Only mount the giant label animation on large screens and re-run it on breakpoint changes.
+      mm.add("(min-width: 1024px)", () => {
+        if (!label) return;
 
-      gsap.to(letters, {
-        x: 0, // Move to natural position
-        opacity: 1,
-        ease: "none", // Linear movement for direct scroll linkage
-        scrollTrigger: {
-          trigger: section,
-          start: "top 50%", // Start revealing when top of section is 50% from top of viewport (50% visible)
-          end: "bottom bottom", // Finish revealing when bottom of section hits bottom of viewport
-          scrub: 1, // Smooth scrubbing linked to scroll
-        },
+        // 1. Parallax "ABOUT" Label Container
+        // The container moves slower than the scroll, creating a sticky/parallax feel.
+        gsap.to(label, {
+          yPercent: 350, // Move down significantly to ensure continuous movement
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        // 2. Letter-by-Letter Reveal
+        // Letters appear one by one from the top edge as user scrolls down.
+        // With -90deg rotation (counter-clockwise), the local X axis points visually UP.
+        // To appear from the "top edge", they need to start from a positive X value (visually above) and move down to 0.
+
+        // Ensure letters are initially hidden/positioned (relying on overflow-hidden for mask)
+        gsap.set(letters, {
+          x: "500vh", // Start visually "above" (positive X in -90deg rotated space)
+          opacity: 0,
+        });
+
+        gsap.to(letters, {
+          x: 0, // Move to natural position
+          opacity: 1,
+          ease: "none", // Linear movement for direct scroll linkage
+          scrollTrigger: {
+            trigger: section,
+            start: "top 50%", // Start revealing when top of section is 50% from top of viewport (50% visible)
+            end: "bottom bottom", // Finish revealing when bottom of section hits bottom of viewport
+            scrub: 1, // Smooth scrubbing linked to scroll
+            invalidateOnRefresh: true,
+          },
+        });
       });
 
       // 3. Paragraph Animations
@@ -87,10 +96,15 @@ export function useAboutAnimation({
               start: "top bottom", // Start when top of paragraph enters viewport
               end: "center center", // End when center of paragraph is in center of viewport
               scrub: 1, // Smooth scrubbing
+              invalidateOnRefresh: true,
             },
           }
         );
       });
+
+      return () => {
+        mm.revert();
+      };
     },
     { scope: sectionRef }
   );
