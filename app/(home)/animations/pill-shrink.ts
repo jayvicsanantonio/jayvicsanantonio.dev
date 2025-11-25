@@ -128,7 +128,11 @@ export function createPillShrinkTimeline({
           gsap.set(profile, { transformOrigin: PROFILE_SCROLL_CONFIG.transformOrigin });
         },
         invalidateOnRefresh: true,
-        onUpdate: isSmallScreen ? undefined : () => syncPillToNavRow(),
+        onUpdate: () => {
+          if (!isSmallScreen) {
+            syncPillToNavRow();
+          }
+        },
         onRefresh: () => {
           lastTargetOffset = null;
           if (!isSmallScreen) {

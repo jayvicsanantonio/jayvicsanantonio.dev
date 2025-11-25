@@ -59,7 +59,6 @@ export function createNavMeasurementHelpers({
 }: NavMeasurementArgs): NavMeasurementHelpers {
   const isSmallScreen =
     typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches;
-  const MOBILE_WIDTH_PADDING = 48; // total horizontal breathing room (px)
   const MOBILE_HEIGHT_PADDING = 18; // total vertical breathing room (px)
 
   const getTargetPillWidth = () => {
