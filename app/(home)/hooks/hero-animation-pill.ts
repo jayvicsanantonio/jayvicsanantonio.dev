@@ -4,11 +4,13 @@ import {
   PILL_SHRINK_BORDER,
   PILL_SHRINK_BOX_SHADOW,
   PROFILE_SCROLL_CONFIG,
-  SCROLL_TIMING,
+} from "../components/Hero/hero.constants";
+import {
   SCROLL_THRESHOLDS,
+  SCROLL_TIMING,
   OVERLAY_OPACITY,
   NAV_INITIAL_STATE,
-} from "../components/Hero/hero.constants";
+} from "../components/Hero/hero-animation-timing";
 import type { PillShrinkTimelineArgs, PillShrinkTimelineResult } from "./animation-types";
 
 // ============================================================================

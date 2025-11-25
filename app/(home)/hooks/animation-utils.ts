@@ -3,10 +3,9 @@ import {
   FINAL_PANEL_STATE,
   PILL_SHRINK_BORDER,
   PILL_SHRINK_BOX_SHADOW,
-  OVERLAY_OPACITY,
 } from "../components/Hero/hero.constants";
-
-import { CFG } from "../components/Hero/hero.constants";
+import { OVERLAY_OPACITY } from "../components/Hero/hero-animation-timing";
+import { CFG } from "../components/config";
 import type { ReducedMotionArgs, NavMeasurementArgs, NavMeasurementHelpers } from "./animation-types";
 
 // ============================================================================

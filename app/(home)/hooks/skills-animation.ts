@@ -1,12 +1,11 @@
-
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
-  SKILLS_TIMING,
   SKILLS_INITIAL_STATE,
+  SKILLS_TIMING,
   SCROLL_TRIGGER_POSITIONS,
   SCROLL_TIMING,
-} from "../components/Hero/hero.constants";
+} from "../components/Hero/hero-animation-timing";
 import { killTimeline } from "./animation-utils";
 import type { SkillsEntranceArgs } from "./animation-types";
 

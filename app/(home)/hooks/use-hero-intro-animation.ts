@@ -8,7 +8,7 @@ import {
   INTRO_TIMING,
   LABEL_INITIAL_STATE,
   OVERLAY_OPACITY,
-} from "../components/Hero/hero.constants";
+} from "../components/Hero/hero-animation-timing";
 import { applyReducedMotionState } from "./animation-utils";
 
 export type UseHeroIntroAnimationArgs = {

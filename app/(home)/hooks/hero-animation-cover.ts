@@ -8,7 +8,7 @@ import {
   SCROLL_TRIGGER_POSITIONS,
   SCROLL_TIMING,
   COVER_TIMING,
-} from "../components/Hero/hero.constants";
+} from "../components/Hero/hero-animation-timing";
 import { killTween, killTimeline } from "./animation-utils";
 import type { CoverAnimationArgs, ProfileSectionVisibilityArgs } from "./animation-types";
 
