@@ -90,6 +90,7 @@ export function useHeroScrollAnimation({
       const navRow = refs.navRowRef.current;
       const nameplate = refs.nameplateRef.current;
       const designation = refs.designationRef.current;
+      const mobileHeroText = refs.mobileHeroTextRef.current;
       const coverLabel = refs.coverLabelRef.current;
       const coverBody = refs.coverBodyRef.current;
       const skillsSection = refs.skillsSectionRef.current;
@@ -165,6 +166,7 @@ export function useHeroScrollAnimation({
         heroSection,
         nameplate,
         designation,
+        mobileHeroText,
       });
       if (labelExitTimeline) {
         cleanupFns.push(() => killTimeline(labelExitTimeline));

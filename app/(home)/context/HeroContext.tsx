@@ -39,6 +39,7 @@ export function HeroProvider({ children }: { children: ReactNode }) {
   const skillsRowsAboveRefs = useRef<Array<HTMLDivElement | null>>([]);
   const skillsRowsBelowRefs = useRef<Array<HTMLDivElement | null>>([]);
   const skillsHeadingRef = useRef<HTMLHeadingElement>(null);
+  const mobileHeroTextRef = useRef<HTMLDivElement>(null);
 
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -66,6 +67,7 @@ export function HeroProvider({ children }: { children: ReactNode }) {
     skillsRowsAboveRefs,
     skillsRowsBelowRefs,
     skillsHeadingRef,
+    mobileHeroTextRef,
   };
 
   useHeroAnimations({ refs, prefersReducedMotion });

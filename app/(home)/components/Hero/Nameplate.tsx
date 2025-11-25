@@ -6,7 +6,7 @@ export default function Nameplate() {
   return (
     <div
       ref={nameplateRef}
-      className="pointer-events-none absolute bottom-0 left-0 z-30 flex flex-col gap-0 px-7 pb-6 text-white/80 opacity-0 sm:px-12 sm:pb-8 lg:pb-10"
+      className="pointer-events-none absolute bottom-0 left-0 z-30 hidden flex-col gap-0 px-7 pb-6 text-white/80 opacity-0 sm:px-12 sm:pb-8 lg:flex lg:pb-10"
     >
       <span className="text-xl font-semibold uppercase tracking-[0.15em] leading-tight text-white sm:text-[2.1rem] lg:text-[2.5rem]">
         Jayvic

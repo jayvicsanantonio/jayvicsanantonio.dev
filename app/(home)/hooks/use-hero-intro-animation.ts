@@ -73,6 +73,7 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
       const profile = refs.profileRef.current;
       const nameplate = refs.nameplateRef.current;
       const designation = refs.designationRef.current;
+      const mobileHeroText = refs.mobileHeroTextRef.current;
 
       // Handle reduced motion preference.
       if (prefersReducedMotion) {
@@ -87,6 +88,7 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
           navRow,
           nameplate,
           designation,
+          mobileHeroText,
         });
         // Start video playback immediately.
         video.play().catch(() => {
@@ -120,6 +122,12 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
       }
       if (designation) {
         timeline.set(designation, {
+          autoAlpha: 0,
+          yPercent: LABEL_INITIAL_STATE.Y_PERCENT,
+        });
+      }
+      if (mobileHeroText) {
+        timeline.set(mobileHeroText, {
           autoAlpha: 0,
           yPercent: LABEL_INITIAL_STATE.Y_PERCENT,
         });
@@ -247,6 +255,20 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
           nameplate
             ? `<${INTRO_TIMING.LABEL_STAGGER}`
             : `labelReveal+=${INTRO_TIMING.LABEL_STAGGER}`,
+        );
+      }
+
+      // Animate mobile hero text if present.
+      if (mobileHeroText) {
+        timeline.to(
+          mobileHeroText,
+          {
+            autoAlpha: 1,
+            yPercent: 0,
+            duration: INTRO_TIMING.LABEL_FADE_DURATION,
+            ease: "power2.out",
+          },
+          `labelReveal+=${INTRO_TIMING.LABEL_REVEAL_OFFSET}`,
         );
       }
 

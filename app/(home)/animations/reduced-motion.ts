@@ -17,6 +17,7 @@ export type ReducedMotionArgs = {
   navRow: HTMLDivElement | null;
   nameplate: HTMLDivElement | null;
   designation: HTMLDivElement | null;
+  mobileHeroText: HTMLDivElement | null;
 };
 
 /**
@@ -38,6 +39,7 @@ export function applyReducedMotionState({
   navRow,
   nameplate,
   designation,
+  mobileHeroText,
 }: ReducedMotionArgs): void {
   gsap.set(pill, {
     ...FINAL_PANEL_STATE,
@@ -75,5 +77,9 @@ export function applyReducedMotionState({
 
   if (designation) {
     gsap.set(designation, { autoAlpha: 1, yPercent: 0 });
+  }
+
+  if (mobileHeroText) {
+    gsap.set(mobileHeroText, { autoAlpha: 1, yPercent: 0 });
   }
 }

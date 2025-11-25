@@ -9,6 +9,7 @@ export type LabelExitTimelineArgs = {
   heroSection: HTMLDivElement;
   nameplate: HTMLDivElement | null;
   designation: HTMLDivElement | null;
+  mobileHeroText: HTMLDivElement | null;
 };
 
 /**
@@ -24,8 +25,9 @@ export function createLabelExitTimeline({
   heroSection,
   nameplate,
   designation,
+  mobileHeroText,
 }: LabelExitTimelineArgs): gsap.core.Timeline | null {
-  const labelTargets = [nameplate, designation].filter((node): node is HTMLDivElement =>
+  const labelTargets = [nameplate, designation, mobileHeroText].filter((node): node is HTMLDivElement =>
     Boolean(node),
   );
 

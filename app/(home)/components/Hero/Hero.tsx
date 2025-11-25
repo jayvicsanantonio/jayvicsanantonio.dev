@@ -3,6 +3,7 @@
 import HeroStage from "./Stage";
 import Nameplate from "./Nameplate";
 import Designation from "./Designation";
+import MobileHeroText from "./MobileHeroText";
 import { useHeroContext } from "../../context/HeroContext";
 
 export default function Hero() {
@@ -13,6 +14,7 @@ export default function Hero() {
       <HeroStage />
       <Nameplate />
       <Designation />
+      <MobileHeroText />
     </section>
   );
 }
