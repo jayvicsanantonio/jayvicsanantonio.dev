@@ -57,7 +57,19 @@ export function createNavMeasurementHelpers({
   navRow,
   pill,
 }: NavMeasurementArgs): NavMeasurementHelpers {
+  const isSmallScreen =
+    typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches;
+  const MOBILE_WIDTH_PADDING = 48; // total horizontal breathing room (px)
+  const MOBILE_HEIGHT_PADDING = 18; // total vertical breathing room (px)
+
   const getTargetPillWidth = () => {
+    // On small screens, prefer the actual nav row width so all buttons fit without overlap.
+    if (isSmallScreen) {
+      const navWidth = navRow.getBoundingClientRect().width || 0;
+      // Add horizontal padding to keep glow clear of buttons/text.
+      return navWidth + MOBILE_WIDTH_PADDING;
+    }
+
     const navSpacerEl = navRow.querySelector<HTMLDivElement>("[data-nav-spacer]");
     const spacerWidth = navSpacerEl?.getBoundingClientRect().width ?? 0;
     if (spacerWidth > 0) {
@@ -71,6 +83,13 @@ export function createNavMeasurementHelpers({
   };
 
   const getTargetPillHeight = () => {
+    if (isSmallScreen) {
+      const navHeight = navRow.getBoundingClientRect().height || 0;
+      if (navHeight > 0) {
+        return navHeight + MOBILE_HEIGHT_PADDING;
+      }
+    }
+
     const firstNavButton = navRow.querySelector<HTMLElement>("a,button");
     const candidate =
       firstNavButton?.getBoundingClientRect().height ?? navRow.getBoundingClientRect().height;
@@ -99,9 +118,17 @@ export function createNavMeasurementHelpers({
     return { x: xCenter, y: yCenter };
   };
 
-  const getNavRowYOffset = () => calculateNavYOffset(navRow, pill, getTargetPillHeight());
+  const getNavRowYOffset = () => {
+    if (isSmallScreen) {
+      return 0;
+    }
+    return calculateNavYOffset(navRow, pill, getTargetPillHeight());
+  };
 
   const getPillCenterOffset = () => {
+    if (isSmallScreen) {
+      return { x: 0, y: 0 };
+    }
     const pr = pill.getBoundingClientRect();
     const target = getTargetCenter();
     // Calculate offset needed to move pill center to target position.

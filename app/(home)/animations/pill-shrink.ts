@@ -142,8 +142,8 @@ export function createPillShrinkTimeline({
       {
         width: () => `${getTargetPillWidth()}px`,
         height: () => `${getTargetPillHeight()}px`,
-        x: () => getPillCenterOffset().x,
-        y: () => getPillCenterOffset().y,
+        x: () => (isSmallScreen ? 0 : getPillCenterOffset().x),
+        y: () => (isSmallScreen ? 0 : getPillCenterOffset().y),
         borderRadius: "384px",
         backgroundColor: PILL_SHRINK_BACKGROUND,
         ease: "none",
@@ -259,7 +259,23 @@ export function createPillShrinkTimeline({
     {
       autoAlpha: 1,
       yPercent: 0,
-      y: () => getNavRowYOffset(),
+      y: () => {
+        if (!isSmallScreen) {
+          return getNavRowYOffset();
+        }
+        // Place nav row below the shrunk pill with a proportional gap for small screens.
+        const pillRect = pill.getBoundingClientRect();
+        const navRect = navRow.getBoundingClientRect();
+        const targetPillHeight = getTargetPillHeight();
+        const gapPx = Math.max(16, targetPillHeight * 0.15);
+        if (!pillRect.height || !navRect.height) {
+          return gapPx;
+        }
+        const pillCenterY = pillRect.top + pillRect.height / 2;
+        const finalPillBottom = pillCenterY + targetPillHeight / 2;
+        const desiredTop = finalPillBottom + gapPx;
+        return desiredTop - navRect.top;
+      },
       duration: SCROLL_TIMING.NAV_FADE_DURATION,
       ease: "power2.out",
     },
