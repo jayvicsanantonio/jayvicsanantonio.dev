@@ -32,7 +32,7 @@ export default function About() {
       aria-label="About Jayvic San Antonio"
     >
       <div className="relative z-[80] mx-auto flex w-full max-w-[92rem] flex-col items-center gap-12 md:flex-row md:items-center">
-        <div className="flex w-full flex-shrink-0 justify-center md:w-2/5">
+        <div className="hidden w-full flex-shrink-0 justify-center lg:flex lg:w-2/5">
           <div className="relative flex h-full min-h-[200vh] w-full items-center justify-center overflow-visible">
             <span
               ref={labelRef}
@@ -46,7 +46,7 @@ export default function About() {
             </span>
           </div>
         </div>
-        <div className="mt-[28rem] w-full space-y-28 text-4xl leading-relaxed text-white/80 md:mt-0 md:w-3/5 md:pl-12">
+        <div className="mt-10 w-full space-y-28 text-4xl leading-relaxed text-white/80 lg:mt-0 lg:w-3/5 lg:pl-12 py-10">
           <p className="">
             I&apos;m Jayvic San Antonio, a Filipino Full-Stack Software Engineer building in the San
             Francisco Bay Area, and I care deeply about craft, clarity, and shipping work people
