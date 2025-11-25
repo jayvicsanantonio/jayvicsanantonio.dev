@@ -66,8 +66,8 @@ export function createNavMeasurementHelpers({
     // On small screens, prefer the actual nav row width so all buttons fit without overlap.
     if (isSmallScreen) {
       const navWidth = navRow.getBoundingClientRect().width || 0;
-      // Add horizontal padding to keep glow clear of buttons/text.
-      return navWidth + MOBILE_WIDTH_PADDING;
+      // Match pill to nav row width (buttons + gaps) so it hugs the nav tightly.
+      return navWidth;
     }
 
     const navSpacerEl = navRow.querySelector<HTMLDivElement>("[data-nav-spacer]");
