@@ -14,7 +14,7 @@ export default function Pill() {
     <div
       ref={pillRef}
       data-testid="HeroPill"
-      className="absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full border border-transparent text-lg font-semibold text-slate-900 shadow-[0_18px_40px_rgba(15,23,42,0.18)] transform-gpu [will-change:transform]"
+      className="absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full border border-transparent text-lg font-semibold text-slate-900 shadow-[0_18px_40px_rgba(15,23,42,0.18)] transform-gpu [will-change:transform] min-w-[clamp(260px,82vw,320px)]"
       style={{ backgroundColor: "#ffffff" }}
     >
       <video
