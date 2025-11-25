@@ -6,7 +6,7 @@ import {
   SCROLL_TRIGGER_POSITIONS,
   SCROLL_TIMING,
   COVER_TIMING,
-} from "../../components/config";
+} from "../components/config";
 import { killTween, killTimeline } from "./cleanup";
 
 export type CoverAnimationArgs = {

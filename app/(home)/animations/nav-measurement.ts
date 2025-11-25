@@ -1,5 +1,5 @@
 
-import { CFG } from "../../components/config";
+import { CFG } from "../components/config";
 
 export type NavMeasurementArgs = {
   navRow: HTMLDivElement;

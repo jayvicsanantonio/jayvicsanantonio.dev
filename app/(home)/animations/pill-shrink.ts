@@ -8,7 +8,7 @@ import {
   SCROLL_TIMING,
   NAV_INITIAL_STATE,
   OVERLAY_OPACITY,
-} from "../../components/config";
+} from "../components/config";
 import { NavMeasurementHelpers } from "./nav-measurement";
 
 export type PillShrinkTimelineArgs = NavMeasurementHelpers & {

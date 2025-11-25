@@ -4,7 +4,7 @@ import {
   PILL_SHRINK_BORDER,
   PILL_SHRINK_BOX_SHADOW,
   OVERLAY_OPACITY,
-} from "../../components/config";
+} from "../components/config";
 
 export type ReducedMotionArgs = {
   pill: HTMLDivElement;

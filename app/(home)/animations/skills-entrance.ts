@@ -5,7 +5,7 @@ import {
   SCROLL_TRIGGER_POSITIONS,
   SKILLS_INITIAL_STATE,
   SCROLL_TIMING,
-} from "../../components/config";
+} from "../components/config";
 import { killTimeline } from "./cleanup";
 
 export type SkillsEntranceArgs = {

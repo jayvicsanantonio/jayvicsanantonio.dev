@@ -3,7 +3,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   PROFILE_BASE_Z_INDEX,
   PROFILE_COVER_Z_INDEX,
-} from "../../components/config";
+} from "../components/config";
 
 export type ProfileSectionVisibilityArgs = {
   profile: HTMLDivElement | null;

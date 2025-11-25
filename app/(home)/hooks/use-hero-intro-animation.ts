@@ -10,7 +10,7 @@ import {
   OVERLAY_OPACITY,
 } from "../components/config";
 import type { HeroAnimationRefs } from "../components/Hero/hero.types";
-import { applyReducedMotionState } from "./animations/reduced-motion";
+import { applyReducedMotionState } from "../animations/reduced-motion";
 
 export type UseHeroIntroAnimationArgs = {
   refs: HeroAnimationRefs;
