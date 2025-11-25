@@ -21,17 +21,13 @@ import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 
 import type { HeroAnimationRefs } from "../components/Hero/hero.types";
-import {
-  createNavMeasurementHelpers,
-  createPillShrinkTimeline,
-  createLabelExitTimeline,
-  createCoverAnimations,
-  createHeroPin,
-  createSkillsEntranceAnimation,
-  createProfileHideOnSection,
-  createSkillsPin,
-  killTimeline,
-} from "./hero-animation-helpers";
+import { createNavMeasurementHelpers } from "./animation-utils";
+import { createPillShrinkTimeline } from "./hero-animation-pill";
+import { createLabelExitTimeline } from "./hero-animation-labels";
+import { createCoverAnimations, createProfileHideOnSection } from "./hero-animation-cover";
+import { createHeroPin } from "./hero-animation-pin";
+import { createSkillsEntranceAnimation, createSkillsPin } from "./skills-animation";
+import { killTimeline } from "./animation-utils";
 // Timing constants are used by helper functions imported above
 // and may be needed for future enhancements
 

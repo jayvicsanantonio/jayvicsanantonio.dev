@@ -9,7 +9,7 @@ import {
   LABEL_INITIAL_STATE,
   OVERLAY_OPACITY,
 } from "../components/Hero/hero-animation-timing";
-import { applyReducedMotionState } from "./hero-animation-helpers";
+import { applyReducedMotionState } from "./animation-utils";
 
 export type UseHeroIntroAnimationArgs = {
   refs: HeroAnimationRefs;
