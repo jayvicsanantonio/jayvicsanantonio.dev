@@ -4,7 +4,7 @@ import { Icon } from "@iconify/react";
 import type { CSSProperties } from "react";
 
 import { NavPill } from "@/components/ui/NavPill";
-import { CFG } from "@/app/(home)/components/config";
+import { CFG } from "./hero.constants";
 
 export const HERO_NAV_PILL_WIDTH = "clamp(320px, var(--nav-row-w, 20vw), 560px)";
 export const HERO_NAV_PILL_HEIGHT = "clamp(54px, var(--pill-h, 8vh), 96px)";

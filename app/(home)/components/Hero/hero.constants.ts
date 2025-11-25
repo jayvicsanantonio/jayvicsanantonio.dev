@@ -57,3 +57,152 @@ export const PROFILE_SCROLL_CONFIG = {
   transformOrigin: "50% 100%",
   ease: "none" as const,
 };
+
+// ============================================================================
+// Animation Timing Constants (Merged from hero-animation-timing.ts)
+// ============================================================================
+
+/**
+ * Timing values for the hero intro animation sequence.
+ */
+export const INTRO_TIMING = {
+  DELAY: 1,
+  PILL_EXPAND_DURATION: 2,
+  PILL_ROUND_DURATION: 0.8,
+  CONTENT_FADE_DURATION: 0.45,
+  PROFILE_FADE_DURATION: 0.6,
+  VIDEO_FADE_DURATION: 0.8,
+  OVERLAY_FADE_DURATION: 0.6,
+  PILL_BACKGROUND_FADE_DURATION: 0.8,
+  LABEL_FADE_DURATION: 0.65,
+  LABEL_STAGGER: 0.08,
+  LABEL_REVEAL_OFFSET: 0.05,
+} as const;
+
+/**
+ * Timing values for scroll-triggered animations.
+ */
+export const SCROLL_TIMING = {
+  SCRUB_SMOOTHING: 0.6,
+  NAV_FADE_DURATION: 0.45,
+  PILL_BORDER_DURATION: 0.25,
+  PILL_CONTENT_DURATION: 0.35,
+  PILL_CONTENT_FADE_DURATION: 0.4,
+  PILL_SKIN_FADE_DURATION: 0.4,
+  OVERLAY_FADE_DURATION: 0.4,
+  VIDEO_FADE_OUT_DURATION: 0.35,
+  PILL_SNAP_DURATION: 0.3,
+  NAV_ROW_START_OFFSET: 0.55,
+  LABEL_EXIT_SCRUB: true,
+  COVER_FILL_SCRUB: true,
+  COVER_CONTENT_SCRUB: true,
+  SKILLS_ENTRANCE_SCRUB: true,
+} as const;
+
+/**
+ * Overlay opacity values for different animation states.
+ */
+export const OVERLAY_OPACITY = {
+  INITIAL: 0.55,
+  PEAK: 0.85,
+} as const;
+
+/**
+ * Timing values for skills section entrance animation.
+ */
+export const SKILLS_TIMING = {
+  HEADING_DURATION: 0.6,
+  ROWS_FADE_DURATION: 0.8,
+  BELOW_DELAY: 0.3,
+  HEADING_DELAY: 0.12,
+} as const;
+
+/**
+ * Scroll progress thresholds and tolerances.
+ */
+export const SCROLL_THRESHOLDS = {
+  MIN_ALIGNMENT_PROGRESS: 0.05,
+  PILL_POSITION_TOLERANCE: 0.5,
+} as const;
+
+/**
+ * ScrollTrigger start and end positions for scroll-driven animations.
+ */
+export const SCROLL_TRIGGER_POSITIONS = {
+  SKILLS_START: "top 40%",
+  SKILLS_END: "center center",
+  COVER_FILL_START: "top bottom",
+  COVER_FILL_END: "top top",
+  COVER_CONTENT_START: "top top",
+} as const;
+
+/**
+ * Initial Y-percent values for label animations.
+ */
+export const LABEL_INITIAL_STATE = {
+  Y_PERCENT: 35,
+} as const;
+
+/**
+ * Navigation row initial state values.
+ */
+export const NAV_INITIAL_STATE = {
+  Y_PERCENT: 18,
+} as const;
+
+/**
+ * Skills section initial state values for animations.
+ */
+export const SKILLS_INITIAL_STATE = {
+  HEADING_Y_PERCENT: 12,
+  HEADING_SCALE: 0.88,
+  ABOVE_X_PERCENT: 18,
+  BELOW_X_PERCENT: -18,
+} as const;
+
+/**
+ * Cover section animation timing values.
+ */
+export const COVER_TIMING = {
+  PARALLAX_DISTANCE: 0.9,
+  LABEL_Y_RANGE: { from: -12, to: 12 },
+  BODY_Y_RANGE: { from: 12, to: -12 },
+} as const;
+
+// ============================================================================
+// Global Configuration (Merged from config.ts)
+// ============================================================================
+
+export const CFG = {
+  timings: {
+    introStartDelay: 800,
+    introExpansionDuration: 2000,
+    reveal: {
+      name: 1000,
+      title: 3600,
+      desc: 3200,
+    },
+    graceAfterExpandMs: 200,
+  },
+  scroll: {
+    max: 1800,
+    shutterStartPx: 120,
+    shutterLengthPx: 900,
+    cyanStartT: 0.45,
+    uiRevealStartT: 0.95,
+  },
+  closeMaxY: "39vh",
+  closeMaxX: "38vw",
+  overlayUpDampen: 0.35,
+  video: {
+    playbackRate: 0.75,
+    scale: 1.05,
+    preload: "metadata" as const,
+  },
+  nav: {
+    centerTop: "46%",
+    buttonSize: { w: 88, h: 72 },
+    leftOffsetsPx: { projects: 54, linkedin: 150 },
+    rightOffsetsPx: { work: 54, github: 150 },
+  },
+} as const;
