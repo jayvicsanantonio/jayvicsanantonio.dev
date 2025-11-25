@@ -67,6 +67,9 @@ export function createPillShrinkTimeline({
   let pillSnapTween: gsap.core.Tween | null = null;
   let videoShrinkTimeline: gsap.core.Timeline;
   let lastTargetOffset: { x: number; y: number } | null = null;
+  const isSmallScreen =
+    typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches;
+  const scrubSmoothing = isSmallScreen ? 0.9 : SCROLL_TIMING.SCRUB_SMOOTHING;
 
   const syncPillToNavRow = () => {
     if (!videoShrinkTimeline) {
@@ -111,7 +114,7 @@ export function createPillShrinkTimeline({
         // End position: exactly one viewport height of scrolling.
         // This gives the pill shrink animation a full viewport to complete.
         end: () => "+=" + window.innerHeight,
-        scrub: SCROLL_TIMING.SCRUB_SMOOTHING,
+        scrub: scrubSmoothing,
         onEnter: () => {
           // Set transform origin to center for both pill and video.
           // This ensures scale/position animations transform from the center point.
@@ -125,8 +128,13 @@ export function createPillShrinkTimeline({
           gsap.set(profile, { transformOrigin: PROFILE_SCROLL_CONFIG.transformOrigin });
         },
         invalidateOnRefresh: true,
-        onUpdate: () => syncPillToNavRow(),
-        onRefresh: () => syncPillToNavRow(),
+        onUpdate: isSmallScreen ? undefined : () => syncPillToNavRow(),
+        onRefresh: () => {
+          lastTargetOffset = null;
+          if (!isSmallScreen) {
+            syncPillToNavRow();
+          }
+        },
       },
     })
     .to(
