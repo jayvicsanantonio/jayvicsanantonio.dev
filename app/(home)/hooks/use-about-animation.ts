@@ -9,21 +9,19 @@ export type UseAboutAnimationArgs = {
   sectionRef: MutableRefObject<HTMLElement | null>;
   labelRef: MutableRefObject<HTMLElement | null>;
   letterRefs: MutableRefObject<Array<HTMLSpanElement | null>>;
-  paragraphRefs: MutableRefObject<Array<HTMLParagraphElement | null>>;
 };
 
 export function useAboutAnimation({
   sectionRef,
   labelRef,
   letterRefs,
-  paragraphRefs,
 }: UseAboutAnimationArgs) {
   useGSAP(
     () => {
       const section = sectionRef.current;
       const label = labelRef.current;
       const letters = letterRefs.current;
-      const paragraphs = paragraphRefs.current;
+
 
       if (!section || !label) return;
 
@@ -63,29 +61,7 @@ export function useAboutAnimation({
         },
       });
 
-      // 3. Scrubbed Paragraph Reveal
-      paragraphs.forEach((para) => {
-        if (!para) return;
 
-        gsap.set(para, { 
-            y: 100, 
-            opacity: 0,
-            clipPath: "inset(0 0 100% 0)" 
-        });
-
-        gsap.to(para, {
-          y: 0,
-          opacity: 1,
-          clipPath: "inset(0 0 0% 0)",
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: para,
-            start: "top bottom-=10%",
-            end: "bottom center",
-            scrub: 1,
-          },
-        });
-      });
     },
     { scope: sectionRef }
   );

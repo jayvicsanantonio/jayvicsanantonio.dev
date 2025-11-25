@@ -11,7 +11,6 @@ export default function About({ sectionRef }: AboutProps) {
   const localSectionRef = useRef<HTMLElement | null>(null);
   const labelRef = useRef<HTMLSpanElement>(null);
   const letterRefs = useRef<Array<HTMLSpanElement | null>>([]);
-  const paragraphRefs = useRef<Array<HTMLParagraphElement | null>>([]);
 
   // Use the passed ref if available, otherwise use local ref
   const finalSectionRef = (sectionRef || localSectionRef) as MutableRefObject<HTMLElement | null>;
@@ -20,14 +19,9 @@ export default function About({ sectionRef }: AboutProps) {
     sectionRef: finalSectionRef,
     labelRef,
     letterRefs,
-    paragraphRefs,
   });
 
-  const addToParagraphRefs = (el: HTMLParagraphElement | null) => {
-    if (el && !paragraphRefs.current.includes(el)) {
-      paragraphRefs.current.push(el);
-    }
-  };
+
 
   const addToLetterRefs = (el: HTMLSpanElement | null) => {
     if (el && !letterRefs.current.includes(el)) {
@@ -57,17 +51,17 @@ export default function About({ sectionRef }: AboutProps) {
           </div>
         </div>
         <div className="mt-[28rem] w-full space-y-28 text-4xl leading-relaxed text-white/80 md:mt-0 md:w-3/5 md:pl-12">
-          <p ref={addToParagraphRefs} className="will-change-transform">
+          <p className="">
             I&apos;m Jayvic San Antonio, a Filipino Full-Stack Software Engineer building in the San
             Francisco Bay Area, and I care deeply about craft, clarity, and shipping work people
             actually enjoy using.
           </p>
-          <p ref={addToParagraphRefs} className="will-change-transform">
+          <p className="">
             I&apos;ve worn many hats, from co-founding a scrappy startup and winning hackathons to
             rebuilding revenue-critical systems at scale, and I stay grounded in reliability,
             accessibility, and thoughtful design.
           </p>
-          <p ref={addToParagraphRefs} className="text-white will-change-transform">
+          <p className="text-white">
             These days I&apos;m sharpening my web and AI toolkit while sneaking in Pokemon Go walks,
             Star Wars collecting, and early coffee. If you&apos;re building something ambitious and
             care about the details, reach me at{" "}
