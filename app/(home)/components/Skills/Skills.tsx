@@ -4,13 +4,91 @@ import { useMemo, useRef, type MutableRefObject } from "react";
 
 import MarqueeRow from "./MarqueeRow";
 
-import { SKILLS, SKILLS_HEADING } from "../../data/skills-data";
+const SKILLS_HEADING = "SKILLS";
 
 export type MarqueeRowConfig = {
   items: string[];
   duration?: number;
   direction?: "left" | "right";
 };
+
+const SKILLS: string[] = [
+  "JavaScript",
+  "TypeScript",
+  "React",
+  "NextJS",
+  "Tailwind CSS",
+  "Shadcn UI",
+  "Framer Motion",
+  "React Native",
+  "Expo",
+  "EmberJS",
+  "HTML",
+  "CSS",
+  "Sass",
+  "SVG",
+  "Accessibility",
+  "VS Code Extensions",
+  "Zed Extensions",
+  "NodeJS",
+  "Hono",
+  "Express",
+  "Cloudflare Workers",
+  "Vercel Edge",
+  "REST APIs",
+  "SailsJS",
+  "Socket.IO",
+  "Rate Limiting",
+  "Caching",
+  "Session Management",
+  "Authentication",
+  "Authorization",
+  "Prisma",
+  "PostgreSQL",
+  "MySQL",
+  "SQLite",
+  "MongoDB",
+  "Redis",
+  "Zod",
+  "Vitest",
+  "React Testing Library",
+  "Jest",
+  "Playwright",
+  "Cypress",
+  "GitHub Actions",
+  "Jenkins",
+  "CI/CD",
+  "Amazon Web Services",
+  "Vercel",
+  "Google Cloud",
+  "Cloudflare",
+  "Netlify",
+  "Git",
+  "Cursor",
+  "Warp.dev",
+  "Claude Code",
+  "Gemini CLI",
+  "Windsurf",
+  "GitHub Copilot",
+  "OpenRouter",
+  "Cline",
+  "VS Code",
+  "Zed",
+  "AI SDK",
+  "OpenAI SDK",
+  "ChatGPT",
+  "Perplexity",
+  "Comet",
+  "LangChain",
+  "Amazon Bedrock",
+  "Amazon Rekognition",
+  "Google AI Studio",
+  "Chrome Builti-in AI API",
+  "Groq API",
+  "AI Agents",
+  "Multi-Agent Orchestration",
+  "Google GenAI SDK",
+];
 
 type SkillsRefs = {
   sectionRef?: MutableRefObject<HTMLElement | null> | null;

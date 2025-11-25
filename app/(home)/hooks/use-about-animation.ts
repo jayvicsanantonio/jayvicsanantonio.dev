@@ -2,7 +2,6 @@ import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MutableRefObject } from "react";
-import { ANIMATION } from "@/lib/constants";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -81,8 +80,8 @@ export function useAboutAnimation({
           {
             y: 0, // Move to natural position
             opacity: 1,
-            duration: ANIMATION.DURATION,
-            ease: ANIMATION.EASE,
+            duration: 1,
+            ease: "power2.out",
             scrollTrigger: {
               trigger: p,
               start: "top bottom", // Start when top of paragraph enters viewport
