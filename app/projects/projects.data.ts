@@ -729,7 +729,3 @@ export const PROJECTS: Project[] = [
     ],
   },
 ];
-
-export function findProject(slug: string): Project | undefined {
-  return PROJECTS.find((c) => c.slug === slug);
-}

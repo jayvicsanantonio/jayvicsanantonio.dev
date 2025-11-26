@@ -24,7 +24,7 @@ export type NavMeasurementHelpers = {
  * @param targetPillHeight - Optional target height (uses measured height if not provided)
  * @returns Vertical offset in pixels to center nav within pill
  */
-export function calculateNavYOffset(
+function calculateNavYOffset(
   navRow: HTMLDivElement,
   pill: HTMLDivElement,
   targetPillHeight?: number,

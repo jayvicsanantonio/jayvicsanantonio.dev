@@ -1,4 +1,4 @@
-import type { CSSProperties, MutableRefObject } from "react";
+import type { MutableRefObject } from "react";
 
 export type HeroAnimationRefs = {
   smoothWrapperRef: MutableRefObject<HTMLDivElement | null>;
@@ -25,34 +25,6 @@ export type HeroAnimationRefs = {
   skillsRowsBelowRefs: MutableRefObject<Array<HTMLDivElement | null>>;
   skillsHeadingRef: MutableRefObject<HTMLHeadingElement | null>;
   mobileHeroTextRef: MutableRefObject<HTMLDivElement | null>;
-};
-
-export type StageProps = Pick<
-  HeroAnimationRefs,
-  | "containerRef"
-  | "navRowRef"
-  | "pillRef"
-  | "videoRef"
-  | "videoOverlayRef"
-  | "videoWatermarkMaskRef"
-  | "pillContentRef"
-  | "pillSkinRef"
-> & {
-  navRowBaseStyle: CSSProperties;
-};
-
-export type PillProps = Pick<
-  HeroAnimationRefs,
-  | "pillRef"
-  | "videoRef"
-  | "videoOverlayRef"
-  | "videoWatermarkMaskRef"
-  | "pillContentRef"
-  | "pillSkinRef"
->;
-
-export type ProfileProps = Pick<HeroAnimationRefs, "profileRef"> & {
-  prefersReducedMotion: boolean;
 };
 
 export type MarqueeRowConfig = {

@@ -5,10 +5,9 @@ import type { CSSProperties } from "react";
 
 import { NavPill } from "@/components/navigation/NavPill";
 
-export const HERO_NAV_PILL_WIDTH = "clamp(280px, var(--nav-row-w, 22vw), 520px)";
-export const HERO_NAV_PILL_HEIGHT = "clamp(48px, var(--pill-h, 10vh), 72px)";
-export const HERO_NAV_BUTTON_HEIGHT = HERO_NAV_PILL_HEIGHT;
-export const HERO_NAV_ROW_GAP = `calc(${HERO_NAV_PILL_WIDTH} + min(2rem, 4vw))`;
+const HERO_NAV_PILL_WIDTH = "clamp(280px, var(--nav-row-w, 22vw), 520px)";
+const HERO_NAV_PILL_HEIGHT = "clamp(48px, var(--pill-h, 10vh), 72px)";
+const HERO_NAV_BUTTON_HEIGHT = HERO_NAV_PILL_HEIGHT;
 const HERO_NAV_BUTTON_WIDTH = "clamp(60px, 17vw, 84px)";
 
 type NavItem = {

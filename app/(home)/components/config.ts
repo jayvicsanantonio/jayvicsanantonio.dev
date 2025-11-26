@@ -164,7 +164,6 @@ export const VIDEO_OVERLAY_BACKGROUND = [
 ].join(",");
 export const PROFILE_DROP_SHADOW =
   "drop-shadow(0 24px 36px rgba(0,0,0,0.55)) drop-shadow(0 0 20px rgba(34,211,238,0.45))";
-export const HERO_SCROLL_DISTANCE = 1;
 export const LABEL_EXIT_Y_PERCENT = -185;
 export const LABEL_EXIT_SCROLL_DISTANCE = 0.5;
 export const PROFILE_BASE_Z_INDEX = 1;
@@ -186,14 +185,6 @@ export const FINAL_PANEL_STATE = {
 
 export const INITIAL_NAV_ROW_STYLE: CSSProperties = {
   visibility: "hidden",
-};
-
-export const SCROLL_SMOOTHER_CONFIG = {
-  smooth: 1.2,
-  smoothTouch: 0.12,
-  effects: true,
-  normalizeScroll: true,
-  ignoreMobileResize: true,
 };
 
 export const PROFILE_SCROLL_CONFIG = {
