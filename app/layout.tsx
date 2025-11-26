@@ -117,6 +117,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
+      <head>
+        <link rel="preconnect" href="https://api.iconify.design" />
+        <link rel="preconnect" href="https://va.vercel-scripts.com" />
+      </head>
       <Body
         fontVars={`${sourceSansPro.variable} ${sourceSansProLight.variable} ${sourceSansProBold.variable} ${oswaldLocal.variable}`}
       >
