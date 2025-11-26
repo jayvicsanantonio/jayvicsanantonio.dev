@@ -12,6 +12,7 @@ export type UseHeroAnimationArgs = {
 };
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
+ScrollTrigger.clearScrollMemory();
 
 /**
  * Orchestrates all hero section animations including intro sequence and scroll-driven effects.
