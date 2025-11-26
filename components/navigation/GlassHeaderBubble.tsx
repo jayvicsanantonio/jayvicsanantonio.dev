@@ -4,7 +4,7 @@ import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { NavPill } from "@/components/ui/NavPill";
+import { NavPill } from "@/components/navigation/NavPill";
 export type GlassHeaderBubbleProps = {
   label: string;
   vtClassName?: string; // e.g., vt-tag-projects, vt-tag-work

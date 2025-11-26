@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import WorkPageContent from "./_components/WorkPageContent.client";
+import WorkPageContent from "./_components/WorkPageContent";
 
 const siteUrl = new URL("https://jayvicsanantonio.dev");
 

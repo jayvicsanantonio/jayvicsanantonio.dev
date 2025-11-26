@@ -1,6 +1,6 @@
 "use client";
 
-import AnimatedText from "@/components/ui/AnimatedText";
+import AnimatedText from "@/components/primitives/AnimatedText";
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
 export default function AnimatedHeader() {

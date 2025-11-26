@@ -7,7 +7,7 @@ import { useGSAP } from "@gsap/react";
 
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
-import WorkTimeline from "./WorkTimeline.client";
+import WorkTimeline from "./WorkTimeline";
 
 gsap.registerPlugin(ScrollTrigger);
 

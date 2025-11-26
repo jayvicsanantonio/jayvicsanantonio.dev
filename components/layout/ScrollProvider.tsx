@@ -4,7 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useScrollProgress } from "@/hooks/useScrollProgress";
 import { useScrollReset } from "@/hooks/useScrollReset";
-import ScrollProgressBar from "./ScrollProgressBar.client";
+import ScrollProgressBar from "./ScrollProgressBar";
 
 gsap.registerPlugin(ScrollTrigger);
 

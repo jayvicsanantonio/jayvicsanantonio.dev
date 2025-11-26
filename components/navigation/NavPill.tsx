@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { GlassButton } from "@/components/ui/GlassButton";
+import { GlassButton } from "@/components/primitives/GlassButton";
 
 export type NavPillProps = {
   href: string;

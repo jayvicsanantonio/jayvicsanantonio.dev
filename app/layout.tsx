@@ -1,6 +1,6 @@
 import localFont from "next/font/local";
 
-import Body from "@/components/shell/Body";
+import Body from "@/components/layout/Body";
 import "./globals.css";
 
 import type { Metadata } from "next";

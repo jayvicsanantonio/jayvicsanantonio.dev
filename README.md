@@ -56,47 +56,54 @@ ANALYZE=true pnpm build
 app/                                 # Route segments (server-first by default)
   globals.css                        # Tailwind v4 entry
   layout.tsx                         # Root layout
-  page.tsx                           # Home page (mounts co-located client hero)
+  page.tsx                           # Home page (mounts hero + sections)
   (home)/                            # Group segment (not in URL)
-    _components/                     # Home-only components
-      HeroMorph.client.tsx
-      NavButton.tsx
-      hero/                          # Home hero sub-islands
-        config.ts
-        InitialPillOverlay.client.tsx
-        MobileNavRow.client.tsx
-        MorphingVideo.client.tsx
-        PrimaryNavOverlay.client.tsx
-        ProfileImage.client.tsx
-        FooterBrandCTA.client.tsx
-    _hooks/                          # Home-only hooks
-      useIntroSequence.ts
-      useScrollCssVariables.ts
+    components/                      # Home-only components
+      HomePageContent.tsx
+      Hero/Navigation.tsx
+      ...                            # (Hero/About/Skills subsections)
+    context/
+      HeroContext.tsx
+    hooks/
+      use-hero-animations.ts
+      use-hero-intro-animation.ts
+      use-hero-scroll-animation.ts
+    animations/                      # Shared animation definitions
+      ...
+    config.ts
+    types.ts
   projects/
     layout.tsx
     page.tsx
     projects.data.ts
     _components/
-      AnimatedHeader.client.tsx
+      AnimatedHeader.tsx
       SkillsAndCases.tsx
   work/
     layout.tsx
     page.tsx
     _components/
-      WorkTimeline.client.tsx
+      WorkPageContent.tsx
+      WorkTimeline.tsx
 
 components/                          # Shared components
-  shell/                             # App shell (shared across routes)
+  layout/                            # App shell (shared across routes)
     Body.tsx
-    ClientAppShell.client.tsx
+    ClientAppShell.tsx
     AmbientBackground.tsx
-  ui/                                # Reusable UI primitives
+    ScrollProvider.tsx
+    ScrollProgressBar.tsx
+  navigation/                        # Navigation elements
+    GlassHeaderBubble.tsx
+    NavPill.tsx
+  primitives/                        # Reusable UI primitives
     AnimatedText.tsx
     Badge.tsx
     GlassButton.tsx
-    GlassHeaderBubble.tsx
-    NavPill.tsx
+  feedback/
     Toaster.tsx
+  styles/                            # Shared style helpers
+    card-styles.ts
 
 hooks/                               # Shared React hooks
   usePrefersReducedMotion.ts

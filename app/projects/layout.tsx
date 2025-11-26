@@ -1,6 +1,6 @@
 import type React from "react";
 
-import GlassHeaderBubble from "@/components/ui/GlassHeaderBubble";
+import GlassHeaderBubble from "@/components/navigation/GlassHeaderBubble";
 
 export default function ProjectsLayout({ children }: { children: React.ReactNode }) {
   return (

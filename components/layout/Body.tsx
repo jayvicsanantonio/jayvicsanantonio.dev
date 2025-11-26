@@ -1,5 +1,5 @@
-import ClientAppShell from "@/components/shell/ClientAppShell.client";
-import ScrollProvider from "@/components/shell/ScrollProvider.client";
+import ClientAppShell from "@/components/layout/ClientAppShell";
+import ScrollProvider from "@/components/layout/ScrollProvider";
 
 export default function Body({
   children,

@@ -6,8 +6,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
 
-import { Badge } from "@/components/ui/Badge";
-import { CARD_INNER_BASE, CARD_OUTER_BASE } from "@/components/ui/cardStyles";
+import { Badge } from "@/components/primitives/Badge";
+import { CARD_INNER_BASE, CARD_OUTER_BASE } from "@/components/styles/card-styles";
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
 gsap.registerPlugin(ScrollTrigger);

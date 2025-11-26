@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import React from "react";
 
-import AnimatedHeader from "./_components/AnimatedHeader.client";
+import AnimatedHeader from "./_components/AnimatedHeader";
 import SkillsAndCases from "./_components/SkillsAndCases";
 
 const siteUrl = new URL("https://jayvicsanantonio.dev");

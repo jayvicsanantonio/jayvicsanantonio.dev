@@ -8,7 +8,7 @@ import React from "react";
 import { PROJECTS } from "@/app/projects/projects.data";
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
-import { CARD_INNER_BASE, CARD_OUTER_BASE } from "@/components/ui/cardStyles";
+import { CARD_INNER_BASE, CARD_OUTER_BASE } from "@/components/styles/card-styles";
 import ProjectLink from "./ProjectLink";
 
 const SKILL_FILTERS = [
