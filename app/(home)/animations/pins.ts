@@ -17,7 +17,6 @@ export function createHeroPin(heroSection: HTMLDivElement): ScrollTrigger {
     // Keeps hero section fixed while scroll animations play.
     end: () => "+=" + window.innerHeight,
     pin: true,
-    pinReparent: true,
     anticipatePin: 1,
   });
 }
