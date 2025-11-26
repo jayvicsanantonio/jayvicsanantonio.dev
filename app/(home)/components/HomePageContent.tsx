@@ -45,6 +45,9 @@ export default function HomePageContent({ children }: { children: React.ReactNod
         window.scrollTo(0, 0);
         frames++;
         requestAnimationFrame(forceScroll);
+      } else {
+        // Once we stop forcing scroll, refresh ScrollTrigger to ensure it sees the top position
+        ScrollTrigger.refresh();
       }
     };
     forceScroll();

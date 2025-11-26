@@ -40,6 +40,7 @@ export function useAboutAnimation({
           start: "top bottom",
           end: "bottom top",
           scrub: true,
+          invalidateOnRefresh: true,
         },
       });
 
@@ -61,6 +62,7 @@ export function useAboutAnimation({
           start: "top 50%", // Start revealing when top of section is 50% from top of viewport (50% visible)
           end: "bottom bottom", // Finish revealing when bottom of section hits bottom of viewport
           scrub: 1, // Smooth scrubbing linked to scroll
+          invalidateOnRefresh: true,
         },
       });
 
@@ -85,6 +87,7 @@ export function useAboutAnimation({
               start: "top bottom", // Start when top of paragraph enters viewport
               end: "center center", // End when center of paragraph is in center of viewport
               scrub: 1, // Smooth scrubbing
+              invalidateOnRefresh: true,
             },
           },
         );
