@@ -71,26 +71,26 @@ export function useAboutAnimation({
       const paragraphs = [p1, p2].filter((p): p is HTMLParagraphElement => p !== null);
 
       paragraphs.forEach((p) => {
-        gsap.fromTo(
-          p,
-          {
-            y: 720, // Start 720px below
-            opacity: 0.2,
+        // Set initial state immediately
+        gsap.set(p, {
+          y: 720,
+          opacity: 0.2,
+        });
+
+        // Animate to final state
+        gsap.to(p, {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: p,
+            start: "top bottom", // Start when top of paragraph enters viewport
+            end: "center center", // End when center of paragraph is in center of viewport
+            scrub: 1, // Smooth scrubbing
+            invalidateOnRefresh: true,
           },
-          {
-            y: 0, // Move to natural position
-            opacity: 1,
-            duration: 1,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: p,
-              start: "top bottom", // Start when top of paragraph enters viewport
-              end: "center center", // End when center of paragraph is in center of viewport
-              scrub: 1, // Smooth scrubbing
-              invalidateOnRefresh: true,
-            },
-          },
-        );
+        });
       });
     },
     { scope: sectionRef },
