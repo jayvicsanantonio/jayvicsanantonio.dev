@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { rng } from "@/lib/utils/rng";
+import { createRng } from "@/lib/create-rng";
 
 export type KeywordItem = {
   label: string;
@@ -54,7 +54,7 @@ export function useKeywordsLayout({
       delay: number; // 0..1 logical order for reveal/fall
     }> = [];
 
-    const next = rng(seed);
+    const next = createRng(seed);
     const base = items.length ? items : [{ label: "Keyword" }];
     const N = Math.max(1, count);
 
