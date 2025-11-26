@@ -12,13 +12,7 @@ import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
 gsap.registerPlugin(ScrollTrigger);
 
-type Experience = {
-  title: string;
-  company: string;
-  period: string;
-  bullets: string[];
-  tags: string[];
-};
+import { Experience } from "../types";
 
 const EXPERIENCES: Experience[] = [
   {

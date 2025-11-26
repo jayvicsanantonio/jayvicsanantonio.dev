@@ -6,11 +6,7 @@ import MarqueeRow from "./MarqueeRow";
 
 const SKILLS_HEADING = "SKILLS";
 
-export type MarqueeRowConfig = {
-  items: string[];
-  duration?: number;
-  direction?: "left" | "right";
-};
+import { MarqueeRowConfig } from "../../types";
 
 const SKILLS: string[] = [
   "JavaScript",

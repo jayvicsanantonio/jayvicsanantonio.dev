@@ -54,3 +54,9 @@ export type PillProps = Pick<
 export type ProfileProps = Pick<HeroAnimationRefs, "profileRef"> & {
   prefersReducedMotion: boolean;
 };
+
+export type MarqueeRowConfig = {
+  items: string[];
+  duration?: number;
+  direction?: "left" | "right";
+};

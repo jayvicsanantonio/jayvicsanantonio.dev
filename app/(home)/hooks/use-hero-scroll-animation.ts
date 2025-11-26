@@ -20,7 +20,7 @@
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 
-import type { HeroAnimationRefs } from "../components/Hero/hero.types";
+import type { HeroAnimationRefs } from "../types";
 import { createNavMeasurementHelpers } from "../animations/nav-measurement";
 import { createPillShrinkTimeline } from "../animations/pill-shrink";
 import { createLabelExitTimeline } from "../animations/label-exit";

@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useRef, type ReactNode } from "react";
-import type { HeroAnimationRefs } from "../components/Hero/hero.types";
+import type { HeroAnimationRefs } from "../types";
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 import useHeroAnimations from "../hooks/use-hero-animations";
 

@@ -2,7 +2,7 @@ import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import type { HeroAnimationRefs } from "../components/Hero/hero.types";
+import type { HeroAnimationRefs } from "../types";
 import { useHeroIntroAnimation } from "./use-hero-intro-animation";
 import { useHeroScrollAnimation } from "./use-hero-scroll-animation";
 
