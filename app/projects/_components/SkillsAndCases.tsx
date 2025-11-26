@@ -60,25 +60,23 @@ export default function SkillsAndCases() {
 
   // Keep URL query param in sync with active filter (replace to avoid history spam)
   const currentQS = React.useMemo(() => searchParams?.toString() ?? "", [searchParams]);
-  React.useEffect(() => {
-    try {
-      const params = new URLSearchParams(currentQS);
-      if (active === "All") {
-        params.delete("skill");
-        params.delete("filter");
-      } else {
-        params.set("skill", active);
-      }
-      const qs = params.toString();
-      // Avoid redundant replaces that can trigger nested view transitions
-      if (qs !== currentQS) {
-        router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
-      }
-      setAnnounce(`Filter: ${active}`);
-    } catch {
-      // no-op
+  const handleFilterChange = (newFilter: string) => {
+    setActive(newFilter);
+    setAnnounce(`Filter: ${newFilter}`);
+
+    const params = new URLSearchParams(currentQS);
+    if (newFilter === "All") {
+      params.delete("skill");
+      params.delete("filter");
+    } else {
+      params.set("skill", newFilter);
     }
-  }, [active, pathname, router, currentQS]);
+    const qs = params.toString();
+    // Avoid redundant replaces that can trigger nested view transitions
+    if (qs !== currentQS) {
+      router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+    }
+  };
 
   // CSS-first entrance animation; we keep Framer only for future interactions
 
@@ -110,7 +108,7 @@ export default function SkillsAndCases() {
             <button
               type="button"
               key={s}
-              onClick={() => setActive(s)}
+              onClick={() => handleFilterChange(s)}
               className={`${FILTER_BUTTON_CLASS} ${
                 active === s ? FILTER_BUTTON_ACTIVE : FILTER_BUTTON_IDLE
               }`}

@@ -10,9 +10,17 @@ import { useWebVitalsLogger } from "@/hooks/useWebVitalsLogger";
 
 // Toggle keeps the wiring in place but skips React ViewTransitions entirely while debugging.
 const ENABLE_VIEW_TRANSITIONS = false;
+
+// Define a type that includes the experimental ViewTransition component
+type ReactWithViewTransition = typeof React & {
+  ViewTransition?: React.ComponentType<{ children: React.ReactNode }>;
+};
+
 const ViewTransition: React.ComponentType<{ children: React.ReactNode }> =
-  ENABLE_VIEW_TRANSITIONS && (React as any).ViewTransition
-    ? ((React as any).ViewTransition as React.ComponentType<{ children: React.ReactNode }>)
+  ENABLE_VIEW_TRANSITIONS && (React as ReactWithViewTransition).ViewTransition
+    ? ((React as ReactWithViewTransition).ViewTransition as React.ComponentType<{
+        children: React.ReactNode;
+      }>)
     : React.Fragment;
 
 export default function ClientAppShell({ children }: { children: React.ReactNode }) {
