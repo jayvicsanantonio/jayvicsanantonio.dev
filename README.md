@@ -90,7 +90,6 @@ components/                          # Shared components
     Body.tsx
     ClientAppShell.client.tsx
     AmbientBackground.tsx
-    CursorGlow.tsx
   ui/                                # Reusable UI primitives
     AnimatedText.tsx
     Badge.tsx

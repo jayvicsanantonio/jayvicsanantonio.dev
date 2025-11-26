@@ -24,7 +24,6 @@ export default function ClientAppShell({ children }: { children: React.ReactNode
 
   return (
     <>
-      {/* <CursorGlow /> */}
       {/* React ViewTransition wrapper per Next.js docs; key by pathname to scope updates */}
       <ViewTransition>
         <div key={pathname} suppressHydrationWarning>
