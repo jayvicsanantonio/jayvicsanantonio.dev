@@ -20,6 +20,7 @@ const nextConfig = {
   // Adding an empty config silences the error when a plugin adds a webpack config.
   turbopack: {},
   images: {
+    deviceSizes: [320, 420, 768, 1024, 1200, 1920],
     remotePatterns: [
       {
         protocol: "https",

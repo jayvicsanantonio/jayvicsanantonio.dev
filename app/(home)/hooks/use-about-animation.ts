@@ -74,7 +74,7 @@ export function useAboutAnimation({
         // Set initial state immediately
         gsap.set(p, {
           y: 720,
-          opacity: 0.2,
+          opacity: 0,
         });
 
         // Animate to final state

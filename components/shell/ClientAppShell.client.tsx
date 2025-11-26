@@ -33,8 +33,13 @@ export default function ClientAppShell({ children }: { children: React.ReactNode
         </div>
       </ViewTransition>
       <Toaster />
-      <SpeedInsights />
-      <Analytics />
+      {process.env.NODE_ENV === "production" &&
+        process.env.NEXT_PUBLIC_VERCEL_ENV === "production" && (
+          <>
+            <SpeedInsights />
+            <Analytics />
+          </>
+        )}
     </>
   );
 }

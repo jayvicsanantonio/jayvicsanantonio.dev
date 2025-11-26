@@ -26,7 +26,7 @@ export default function Profile({ prefersReducedMotion }: { prefersReducedMotion
           priority
           className="block w-full object-contain"
           style={{ filter: PROFILE_DROP_SHADOW }}
-          sizes="(max-width: 600px) 100vw, (max-width: 1600px) 55vw, 880px"
+          sizes="(max-width: 600px) 90vw, (max-width: 1200px) 55vw, 880px"
         />
       </div>
     </div>
