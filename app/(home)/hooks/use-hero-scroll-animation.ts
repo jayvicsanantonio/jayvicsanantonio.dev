@@ -1,22 +1,3 @@
-/**
- * Hero Scroll Animation Hook
- *
- * Manages all scroll-driven animations for the hero section.
- *
- * This hook orchestrates multiple coordinated scroll effects:
- * - Profile image scaling as user scrolls
- * - Pill shrinking and morphing into navigation button
- * - Label (nameplate/designation) fade-out
- * - Cover section reveal with parallax effects
- * - Skills section entrance animation
- * - Hero section pinning during scroll
- *
- * All animations are scroll-scrubbed for smooth, controlled playback.
- * Respects reduced motion preferences by applying final states immediately.
- *
- * @module use-hero-scroll-animation
- */
-
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 
@@ -29,54 +10,18 @@ import { createHeroPin, createSkillsPin } from "../animations/pins";
 import { createSkillsEntranceAnimation } from "../animations/skills-entrance";
 import { createProfileHideOnSection } from "../animations/profile-visibility";
 import { killTimeline } from "../animations/cleanup";
-// Timing constants are used by helper functions imported above
-// and may be needed for future enhancements
 
-/**
- * Arguments for the hero scroll animation hook.
- */
 export type UseHeroScrollAnimationArgs = {
-  /** Collection of React refs to animated elements */
   refs: HeroAnimationRefs;
-  /** Whether user prefers reduced motion */
   prefersReducedMotion: boolean;
 };
 
-/**
- * Manages all scroll-driven animations for the hero section.
- *
- * Orchestrates multiple coordinated scroll effects:
- * - Profile image scaling
- * - Pill shrinking and morphing into nav button
- * - Label fade-out
- * - Cover section reveal and parallax
- * - Skills section entrance
- * - Hero section pinning
- *
- * All animations are scroll-scrubbed for smooth, controlled playback.
- * Respects reduced motion preferences by applying final states immediately.
- *
- * @param args - Animation configuration with refs and motion preferences
- *
- * @example
- * ```tsx
- * function HeroSection() {
- *   const refs = useHeroRefs();
- *   const prefersReducedMotion = usePrefersReducedMotion();
- *
- *   useHeroScrollAnimation({ refs, prefersReducedMotion });
- *
- *   return <div ref={refs.containerRef}>...</div>;
- * }
- * ```
- */
 export function useHeroScrollAnimation({
   refs,
   prefersReducedMotion,
 }: UseHeroScrollAnimationArgs): void {
   useGSAP(
     () => {
-      // Extract all required refs.
       const coverFill = refs.coverFillRef.current;
       const heroSection = refs.heroSectionRef.current;
       const coverSection = refs.coverSectionRef.current;
@@ -109,7 +54,6 @@ export function useHeroScrollAnimation({
         );
       }
 
-      // Handle reduced motion: apply final states immediately.
       if (prefersReducedMotion) {
         if (coverFill) {
           gsap.set(coverFill, { scaleY: 1 });
@@ -125,25 +69,21 @@ export function useHeroScrollAnimation({
         };
       }
 
-      // Early return if required refs are missing.
       if (!heroSection || !profile || !pill || !pillContent || !video || !navRow) {
         return () => {
           cleanupFns.forEach((cleanup) => cleanup());
         };
       }
 
-      // Ensure nav row is visible for measurements.
       if (window.getComputedStyle(navRow).visibility === "hidden") {
         gsap.set(navRow, { visibility: "visible" });
       }
 
-      // Create navigation measurement helpers.
       const navMeasurements = createNavMeasurementHelpers({
         navRow,
         pill,
       });
 
-      // Create pill shrink timeline (morphs pill into nav button).
       const { cleanup: pillCleanup } = createPillShrinkTimeline({
         heroSection,
         navRow,
@@ -161,7 +101,6 @@ export function useHeroScrollAnimation({
       });
       cleanupFns.push(pillCleanup);
 
-      // Create label exit timeline (fades out nameplate and designation).
       const labelExitTimeline = createLabelExitTimeline({
         heroSection,
         nameplate,
@@ -172,7 +111,6 @@ export function useHeroScrollAnimation({
         cleanupFns.push(() => killTimeline(labelExitTimeline));
       }
 
-      // Create cover animations (reveal and parallax effects).
       const coverCleanup = createCoverAnimations({
         profile,
         coverSection,
@@ -182,11 +120,9 @@ export function useHeroScrollAnimation({
       });
       cleanupFns.push(coverCleanup);
 
-      // Create hero pin (keeps hero section in view during scroll).
       const heroPin = createHeroPin(heroSection);
       cleanupFns.push(() => heroPin.kill());
 
-      // Create skills entrance animation (staggered reveal of skills).
       const skillsCleanup = createSkillsEntranceAnimation({
         section: skillsSection,
         rowsAbove: skillsRowsAbove,
@@ -196,13 +132,11 @@ export function useHeroScrollAnimation({
       });
       cleanupFns.push(skillsCleanup);
 
-      // Create skills pin (keeps skills section in place while about section slides over).
       if (skillsSection) {
         const skillsPin = createSkillsPin(skillsSection);
         cleanupFns.push(() => skillsPin.kill());
       }
 
-      // Return cleanup function to kill all animations on unmount.
       return () => {
         cleanupFns.forEach((cleanup) => cleanup());
       };

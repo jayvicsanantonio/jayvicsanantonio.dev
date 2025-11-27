@@ -30,7 +30,6 @@ const GlassButton = forwardRef<HTMLAnchorElement, GlassButtonProps>(
           className,
         )}
       >
-        {/* Content sits above sheen/highlight */}
         <span className="relative z-10 flex items-center justify-center">{children}</span>
       </Link>
     );

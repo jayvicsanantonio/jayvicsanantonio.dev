@@ -8,10 +8,8 @@ import AmbientBackground from "@/components/layout/AmbientBackground";
 import { Toaster } from "@/components/feedback/Toaster";
 import { useWebVitalsLogger } from "@/hooks/useWebVitalsLogger";
 
-// Toggle keeps the wiring in place but skips React ViewTransitions entirely while debugging.
 const ENABLE_VIEW_TRANSITIONS = false;
 
-// Define a type that includes the experimental ViewTransition component
 type ReactWithViewTransition = typeof React & {
   ViewTransition?: React.ComponentType<{ children: React.ReactNode }>;
 };
@@ -32,7 +30,6 @@ export default function ClientAppShell({ children }: { children: React.ReactNode
 
   return (
     <>
-      {/* React ViewTransition wrapper per Next.js docs; key by pathname to scope updates */}
       <ViewTransition>
         <div key={pathname} suppressHydrationWarning>
           {pathname !== "/" && <AmbientBackground />}

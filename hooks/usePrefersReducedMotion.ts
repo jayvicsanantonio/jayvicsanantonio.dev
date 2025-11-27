@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 const QUERY = "(prefers-reduced-motion: no-preference)";
 
 const getInitialState = () => {
-  // The real preference is applied after mount in the effect below.
   return false;
 };
 

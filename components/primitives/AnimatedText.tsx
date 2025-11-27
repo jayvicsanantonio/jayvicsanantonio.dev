@@ -35,7 +35,6 @@ export default function AnimatedText({
 
   return (
     <span className={className} style={{ display: "inline-block", whiteSpace: "pre" }}>
-      {/* Screen-reader friendly: expose the full string once, hide per-letter spans */}
       <span className="sr-only">{text}</span>
       <span aria-hidden>
         {letterObjs.map((item, i) => (

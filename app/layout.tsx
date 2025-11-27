@@ -54,7 +54,6 @@ export const viewport = {
   viewportFit: "cover",
 };
 
-// Regular weight preloaded for LCP-critical body text
 const sourceSansPro = localFont({
   src: [
     {
@@ -67,7 +66,6 @@ const sourceSansPro = localFont({
   variable: "--font-source-sans",
 });
 
-// Light weight - not needed for LCP, disable preload
 const sourceSansProLight = localFont({
   src: [
     {
@@ -81,7 +79,6 @@ const sourceSansProLight = localFont({
   preload: false,
 });
 
-// Bold weight - not needed for LCP, disable preload
 const sourceSansProBold = localFont({
   src: [
     {
@@ -95,8 +92,6 @@ const sourceSansProBold = localFont({
   preload: false,
 });
 
-// Use a local fallback mapped to the legacy --font-oswald variable so existing classes continue to work
-// Disable preload since headings aren't typically the LCP element
 const oswaldLocal = localFont({
   src: [
     {

@@ -11,7 +11,6 @@ export function useWebVitalsLogger() {
       .then(({ onLCP, onINP, onCLS }) => {
         const log = (name: string, value: number, rating?: string, id?: string) => {
           if (!active) return;
-          // Intentionally no-op to avoid console noise in development
           void name;
           void value;
           void rating;

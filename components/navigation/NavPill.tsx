@@ -80,7 +80,6 @@ export function NavPill({
         {...linkProps}
       >
         <span className="inline-flex items-center gap-2">
-          {/* Icon with cursor-follow transform */}
           <span
             aria-hidden
             className="inline-flex"
@@ -92,7 +91,6 @@ export function NavPill({
               color: active ? "#22d3ee" : undefined,
             }}
           >
-            {/* Force icon cyan when active */}
             {(() => {
               if (React.isValidElement(icon)) {
                 type IconProps = {
@@ -113,11 +111,9 @@ export function NavPill({
               return icon;
             })()}
           </span>
-          {/* icon-only; no expanding pill text */}
         </span>
       </GlassButton>
 
-      {/* Tooltip only when non-active and tooltip prop provided */}
       {!active && tooltip ? (
         <span
           className={[
@@ -130,7 +126,6 @@ export function NavPill({
         </span>
       ) : null}
 
-      {/* Active route indicator dot */}
       {active ? (
         <span
           aria-hidden

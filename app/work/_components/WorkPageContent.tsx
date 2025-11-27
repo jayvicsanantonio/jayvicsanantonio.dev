@@ -18,9 +18,6 @@ export default function WorkPageContent() {
   const backgroundRef = useRef<HTMLDivElement | null>(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  // Smooth Scrollbar lifecycle is managed globally by ScrollProvider.
-  // Keep wrapper/content refs to preserve DOM structure, but no smoother init here.
-
   useGSAP(
     () => {
       if (prefersReducedMotion || !heroRef.current) {
@@ -28,7 +25,7 @@ export default function WorkPageContent() {
       }
 
       const heroEls = Array.from(
-        heroRef.current.querySelectorAll<HTMLElement>("[data-hero-animate]")
+        heroRef.current.querySelectorAll<HTMLElement>("[data-hero-animate]"),
       );
 
       if (!heroEls.length) {
@@ -45,7 +42,7 @@ export default function WorkPageContent() {
 
       return () => tl.kill();
     },
-    { scope: heroRef, dependencies: [prefersReducedMotion] }
+    { scope: heroRef, dependencies: [prefersReducedMotion] },
   );
 
   useGSAP(
@@ -63,7 +60,7 @@ export default function WorkPageContent() {
 
       return () => tween.kill();
     },
-    { scope: backgroundRef, dependencies: [prefersReducedMotion] }
+    { scope: backgroundRef, dependencies: [prefersReducedMotion] },
   );
 
   return (
@@ -90,9 +87,9 @@ export default function WorkPageContent() {
               </h1>
               <p className="max-w-[720px] text-base text-gray-300/85 sm:text-lg" data-hero-animate>
                 Ten years architecting and building high-performance adtech platforms, real-time
-                systems, and scalable web applications built for enterprise-grade performance. Proven
-                track record of delivering mission-critical systems, optimizing performance bottlenecks,
-                and shipping solutions that drive measurable business impact.
+                systems, and scalable web applications built for enterprise-grade performance.
+                Proven track record of delivering mission-critical systems, optimizing performance
+                bottlenecks, and shipping solutions that drive measurable business impact.
               </p>
             </div>
 

@@ -3,23 +3,6 @@
 import React from "react";
 import { usePathname } from "next/navigation";
 
-/**
- * Manages scroll position reset on navigation and page lifecycle events.
- * Handles browser back/forward cache (bfcache) and scroll restoration.
- *
- * This hook:
- * - Disables browser scroll restoration to take manual control
- * - Resets scroll position on mount
- * - Resets scroll on beforeunload (page navigation)
- * - Resets scroll on pageshow if page was restored from bfcache
- * - Resets scroll when pathname changes (Next.js navigation)
- *
- * @example
- * function MyLayout({ children }) {
- *   useScrollReset();
- *   return <div>{children}</div>;
- * }
- */
 export function useScrollReset(): void {
   const pathname = usePathname();
 
@@ -35,7 +18,6 @@ export function useScrollReset(): void {
     }
   }, []);
 
-  // Manage scroll restoration and lifecycle events.
   React.useLayoutEffect(() => {
     if (typeof window === "undefined") {
       return;
@@ -45,10 +27,7 @@ export function useScrollReset(): void {
     let previousRestoration: History["scrollRestoration"] | undefined;
 
     if (supportsScrollRestoration) {
-      // Save the current scroll restoration setting to restore it on cleanup.
       previousRestoration = window.history.scrollRestoration;
-      // Set to "manual" to disable browser's automatic scroll restoration.
-      // This gives us full control over scroll position on navigation.
       window.history.scrollRestoration = "manual";
     }
 
@@ -57,9 +36,6 @@ export function useScrollReset(): void {
     };
 
     const handlePageShow = (event: PageTransitionEvent) => {
-      // event.persisted indicates the page was restored from bfcache (back/forward cache).
-      // When true, the page wasn't freshly loaded but restored from memory.
-      // We need to reset scroll in this case to ensure consistent behavior.
       if (event.persisted) {
         resetScrollPosition();
       }
@@ -78,7 +54,6 @@ export function useScrollReset(): void {
     };
   }, [resetScrollPosition]);
 
-  // Reset scroll on pathname change.
   React.useEffect(() => {
     const raf = requestAnimationFrame(() => {
       resetScrollPosition();

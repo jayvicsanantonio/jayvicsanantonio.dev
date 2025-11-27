@@ -226,7 +226,7 @@ export default function WorkTimeline() {
               start: "top 85%",
               toggleActions: "play none none reverse",
             },
-          }
+          },
         );
       });
 
@@ -270,7 +270,7 @@ export default function WorkTimeline() {
                   duration: 1.6,
                   ease: "power2.out",
                 },
-                idx * 0.1
+                idx * 0.1,
               );
             });
           },
@@ -287,11 +287,11 @@ export default function WorkTimeline() {
             duration: 2.2,
             ease: "sine.out",
             repeat: -1,
-          }
+          },
         );
       }
     },
-    { scope: containerRef, dependencies: [prefersReducedMotion] }
+    { scope: containerRef, dependencies: [prefersReducedMotion] },
   );
 
   return (
@@ -360,12 +360,7 @@ export default function WorkTimeline() {
                   />
                 </div>
 
-                <div
-                  className={`relative ${
-                    // On lg+, allocate viewport-side gutter so cards hug a 2vw gap from the 50vw spine
-                    isRight ? "lg:pl-[52vw]" : "lg:pr-[52vw]"
-                  }`}
-                >
+                <div className={`relative ${isRight ? "lg:pl-[52vw]" : "lg:pr-[52vw]"}`}>
                   {/* Card */}
                   <article
                     data-timeline-card

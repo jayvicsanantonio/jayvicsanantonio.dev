@@ -35,15 +35,11 @@ export default function GlassHeaderBubble({
 
   return (
     <div className={`relative inline-flex items-center ${_vtClassName ?? ""}`}>
-      {/* Inline nav buttons - order: LinkedIn, Projects, Home, Work, GitHub */}
-      {/* On small screens, the greeting pill sits on its own row above the icon row */}
       <nav
         aria-label="Header navigation"
         className="inline-grid w-fit grid-cols-1 justify-items-center gap-2 sm:flex sm:w-auto sm:items-center sm:gap-2"
       >
-        {/* Icon row (mobile): becomes contents on sm+ so items flow inline around greeting */}
         <div className="order-2 flex items-center gap-2 sm:order-none sm:contents">
-          {/* LinkedIn (left) */}
           <span className="sm:order-1">
             <NavPill
               href="https://www.linkedin.com/in/jayvicsanantonio/"
@@ -64,7 +60,6 @@ export default function GlassHeaderBubble({
             />
           </span>
 
-          {/* Projects (left) */}
           <span className="sm:order-2">
             <NavPill
               href="/projects"
@@ -89,7 +84,6 @@ export default function GlassHeaderBubble({
             />
           </span>
 
-          {/* Work (right) */}
           <span className="sm:order-4">
             <NavPill
               href="/work"
@@ -114,7 +108,6 @@ export default function GlassHeaderBubble({
             />
           </span>
 
-          {/* GitHub (right) */}
           <span className="sm:order-5">
             <NavPill
               href="https://github.com/jayvicsanantonio"
@@ -136,7 +129,6 @@ export default function GlassHeaderBubble({
           </span>
         </div>
 
-        {/* Home (middle): greeting pill (glass with dark cyan) */}
         <Link
           href="/"
           aria-label="Home"
