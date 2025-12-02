@@ -34,8 +34,18 @@ export const PROJECTS: Project[] = [
     links: [
       {
         label: "Github",
-        href: "https://github.com/jayvicsanantonio/collectiq",
+        href: "https://github.com/jayvicsanantonio/collect-iq",
         icon: "github",
+      },
+      {
+        label: "Devpost",
+        href: "https://devpost.com/software/collectiq",
+        icon: "external",
+      },
+      {
+        label: "View",
+        href: "https://main.ddtufp5of4bf.amplifyapp.com/",
+        icon: "external",
       },
     ],
     sections: [
@@ -90,6 +100,11 @@ export const PROJECTS: Project[] = [
         href: "https://github.com/jayvicsanantonio/reflexa-ai",
         icon: "github",
       },
+      {
+        label: "Devpost",
+        href: "https://devpost.com/software/reflexa-ai",
+        icon: "external",
+      },
     ],
     sections: [
       {
@@ -134,6 +149,11 @@ export const PROJECTS: Project[] = [
         label: "Github",
         href: "https://github.com/jayvicsanantonio/ai-humanity-passport",
         icon: "github",
+      },
+      {
+        label: "Devpost",
+        href: "https://devpost.com/software/humanity-passport",
+        icon: "external",
       },
       { label: "View", href: "https://ai-humanity-passport.vercel.app/", icon: "external" },
     ],
