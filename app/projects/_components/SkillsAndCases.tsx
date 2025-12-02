@@ -23,6 +23,8 @@ const SKILL_FILTERS = [
 
 const PRIORITY_ORDER = [
   "yahoo-dsp",
+  "collectiq",
+  "reflexa-ai",
   "ai-humanity-passport",
   "tracknstick",
   "webdevhub",

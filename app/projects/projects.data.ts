@@ -2,6 +2,160 @@ import { Project } from "./types";
 
 export const PROJECTS: Project[] = [
   {
+    slug: "collectiq",
+    title: "CollectIQ",
+    period: "2025",
+    blurb:
+      "Built for the AWS AI Agent Global Hackathon 2025, this serverless multi agent Pokémon TCG valuation platform uses Next.js 15, TypeScript, and AWS Bedrock agents with Rekognition and Step Functions to authenticate trading cards and generate fast, low cost pricing insights.",
+    image: {
+      src: "/images/projects/collectiq.png",
+      alt: "CollectIQ trading card valuation interface",
+      width: 1200,
+      height: 675,
+      ratio: "1200/675",
+    },
+    skills: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "AWS Lambda",
+      "Step Functions",
+      "Bedrock",
+      "Rekognition",
+      "Terraform",
+      "Hackathon",
+    ],
+    metrics: [
+      "AWS AI Agent Global Hackathon 2025",
+      "Sub minute valuation pipeline",
+      "Around $0.01 per analysis",
+      "Multi agent orchestration",
+    ],
+    links: [
+      {
+        label: "Github",
+        href: "https://github.com/jayvicsanantonio/collectiq",
+        icon: "github",
+      },
+    ],
+    sections: [
+      {
+        label: "Context",
+        content:
+          "Built for the AWS AI Agent Global Hackathon as a proof of concept vault where collectors can upload card photos and receive authenticity checks and pricing signals.",
+      },
+      {
+        label: "Decisions",
+        content:
+          "Defined the backend as code with Terraform; used AWS Lambda and Step Functions for a resilient pipeline; split concerns across dedicated Bedrock and Rekognition agents; surfaced status and failures through CloudWatch.",
+      },
+      {
+        label: "Results",
+        content:
+          "End to end valuation flow that completes in under a minute while keeping analysis costs low and monitoring transparent.",
+      },
+    ],
+  },
+  {
+    slug: "reflexa-ai",
+    title: "Reflexa AI",
+    period: "2025",
+    blurb:
+      "Created for the Google Chrome Built in AI Challenge 2025, this wellness centered Chrome extension transforms everyday reading into calm, reflective micro sessions powered by Gemini Nano and the Chrome built in AI APIs, with all processing kept on device.",
+    image: {
+      src: "/images/projects/reflexa-ai.png",
+      alt: "Reflexa AI wellness focused reading overlay",
+      width: 1200,
+      height: 675,
+      ratio: "1200/675",
+    },
+    skills: [
+      "Chrome Extensions",
+      "TypeScript",
+      "React",
+      "Vite",
+      "Manifest V3",
+      "Vitest",
+      "Gemini Nano",
+      "Hackathon",
+    ],
+    metrics: [
+      "Google Chrome Built in AI Challenge 2025",
+      "Uses all 7 Chrome AI APIs",
+      "On device inference",
+    ],
+    links: [
+      {
+        label: "Github",
+        href: "https://github.com/jayvicsanantonio/reflexa-ai",
+        icon: "github",
+      },
+    ],
+    sections: [
+      {
+        label: "Context",
+        content:
+          "A wellness extension designed for the Google Chrome Built in AI Challenge that nudges readers to pause, reflect, and journal while they browse.",
+      },
+      {
+        label: "Decisions",
+        content:
+          "Used Gemini Nano and all 7 Chrome built in AI APIs for summarization, rewriting, translation, and tone guidance; kept all processing on device; structured the codebase with React 19, Vite, Vitest, and Manifest V3 for fast iteration.",
+      },
+      {
+        label: "Results",
+        content:
+          "Delivered a smooth reading overlay that detects sustained reading, offers gentle lotus prompts, and guides users through short reflective exercises without sending their content off device.",
+      },
+    ],
+  },
+  {
+    slug: "ai-humanity-passport",
+    title: "Humanity+ Passport",
+    period: "2025",
+    blurb:
+      "Developed for the KiroWeen 2025 Hackathon, this LLM powered repository ethics analyzer uses Next.js 15, Groq, PostgreSQL, and Prisma to evaluate codebases and generate shareable SVG badges that highlight positive societal impact.",
+    image: {
+      src: "/images/projects/ai-humanity.png",
+      alt: "Humanity+ Passport",
+      width: 1200,
+      height: 675,
+      ratio: "1200/675",
+    },
+    skills: ["AI", "TypeScript", "Hobby", "Hackathon"],
+    metrics: [
+      "KiroWeen 2025 Hackathon",
+      "Groq + gpt-oss-20b",
+      "AI repo analysis",
+      "Dynamic SVG badges",
+    ],
+    links: [
+      {
+        label: "Github",
+        href: "https://github.com/jayvicsanantonio/ai-humanity-passport",
+        icon: "github",
+      },
+      { label: "View", href: "https://ai-humanity-passport.vercel.app/", icon: "external" },
+    ],
+    sections: [
+      {
+        label: "Context",
+        content:
+          "An AI service created for KiroWeen 2025 that evaluates open source repositories and issues badges that highlight positive societal impact.",
+      },
+      {
+        label: "Decisions",
+        content:
+          "Designed transparent scoring criteria and used Groq for fast, low cost model inference; produced shareable SVG badges for verified outcomes.",
+      },
+      {
+        label: "Results",
+        content:
+          "Live demo and badge issuance flow that encourages ethical, socially responsible open source development.",
+      },
+    ],
+  },
+  {
     slug: "ai-temple-run",
     title: "AI Temple Run",
     period: "2025",
@@ -174,46 +328,6 @@ export const PROJECTS: Project[] = [
         label: "Results",
         content:
           "Increased upload capacity from 2M → 25M; contributed to features driving material spend; improved reliability and velocity.",
-      },
-    ],
-  },
-  {
-    slug: "ai-humanity-passport",
-    title: "Humanity+ Passport",
-    period: "2025",
-    blurb:
-      "An LLM‑powered repository ethics analyzer built with Next.js 15, Groq, PostgreSQL, and Prisma that evaluates codebases and generates SVG badges.",
-    image: {
-      src: "/images/projects/ai-humanity.png",
-      alt: "Humanity+ Passport",
-      width: 1200,
-      height: 675,
-      ratio: "1200/675",
-    },
-    skills: ["AI", "TypeScript", "Hobby", "Hackathon"],
-    metrics: ["Groq + gpt-oss-20b", "AI repo analysis", "Dynamic SVG badges"],
-    links: [
-      {
-        label: "Github",
-        href: "https://github.com/jayvicsanantonio/ai-humanity-passport",
-        icon: "github",
-      },
-      { label: "View", href: "https://ai-humanity-passport.vercel.app/", icon: "external" },
-    ],
-    sections: [
-      {
-        label: "Context",
-        content:
-          "An AI service that evaluates open‑source repositories and issues Humanity+ badges to highlight positive societal impact.",
-      },
-      {
-        label: "Decisions",
-        content:
-          "Emphasized transparent criteria and fast analysis; generated shareable SVG badges for verified outcomes.",
-      },
-      {
-        label: "Results",
-        content: "Live demo and badge issuance flow encouraging socially responsible development.",
       },
     ],
   },
