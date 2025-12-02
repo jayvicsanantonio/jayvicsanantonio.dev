@@ -43,6 +43,28 @@ const FILTER_BUTTON_ACTIVE =
 const FILTER_BUTTON_IDLE =
   "border-white/20 bg-slate-900/80 text-white/80 hover:border-white/35 hover:bg-slate-900/90";
 
+import { cn } from "@/lib/class-names";
+
+function FadeInImage({ alt, ...props }: React.ComponentProps<typeof Image>) {
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  return (
+    <Image
+      alt={alt}
+      {...props}
+      className={cn(
+        props.className,
+        "transition-opacity duration-500",
+        isLoading ? "opacity-0" : "opacity-100",
+      )}
+      onLoad={(e) => {
+        setIsLoading(false);
+        props.onLoad?.(e);
+      }}
+    />
+  );
+}
+
 export default function SkillsAndCases() {
   const prefersReducedMotion = usePrefersReducedMotion();
   const router = useRouter();
@@ -136,7 +158,7 @@ export default function SkillsAndCases() {
               className={`${CARD_INNER_BASE} [@container(min-width:36rem)]:grid [@container(min-width:36rem)]:grid-cols-[minmax(0,1fr),1.5fr] [@container(min-width:36rem)]:gap-0`}
             >
               <div className="relative h-36 w-full overflow-hidden md:h-44 [@container(min-width:28rem)]:h-48 [@container(min-width:36rem)]:h-full">
-                <Image
+                <FadeInImage
                   src={c.image.src}
                   alt={c.image.alt}
                   width={c.image.width}
