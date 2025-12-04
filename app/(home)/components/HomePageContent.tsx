@@ -6,6 +6,7 @@ import Profile from "./Hero/Profile";
 import Hero from "./Hero";
 import Skills from "./Skills";
 import About from "./About";
+import ScrollIndicator from "./Hero/ScrollIndicator";
 import { HeroProvider, useHeroContext } from "../context/HeroContext";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -22,6 +23,7 @@ function HomePageInner({ children }: { children: React.ReactNode }) {
         <About />
       </div>
       <Profile prefersReducedMotion={prefersReducedMotion} />
+      <ScrollIndicator />
     </>
   );
 }
