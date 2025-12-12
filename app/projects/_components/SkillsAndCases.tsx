@@ -16,7 +16,7 @@ const SKILL_FILTERS = [
   "Enterprise",
   "Startup",
   "Hobby",
-  "Client",
+  // "Client",
   "Open Source",
   "Sandboxes",
 ] as const;

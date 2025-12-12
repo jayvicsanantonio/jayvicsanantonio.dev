@@ -24,6 +24,7 @@ export const PROJECTS: Project[] = [
       "Rekognition",
       "Terraform",
       "Hackathon",
+      "Hobby",
     ],
     metrics: [
       "AWS AI Agent Global Hackathon 2025",
@@ -88,6 +89,7 @@ export const PROJECTS: Project[] = [
       "Vitest",
       "Gemini Nano",
       "Hackathon",
+      "Hobby",
     ],
     metrics: [
       "Google Chrome Built in AI Challenge 2025",
@@ -522,32 +524,32 @@ export const PROJECTS: Project[] = [
       },
     ],
   },
-  {
-    slug: "mm-church",
-    title: "Malayang Mananampalataya Church",
-    period: "2022",
-    blurb:
-      "A responsive and accessible church website built with React and a content‑first information architecture.",
-    image: {
-      src: "/images/home/mm-church.webp",
-      alt: "Malayang Mananampalataya Church",
-      width: 1200,
-      height: 675,
-      ratio: "1200/675",
-    },
-    skills: ["React", "Accessibility", "Content Architecture", "Client"],
-    metrics: ["Mobile‑first UX", "Fast loading", "Clear content structure"],
-    links: [
-      { label: "Github", href: "https://github.com/nesceal/mmchurch", icon: "github" },
-      { label: "View", href: "https://mmchurch.ph/", icon: "external" },
-    ],
-    sections: [
-      {
-        label: "Context",
-        content: "Focused on simple publishing and intuitive structure for a broad audience.",
-      },
-    ],
-  },
+  // {
+  //   slug: "mm-church",
+  //   title: "Malayang Mananampalataya Church",
+  //   period: "2022",
+  //   blurb:
+  //     "A responsive and accessible church website built with React and a content‑first information architecture.",
+  //   image: {
+  //     src: "/images/home/mm-church.webp",
+  //     alt: "Malayang Mananampalataya Church",
+  //     width: 1200,
+  //     height: 675,
+  //     ratio: "1200/675",
+  //   },
+  //   skills: ["React", "Accessibility", "Content Architecture", "Client"],
+  //   metrics: ["Mobile‑first UX", "Fast loading", "Clear content structure"],
+  //   links: [
+  //     { label: "Github", href: "https://github.com/nesceal/mmchurch", icon: "github" },
+  //     { label: "View", href: "https://mmchurch.ph/", icon: "external" },
+  //   ],
+  //   sections: [
+  //     {
+  //       label: "Context",
+  //       content: "Focused on simple publishing and intuitive structure for a broad audience.",
+  //     },
+  //   ],
+  // },
   {
     slug: "sync-flow",
     title: "SyncFlow",
