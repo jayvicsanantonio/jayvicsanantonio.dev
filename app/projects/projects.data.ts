@@ -68,6 +68,62 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
+    slug: "ai-inbox-briefer",
+    title: "AI Inbox Briefer",
+    period: "2024",
+    blurb:
+      "An agentic AI system that autonomously monitors my inbox and delivers personalized voice briefings via phone call. Built with AWS (Lambda, S3, API Gateway, IAM, DynamoDB, CDK, SystemsManager, EventBridge Scheduler), Gmail API, and ElevenLabs for text-to-speech.",
+    image: {
+      src: "/images/projects/ai-inbox-briefing.png",
+      alt: "AI Inbox Briefer voice briefing system",
+      width: 1200,
+      height: 675,
+      ratio: "1200/675",
+    },
+    skills: [
+      "AI",
+      "AWS Lambda",
+      "AWS CDK",
+      "DynamoDB",
+      "EventBridge",
+      "TypeScript",
+      "Gmail API",
+      "Voice AI",
+      "Automation",
+      "Hobby",
+    ],
+    metrics: [
+      "Autonomous inbox monitoring",
+      "Voice briefings via phone",
+      "Event-driven architecture",
+      "Serverless deployment",
+    ],
+    links: [
+      {
+        label: "Github",
+        href: "https://github.com/jayvicsanantonio/ai-inbox-briefer",
+        icon: "github",
+      },
+    ],
+    sections: [
+      {
+        label: "Context",
+        content:
+          "An agentic AI system designed to autonomously monitor email inbox and deliver personalized voice briefings through phone calls, keeping me informed without manual checking.",
+      },
+      {
+        label: "Decisions",
+        content:
+          "AWS CDK for infrastructure as code; Lambda functions for serverless execution; EventBridge Scheduler for automated monitoring; DynamoDB for state management; Gmail API for email access; ElevenLabs for natural-sounding text-to-speech conversion.",
+      },
+      {
+        label: "Results",
+        content:
+          "Fully automated email briefing system that proactively calls with summarized inbox updates, reducing the need for constant email checking while staying informed on important communications.",
+      },
+    ],
+  },
+  {
     slug: "reflexa-ai",
     title: "Reflexa AI",
     period: "2025",
@@ -592,7 +648,7 @@ export const PROJECTS: Project[] = [
     title: "Track N' Stick",
     period: "2024",
     blurb:
-      "A habit‑tracking progressive web app built with React 19, TypeScript, and Vite that uses modern PWA APIs. The backend is a Cloudflare Workers API built with Hono and secured with Clerk.",
+      "A habit‑tracking progressive web app built with React 19, TypeScript, and Vite that uses modern PWA APIs. The backend is a Cloudflare Workers API built with Hono and secured with Clerk. Features a RAG chatbot powered by Pinecone for vector storage, Cloudflare Workers AI for embedding and LLM inference, and Vercel AI SDK for a unified AI interface with streaming.",
     image: {
       src: "/images/projects/tracknstick.png",
       alt: "Track N' Stick",
@@ -609,6 +665,10 @@ export const PROJECTS: Project[] = [
       "Hono",
       "Security",
       "Clerk",
+      "AI",
+      "RAG",
+      "Pinecone",
+      "Vercel AI SDK",
     ],
     metrics: [
       "98/100 Lighthouse",

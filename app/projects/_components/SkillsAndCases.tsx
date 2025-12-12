@@ -28,6 +28,7 @@ const PRIORITY_ORDER = [
   "ai-humanity-passport",
   "tracknstick",
   "webdevhub",
+  "ai-inbox-briefer",
   "sync-flow",
   "barbenheimer-vscode-theme",
   "barbenheimer-zed-theme",
