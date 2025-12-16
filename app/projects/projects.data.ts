@@ -187,7 +187,7 @@ export const PROJECTS: Project[] = [
     title: "Humanity+ Passport",
     period: "2025",
     blurb:
-      "Developed for the KiroWeen 2025 Hackathon, this LLM powered repository ethics analyzer uses Next.js 15, Groq, PostgreSQL, and Prisma to evaluate codebases and generate shareable SVG badges that highlight positive societal impact.",
+      "Developed for the OpenAI Open Model Hackathon, this LLM powered repository ethics analyzer uses Next.js 15, Groq, PostgreSQL, and Prisma to evaluate codebases and generate shareable SVG badges that highlight positive societal impact.",
     image: {
       src: "/images/projects/ai-humanity.png",
       alt: "Humanity+ Passport",
