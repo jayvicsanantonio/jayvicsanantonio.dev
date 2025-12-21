@@ -11,6 +11,20 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  openGraph: {
+    title: "Jayvic San Antonio | Full-Stack Software Engineer",
+    description:
+      "Bay Area-based full-stack software engineer building high-performance web experiences and reliable systems.",
+    url: "https://jayvicsanantonio.dev",
+    siteName: "Jayvic San Antonio",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Jayvic San Antonio | Full-Stack Software Engineer",
+    description:
+      "Bay Area-based full-stack software engineer building high-performance web experiences and reliable systems.",
+  },
 };
 
 export default function Page() {

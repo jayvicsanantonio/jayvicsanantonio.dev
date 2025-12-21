@@ -14,6 +14,20 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/projects",
   },
+  openGraph: {
+    title: "Projects | Jayvic San Antonio",
+    description:
+      "Production-ready applications, case studies, and experiments that highlight modern web engineering, performance tuning, and DX improvements.",
+    url: "https://jayvicsanantonio.dev/projects",
+    siteName: "Jayvic San Antonio",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Projects | Jayvic San Antonio",
+    description:
+      "Production-ready applications, case studies, and experiments that highlight modern web engineering and performance tuning.",
+  },
 };
 
 export default function ProjectsPage() {

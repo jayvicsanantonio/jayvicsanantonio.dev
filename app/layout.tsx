@@ -20,6 +20,9 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/images/home/profile-image.jpg",
+        width: 1616,
+        height: 1080,
+        alt: "Jayvic San Antonio | Full-Stack Software Engineer",
       },
     ],
   },
