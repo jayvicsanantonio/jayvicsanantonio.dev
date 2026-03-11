@@ -1,23 +1,11 @@
 import type { MetadataRoute } from "next";
 
-const siteUrl = "https://jayvicsanantonio.dev";
+import { CRAWLABLE_ROUTES, toAbsoluteUrl } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: siteUrl,
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    {
-      url: `${siteUrl}/projects`,
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${siteUrl}/work`,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-  ];
+  return CRAWLABLE_ROUTES.map((route) => ({
+    url: toAbsoluteUrl(route.path),
+    changeFrequency: route.changeFrequency,
+    priority: route.priority,
+  }));
 }
