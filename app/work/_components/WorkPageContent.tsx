@@ -66,7 +66,7 @@ export default function WorkPageContent() {
   return (
     <div ref={wrapperRef} className="relative isolate min-h-screen overflow-hidden">
       <div ref={contentRef} className="relative">
-        <section className="relative w-full overflow-hidden">
+        <main className="relative w-full overflow-hidden">
           <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
             <div
               ref={backgroundRef}
@@ -97,7 +97,7 @@ export default function WorkPageContent() {
               <WorkTimeline />
             </div>
           </div>
-        </section>
+        </main>
       </div>
     </div>
   );

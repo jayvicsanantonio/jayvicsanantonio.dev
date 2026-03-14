@@ -3,6 +3,9 @@ import React from "react";
 
 import AnimatedHeader from "./_components/AnimatedHeader";
 import SkillsAndCases from "./_components/SkillsAndCases";
+import { PROJECTS } from "./projects.data";
+
+import { createProjectsCollectionSchema, serializeJsonLd } from "@/lib/structured-data";
 
 const siteUrl = new URL("https://jayvicsanantonio.dev");
 
@@ -31,8 +34,14 @@ export const metadata: Metadata = {
 };
 
 export default function ProjectsPage() {
+  const projectsSchema = createProjectsCollectionSchema(PROJECTS);
+
   return (
-    <section className="relative w-full overflow-hidden">
+    <main className="relative w-full overflow-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(projectsSchema) }}
+      />
       <div className="cq container pt-48 pb-16 sm:pt-52">
         {/* Header */}
         <div className="space-y-5 motion-safe:animate-fade-in-up">
@@ -51,6 +60,6 @@ export default function ProjectsPage() {
           </div>
         </React.Suspense>
       </div>
-    </section>
+    </main>
   );
 }

@@ -10,7 +10,7 @@ import ScrollIndicator from "./Hero/ScrollIndicator";
 import { HeroProvider, useHeroContext } from "../context/HeroContext";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-function HomePageInner({ children }: { children: React.ReactNode }) {
+function HomePageInner({ children }: { children?: React.ReactNode }) {
   const { smoothContentRef } = useHeroContext();
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -28,7 +28,7 @@ function HomePageInner({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function HomePageContent({ children }: { children: React.ReactNode }) {
+export default function HomePageContent({ children }: { children?: React.ReactNode }) {
   useLayoutEffect(() => {
     // 1. Disable browser's default scroll restoration
     if (window.history && window.history.scrollRestoration) {

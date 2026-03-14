@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRef } from "react";
 import { useAboutAnimation } from "../../hooks/use-about-animation";
 import { useHeroContext } from "../../context/HeroContext";
@@ -77,12 +78,12 @@ export default function About() {
               LinkedIn
             </a>
             , or through my{" "}
-            <a
+            <Link
               href="/projects"
               className="text-cyan-200 underline-offset-4 transition-colors hover:text-cyan-100"
             >
               projects
-            </a>
+            </Link>
             .
           </p>
         </div>
