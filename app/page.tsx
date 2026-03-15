@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import HomePageContent from "./(home)/components/HomePageContent";
 
+import {
+  createHomePersonSchema,
+  createHomeWebsiteSchema,
+  serializeJsonLd,
+} from "@/lib/structured-data";
+
 const siteUrl = new URL("https://jayvicsanantonio.dev");
 
 export const metadata: Metadata = {
@@ -28,11 +34,20 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
+  const personSchema = createHomePersonSchema();
+  const websiteSchema = createHomeWebsiteSchema();
+
   return (
     <div className="min-h-[380vh] bg-gradient-to-b from-black  via-gray-800 to-gray-200 ">
-      <HomePageContent>
-        <h1 className="sr-only">Jayvic San Antonio — Full-Stack Software Engineer</h1>
-      </HomePageContent>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(personSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(websiteSchema) }}
+      />
+      <HomePageContent />
     </div>
   );
 }
