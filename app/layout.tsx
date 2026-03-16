@@ -7,9 +7,29 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://jayvicsanantonio.dev"),
-  title: "Jayvic San Antonio | Full-Stack Software Engineer",
+  title: {
+    default: "Jayvic San Antonio | Full-Stack Software Engineer",
+    template: "%s | Jayvic San Antonio",
+  },
   description:
     "Highly skilled full-stack software engineer with a proven track record of delivering successful web projects. Experienced in JavaScript and passionate about building innovative solutions. Contact me to learn more about my expertise.",
+  alternates: {
+    canonical: "/",
+  },
+  authors: [{ name: "Jayvic San Antonio", url: "https://jayvicsanantonio.dev" }],
+  creator: "Jayvic San Antonio",
+  publisher: "Jayvic San Antonio",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
     type: "website",
     url: "https://jayvicsanantonio.dev",
@@ -17,21 +37,14 @@ export const metadata: Metadata = {
     title: "Jayvic San Antonio | Full-Stack Software Engineer",
     description:
       "Highly skilled full-stack software engineer with a proven track record of delivering successful web projects. Experienced in JavaScript and passionate about building innovative solutions.",
-    images: [
-      {
-        url: "/images/home/profile-image.jpg",
-        width: 1616,
-        height: 1080,
-        alt: "Jayvic San Antonio | Full-Stack Software Engineer",
-      },
-    ],
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Jayvic San Antonio" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Jayvic San Antonio | Full-Stack Software Engineer",
     description:
       "Highly skilled full-stack software engineer with a proven track record of delivering successful web projects.",
-    images: ["/images/home/profile-image.jpg"],
+    images: ["/opengraph-image"],
   },
   icons: {
     icon: [

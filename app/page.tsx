@@ -11,7 +11,7 @@ const siteUrl = new URL("https://jayvicsanantonio.dev");
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
-  title: "Jayvic San Antonio | Full-Stack Software Engineer",
+  title: "Full-Stack Software Engineer",
   description:
     "Bay Area-based full-stack engineer building high-performance web experiences and reliable systems.",
   alternates: {
@@ -24,12 +24,14 @@ export const metadata: Metadata = {
     url: "https://jayvicsanantonio.dev",
     siteName: "Jayvic San Antonio",
     type: "website",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Jayvic San Antonio" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Jayvic San Antonio | Full-Stack Software Engineer",
     description:
       "Bay Area-based full-stack software engineer building high-performance web experiences and reliable systems.",
+    images: ["/opengraph-image"],
   },
 };
 

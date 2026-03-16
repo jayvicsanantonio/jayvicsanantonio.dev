@@ -8,7 +8,7 @@ const siteUrl = new URL("https://jayvicsanantonio.dev");
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
-  title: "Experience | Jayvic San Antonio",
+  title: "Experience",
   description:
     "Timeline of enterprise adtech, platform, and product engineering roles showcasing leadership, system scale, and measurable impact.",
   alternates: {
@@ -21,12 +21,14 @@ export const metadata: Metadata = {
     url: "https://jayvicsanantonio.dev/work",
     siteName: "Jayvic San Antonio",
     type: "website",
+    images: [{ url: "/work/opengraph-image", width: 1200, height: 630, alt: "Experience" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Experience | Jayvic San Antonio",
     description:
       "Timeline of enterprise adtech, platform, and product engineering roles showcasing leadership and system scale.",
+    images: ["/work/opengraph-image"],
   },
 };
 
