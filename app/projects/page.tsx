@@ -11,7 +11,7 @@ const siteUrl = new URL("https://jayvicsanantonio.dev");
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
-  title: "Projects | Jayvic San Antonio",
+  title: "Projects",
   description:
     "Production-ready applications, case studies, and experiments that highlight modern web engineering, performance tuning, and DX improvements.",
   alternates: {
@@ -24,12 +24,14 @@ export const metadata: Metadata = {
     url: "https://jayvicsanantonio.dev/projects",
     siteName: "Jayvic San Antonio",
     type: "website",
+    images: [{ url: "/projects/opengraph-image", width: 1200, height: 630, alt: "Projects" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Projects | Jayvic San Antonio",
     description:
       "Production-ready applications, case studies, and experiments that highlight modern web engineering and performance tuning.",
+    images: ["/projects/opengraph-image"],
   },
 };
 
