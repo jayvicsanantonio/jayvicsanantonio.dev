@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import React from "react";
 
 import AnimatedHeader from "./_components/AnimatedHeader";
@@ -51,7 +52,22 @@ export default function ProjectsPage() {
 
           <p className="max-w-[720px] text-base text-gray-300/85 sm:text-lg">
             Production-ready applications and systems showcasing full-stack development expertise,
-            scalable architecture design, and modern engineering practices.
+            scalable architecture design, and modern engineering practices. For the broader career
+            context behind these builds, explore my{" "}
+            <Link
+              href="/work"
+              className="text-cyan-200 underline underline-offset-4 transition-colors hover:text-cyan-100"
+            >
+              software engineering experience timeline
+            </Link>{" "}
+            or return to the{" "}
+            <Link
+              href="/"
+              className="text-cyan-200 underline underline-offset-4 transition-colors hover:text-cyan-100"
+            >
+              homepage overview
+            </Link>
+            .
           </p>
         </div>
 
@@ -61,6 +77,29 @@ export default function ProjectsPage() {
             <SkillsAndCases />
           </div>
         </React.Suspense>
+
+        <section
+          className="mt-16 rounded-[2rem] border border-white/10 bg-white/5 p-6 text-sm text-gray-300/85 shadow-[0_24px_60px_rgba(0,0,0,0.2)] sm:p-8 sm:text-base"
+          aria-label="Related site sections"
+        >
+          <p className="max-w-[68ch]">
+            Prefer a narrative view? Visit the{" "}
+            <Link
+              href="/work"
+              className="text-cyan-200 underline underline-offset-4 transition-colors hover:text-cyan-100"
+            >
+              professional experience page
+            </Link>{" "}
+            to see the enterprise platforms and teams behind these projects, or head back to the{" "}
+            <Link
+              href="/"
+              className="text-cyan-200 underline underline-offset-4 transition-colors hover:text-cyan-100"
+            >
+              home page
+            </Link>{" "}
+            for a concise summary of my work, skills, and current focus.
+          </p>
+        </section>
       </div>
     </main>
   );

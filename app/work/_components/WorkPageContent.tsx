@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -89,13 +90,51 @@ export default function WorkPageContent() {
                 Ten years architecting and building high-performance adtech platforms, real-time
                 systems, and scalable web applications built for enterprise-grade performance.
                 Proven track record of delivering mission-critical systems, optimizing performance
-                bottlenecks, and shipping solutions that drive measurable business impact.
+                bottlenecks, and shipping solutions that drive measurable business impact. Browse
+                the{" "}
+                <Link
+                  href="/projects"
+                  className="text-cyan-200 underline underline-offset-4 transition-colors hover:text-cyan-100"
+                >
+                  project case studies
+                </Link>{" "}
+                for product examples, or return to the{" "}
+                <Link
+                  href="/"
+                  className="text-cyan-200 underline underline-offset-4 transition-colors hover:text-cyan-100"
+                >
+                  homepage summary
+                </Link>{" "}
+                for a higher-level overview.
               </p>
             </div>
 
             <div className="relative mt-12" data-speed="1.04" data-lag="0.05">
               <WorkTimeline />
             </div>
+
+            <section
+              className="mt-14 rounded-[2rem] border border-white/10 bg-white/5 p-6 text-sm text-gray-300/85 shadow-[0_24px_60px_rgba(0,0,0,0.22)] sm:p-8 sm:text-base"
+              aria-label="Related routes"
+            >
+              <p className="max-w-[68ch]">
+                This experience timeline connects directly to the{" "}
+                <Link
+                  href="/projects"
+                  className="text-cyan-200 underline underline-offset-4 transition-colors hover:text-cyan-100"
+                >
+                  projects archive
+                </Link>
+                , where each featured build has a crawlable case study page, and the{" "}
+                <Link
+                  href="/"
+                  className="text-cyan-200 underline underline-offset-4 transition-colors hover:text-cyan-100"
+                >
+                  homepage
+                </Link>
+                , which introduces my current focus and contact paths.
+              </p>
+            </section>
           </div>
         </main>
       </div>
