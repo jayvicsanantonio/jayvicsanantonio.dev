@@ -2,6 +2,7 @@
 
 import { Icon } from "@iconify/react";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 
@@ -171,7 +172,14 @@ export default function SkillsAndCases() {
               </div>
               <div className="flex flex-1 flex-col gap-3 p-6 sm:p-8">
                 <div className="flex items-center justify-between gap-4">
-                  <h3 className="font-oswald text-xl text-white">{c.title}</h3>
+                  <h3 className="font-oswald text-xl text-white">
+                    <Link
+                      href={`/projects/${c.slug}`}
+                      className="transition-colors hover:text-cyan-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60"
+                    >
+                      {c.title}
+                    </Link>
+                  </h3>
                   <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] font-medium tracking-[0.12em] whitespace-nowrap text-gray-300 uppercase">
                     {c.period}
                   </span>
@@ -181,7 +189,9 @@ export default function SkillsAndCases() {
                 </p>
 
                 <div className="mt-auto flex flex-wrap gap-2">
-                  <ProjectLink href={`/projects/${c.slug}`}>Read case study</ProjectLink>
+                  <ProjectLink href={`/projects/${c.slug}`}>
+                    View {c.title} case study
+                  </ProjectLink>
                   {c.links.map((l) => {
                     let icon: React.ReactNode = null;
                     switch (l.icon) {
