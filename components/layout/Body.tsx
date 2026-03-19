@@ -12,7 +12,7 @@ export default function Body({
     <body
       className={`dark ${
         fontVars ?? ""
-      } relative flex min-h-screen flex-col text-gray-200 bg-black touch-manipulation overscroll-y-contain`}
+      } relative flex min-h-screen flex-col bg-black text-gray-200 touch-manipulation`}
     >
       <ScrollProvider>
         <ClientAppShell>{children}</ClientAppShell>

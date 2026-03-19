@@ -298,14 +298,9 @@
     overflow-x: hidden;
     overflow-y: visible;
     -webkit-overflow-scrolling: touch;
-    overscroll-behavior-y: contain;
   }
 
   @supports (-webkit-touch-callout: none) {
-    body {
-      overscroll-behavior-y: contain;
-    }
-
     .min-h-screen {
       min-height: 100vh;
       /* biome-ignore lint/suspicious/noDuplicateProperties: Intentional fallback pattern for iOS Safari */
