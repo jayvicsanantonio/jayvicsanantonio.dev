@@ -160,21 +160,28 @@ export default function SkillsAndCases() {
               className={`${CARD_INNER_BASE} [@container(min-width:36rem)]:grid [@container(min-width:36rem)]:grid-cols-[minmax(0,1fr),1.5fr] [@container(min-width:36rem)]:gap-0`}
             >
               <div className="relative h-36 w-full overflow-hidden md:h-44 [@container(min-width:28rem)]:h-48 [@container(min-width:36rem)]:h-full">
-                <FadeInImage
-                  src={c.image.src}
-                  alt={c.image.alt}
-                  width={c.image.width}
-                  height={c.image.height}
-                  style={{ aspectRatio: c.image.ratio }}
-                  className="h-full w-full object-cover"
-                  priority={i < 3}
-                />
+                <Link
+                  href={`/projects/${c.slug}`}
+                  aria-label={`Read the ${c.title} project case study`}
+                  className="block h-full w-full"
+                >
+                  <FadeInImage
+                    src={c.image.src}
+                    alt={c.image.alt}
+                    width={c.image.width}
+                    height={c.image.height}
+                    style={{ aspectRatio: c.image.ratio }}
+                    className="h-full w-full object-cover"
+                    priority={i < 3}
+                  />
+                </Link>
               </div>
               <div className="flex flex-1 flex-col gap-3 p-6 sm:p-8">
                 <div className="flex items-center justify-between gap-4">
                   <h3 className="font-oswald text-xl text-white">
                     <Link
                       href={`/projects/${c.slug}`}
+                      aria-label={`Read the ${c.title} project case study`}
                       className="transition-colors hover:text-cyan-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60"
                     >
                       {c.title}
@@ -187,36 +194,50 @@ export default function SkillsAndCases() {
                 <p className="hyphenate flex-1 overflow-hidden text-[0.98rem]/relaxed text-gray-300/90">
                   {c.blurb}
                 </p>
+                <p className="text-sm text-cyan-100/75">
+                  Dedicated case study with project context, technical decisions, and outcomes.
+                </p>
 
-                <div className="mt-auto flex flex-wrap gap-2">
-                  <ProjectLink href={`/projects/${c.slug}`}>
-                    View {c.title} case study
-                  </ProjectLink>
-                  {c.links.map((l) => {
-                    let icon: React.ReactNode = null;
-                    switch (l.icon) {
-                      case "github":
-                        icon = <Icon icon="mdi:github" width={18} height={18} />;
-                        break;
-                      case "watch":
-                        icon = <Icon icon="mdi:play" width={16} height={16} />;
-                        break;
-                      case "marketplace":
-                      case "external":
-                      case "view":
-                        icon = <Icon icon="mdi:open-in-new" width={16} height={16} />;
-                        break;
-                      default:
-                        icon = null;
-                    }
-                    return (
-                      <ProjectLink key={`${c.slug}-${l.label}`} href={l.href}>
-                        {icon}
-                        {icon ? <>&nbsp;</> : null}
-                        {l.label}
-                      </ProjectLink>
-                    );
-                  })}
+                <div className="mt-auto space-y-3">
+                  <div className="flex flex-wrap gap-2">
+                    <ProjectLink href={`/projects/${c.slug}`}>
+                      Read {c.title} case study
+                    </ProjectLink>
+                  </div>
+                  {c.links.length ? (
+                    <div className="space-y-2">
+                      <p className="text-xs tracking-[0.16em] text-gray-500 uppercase">
+                        External resources
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {c.links.map((l) => {
+                          let icon: React.ReactNode = null;
+                          switch (l.icon) {
+                            case "github":
+                              icon = <Icon icon="mdi:github" width={18} height={18} />;
+                              break;
+                            case "watch":
+                              icon = <Icon icon="mdi:play" width={16} height={16} />;
+                              break;
+                            case "marketplace":
+                            case "external":
+                            case "view":
+                              icon = <Icon icon="mdi:open-in-new" width={16} height={16} />;
+                              break;
+                            default:
+                              icon = null;
+                          }
+                          return (
+                            <ProjectLink key={`${c.slug}-${l.label}`} href={l.href}>
+                              {icon}
+                              {icon ? <>&nbsp;</> : null}
+                              {l.label}
+                            </ProjectLink>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
               </div>
             </div>
