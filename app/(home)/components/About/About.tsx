@@ -82,14 +82,14 @@ export default function About() {
               href="/projects"
               className="text-cyan-200 underline-offset-4 transition-colors hover:text-cyan-100"
             >
-              full library of project case studies
+              project case studies
             </Link>
-            , or review my{" "}
+            , review my{" "}
             <Link
               href="/work"
               className="text-cyan-200 underline-offset-4 transition-colors hover:text-cyan-100"
             >
-              detailed professional experience timeline
+              professional experience timeline
             </Link>
             .
           </p>
