@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import React from "react";
 
 import AnimatedHeader from "./_components/AnimatedHeader";
 import SkillsAndCases from "./_components/SkillsAndCases";
@@ -36,8 +35,25 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ProjectsPage() {
+type ProjectsPageProps = {
+  searchParams: Promise<{
+    filter?: string | string[];
+    skill?: string | string[];
+  }>;
+};
+
+export default async function ProjectsPage({ searchParams }: ProjectsPageProps) {
   const projectsSchema = createProjectsCollectionSchema(PROJECTS);
+  const resolvedSearchParams = await searchParams;
+  const skill =
+    typeof resolvedSearchParams.skill === "string"
+      ? resolvedSearchParams.skill
+      : resolvedSearchParams.skill?.[0];
+  const filter =
+    typeof resolvedSearchParams.filter === "string"
+      ? resolvedSearchParams.filter
+      : resolvedSearchParams.filter?.[0];
+  const initialFilter = skill ?? filter;
 
   return (
     <main className="relative w-full overflow-hidden">
@@ -47,7 +63,7 @@ export default function ProjectsPage() {
       />
       <div className="cq container pt-48 pb-16 sm:pt-52">
         {/* Header */}
-        <div className="space-y-5 motion-safe:animate-fade-in-up">
+        <div className="space-y-5">
           <AnimatedHeader />
 
           <p className="max-w-[720px] text-base text-gray-300/85 sm:text-lg">
@@ -76,11 +92,7 @@ export default function ProjectsPage() {
         </div>
 
         {/* Projects only */}
-        <React.Suspense fallback={null}>
-          <div className="motion-safe:animate-fade-in-up" style={{ animationDelay: "160ms" }}>
-            <SkillsAndCases />
-          </div>
-        </React.Suspense>
+        <SkillsAndCases initialFilter={initialFilter} />
 
         <section
           className="mt-16 rounded-[2rem] border border-white/10 bg-white/5 p-6 text-sm text-gray-300/85 shadow-[0_24px_60px_rgba(0,0,0,0.2)] sm:p-8 sm:text-base"
