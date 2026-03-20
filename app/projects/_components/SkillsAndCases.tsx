@@ -3,11 +3,10 @@
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 
 import { PROJECTS } from "@/app/projects/projects.data";
-import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
 import { CARD_INNER_BASE, CARD_OUTER_BASE } from "@/components/styles/card-styles";
 import ProjectLink from "./ProjectLink";
@@ -45,6 +44,9 @@ const FILTER_BUTTON_ACTIVE =
 const FILTER_BUTTON_IDLE =
   "border-white/20 bg-slate-900/80 text-white/80 hover:border-white/35 hover:bg-slate-900/90";
 
+const PROJECT_CARD_IMAGE_SIZES =
+  "(min-width: 1400px) 387px, (min-width: 1024px) calc((100vw - 9rem) / 3), (min-width: 768px) calc((100vw - 6rem) / 2), calc(100vw - 2rem)";
+
 import { cn } from "@/lib/class-names";
 
 function FadeInImage({ alt, ...props }: React.ComponentProps<typeof Image>) {
@@ -67,17 +69,18 @@ function FadeInImage({ alt, ...props }: React.ComponentProps<typeof Image>) {
   );
 }
 
-export default function SkillsAndCases() {
-  const prefersReducedMotion = usePrefersReducedMotion();
+type SkillsAndCasesProps = {
+  initialFilter?: string | undefined;
+};
+
+export default function SkillsAndCases({ initialFilter }: SkillsAndCasesProps) {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const initialFromQuery = (searchParams?.get("skill") || searchParams?.get("filter")) ?? undefined;
 
   // Fixed, curated filters
   const [active, setActive] = React.useState<string>(() =>
-    initialFromQuery && (SKILL_FILTERS as readonly string[]).includes(initialFromQuery)
-      ? (initialFromQuery as (typeof SKILL_FILTERS)[number])
+    initialFilter && (SKILL_FILTERS as readonly string[]).includes(initialFilter)
+      ? (initialFilter as (typeof SKILL_FILTERS)[number])
       : "All",
   );
 
@@ -85,12 +88,11 @@ export default function SkillsAndCases() {
   const [announce, setAnnounce] = React.useState<string>("");
 
   // Keep URL query param in sync with active filter (replace to avoid history spam)
-  const currentQS = React.useMemo(() => searchParams?.toString() ?? "", [searchParams]);
   const handleFilterChange = (newFilter: string) => {
     setActive(newFilter);
     setAnnounce(`Filter: ${newFilter}`);
 
-    const params = new URLSearchParams(currentQS);
+    const params = new URLSearchParams(window.location.search);
     if (newFilter === "All") {
       params.delete("skill");
       params.delete("filter");
@@ -98,15 +100,13 @@ export default function SkillsAndCases() {
       params.set("skill", newFilter);
     }
     const qs = params.toString();
-    // Avoid redundant replaces that can trigger nested view transitions
-    if (qs !== currentQS) {
+    const currentQuery = window.location.search.startsWith("?")
+      ? window.location.search.slice(1)
+      : window.location.search;
+    if (qs !== currentQuery) {
       router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
     }
   };
-
-  // CSS-first entrance animation; we keep Framer only for future interactions
-
-  // Card animation handled via CSS keyframes (animate-fade-in-up)
 
   const visible = React.useMemo(() => {
     const filtered = PROJECTS.filter((c) => active === "All" || c.skills.includes(active));
@@ -149,13 +149,7 @@ export default function SkillsAndCases() {
       {/* Projects grid */}
       <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {visible.map((c, i) => (
-          <article
-            key={c.slug}
-            className={`${CARD_OUTER_BASE} min-h-[360px] md:min-h-[430px] ${
-              !prefersReducedMotion ? "motion-safe:animate-fade-in-up" : ""
-            }`}
-            style={{ animationDelay: !prefersReducedMotion ? `${80 * i}ms` : undefined }}
-          >
+          <article key={c.slug} className={`${CARD_OUTER_BASE} min-h-[360px] md:min-h-[430px]`}>
             <div
               className={`${CARD_INNER_BASE} [@container(min-width:36rem)]:grid [@container(min-width:36rem)]:grid-cols-[minmax(0,1fr),1.5fr] [@container(min-width:36rem)]:gap-0`}
             >
@@ -172,7 +166,8 @@ export default function SkillsAndCases() {
                     height={c.image.height}
                     style={{ aspectRatio: c.image.ratio }}
                     className="h-full w-full object-cover"
-                    priority={i < 3}
+                    priority={i === 0}
+                    sizes={PROJECT_CARD_IMAGE_SIZES}
                   />
                 </Link>
               </div>
