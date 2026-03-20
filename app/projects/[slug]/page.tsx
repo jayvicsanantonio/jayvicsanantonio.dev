@@ -16,6 +16,19 @@ const getProjectBySlug = (slug: string): Project | undefined =>
 
 const buildProjectUrl = (slug: string): `/${string}` => `/projects/${slug}`;
 
+const getRelatedProjects = (project: Project): Project[] =>
+  PROJECTS.filter((candidate) => candidate.slug !== project.slug)
+    .map((candidate) => ({
+      project: candidate,
+      sharedSkillCount: candidate.skills.filter((skill) => project.skills.includes(skill)).length,
+    }))
+    .sort(
+      (a, b) =>
+        b.sharedSkillCount - a.sharedSkillCount || a.project.title.localeCompare(b.project.title),
+    )
+    .slice(0, 3)
+    .map(({ project: relatedProject }) => relatedProject);
+
 export const generateStaticParams = () => PROJECTS.map((project) => ({ slug: project.slug }));
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
@@ -70,6 +83,8 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   if (!project) {
     notFound();
   }
+
+  const relatedProjects = getRelatedProjects(project);
 
   return (
     <section className="relative w-full overflow-hidden">
@@ -146,6 +161,48 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                     className="inline-flex h-10 items-center justify-center rounded-full border border-white/20 bg-slate-900/85 px-4 text-sm text-white/90 transition-colors hover:border-white/35 hover:bg-slate-900/95"
                   >
                     {link.label}
+                  </Link>
+                ))}
+              </div>
+            </section>
+
+            <section className="space-y-4">
+              <h2 className="font-oswald text-2xl text-white">Continue Exploring</h2>
+              <p className="max-w-3xl text-base leading-relaxed text-gray-300">
+                Keep moving through the site with the full{" "}
+                <Link
+                  href="/projects"
+                  className="text-cyan-200 underline underline-offset-4 transition-colors hover:text-cyan-100"
+                >
+                  project case study archive
+                </Link>
+                , the{" "}
+                <Link
+                  href="/work"
+                  className="text-cyan-200 underline underline-offset-4 transition-colors hover:text-cyan-100"
+                >
+                  professional experience timeline
+                </Link>
+                , or the{" "}
+                <Link
+                  href="/"
+                  className="text-cyan-200 underline underline-offset-4 transition-colors hover:text-cyan-100"
+                >
+                  homepage overview
+                </Link>
+                .
+              </p>
+              <div className="grid gap-3 md:grid-cols-3">
+                {relatedProjects.map((relatedProject) => (
+                  <Link
+                    key={relatedProject.slug}
+                    href={buildProjectUrl(relatedProject.slug)}
+                    className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 transition-colors hover:border-cyan-300/40 hover:bg-white/[0.05]"
+                  >
+                    <p className="font-oswald text-xl text-white">{relatedProject.title}</p>
+                    <p className="mt-2 text-sm leading-relaxed text-gray-300">
+                      {relatedProject.blurb}
+                    </p>
                   </Link>
                 ))}
               </div>

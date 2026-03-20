@@ -112,6 +112,29 @@ export default function WorkPageContent() {
             <div className="relative mt-12" data-speed="1.04" data-lag="0.05">
               <WorkTimeline />
             </div>
+
+            <section
+              className="mt-16 rounded-[2rem] border border-white/10 bg-white/5 p-6 text-sm text-gray-300/85 shadow-[0_24px_60px_rgba(0,0,0,0.2)] sm:p-8 sm:text-base"
+              aria-label="Related site sections"
+            >
+              <p className="max-w-[68ch]">
+                Want to connect this timeline to shipped work? Browse the{" "}
+                <Link
+                  href="/projects"
+                  className="text-cyan-200 underline underline-offset-4 transition-colors hover:text-cyan-100"
+                >
+                  full project case study archive
+                </Link>{" "}
+                for implementation details, or return to the{" "}
+                <Link
+                  href="/"
+                  className="text-cyan-200 underline underline-offset-4 transition-colors hover:text-cyan-100"
+                >
+                  homepage overview
+                </Link>{" "}
+                for the shorter version of my background and current focus.
+              </p>
+            </section>
           </div>
         </main>
       </div>
