@@ -65,13 +65,9 @@ export default function ProjectsPage() {
               href="/"
               className="text-cyan-200 underline underline-offset-4 transition-colors hover:text-cyan-100"
             >
-              homepage overview of my current focus
+              homepage overview
             </Link>
             .
-          </p>
-          <p className="max-w-[720px] text-sm text-gray-400 sm:text-base">
-            Each project below now leads to a dedicated internal case study page covering context,
-            key decisions, and measurable outcomes before linking out to demos or source code.
           </p>
         </div>
 
@@ -92,14 +88,14 @@ export default function ProjectsPage() {
               href="/work"
               className="text-cyan-200 underline underline-offset-4 transition-colors hover:text-cyan-100"
             >
-              professional experience timeline
+              professional experience page
             </Link>{" "}
             to see the enterprise platforms and teams behind these projects, or head back to the{" "}
             <Link
               href="/"
               className="text-cyan-200 underline underline-offset-4 transition-colors hover:text-cyan-100"
             >
-              homepage summary
+              home page
             </Link>{" "}
             for a concise summary of my work, skills, and current focus.
           </p>
