@@ -77,19 +77,12 @@ export default function About() {
             >
               LinkedIn
             </a>
-            , browse my{" "}
+            , or through my{" "}
             <Link
               href="/projects"
               className="text-cyan-200 underline-offset-4 transition-colors hover:text-cyan-100"
             >
-              project case studies
-            </Link>
-            , review my{" "}
-            <Link
-              href="/work"
-              className="text-cyan-200 underline-offset-4 transition-colors hover:text-cyan-100"
-            >
-              professional experience timeline
+              projects
             </Link>
             .
           </p>
