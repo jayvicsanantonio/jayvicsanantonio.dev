@@ -181,7 +181,6 @@ export default function SkillsAndCases() {
                 </p>
 
                 <div className="mt-auto flex flex-wrap gap-2">
-                  <ProjectLink href={`/projects/${c.slug}`}>Read case study</ProjectLink>
                   {c.links.map((l) => {
                     let icon: React.ReactNode = null;
                     switch (l.icon) {
