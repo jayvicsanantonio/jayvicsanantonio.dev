@@ -1,11 +1,12 @@
 "use client";
 
 import { createContext, useContext, useRef, type ReactNode } from "react";
-import type { HeroAnimationRefs } from "../types";
+import type { HeroAnimationRefs, HeroContextValue } from "../types";
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 import useHeroAnimations from "../hooks/use-hero-animations";
+import useHeroPerformanceMode from "../hooks/use-hero-performance-mode";
 
-const HeroContext = createContext<HeroAnimationRefs | null>(null);
+const HeroContext = createContext<HeroContextValue | null>(null);
 
 export function useHeroContext() {
   const context = useContext(HeroContext);
@@ -42,6 +43,7 @@ export function HeroProvider({ children }: { children: ReactNode }) {
   const mobileHeroTextRef = useRef<HTMLDivElement>(null);
 
   const prefersReducedMotion = usePrefersReducedMotion();
+  const { isConstrainedExperience, shouldLoadHeroVideo } = useHeroPerformanceMode();
 
   const refs: HeroAnimationRefs = {
     smoothWrapperRef,
@@ -70,10 +72,22 @@ export function HeroProvider({ children }: { children: ReactNode }) {
     mobileHeroTextRef,
   };
 
-  useHeroAnimations({ refs, prefersReducedMotion });
+  useHeroAnimations({
+    refs,
+    prefersReducedMotion,
+    isConstrainedExperience,
+    shouldLoadHeroVideo,
+  });
 
   return (
-    <HeroContext.Provider value={refs}>
+    <HeroContext.Provider
+      value={{
+        ...refs,
+        prefersReducedMotion,
+        shouldLoadHeroVideo,
+        isConstrainedExperience,
+      }}
+    >
       <main ref={smoothWrapperRef} id="smooth-wrapper" className="relative z-10 w-full text-white">
         {children}
       </main>

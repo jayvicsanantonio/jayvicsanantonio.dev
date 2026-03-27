@@ -21,6 +21,7 @@ export type PillShrinkTimelineArgs = NavMeasurementHelpers & {
   overlay: HTMLDivElement | null;
   watermarkMask: HTMLDivElement | null;
   profile: HTMLDivElement;
+  isConstrainedExperience: boolean;
 };
 
 export type PillShrinkTimelineResult = {
@@ -56,6 +57,7 @@ export function createPillShrinkTimeline({
   overlay,
   watermarkMask,
   profile,
+  isConstrainedExperience,
   getTargetPillWidth,
   getTargetPillHeight,
   getNavRowYOffset,
@@ -69,6 +71,7 @@ export function createPillShrinkTimeline({
   let lastTargetOffset: { x: number; y: number } | null = null;
   const isSmallScreen =
     typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches;
+  const shouldRealtimeAlign = !isSmallScreen && !isConstrainedExperience;
   const scrubSmoothing = isSmallScreen ? 0.9 : SCROLL_TIMING.SCRUB_SMOOTHING;
 
   const syncPillToNavRow = () => {
@@ -129,13 +132,13 @@ export function createPillShrinkTimeline({
         },
         invalidateOnRefresh: true,
         onUpdate: () => {
-          if (!isSmallScreen) {
+          if (shouldRealtimeAlign) {
             syncPillToNavRow();
           }
         },
         onRefresh: () => {
           lastTargetOffset = null;
-          if (!isSmallScreen) {
+          if (shouldRealtimeAlign) {
             syncPillToNavRow();
           }
         },
@@ -307,6 +310,7 @@ export function createPillShrinkTimeline({
       videoShrinkTimeline.scrollTrigger?.kill();
       videoShrinkTimeline.kill();
       pillSnapTween?.kill();
+      lastTargetOffset = null;
     },
   };
 }

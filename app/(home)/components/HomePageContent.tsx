@@ -1,7 +1,6 @@
 "use client";
 
 import { useLayoutEffect } from "react";
-import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 import Profile from "./Hero/Profile";
 import Hero from "./Hero";
 import Skills from "./Skills";
@@ -12,7 +11,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 function HomePageInner({ children }: { children?: React.ReactNode }) {
   const { smoothContentRef } = useHeroContext();
-  const prefersReducedMotion = usePrefersReducedMotion();
 
   return (
     <>
@@ -22,7 +20,7 @@ function HomePageInner({ children }: { children?: React.ReactNode }) {
         <Skills />
         <About />
       </div>
-      <Profile prefersReducedMotion={prefersReducedMotion} />
+      <Profile />
       <ScrollIndicator />
     </>
   );
@@ -30,42 +28,19 @@ function HomePageInner({ children }: { children?: React.ReactNode }) {
 
 export default function HomePageContent({ children }: { children?: React.ReactNode }) {
   useLayoutEffect(() => {
-    // 1. Disable browser's default scroll restoration
     if (window.history && window.history.scrollRestoration) {
       window.history.scrollRestoration = "manual";
     }
 
-    // 2. Clear GSAP scroll memory
     ScrollTrigger.clearScrollMemory();
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
 
-    // 3. NUCLEAR OPTION: Force scroll to top for a few frames
-    // This beats the browser's async scroll restoration
-    let frames = 0;
-    const forceScroll = () => {
-      if (frames < 30) {
-        // Run for ~500ms (30 frames at 60fps) to be absolutely sure
-        window.scrollTo(0, 0);
-        frames++;
-        requestAnimationFrame(forceScroll);
-      } else {
-        // Once we stop forcing scroll, refresh ScrollTrigger to ensure it sees the top position
-        ScrollTrigger.refresh();
-      }
-    };
-    forceScroll();
-
-    // 4. Ensure we scroll to top when leaving the page (for back button reliability)
-    const handleBeforeUnload = () => {
-      window.scrollTo(0, 0);
-      // Try to clear history state scroll position
-      if (window.history && window.history.replaceState) {
-        window.history.replaceState(null, "", window.location.href);
-      }
-    };
-    window.addEventListener("beforeunload", handleBeforeUnload);
+    const raf = requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
+    });
 
     return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
+      cancelAnimationFrame(raf);
     };
   }, []);
 

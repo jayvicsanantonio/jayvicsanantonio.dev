@@ -27,6 +27,12 @@ export type HeroAnimationRefs = {
   mobileHeroTextRef: MutableRefObject<HTMLDivElement | null>;
 };
 
+export type HeroContextValue = HeroAnimationRefs & {
+  isConstrainedExperience: boolean;
+  prefersReducedMotion: boolean;
+  shouldLoadHeroVideo: boolean;
+};
+
 export type MarqueeRowConfig = {
   items: string[];
   duration?: number;

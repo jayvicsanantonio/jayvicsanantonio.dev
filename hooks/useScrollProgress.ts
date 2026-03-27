@@ -8,26 +8,32 @@ export function useScrollProgress(): number {
   useEffect(() => {
     let raf = 0;
 
-    const sample = () => {
+    const updateProgress = () => {
       const doc = document.documentElement;
       const max = Math.max(1, doc.scrollHeight - doc.clientHeight);
-      const p = Math.min(1, Math.max(0, doc.scrollTop / max));
-      setProgress(p);
-      raf = requestAnimationFrame(sample);
+      setProgress(Math.min(1, Math.max(0, doc.scrollTop / max)));
     };
 
-    sample();
+    const scheduleUpdate = () => {
+      if (raf !== 0) {
+        return;
+      }
 
-    const onResize = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(sample);
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        updateProgress();
+      });
     };
 
-    window.addEventListener("resize", onResize);
+    updateProgress();
+
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
 
     return () => {
       cancelAnimationFrame(raf);
-      window.removeEventListener("resize", onResize);
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
     };
   }, []);
 

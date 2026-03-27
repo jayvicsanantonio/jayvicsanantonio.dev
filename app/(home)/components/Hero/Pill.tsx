@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import { VIDEO_OVERLAY_BACKGROUND, VIDEO_WATERMARK_MASK } from "../config";
 import { useHeroContext } from "../../context/HeroContext";
 
@@ -9,7 +11,30 @@ export default function Pill() {
     videoWatermarkMaskRef,
     pillContentRef,
     pillSkinRef,
+    shouldLoadHeroVideo,
   } = useHeroContext();
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) {
+      return;
+    }
+
+    if (!shouldLoadHeroVideo) {
+      video.pause();
+      video.removeAttribute("src");
+      video.load();
+      return;
+    }
+
+    if (video.getAttribute("src") === "/matrix-horizontal.mp4") {
+      return;
+    }
+
+    video.setAttribute("src", "/matrix-horizontal.mp4");
+    video.load();
+  }, [shouldLoadHeroVideo, videoRef]);
+
   return (
     <div
       ref={pillRef}
@@ -26,9 +51,7 @@ export default function Pill() {
         aria-hidden
         tabIndex={-1}
         className="absolute inset-0 z-0 h-full w-full rounded-[inherit] object-cover opacity-0 transform-gpu [will-change:transform]"
-      >
-        <source src="/matrix-horizontal.mp4" type="video/mp4" />
-      </video>
+      />
       <div
         ref={pillSkinRef}
         className="pointer-events-none absolute inset-[1px] z-[1] rounded-[inherit] opacity-0"

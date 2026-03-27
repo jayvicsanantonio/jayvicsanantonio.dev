@@ -1,12 +1,12 @@
 "use client";
 
-import { Icon } from "@iconify/react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
 
 import { Badge } from "@/components/primitives/Badge";
+import { AppIcon } from "@/components/primitives/AppIcon";
 import { CARD_INNER_BASE, CARD_OUTER_BASE } from "@/components/styles/card-styles";
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
@@ -389,8 +389,8 @@ export default function WorkTimeline() {
                       <ul className="mt-4 space-y-3 text-[0.95rem]/relaxed sm:text-[0.98rem]/relaxed [@container(min-width:34rem)]:space-y-4">
                         {item.bullets.map((b) => (
                           <li key={b} className="flex gap-2 break-words text-gray-300/90">
-                            <Icon
-                              icon="mdi:check"
+                            <AppIcon
+                              name="check"
                               width={18}
                               height={18}
                               className="mt-0.5 shrink-0 text-cyan-300/80"

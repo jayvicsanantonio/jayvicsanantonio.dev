@@ -13,12 +13,16 @@ import { killTimeline } from "../animations/cleanup";
 
 export type UseHeroScrollAnimationArgs = {
   refs: HeroAnimationRefs;
+  isConstrainedExperience: boolean;
   prefersReducedMotion: boolean;
+  shouldLoadHeroVideo: boolean;
 };
 
 export function useHeroScrollAnimation({
   refs,
+  isConstrainedExperience,
   prefersReducedMotion,
+  shouldLoadHeroVideo,
 }: UseHeroScrollAnimationArgs): void {
   useGSAP(
     () => {
@@ -64,6 +68,20 @@ export function useHeroScrollAnimation({
         if (coverBody) {
           gsap.set(coverBody, { yPercent: 0 });
         }
+        if (!shouldLoadHeroVideo) {
+          if (video) {
+            gsap.set(video, { autoAlpha: 0 });
+          }
+          if (overlay) {
+            gsap.set(overlay, { autoAlpha: 0 });
+          }
+          if (watermarkMask) {
+            gsap.set(watermarkMask, { autoAlpha: 0 });
+          }
+          if (pillSkin) {
+            gsap.set(pillSkin, { autoAlpha: 1 });
+          }
+        }
         return () => {
           cleanupFns.forEach((cleanup) => cleanup());
         };
@@ -94,6 +112,7 @@ export function useHeroScrollAnimation({
         overlay,
         watermarkMask,
         profile,
+        isConstrainedExperience,
         getTargetPillWidth: navMeasurements.getTargetPillWidth,
         getTargetPillHeight: navMeasurements.getTargetPillHeight,
         getNavRowYOffset: navMeasurements.getNavRowYOffset,
@@ -141,6 +160,6 @@ export function useHeroScrollAnimation({
         cleanupFns.forEach((cleanup) => cleanup());
       };
     },
-    { dependencies: [prefersReducedMotion] },
+    { dependencies: [isConstrainedExperience, prefersReducedMotion, shouldLoadHeroVideo] },
   );
 }

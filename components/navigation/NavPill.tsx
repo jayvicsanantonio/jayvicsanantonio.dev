@@ -19,6 +19,7 @@ export type NavPillProps = {
   tooltip?: string; // Tooltip text when non-active
   tooltipPlacement?: "above" | "below"; // Default: 'above'
   className?: string;
+  prefetch?: boolean;
 };
 
 export function NavPill({
@@ -36,11 +37,13 @@ export function NavPill({
   tooltip,
   tooltipPlacement = "above",
   className,
+  prefetch,
 }: NavPillProps) {
   // View-transition tag (optional)
   const vtClass = vtTagName ? `vt-tag-${vtTagName}` : "";
 
   const linkProps = external ? { target: "_blank", rel: "noopener noreferrer" as const } : {};
+  const prefetchProps = external ? {} : { prefetch: prefetch ?? false };
 
   return (
     <fieldset
@@ -78,6 +81,7 @@ export function NavPill({
         }}
         aria-current={active ? "page" : undefined}
         {...linkProps}
+        {...prefetchProps}
       >
         <span className="inline-flex items-center gap-2">
           <span

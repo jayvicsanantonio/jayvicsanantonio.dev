@@ -1,10 +1,10 @@
 "use client";
 
-import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { NavPill } from "@/components/navigation/NavPill";
+import { AppIcon } from "@/components/primitives/AppIcon";
 export type GlassHeaderBubbleProps = {
   label: string;
   vtClassName?: string; // e.g., vt-tag-projects, vt-tag-work
@@ -45,8 +45,8 @@ export default function GlassHeaderBubble({
               href="https://www.linkedin.com/in/jayvicsanantonio/"
               ariaLabel="LinkedIn"
               icon={
-                <Icon
-                  icon="mdi:linkedin"
+                <AppIcon
+                  name="linkedin"
                   className="h-[clamp(24px,6vw,36px)] w-[clamp(24px,6vw,36px)]"
                   aria-hidden="true"
                 />
@@ -65,8 +65,8 @@ export default function GlassHeaderBubble({
               href="/projects"
               ariaLabel="Projects"
               icon={
-                <Icon
-                  icon="mdi:application-brackets"
+                <AppIcon
+                  name="projects"
                   className="h-[clamp(24px,6vw,36px)] w-[clamp(24px,6vw,36px)] font-bold"
                   aria-hidden="true"
                 />
@@ -89,8 +89,8 @@ export default function GlassHeaderBubble({
               href="/work"
               ariaLabel="Work"
               icon={
-                <Icon
-                  icon="mdi:timeline-text"
+                <AppIcon
+                  name="work"
                   className="h-[clamp(24px,6vw,36px)] w-[clamp(24px,6vw,36px)]"
                   aria-hidden="true"
                 />
@@ -113,8 +113,8 @@ export default function GlassHeaderBubble({
               href="https://github.com/jayvicsanantonio"
               ariaLabel="GitHub"
               icon={
-                <Icon
-                  icon="mdi:github"
+                <AppIcon
+                  name="github"
                   className="h-[clamp(24px,6vw,36px)] w-[clamp(24px,6vw,36px)]"
                   aria-hidden="true"
                 />

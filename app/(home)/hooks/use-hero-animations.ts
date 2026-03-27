@@ -8,7 +8,9 @@ import { useHeroScrollAnimation } from "./use-hero-scroll-animation";
 
 export type UseHeroAnimationArgs = {
   refs: HeroAnimationRefs;
+  isConstrainedExperience: boolean;
   prefersReducedMotion: boolean;
+  shouldLoadHeroVideo: boolean;
 };
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);

@@ -14,7 +14,9 @@ import { applyReducedMotionState } from "../animations/reduced-motion";
 
 export type UseHeroIntroAnimationArgs = {
   refs: HeroAnimationRefs;
+  isConstrainedExperience: boolean;
   prefersReducedMotion: boolean;
+  shouldLoadHeroVideo: boolean;
 };
 
 /**
@@ -51,7 +53,12 @@ export type UseHeroIntroAnimationArgs = {
  *   return <div ref={refs.containerRef}>...</div>;
  * }
  */
-export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroIntroAnimationArgs) {
+export function useHeroIntroAnimation({
+  refs,
+  isConstrainedExperience,
+  prefersReducedMotion,
+  shouldLoadHeroVideo,
+}: UseHeroIntroAnimationArgs) {
   useGSAP(
     () => {
       // Extract required refs.
@@ -74,10 +81,11 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
       const nameplate = refs.nameplateRef.current;
       const designation = refs.designationRef.current;
       const mobileHeroText = refs.mobileHeroTextRef.current;
-      const isSmallScreen = typeof window !== "undefined" && window.matchMedia("(max-width: 1023px)").matches;
+      const isSmallScreen =
+        typeof window !== "undefined" && window.matchMedia("(max-width: 1023px)").matches;
 
       // Handle reduced motion preference.
-      if (prefersReducedMotion) {
+      if (prefersReducedMotion || isConstrainedExperience) {
         applyReducedMotionState({
           pill,
           pillContent,
@@ -90,11 +98,13 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
           nameplate,
           designation,
           mobileHeroText,
+          shouldLoadHeroVideo,
         });
-        // Start video playback immediately.
-        video.play().catch(() => {
-          // Silently handle autoplay restrictions.
-        });
+        if (shouldLoadHeroVideo) {
+          video.play().catch(() => {
+            // Silently handle autoplay restrictions.
+          });
+        }
         return;
       }
 
@@ -186,7 +196,7 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
         )
         // Add label for label reveal timing.
         .addLabel("labelReveal")
-        // Fade out pill background to reveal video.
+        // Fade out pill background to reveal the hero media.
         .to(
           pill,
           {
@@ -196,34 +206,46 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
           },
           "-=0.6",
         )
-        // Fade in video, overlay, and watermark mask.
-        .to(
-          [video, overlay, watermarkMask],
+        // Release scroll lock slightly before animation completes for smoother UX.
+        .add(releaseScrollLockIfNeeded, ">-0.25")
+        .addLabel("heroMediaReveal", "-=0.2");
+
+      if (shouldLoadHeroVideo) {
+        timeline
+          .to(
+            [video, overlay, watermarkMask],
+            {
+              autoAlpha: 1,
+              duration: INTRO_TIMING.VIDEO_FADE_DURATION,
+              ease: "power2.out",
+              onStart: () => {
+                video.play().catch(() => {
+                  // Silently handle autoplay restrictions.
+                });
+              },
+            },
+            "heroMediaReveal",
+          )
+          .to(
+            overlay,
+            {
+              autoAlpha: OVERLAY_OPACITY.INITIAL,
+              duration: INTRO_TIMING.OVERLAY_FADE_DURATION,
+              ease: "power1.out",
+            },
+            ">-0.1",
+          );
+      } else if (pillSkin) {
+        timeline.to(
+          pillSkin,
           {
             autoAlpha: 1,
             duration: INTRO_TIMING.VIDEO_FADE_DURATION,
             ease: "power2.out",
-            onStart: () => {
-              // Start video playback when it becomes visible.
-              video.play().catch(() => {
-                // Silently handle autoplay restrictions.
-              });
-            },
           },
-          "-=0.2",
-        )
-        // Release scroll lock slightly before animation completes for smoother UX.
-        .add(releaseScrollLockIfNeeded, ">-0.25")
-        // Adjust overlay opacity to final state.
-        .to(
-          overlay,
-          {
-            autoAlpha: OVERLAY_OPACITY.INITIAL,
-            duration: INTRO_TIMING.OVERLAY_FADE_DURATION,
-            ease: "power1.out",
-          },
-          ">-0.1",
+          "heroMediaReveal",
         );
+      }
 
       // Animate nameplate label if present.
       if (nameplate) {
@@ -282,6 +304,9 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
         timeline.kill();
       };
     },
-    { scope: refs.containerRef, dependencies: [prefersReducedMotion] },
+    {
+      scope: refs.containerRef,
+      dependencies: [isConstrainedExperience, prefersReducedMotion, shouldLoadHeroVideo],
+    },
   );
 }

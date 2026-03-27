@@ -1,6 +1,5 @@
 "use client";
 
-import { Icon } from "@iconify/react";
 import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
@@ -9,6 +8,7 @@ import { PROJECTS } from "@/app/projects/projects.data";
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
 import { CARD_INNER_BASE, CARD_OUTER_BASE } from "@/components/styles/card-styles";
+import { AppIcon } from "@/components/primitives/AppIcon";
 import ProjectLink from "./ProjectLink";
 
 const SKILL_FILTERS = [
@@ -185,15 +185,15 @@ export default function SkillsAndCases() {
                     let icon: React.ReactNode = null;
                     switch (l.icon) {
                       case "github":
-                        icon = <Icon icon="mdi:github" width={18} height={18} />;
+                        icon = <AppIcon name="github" width={18} height={18} />;
                         break;
                       case "watch":
-                        icon = <Icon icon="mdi:play" width={16} height={16} />;
+                        icon = <AppIcon name="play" width={16} height={16} />;
                         break;
                       case "marketplace":
                       case "external":
                       case "view":
-                        icon = <Icon icon="mdi:open-in-new" width={16} height={16} />;
+                        icon = <AppIcon name="external" width={16} height={16} />;
                         break;
                       default:
                         icon = null;

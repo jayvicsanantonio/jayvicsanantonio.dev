@@ -3,7 +3,11 @@ import { useEffect, useState } from "react";
 const QUERY = "(prefers-reduced-motion: no-preference)";
 
 const getInitialState = () => {
-  return false;
+  if (typeof window === "undefined") {
+    return false;
+  }
+
+  return !window.matchMedia(QUERY).matches;
 };
 
 export default function usePrefersReducedMotion() {

@@ -1,63 +1,72 @@
 "use client";
 
-import { Icon } from "@iconify/react";
-import { useLayoutEffect, useRef } from "react";
+import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react";
+import { AppIcon } from "@/components/primitives/AppIcon";
+import { useHeroContext } from "../../context/HeroContext";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function ScrollIndicator() {
+  const { isConstrainedExperience, prefersReducedMotion } = useHeroContext();
   const containerRef = useRef<HTMLDivElement>(null);
   const arrowRef = useRef<HTMLDivElement>(null);
 
-  useLayoutEffect(() => {
-    const container = containerRef.current;
-    const arrow = arrowRef.current;
+  useGSAP(
+    () => {
+      const container = containerRef.current;
+      const arrow = arrowRef.current;
 
-    if (!container || !arrow) return;
+      if (!container || !arrow) {
+        return;
+      }
 
-    // Initial state: hidden and centered
-    gsap.set(container, { opacity: 0, y: 20, xPercent: -50 });
+      if (prefersReducedMotion) {
+        gsap.set(container, { autoAlpha: 0, xPercent: -50 });
+        return;
+      }
 
-    // Entrance animation
-    const tl = gsap.timeline({
-      delay: 2.5, // Wait for other hero animations
-    });
+      gsap.set(container, { autoAlpha: 0, y: 20, xPercent: -50 });
 
-    tl.to(container, {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      ease: "power2.out",
-    });
+      const entranceTween = gsap.to(container, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 1,
+        delay: 2.5,
+        ease: "power2.out",
+      });
 
-    // Continuous bounce animation
-    gsap.to(arrow, {
-      y: 10,
-      duration: 1.5,
-      repeat: -1,
-      yoyo: true,
-      ease: "power1.inOut",
-    });
+      const bounceTween = isConstrainedExperience
+        ? null
+        : gsap.to(arrow, {
+            y: 10,
+            duration: 1.5,
+            repeat: -1,
+            yoyo: true,
+            ease: "power1.inOut",
+          });
 
-    // Exit on scroll
-    ScrollTrigger.create({
-      trigger: document.body,
-      start: "top top",
-      end: "100px top",
-      scrub: true,
-      onUpdate: (self) => {
-        gsap.to(container, {
-          opacity: 1 - self.progress,
-          overwrite: "auto",
-        });
-      },
-    });
+      const setOpacity = gsap.quickSetter(container, "opacity");
+      const fadeTrigger = ScrollTrigger.create({
+        trigger: document.documentElement,
+        start: "top top",
+        end: "100px top",
+        scrub: true,
+        onUpdate: (self) => {
+          setOpacity(1 - self.progress);
+        },
+      });
 
-    return () => {
-      tl.kill();
-      ScrollTrigger.getAll().forEach((t) => t.kill());
-    };
-  }, []);
+      return () => {
+        entranceTween.kill();
+        bounceTween?.kill();
+        fadeTrigger.kill();
+      };
+    },
+    { dependencies: [isConstrainedExperience, prefersReducedMotion], scope: containerRef },
+  );
 
   return (
     <div
@@ -65,7 +74,7 @@ export default function ScrollIndicator() {
       className="fixed bottom-8 left-1/2 z-50 flex flex-col items-center gap-2 pointer-events-none mix-blend-difference"
     >
       <div ref={arrowRef} className="text-white/80">
-        <Icon icon="mdi:chevron-down" width={48} height={48} />
+        <AppIcon name="chevron-down" width={48} height={48} />
       </div>
     </div>
   );
