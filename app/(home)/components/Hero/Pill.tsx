@@ -27,6 +27,7 @@ export default function Pill() {
         tabIndex={-1}
         className="absolute inset-0 z-0 h-full w-full rounded-[inherit] object-cover opacity-0 transform-gpu [will-change:transform]"
       >
+        <source src="/matrix-horizontal.webm" type="video/webm" />
         <source src="/matrix-horizontal.mp4" type="video/mp4" />
       </video>
       <div
