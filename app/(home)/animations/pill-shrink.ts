@@ -4,7 +4,6 @@ import {
   PILL_SHRINK_BORDER,
   PILL_SHRINK_BOX_SHADOW,
   PROFILE_SCROLL_CONFIG,
-  SCROLL_THRESHOLDS,
   SCROLL_TIMING,
   NAV_INITIAL_STATE,
   OVERLAY_OPACITY,
@@ -64,47 +63,10 @@ export function createPillShrinkTimeline({
   const pillShrinkCompleteLabel = "pillShrinkComplete";
   gsap.set(pill, { borderWidth: 0, borderColor: "transparent" });
 
-  let pillSnapTween: gsap.core.Tween | null = null;
   let videoShrinkTimeline: gsap.core.Timeline;
-  let lastTargetOffset: { x: number; y: number } | null = null;
   const isSmallScreen =
     typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches;
   const scrubSmoothing = isSmallScreen ? 0.9 : SCROLL_TIMING.SCRUB_SMOOTHING;
-
-  const syncPillToNavRow = () => {
-    if (!videoShrinkTimeline) {
-      return;
-    }
-    const trigger = videoShrinkTimeline.scrollTrigger;
-    if (!trigger) {
-      return;
-    }
-    // Skip alignment if animation hasn't started (progress < 5%) and isn't currently active.
-    // This prevents unnecessary calculations before the scroll animation begins.
-    if (trigger.progress < SCROLL_THRESHOLDS.MIN_ALIGNMENT_PROGRESS && !trigger.isActive) {
-      lastTargetOffset = null;
-      return;
-    }
-    const offset = getPillCenterOffset();
-    // Optimization: skip re-alignment if position change is negligible (< 0.5px).
-    // This prevents excessive tweens during minor layout shifts or rounding errors.
-    if (
-      lastTargetOffset &&
-      Math.abs(offset.x - lastTargetOffset.x) < SCROLL_THRESHOLDS.PILL_POSITION_TOLERANCE &&
-      Math.abs(offset.y - lastTargetOffset.y) < SCROLL_THRESHOLDS.PILL_POSITION_TOLERANCE
-    ) {
-      return;
-    }
-    lastTargetOffset = offset;
-    pillSnapTween?.kill();
-    // Animate pill position to match nav row (instant if not actively scrolling).
-    pillSnapTween = gsap.to(pill, {
-      x: offset.x,
-      y: offset.y,
-      duration: trigger.isActive ? SCROLL_TIMING.PILL_SNAP_DURATION : 0,
-      ease: "power2.out",
-    });
-  };
 
   videoShrinkTimeline = gsap
     .timeline({
@@ -128,9 +90,6 @@ export function createPillShrinkTimeline({
           gsap.set(profile, { transformOrigin: PROFILE_SCROLL_CONFIG.transformOrigin });
         },
         invalidateOnRefresh: true,
-        onRefresh: () => {
-          lastTargetOffset = null;
-        },
       },
     })
     .to(
@@ -298,7 +257,6 @@ export function createPillShrinkTimeline({
     cleanup: () => {
       videoShrinkTimeline.scrollTrigger?.kill();
       videoShrinkTimeline.kill();
-      pillSnapTween?.kill();
     },
   };
 }
