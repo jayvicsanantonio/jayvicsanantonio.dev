@@ -24,20 +24,32 @@ export function createProfileHideOnSection({
     return () => {};
   }
 
+  let rectHeight = 1;
+  let viewHeight = 1;
+
   const clamp01 = gsap.utils.clamp(0, 1);
   const trigger = ScrollTrigger.create({
     trigger: section,
     start: "top bottom",
     end: "bottom top",
-    onUpdate: () => {
-      const rect = section.getBoundingClientRect();
-      const viewHeight = window.innerHeight || 1;
-      const intersection = Math.max(0, Math.min(rect.bottom, viewHeight) - Math.max(rect.top, 0));
-      const visibleRatio = rect.height ? intersection / rect.height : 0;
+    onRefresh: () => {
+      rectHeight = section.getBoundingClientRect().height || 1;
+      viewHeight = window.innerHeight || 1;
+    },
+    onUpdate: (self) => {
+      // Approximate rect.top and rect.bottom using scroll progress to avoid forced reflows.
+      // self.start is when top hits bottom of viewport. self.end is when bottom hits top.
+      const totalScrollDistance = self.end - self.start;
+      const currentScroll = self.start + self.progress * totalScrollDistance;
+      // We can directly calculate visibleRatio without DOM read!
+      // In GSAP ScrollTrigger, the distance scrolled past start is (currentScroll - self.start).
+      // Since it starts at "top bottom", at self.start, the top is exactly at viewHeight.
+      const rectTop = viewHeight - (currentScroll - self.start);
+      const rectBottom = rectTop + rectHeight;
+
+      const intersection = Math.max(0, Math.min(rectBottom, viewHeight) - Math.max(rectTop, 0));
+      const visibleRatio = rectHeight ? intersection / rectHeight : 0;
       
-      // Start moving when 10% of the About section is visible.
-      // We want it to hide relatively quickly as the About section comes up.
-      // Let's finish hiding by 25% visibility to ensure it's gone before it overlaps content.
       const startThreshold = 0.1;
       const endThreshold = 0.25;
       const progress = clamp01((visibleRatio - startThreshold) / (endThreshold - startThreshold));
