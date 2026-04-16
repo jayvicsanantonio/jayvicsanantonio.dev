@@ -40,9 +40,9 @@ export const CFG = {
  * Timing values for the hero intro animation sequence.
  */
 export const INTRO_TIMING = {
-  DELAY: 1,
-  PILL_EXPAND_DURATION: 2,
-  PILL_ROUND_DURATION: 0.8,
+  DELAY: 0.2,
+  PILL_EXPAND_DURATION: 1.2,
+  PILL_ROUND_DURATION: 0.5,
   CONTENT_FADE_DURATION: 0.45,
   PROFILE_FADE_DURATION: 0.6,
   VIDEO_FADE_DURATION: 0.8,
