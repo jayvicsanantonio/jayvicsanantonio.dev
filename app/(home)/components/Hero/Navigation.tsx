@@ -1,9 +1,9 @@
 "use client";
 
-import { Icon } from "@iconify/react";
-import type { CSSProperties } from "react";
+import type { ComponentProps, CSSProperties } from "react";
 
 import { NavPill } from "@/components/navigation/NavPill";
+import Icon from "@/components/primitives/Icon";
 
 const HERO_NAV_PILL_WIDTH = "clamp(280px, var(--nav-row-w, 22vw), 520px)";
 const HERO_NAV_PILL_HEIGHT = "clamp(48px, var(--pill-h, 10vh), 72px)";
@@ -14,7 +14,7 @@ type NavItem = {
   href: string;
   ariaLabel: string;
   tooltip: string;
-  icon: string;
+  icon: ComponentProps<typeof Icon>["name"];
   iconSize: number;
   vtTagName?: "projects" | "work";
   external?: boolean;
@@ -25,7 +25,7 @@ const NAV_ITEMS: NavItem[] = [
     href: "https://www.linkedin.com/in/jayvicsanantonio/",
     ariaLabel: "LinkedIn",
     tooltip: "LinkedIn",
-    icon: "mdi:linkedin",
+    icon: "linkedin",
     iconSize: 36,
     external: true,
   },
@@ -33,7 +33,7 @@ const NAV_ITEMS: NavItem[] = [
     href: "/projects",
     ariaLabel: "Projects",
     tooltip: "Projects",
-    icon: "mdi:application-brackets",
+    icon: "projects",
     iconSize: 32,
     vtTagName: "projects",
   },
@@ -41,7 +41,7 @@ const NAV_ITEMS: NavItem[] = [
     href: "/work",
     ariaLabel: "Work Experience",
     tooltip: "Work Experience",
-    icon: "mdi:timeline-text",
+    icon: "work",
     iconSize: 32,
     vtTagName: "work",
   },
@@ -49,7 +49,7 @@ const NAV_ITEMS: NavItem[] = [
     href: "https://github.com/jayvicsanantonio",
     ariaLabel: "GitHub",
     tooltip: "GitHub",
-    icon: "mdi:github",
+    icon: "github",
     iconSize: 36,
     external: true,
   },
@@ -73,7 +73,7 @@ export default function Navigation() {
                 key={item.ariaLabel}
                 href={item.href}
                 ariaLabel={item.ariaLabel}
-                icon={<Icon icon={item.icon} width={item.iconSize} height={item.iconSize} />}
+                icon={<Icon name={item.icon} size={item.iconSize} />}
                 tooltip={item.tooltip}
                 collapsedPx={HERO_NAV_BUTTON_WIDTH}
                 heightPx={HERO_NAV_BUTTON_HEIGHT}
@@ -102,7 +102,7 @@ export default function Navigation() {
                 key={item.ariaLabel}
                 href={item.href}
                 ariaLabel={item.ariaLabel}
-                icon={<Icon icon={item.icon} width={item.iconSize} height={item.iconSize} />}
+                icon={<Icon name={item.icon} size={item.iconSize} />}
                 tooltip={item.tooltip}
                 collapsedPx={HERO_NAV_BUTTON_WIDTH}
                 heightPx={HERO_NAV_BUTTON_HEIGHT}

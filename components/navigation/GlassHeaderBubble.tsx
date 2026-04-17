@@ -1,10 +1,10 @@
 "use client";
 
-import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { NavPill } from "@/components/navigation/NavPill";
+import Icon from "@/components/primitives/Icon";
 export type GlassHeaderBubbleProps = {
   label: string;
   vtClassName?: string; // e.g., vt-tag-projects, vt-tag-work
@@ -46,9 +46,8 @@ export default function GlassHeaderBubble({
               ariaLabel="LinkedIn"
               icon={
                 <Icon
-                  icon="mdi:linkedin"
+                  name="linkedin"
                   className="h-[clamp(24px,6vw,36px)] w-[clamp(24px,6vw,36px)]"
-                  aria-hidden="true"
                 />
               }
               external
@@ -66,9 +65,8 @@ export default function GlassHeaderBubble({
               ariaLabel="Projects"
               icon={
                 <Icon
-                  icon="mdi:application-brackets"
+                  name="projects"
                   className="h-[clamp(24px,6vw,36px)] w-[clamp(24px,6vw,36px)] font-bold"
-                  aria-hidden="true"
                 />
               }
               label="Projects"
@@ -89,11 +87,7 @@ export default function GlassHeaderBubble({
               href="/work"
               ariaLabel="Work"
               icon={
-                <Icon
-                  icon="mdi:timeline-text"
-                  className="h-[clamp(24px,6vw,36px)] w-[clamp(24px,6vw,36px)]"
-                  aria-hidden="true"
-                />
+                <Icon name="work" className="h-[clamp(24px,6vw,36px)] w-[clamp(24px,6vw,36px)]" />
               }
               label="Work"
               active={isWork}
@@ -113,11 +107,7 @@ export default function GlassHeaderBubble({
               href="https://github.com/jayvicsanantonio"
               ariaLabel="GitHub"
               icon={
-                <Icon
-                  icon="mdi:github"
-                  className="h-[clamp(24px,6vw,36px)] w-[clamp(24px,6vw,36px)]"
-                  aria-hidden="true"
-                />
+                <Icon name="github" className="h-[clamp(24px,6vw,36px)] w-[clamp(24px,6vw,36px)]" />
               }
               external
               tooltip="GitHub"
