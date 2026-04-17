@@ -4,7 +4,7 @@ import Image from "next/image";
 
 import { PROFILE_BASE_Z_INDEX, PROFILE_DROP_SHADOW } from "../config";
 import { useHeroContext } from "../../context/HeroContext";
-import meImage from "@/public/images/me.png";
+import meImage from "@/public/images/me.webp";
 
 export default function Profile({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
   const { profileRef } = useHeroContext();

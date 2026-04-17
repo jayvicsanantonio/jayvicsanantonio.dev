@@ -17,6 +17,17 @@ export type UseHeroIntroAnimationArgs = {
   prefersReducedMotion: boolean;
 };
 
+const shouldSkipDecorativeVideo = () => {
+  if (typeof navigator === "undefined") return false;
+  const connection = (
+    navigator as Navigator & {
+      connection?: { effectiveType?: string; saveData?: boolean };
+    }
+  ).connection;
+
+  return Boolean(connection?.saveData || connection?.effectiveType?.includes("2g"));
+};
+
 /**
  * Manages the hero intro animation sequence that plays on page load.
  *
@@ -74,7 +85,9 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
       const nameplate = refs.nameplateRef.current;
       const designation = refs.designationRef.current;
       const mobileHeroText = refs.mobileHeroTextRef.current;
-      const isSmallScreen = typeof window !== "undefined" && window.matchMedia("(max-width: 1023px)").matches;
+      const skipDecorativeVideo = shouldSkipDecorativeVideo();
+      const isSmallScreen =
+        typeof window !== "undefined" && window.matchMedia("(max-width: 1023px)").matches;
 
       // Handle reduced motion preference.
       if (prefersReducedMotion) {
@@ -90,11 +103,13 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
           nameplate,
           designation,
           mobileHeroText,
+          skipDecorativeVideo,
         });
-        // Start video playback immediately.
-        video.play().catch(() => {
-          // Silently handle autoplay restrictions.
-        });
+        if (!skipDecorativeVideo) {
+          video.play().catch(() => {
+            // Silently handle autoplay restrictions.
+          });
+        }
         return;
       }
 
@@ -196,14 +211,15 @@ export function useHeroIntroAnimation({ refs, prefersReducedMotion }: UseHeroInt
           },
           "-=0.6",
         )
-        // Fade in video, overlay, and watermark mask.
+        // Fade in decorative media, or a static skin when the connection asks us to be frugal.
         .to(
-          [video, overlay, watermarkMask],
+          skipDecorativeVideo ? [pillSkin, overlay] : [video, overlay, watermarkMask],
           {
             autoAlpha: 1,
             duration: INTRO_TIMING.VIDEO_FADE_DURATION,
             ease: "power2.out",
             onStart: () => {
+              if (skipDecorativeVideo) return;
               // Start video playback when it becomes visible.
               video.play().catch(() => {
                 // Silently handle autoplay restrictions.

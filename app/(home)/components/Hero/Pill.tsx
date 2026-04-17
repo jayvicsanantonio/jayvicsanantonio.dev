@@ -2,14 +2,8 @@ import { VIDEO_OVERLAY_BACKGROUND, VIDEO_WATERMARK_MASK } from "../config";
 import { useHeroContext } from "../../context/HeroContext";
 
 export default function Pill() {
-  const {
-    pillRef,
-    videoRef,
-    videoOverlayRef,
-    videoWatermarkMaskRef,
-    pillContentRef,
-    pillSkinRef,
-  } = useHeroContext();
+  const { pillRef, videoRef, videoOverlayRef, videoWatermarkMaskRef, pillContentRef, pillSkinRef } =
+    useHeroContext();
   return (
     <div
       ref={pillRef}
@@ -22,7 +16,7 @@ export default function Pill() {
         muted
         loop
         playsInline
-        preload="metadata"
+        preload="none"
         aria-hidden
         tabIndex={-1}
         className="absolute inset-0 z-0 h-full w-full rounded-[inherit] object-cover opacity-0 transform-gpu [will-change:transform]"
