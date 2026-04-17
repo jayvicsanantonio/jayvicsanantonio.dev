@@ -1,11 +1,9 @@
 "use client";
 
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { usePathname } from "next/navigation";
 import * as React from "react";
 import AmbientBackground from "@/components/layout/AmbientBackground";
-import { Toaster } from "@/components/feedback/Toaster";
+import DeferredVercelInsights from "@/components/layout/DeferredVercelInsights";
 import { useWebVitalsLogger } from "@/hooks/useWebVitalsLogger";
 
 const ENABLE_VIEW_TRANSITIONS = false;
@@ -36,14 +34,8 @@ export default function ClientAppShell({ children }: { children: React.ReactNode
           {isHome ? children : <div className="container">{children}</div>}
         </div>
       </ViewTransition>
-      <Toaster />
       {process.env.NODE_ENV === "production" &&
-        process.env.NEXT_PUBLIC_VERCEL_ENV === "production" && (
-          <>
-            <SpeedInsights />
-            <Analytics />
-          </>
-        )}
+        process.env.NEXT_PUBLIC_VERCEL_ENV === "production" && <DeferredVercelInsights />}
     </>
   );
 }
