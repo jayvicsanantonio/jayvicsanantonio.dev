@@ -99,7 +99,7 @@ const EXPERIENCES: Experience[] = [
       "Featured in five of the Philippines’ top tech and business outlets, including Deal Street Asia, Enterprise Innovation, KabayanTech, The Philippine Star, and BusinessMirror, after winning the 2015 IdeaSpace Startup Competition, gaining national recognition and credibility in the local startup ecosystem",
       "Represented the company as one of 350 startups worldwide selected for the RISE Conference 2015 (Hong Kong) under the ALPHA Program, showcasing our wearable technology to investors, and strengthening brand presence at the National Science and Technology Week 2015 (Philippines)",
       "Co-led the research, design, and implementation of Bluetooth Low Energy (BLE) technology for the wearable device Croo, enhancing connection stability and cutting hardware costs",
-      "ollaborated on designing and scaling AWS infrastructure for the Android companion app of our IoT wearable device, ensuring reliable performance and seamless data sync between the app and device",
+      "Collaborated on designing and scaling AWS infrastructure for the Android companion app of our IoT wearable device, ensuring reliable performance and seamless data sync between the app and device",
     ],
     tags: [
       "Bluetooth Low Energy (BLE)",
