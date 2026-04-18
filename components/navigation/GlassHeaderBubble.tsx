@@ -6,6 +6,8 @@ import { usePathname } from "next/navigation";
 import { NavPill } from "@/components/navigation/NavPill";
 import {
   NAV_BUTTON_CLASSES,
+  NAV_BUTTON_HEIGHT,
+  NAV_BUTTON_WIDTH,
   NAV_HOME_LINK_CLASSES,
   NAV_ICON_CLASSES,
 } from "@/components/navigation/navStyles";
@@ -43,9 +45,9 @@ export default function GlassHeaderBubble({
     <div className={`relative inline-flex items-center ${_vtClassName ?? ""}`}>
       <nav
         aria-label="Header navigation"
-        className="inline-grid w-fit grid-cols-1 justify-items-center gap-2 sm:flex sm:w-auto sm:items-center sm:gap-2"
+        className="inline-grid w-fit grid-cols-1 justify-items-center gap-2 sm:flex sm:w-auto sm:items-center sm:gap-2.5 md:gap-3.5"
       >
-        <div className="order-2 flex items-center gap-2 sm:order-none sm:contents">
+        <div className="order-2 flex items-center gap-2.5 sm:order-none sm:contents">
           <span className="sm:order-1">
             <NavPill
               href="https://www.linkedin.com/in/jayvicsanantonio/"
@@ -54,8 +56,8 @@ export default function GlassHeaderBubble({
               external
               tooltip="LinkedIn"
               tooltipPlacement="below"
-              collapsedPx={"clamp(56px,11vw,84px)"}
-              heightPx={"clamp(48px,9.5vw,72px)"}
+              collapsedPx={NAV_BUTTON_WIDTH}
+              heightPx={NAV_BUTTON_HEIGHT}
               className={NAV_BUTTON_CLASSES}
             />
           </span>
@@ -68,9 +70,9 @@ export default function GlassHeaderBubble({
               label="Projects"
               active={isProjects}
               {...projectsTooltipProps}
-              collapsedPx={"clamp(56px,11vw,84px)"}
+              collapsedPx={NAV_BUTTON_WIDTH}
               expandedPx={"clamp(120px,40vw,180px)"}
-              heightPx={"clamp(48px,9.5vw,72px)"}
+              heightPx={NAV_BUTTON_HEIGHT}
               className={NAV_BUTTON_CLASSES}
             />
           </span>
@@ -83,9 +85,9 @@ export default function GlassHeaderBubble({
               label="Work"
               active={isWork}
               {...workTooltipProps}
-              collapsedPx={"clamp(56px,11vw,84px)"}
+              collapsedPx={NAV_BUTTON_WIDTH}
               expandedPx={"clamp(104px,34vw,160px)"}
-              heightPx={"clamp(48px,9.5vw,72px)"}
+              heightPx={NAV_BUTTON_HEIGHT}
               className={NAV_BUTTON_CLASSES}
             />
           </span>
@@ -98,8 +100,8 @@ export default function GlassHeaderBubble({
               external
               tooltip="GitHub"
               tooltipPlacement="below"
-              collapsedPx={"clamp(56px,11vw,84px)"}
-              heightPx={"clamp(48px,9.5vw,72px)"}
+              collapsedPx={NAV_BUTTON_WIDTH}
+              heightPx={NAV_BUTTON_HEIGHT}
               className={NAV_BUTTON_CLASSES}
             />
           </span>

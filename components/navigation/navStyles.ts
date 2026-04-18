@@ -1,3 +1,6 @@
+export const NAV_BUTTON_HEIGHT = "clamp(48px, var(--pill-h, 9.5vw), 72px)";
+export const NAV_BUTTON_WIDTH = "clamp(60px, 17vw, 84px)";
+
 export const NAV_BUTTON_CLASSES =
   "text-white/95 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200/80 focus-visible:ring-offset-0 bg-white/10 backdrop-blur-[24px] backdrop-saturate-[180%] border-white/30 shadow-[0_12px_28px_rgba(0,0,0,0.34),0_0_18px_rgba(34,211,238,0.32)] hover:border-cyan-200/60 hover:bg-white/14 hover:shadow-[0_14px_32px_rgba(0,0,0,0.36),0_0_22px_rgba(34,211,238,0.45)]";
 

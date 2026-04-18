@@ -3,13 +3,12 @@
 import type { ComponentProps, CSSProperties } from "react";
 
 import { NavPill } from "@/components/navigation/NavPill";
-import { NAV_BUTTON_CLASSES } from "@/components/navigation/navStyles";
+import { NAV_BUTTON_CLASSES, NAV_BUTTON_WIDTH } from "@/components/navigation/navStyles";
 import Icon from "@/components/primitives/Icon";
 
 const HERO_NAV_PILL_WIDTH = "clamp(280px, var(--nav-row-w, 22vw), 520px)";
 const HERO_NAV_PILL_HEIGHT = "clamp(48px, var(--pill-h, 10vh), 72px)";
 const HERO_NAV_BUTTON_HEIGHT = HERO_NAV_PILL_HEIGHT;
-const HERO_NAV_BUTTON_WIDTH = "clamp(60px, 17vw, 84px)";
 
 type NavItem = {
   href: string;
@@ -73,7 +72,7 @@ export default function Navigation() {
                 ariaLabel={item.ariaLabel}
                 icon={<Icon name={item.icon} size={item.iconSize} />}
                 tooltip={item.tooltip}
-                collapsedPx={HERO_NAV_BUTTON_WIDTH}
+                collapsedPx={NAV_BUTTON_WIDTH}
                 heightPx={HERO_NAV_BUTTON_HEIGHT}
                 className={NAV_BUTTON_CLASSES}
                 {...navPillProps}
@@ -102,7 +101,7 @@ export default function Navigation() {
                 ariaLabel={item.ariaLabel}
                 icon={<Icon name={item.icon} size={item.iconSize} />}
                 tooltip={item.tooltip}
-                collapsedPx={HERO_NAV_BUTTON_WIDTH}
+                collapsedPx={NAV_BUTTON_WIDTH}
                 heightPx={HERO_NAV_BUTTON_HEIGHT}
                 className={NAV_BUTTON_CLASSES}
                 {...navPillProps}
