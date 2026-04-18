@@ -26,7 +26,7 @@ const NAV_ITEMS: NavItem[] = [
     ariaLabel: "LinkedIn",
     tooltip: "LinkedIn",
     icon: "linkedin",
-    iconSize: 36,
+    iconSize: 30,
     external: true,
   },
   {
@@ -34,7 +34,7 @@ const NAV_ITEMS: NavItem[] = [
     ariaLabel: "Projects",
     tooltip: "Projects",
     icon: "projects",
-    iconSize: 32,
+    iconSize: 30,
     vtTagName: "projects",
   },
   {
@@ -42,7 +42,7 @@ const NAV_ITEMS: NavItem[] = [
     ariaLabel: "Work Experience",
     tooltip: "Work Experience",
     icon: "work",
-    iconSize: 32,
+    iconSize: 30,
     vtTagName: "work",
   },
   {
@@ -50,7 +50,7 @@ const NAV_ITEMS: NavItem[] = [
     ariaLabel: "GitHub",
     tooltip: "GitHub",
     icon: "github",
-    iconSize: 36,
+    iconSize: 30,
     external: true,
   },
 ];

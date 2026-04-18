@@ -5,6 +5,9 @@ import { usePathname } from "next/navigation";
 
 import { NavPill } from "@/components/navigation/NavPill";
 import Icon from "@/components/primitives/Icon";
+
+const NAV_ICON_CLASS = "h-[clamp(22px,5vw,30px)] w-[clamp(22px,5vw,30px)]";
+
 export type GlassHeaderBubbleProps = {
   label: string;
   vtClassName?: string; // e.g., vt-tag-projects, vt-tag-work
@@ -44,12 +47,7 @@ export default function GlassHeaderBubble({
             <NavPill
               href="https://www.linkedin.com/in/jayvicsanantonio/"
               ariaLabel="LinkedIn"
-              icon={
-                <Icon
-                  name="linkedin"
-                  className="h-[clamp(24px,6vw,36px)] w-[clamp(24px,6vw,36px)]"
-                />
-              }
+              icon={<Icon name="linkedin" className={NAV_ICON_CLASS} />}
               external
               tooltip="LinkedIn"
               tooltipPlacement="below"
@@ -63,12 +61,7 @@ export default function GlassHeaderBubble({
             <NavPill
               href="/projects"
               ariaLabel="Projects"
-              icon={
-                <Icon
-                  name="projects"
-                  className="h-[clamp(24px,6vw,36px)] w-[clamp(24px,6vw,36px)] font-bold"
-                />
-              }
+              icon={<Icon name="projects" className={NAV_ICON_CLASS} />}
               label="Projects"
               active={isProjects}
               {...projectsTooltipProps}
@@ -86,9 +79,7 @@ export default function GlassHeaderBubble({
             <NavPill
               href="/work"
               ariaLabel="Work"
-              icon={
-                <Icon name="work" className="h-[clamp(24px,6vw,36px)] w-[clamp(24px,6vw,36px)]" />
-              }
+              icon={<Icon name="work" className={NAV_ICON_CLASS} />}
               label="Work"
               active={isWork}
               {...workTooltipProps}
@@ -106,9 +97,7 @@ export default function GlassHeaderBubble({
             <NavPill
               href="https://github.com/jayvicsanantonio"
               ariaLabel="GitHub"
-              icon={
-                <Icon name="github" className="h-[clamp(24px,6vw,36px)] w-[clamp(24px,6vw,36px)]" />
-              }
+              icon={<Icon name="github" className={NAV_ICON_CLASS} />}
               external
               tooltip="GitHub"
               tooltipPlacement="below"
