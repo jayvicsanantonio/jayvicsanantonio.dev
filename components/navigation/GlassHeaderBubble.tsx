@@ -115,7 +115,7 @@ export default function GlassHeaderBubble({
             if (typeof window !== "undefined") window.location.assign("/");
           }}
         >
-          <span className="relative text-[clamp(14px,2.2vw,22px)] text-cyan-50">
+          <span className="relative z-10 text-[clamp(14px,2.2vw,22px)] text-cyan-50">
             Hi, I'm Jayvic 👋
           </span>
         </Link>
