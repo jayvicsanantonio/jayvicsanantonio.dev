@@ -1,15 +1,20 @@
 "use client";
 
-import { Icon } from "@iconify/react";
 import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 
-import { PROJECTS } from "@/app/projects/projects.data";
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
 import { CARD_INNER_BASE, CARD_OUTER_BASE } from "@/components/styles/card-styles";
+import Icon from "@/components/primitives/Icon";
 import ProjectLink from "./ProjectLink";
+import type { Project } from "../types";
+
+type ProjectListItem = Pick<
+  Project,
+  "slug" | "title" | "period" | "blurb" | "image" | "skills" | "links"
+>;
 
 const SKILL_FILTERS = [
   "All",
@@ -66,7 +71,7 @@ function FadeInImage({ alt, ...props }: React.ComponentProps<typeof Image>) {
   );
 }
 
-export default function SkillsAndCases() {
+export default function SkillsAndCases({ projects }: { projects: ProjectListItem[] }) {
   const prefersReducedMotion = usePrefersReducedMotion();
   const router = useRouter();
   const pathname = usePathname();
@@ -108,7 +113,7 @@ export default function SkillsAndCases() {
   // Card animation handled via CSS keyframes (animate-fade-in-up)
 
   const visible = React.useMemo(() => {
-    const filtered = PROJECTS.filter((c) => active === "All" || c.skills.includes(active));
+    const filtered = projects.filter((c) => active === "All" || c.skills.includes(active));
     return filtered.slice().sort((a, b) => {
       const ai = PRIORITY_ORDER.indexOf(a.slug);
       const bi = PRIORITY_ORDER.indexOf(b.slug);
@@ -119,7 +124,7 @@ export default function SkillsAndCases() {
       }
       return 0;
     });
-  }, [active]);
+  }, [active, projects]);
 
   return (
     <div className="mt-12">
@@ -185,15 +190,15 @@ export default function SkillsAndCases() {
                     let icon: React.ReactNode = null;
                     switch (l.icon) {
                       case "github":
-                        icon = <Icon icon="mdi:github" width={18} height={18} />;
+                        icon = <Icon name="github" size={18} />;
                         break;
                       case "watch":
-                        icon = <Icon icon="mdi:play" width={16} height={16} />;
+                        icon = <Icon name="play" size={16} />;
                         break;
                       case "marketplace":
                       case "external":
                       case "view":
-                        icon = <Icon icon="mdi:open-in-new" width={16} height={16} />;
+                        icon = <Icon name="external" size={16} />;
                         break;
                       default:
                         icon = null;

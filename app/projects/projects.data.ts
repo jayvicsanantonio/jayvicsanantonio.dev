@@ -8,7 +8,7 @@ export const PROJECTS: Project[] = [
     blurb:
       "Built for the AWS AI Agent Global Hackathon 2025, this serverless multi agent Pokémon TCG valuation platform uses Next.js 15, TypeScript, and AWS Bedrock agents with Rekognition and Step Functions to authenticate trading cards and generate fast, low cost pricing insights.",
     image: {
-      src: "/images/projects/collectiq.png",
+      src: "/images/projects/collectiq.webp",
       alt: "CollectIQ trading card valuation interface",
       width: 1200,
       height: 675,
@@ -74,7 +74,7 @@ export const PROJECTS: Project[] = [
     blurb:
       "An agentic AI system that autonomously monitors my inbox and delivers personalized voice briefings via phone call. Built with AWS (Lambda, S3, API Gateway, IAM, DynamoDB, CDK, SystemsManager, EventBridge Scheduler), Gmail API, and ElevenLabs for text-to-speech.",
     image: {
-      src: "/images/projects/ai-inbox-briefing.png",
+      src: "/images/projects/ai-inbox-briefing.webp",
       alt: "AI Inbox Briefer voice briefing system",
       width: 1200,
       height: 675,
@@ -130,7 +130,7 @@ export const PROJECTS: Project[] = [
     blurb:
       "Created for the Google Chrome Built in AI Challenge 2025, this wellness centered Chrome extension transforms everyday reading into calm, reflective micro sessions powered by Gemini Nano and the Chrome built in AI APIs, with all processing kept on device.",
     image: {
-      src: "/images/projects/reflexa-ai.png",
+      src: "/images/projects/reflexa-ai.webp",
       alt: "Reflexa AI wellness focused reading overlay",
       width: 1200,
       height: 675,
@@ -189,7 +189,7 @@ export const PROJECTS: Project[] = [
     blurb:
       "Developed for the OpenAI Open Model Hackathon, this LLM powered repository ethics analyzer uses Next.js 15, Groq, PostgreSQL, and Prisma to evaluate codebases and generate shareable SVG badges that highlight positive societal impact.",
     image: {
-      src: "/images/projects/ai-humanity.png",
+      src: "/images/projects/ai-humanity.webp",
       alt: "Humanity+ Passport",
       width: 1200,
       height: 675,
@@ -240,7 +240,7 @@ export const PROJECTS: Project[] = [
     blurb:
       "A modern Pac‑Man remake built with React 19, TypeScript, Vite, and TailwindCSS that features stateful ghost AI and a clean gameplay architecture.",
     image: {
-      src: "/images/projects/ai-pacman.png",
+      src: "/images/projects/ai-pacman.webp",
       alt: "AI Pac-Man",
       width: 1200,
       height: 675,
@@ -277,7 +277,7 @@ export const PROJECTS: Project[] = [
     blurb:
       "An interactive AI history timeline built with Next.js 15, React 19, TypeScript, and Framer Motion. The curation backend is a Node.js service that uses the OpenAI API and GitHub Actions to score news and propose updates.",
     image: {
-      src: "/images/projects/ai-timeline.png",
+      src: "/images/projects/ai-timeline.webp",
       alt: "AI Timeline",
       width: 1200,
       height: 675,
@@ -375,7 +375,7 @@ export const PROJECTS: Project[] = [
     blurb:
       "A playful holiday snippet with a dynamic countdown and a “Santa’s Mail” popover built with the Popover API. It also demonstrates precise element placement with the CSS Anchor Positioning API (Chrome/Edge today; Firefox/Safari forthcoming) using plain HTML, CSS, and JavaScript.",
     image: {
-      src: "/images/projects/christmas-countdown.png",
+      src: "/images/projects/christmas-countdown.webp",
       alt: "Christmas Countdown experiment preview",
       width: 1200,
       height: 675,
@@ -404,7 +404,7 @@ export const PROJECTS: Project[] = [
     blurb:
       "A pure HTML and CSS animation that recreates the aurora borealis over a starry night sky using layered gradients, background images, and keyframe animations. Inspired by the May 2024 solar storm that made the northern lights visible across the Bay Area and as far south as San Diego.",
     image: {
-      src: "/images/projects/aurora-borealis.png",
+      src: "/images/projects/aurora-borealis.webp",
       alt: "Aurora Borealis CSS animation",
       width: 1200,
       height: 675,
@@ -433,7 +433,7 @@ export const PROJECTS: Project[] = [
     blurb:
       "An HTML and CSS animation that simulates a total solar eclipse using a centered container with sun and moon layers, a radial-gradient sun, a solid-color moon, and keyframe motion. Inspired by the April 8, 2024 eclipse that crossed North America over Mexico, the United States, and Canada.",
     image: {
-      src: "/images/projects/solar-eclipse.png",
+      src: "/images/projects/solar-eclipse.webp",
       alt: "Total Solar Eclipse CSS animation",
       width: 1200,
       height: 675,
@@ -539,32 +539,6 @@ export const PROJECTS: Project[] = [
       },
     ],
   },
-  // {
-  //   slug: "mm-church",
-  //   title: "Malayang Mananampalataya Church",
-  //   period: "2022",
-  //   blurb:
-  //     "A responsive and accessible church website built with React and a content‑first information architecture.",
-  //   image: {
-  //     src: "/images/home/mm-church.webp",
-  //     alt: "Malayang Mananampalataya Church",
-  //     width: 1200,
-  //     height: 675,
-  //     ratio: "1200/675",
-  //   },
-  //   skills: ["React", "Accessibility", "Content Architecture", "Client"],
-  //   metrics: ["Mobile‑first UX", "Fast loading", "Clear content structure"],
-  //   links: [
-  //     { label: "Github", href: "https://github.com/nesceal/mmchurch", icon: "github" },
-  //     { label: "View", href: "https://mmchurch.ph/", icon: "external" },
-  //   ],
-  //   sections: [
-  //     {
-  //       label: "Context",
-  //       content: "Focused on simple publishing and intuitive structure for a broad audience.",
-  //     },
-  //   ],
-  // },
   {
     slug: "sync-flow",
     title: "SyncFlow",
@@ -572,7 +546,7 @@ export const PROJECTS: Project[] = [
     blurb:
       "A unified edge‑deployed synchronization service built with Hono on Vercel Edge that consolidates 19 Node functions into a single deployment. The system adds Redis‑backed rate limiting, email onboarding, and admin dashboards while reducing cold starts.",
     image: {
-      src: "/images/projects/sync-flow.png",
+      src: "/images/projects/sync-flow.webp",
       alt: "SyncFlow",
       width: 1200,
       height: 675,
@@ -609,7 +583,7 @@ export const PROJECTS: Project[] = [
     blurb:
       "A habit‑tracking progressive web app built with React 19, TypeScript, and Vite that uses modern PWA APIs. The backend is a Cloudflare Workers API built with Hono and secured with Clerk. Features a RAG chatbot powered by Pinecone for vector storage, Cloudflare Workers AI for embedding and LLM inference, and Vercel AI SDK for a unified AI interface with streaming.",
     image: {
-      src: "/images/projects/tracknstick.png",
+      src: "/images/projects/tracknstick.webp",
       alt: "Track N' Stick",
       width: 1200,
       height: 675,
@@ -672,7 +646,7 @@ export const PROJECTS: Project[] = [
     blurb:
       "A curated developer resource hub built with Next.js 15, React 19, and Tailwind CSS v4 using @theme directives.",
     image: {
-      src: "/images/home/webdevhub.png",
+      src: "/images/home/webdevhub.webp",
       alt: "Web Development Hub",
       width: 1200,
       height: 675,
@@ -710,7 +684,7 @@ export const PROJECTS: Project[] = [
     blurb:
       "A mobile‑first digital lending marketplace with secure onboarding, built on an API‑first Node.js backend and a responsive web frontend.",
     image: {
-      src: "/images/projects/fintq-lendr.png",
+      src: "/images/projects/fintq-lendr.webp",
       alt: "FINTQ Lendr",
       width: 1200,
       height: 675,
@@ -741,7 +715,7 @@ export const PROJECTS: Project[] = [
     blurb:
       "IoT wearable safety device with companion Android app, BLE connectivity, and scalable AWS backend.",
     image: {
-      src: "/images/projects/croo.png",
+      src: "/images/projects/croo.webp",
       alt: "Croo wearable and app",
       width: 1200,
       height: 675,
@@ -786,7 +760,7 @@ export const PROJECTS: Project[] = [
     blurb:
       "An open‑source web tool for the Ember community built with React that guides upgrades across framework versions.",
     image: {
-      src: "/images/projects/ember-upgrade-guide.png",
+      src: "/images/projects/ember-upgrade-guide.webp",
       alt: "Ember Upgrade Guide",
       width: 1200,
       height: 675,
@@ -820,7 +794,7 @@ export const PROJECTS: Project[] = [
     blurb:
       "Official fan app supporting hundreds of thousands of users with scalable Node.js services and real-time features.",
     image: {
-      src: "/images/projects/eat-bulaga-mobile.png",
+      src: "/images/projects/eat-bulaga-mobile.webp",
       alt: "Eat Bulaga Mobile app",
       width: 1200,
       height: 675,

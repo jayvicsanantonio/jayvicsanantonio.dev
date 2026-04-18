@@ -70,44 +70,6 @@ export const viewport = {
   viewportFit: "cover",
 };
 
-const sourceSansPro = localFont({
-  src: [
-    {
-      path: "../public/fonts/SourceSansPro-Regular.woff2",
-      weight: "400",
-      style: "normal",
-    },
-  ],
-  display: "swap",
-  variable: "--font-source-sans",
-});
-
-const sourceSansProLight = localFont({
-  src: [
-    {
-      path: "../public/fonts/SourceSansPro-Light.woff2",
-      weight: "300",
-      style: "normal",
-    },
-  ],
-  display: "swap",
-  variable: "--font-source-sans",
-  preload: false,
-});
-
-const sourceSansProBold = localFont({
-  src: [
-    {
-      path: "../public/fonts/SourceSansPro-Bold.woff2",
-      weight: "700",
-      style: "normal",
-    },
-  ],
-  display: "swap",
-  variable: "--font-source-sans",
-  preload: false,
-});
-
 const oswaldLocal = localFont({
   src: [
     {
@@ -128,15 +90,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
-      <head>
-        <link rel="preconnect" href="https://api.iconify.design" />
-        <link rel="preconnect" href="https://va.vercel-scripts.com" />
-      </head>
-      <Body
-        fontVars={`${sourceSansPro.variable} ${sourceSansProLight.variable} ${sourceSansProBold.variable} ${oswaldLocal.variable}`}
-      >
-        {children}
-      </Body>
+      <Body fontVars={oswaldLocal.variable}>{children}</Body>
     </html>
   );
 }

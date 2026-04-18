@@ -1,9 +1,9 @@
 "use client";
 
-import { Icon } from "@iconify/react";
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Icon from "@/components/primitives/Icon";
 
 export default function ScrollIndicator() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -40,7 +40,7 @@ export default function ScrollIndicator() {
     });
 
     // Exit on scroll
-    ScrollTrigger.create({
+    const trigger = ScrollTrigger.create({
       trigger: document.body,
       start: "top top",
       end: "100px top",
@@ -55,7 +55,7 @@ export default function ScrollIndicator() {
 
     return () => {
       tl.kill();
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      trigger.kill();
     };
   }, []);
 
@@ -65,7 +65,7 @@ export default function ScrollIndicator() {
       className="fixed bottom-8 left-1/2 z-50 flex flex-col items-center gap-2 pointer-events-none mix-blend-difference"
     >
       <div ref={arrowRef} className="text-white/80">
-        <Icon icon="mdi:chevron-down" width={48} height={48} />
+        <Icon name="chevronDown" size={48} />
       </div>
     </div>
   );

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import React from "react";
 
-import AnimatedHeader from "./_components/AnimatedHeader";
 import SkillsAndCases from "./_components/SkillsAndCases";
 import { PROJECTS } from "./projects.data";
 
@@ -37,6 +36,15 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   const projectsSchema = createProjectsCollectionSchema(PROJECTS);
+  const projectListItems = PROJECTS.map(({ slug, title, period, blurb, image, skills, links }) => ({
+    slug,
+    title,
+    period,
+    blurb,
+    image,
+    skills,
+    links,
+  }));
 
   return (
     <main className="relative w-full overflow-hidden">
@@ -47,7 +55,9 @@ export default function ProjectsPage() {
       <div className="cq container pt-48 pb-16 sm:pt-52">
         {/* Header */}
         <div className="space-y-5 motion-safe:animate-fade-in-up">
-          <AnimatedHeader />
+          <h1 className="font-oswald text-3xl font-bold tracking-tight text-cyan-300/90 sm:text-4xl lg:text-6xl">
+            Engineering Portfolio
+          </h1>
 
           <p className="max-w-[720px] text-base text-gray-300/85 sm:text-lg">
             Production-ready applications and systems showcasing full-stack development expertise,
@@ -58,7 +68,7 @@ export default function ProjectsPage() {
         {/* Projects only */}
         <React.Suspense fallback={null}>
           <div className="motion-safe:animate-fade-in-up" style={{ animationDelay: "160ms" }}>
-            <SkillsAndCases />
+            <SkillsAndCases projects={projectListItems} />
           </div>
         </React.Suspense>
       </div>

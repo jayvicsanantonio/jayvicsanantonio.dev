@@ -3,9 +3,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-source-sans: var(--font-source-sans);
   --font-oswald: var(--font-oswald);
-  --font-inter-tight: var(--font-inter-tight);
 
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
@@ -295,6 +293,12 @@
   }
 
   body {
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      sans-serif;
     overflow-x: hidden;
     overflow-y: visible;
     -webkit-overflow-scrolling: touch;

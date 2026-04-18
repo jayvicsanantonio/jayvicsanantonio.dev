@@ -18,6 +18,7 @@ export type ReducedMotionArgs = {
   nameplate: HTMLDivElement | null;
   designation: HTMLDivElement | null;
   mobileHeroText: HTMLDivElement | null;
+  skipDecorativeVideo?: boolean;
 };
 
 /**
@@ -40,6 +41,7 @@ export function applyReducedMotionState({
   nameplate,
   designation,
   mobileHeroText,
+  skipDecorativeVideo = false,
 }: ReducedMotionArgs): void {
   gsap.set(pill, {
     ...FINAL_PANEL_STATE,
@@ -49,18 +51,18 @@ export function applyReducedMotionState({
     boxShadow: PILL_SHRINK_BOX_SHADOW,
   });
   gsap.set(pillContent, { autoAlpha: 0 });
-  gsap.set(video, { autoAlpha: 1 });
+  gsap.set(video, { autoAlpha: skipDecorativeVideo ? 0 : 1 });
 
   if (overlay) {
     gsap.set(overlay, { autoAlpha: OVERLAY_OPACITY.INITIAL });
   }
 
   if (watermarkMask) {
-    gsap.set(watermarkMask, { autoAlpha: 1 });
+    gsap.set(watermarkMask, { autoAlpha: skipDecorativeVideo ? 0 : 1 });
   }
 
   if (pillSkin) {
-    gsap.set(pillSkin, { autoAlpha: 0 });
+    gsap.set(pillSkin, { autoAlpha: skipDecorativeVideo ? 1 : 0 });
   }
 
   if (profile) {
