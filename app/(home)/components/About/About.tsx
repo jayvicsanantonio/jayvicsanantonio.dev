@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useRef } from "react";
-import { useAboutAnimation } from "../../hooks/use-about-animation";
 import { useHeroContext } from "../../context/HeroContext";
+import { useAboutAnimation } from "../../hooks/use-about-animation";
 
 export default function About() {
   const { aboutSectionRef: sectionRef } = useHeroContext();
@@ -49,7 +49,7 @@ export default function About() {
         </div>
         <div className="mt-10 w-full space-y-16 lg:space-y-28 text-2xl lg:text-4xl leading-relaxed text-white/80 lg:mt-0 lg:w-3/5 lg:pl-12 py-10 lg:py-0">
           <p className="">
-            I&apos;m Jayvic San Antonio, a Filipino Full-Stack Software Engineer building in the San
+            I&apos;m Jayvic San Antonio, a Filipino-American Full-Stack Software Engineer building in the San
             Francisco Bay Area, and I care deeply about craft, clarity, and shipping work people
             actually enjoy using.
           </p>
