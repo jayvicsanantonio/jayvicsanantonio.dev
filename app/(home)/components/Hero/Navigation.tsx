@@ -3,6 +3,7 @@
 import type { ComponentProps, CSSProperties } from "react";
 
 import { NavPill } from "@/components/navigation/NavPill";
+import { NAV_BUTTON_CLASSES } from "@/components/navigation/navStyles";
 import Icon from "@/components/primitives/Icon";
 
 const HERO_NAV_PILL_WIDTH = "clamp(280px, var(--nav-row-w, 22vw), 520px)";
@@ -55,9 +56,6 @@ const NAV_ITEMS: NavItem[] = [
   },
 ];
 
-const BUTTON_CLASSES =
-  "text-white/95 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200/80 focus-visible:ring-offset-0 bg-white/10 backdrop-blur-[24px] backdrop-saturate-[180%] border-white/30 shadow-[0_12px_28px_rgba(0,0,0,0.34),0_0_18px_rgba(34,211,238,0.32)] hover:border-cyan-200/60 hover:bg-white/14 hover:shadow-[0_14px_32px_rgba(0,0,0,0.36),0_0_22px_rgba(34,211,238,0.45)]";
-
 export default function Navigation() {
   return (
     <nav aria-label="Hero quick links" className="w-full">
@@ -77,7 +75,7 @@ export default function Navigation() {
                 tooltip={item.tooltip}
                 collapsedPx={HERO_NAV_BUTTON_WIDTH}
                 heightPx={HERO_NAV_BUTTON_HEIGHT}
-                className={BUTTON_CLASSES}
+                className={NAV_BUTTON_CLASSES}
                 {...navPillProps}
               />
             );
@@ -106,7 +104,7 @@ export default function Navigation() {
                 tooltip={item.tooltip}
                 collapsedPx={HERO_NAV_BUTTON_WIDTH}
                 heightPx={HERO_NAV_BUTTON_HEIGHT}
-                className={BUTTON_CLASSES}
+                className={NAV_BUTTON_CLASSES}
                 {...navPillProps}
               />
             );

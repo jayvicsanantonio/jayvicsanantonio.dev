@@ -4,14 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { NavPill } from "@/components/navigation/NavPill";
+import {
+  NAV_BUTTON_CLASSES,
+  NAV_HOME_LINK_CLASSES,
+  NAV_ICON_CLASSES,
+} from "@/components/navigation/navStyles";
 import Icon from "@/components/primitives/Icon";
-
-const NAV_ICON_CLASSES = {
-  github: "h-[clamp(22px,4.5vw,26px)] w-[clamp(22px,4.5vw,26px)]",
-  linkedin: "h-[clamp(27px,5.8vw,34px)] w-[clamp(27px,5.8vw,34px)]",
-  projects: "h-[clamp(24px,5.2vw,31px)] w-[clamp(24px,5.2vw,31px)]",
-  work: "h-[clamp(24px,5.2vw,31px)] w-[clamp(24px,5.2vw,31px)]",
-};
 
 export type GlassHeaderBubbleProps = {
   label: string;
@@ -58,7 +56,7 @@ export default function GlassHeaderBubble({
               tooltipPlacement="below"
               collapsedPx={"clamp(56px,11vw,84px)"}
               heightPx={"clamp(48px,9.5vw,72px)"}
-              className="bg-white/10 backdrop-blur-[24px] backdrop-saturate-200 border-white/55 hover:border-white/60"
+              className={NAV_BUTTON_CLASSES}
             />
           </span>
 
@@ -73,10 +71,7 @@ export default function GlassHeaderBubble({
               collapsedPx={"clamp(56px,11vw,84px)"}
               expandedPx={"clamp(120px,40vw,180px)"}
               heightPx={"clamp(48px,9.5vw,72px)"}
-              className={[
-                "bg-white/20 backdrop-blur-[24px] backdrop-saturate-200",
-                !isProjects ? "border-white/55 hover:border-white/60" : "",
-              ].join(" ")}
+              className={NAV_BUTTON_CLASSES}
             />
           </span>
 
@@ -91,10 +86,7 @@ export default function GlassHeaderBubble({
               collapsedPx={"clamp(56px,11vw,84px)"}
               expandedPx={"clamp(104px,34vw,160px)"}
               heightPx={"clamp(48px,9.5vw,72px)"}
-              className={[
-                "bg-white/20 backdrop-blur-[24px] backdrop-saturate-200",
-                !isWork ? "border-white/55 hover:border-white/60" : "",
-              ].join(" ")}
+              className={NAV_BUTTON_CLASSES}
             />
           </span>
 
@@ -108,7 +100,7 @@ export default function GlassHeaderBubble({
               tooltipPlacement="below"
               collapsedPx={"clamp(56px,11vw,84px)"}
               heightPx={"clamp(48px,9.5vw,72px)"}
-              className="bg-white/20 backdrop-blur-[24px] backdrop-saturate-200 border-white/55 hover:border-white/60"
+              className={NAV_BUTTON_CLASSES}
             />
           </span>
         </div>
@@ -116,7 +108,7 @@ export default function GlassHeaderBubble({
         <Link
           href="/"
           aria-label="Home"
-          className="pointer-events-auto order-1 inline-flex h-[clamp(48px,9.5vw,72px)] items-center justify-center rounded-full border border-cyan-400/30 bg-cyan-900/40 px-5 font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_10px_30px_rgba(0,139,139,0.3)] backdrop-blur-[20px] backdrop-saturate-[180%] transition-all hover:bg-cyan-800/50 hover:border-cyan-400/40 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.15),0_12px_35px_rgba(0,139,139,0.4)] w-full sm:order-3 sm:w-auto sm:px-6 md:px-20 before:pointer-events-none before:absolute before:inset-0 before:rounded-full before:bg-[radial-gradient(100%_50%_at_50%_0%,rgba(0,255,255,0.13),rgba(0,255,255,0)_50%)] before:content-['']"
+          className={NAV_HOME_LINK_CLASSES}
           onClick={(e) => {
             e.preventDefault();
             // Force a full reload to ensure the homepage remounts and animations restart
