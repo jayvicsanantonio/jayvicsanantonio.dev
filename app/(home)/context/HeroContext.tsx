@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useRef, type ReactNode } from "react";
+import { createContext, use, useRef, type ReactNode } from "react";
 import type { HeroAnimationRefs } from "../types";
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 import useHeroAnimations from "../hooks/use-hero-animations";
@@ -8,7 +8,7 @@ import useHeroAnimations from "../hooks/use-hero-animations";
 const HeroContext = createContext<HeroAnimationRefs | null>(null);
 
 export function useHeroContext() {
-  const context = useContext(HeroContext);
+  const context = use(HeroContext);
   if (!context) {
     throw new Error("useHeroContext must be used within a HeroProvider");
   }
@@ -73,10 +73,10 @@ export function HeroProvider({ children }: { children: ReactNode }) {
   useHeroAnimations({ refs, prefersReducedMotion });
 
   return (
-    <HeroContext.Provider value={refs}>
+    <HeroContext value={refs}>
       <main ref={smoothWrapperRef} id="smooth-wrapper" className="relative z-10 w-full text-white">
         {children}
       </main>
-    </HeroContext.Provider>
+    </HeroContext>
   );
 }
