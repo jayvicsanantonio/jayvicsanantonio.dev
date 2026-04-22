@@ -1,19 +1,17 @@
 "use client";
 
-import { forwardRef } from "react";
-
+import type React from "react";
 import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
+
 type MarqueeRowProps = {
   items: string[];
   direction?: "left" | "right";
   duration?: number; // seconds
   pauseOnHover?: boolean;
+  ref?: React.Ref<HTMLDivElement>;
 };
 
-const MarqueeRow = forwardRef<HTMLDivElement, MarqueeRowProps>(function MarqueeRow(
-  { items, direction = "left", duration = 45, pauseOnHover = true },
-  ref,
-) {
+const MarqueeRow = ({ items, direction = "left", duration = 45, pauseOnHover = true, ref }: MarqueeRowProps) => {
   const reducedMotion = usePrefersReducedMotion();
 
   const playStateClass = pauseOnHover ? "group-hover:[animation-play-state:paused]" : "";
@@ -68,6 +66,5 @@ const MarqueeRow = forwardRef<HTMLDivElement, MarqueeRowProps>(function MarqueeR
       `}</style>
     </div>
   );
-});
-
+};
 export default MarqueeRow;
