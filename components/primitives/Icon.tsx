@@ -6,6 +6,7 @@ type IconName =
   | "external"
   | "github"
   | "linkedin"
+  | "download"
   | "play"
   | "projects"
   | "work";
@@ -27,6 +28,16 @@ type IconDefinition =
 
 const ICONS: Record<IconName, IconDefinition> = {
   check: { paths: ["M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"], type: "fill" },
+  download: {
+    children: (
+      <>
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <polyline points="7 10 12 15 17 10" />
+        <line x1="12" x2="12" y1="15" y2="3" />
+      </>
+    ),
+    type: "stroke",
+  },
   chevronDown: { paths: ["M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"], type: "fill" },
   external: {
     paths: [
