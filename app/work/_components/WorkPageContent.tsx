@@ -1,3 +1,4 @@
+import DownloadExperience from "./DownloadExperience";
 import WorkTimeline from "./WorkTimeline";
 
 export default function WorkPageContent() {
@@ -16,9 +17,14 @@ export default function WorkPageContent() {
           </div>
           <div className="cq container relative pt-48 pb-16 sm:pt-52" data-speed="0.98">
             <div className="space-y-5 motion-safe:animate-fade-in-up" data-lag="0.12">
-              <h1 className="font-oswald text-3xl font-bold tracking-tight text-cyan-300/90 sm:text-4xl lg:text-6xl">
-                Professional Experience
-              </h1>
+              <div className="flex flex-wrap items-end justify-between gap-6">
+                <h1 className="font-oswald text-3xl font-bold tracking-tight text-cyan-300/90 sm:text-4xl lg:text-6xl">
+                  Professional Experience
+                </h1>
+                <div className="pb-1 sm:pb-2">
+                  <DownloadExperience />
+                </div>
+              </div>
               <p className="max-w-[720px] text-base text-gray-300/85 sm:text-lg">
                 Ten years architecting and building high-performance adtech platforms, real-time
                 systems, and scalable web applications built for enterprise-grade performance.
