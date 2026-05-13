@@ -34,8 +34,7 @@ export const metadata: Metadata = {
 
 const EXPERIENCES_FOR_STRUCTURED_DATA = [
   {
-    title: "Independent Builder and AI Upskilling",
-    company: "Professional Sabbatical",
+    title: "Independent AI Developer & Builder",
     period: "2023 - Present",
   },
   {

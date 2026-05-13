@@ -12,7 +12,7 @@ type ProjectStructuredDataInput = {
 
 type WorkStructuredDataInput = {
   title: string;
-  company: string;
+  company?: string;
   period: string;
 };
 
@@ -92,7 +92,7 @@ export const createWorkCollectionSchema = (
       position: index + 1,
       item: {
         "@type": "Thing",
-        name: `${experience.title} at ${experience.company}`,
+        name: experience.company ? `${experience.title} at ${experience.company}` : experience.title,
         description: experience.period,
       },
     })),

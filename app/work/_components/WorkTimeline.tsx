@@ -6,8 +6,7 @@ import type { Experience } from "../types";
 
 const EXPERIENCES: Experience[] = [
   {
-    title: "Independent Builder and AI Upskilling",
-    company: "Professional Sabbatical",
+    title: "Independent AI Developer & Builder",
     period: "2023 - Present",
     bullets: [
       "Rebuilt my personal website with Next.js, React, TypeScript, and Tailwind CSS, modernizing its architecture for performance, accessibility, and visual consistency. Benchmarked and refactored the frontend to improve mobile LCP by 0.52 seconds, introduced Partial Pre-Rendering experiments, and ensured Safari/mobile parity through dedicated proxy and CSS fallback systems. The site also showcases multiple production-grade React + TypeScript applications I built, including productivity tools, games, and utilities.",
@@ -243,9 +242,13 @@ export default function WorkTimeline() {
                           {item.title}
                         </h3>
                         <div className="mt-1 flex items-baseline justify-between gap-3">
-                          <p className="text-sm tracking-[0.14em] text-gray-300/90 uppercase lg:text-base">
-                            {item.company}
-                          </p>
+                          {item.company ? (
+                            <p className="text-sm tracking-[0.14em] text-gray-300/90 uppercase lg:text-base">
+                              {item.company}
+                            </p>
+                          ) : (
+                            <div />
+                          )}
                           <span className="lg:text:[11px] rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] font-medium tracking-[0.12em] whitespace-nowrap text-gray-300 uppercase">
                             {item.period}
                           </span>
