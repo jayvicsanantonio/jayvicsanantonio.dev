@@ -238,21 +238,26 @@ export default function WorkTimeline() {
                       className={`${CARD_INNER_BASE} p-5 sm:p-6 [@container(min-width:36rem)]:p-6`}
                     >
                       <div className="text-left">
-                        <h3 className="font-oswald text-xl text-white [@container(min-width:28rem)]:text-2xl">
-                          {item.title}
-                        </h3>
-                        <div className="mt-1 flex items-baseline justify-between gap-3">
-                          {item.company ? (
+                        <div className="flex items-baseline justify-between gap-3">
+                          <h3 className="font-oswald text-xl text-white [@container(min-width:28rem)]:text-2xl">
+                            {item.title}
+                          </h3>
+                          {!item.company && (
+                            <span className="lg:text-[11px] shrink-0 rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] font-medium tracking-[0.12em] whitespace-nowrap text-gray-300 uppercase">
+                              {item.period}
+                            </span>
+                          )}
+                        </div>
+                        {item.company && (
+                          <div className="mt-1 flex items-baseline justify-between gap-3">
                             <p className="text-sm tracking-[0.14em] text-gray-300/90 uppercase lg:text-base">
                               {item.company}
                             </p>
-                          ) : (
-                            <div />
-                          )}
-                          <span className="lg:text:[11px] rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] font-medium tracking-[0.12em] whitespace-nowrap text-gray-300 uppercase">
-                            {item.period}
-                          </span>
-                        </div>
+                            <span className="lg:text-[11px] shrink-0 rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-[10px] font-medium tracking-[0.12em] whitespace-nowrap text-gray-300 uppercase">
+                              {item.period}
+                            </span>
+                          </div>
+                        )}
                         <div className="mt-3 h-px bg-linear-to-r from-transparent via-white/5 to-transparent" />
                       </div>
 
