@@ -55,7 +55,8 @@
 
 ## Testing & Quality Checks
 
-- There are currently no automated tests; run `pnpm type-check` and `pnpm check` before every PR. If adding tests, co-locate `*.test.tsx` with the module.
+- Unit/component tests run with Vitest (`pnpm test`, `pnpm test:watch`); co-locate `*.test.ts(x)` with the module. End-to-end tests live in `e2e/` and run with Playwright (`pnpm test:e2e`, requires `pnpm exec playwright install chromium` once).
+- Run `pnpm test`, `pnpm type-check`, and `pnpm check` before every PR.
 - For UI changes, manually smoke-test `/`, `/projects`, and `/work` on desktop and mobile widths; rerun `pnpm lh:all` when performance-sensitive assets change.
 
 ## Commit & Pull Request Guidelines
