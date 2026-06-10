@@ -40,3 +40,7 @@ next-env.d.ts
 
 /reports
 /.vscode/
+
+# playwright
+/test-results/
+/playwright-report/
