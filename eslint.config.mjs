@@ -5,8 +5,9 @@ const tsProject = "./tsconfig.json";
 const tsconfigRootDir = fileURLToPath(new URL(".", import.meta.url));
 
 const config = [
-  ...next,
   {
+    // A config object with only "ignores" applies globally; combined with
+    // other keys it would only scope that object.
     ignores: [
       ".next/**",
       ".vercel/**",
@@ -19,6 +20,9 @@ const config = [
       "postcss.config.mjs",
       "next.config.mjs",
     ],
+  },
+  ...next,
+  {
     rules: {
       "react/no-unescaped-entities": "off",
       "no-console": ["error", { allow: ["error"] }],
