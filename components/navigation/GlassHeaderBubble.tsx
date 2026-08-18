@@ -14,18 +14,10 @@ import {
 import Icon from "@/components/primitives/Icon";
 
 export type GlassHeaderBubbleProps = {
-  label: string;
   vtClassName?: string; // e.g., vt-tag-projects, vt-tag-work
-  collapsedWidthPx?: number; // defaults to 80 (w-20)
-  expandedWidthPx?: number; // defaults to 200
 };
 
-export default function GlassHeaderBubble({
-  label: _label,
-  vtClassName: _vtClassName,
-  collapsedWidthPx: _collapsedWidthPx = 80,
-  expandedWidthPx: _expandedWidthPx = 200,
-}: GlassHeaderBubbleProps) {
+export default function GlassHeaderBubble({ vtClassName }: GlassHeaderBubbleProps) {
   const pathname = usePathname();
 
   const isProjects = pathname?.startsWith("/projects");
@@ -35,14 +27,8 @@ export default function GlassHeaderBubble({
     : { tooltip: "Projects", tooltipPlacement: "below" as const };
   const workTooltipProps = isWork ? {} : { tooltip: "Work", tooltipPlacement: "below" as const };
 
-  // Only keep vtTag on the expanded nav button for current route.
-  // If the parent passes vt-tag-... to this header bubble, suppress it
-  // when that tag matches the current route to avoid duplicate VT elements.
-
-  // Delay the active pill expansion slightly to echo the main bubble
-
   return (
-    <div className={`relative inline-flex items-center ${_vtClassName ?? ""}`}>
+    <div className={`relative inline-flex items-center ${vtClassName ?? ""}`}>
       <nav
         aria-label="Header navigation"
         className="inline-grid w-fit grid-cols-1 justify-items-center gap-2 sm:flex sm:w-auto sm:items-center sm:gap-2.5 md:gap-3.5"
@@ -56,7 +42,7 @@ export default function GlassHeaderBubble({
               external
               tooltip="LinkedIn"
               tooltipPlacement="below"
-              collapsedPx={NAV_BUTTON_WIDTH}
+              widthPx={NAV_BUTTON_WIDTH}
               heightPx={NAV_BUTTON_HEIGHT}
               className={NAV_BUTTON_CLASSES}
             />
@@ -67,11 +53,9 @@ export default function GlassHeaderBubble({
               href="/projects"
               ariaLabel="Projects"
               icon={<Icon name="projects" className={NAV_ICON_CLASSES.projects} />}
-              label="Projects"
               active={isProjects}
               {...projectsTooltipProps}
-              collapsedPx={NAV_BUTTON_WIDTH}
-              expandedPx={"clamp(120px,40vw,180px)"}
+              widthPx={NAV_BUTTON_WIDTH}
               heightPx={NAV_BUTTON_HEIGHT}
               className={NAV_BUTTON_CLASSES}
             />
@@ -82,11 +66,9 @@ export default function GlassHeaderBubble({
               href="/work"
               ariaLabel="Work"
               icon={<Icon name="work" className={NAV_ICON_CLASSES.work} />}
-              label="Work"
               active={isWork}
               {...workTooltipProps}
-              collapsedPx={NAV_BUTTON_WIDTH}
-              expandedPx={"clamp(104px,34vw,160px)"}
+              widthPx={NAV_BUTTON_WIDTH}
               heightPx={NAV_BUTTON_HEIGHT}
               className={NAV_BUTTON_CLASSES}
             />
@@ -100,7 +82,7 @@ export default function GlassHeaderBubble({
               external
               tooltip="GitHub"
               tooltipPlacement="below"
-              collapsedPx={NAV_BUTTON_WIDTH}
+              widthPx={NAV_BUTTON_WIDTH}
               heightPx={NAV_BUTTON_HEIGHT}
               className={NAV_BUTTON_CLASSES}
             />

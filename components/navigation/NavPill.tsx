@@ -8,13 +8,10 @@ export type NavPillProps = {
   href: string;
   ariaLabel: string;
   icon: React.ReactNode;
-  label?: string; // Text shown when active
-  active?: boolean; // Controls expansion + letter reveal
+  active?: boolean; // Cyan tint, aria-current, tooltip suppression, and the active dot
   vtTagName?: string; // e.g., 'projects' | 'work' — always applied when provided
-  cyanAccent?: boolean; // Optional cyan border tint (Home)
   external?: boolean; // Open in new tab
-  collapsedPx?: number | string; // Default 48; can be CSS strings like 'clamp(...)'
-  expandedPx?: number | string; // Default 140; CSS strings allowed
+  widthPx?: number | string; // Default 48; CSS strings such as clamp() are allowed
   heightPx?: number | string; // Default 48; CSS strings allowed
   tooltip?: string; // Tooltip text when non-active
   tooltipPlacement?: "above" | "below"; // Default: 'above'
@@ -25,13 +22,10 @@ export function NavPill({
   href,
   ariaLabel,
   icon,
-  label: _label,
   active = false,
   vtTagName,
-  cyanAccent = false,
   external = false,
-  collapsedPx = 48,
-  expandedPx: _expandedPx = 140,
+  widthPx = 48,
   heightPx = 48,
   tooltip,
   tooltipPlacement = "above",
@@ -64,16 +58,14 @@ export function NavPill({
         href={href}
         aria-label={ariaLabel}
         className={[
-          cyanAccent ? "border-cyan-400/50 hover:border-cyan-300/60" : "",
           active ? "border-cyan-400/70 hover:border-cyan-300/70" : "",
           vtClass,
           className ?? "",
         ].join(" ")}
         style={{
-          width: collapsedPx,
+          width: widthPx,
           height: heightPx,
           transition: "width 200ms ease-out",
-          willChange: "width",
           WebkitBackdropFilter: "blur(24px) saturate(200%)",
           backdropFilter: "blur(24px) saturate(200%)",
         }}

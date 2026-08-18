@@ -72,7 +72,7 @@ export default function Navigation() {
                 ariaLabel={item.ariaLabel}
                 icon={<Icon name={item.icon} size={item.iconSize} />}
                 tooltip={item.tooltip}
-                collapsedPx={NAV_BUTTON_WIDTH}
+                widthPx={NAV_BUTTON_WIDTH}
                 heightPx={HERO_NAV_BUTTON_HEIGHT}
                 className={NAV_BUTTON_CLASSES}
                 {...navPillProps}
@@ -101,7 +101,7 @@ export default function Navigation() {
                 ariaLabel={item.ariaLabel}
                 icon={<Icon name={item.icon} size={item.iconSize} />}
                 tooltip={item.tooltip}
-                collapsedPx={NAV_BUTTON_WIDTH}
+                widthPx={NAV_BUTTON_WIDTH}
                 heightPx={HERO_NAV_BUTTON_HEIGHT}
                 className={NAV_BUTTON_CLASSES}
                 {...navPillProps}
