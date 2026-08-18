@@ -16,7 +16,7 @@ const nextConfig = {
   reactCompiler: false,
   cacheComponents: false,
   experimental: {
-    viewTransition: true,
+    viewTransition: false,
     turbopackFileSystemCacheForDev: true,
   },
   turbopack: {},
