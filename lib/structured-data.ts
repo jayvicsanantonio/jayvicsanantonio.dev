@@ -7,7 +7,6 @@ type ProjectStructuredDataInput = {
   title: string;
   blurb: string;
   period: string;
-  links: { href: string }[];
 };
 
 type WorkStructuredDataInput = {
