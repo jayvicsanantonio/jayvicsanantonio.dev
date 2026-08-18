@@ -132,7 +132,9 @@ Create a `.env.local` with any environment variables required by features you en
 
 ## CI
 
-No CI is currently configured. Run `pnpm check`, `pnpm type-check`, and `pnpm test` locally before pushing — `pnpm build` runs the first two via `prebuild` and fails on any violation.
+There are no GitHub Actions workflow files in this repository. Pull requests are still checked by repository-level integrations — CodeQL default setup, Socket Security, and a Vercel preview deployment — but nothing runs the type-check, lint, or test suite.
+
+Run `pnpm check`, `pnpm type-check`, and `pnpm test` locally before pushing. `pnpm build` runs the first two via `prebuild` and fails on any violation.
 
 ## Contact
 
