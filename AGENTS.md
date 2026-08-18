@@ -12,7 +12,7 @@
 - Install: `pnpm install` (see `engines.node` and `packageManager` in `package.json`; `.nvmrc` pins the Node version). Use `pnpm dev` for local development; `pnpm start` runs the built app.
 - Ship: `pnpm build` (webpack enabled). Set `ANALYZE=true pnpm build` to view bundle analysis.
 - Quality: `pnpm type-check` (TS strict), `pnpm check` (eslint + prettier + `scripts/check-asset-budgets.mjs`, which fails on non-WebP/AVIF or oversized images), `pnpm fix` (autofix lint + format), `pnpm format` (format JS/TS + CSS/MD).
-- Performance: `pnpm lh:all` after a running dev server generates Lighthouse reports under `.lighthouse/`. Note `lighthouse-budgets.json` is not currently applied — no `--budget-path` is passed.
+- Performance: `pnpm lh:all` after a running dev server generates Lighthouse reports under `.lighthouse/`, evaluated against `lighthouse-budgets.json`. Lighthouse reports budget overages but does not exit non-zero, so this is informational rather than a gate.
 
 ## Coding Style & Naming Conventions
 
