@@ -73,7 +73,7 @@ export default function WorkTimeline() {
                 <div className={`relative ${isRight ? "lg:pl-[52vw]" : "lg:pr-[52vw]"}`}>
                   {/* Card */}
                   <article
-                    className={`${CARD_OUTER_BASE} mx-auto w-full motion-safe:animate-fade-in-up lg:mx-0 lg:w-[min(500px,50vw)] ${
+                    className={`${CARD_OUTER_BASE} mx-auto w-full lg:mx-0 lg:w-[min(500px,50vw)] ${
                       isRight ? "lg:mr-auto" : "lg:ml-auto"
                     }`}
                     style={{ animationDelay: `${Math.min(index * 80, 320)}ms` }}

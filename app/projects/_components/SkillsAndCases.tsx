@@ -4,8 +4,6 @@ import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 
-import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
-
 import { CARD_INNER_BASE, CARD_OUTER_BASE } from "@/components/styles/card-styles";
 import Icon from "@/components/primitives/Icon";
 import ProjectLink from "./ProjectLink";
@@ -72,7 +70,6 @@ function FadeInImage({ alt, ...props }: React.ComponentProps<typeof Image>) {
 }
 
 export default function SkillsAndCases({ projects }: { projects: ProjectListItem[] }) {
-  const prefersReducedMotion = usePrefersReducedMotion();
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -107,10 +104,6 @@ export default function SkillsAndCases({ projects }: { projects: ProjectListItem
       router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
     }
   };
-
-  // CSS-first entrance animation; we keep Framer only for future interactions
-
-  // Card animation handled via CSS keyframes (animate-fade-in-up)
 
   const visible = React.useMemo(() => {
     const filtered = projects.filter((c) => active === "All" || c.skills.includes(active));
@@ -155,10 +148,7 @@ export default function SkillsAndCases({ projects }: { projects: ProjectListItem
         {visible.map((c, i) => (
           <article
             key={c.slug}
-            className={`${CARD_OUTER_BASE} min-h-[360px] md:min-h-[430px] ${
-              !prefersReducedMotion ? "motion-safe:animate-fade-in-up" : ""
-            }`}
-            style={{ animationDelay: !prefersReducedMotion ? `${80 * i}ms` : undefined }}
+            className={`${CARD_OUTER_BASE} min-h-[360px] md:min-h-[430px]`}
           >
             <div
               className={`${CARD_INNER_BASE} [@container(min-width:36rem)]:grid [@container(min-width:36rem)]:grid-cols-[minmax(0,1fr),1.5fr] [@container(min-width:36rem)]:gap-0`}
