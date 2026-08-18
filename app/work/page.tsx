@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 
 import WorkPageContent from "./_components/WorkPageContent";
 
+import { EXPERIENCES } from "./experiences";
+
 import { createWorkCollectionSchema, serializeJsonLd } from "@/lib/structured-data";
 
 const siteUrl = new URL("https://jayvicsanantonio.dev");
@@ -32,35 +34,8 @@ export const metadata: Metadata = {
   },
 };
 
-const EXPERIENCES_FOR_STRUCTURED_DATA = [
-  {
-    title: "Independent AI Developer & Builder",
-    period: "2023 - Present",
-  },
-  {
-    title: "Software Engineer",
-    company: "Yahoo Inc.",
-    period: "2016 - 2023",
-  },
-  {
-    title: "Co-Founder",
-    company: "Saffron Technologies Inc.",
-    period: "2015 - 2016",
-  },
-  {
-    title: "Software Engineer",
-    company: "Voyager Innovations Inc.",
-    period: "2013 - 2016",
-  },
-  {
-    title: "Intern",
-    company: "University of the Philippines Diliman CRS",
-    period: "2011 - 2012",
-  },
-] as const;
-
 export default function WorkPage() {
-  const workSchema = createWorkCollectionSchema([...EXPERIENCES_FOR_STRUCTURED_DATA]);
+  const workSchema = createWorkCollectionSchema(EXPERIENCES);
 
   return (
     <>
