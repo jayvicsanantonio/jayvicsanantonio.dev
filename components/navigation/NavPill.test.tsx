@@ -3,6 +3,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
+import { NAV_BUTTON_CLASSES } from "@/components/navigation/navStyles";
 import { NavPill } from "@/components/navigation/NavPill";
 import Icon from "@/components/primitives/Icon";
 
@@ -40,5 +41,18 @@ describe("NavPill", () => {
 
     renderPill(false);
     expect(screen.getByText("Projects", { selector: "span" })).toBeInTheDocument();
+  });
+  it("keeps the active border tint when a caller supplies its own border class", () => {
+    render(
+      <NavPill
+        href="/projects"
+        ariaLabel="Projects"
+        icon={<Icon name="projects" />}
+        active
+        className={NAV_BUTTON_CLASSES}
+      />,
+    );
+
+    expect(screen.getByLabelText("Projects").className).toContain("border-cyan-400/70");
   });
 });

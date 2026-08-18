@@ -3,6 +3,7 @@
 import type React from "react";
 
 import { GlassButton } from "@/components/primitives/GlassButton";
+import { cn } from "@/lib/class-names";
 
 export type NavPillProps = {
   href: string;
@@ -57,11 +58,7 @@ export function NavPill({
       <GlassButton
         href={href}
         aria-label={ariaLabel}
-        className={[
-          active ? "border-cyan-400/70 hover:border-cyan-300/70" : "",
-          vtClass,
-          className ?? "",
-        ].join(" ")}
+        className={cn(className, vtClass, active && "border-cyan-400/70 hover:border-cyan-300/70")}
         style={{
           width: widthPx,
           height: heightPx,
