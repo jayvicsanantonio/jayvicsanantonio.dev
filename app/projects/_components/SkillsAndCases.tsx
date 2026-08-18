@@ -24,6 +24,12 @@ const SKILL_FILTERS = [
   "Sandboxes",
 ] as const;
 
+type SkillFilter = (typeof SKILL_FILTERS)[number];
+
+// "filter" is a legacy alias that is read but never written; "skill" is canonical.
+const parseSkillFilter = (value: string | null | undefined): SkillFilter =>
+  (SKILL_FILTERS as readonly string[]).includes(value ?? "") ? (value as SkillFilter) : "All";
+
 const PRIORITY_ORDER = [
   "yahoo-dsp",
   "collectiq",
@@ -73,28 +79,24 @@ export default function SkillsAndCases({ projects }: { projects: ProjectListItem
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const initialFromQuery = (searchParams?.get("skill") || searchParams?.get("filter")) ?? undefined;
+  const urlFilter = parseSkillFilter(searchParams?.get("skill") ?? searchParams?.get("filter"));
 
-  // Fixed, curated filters
-  const [active, setActive] = React.useState<string>(() =>
-    initialFromQuery && (SKILL_FILTERS as readonly string[]).includes(initialFromQuery)
-      ? (initialFromQuery as (typeof SKILL_FILTERS)[number])
-      : "All",
-  );
+  const [active, setActive] = React.useState<SkillFilter>(urlFilter);
 
   // Announce filter changes for screen readers
   const [announce, setAnnounce] = React.useState<string>("");
 
   // Keep URL query param in sync with active filter (replace to avoid history spam)
   const currentQS = React.useMemo(() => searchParams?.toString() ?? "", [searchParams]);
-  const handleFilterChange = (newFilter: string) => {
+  const handleFilterChange = (newFilter: SkillFilter) => {
     setActive(newFilter);
     setAnnounce(`Filter: ${newFilter}`);
 
     const params = new URLSearchParams(currentQS);
+    // Always drop the legacy alias so the two keys can never disagree.
+    params.delete("filter");
     if (newFilter === "All") {
       params.delete("skill");
-      params.delete("filter");
     } else {
       params.set("skill", newFilter);
     }
@@ -146,10 +148,7 @@ export default function SkillsAndCases({ projects }: { projects: ProjectListItem
       {/* Projects grid */}
       <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {visible.map((c, i) => (
-          <article
-            key={c.slug}
-            className={`${CARD_OUTER_BASE} min-h-[360px] md:min-h-[430px]`}
-          >
+          <article key={c.slug} className={`${CARD_OUTER_BASE} min-h-[360px] md:min-h-[430px]`}>
             <div
               className={`${CARD_INNER_BASE} [@container(min-width:36rem)]:grid [@container(min-width:36rem)]:grid-cols-[minmax(0,1fr),1.5fr] [@container(min-width:36rem)]:gap-0`}
             >
