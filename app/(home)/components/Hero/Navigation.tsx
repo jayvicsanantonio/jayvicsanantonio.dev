@@ -20,7 +20,7 @@ type NavItem = {
   external?: boolean;
 };
 
-const NAV_ITEMS: NavItem[] = [
+const LEFT_NAV_ITEMS: NavItem[] = [
   {
     href: "https://www.linkedin.com/in/jayvicsanantonio/",
     ariaLabel: "LinkedIn",
@@ -37,6 +37,9 @@ const NAV_ITEMS: NavItem[] = [
     iconSize: 31,
     vtTagName: "projects",
   },
+];
+
+const RIGHT_NAV_ITEMS: NavItem[] = [
   {
     href: "/work",
     ariaLabel: "Work Experience",
@@ -55,31 +58,38 @@ const NAV_ITEMS: NavItem[] = [
   },
 ];
 
+function NavGroup({ items }: { items: NavItem[] }) {
+  return (
+    <div className="flex items-center gap-2.5 sm:gap-3 md:gap-3.5">
+      {items.map((item) => {
+        // exactOptionalPropertyTypes rejects passing these as undefined, so spread them conditionally
+        const navPillProps = {
+          ...(item.vtTagName ? { vtTagName: item.vtTagName } : {}),
+          ...(item.external ? { external: true } : {}),
+        };
+        return (
+          <NavPill
+            key={item.ariaLabel}
+            href={item.href}
+            ariaLabel={item.ariaLabel}
+            icon={<Icon name={item.icon} size={item.iconSize} />}
+            tooltip={item.tooltip}
+            widthPx={NAV_BUTTON_WIDTH}
+            heightPx={HERO_NAV_BUTTON_HEIGHT}
+            className={NAV_BUTTON_CLASSES}
+            {...navPillProps}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
 export default function Navigation() {
   return (
     <nav aria-label="Hero quick links" className="w-full">
       <div className="mx-auto flex w-fit items-center gap-2.5 sm:gap-3 md:gap-3.5">
-        <div className="flex items-center gap-2.5 sm:gap-3 md:gap-3.5">
-          {NAV_ITEMS.slice(0, 2).map((item) => {
-            const navPillProps = {
-              ...(item.vtTagName ? { vtTagName: item.vtTagName } : {}),
-              ...(item.external ? { external: true } : {}),
-            };
-            return (
-              <NavPill
-                key={item.ariaLabel}
-                href={item.href}
-                ariaLabel={item.ariaLabel}
-                icon={<Icon name={item.icon} size={item.iconSize} />}
-                tooltip={item.tooltip}
-                widthPx={NAV_BUTTON_WIDTH}
-                heightPx={HERO_NAV_BUTTON_HEIGHT}
-                className={NAV_BUTTON_CLASSES}
-                {...navPillProps}
-              />
-            );
-          })}
-        </div>
+        <NavGroup items={LEFT_NAV_ITEMS} />
 
         <div
           aria-hidden
@@ -88,27 +98,7 @@ export default function Navigation() {
           data-nav-spacer
         />
 
-        <div className="flex items-center gap-2.5 sm:gap-3 md:gap-3.5">
-          {NAV_ITEMS.slice(2).map((item) => {
-            const navPillProps = {
-              ...(item.vtTagName ? { vtTagName: item.vtTagName } : {}),
-              ...(item.external ? { external: true } : {}),
-            };
-            return (
-              <NavPill
-                key={item.ariaLabel}
-                href={item.href}
-                ariaLabel={item.ariaLabel}
-                icon={<Icon name={item.icon} size={item.iconSize} />}
-                tooltip={item.tooltip}
-                widthPx={NAV_BUTTON_WIDTH}
-                heightPx={HERO_NAV_BUTTON_HEIGHT}
-                className={NAV_BUTTON_CLASSES}
-                {...navPillProps}
-              />
-            );
-          })}
-        </div>
+        <NavGroup items={RIGHT_NAV_ITEMS} />
       </div>
     </nav>
   );
