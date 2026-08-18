@@ -8,7 +8,6 @@ export type Project = {
     alt: string;
     width: number;
     height: number;
-    ratio: string;
   };
   skills: string[];
   metrics: string[];

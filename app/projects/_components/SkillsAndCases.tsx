@@ -169,7 +169,7 @@ export default function SkillsAndCases({ projects }: { projects: ProjectListItem
                   alt={c.image.alt}
                   width={c.image.width}
                   height={c.image.height}
-                  style={{ aspectRatio: c.image.ratio }}
+                  style={{ aspectRatio: `${c.image.width}/${c.image.height}` }}
                   className="h-full w-full object-cover"
                   priority={i < 3}
                 />
