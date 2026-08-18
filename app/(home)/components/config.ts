@@ -36,8 +36,6 @@ export const SCROLL_TIMING = {
   PILL_SNAP_DURATION: 0.3,
   NAV_ROW_START_OFFSET: 0.55,
   LABEL_EXIT_SCRUB: true,
-  COVER_FILL_SCRUB: true,
-  COVER_CONTENT_SCRUB: true,
   SKILLS_ENTRANCE_SCRUB: true,
 } as const;
 
@@ -73,9 +71,6 @@ export const SCROLL_THRESHOLDS = {
 export const SCROLL_TRIGGER_POSITIONS = {
   SKILLS_START: "top 40%",
   SKILLS_END: "center center",
-  COVER_FILL_START: "top bottom",
-  COVER_FILL_END: "top top",
-  COVER_CONTENT_START: "top top",
 } as const;
 
 /**
@@ -100,15 +95,6 @@ export const SKILLS_INITIAL_STATE = {
   HEADING_SCALE: 0.88,
   ABOVE_X_PERCENT: 18,
   BELOW_X_PERCENT: -18,
-} as const;
-
-/**
- * Cover section animation timing values.
- */
-export const COVER_TIMING = {
-  PARALLAX_DISTANCE: 0.9,
-  LABEL_Y_RANGE: { from: -12, to: 12 },
-  BODY_Y_RANGE: { from: 12, to: -12 },
 } as const;
 
 // --- From hero.constants.ts ---

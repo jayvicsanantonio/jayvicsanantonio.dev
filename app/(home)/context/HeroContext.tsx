@@ -22,10 +22,6 @@ export function HeroProvider({ children }: { children: ReactNode }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const nameplateRef = useRef<HTMLDivElement>(null);
   const designationRef = useRef<HTMLDivElement>(null);
-  const coverSectionRef = useRef<HTMLDivElement>(null);
-  const coverFillRef = useRef<HTMLDivElement>(null);
-  const coverLabelRef = useRef<HTMLDivElement>(null);
-  const coverBodyRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const videoOverlayRef = useRef<HTMLDivElement>(null);
   const videoWatermarkMaskRef = useRef<HTMLDivElement>(null);
@@ -50,10 +46,6 @@ export function HeroProvider({ children }: { children: ReactNode }) {
     containerRef,
     nameplateRef,
     designationRef,
-    coverSectionRef,
-    coverFillRef,
-    coverLabelRef,
-    coverBodyRef,
     videoRef,
     videoOverlayRef,
     videoWatermarkMaskRef,

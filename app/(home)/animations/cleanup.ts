@@ -1,18 +1,5 @@
-
-
-/**
- * Safely kills a GSAP tween and its associated ScrollTrigger.
- *
- * Handles null/undefined values gracefully, making it safe to use
- * in cleanup functions without additional checks.
- *
- * @param tween - The tween to kill (can be null/undefined)
- */
-export function killTween(tween: gsap.core.Tween | null | undefined): void {
-  tween?.scrollTrigger?.kill();
-  tween?.kill();
-}
-
+// GSAP teardown helpers.
+// Safely kills a timeline and any ScrollTrigger attached to it.
 /**
  * Safely kills a GSAP timeline and its associated ScrollTrigger.
  *
