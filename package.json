@@ -70,5 +70,13 @@
     "defaults",
     "not IE 11",
     "not dead"
-  ]
+  ],
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@tailwindcss/oxide",
+      "@vercel/speed-insights",
+      "sharp",
+      "unrs-resolver"
+    ]
+  }
 }
