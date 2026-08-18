@@ -1,5 +1,5 @@
 // Unit tests for the usePrefersReducedMotion hook.
-// Verifies the initial value and reaction to media query change events.
+// Covers detection at mount, reaction to live changes, and listener cleanup.
 import { act, renderHook } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
@@ -7,30 +7,35 @@ import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 
 type ChangeListener = (event: MediaQueryListEvent) => void;
 
-const stubMatchMedia = () => {
+// Models MediaQueryList closely enough to matter: `matches` and the event stream
+// stay in agreement, so a hook that ignores one of them fails.
+const stubMatchMedia = (initialMatches: boolean) => {
   const listeners: ChangeListener[] = [];
-  const removeEventListener = vi.fn((_type: string, listener: ChangeListener) => {
-    const index = listeners.indexOf(listener);
-    if (index !== -1) {
-      listeners.splice(index, 1);
-    }
-  });
-  const matchMedia = vi.fn().mockReturnValue({
-    matches: true,
+  const mediaQueryList = {
+    matches: initialMatches,
+    media: "",
+    onchange: null,
     addEventListener: (_type: string, listener: ChangeListener) => {
       listeners.push(listener);
     },
-    removeEventListener,
-  });
+    removeEventListener: vi.fn((_type: string, listener: ChangeListener) => {
+      const index = listeners.indexOf(listener);
+      if (index !== -1) listeners.splice(index, 1);
+    }),
+    dispatchEvent: () => false,
+  };
+
+  const matchMedia = vi.fn().mockReturnValue(mediaQueryList);
   vi.stubGlobal("matchMedia", matchMedia);
 
   const emitChange = (matches: boolean) => {
+    mediaQueryList.matches = matches;
     for (const listener of [...listeners]) {
       listener({ matches } as MediaQueryListEvent);
     }
   };
 
-  return { matchMedia, emitChange, removeEventListener };
+  return { matchMedia, emitChange, removeEventListener: mediaQueryList.removeEventListener };
 };
 
 afterEach(() => {
@@ -38,31 +43,37 @@ afterEach(() => {
 });
 
 describe("usePrefersReducedMotion", () => {
-  it("returns false before any media query change fires", () => {
-    stubMatchMedia();
+  it("reports the preference already set before the page loaded", () => {
+    stubMatchMedia(true);
+    const { result } = renderHook(() => usePrefersReducedMotion());
+    expect(result.current).toBe(true);
+  });
+
+  it("reports no preference when the query does not match at mount", () => {
+    stubMatchMedia(false);
     const { result } = renderHook(() => usePrefersReducedMotion());
     expect(result.current).toBe(false);
   });
 
-  it("subscribes to the no-preference media query", () => {
-    const { matchMedia } = stubMatchMedia();
+  it("queries the reduce preference directly rather than its complement", () => {
+    const { matchMedia } = stubMatchMedia(false);
     renderHook(() => usePrefersReducedMotion());
-    expect(matchMedia).toHaveBeenCalledWith("(prefers-reduced-motion: no-preference)");
+    expect(matchMedia).toHaveBeenCalledWith("(prefers-reduced-motion: reduce)");
   });
 
-  it("returns true when the user switches to reduced motion", () => {
-    const { emitChange } = stubMatchMedia();
+  it("follows the preference when it changes mid-session", () => {
+    const { emitChange } = stubMatchMedia(false);
     const { result } = renderHook(() => usePrefersReducedMotion());
 
-    act(() => emitChange(false));
+    act(() => emitChange(true));
     expect(result.current).toBe(true);
 
-    act(() => emitChange(true));
+    act(() => emitChange(false));
     expect(result.current).toBe(false);
   });
 
   it("removes the change listener on unmount", () => {
-    const { removeEventListener } = stubMatchMedia();
+    const { removeEventListener } = stubMatchMedia(false);
     const { unmount } = renderHook(() => usePrefersReducedMotion());
 
     unmount();

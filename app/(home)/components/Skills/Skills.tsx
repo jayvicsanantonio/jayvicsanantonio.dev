@@ -1,6 +1,5 @@
 "use client";
 
-import { useMemo } from "react";
 
 import MarqueeRow from "./MarqueeRow";
 
@@ -86,6 +85,21 @@ const SKILLS: string[] = [
   "Google GenAI SDK",
 ];
 
+const ROW_COUNT = 6;
+const skillsInRow = (row: number) => SKILLS.filter((_, index) => index % ROW_COUNT === row);
+
+const ROWS_ABOVE: MarqueeRowConfig[] = [
+  { items: skillsInRow(0), duration: 56, direction: "left" },
+  { items: skillsInRow(1), duration: 62, direction: "right" },
+  { items: skillsInRow(2), duration: 68, direction: "left" },
+];
+
+const ROWS_BELOW: MarqueeRowConfig[] = [
+  { items: skillsInRow(3), duration: 74, direction: "right" },
+  { items: skillsInRow(4), duration: 80, direction: "left" },
+  { items: skillsInRow(5), duration: 86, direction: "right" },
+];
+
 import { useHeroContext } from "../../context/HeroContext";
 
 export default function Skills() {
@@ -96,30 +110,6 @@ export default function Skills() {
     skillsHeadingRef: headingRef,
   } = useHeroContext();
 
-  const row0 = useMemo(() => SKILLS.filter((_, index) => index % 6 === 0), []);
-  const row1 = useMemo(() => SKILLS.filter((_, index) => index % 6 === 1), []);
-  const row2 = useMemo(() => SKILLS.filter((_, index) => index % 6 === 2), []);
-  const row3 = useMemo(() => SKILLS.filter((_, index) => index % 6 === 3), []);
-  const row4 = useMemo(() => SKILLS.filter((_, index) => index % 6 === 4), []);
-  const row5 = useMemo(() => SKILLS.filter((_, index) => index % 6 === 5), []);
-
-  const rowsAbove = useMemo<MarqueeRowConfig[]>(
-    () => [
-      { items: row0, duration: 56, direction: "left" },
-      { items: row1, duration: 62, direction: "right" },
-      { items: row2, duration: 68, direction: "left" },
-    ],
-    [row0, row1, row2],
-  );
-
-  const rowsBelow = useMemo<MarqueeRowConfig[]>(
-    () => [
-      { items: row3, duration: 74, direction: "right" },
-      { items: row4, duration: 80, direction: "left" },
-      { items: row5, duration: 86, direction: "right" },
-    ],
-    [row3, row4, row5],
-  );
 
   return (
     <section
@@ -128,12 +118,10 @@ export default function Skills() {
       aria-labelledby="skills-heading"
     >
       <div className="space-y-2 sm:space-y-3">
-        {rowsAbove.map((config, index) => (
+        {ROWS_ABOVE.map((config, index) => (
           <MarqueeRow
-            items={config.items}
-            duration={config.duration ?? 56}
-            direction={config.direction as "left" | "right"}
             key={`skills-top-${index}`}
+            {...config}
             ref={(el) => {
               if (rowsAboveRefs.current) {
                 rowsAboveRefs.current[index] = el;
@@ -153,12 +141,10 @@ export default function Skills() {
         </h2>
       </div>
       <div className="space-y-2 sm:space-y-3">
-        {rowsBelow.map((config, index) => (
+        {ROWS_BELOW.map((config, index) => (
           <MarqueeRow
-            items={config.items}
-            duration={config.duration ?? 56}
-            direction={config.direction as "left" | "right"}
             key={`skills-bottom-${index}`}
+            {...config}
             ref={(el) => {
               if (rowsBelowRefs.current) {
                 rowsBelowRefs.current[index] = el;

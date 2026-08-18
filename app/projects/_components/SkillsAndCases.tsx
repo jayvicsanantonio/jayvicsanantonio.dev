@@ -4,8 +4,6 @@ import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 
-import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
-
 import { CARD_INNER_BASE, CARD_OUTER_BASE } from "@/components/styles/card-styles";
 import Icon from "@/components/primitives/Icon";
 import ProjectLink from "./ProjectLink";
@@ -25,6 +23,12 @@ const SKILL_FILTERS = [
   "Open Source",
   "Sandboxes",
 ] as const;
+
+type SkillFilter = (typeof SKILL_FILTERS)[number];
+
+// "filter" is a legacy alias that is read but never written; "skill" is canonical.
+const parseSkillFilter = (value: string | null | undefined): SkillFilter =>
+  (SKILL_FILTERS as readonly string[]).includes(value ?? "") ? (value as SkillFilter) : "All";
 
 const PRIORITY_ORDER = [
   "yahoo-dsp",
@@ -72,32 +76,27 @@ function FadeInImage({ alt, ...props }: React.ComponentProps<typeof Image>) {
 }
 
 export default function SkillsAndCases({ projects }: { projects: ProjectListItem[] }) {
-  const prefersReducedMotion = usePrefersReducedMotion();
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const initialFromQuery = (searchParams?.get("skill") || searchParams?.get("filter")) ?? undefined;
+  const urlFilter = parseSkillFilter(searchParams?.get("skill") ?? searchParams?.get("filter"));
 
-  // Fixed, curated filters
-  const [active, setActive] = React.useState<string>(() =>
-    initialFromQuery && (SKILL_FILTERS as readonly string[]).includes(initialFromQuery)
-      ? (initialFromQuery as (typeof SKILL_FILTERS)[number])
-      : "All",
-  );
+  const [active, setActive] = React.useState<SkillFilter>(urlFilter);
 
   // Announce filter changes for screen readers
   const [announce, setAnnounce] = React.useState<string>("");
 
   // Keep URL query param in sync with active filter (replace to avoid history spam)
   const currentQS = React.useMemo(() => searchParams?.toString() ?? "", [searchParams]);
-  const handleFilterChange = (newFilter: string) => {
+  const handleFilterChange = (newFilter: SkillFilter) => {
     setActive(newFilter);
     setAnnounce(`Filter: ${newFilter}`);
 
     const params = new URLSearchParams(currentQS);
+    // Always drop the legacy alias so the two keys can never disagree.
+    params.delete("filter");
     if (newFilter === "All") {
       params.delete("skill");
-      params.delete("filter");
     } else {
       params.set("skill", newFilter);
     }
@@ -107,10 +106,6 @@ export default function SkillsAndCases({ projects }: { projects: ProjectListItem
       router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
     }
   };
-
-  // CSS-first entrance animation; we keep Framer only for future interactions
-
-  // Card animation handled via CSS keyframes (animate-fade-in-up)
 
   const visible = React.useMemo(() => {
     const filtered = projects.filter((c) => active === "All" || c.skills.includes(active));
@@ -153,13 +148,7 @@ export default function SkillsAndCases({ projects }: { projects: ProjectListItem
       {/* Projects grid */}
       <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {visible.map((c, i) => (
-          <article
-            key={c.slug}
-            className={`${CARD_OUTER_BASE} min-h-[360px] md:min-h-[430px] ${
-              !prefersReducedMotion ? "motion-safe:animate-fade-in-up" : ""
-            }`}
-            style={{ animationDelay: !prefersReducedMotion ? `${80 * i}ms` : undefined }}
-          >
+          <article key={c.slug} className={`${CARD_OUTER_BASE} min-h-[360px] md:min-h-[430px]`}>
             <div
               className={`${CARD_INNER_BASE} [@container(min-width:36rem)]:grid [@container(min-width:36rem)]:grid-cols-[minmax(0,1fr),1.5fr] [@container(min-width:36rem)]:gap-0`}
             >
@@ -169,7 +158,7 @@ export default function SkillsAndCases({ projects }: { projects: ProjectListItem
                   alt={c.image.alt}
                   width={c.image.width}
                   height={c.image.height}
-                  style={{ aspectRatio: c.image.ratio }}
+                  style={{ aspectRatio: `${c.image.width}/${c.image.height}` }}
                   className="h-full w-full object-cover"
                   priority={i < 3}
                 />

@@ -11,6 +11,7 @@ export type UseAboutAnimationArgs = {
   letterRefs: MutableRefObject<Array<HTMLSpanElement | null>>;
   paragraph1Ref: MutableRefObject<HTMLParagraphElement | null>;
   paragraph2Ref: MutableRefObject<HTMLParagraphElement | null>;
+  prefersReducedMotion: boolean;
 };
 
 export function useAboutAnimation({
@@ -19,10 +20,13 @@ export function useAboutAnimation({
   letterRefs,
   paragraph1Ref,
   paragraph2Ref,
+  prefersReducedMotion,
 }: UseAboutAnimationArgs) {
   useGSAP(
     () => {
       const section = sectionRef.current;
+      if (prefersReducedMotion) return;
+
       const label = labelRef.current;
       const letters = letterRefs.current;
       const p1 = paragraph1Ref.current;
@@ -93,6 +97,6 @@ export function useAboutAnimation({
         });
       });
     },
-    { scope: sectionRef },
+    { scope: sectionRef, dependencies: [prefersReducedMotion] },
   );
 }

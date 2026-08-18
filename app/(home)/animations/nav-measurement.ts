@@ -1,5 +1,5 @@
 
-import { CFG } from "../components/config";
+import { NAV_BUTTON_SIZE } from "../components/config";
 
 export type NavMeasurementArgs = {
   navRow: HTMLDivElement;
@@ -78,7 +78,7 @@ export function createNavMeasurementHelpers({
     // Use 35% of nav width OR minimum of 3 button widths, whichever is larger.
     // This ensures the pill is wide enough to contain nav buttons gracefully.
     const navWidth = navRow.getBoundingClientRect().width;
-    return Math.max(navWidth * 0.35, CFG.nav.buttonSize.w * 3);
+    return Math.max(navWidth * 0.35, NAV_BUTTON_SIZE.w * 3);
   };
 
   const getTargetPillHeight = () => {
@@ -95,7 +95,7 @@ export function createNavMeasurementHelpers({
     if (candidate && candidate > 0) {
       return candidate;
     }
-    return CFG.nav.buttonSize.h;
+    return NAV_BUTTON_SIZE.h;
   };
 
   const getTargetCenter = () => {

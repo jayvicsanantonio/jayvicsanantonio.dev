@@ -7,10 +7,6 @@ export type HeroAnimationRefs = {
   containerRef: MutableRefObject<HTMLDivElement | null>;
   nameplateRef: MutableRefObject<HTMLDivElement | null>;
   designationRef: MutableRefObject<HTMLDivElement | null>;
-  coverSectionRef: MutableRefObject<HTMLDivElement | null>;
-  coverFillRef: MutableRefObject<HTMLDivElement | null>;
-  coverLabelRef: MutableRefObject<HTMLDivElement | null>;
-  coverBodyRef: MutableRefObject<HTMLDivElement | null>;
   videoRef: MutableRefObject<HTMLVideoElement | null>;
   videoOverlayRef: MutableRefObject<HTMLDivElement | null>;
   videoWatermarkMaskRef: MutableRefObject<HTMLDivElement | null>;
@@ -29,6 +25,6 @@ export type HeroAnimationRefs = {
 
 export type MarqueeRowConfig = {
   items: string[];
-  duration?: number;
-  direction?: "left" | "right";
+  duration: number;
+  direction: "left" | "right";
 };

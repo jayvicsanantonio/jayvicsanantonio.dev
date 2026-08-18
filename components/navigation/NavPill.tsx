@@ -1,20 +1,18 @@
 "use client";
 
-import React from "react";
+import type React from "react";
 
 import { GlassButton } from "@/components/primitives/GlassButton";
+import { cn } from "@/lib/class-names";
 
 export type NavPillProps = {
   href: string;
   ariaLabel: string;
   icon: React.ReactNode;
-  label?: string; // Text shown when active
-  active?: boolean; // Controls expansion + letter reveal
+  active?: boolean; // Cyan tint, aria-current, tooltip suppression, and the active dot
   vtTagName?: string; // e.g., 'projects' | 'work' — always applied when provided
-  cyanAccent?: boolean; // Optional cyan border tint (Home)
   external?: boolean; // Open in new tab
-  collapsedPx?: number | string; // Default 48; can be CSS strings like 'clamp(...)'
-  expandedPx?: number | string; // Default 140; CSS strings allowed
+  widthPx?: number | string; // Default 48; CSS strings such as clamp() are allowed
   heightPx?: number | string; // Default 48; CSS strings allowed
   tooltip?: string; // Tooltip text when non-active
   tooltipPlacement?: "above" | "below"; // Default: 'above'
@@ -25,13 +23,10 @@ export function NavPill({
   href,
   ariaLabel,
   icon,
-  label: _label,
   active = false,
   vtTagName,
-  cyanAccent = false,
   external = false,
-  collapsedPx = 48,
-  expandedPx: _expandedPx = 140,
+  widthPx = 48,
   heightPx = 48,
   tooltip,
   tooltipPlacement = "above",
@@ -63,17 +58,11 @@ export function NavPill({
       <GlassButton
         href={href}
         aria-label={ariaLabel}
-        className={[
-          cyanAccent ? "border-cyan-400/50 hover:border-cyan-300/60" : "",
-          active ? "border-cyan-400/70 hover:border-cyan-300/70" : "",
-          vtClass,
-          className ?? "",
-        ].join(" ")}
+        className={cn(className, vtClass, active && "border-cyan-400/70 hover:border-cyan-300/70")}
         style={{
-          width: collapsedPx,
+          width: widthPx,
           height: heightPx,
           transition: "width 200ms ease-out",
-          willChange: "width",
           WebkitBackdropFilter: "blur(24px) saturate(200%)",
           backdropFilter: "blur(24px) saturate(200%)",
         }}
@@ -93,25 +82,7 @@ export function NavPill({
               color: active ? "#22d3ee" : undefined,
             }}
           >
-            {(() => {
-              if (React.isValidElement(icon)) {
-                type IconProps = {
-                  className?: string;
-                  color?: string;
-                  style?: React.CSSProperties;
-                };
-                const el = icon as React.ReactElement<IconProps>;
-                const prevClass = el.props.className ?? "";
-                return React.cloneElement(el, {
-                  className: [prevClass, active ? "text-cyan-300" : ""].filter(Boolean).join(" "),
-                  style: {
-                    ...(el.props.style ?? {}),
-                    color: active ? "#22d3ee" : el.props.style?.color,
-                  },
-                });
-              }
-              return icon;
-            })()}
+            {icon}
           </span>
         </span>
       </GlassButton>

@@ -54,7 +54,7 @@ export default function ProjectsPage() {
       />
       <div className="cq container pt-48 pb-16 sm:pt-52">
         {/* Header */}
-        <div className="space-y-5 motion-safe:animate-fade-in-up">
+        <div className="space-y-5">
           <h1 className="font-oswald text-3xl font-bold tracking-tight text-cyan-300/90 sm:text-4xl lg:text-6xl">
             Engineering Portfolio
           </h1>
@@ -67,7 +67,7 @@ export default function ProjectsPage() {
 
         {/* Projects only */}
         <React.Suspense fallback={null}>
-          <div className="motion-safe:animate-fade-in-up" style={{ animationDelay: "160ms" }}>
+          <div>
             <SkillsAndCases projects={projectListItems} />
           </div>
         </React.Suspense>

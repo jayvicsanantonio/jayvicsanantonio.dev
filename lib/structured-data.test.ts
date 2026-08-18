@@ -47,16 +47,28 @@ describe("createProjectsCollectionSchema", () => {
       title: "Alpha",
       blurb: "First project",
       period: "2024",
-      links: [{ href: "https://example.com" }],
     },
     {
       slug: "beta",
       title: "Beta",
       blurb: "Second project",
       period: "2025",
-      links: [],
     },
   ];
+
+  it("emits exactly the keys the schema contract promises", () => {
+    const schema = createProjectsCollectionSchema(projects);
+    const mainEntity = schema.mainEntity as { itemListElement: { item: Record<string, unknown> }[] };
+
+    expect(Object.keys(mainEntity.itemListElement[0]!.item).sort()).toEqual([
+      "@type",
+      "dateCreated",
+      "description",
+      "identifier",
+      "name",
+      "url",
+    ]);
+  });
 
   it("lists every project with 1-based positions and absolute URLs", () => {
     const schema = createProjectsCollectionSchema(projects);

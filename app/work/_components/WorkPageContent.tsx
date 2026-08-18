@@ -7,15 +7,15 @@ export default function WorkPageContent() {
         <main className="relative w-full overflow-hidden">
           <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
             <div
-              className="absolute top-1/2 left-1/2 hidden h-[120vw] w-[120vw] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-5 blur-3xl motion-safe:animate-spin-slow lg:block"
+              className="absolute top-1/2 left-1/2 hidden h-[120vw] w-[120vw] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-5 blur-3xl lg:block"
               style={{
                 background:
-                  "conic-gradient(from_0deg_at_50%_50%,rgba(168,85,247,0.35),rgba(59,130,246,0.28),rgba(34,211,238,0.24),rgba(168,85,247,0.35))",
+                  "conic-gradient(from 0deg at 50% 50%,rgba(168,85,247,0.35),rgba(59,130,246,0.28),rgba(34,211,238,0.24),rgba(168,85,247,0.35))",
               }}
             />
           </div>
           <div className="cq container relative pt-48 pb-16 sm:pt-52" data-speed="0.98">
-            <div className="space-y-5 motion-safe:animate-fade-in-up" data-lag="0.12">
+            <div className="space-y-5" data-lag="0.12">
               <h1 className="font-oswald text-3xl font-bold tracking-tight text-cyan-300/90 sm:text-4xl lg:text-6xl">
                 Professional Experience
               </h1>

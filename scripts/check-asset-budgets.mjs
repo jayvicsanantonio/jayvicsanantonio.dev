@@ -1,11 +1,13 @@
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { extname, join, relative } from "node:path";
 
+const ALLOWED_IMAGE_EXTENSIONS = [".webp", ".avif"];
 const PROJECT_IMAGE_MAX_BYTES = 225 * 1024;
 const PROJECT_IMAGE_DIR_MAX_BYTES = 900 * 1024;
 const PUBLIC_DIR_MAX_BYTES = 3.5 * 1024 * 1024;
 const ROOT = process.cwd();
 const PUBLIC_DIR = join(ROOT, "public");
+const IMAGES_DIR = join(PUBLIC_DIR, "images");
 const PROJECT_IMAGES_DIR = join(PUBLIC_DIR, "images/projects");
 
 const formatBytes = (bytes) => `${Math.round(bytes / 1024)} KB`;
@@ -17,7 +19,8 @@ const walkFiles = (dir) =>
   });
 
 const publicFiles = walkFiles(PUBLIC_DIR);
-const projectImageFiles = walkFiles(PROJECT_IMAGES_DIR);
+const imageFiles = walkFiles(IMAGES_DIR);
+const projectImageFiles = imageFiles.filter((file) => file.startsWith(PROJECT_IMAGES_DIR));
 const errors = [];
 
 for (const file of publicFiles) {
@@ -25,18 +28,15 @@ for (const file of publicFiles) {
   if (file.endsWith(".DS_Store")) {
     errors.push(`${filePath} should not be committed.`);
   }
-  if (/public\/fonts\/SourceSansPro-.*\.woff2$/.test(filePath)) {
-    errors.push(`${filePath} is unused. The site uses system sans plus Oswald.`);
-  }
 }
 
-for (const file of projectImageFiles) {
+for (const file of imageFiles) {
   const extension = extname(file);
   const filePath = relative(ROOT, file);
   const size = statSync(file).size;
 
-  if (![".webp", ".avif"].includes(extension)) {
-    errors.push(`${filePath} should be WebP or AVIF for project listing/detail usage.`);
+  if (!ALLOWED_IMAGE_EXTENSIONS.includes(extension)) {
+    errors.push(`${filePath} should be WebP or AVIF.`);
   }
 
   if (size > PROJECT_IMAGE_MAX_BYTES) {
@@ -58,7 +58,7 @@ for (const imagePath of referencedImages) {
     errors.push(`${imagePath} is referenced from project data but does not exist in public/.`);
   }
 
-  if (extension === ".png" || extension === ".jpg" || extension === ".jpeg") {
+  if (!ALLOWED_IMAGE_EXTENSIONS.includes(extension)) {
     errors.push(`${imagePath} is referenced from project data; use WebP or AVIF instead.`);
   }
 }

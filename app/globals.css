@@ -35,30 +35,6 @@
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
-
-  --cq-sm: 24rem;
-  --cq-md: 32rem;
-  --cq-lg: 42rem;
-
-  --animate-accordion-down: accordion-down 0.2s ease-out;
-  --animate-accordion-up: accordion-up 0.2s ease-out;
-
-  @keyframes accordion-down {
-    from {
-      height: 0;
-    }
-    to {
-      height: var(--radix-accordion-content-height);
-    }
-  }
-  @keyframes accordion-up {
-    from {
-      height: var(--radix-accordion-content-height);
-    }
-    to {
-      height: 0;
-    }
-  }
 }
 
 @utility container {
@@ -74,14 +50,6 @@
 
 @utility cq {
   container-type: inline-size;
-}
-
-@layer base {
-  @media (prefers-reduced-motion: reduce) {
-    .motion-safe-only {
-      display: none !important;
-    }
-  }
 }
 
 @layer base {
@@ -159,129 +127,10 @@
     --ring: 216 12.2% 83.9%;
   }
 
-  .content-visibility-auto {
-    content-visibility: auto;
-  }
-
   .hyphenate {
     overflow-wrap: break-word;
     hyphens: auto;
     -webkit-hyphens: auto;
-  }
-
-  @keyframes lights {
-    0% {
-      opacity: 0;
-    }
-
-    30% {
-      opacity: 0;
-    }
-
-    40% {
-      opacity: 1;
-    }
-
-    90% {
-      opacity: 1;
-    }
-
-    100% {
-      opacity: 0;
-    }
-  }
-
-  .lit {
-    animation: 2s linear infinite lights;
-
-    &.yellow {
-      animation-delay: 0.5s;
-    }
-
-    &.blue {
-      animation-delay: 1s;
-    }
-
-    &.red {
-      animation-delay: 1.5s;
-    }
-  }
-
-  .lights {
-    align-items: top;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
-    position: absolute;
-    inset-inline: 0;
-
-    &.top {
-      top: 52px;
-    }
-
-    & svg {
-      display: block;
-      width: 100%;
-    }
-
-    & svg:nth-child(2) ~ svg {
-      display: none;
-
-      @media (min-width: 400px) {
-        display: block;
-      }
-    }
-
-    & svg:nth-child(3) ~ svg {
-      display: none;
-
-      @media (min-width: 500px) {
-        display: block;
-      }
-    }
-
-    & svg:nth-child(4) ~ svg {
-      display: none;
-
-      @media (min-width: 600px) {
-        display: block;
-      }
-    }
-  }
-
-  #lights-def {
-    display: block;
-    width: 0;
-    height: 0;
-    overflow: hidden;
-  }
-
-  @keyframes fade-in-up {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes spin-slow {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  .animate-fade-in-up {
-    animation: fade-in-up 0.8s ease-out forwards;
-    opacity: 0;
-  }
-
-  .animate-spin-slow {
-    animation: spin-slow 8s linear infinite;
   }
 
   html {
@@ -310,13 +159,6 @@
       /* biome-ignore lint/suspicious/noDuplicateProperties: Intentional fallback pattern for iOS Safari */
       min-height: -webkit-fill-available;
     }
-  }
-
-  .scroll-element {
-    will-change: transform, opacity;
-    -webkit-transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
   }
 
   * {

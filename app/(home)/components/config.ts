@@ -1,38 +1,6 @@
 "use client";
 
-export const CFG = {
-  timings: {
-    introStartDelay: 800,
-    introExpansionDuration: 2000,
-    reveal: {
-      name: 1000,
-      title: 3600,
-      desc: 3200,
-    },
-    graceAfterExpandMs: 200,
-  },
-  scroll: {
-    max: 1800,
-    shutterStartPx: 120,
-    shutterLengthPx: 900,
-    cyanStartT: 0.45,
-    uiRevealStartT: 0.95,
-  },
-  closeMaxY: "39vh",
-  closeMaxX: "38vw",
-  overlayUpDampen: 0.35,
-  video: {
-    playbackRate: 0.75,
-    scale: 1.05,
-    preload: "metadata" as const,
-  },
-  nav: {
-    centerTop: "46%",
-    buttonSize: { w: 82, h: 64 },
-    leftOffsetsPx: { projects: 54, linkedin: 150 },
-    rightOffsetsPx: { work: 54, github: 150 },
-  },
-} as const;
+export const NAV_BUTTON_SIZE = { w: 82, h: 64 } as const;
 
 // --- From hero-animation-timing.ts ---
 
@@ -68,8 +36,6 @@ export const SCROLL_TIMING = {
   PILL_SNAP_DURATION: 0.3,
   NAV_ROW_START_OFFSET: 0.55,
   LABEL_EXIT_SCRUB: true,
-  COVER_FILL_SCRUB: true,
-  COVER_CONTENT_SCRUB: true,
   SKILLS_ENTRANCE_SCRUB: true,
 } as const;
 
@@ -105,9 +71,6 @@ export const SCROLL_THRESHOLDS = {
 export const SCROLL_TRIGGER_POSITIONS = {
   SKILLS_START: "top 40%",
   SKILLS_END: "center center",
-  COVER_FILL_START: "top bottom",
-  COVER_FILL_END: "top top",
-  COVER_CONTENT_START: "top top",
 } as const;
 
 /**
@@ -132,15 +95,6 @@ export const SKILLS_INITIAL_STATE = {
   HEADING_SCALE: 0.88,
   ABOVE_X_PERCENT: 18,
   BELOW_X_PERCENT: -18,
-} as const;
-
-/**
- * Cover section animation timing values.
- */
-export const COVER_TIMING = {
-  PARALLAX_DISTANCE: 0.9,
-  LABEL_Y_RANGE: { from: -12, to: 12 },
-  BODY_Y_RANGE: { from: 12, to: -12 },
 } as const;
 
 // --- From hero.constants.ts ---

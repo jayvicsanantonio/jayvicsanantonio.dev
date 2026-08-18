@@ -31,7 +31,7 @@ export default function ScrollIndicator() {
     });
 
     // Continuous bounce animation
-    gsap.to(arrow, {
+    const bounce = gsap.to(arrow, {
       y: 10,
       duration: 1.5,
       repeat: -1,
@@ -55,6 +55,7 @@ export default function ScrollIndicator() {
 
     return () => {
       tl.kill();
+      bounce.kill();
       trigger.kill();
     };
   }, []);

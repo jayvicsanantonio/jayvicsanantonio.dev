@@ -5,7 +5,6 @@ import type { HeroAnimationRefs } from "../types";
 import { createNavMeasurementHelpers } from "../animations/nav-measurement";
 import { createPillShrinkTimeline } from "../animations/pill-shrink";
 import { createLabelExitTimeline } from "../animations/label-exit";
-import { createCoverAnimations } from "../animations/cover-section";
 import { createHeroPin, createSkillsPin } from "../animations/pins";
 import { createSkillsEntranceAnimation } from "../animations/skills-entrance";
 import { createProfileHideOnSection } from "../animations/profile-visibility";
@@ -22,9 +21,7 @@ export function useHeroScrollAnimation({
 }: UseHeroScrollAnimationArgs): void {
   useGSAP(
     () => {
-      const coverFill = refs.coverFillRef.current;
       const heroSection = refs.heroSectionRef.current;
-      const coverSection = refs.coverSectionRef.current;
       const profile = refs.profileRef.current;
       const pill = refs.pillRef.current;
       const pillContent = refs.pillContentRef.current;
@@ -36,8 +33,6 @@ export function useHeroScrollAnimation({
       const nameplate = refs.nameplateRef.current;
       const designation = refs.designationRef.current;
       const mobileHeroText = refs.mobileHeroTextRef.current;
-      const coverLabel = refs.coverLabelRef.current;
-      const coverBody = refs.coverBodyRef.current;
       const skillsSection = refs.skillsSectionRef.current;
       const skillsRowsAbove = refs.skillsRowsAboveRefs.current;
       const skillsRowsBelow = refs.skillsRowsBelowRefs.current;
@@ -55,15 +50,6 @@ export function useHeroScrollAnimation({
       }
 
       if (prefersReducedMotion) {
-        if (coverFill) {
-          gsap.set(coverFill, { scaleY: 1 });
-        }
-        if (coverLabel) {
-          gsap.set(coverLabel, { yPercent: 0 });
-        }
-        if (coverBody) {
-          gsap.set(coverBody, { yPercent: 0 });
-        }
         return () => {
           cleanupFns.forEach((cleanup) => cleanup());
         };
@@ -110,15 +96,6 @@ export function useHeroScrollAnimation({
       if (labelExitTimeline) {
         cleanupFns.push(() => killTimeline(labelExitTimeline));
       }
-
-      const coverCleanup = createCoverAnimations({
-        profile,
-        coverSection,
-        coverFill,
-        coverLabel,
-        coverBody,
-      });
-      cleanupFns.push(coverCleanup);
 
       const heroPin = createHeroPin(heroSection);
       cleanupFns.push(() => heroPin.kill());
