@@ -3,16 +3,16 @@
 ## Project Structure & Module Organization
 
 - `app/` holds all Next.js App Router routes; `layout.tsx`, `page.tsx`, and `global-error.tsx` define the shell. `(home)/` contains homepage-only components, hooks, and animations; `projects/` and `work/` own their route layouts/components. Shared styling lives in `app/globals.css`.
-- `components/` provides shared layout pieces (e.g., `layout/ClientAppShell.tsx`, `layout/AmbientBackground.tsx`), navigation, primitives (AnimatedText, Badge, GlassButton), feedback (Toaster), and style helpers.
-- `hooks/` exposes cross-page hooks (e.g., `usePrefersReducedMotion`, `useWebVitalsLogger`); page-specific hooks stay alongside their route folders.
-- `lib/utils.ts` stores general utilities; `public/` houses static assets/fonts; root configs (`env.ts`, `next.config.mjs`, lint/format configs) drive build tooling.
+- `components/` provides shared layout pieces (e.g., `layout/ClientAppShell.tsx`, `layout/AmbientBackground.tsx`), navigation, primitives (Badge, GlassButton, Icon), and style helpers.
+- `hooks/` exposes cross-page hooks (e.g., `usePrefersReducedMotion`, `useScrollReset`); page-specific hooks stay alongside their route folders.
+- `lib/` holds shared utilities (`class-names.ts`, `scroll-lock.ts`, `seo.ts`, `structured-data.ts`); `public/` houses static assets/fonts; root configs (`next.config.mjs`, lint/format configs) drive build tooling.
 
 ## Build, Test, and Development Commands
 
-- Install: `pnpm install` (Node 20+, pnpm 9+). Use `pnpm dev` for local development; `pnpm start` runs the built app.
+- Install: `pnpm install` (see `engines.node` and `packageManager` in `package.json`; `.nvmrc` pins the Node version). Use `pnpm dev` for local development; `pnpm start` runs the built app.
 - Ship: `pnpm build` (webpack enabled). Set `ANALYZE=true pnpm build` to view bundle analysis.
-- Quality: `pnpm type-check` (TS strict), `pnpm check` (eslint + prettier checks), `pnpm fix` (autofix lint + format), `pnpm format` (format JS/TS + CSS/MD).
-- Performance: `pnpm lh:all` after a running dev server to generate Lighthouse reports under `.lighthouse/` using `lighthouse-budgets.json`.
+- Quality: `pnpm type-check` (TS strict), `pnpm check` (eslint + prettier + `scripts/check-asset-budgets.mjs`, which fails on non-WebP/AVIF or oversized images), `pnpm fix` (autofix lint + format), `pnpm format` (format JS/TS + CSS/MD).
+- Performance: `pnpm lh:all` after a running dev server generates Lighthouse reports under `.lighthouse/`. Note `lighthouse-budgets.json` is not currently applied — no `--budget-path` is passed.
 
 ## Coding Style & Naming Conventions
 
@@ -66,4 +66,4 @@
 
 ## Environment & Configuration
 
-- Add secrets to `.env.local` (ignored); surface new variables through `env.ts` using `createEnv`. Keep Vercel/Next defaults unless a change is documented in `next.config.mjs` or `lighthouse-budgets.json`.
+- Add secrets to `.env.local` (ignored). There is no env-validation layer; read `process.env` at the point of use. Keep Vercel/Next defaults unless a change is documented in `next.config.mjs`.

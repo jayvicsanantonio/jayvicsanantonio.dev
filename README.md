@@ -16,8 +16,7 @@ This is the source for my personal site built with Next.js 16 (App Router), Reac
 
 Prerequisites
 
-- Node.js 20+
-- pnpm 9+
+- Node.js and pnpm per `engines.node` and `packageManager` in `package.json` (`.nvmrc` pins the Node version)
 
 Install dependencies
 
@@ -70,14 +69,15 @@ app/                                 # Route segments (server-first by default)
       use-hero-scroll-animation.ts
     animations/                      # Shared animation definitions
       ...
-    config.ts
+    components/config.ts
     types.ts
   projects/
     layout.tsx
     page.tsx
     projects.data.ts
     _components/
-      AnimatedHeader.tsx
+      ProjectLink.tsx
+      SkillsAndCases.tsx
       SkillsAndCases.tsx
   work/
     layout.tsx
@@ -97,20 +97,21 @@ components/                          # Shared components
     GlassHeaderBubble.tsx
     NavPill.tsx
   primitives/                        # Reusable UI primitives
-    AnimatedText.tsx
     Badge.tsx
     GlassButton.tsx
-  feedback/
-    Toaster.tsx
+    Icon.tsx
   styles/                            # Shared style helpers
     card-styles.ts
 
 hooks/                               # Shared React hooks
   usePrefersReducedMotion.ts
-  useWebVitalsLogger.ts
+  useScrollReset.ts
 
 lib/                                 # Shared utilities
-  utils.ts
+  class-names.ts
+  scroll-lock.ts
+  seo.ts
+  structured-data.ts
 
 public/                              # Static assets
 ```
@@ -123,7 +124,7 @@ Conventions (summary)
 - Use the path alias `@/` for internal imports instead of deep relative paths when possible
 - Props: export reusable prop types/interfaces alongside components
 
-See CONTRIBUTING.md for more details.
+See AGENTS.md for the full contributor guide.
 
 ## Environment
 
@@ -131,7 +132,7 @@ Create a `.env.local` with any environment variables required by features you en
 
 ## CI
 
-A GitHub Actions workflow runs type-checks, linting, and build.
+No CI is currently configured. Run `pnpm check`, `pnpm type-check`, and `pnpm test` locally before pushing — `pnpm build` runs the first two via `prebuild` and fails on any violation.
 
 ## Contact
 
