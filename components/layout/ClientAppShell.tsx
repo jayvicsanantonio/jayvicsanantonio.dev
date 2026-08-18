@@ -9,14 +9,12 @@ import DeferredVercelInsights from "@/components/layout/DeferredVercelInsights";
 export default function ClientAppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
-  const isHome = pathname === "/";
-
   return (
     <>
       <ViewTransition>
         <div key={pathname} suppressHydrationWarning>
           {pathname !== "/" && <AmbientBackground />}
-          {isHome ? children : <div className="container">{children}</div>}
+          {children}
         </div>
       </ViewTransition>
       {process.env.NODE_ENV === "production" &&
