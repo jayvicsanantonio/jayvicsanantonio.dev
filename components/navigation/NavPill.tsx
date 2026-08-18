@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import type React from "react";
 
 import { GlassButton } from "@/components/primitives/GlassButton";
 
@@ -85,25 +85,7 @@ export function NavPill({
               color: active ? "#22d3ee" : undefined,
             }}
           >
-            {(() => {
-              if (React.isValidElement(icon)) {
-                type IconProps = {
-                  className?: string;
-                  color?: string;
-                  style?: React.CSSProperties;
-                };
-                const el = icon as React.ReactElement<IconProps>;
-                const prevClass = el.props.className ?? "";
-                return React.cloneElement(el, {
-                  className: [prevClass, active ? "text-cyan-300" : ""].filter(Boolean).join(" "),
-                  style: {
-                    ...(el.props.style ?? {}),
-                    color: active ? "#22d3ee" : el.props.style?.color,
-                  },
-                });
-              }
-              return icon;
-            })()}
+            {icon}
           </span>
         </span>
       </GlassButton>

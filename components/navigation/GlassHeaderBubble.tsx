@@ -22,10 +22,6 @@ export default function GlassHeaderBubble({ vtClassName }: GlassHeaderBubbleProp
 
   const isProjects = pathname?.startsWith("/projects");
   const isWork = pathname?.startsWith("/work");
-  const projectsTooltipProps = isProjects
-    ? {}
-    : { tooltip: "Projects", tooltipPlacement: "below" as const };
-  const workTooltipProps = isWork ? {} : { tooltip: "Work", tooltipPlacement: "below" as const };
 
   return (
     <div className={`relative inline-flex items-center ${vtClassName ?? ""}`}>
@@ -54,7 +50,8 @@ export default function GlassHeaderBubble({ vtClassName }: GlassHeaderBubbleProp
               ariaLabel="Projects"
               icon={<Icon name="projects" className={NAV_ICON_CLASSES.projects} />}
               active={isProjects}
-              {...projectsTooltipProps}
+              tooltip="Projects"
+              tooltipPlacement="below"
               widthPx={NAV_BUTTON_WIDTH}
               heightPx={NAV_BUTTON_HEIGHT}
               className={NAV_BUTTON_CLASSES}
@@ -67,7 +64,8 @@ export default function GlassHeaderBubble({ vtClassName }: GlassHeaderBubbleProp
               ariaLabel="Work"
               icon={<Icon name="work" className={NAV_ICON_CLASSES.work} />}
               active={isWork}
-              {...workTooltipProps}
+              tooltip="Work"
+              tooltipPlacement="below"
               widthPx={NAV_BUTTON_WIDTH}
               heightPx={NAV_BUTTON_HEIGHT}
               className={NAV_BUTTON_CLASSES}
