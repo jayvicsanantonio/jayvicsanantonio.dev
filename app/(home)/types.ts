@@ -29,6 +29,6 @@ export type HeroAnimationRefs = {
 
 export type MarqueeRowConfig = {
   items: string[];
-  duration?: number;
-  direction?: "left" | "right";
+  duration: number;
+  direction: "left" | "right";
 };
