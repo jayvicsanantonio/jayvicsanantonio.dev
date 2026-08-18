@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { useRef } from "react";
+import usePrefersReducedMotion from "@/hooks/usePrefersReducedMotion";
 import { useHeroContext } from "../../context/HeroContext";
 import { useAboutAnimation } from "../../hooks/use-about-animation";
 
 export default function About() {
   const { aboutSectionRef: sectionRef } = useHeroContext();
+  const prefersReducedMotion = usePrefersReducedMotion();
   const labelRef = useRef<HTMLSpanElement>(null);
   const letterRefs = useRef<Array<HTMLSpanElement | null>>([]);
   const paragraph1Ref = useRef<HTMLParagraphElement>(null);
@@ -18,6 +20,7 @@ export default function About() {
     letterRefs,
     paragraph1Ref,
     paragraph2Ref,
+    prefersReducedMotion,
   });
 
   const addToLetterRefs = (el: HTMLSpanElement | null) => {
@@ -49,9 +52,9 @@ export default function About() {
         </div>
         <div className="mt-10 w-full space-y-16 lg:space-y-28 text-2xl lg:text-4xl leading-relaxed text-white/80 lg:mt-0 lg:w-3/5 lg:pl-12 py-10 lg:py-0">
           <p className="">
-            I&apos;m Jayvic San Antonio, a Filipino-American Full-Stack Software Engineer building in the San
-            Francisco Bay Area, and I care deeply about craft, clarity, and shipping work people
-            actually enjoy using.
+            I&apos;m Jayvic San Antonio, a Filipino-American Full-Stack Software Engineer building
+            in the San Francisco Bay Area, and I care deeply about craft, clarity, and shipping work
+            people actually enjoy using.
           </p>
           <p ref={paragraph1Ref} className="will-change-transform">
             I&apos;ve worn many hats, from co-founding a scrappy startup and winning hackathons to
